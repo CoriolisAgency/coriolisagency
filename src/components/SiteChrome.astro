@@ -1,0 +1,137 @@
+---
+import { LINKS } from "../lib/links";
+import { CANON_PATHS as CANON, SITE } from "../lib/site";
+import { withBase } from "../lib/base";
+
+const base = import.meta.env.BASE_URL || "/";
+const rawPath = Astro.url.pathname;
+const path =
+  (rawPath.startsWith(base)
+    ? rawPath.slice(base.length - 1)
+    : rawPath
+  ).replace(/\/$/, "") || "/";
+
+const nav = [
+  { href: "ecommerce", label: "Ecommerce" },
+  { href: "ai-factory", label: "AI Factory" },
+  { href: "demand-intelligence", label: "Demand Intelligence" },
+  { href: "about", label: "About" },
+] as const;
+
+function active(slug: string) {
+  const p = `/${slug}`;
+  return path === p || path.startsWith(p + "/");
+}
+
+const family = [
+  { href: LINKS.gsa, label: "GunSearchAgent" },
+  { href: LINKS.gse, label: "GunSearchEngine" },
+  { href: LINKS.betsy, label: "2aBetsy" },
+  { href: LINKS.betsyLive, label: "Betsy Live" },
+  { href: LINKS.fflaccelerator, label: "FFL Accelerator" },
+  { href: LINKS.fflintel, label: "FFLIntel" },
+  { href: LINKS.gunStoreGame, label: "Gun Store Game" },
+] as const;
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-zinc-800/80 bg-[color-mix(in_srgb,#0a1220_94%,transparent)] backdrop-blur-md"
+>
+  <div
+    class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6"
+  >
+    <a href={withBase("/")} class="shrink-0">
+      <img
+        src={withBase(CANON.logo)}
+        alt={SITE.legalName}
+        width="500"
+        height="150"
+        class="h-9 w-auto sm:h-10"
+      />
+    </a>
+    <nav
+      class="flex flex-wrap items-center justify-end gap-1 sm:gap-1.5"
+      aria-label="Main"
+    >
+      {
+        nav.map((item) => (
+          <a
+            href={withBase(item.href)}
+            class:list={[
+              "rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors sm:text-sm",
+              active(item.href)
+                ? "border-gold/50 bg-gold/10 text-gold"
+                : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href={withBase("contact")}
+        class="rounded-sm border border-gold/70 bg-gold px-2.5 py-1.5 text-xs font-semibold text-ink hover:bg-amber-300 sm:text-sm"
+      >
+        Talk to Coriolis
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="flex-1">
+  <slot />
+</main>
+
+<footer class="border-t border-zinc-800/80 bg-[#070b12]">
+  <div
+    class="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6 lg:flex-row lg:items-start lg:justify-between"
+  >
+    <div class="space-y-3 max-w-md">
+      <img
+        src={withBase(CANON.logo)}
+        alt={SITE.legalName}
+        width="500"
+        height="150"
+        class="h-8 w-auto"
+      />
+      <p class="text-sm text-zinc-400">{SITE.role}</p>
+      <p class="text-xs leading-relaxed text-zinc-500">
+        {SITE.legalName} · {SITE.origin}. Lawful 2A commerce. Not 4473, NICS,
+        or bound-book software.
+      </p>
+      <div class="flex flex-wrap gap-x-4 gap-y-2 text-xs text-zinc-500">
+        <a href={withBase("privacy")} class="hover:text-sky-300">Privacy</a>
+        <a
+          href={LINKS.msa}
+          class="hover:text-sky-300"
+          target="_blank"
+          rel="noopener noreferrer">Master Services Agreement</a
+        >
+        <a href={LINKS.facebook} class="hover:text-sky-300" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href={LINKS.x} class="hover:text-sky-300" target="_blank" rel="noopener noreferrer">X</a>
+        <a href={LINKS.instagram} class="hover:text-sky-300" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+    </div>
+    <nav
+      class="flex flex-wrap gap-x-4 gap-y-2 text-xs text-zinc-400"
+      aria-label="Family"
+    >
+      {
+        family.map((item) => (
+          <a
+            href={item.href}
+            class="hover:text-sky-300"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+  <p class="px-4 pb-6 text-center text-[11px] text-zinc-600">
+    © {new Date().getFullYear()} {SITE.legalName}. Not affiliated with Gearfire
+    or RetailBI. Marks belong to their owners.
+  </p>
+</footer>

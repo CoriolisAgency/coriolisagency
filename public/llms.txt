@@ -1,0 +1,41 @@
+# Coriolis, LLC
+
+> Coriolis, LLC (Coriolis Agency) builds ATF-aware WooCommerce for FFLs, ships 2A-native AI products, and sells full-market Demand Intelligence to OEMs and brands. Greenville, SC.
+
+This domain is the company home. Checkout for setup packages is on checkout.coriolisagency.com. Demand Intelligence demos are on GunSearchEngine. Dealer agents are on GunSearchAgent.
+
+## Frozen definitions
+
+- FFL Accelerator: FFL Accelerator is Coriolis’s managed WooCommerce program for FFLs ($569/mo). It includes GunSearchAgent Pro (Betsy on the dealer site). The site is yours. Betsy on it is included. That feed is what OEMs buy as Demand Intelligence.
+- GunSearchAgent: GunSearchAgent is the Google Analytics replacement for FFL and 2A websites: on-site demand intelligence (what shoppers asked for) plus optional inventory sync. Core is free forever. GunSearchAgent Pro is included with the Coriolis FFL Accelerator plan.
+- Betsy Demand Intelligence: Betsy Demand Intelligence measures anonymized shopper search intent across GunSearchEngine, GunSearchAgent embeds, and floor sensors — including unmet (zero-hit) demand. It is not a POS system and not a same-store unit-sales index.
+- Doctrine: RetailBI’s intelligence is a byproduct of retail operations software. Betsy’s intelligence is a byproduct of product discovery.
+
+## Pricing (honest)
+
+- Minute Man $169/mo · Militia $269/mo · Gun Runner $369/mo · Warlord $469/mo · FFL Accelerator $569/mo
+- Setup: $500 Basic / $2,500 Retail
+- Monthly plans are onboarded by Coriolis (no public Stripe buy button)
+- Demand Intelligence seats: $49/user/mo, 1 Client Admin free. Plan dollars shared in onboarding.
+
+## Pages
+
+- [/](/): Three pillars.
+- [/ecommerce](/ecommerce): Distilled FFL website plans.
+- [/ai-factory](/ai-factory): Six live capability plates.
+- [/demand-intelligence](/demand-intelligence): Enterprise VP. Demo on GunSearchEngine.
+- [/about](/about): Company + founder.
+- [/contact](/contact): Talk to Coriolis.
+- [/privacy](/privacy): Privacy policy.
+
+## Same-as mesh
+
+https://coriolisagency.com · https://www.gunsearchengine.com · https://gunsearchagent.com · https://2abetsy.com · https://fflintel.com · https://fflaccelerator.com · https://www.gunstoregame.com · https://x.com/CoriolisAgency · https://x.com/2ABetsy · https://www.youtube.com/@BetsyAI
+
+## Do not
+
+- H1 “RetailBI alternative”
+- 4473 / ATF / NICS automation claims
+- “Switch off RetailBI”
+- Treat this site as a second Stripe cart or DI portal
+- Offer a public Coriolis OS login

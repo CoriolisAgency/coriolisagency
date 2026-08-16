@@ -1,0 +1,158 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_DI } from "../lib/faq";
+import { DI_OUTCOMES, DI_PLANS } from "../lib/factory";
+import { FROZEN } from "../lib/frozen";
+import { LINKS, linkClass, btnPlan, btnSecondary } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+---
+
+<BaseLayout
+  title="Demand Intelligence for OEMs — Full-market 2A search intent | Coriolis"
+  description="Betsy Demand Intelligence is full-market anonymized search intent for firearms OEMs and brands — including unmet demand. Not sell-through. Not NICS."
+  path="/demand-intelligence"
+  ogImagePath={CANON_PATHS.copilot}
+  faq={FAQ_DI}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div
+      class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2"
+    >
+      <div>
+        <p
+          class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+        >
+          Demand Intelligence · Enterprise
+        </p>
+        <h1
+          class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]"
+        >
+          Search heat becomes Monday decisions.
+        </h1>
+        <p class="mt-5 max-w-xl text-base leading-relaxed text-zinc-300">
+          {FROZEN.brandIntelligence}
+        </p>
+        <p class="mt-4 max-w-xl text-sm leading-relaxed text-zinc-400">
+          {FROZEN.doctrine}
+        </p>
+        <div class="mt-8">
+          <CtaRow primary="demo" showGsa={false} />
+        </div>
+      </div>
+      <img
+        src={withBase(CANON_PATHS.copilot)}
+        alt="Betsy Enterprise Co-Pilot — Demand Intelligence inside the tools brand teams already use"
+        width="1600"
+        height="900"
+        class="w-full rounded-2xl object-cover ring-1 ring-white/10"
+      />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        What enterprise teams actually do with it
+      </h2>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+        {
+          DI_OUTCOMES.map((item) => (
+            <li class="rounded-xl border border-zinc-800 bg-zinc-950/50 p-4 text-sm text-zinc-300">
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 text-sm text-zinc-500">
+        Full-market anonymized demand — not a four-brand sandbox. Includes
+        unmet (zero-hit) demand: what shoppers asked for and could not find.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Three depths. One market.</h2>
+      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
+        Seats are $49 per user per month. One Client Admin is free on every
+        plan. Pricing for Insight, Growth, and Platform is shared in onboarding
+        — request a demo on GunSearchEngine.
+      </p>
+      <div class="mt-8 grid gap-4 lg:grid-cols-3">
+        {
+          DI_PLANS.map((plan) => (
+            <article
+              class:list={[
+                "flex flex-col rounded-2xl border p-6",
+                "featured" in plan && plan.featured
+                  ? "border-gold/60 bg-gold/5"
+                  : "border-zinc-800 bg-zinc-950/50",
+              ]}
+            >
+              <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
+                {plan.for}
+              </p>
+              <h3 class="mt-2 text-lg font-semibold text-white">{plan.name}</h3>
+              <p class="mt-1 text-sm text-gold">{plan.hook}</p>
+              <ul class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400">
+                {plan.features.map((f) => (
+                  <li>{f}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+      <div class="mt-8 flex flex-col gap-2.5 sm:flex-row">
+        <a href={LINKS.demandDemo} class={btnPlan} {...ext}>Request a demo</a>
+        <a href={LINKS.copilot} class={btnSecondary} {...ext}
+          >Enterprise Co-Pilot</a
+        >
+        <a href={LINKS.betsyVsRetailBi} class={btnSecondary} {...ext}
+          >Betsy vs RetailBI</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Surfaces</h2>
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+          <h3 class="text-sm font-semibold text-sky-300">Portal and API</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">
+            Demand cloud, map, unmet, UPC intensity, and top referrers. REST
+            with secure keys.{" "}
+            <a href={LINKS.enterpriseApi} class={linkClass} {...ext}
+              >API docs</a
+            >.
+          </p>
+        </article>
+        <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+          <h3 class="text-sm font-semibold text-sky-300">
+            Enterprise Co-Pilot
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">
+            {FROZEN.copilot}{" "}
+            <a href={LINKS.copilot} class={linkClass} {...ext}
+              >Install guide</a
+            >.
+          </p>
+        </article>
+      </div>
+      <p class="mt-8 max-w-3xl text-sm text-zinc-500">
+        Dealers who want on-site demand start at{" "}
+        <a href={LINKS.gsa} class={linkClass} {...ext}>GunSearchAgent</a>, not
+        here. This page is for manufacturers, distributors, and brand teams.
+      </p>
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_DI} />
+</BaseLayout>

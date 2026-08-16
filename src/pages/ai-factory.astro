@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { FACTORY_PLATES } from "../lib/factory";
+import { CANON_PATHS } from "../lib/site";
+import { LINKS, linkClass, btnSky } from "../lib/links";
+import { withBase } from "../lib/base";
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+---
+
+<BaseLayout
+  title="AI Factory — Working 2A products | Coriolis, LLC"
+  description="Coriolis AI Factory: Betsy AI, GunSearchEngine, GunSearchAgent, Coriolis OS, Betsy Live, and Gun Store Game. Live products, not a deck."
+  path="/ai-factory"
+  ogImagePath={CANON_PATHS.headshot}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div
+      class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.2fr_0.8fr]"
+    >
+      <div>
+        <p
+          class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+        >
+          AI Factory
+        </p>
+        <h1
+          class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+        >
+          These are live. This is how we prove it.
+        </h1>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300">
+          Six working examples of 2A-native software. Not a capability slide.
+          Each plate is a product you can open — except Coriolis OS, which we
+          run ourselves.
+        </p>
+      </div>
+      <img
+        src={withBase(CANON_PATHS.headshot)}
+        alt="Betsy AI"
+        width="640"
+        height="800"
+        class="mx-auto w-full max-w-[240px] rounded-2xl ring-1 ring-white/10 lg:max-w-none"
+      />
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {
+          FACTORY_PLATES.map((plate) => (
+            <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
+                {plate.urlLabel}
+              </p>
+              <h2 class="mt-2 text-xl font-semibold text-white">{plate.name}</h2>
+              <p class="mt-3 text-sm leading-relaxed text-zinc-300">
+                {plate.job}
+              </p>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-zinc-500">
+                {plate.proof}
+              </p>
+              {plate.href ? (
+                <a
+                  href={plate.href}
+                  class={`${linkClass} mt-5 text-sm`}
+                  {...ext}
+                >
+                  {plate.cta} →
+                </a>
+              ) : (
+                <p class="mt-5 text-xs uppercase tracking-[0.12em] text-zinc-600">
+                  {plate.cta}
+                </p>
+              )}
+            </article>
+          ))
+        }
+      </div>
+      <p class="mt-10 max-w-3xl text-sm text-zinc-500">
+        Dealers start on{" "}
+        <a href={LINKS.gsa} class={linkClass} {...ext}>GunSearchAgent</a>.
+        Shoppers and OEMs start on{" "}
+        <a href={LINKS.gse} class={linkClass} {...ext}>GunSearchEngine</a>.
+        The character lives on{" "}
+        <a href={LINKS.betsy} class={linkClass} {...ext}>2aBetsy</a>.
+      </p>
+      <div class="mt-6">
+        <a href={LINKS.betsyLive} class={btnSky} {...ext}>Watch Betsy Live</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

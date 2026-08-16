@@ -1,0 +1,53 @@
+---
+import { LINKS, btnPlan, btnSky, btnSecondary } from "../lib/links";
+import { withBase } from "../lib/base";
+
+interface Props {
+  primary?: "contact" | "ecommerce" | "demo";
+  showGsa?: boolean;
+}
+
+const { primary = "contact", showGsa = true } = Astro.props;
+---
+
+<div class="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+  {
+    primary === "demo" ? (
+      <a
+        href={LINKS.demandDemo}
+        target="_blank"
+        rel="noopener noreferrer"
+        class={btnPlan}
+      >
+        Request a demo
+      </a>
+    ) : primary === "ecommerce" ? (
+      <a href={withBase("ecommerce")} class={btnPlan}>
+        See ecommerce plans
+      </a>
+    ) : (
+      <a href={withBase("contact")} class={btnPlan}>
+        Talk to Coriolis
+      </a>
+    )
+  }
+  {
+    showGsa && (
+      <a
+        href={LINKS.gsa}
+        target="_blank"
+        rel="noopener noreferrer"
+        class={primary === "demo" ? btnSecondary : btnSky}
+      >
+        Put Betsy on a site I already have
+      </a>
+    )
+  }
+  {
+    primary !== "contact" && (
+      <a href={withBase("contact")} class={btnSecondary}>
+        Talk to Coriolis
+      </a>
+    )
+  }
+</div>

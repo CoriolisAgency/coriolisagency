@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { LINKS, linkClass } from "../lib/links";
+---
+
+<BaseLayout
+  title="Privacy Policy — Coriolis, LLC"
+  description="How Coriolis, LLC handles contact-form and site data on coriolisagency.com."
+  path="/privacy"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+    <p
+      class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+    >
+      Policies
+    </p>
+    <h1 class="mt-3 text-3xl font-semibold tracking-tight text-white">
+      Privacy Policy
+    </h1>
+    <p class="mt-2 text-sm text-zinc-500">Coriolis, LLC · Greenville, SC</p>
+
+    <div class="mt-8 space-y-8 text-sm leading-relaxed text-zinc-400">
+      <section>
+        <h2 class="text-base font-semibold text-white">Who we are</h2>
+        <p class="mt-2">
+          This site is published by Coriolis, LLC at{" "}
+          <a href={LINKS.home} class={linkClass}>{LINKS.home}</a>. It is a
+          static company site. Product logins, checkout, and demand portals
+          live on other Coriolis properties and have their own policies.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">What we collect</h2>
+        <p class="mt-2">
+          If you use the contact form, your mail app sends us the name,
+          company, email, phone, website, pillar, and message you typed. We
+          use that to reply. We do not run a comment system or a login on this
+          host.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">
+          Embedded and outbound sites
+        </h2>
+        <p class="mt-2">
+          Links to GunSearchEngine, GunSearchAgent, 2aBetsy, FFL Accelerator,
+          Stripe Checkout, and similar hosts behave as if you visited those
+          sites directly. Their cookies and policies apply there.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">Your rights</h2>
+        <p class="mt-2">
+          Email{" "}
+          <a href={LINKS.contactEmail} class={linkClass}
+            >{LINKS.contactEmailAddress}</a
+          >{" "}
+          to ask what we hold from a contact, or to ask us to delete it, except
+          where we must keep records for contracts, billing, or law.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">Agreements</h2>
+        <p class="mt-2">
+          Hosting and setup are governed by the{" "}
+          <a
+            href={LINKS.msa}
+            class={linkClass}
+            target="_blank"
+            rel="noopener noreferrer">Master Services Agreement</a
+          >.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
