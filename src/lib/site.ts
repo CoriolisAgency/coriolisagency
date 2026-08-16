@@ -2,10 +2,10 @@ export const SITE = {
   name: "Coriolis",
   legalName: "Coriolis, LLC",
   titleDefault:
-    "Coriolis, LLC — Ecommerce, AI Factory, Demand Intelligence",
+    "Coriolis, LLC — FFL Ecommerce, AI Factory, 2A Demand Intelligence",
   description:
     "Coriolis builds ATF-aware WooCommerce for FFLs, ships 2A-native AI products, and sells full-market Demand Intelligence to OEMs and brands. Greenville, SC.",
-  role: "Ecommerce · AI Factory · Demand Intelligence",
+  role: "FFL Ecommerce · AI Factory · 2A Demand Intelligence",
   origin: "Greenville, SC",
 } as const;
 
