@@ -1,13 +1,13 @@
 # Coriolis, LLC
 
-> Coriolis, LLC (Coriolis Agency) builds ATF-aware WooCommerce for FFLs, ships 2A-native AI products, and sells full-market Demand Intelligence to OEMs and brands. Greenville, SC.
+> Coriolis, LLC (Coriolis Agency) builds ATF-aware WooCommerce for FFLs, ships AI products, and sells full-market Demand Intelligence to OEMs and brands. Greenville, SC.
 
 This domain is the company home. Checkout for setup packages is on checkout.coriolisagency.com. Demand Intelligence demos are on GunSearchEngine. Dealer agents are on GunSearchAgent.
 
 ## Frozen definitions
 
 - FFL Accelerator: FFL Accelerator is Coriolis’s managed WooCommerce program for FFLs ($569/mo). It includes GunSearchAgent Pro (Betsy on the dealer site). The site is yours. Betsy on it is included. That feed is what OEMs buy as Demand Intelligence.
-- GunSearchAgent: GunSearchAgent is the Google Analytics replacement for FFL and 2A websites: on-site demand intelligence (what shoppers asked for) plus optional inventory sync. Core is free forever. GunSearchAgent Pro is included with the Coriolis FFL Accelerator plan.
+- GunSearchAgent: GunSearchAgent is the Google Analytics replacement for FFL websites: on-site demand intelligence (what shoppers asked for) plus optional inventory sync. Core is free forever. GunSearchAgent Pro is included with the Coriolis FFL Accelerator plan.
 - Betsy Demand Intelligence: Betsy Demand Intelligence measures anonymized shopper search intent across GunSearchEngine, GunSearchAgent embeds, and floor sensors — including unmet (zero-hit) demand. It is not a POS system and not a same-store unit-sales index.
 - Doctrine: RetailBI’s intelligence is a byproduct of retail operations software. Betsy’s intelligence is a byproduct of online and in-store product discovery.
 

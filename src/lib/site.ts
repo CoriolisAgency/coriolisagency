@@ -4,7 +4,7 @@ export const SITE = {
   titleDefault:
     "Coriolis, LLC — FFL Ecommerce, AI Studio, Demand Intelligence",
   description:
-    "Coriolis builds ATF-aware WooCommerce for FFLs, ships 2A-native AI products, and sells full-market Demand Intelligence to OEMs and brands. Greenville, SC.",
+    "Coriolis builds ATF-aware WooCommerce for FFLs, ships AI products, and sells full-market Demand Intelligence to OEMs and brands. Greenville, SC.",
   role: "FFL Ecommerce · AI Studio · Demand Intelligence",
   origin: "Greenville, SC",
 } as const;

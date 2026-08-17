@@ -17,7 +17,7 @@ export const STUDIO_PROOF: StudioProof[] = [
     name: "Betsy",
     urlLabel: "2abetsy.com",
     href: LINKS.betsy,
-    job: "Demand intelligence for the 2A web — what people came for, not bounce rate.",
+    job: "Demand intelligence for dealer sites — what people came for, not bounce rate.",
     proof:
       "Built for this market. Live on GunSearchEngine embeds and dealer sites. Not 4473 software.",
     cta: "Meet Betsy",
@@ -27,7 +27,7 @@ export const STUDIO_PROOF: StudioProof[] = [
     name: "GunSearchAgent",
     urlLabel: "gunsearchagent.com",
     href: LINKS.gsa,
-    job: "Google Analytics replacement for FFL and 2A websites.",
+    job: "Google Analytics replacement for FFL websites.",
     proof:
       "On-site demand plus optional inventory sync. Core is free forever. Pro ships with FFL Accelerator.",
     cta: "Claim a free agent",
