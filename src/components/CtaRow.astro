@@ -44,6 +44,18 @@ const { primary = "contact", showGsa = true } = Astro.props;
     )
   }
   {
+    primary === "demo" && (
+      <a
+        href={LINKS.betsyLive}
+        target="_blank"
+        rel="noopener noreferrer"
+        class={btnSky}
+      >
+        Betsy Live
+      </a>
+    )
+  }
+  {
     primary !== "contact" && (
       <a href={withBase("contact")} class={btnSecondary}>
         Talk to Coriolis
