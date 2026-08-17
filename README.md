@@ -7,8 +7,10 @@ This repo replaces the WordPress story on [coriolisagency.com](https://www.corio
 ## Stack
 
 - [Astro](https://astro.build) 7 (static) + Tailwind CSS v4
-- Host: **GitHub Pages**
-- Custom domain: `coriolisagency.com` (`public/CNAME`)
+- Host: **Vercel** (Astro static)
+- Custom domain: `coriolisagency.com`
+- Customer login (`/login`, `/account`): rewrite to Coriolis OS portal — not this repo
+- Operator Admin: Coriolis OS on a separate host — not this domain
 
 ## Local
 
@@ -46,4 +48,4 @@ Node `>=22.12.0`.
 - Monthly plans = talk to Coriolis. Setup packages keep existing buy links.
 - Demand Intelligence demo stays on GunSearchEngine.
 - Never H1 “RetailBI alternative.” Never 4473 / NICS / bound-book automation.
-- Coriolis OS is a capability plate, not a customer login.
+- Coriolis OS Admin is not a customer login. Header **Log in** is the customer portal.

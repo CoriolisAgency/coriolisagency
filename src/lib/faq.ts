@@ -59,7 +59,7 @@ export const FAQ_COCKPIT: FaqItem[] = [
 export const FAQ_AMMOREADY: FaqItem[] = [
   {
     q: "Is Coriolis a hosted AmmoReady clone?",
-    a: "No. Our founder ran AmmoReady.com for 9 years. Coriolis is the opposite model: open WooCommerce you own, FFL Cockpit for catalogs, and no vendor lock-in on the storefront.",
+    a: "No. Coriolis is the opposite model: open WooCommerce you own, FFL Cockpit for catalogs, and no vendor lock-in on the storefront.",
   },
   {
     q: "What about Gearfire?",

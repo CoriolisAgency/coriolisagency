@@ -31,6 +31,7 @@ This domain is the company home. Checkout for setup packages is on checkout.cori
 - [/about](/about): Company and founder.
 - [/contact](/contact): Talk to Coriolis.
 - [/privacy](/privacy): Privacy policy.
+- [/login](/login) and [/account](/account): customer portal (Coriolis OS rewrite). noindex. Not operator Admin.
 
 ## Same-as mesh
 

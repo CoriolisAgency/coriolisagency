@@ -4,7 +4,6 @@ import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import { FAQ_AMMOREADY } from "../lib/faq";
-import { FROZEN } from "../lib/frozen";
 import { LINKS, linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
@@ -21,7 +20,7 @@ const rows = [
 
 <BaseLayout
   title="AmmoReady Alternative — WooCommerce + FFL Cockpit | Coriolis"
-  description="Looking for an AmmoReady or Gearfire alternative? Coriolis is managed WooCommerce you own, with FFL Cockpit dropshipping. Our founder ran AmmoReady for 9 years."
+  description="Looking for an AmmoReady or Gearfire alternative? Coriolis is managed WooCommerce you own, with FFL Cockpit dropshipping."
   path="/ammoready-alternative"
   ogImagePath={CANON_PATHS.rangeMckinney}
   faq={FAQ_AMMOREADY}
@@ -42,8 +41,8 @@ const rows = [
         AmmoReady is a fine place to start. It is a rented storefront. When you
         want the site, the SEO, the POS, and the catalog under your name,
         Coriolis is the AmmoReady alternative — and the same answer if you are
-        leaving Gearfire. Our founder built and ran AmmoReady.com for 9 years.
-        This company exists so dealers are not stuck on a closed catalog.
+        leaving Gearfire. This company exists so dealers are not stuck on a
+        closed catalog.
       </p>
       <div class="mt-8">
         <CtaRow />
@@ -89,7 +88,7 @@ const rows = [
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
       <p class="max-w-3xl text-sm text-zinc-400">
-        {FROZEN.commercialLine} Setup is $500 or $2,500.{" "}
+        Setup is $500 or $2,500.{" "}
         <a href={withBase("ecommerce")} class={linkClass}>Plans</a>
         {" · "}
         <a href={LINKS.fflaccelerator} class={linkClass} target="_blank" rel="noopener noreferrer"

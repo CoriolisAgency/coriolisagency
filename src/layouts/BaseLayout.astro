@@ -12,6 +12,7 @@ interface Props {
   path?: string;
   ogImagePath?: string;
   canonicalUrl?: string;
+  noindex?: boolean;
   faq?: FaqItem[];
 }
 
@@ -21,6 +22,7 @@ const {
   path = "/",
   ogImagePath = CANON_PATHS.gaHero,
   canonicalUrl,
+  noindex = false,
   faq,
 } = Astro.props;
 
@@ -92,6 +94,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#0a1220" />
     <link rel="icon" type="image/png" href={withBase(CANON_PATHS.icon)} />

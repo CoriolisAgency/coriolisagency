@@ -138,41 +138,9 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 - `trashpanda.coriolisagency.com` — **11 clicks**. Separate subdomain. Do not point the company 301 map at it; leave that DNS alone.
 
-## Cloudflare Bulk Redirects (v1 — required)
+## Cloudflare import (launch)
 
-Host rule first, then path rules. All destinations are apex, no trailing slash.
+1. **Redirect Rule** — `www` → apex (see `docs/dns-cutover.md`).
+2. **Bulk Redirects** — import `scripts/cloudflare-bulk-redirects.csv`.
 
-```
-www.coriolisagency.com/*                               → https://coriolisagency.com/$1
-
-coriolisagency.com/ffl-website-plans/                  → https://coriolisagency.com/ecommerce
-coriolisagency.com/ffl-website-plans                   → https://coriolisagency.com/ecommerce
-coriolisagency.com/plans                               → https://coriolisagency.com/ecommerce
-coriolisagency.com/ffl-ecommerce/                      → https://coriolisagency.com/ecommerce
-coriolisagency.com/ffl-ecommerce                       → https://coriolisagency.com/ecommerce
-coriolisagency.com/pricing/                            → https://coriolisagency.com/ecommerce
-coriolisagency.com/pricing                             → https://coriolisagency.com/ecommerce
-coriolisagency.com/contact-the-coriolis-agency/        → https://coriolisagency.com/contact
-coriolisagency.com/contact-the-coriolis-agency         → https://coriolisagency.com/contact
-coriolisagency.com/privacy-policy/                     → https://coriolisagency.com/privacy
-coriolisagency.com/meet-the-team/                      → https://coriolisagency.com/about
-coriolisagency.com/partners/                           → https://coriolisagency.com/about
-coriolisagency.com/faq/                                → https://coriolisagency.com/ecommerce
-coriolisagency.com/payments/                           → https://coriolisagency.com/ecommerce
-coriolisagency.com/ffl-dropshipping/                   → https://coriolisagency.com/firearms-dropshipping
-coriolisagency.com/ammoready-alternative-why-ffls-are-switching-to-coriolis/ → https://coriolisagency.com/ammoready-alternative
-coriolisagency.com/gearfire-alternative-why-ffls-are-choosing-coriolis-instead/ → https://coriolisagency.com/ammoready-alternative
-```
-
-Expand the long-tail 301s from the tables above into the same Bulk Redirects list before flip. A 50-row map is cheap; a missing `/firearms-dropshipping` page is not.
-
-## Astro pages still to add before flip
-
-These slugs do not exist on the new site today:
-
-1. `/firearms-dropshipping` — required
-2. `/ffl-cockpit` — required
-3. `/ammoready-alternative` — required
-4. `/best-ffl-ecommerce-website` — required (or 301 it to `/ecommerce` and rewrite `/ecommerce` to answer “best FFL ecommerce website”)
-
-`/ecommerce` first ~80 words must also cover plans, WooCommerce for FFLs, and payments so the 301s land on a page that matches the query.
+Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/best-ffl-ecommerce-website`). Do not 301 those.

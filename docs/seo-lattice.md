@@ -20,6 +20,8 @@
 | GA for FFLs / free agent | **GunSearchAgent** |
 | Three numbers desk | **FFLIntel** |
 | Checkout / MSA | Stripe + Google Doc (this site links) |
+| Customer login / account | **This host** `/login` `/account` — OS portal rewrite, **noindex** |
+| Operator Admin | Coriolis OS on a separate host. Never this marketing chrome. |
 
 ## Rules
 

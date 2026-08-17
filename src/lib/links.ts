@@ -9,6 +9,8 @@ export const LINKS = {
   demandIntelPage: "/demand-intelligence",
   about: "/about",
   contact: "/contact",
+  login: "/login",
+  account: "/account",
   privacy: "/privacy",
   msa: "https://docs.google.com/document/d/18FcRaIjiZURO5nztD2Tldz9nuZj-cmXwjdcObcjRP3I/edit?usp=sharing",
   checkoutBasic:

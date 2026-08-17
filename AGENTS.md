@@ -1,6 +1,6 @@
 # Coriolis, LLC — agent notes
 
-Static company site (Astro → GitHub Pages) for the three-pillar model.
+Static company site (Astro → **Vercel**) for the three-pillar model. Not GitHub Pages.
 
 ## Product lattice
 
@@ -9,7 +9,7 @@ Static company site (Astro → GitHub Pages) for the three-pillar model.
 - **gunsearchagent.com:** dealer product. Free core. Do not rebuild claim flow.
 - **gunsearchengine.com:** shoppers, Betsy Live, Demand Intelligence portal/demo/API/Co-Pilot.
 - **2abetsy.com:** Betsy character.
-- **Coriolis OS** (`CoriolisAgency/coriolis`): internal ops. One plate on `/ai-factory`. No public admin. Not a SKU.
+- **Coriolis OS** (`CoriolisAgency/coriolis`): operator Admin on a **separate host**. Customer portal routes (`/login`, `/account`) will rewrite here. Not a SKU. No Workspace login on this domain.
 
 Do **not** clone checkout, GSA claim, or the DI portal here. Link out.
 
@@ -28,7 +28,7 @@ Copy from `src/lib/frozen.ts`. Do not rewrite the RetailBI doctrine line or FFL 
 - 4473 / NICS / bound-book automation claims
 - H1 “RetailBI alternative” / “switch off RetailBI”
 - Inventing Insight/Growth/Platform dollar amounts
-- Public login for Coriolis OS
+- Public login for Coriolis OS Admin (Workspace). Do not put **Log in** in the header until the OS portal rewrite exists.
 
 ## Dev
 
@@ -40,4 +40,4 @@ npm run build
 
 ## Deploy
 
-GitHub Actions → Pages (`deploy.yml`). Domain: `public/CNAME` = `coriolisagency.com`. DNS cutover is a later, explicit step — see `docs/dns-cutover.md`.
+Vercel project, domain `coriolisagency.com`. DNS cutover is a later, explicit step — see `docs/dns-cutover.md`. Do not flip to GitHub Pages.

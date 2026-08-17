@@ -154,16 +154,16 @@ export const CAPABILITIES = [
 ] as const;
 
 export const CLIENTS = [
-  "The Range in McKinney",
-  "Robinson Armament",
-  "Down Range Chico",
-  "Reynolds Ranch & Farm",
-  "Gun Pro",
-  "Freedom First Ammo",
-  "Crown Ridge Barrel Works",
-  "The Smoking Gun",
-  "Frontline Firearms",
-  "First Light Guns",
-  "US AR Parts",
-  "EE & Arms",
+  { name: "The Range in McKinney", href: "https://store.therangeinmckinney.com/" },
+  { name: "Robinson Armament", href: "https://robinsonarmament.com/" },
+  { name: "Down Range Chico", href: "https://downrangechico.com/" },
+  { name: "Reynolds Ranch & Farm", href: "https://reynoldsranchandfarm.com/" },
+  { name: "Gun Pro", href: "https://www.gunpro.com/" },
+  { name: "Freedom First Ammo", href: "https://freedomfirstammo.com/" },
+  { name: "Crown Ridge Barrel Works", href: "https://crownridgebarrelworks.com/" },
+  { name: "The Smoking Gun", href: "https://smokinggunstore.com/" },
+  { name: "Frontline Firearms", href: "https://frontlinefirearmsco.com/" },
+  { name: "First Light Guns", href: "https://firstlightguns.com/" },
+  { name: "US AR Parts", href: "https://usarparts.com/" },
+  { name: "EE & Arms", href: "https://eeandarms.com/" },
 ] as const;
