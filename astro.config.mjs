@@ -14,8 +14,12 @@ export default defineConfig({
   site,
   base,
   trailingSlash: "never",
+  redirects: {
+    "/ai-factory": "/ai-studio",
+  },
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },
 });
+

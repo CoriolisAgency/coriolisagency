@@ -74,7 +74,7 @@ Optional keep (editorial accidents — not company juice, but real clicks). Only
 | `/distributor-program/` | `/ecommerce` | 7 | |
 | `/can-you-use-woocommerce-to-sell-guns-…/` | `/ecommerce` | 4 | |
 | `/is-woocommerce-good-for-firearms/` | `/ecommerce` | 1 | 1,267 impr, 1 click. Not worth a slug. |
-| `/coriolis-agency-launches-betsy-ai-gun-search-engine-and-gun-search-agent/` | `/ai-factory` | 1 | Only Betsy URL with a click. |
+| `/coriolis-agency-launches-betsy-ai-gun-search-engine-and-gun-search-agent/` | `/ai-studio` | 1 | Only Betsy URL with a click. (`/ai-factory` 301s to `/ai-studio`.) |
 
 ### Distributor clones → `/firearms-dropshipping`
 

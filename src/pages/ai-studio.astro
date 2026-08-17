@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { FACTORY_PLATES } from "../lib/factory";
+import { STUDIO_PROOF } from "../lib/factory";
 import { CANON_PATHS } from "../lib/site";
-import { LINKS, linkClass, btnPlan, btnSky, btnSecondary } from "../lib/links";
+import { LINKS, linkClass, btnPlan, btnSecondary } from "../lib/links";
 import { withBase } from "../lib/base";
 import gsgHero from "../assets/gun-store-game-hero.png";
 
@@ -11,9 +11,9 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
 ---
 
 <BaseLayout
-  title="AI Factory — Working 2A products | Coriolis, LLC"
-  description="Coriolis AI Factory: Betsy AI, GunSearchEngine, GunSearchAgent, Coriolis OS, Betsy Live, and Gun Store Game. Live products, not a deck."
-  path="/ai-factory"
+  title="AI Studio — Build on what Coriolis already shipped | Coriolis, LLC"
+  description="Coriolis AI Studio: bring the idea and the budget. Betsy, GunSearchAgent, Demand Intelligence, and Gun Store Game are live proof we can ship your app, platform, or agent."
+  path="/ai-studio"
   ogImagePath={CANON_PATHS.gsgHero}
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
@@ -24,22 +24,25 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
         <p
           class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
         >
-          AI Factory
+          AI Studio
         </p>
         <h1
           class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
         >
-          Working 2A Products. Not a Pitch Deck.
+          You Have the Idea. We Already Shipped the Proof.
         </h1>
         <p class="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300">
-          Six 2A products we built and run. Each one is live — except Coriolis
-          OS, which we run the company on.
+          Betsy, GunSearchAgent, Demand Intelligence, and Gun Store Game are
+          live — not a deck. People with a budget come here when they want a
+          blue-sky app, platform, or agent built by a team that already ships
+          2A software. We are not the vibe-coding FFLs making AI promises they
+          cannot keep.
         </p>
         <div class="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
-          <a href={LINKS.gunStoreGame} class={btnPlan} {...ext}
-            >Play Gun Store Game Now</a
+          <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
+          <a href={LINKS.gunStoreGame} class={btnSecondary} {...ext}
+            >See Gun Store Game</a
           >
-          <a href={withBase("contact")} class={btnSecondary}>Talk to Coriolis</a>
         </div>
       </div>
       <a href={LINKS.gunStoreGame} class="block" {...ext}>
@@ -56,9 +59,17 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
 
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold"
+      >
+        Proof we already shipped
+      </p>
+      <p class="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
+        Not a catalog. Evidence. Bring the brief — we execute.
+      </p>
+      <div class="mt-8 grid gap-4 md:grid-cols-2">
         {
-          FACTORY_PLATES.map((plate) => (
+          STUDIO_PROOF.map((plate) => (
             <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
               <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
                 {plate.urlLabel}
@@ -95,9 +106,6 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
         Betsy's home is{" "}
         <a href={LINKS.betsy} class={linkClass} {...ext}>2aBetsy</a>.
       </p>
-      <div class="mt-6">
-        <a href={LINKS.betsyLive} class={btnSky} {...ext}>Watch Betsy Live</a>
-      </div>
     </div>
   </section>
 </BaseLayout>

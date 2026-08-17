@@ -1,6 +1,6 @@
 # Coriolis, LLC
 
-Company home for **Coriolis, LLC** — Ecommerce, AI Factory, and Demand Intelligence.
+Company home for **Coriolis, LLC** — Ecommerce, AI Studio, and Demand Intelligence.
 
 This repo replaces the WordPress story on [coriolisagency.com](https://www.coriolisagency.com/). It is not a second checkout, not FFL Accelerator, and not GunSearchEngine.
 

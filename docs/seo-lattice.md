@@ -2,7 +2,7 @@
 
 ## Role
 
-**coriolisagency.com** is the company home for Coriolis, LLC: Ecommerce, AI Factory, Demand Intelligence.
+**coriolisagency.com** is the company home for Coriolis, LLC: Ecommerce, AI Studio, Demand Intelligence.
 
 | Intent | Ranking owner |
 |--------|----------------|
@@ -13,7 +13,7 @@
 | AmmoReady alternative / Gearfire alternative | **This site** `/ammoready-alternative` |
 | Best FFL ecommerce website | **This site** `/best-ffl-ecommerce-website` |
 | FFL Accelerator $569 program story | **fflaccelerator.com** |
-| AI Factory / Coriolis products as capability | **This site** `/ai-factory` |
+| AI Studio / Coriolis products as capability | **This site** `/ai-studio` (`/ai-factory` → 301) |
 | Betsy AI character | **2abetsy.com** |
 | Demand Intelligence enterprise VP | **This site** `/demand-intelligence` |
 | DI portal, demo, API, Co-Pilot, depth matrix | **GunSearchEngine** `/demand-intelligence` |
@@ -37,6 +37,6 @@
 
 - Home → three pillars
 - Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / best-store cluster
-- AI Factory → live product URLs
+- AI Studio → live product URLs (proof, not a catalog)
 - Demand Intelligence → GSE demo, Co-Pilot, Betsy vs RetailBI
 - About → family lattice
