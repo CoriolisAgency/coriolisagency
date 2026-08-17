@@ -18,4 +18,5 @@ export const CANON_PATHS = {
   range: "betsy/images/betsy-at-the-range.jpg",
   unmet: "betsy/images/empty-search.jpg",
   storefront: "brand/storefront.jpg",
+  gsgHero: "brand/gun-store-game-hero.png",
 } as const;

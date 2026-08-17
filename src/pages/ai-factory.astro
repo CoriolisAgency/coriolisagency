@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { FACTORY_PLATES } from "../lib/factory";
 import { CANON_PATHS } from "../lib/site";
-import { LINKS, linkClass, btnSky } from "../lib/links";
+import { LINKS, linkClass, btnPlan, btnSky } from "../lib/links";
 import { withBase } from "../lib/base";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
@@ -12,11 +12,11 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
   title="AI Factory — Working 2A products | Coriolis, LLC"
   description="Coriolis AI Factory: Betsy AI, GunSearchEngine, GunSearchAgent, Coriolis OS, Betsy Live, and Gun Store Game. Live products, not a deck."
   path="/ai-factory"
-  ogImagePath={CANON_PATHS.headshot}
+  ogImagePath={CANON_PATHS.gsgHero}
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
     <div
-      class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.2fr_0.8fr]"
+      class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2"
     >
       <div>
         <p
@@ -34,14 +34,21 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
           Each plate is a product you can open — except Coriolis OS, which we
           run ourselves.
         </p>
+        <div class="mt-8">
+          <a href={LINKS.gunStoreGame} class={btnPlan} {...ext}
+            >Play Gun Store Game Now</a
+          >
+        </div>
       </div>
-      <img
-        src={withBase(CANON_PATHS.headshot)}
-        alt="Betsy AI"
-        width="640"
-        height="800"
-        class="mx-auto w-full max-w-[240px] rounded-2xl ring-1 ring-white/10 lg:max-w-none"
-      />
+      <a href={LINKS.gunStoreGame} class="block" {...ext}>
+        <img
+          src={withBase(CANON_PATHS.gsgHero)}
+          alt="Gun Store Game — a zombie bursts through the shop door. Betsy: I made you guys a game."
+          width="1600"
+          height="900"
+          class="w-full rounded-2xl object-cover ring-1 ring-white/10 transition hover:ring-gold/50"
+        />
+      </a>
     </div>
   </section>
 
