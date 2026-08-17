@@ -25,7 +25,7 @@ export const FAQ_ECOMMERCE: FaqItem[] = [
 export const FAQ_DI: FaqItem[] = [
   {
     q: "Is this a RetailBI replacement?",
-    a: "No. RetailBI’s intelligence is a byproduct of retail operations software. Betsy’s intelligence is a byproduct of product discovery.",
+    a: "No. RetailBI’s intelligence is a byproduct of retail operations software. Betsy’s intelligence is a byproduct of online and in-store product discovery.",
   },
   {
     q: "Do I only see my brand and three competitors?",

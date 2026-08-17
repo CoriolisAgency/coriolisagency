@@ -12,7 +12,7 @@ export const FROZEN = {
   brandIntelligence:
     "Betsy Demand Intelligence measures anonymized shopper search intent across GunSearchEngine, GunSearchAgent embeds, and floor sensors — including unmet (zero-hit) demand. It is not a POS system and not a same-store unit-sales index. (Formerly Brand Intelligence.)",
   doctrine:
-    "RetailBI’s intelligence is a byproduct of retail operations software. Betsy’s intelligence is a byproduct of product discovery.",
+    "RetailBI’s intelligence is a byproduct of retail operations software. Betsy’s intelligence is a byproduct of online and in-store product discovery.",
   commercialLine:
     "The site is yours. Betsy on it is included. That feed is what OEMs buy as Demand Intelligence.",
   copilot:
