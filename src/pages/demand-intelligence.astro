@@ -47,8 +47,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
             >My Betsy</a
           >{" "}
           floor sensors — including unmet (zero-hit) demand. It is not a POS
-          system and not a same-store unit-sales index. (Formerly Brand
-          Intelligence.)
+          system and not a same-store unit-sales index.
         </p>
         <p class="mt-4 max-w-xl text-sm leading-relaxed text-zinc-400">
           {FROZEN.doctrine}
@@ -57,13 +56,20 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
           <CtaRow primary="demo" showGsa={false} />
         </div>
       </div>
-      <img
-        src={withBase(CANON_PATHS.copilot)}
-        alt="Betsy Enterprise Co-Pilot — Demand Intelligence inside the tools brand teams already use"
-        width="1600"
-        height="900"
-        class="w-full rounded-2xl object-cover ring-1 ring-white/10"
-      />
+      <a
+        href={LINKS.demandIntel}
+        class="block"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={withBase(CANON_PATHS.copilot)}
+          alt="Betsy Enterprise Co-Pilot — Demand Intelligence inside the tools brand teams already use"
+          width="1600"
+          height="900"
+          class="w-full rounded-2xl object-cover ring-1 ring-white/10 transition hover:ring-sky-400/50"
+        />
+      </a>
     </div>
   </section>
 
