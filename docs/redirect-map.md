@@ -1,10 +1,22 @@
-# Redirect map (Cloudflare)
+# Redirect map (Vercel)
 
-WordPress → this Astro site. Implement as **301** at Cloudflare **at DNS cutover**, not before.
+WordPress → this Astro site. **301s run on Vercel** (`vercel.json`), not Cloudflare Bulk Redirects.
 
-Also 301 **`www.coriolisagency.com/*` → `https://coriolisagency.com/$1`**. GSC (Domain property, last 16 months, Web): **1,426 of 1,441 clicks are on `www`**. Apex has 3 impressions and 0 clicks. Trailing-slash variants 301 to no-slash (`trailingSlash: never`).
+Cloudflare is **DNS-only** after cutover (orange cloud off). Vercel security stays in front — do **not** proxy through Cloudflare. Bulk Redirect lists never fire in DNS-only mode; that is why old WP paths 404’d until they lived in `vercel.json`.
+
+Also 301 **`www.coriolisagency.com/*` → `https://coriolisagency.com/$1`** (host redirect elsewhere — see `docs/dns-cutover.md`). GSC (Domain property, last 16 months, Web): **1,426 of 1,441 clicks are on `www`**. Apex has 3 impressions and 0 clicks. Trailing-slash variants 308 to no-slash via `"trailingSlash": false` in `vercel.json` — do not duplicate slash rows in the redirects array.
 
 Source: `Downloads/coriolisagency.com-Performance-on-Search-2026-08-16/` (Pages + Queries). Links export not in yet.
+
+## Runtime
+
+| Layer | Role |
+|-------|------|
+| **Vercel `vercel.json` redirects** | Canonical 301 list for old WordPress paths → new Astro slugs (`permanent: true`). |
+| **`scripts/cloudflare-bulk-redirects.csv`** | Reference / historical import for Cloudflare Bulk Redirects. Same map as paths; **not** the runtime after DNS-only cutover. |
+| **Cloudflare** | DNS-only. Do not re-enable proxy for these 301s. |
+
+Highest-priority rule: `/ffl-website-plans` → `/ecommerce` (also `/ffl-ecommerce` → `/ecommerce`). Keep `/ai-factory` → `/ai-studio`.
 
 ## How to read the numbers
 
@@ -15,7 +27,7 @@ Source: `Downloads/coriolisagency.com-Performance-on-Search-2026-08-16/` (Pages 
 
 ## Keep the slug (recreate in Astro)
 
-Same path, new voice, still answer the old query in the first 80 words.
+Same path, new voice, still answer the old query in the first 80 words. **Do not 301 these** — they are live Astro pages.
 
 | Old (www) | 16-mo clicks | Impr | Why |
 |-----------|-------------:|-----:|-----|
@@ -24,6 +36,8 @@ Same path, new voice, still answer the old query in the first 80 words.
 | `/ffl-cockpit` | 33 | 2,390 | Partner product, pos ~8 for `ffl cockpit`. |
 | `/ammoready-alternative` | 19 | 1,780 | Query pos 6.1, 9 clicks. Keep the short slug. |
 | `/best-ffl-ecommerce-website` | 17 | 3,047 | Comparison intent still sells ecommerce. |
+
+Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/demand-intelligence`, `/ecommerce`, `/privacy`.
 
 Optional keep (editorial accidents — not company juice, but real clicks). Only if you want the traffic; otherwise 301 or die:
 
@@ -39,6 +53,8 @@ Optional keep (editorial accidents — not company juice, but real clicks). Only
 
 ## 301 to a new pillar (do these)
 
+Implemented in `vercel.json` (path sources only; trailing-slash handled by Vercel).
+
 | Old WordPress | New | Clicks | Why |
 |---------------|-----|-------:|-----|
 | `/ffl-website-plans/` | `/ecommerce` | 40 | Already planned. |
@@ -46,7 +62,7 @@ Optional keep (editorial accidents — not company juice, but real clicks). Only
 | `/plans` | `/ecommerce` | — | Alias. |
 | `/pricing/` and `/pricing` | `/ecommerce` | 6 | |
 | `/contact-the-coriolis-agency/` | `/contact` | 7 | Already planned. |
-| `/contact/` | `/contact` | 0 | Same intent, 171 impr. |
+| `/contact/` | `/contact` | 0 | Same intent, 171 impr. Trailing slash only — Vercel 308. |
 | `/privacy-policy/` | `/privacy` | 0 | Already planned. |
 | `/meet-the-team/` | `/about` | 26 | |
 | `/ammoready-com-founder-launches-2a-focused-digital-marketing-agency/` | `/about` | 24 | |
@@ -138,9 +154,8 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 - `trashpanda.coriolisagency.com` — **11 clicks**. Separate subdomain. Do not point the company 301 map at it; leave that DNS alone.
 
-## Cloudflare import (launch)
+## Maintaining the list
 
-1. **Redirect Rule** — `www` → apex (see `docs/dns-cutover.md`).
-2. **Bulk Redirects** — import `scripts/cloudflare-bulk-redirects.csv`.
-
-Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/best-ffl-ecommerce-website`). Do not 301 those.
+1. Edit **`vercel.json`** `redirects` (paths only, `permanent: true`). Skip keep-slugs and trailing-slash duplicates.
+2. Optionally mirror path changes in `scripts/cloudflare-bulk-redirects.csv` for reference — it is not the runtime.
+3. Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/best-ffl-ecommerce-website`, plus `/about`, `/ai-studio`, `/contact`, `/demand-intelligence`, `/ecommerce`, `/privacy`). Do not 301 those.
