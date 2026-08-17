@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_COCKPIT } from "../lib/faq";
+import { LINKS, linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+
+const split = [
+  {
+    title: "FFL Cockpit",
+    body: "Distributor catalogs, lowest-cost routing, MAP, FFL Checkout. The operations layer. Licensed at fflcockpit.com.",
+  },
+  {
+    title: "Coriolis WooCommerce",
+    body: "The public store. Your domain, your theme, your SEO. We build, host, and support it so Cockpit has somewhere to sell.",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="FFL Cockpit Websites — WooCommerce Hosting for FFLs | Coriolis"
+  description="FFL Cockpit is not a website. Coriolis builds and hosts the WooCommerce storefront it needs — catalogs, FFL Checkout, and your domain. Militia $269/mo."
+  path="/ffl-cockpit"
+  ogImagePath={CANON_PATHS.storefront}
+  faq={FAQ_COCKPIT}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div
+      class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2"
+    >
+      <div>
+        <p
+          class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+        >
+          Ecommerce · FFL Cockpit
+        </p>
+        <h1
+          class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+        >
+          FFL Cockpit websites for gun stores
+        </h1>
+        <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+          FFL Cockpit is the firearms operations platform for distributor
+          catalogs, FFL Checkout, and automated dropshipping. It is not a
+          customer-facing store. Coriolis builds and hosts the WooCommerce
+          website that sits in front of it — on your domain, designed for an
+          FFL, ready to sell stock, dropship, or both.
+        </p>
+        <div class="mt-8">
+          <CtaRow />
+        </div>
+        <EcommerceCluster current="ffl-cockpit" />
+      </div>
+      <img
+        src={withBase(CANON_PATHS.storefront)}
+        alt="A Coriolis-built gun store website — the storefront FFL Cockpit sells through."
+        width="1600"
+        height="900"
+        class="w-full rounded-2xl object-cover ring-1 ring-white/10"
+      />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Who does what</h2>
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        {
+          split.map((s) => (
+            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+              <h3 class="text-sm font-semibold text-sky-300">{s.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-zinc-400">{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="mt-6 text-sm text-zinc-500">
+        Licenses live on{" "}
+        <a href={LINKS.fflCockpit} class={linkClass} {...ext}>fflcockpit.com</a>.
+        Militia ($269/mo) and every plan above it include FFL Cockpit and FFL
+        Checkout. We configure them at setup.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
+      <p class="max-w-3xl text-sm text-zinc-400">
+        Already on Cockpit and shopping for a better store? That is the usual
+        brief.{" "}
+        <a href={withBase("ecommerce")} class={linkClass}>Plans and setup</a>
+        {" · "}
+        <a href={withBase("firearms-dropshipping")} class={linkClass}
+          >How dropshipping runs on it</a
+        >.
+      </p>
+      <CtaRow primary="ecommerce" />
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_COCKPIT} />
+</BaseLayout>

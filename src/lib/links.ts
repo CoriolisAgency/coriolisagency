@@ -1,6 +1,10 @@
 export const LINKS = {
   home: "https://coriolisagency.com",
   ecommerce: "/ecommerce",
+  dropshipping: "/firearms-dropshipping",
+  cockpitPage: "/ffl-cockpit",
+  ammoreadyAlt: "/ammoready-alternative",
+  bestStore: "/best-ffl-ecommerce-website",
   aiFactory: "/ai-factory",
   demandIntelPage: "/demand-intelligence",
   about: "/about",

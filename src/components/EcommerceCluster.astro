@@ -1,0 +1,34 @@
+---
+import { withBase } from "../lib/base";
+
+const items = [
+  { href: "ecommerce", label: "FFL website plans" },
+  { href: "firearms-dropshipping", label: "Firearms dropshipping" },
+  { href: "ffl-cockpit", label: "FFL Cockpit websites" },
+  { href: "ammoready-alternative", label: "AmmoReady alternative" },
+  { href: "best-ffl-ecommerce-website", label: "Best FFL ecommerce website" },
+] as const;
+
+interface Props {
+  current?: (typeof items)[number]["href"];
+}
+
+const { current } = Astro.props;
+---
+
+<nav
+  class="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-sm text-zinc-400"
+  aria-label="FFL ecommerce"
+>
+  {
+    items.map((item) =>
+      item.href === current ? (
+        <span class="text-zinc-200">{item.label}</span>
+      ) : (
+        <a href={withBase(item.href)} class="text-sky-400 hover:underline underline-offset-2">
+          {item.label}
+        </a>
+      ),
+    )
+  }
+</nav>

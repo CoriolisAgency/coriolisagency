@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_AMMOREADY } from "../lib/faq";
+import { FROZEN } from "../lib/frozen";
+import { LINKS, linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+
+const rows = [
+  ["What you own", "A login on their platform", "The WooCommerce site, on your domain"],
+  ["How you grow", "Usage and catalog limits are their levers", "Minute Man $169 → Accelerator $569. You keep the URL."],
+  ["Dropshipping", "Manual or limited catalogs", "FFL Cockpit: 21 distributors, automated routing (Militia+)"],
+  ["POS", "Their partner list", "AIM, MicroBiz, Rapid, Trident 1, Corestore (Warlord+)"],
+  ["SEO", "Their URLs, their templates", "Your slugs, your content, your schema"],
+  ["Exit", "Export what they allow", "Take the site. It is WordPress."],
+] as const;
+---
+
+<BaseLayout
+  title="AmmoReady Alternative — WooCommerce + FFL Cockpit | Coriolis"
+  description="Looking for an AmmoReady or Gearfire alternative? Coriolis is managed WooCommerce you own, with FFL Cockpit dropshipping. Our founder ran AmmoReady for 9 years."
+  path="/ammoready-alternative"
+  ogImagePath={CANON_PATHS.rangeMckinney}
+  faq={FAQ_AMMOREADY}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        Ecommerce · Switch
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        AmmoReady alternative: WooCommerce you own
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        AmmoReady is a fine place to start. It is a rented storefront. When you
+        want the site, the SEO, the POS, and the catalog under your name,
+        Coriolis is the AmmoReady alternative — and the same answer if you are
+        leaving Gearfire. Our founder built and ran AmmoReady.com for 9 years.
+        This company exists so dealers are not stuck on a closed catalog.
+      </p>
+      <div class="mt-8">
+        <CtaRow />
+      </div>
+      <EcommerceCluster current="ammoready-alternative" />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        AmmoReady or Gearfire vs Coriolis
+      </h2>
+      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
+        Gearfire is the other closed network people compare. Same column.
+        Coriolis is not affiliated with Gearfire or RetailBI.
+      </p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[36rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              <th class="py-3 pr-4 font-medium"> </th>
+              <th class="py-3 pr-4 font-medium">Closed platform</th>
+              <th class="py-3 font-medium text-zinc-200">Coriolis WooCommerce</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              rows.map(([k, a, b]) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class="py-3 pr-4 font-medium text-zinc-300">{k}</th>
+                  <td class="py-3 pr-4">{a}</td>
+                  <td class="py-3 text-zinc-200">{b}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
+      <p class="max-w-3xl text-sm text-zinc-400">
+        {FROZEN.commercialLine} Setup is $500 or $2,500.{" "}
+        <a href={withBase("ecommerce")} class={linkClass}>Plans</a>
+        {" · "}
+        <a href={LINKS.fflaccelerator} class={linkClass} target="_blank" rel="noopener noreferrer"
+          >FFL Accelerator</a
+        >.
+      </p>
+      <CtaRow primary="ecommerce" />
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_AMMOREADY} />
+</BaseLayout>

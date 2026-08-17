@@ -8,6 +8,10 @@
 |--------|----------------|
 | Coriolis / Coriolis Agency / Coriolis LLC | **This site** `/` |
 | FFL website plans / WooCommerce hosting ladder | **This site** `/ecommerce` |
+| Firearms dropshipping / FFL dropshipping | **This site** `/firearms-dropshipping` |
+| FFL Cockpit + “what website do I use” | **This site** `/ffl-cockpit` |
+| AmmoReady alternative / Gearfire alternative | **This site** `/ammoready-alternative` |
+| Best FFL ecommerce website | **This site** `/best-ffl-ecommerce-website` |
 | FFL Accelerator $569 program story | **fflaccelerator.com** |
 | AI Factory / Coriolis products as capability | **This site** `/ai-factory` |
 | Betsy AI character | **2abetsy.com** |
@@ -21,7 +25,7 @@
 
 1. Conversion: monthly ecommerce → `/contact`. Setup → existing Stripe links. DI → GSE demo. GSA → gunsearchagent.com.
 2. First ~80 words of each commercial page answer the query.
-3. FAQ JSON-LD on `/ecommerce` and `/demand-intelligence`.
+3. FAQ JSON-LD on `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/best-ffl-ecommerce-website`, and `/demand-intelligence`.
 4. Organization `sameAs`: listed in `src/lib/links.ts`.
 5. Never H1 “RetailBI alternative.” Never “switch off RetailBI.” Never 4473 automation claims.
 6. Frozen strings from `src/lib/frozen.ts`.
@@ -30,7 +34,7 @@
 ## Internal links
 
 - Home → three pillars
-- Ecommerce → Accelerator (external) + contact + setup checkout
+- Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / best-store cluster
 - AI Factory → live product URLs
 - Demand Intelligence → GSE demo, Co-Pilot, Betsy vs RetailBI
 - About → family lattice

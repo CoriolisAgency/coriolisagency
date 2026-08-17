@@ -18,8 +18,17 @@ const nav = [
   { href: "about", label: "About" },
 ] as const;
 
+const ecommercePaths = new Set([
+  "/ecommerce",
+  "/firearms-dropshipping",
+  "/ffl-cockpit",
+  "/ammoready-alternative",
+  "/best-ffl-ecommerce-website",
+]);
+
 function active(slug: string) {
   const p = `/${slug}`;
+  if (slug === "ecommerce") return ecommercePaths.has(path);
   return path === p || path.startsWith(p + "/");
 }
 

@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_BEST } from "../lib/faq";
+import { LINKS, linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+
+const rows = [
+  ["You own the website", "No", "No", "Yes — open WooCommerce"],
+  ["Monthly (dropshipping rung)", "Usage-priced", "Network-priced", "Militia $269/mo"],
+  ["Own inventory + dropship", "Varies", "Yes", "Yes, or either one"],
+  ["Distributor catalogs", "Limited set", "Their set", "21 via FFL Cockpit"],
+  ["FFL dealer checkout", "Built-in", "Built-in", "FFL Checkout"],
+  ["POS", "Their partner", "Axis and others", "AIM, MicroBiz, Rapid, Trident 1, Corestore"],
+  ["AmmoSeek / GunBroker", "Add-on or no", "Limited", "Included on Militia+"],
+  ["SEO control", "Theirs", "Theirs", "Yours"],
+  ["4473 / bound book", "Sometimes bundled", "Third-party", "Your POS or FastBound — not us"],
+] as const;
+---
+
+<BaseLayout
+  title="Best FFL Ecommerce Website — WooCommerce vs Closed Platforms | Coriolis"
+  description="The best FFL ecommerce website is the one you own. Honest comparison of AmmoReady, Gearfire, and Coriolis-managed WooCommerce with FFL Cockpit."
+  path="/best-ffl-ecommerce-website"
+  ogImagePath={CANON_PATHS.storefront}
+  faq={FAQ_BEST}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        Ecommerce · Comparison
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        Best FFL ecommerce website
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        The best FFL ecommerce website is the one the dealer owns. AmmoReady
+        and Gearfire rent you a catalog. Orchid bundles compliance with a
+        storefront. Coriolis builds ATF-aware WooCommerce on your domain —
+        inventory,{" "}
+        <a href={withBase("firearms-dropshipping")} class={linkClass}
+          >firearms dropshipping</a
+        >, or both — with{" "}
+        <a href={LINKS.fflCockpit} class={linkClass} {...ext}>FFL Cockpit</a>
+        {" "}
+        for feeds and checkout. You can leave with the site.
+      </p>
+      <div class="mt-8">
+        <CtaRow />
+      </div>
+      <EcommerceCluster current="best-ffl-ecommerce-website" />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">What actually differs</h2>
+      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
+        “Not built in” is not the same as “not supported.” Closed platforms
+        bundle. WooCommerce integrates. Marks belong to their owners.
+      </p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[40rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              <th class="py-3 pr-3 font-medium"> </th>
+              <th class="py-3 pr-3 font-medium">AmmoReady</th>
+              <th class="py-3 pr-3 font-medium">Gearfire</th>
+              <th class="py-3 font-medium text-zinc-200">Coriolis Woo</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              rows.map(([k, a, g, c]) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class="py-3 pr-3 font-medium text-zinc-300">{k}</th>
+                  <td class="py-3 pr-3">{a}</td>
+                  <td class="py-3 pr-3">{g}</td>
+                  <td class="py-3 text-zinc-200">{c}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
+      <p class="max-w-3xl text-sm text-zinc-400">
+        Leaving a closed platform?{" "}
+        <a href={withBase("ammoready-alternative")} class={linkClass}
+          >AmmoReady / Gearfire alternative</a
+        >
+        {" · "}
+        <a href={withBase("ecommerce")} class={linkClass}>Plans from $169/mo</a>.
+      </p>
+      <CtaRow primary="ecommerce" />
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_BEST} />
+</BaseLayout>

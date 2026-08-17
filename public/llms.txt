@@ -15,16 +15,20 @@ This domain is the company home. Checkout for setup packages is on checkout.cori
 
 - Minute Man $169/mo · Militia $269/mo · Gun Runner $369/mo · Warlord $469/mo · FFL Accelerator $569/mo
 - Setup: $500 Basic / $2,500 Retail
-- Monthly plans are onboarded by Coriolis (no public Stripe buy button)
-- Demand Intelligence seats: $49/user/mo, 1 Client Admin free. Plan dollars shared in onboarding.
+- Monthly hosting starts after a conversation (no public buy button)
+- Demand Intelligence seats: $49/user/mo, 1 Client Admin free. Plan pricing is in the demo.
 
 ## Pages
 
-- [/](/): Three pillars.
-- [/ecommerce](/ecommerce): Distilled FFL website plans.
-- [/ai-factory](/ai-factory): Six live capability plates.
-- [/demand-intelligence](/demand-intelligence): Enterprise VP. Demo on GunSearchEngine.
-- [/about](/about): Company + founder.
+- [/](/): Company home — ecommerce, AI Factory, Demand Intelligence.
+- [/ecommerce](/ecommerce): FFL website plans.
+- [/firearms-dropshipping](/firearms-dropshipping): What firearms dropshipping is; Militia+ with FFL Cockpit.
+- [/ffl-cockpit](/ffl-cockpit): Cockpit is operations; Coriolis is the WooCommerce website.
+- [/ammoready-alternative](/ammoready-alternative): AmmoReady / Gearfire alternative. You own the site.
+- [/best-ffl-ecommerce-website](/best-ffl-ecommerce-website): Comparison. Best FFL store is the one you own.
+- [/ai-factory](/ai-factory): Six live products. Coriolis OS is internal, not for sale.
+- [/demand-intelligence](/demand-intelligence): Demand Intelligence for brands. Demo on GunSearchEngine.
+- [/about](/about): Company and founder.
 - [/contact](/contact): Talk to Coriolis.
 - [/privacy](/privacy): Privacy policy.
 

@@ -55,10 +55,9 @@ export const PLANS: Plan[] = [
     hook: "Add VIP support",
     includesFrom: "Militia",
     features: [
-      "DNS and email administration",
-      "SMTP mail server",
+      "DNS and email hosting",
       "Advanced search and filter",
-      "Google Analytics admin",
+      "Analytics setup",
       "VIP support for WordPress, WooCommerce, theme, feeds, and plugins",
       "Email and chat support (one-hour response)",
     ],
@@ -70,9 +69,8 @@ export const PLANS: Plan[] = [
     hook: "Add point-of-sale",
     includesFrom: "Gun Runner",
     features: [
-      "API-based POS integration",
+      "Connect your register",
       "AIM, MicroBiz, Rapid, Trident 1, Corestore",
-      "Unlimited API requests and webhooks",
       "Concierge onboarding",
     ],
   },
@@ -80,7 +78,7 @@ export const PLANS: Plan[] = [
     id: "ffl-accelerator",
     name: "FFL Accelerator",
     price: 569,
-    hook: "Add jet fuel",
+    hook: "Add the full program",
     featured: true,
     includesFrom: "Warlord",
     features: [
@@ -143,11 +141,11 @@ export const CAPABILITIES = [
   },
   {
     title: "POS when you need it",
-    body: "Warlord and Accelerator integrate AIM, MicroBiz, Rapid, Trident 1, and Corestore over API — unlimited requests and webhooks.",
+    body: "Warlord and Accelerator connect AIM, MicroBiz, Rapid, Trident 1, and Corestore so the floor and the site stay in sync.",
   },
   {
     title: "Feeds that sell",
-    body: "AmmoSeek product feed and GunBroker listing automation ship with Militia. They are not a later add-on project.",
+    body: "AmmoSeek product feed and GunBroker listing automation are included on Militia — not a separate project.",
   },
   {
     title: "Betsy on the domain",

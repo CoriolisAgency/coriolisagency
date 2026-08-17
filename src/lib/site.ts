@@ -14,9 +14,12 @@ export const CANON_PATHS = {
   icon: "favicon.png",
   headshot: "betsy/images/betsy-headshot-work.png",
   gaHero: "betsy/images/betsy-ga-alternative-hero.jpg",
+  trendingIntent: "betsy/images/betsy-trending-intent.png",
   copilot: "betsy/images/betsy-ai-brand-intelligence-enterprise-co-pilot.jpg",
   range: "betsy/images/betsy-at-the-range.jpg",
   unmet: "betsy/images/empty-search.jpg",
   storefront: "brand/storefront.jpg",
+  rangeMckinney: "brand/the-range-mckinney.png",
   gsgHero: "brand/gun-store-game-hero.png",
+  contactHero: "brand/contact-hero.jpg",
 } as const;

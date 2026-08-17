@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { FACTORY_PLATES } from "../lib/factory";
 import { CANON_PATHS } from "../lib/site";
-import { LINKS, linkClass, btnPlan, btnSky } from "../lib/links";
+import { LINKS, linkClass, btnPlan, btnSky, btnSecondary } from "../lib/links";
 import { withBase } from "../lib/base";
 import gsgHero from "../assets/gun-store-game-hero.png";
 
@@ -29,17 +29,17 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
         <h1
           class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
         >
-          Speedmaxx App Development With Betsy AI Factory
+          Working 2A Products. Not a Pitch Deck.
         </h1>
         <p class="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300">
-          Six working 2A-focused solutions we built with Betsy AI Factory. Each
-          plate is a product you can open — except Coriolis OS, which is our
-          internal, AI-powered operating system.
+          Six 2A products we built and run. Each one is live — except Coriolis
+          OS, which we run the company on.
         </p>
-        <div class="mt-8">
+        <div class="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
           <a href={LINKS.gunStoreGame} class={btnPlan} {...ext}
             >Play Gun Store Game Now</a
           >
+          <a href={withBase("contact")} class={btnSecondary}>Talk to Coriolis</a>
         </div>
       </div>
       <a href={LINKS.gunStoreGame} class="block" {...ext}>
@@ -90,9 +90,9 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
       <p class="mt-10 max-w-3xl text-sm text-zinc-500">
         Dealers start on{" "}
         <a href={LINKS.gsa} class={linkClass} {...ext}>GunSearchAgent</a>.
-        Shoppers and OEMs start on{" "}
+        Shoppers and brands start on{" "}
         <a href={LINKS.gse} class={linkClass} {...ext}>GunSearchEngine</a>.
-        The character lives on{" "}
+        Betsy's home is{" "}
         <a href={LINKS.betsy} class={linkClass} {...ext}>2aBetsy</a>.
       </p>
       <div class="mt-6">

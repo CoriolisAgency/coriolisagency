@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import { FAQ_ECOMMERCE } from "../lib/faq";
 import { FROZEN } from "../lib/frozen";
@@ -19,29 +20,48 @@ const checkout = {
   title="FFL Ecommerce Plans — WooCommerce + FFL Cockpit | Coriolis"
   description="WooCommerce and FFL Cockpit hosting for FFLs. Minute Man $169 through FFL Accelerator $569. Setup $500 or $2,500. The site is yours. Betsy on it is included."
   path="/ecommerce"
-  ogImagePath={CANON_PATHS.storefront}
+  ogImagePath={CANON_PATHS.rangeMckinney}
   faq={FAQ_ECOMMERCE}
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <p
-        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
-      >
-        Ecommerce
-      </p>
-      <h1
-        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
-      >
-        WooCommerce and FFL Cockpit hosting for FFLs
-      </h1>
-      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        We build, host, support, and promote ATF-aware WooCommerce for
-        online-only FFLs, gun stores, shooting ranges, and 2A brands. Sell your
-        inventory, dropship from distributor catalogs, or both.
-      </p>
-      <div class="mt-8">
-        <CtaRow />
+    <div
+      class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2"
+    >
+      <div>
+        <p
+          class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+        >
+          Ecommerce
+        </p>
+        <h1
+          class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+        >
+          WooCommerce and FFL Cockpit hosting for FFLs
+        </h1>
+        <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+          We build, host, support, and promote ATF-aware WooCommerce for
+          online-only FFLs, gun stores, shooting ranges, and 2A brands. Sell your
+          inventory, dropship from distributor catalogs, or both.
+        </p>
+        <div class="mt-8">
+          <CtaRow />
+        </div>
+        <EcommerceCluster current="ecommerce" />
       </div>
+      <a
+        href="https://store.therangeinmckinney.com/"
+        class="block"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={withBase(CANON_PATHS.rangeMckinney)}
+          alt="The Range in McKinney — a Coriolis FFL ecommerce site. Browse and buy online, pick up in store."
+          width="1283"
+          height="965"
+          class="w-full rounded-2xl object-contain ring-1 ring-white/10 bg-[#111] transition hover:ring-gold/50"
+        />
+      </a>
     </div>
   </section>
 
@@ -51,8 +71,8 @@ const checkout = {
         <div>
           <h2 class="text-xl font-semibold text-white">Monthly plans</h2>
           <p class="mt-2 max-w-2xl text-sm text-zinc-400">
-            A ladder, not five competing carts. Each tier includes everything
-            below it. Monthly hosting is onboarded by Coriolis — talk to us.
+            Each plan includes everything in the one below it. Monthly hosting
+            starts after we talk. We set the site up with you.
           </p>
         </div>
       </div>
@@ -109,7 +129,7 @@ const checkout = {
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">One-time setup</h2>
       <p class="mt-2 max-w-2xl text-sm text-zinc-400">
-        Buy setup on Stripe. Monthly hosting starts after we talk.
+        Pay for setup online. Monthly hosting starts after we talk.
       </p>
       <div class="mt-8 grid gap-4 md:grid-cols-2">
         {
