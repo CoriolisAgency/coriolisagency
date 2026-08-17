@@ -5,7 +5,7 @@ export const LINKS = {
   cockpitPage: "/ffl-cockpit",
   ammoreadyAlt: "/ammoready-alternative",
   bestStore: "/best-ffl-ecommerce-website",
-  aiFactory: "/ai-factory",
+  aiStudio: "/ai-studio",
   demandIntelPage: "/demand-intelligence",
   about: "/about",
   contact: "/contact",

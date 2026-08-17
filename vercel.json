@@ -1,3 +1,10 @@
 {
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/ai-factory",
+      "destination": "/ai-studio",
+      "permanent": true
+    }
+  ]
 }

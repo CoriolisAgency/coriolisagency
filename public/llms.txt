@@ -20,13 +20,13 @@ This domain is the company home. Checkout for setup packages is on checkout.cori
 
 ## Pages
 
-- [/](/): Company home — ecommerce, AI Factory, Demand Intelligence.
+- [/](/): Company home — ecommerce, AI Studio, Demand Intelligence.
 - [/ecommerce](/ecommerce): FFL website plans.
 - [/firearms-dropshipping](/firearms-dropshipping): What firearms dropshipping is; Militia+ with FFL Cockpit.
 - [/ffl-cockpit](/ffl-cockpit): Cockpit is operations; Coriolis is the WooCommerce website.
 - [/ammoready-alternative](/ammoready-alternative): AmmoReady / Gearfire alternative. You own the site.
 - [/best-ffl-ecommerce-website](/best-ffl-ecommerce-website): Comparison. Best FFL store is the one you own.
-- [/ai-factory](/ai-factory): Six live products. Coriolis OS is internal, not for sale.
+- [/ai-studio](/ai-studio): Build custom apps on shipped proof (Betsy, GSA, DI, Gun Store Game). `/ai-factory` 301s here.
 - [/demand-intelligence](/demand-intelligence): Demand Intelligence for brands. Demo on GunSearchEngine.
 - [/about](/about): Company and founder.
 - [/contact](/contact): Talk to Coriolis.

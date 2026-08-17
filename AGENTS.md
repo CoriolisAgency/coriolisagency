@@ -4,7 +4,7 @@ Static company site (Astro → **Vercel**) for the three-pillar model. Not GitHu
 
 ## Product lattice
 
-- **This site:** company home. Ecommerce ladder, AI Factory plates, enterprise DI VP.
+- **This site:** company home. Ecommerce ladder, AI Studio plates, enterprise DI VP.
 - **fflaccelerator.com:** $569 program door. Keep it. Deep-link from `/ecommerce`.
 - **gunsearchagent.com:** dealer product. Free core. Do not rebuild claim flow.
 - **gunsearchengine.com:** shoppers, Betsy Live, Demand Intelligence portal/demo/API/Co-Pilot.
@@ -15,7 +15,7 @@ Do **not** clone checkout, GSA claim, or the DI portal here. Link out.
 
 ## Naming
 
-- Pillar is **AI Factory** (Paul’s word).
+- Pillar is **AI Studio** (public name; was AI Factory).
 - Do not call this site “Intelligence Factory” (GSE DI hero).
 - Do not call Coriolis OS “the factory” or “a Vercel factory.”
 
