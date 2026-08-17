@@ -2,7 +2,7 @@
 
 Company home for **Coriolis, LLC** — Ecommerce, AI Studio, and Demand Intelligence.
 
-This repo replaces the WordPress story on [coriolisagency.com](https://www.coriolisagency.com/). It is not a second checkout, not FFL Accelerator, and not GunSearchEngine.
+This repo is the company site on [coriolisagency.com](https://www.coriolisagency.com/). It is not a second checkout, not FFL Accelerator, and not GunSearchEngine.
 
 ## Stack
 
@@ -21,6 +21,22 @@ npm run build
 ```
 
 Node `>=22.12.0`.
+
+## Contact form (Mailgun + Coriolis OS Lead)
+
+`POST /api/contact` emails `CONTACT_TO` (default `paul@coriolisagency.com`) and, when OS env is set, mints a Lead on Coriolis OS via signed `POST /api/forms/lead`. Set these on the Vercel project (and in `.env.local` for local `vercel dev`):
+
+```
+MAILGUN_API_KEY=
+MAILGUN_DOMAIN=
+MAILGUN_API_BASE=https://api.mailgun.net
+CONTACT_TO=paul@coriolisagency.com
+CONTACT_FROM=Coriolis <forms@YOUR_MAILGUN_DOMAIN>
+CORIOLIS_OS_URL=https://<os-host>
+FORM_INTAKE_SECRET=<same as the coriolis Vercel project>
+```
+
+US API base is the default. Do not commit keys. `FORM_INTAKE_SECRET` must match the OS project. Missing OS env skips the Lead and still sends mail.
 
 ## What lives where
 
