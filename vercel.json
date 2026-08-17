@@ -5,6 +5,371 @@
       "source": "/ai-factory",
       "destination": "/ai-studio",
       "permanent": true
+    },
+    {
+      "source": "/ffl-website-plans",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/ffl-ecommerce",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/plans",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/pricing",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/payments",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/ffl-payments",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/gun-store-ecommerce",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/gun-store-website-builder-for-ffls",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/distributor-program",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/is-woocommerce-good-for-firearms",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/can-you-use-woocommerce-to-sell-guns-the-complete-compliance-first-guide-for-ffl-holders-gun-stores-2a-brands-in-2026",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/coriolis-agency-announces-fully-managed-woocommerce-hosting-for-ffl-cockpit",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/coriolis-agency-announces-professionally-managed-hosting-for-woocommerce-and-ffl-cockpit",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/ffl-cockpit-woocommerce-hosting",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/contact-the-coriolis-agency",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/meet-the-team",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/partners",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/author/devopscoriolisagency-com",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/author/coriolisagency",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/ammoready-com-founder-launches-2a-focused-digital-marketing-agency",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/shadowsmith-ammo-selects-coriolis-agency-for-next-generation-ecommerce-pos-payments-ammoseek-integration",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/ammoready-alternative-why-ffls-are-switching-to-coriolis",
+      "destination": "/ammoready-alternative",
+      "permanent": true
+    },
+    {
+      "source": "/gearfire-alternative-why-ffls-are-choosing-coriolis-instead",
+      "destination": "/ammoready-alternative",
+      "permanent": true
+    },
+    {
+      "source": "/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026",
+      "destination": "/ammoready-alternative",
+      "permanent": true
+    },
+    {
+      "source": "/switch",
+      "destination": "/ammoready-alternative",
+      "permanent": true
+    },
+    {
+      "source": "/switch-n-save",
+      "destination": "/ammoready-alternative",
+      "permanent": true
+    },
+    {
+      "source": "/ffl-dropshipping",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/what-is-firearms-dropshipping",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/firearms-dropshipping-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/dropshipping-firearms-ammunition-for-ffls-coriolis-agency",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/home-based-ffl-distributors-how-to-build-a-profitable-online-firearms-business-from-home-in-2026",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/dropshipping-for-home-based-ffls-how-to-build-a-scalable-firearms-business-without-a-storefront",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/home-based-ffl-dropshipping-with-woocommerce-ffl-cockpit-2026-complete-setup-guide",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/rsr-group-dropshipping-for-woocommerce-automated-firearms-sales-engine",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/zanders-sporting-goods-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/chattanooga-shooting-supplies-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/sports-south-dropshipping-for-woocommerce-automated-firearms-sales-engine",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/rsr-group-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/lipseys-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/sports-south-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/orion-wholesale-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/kinseys-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/lipseys-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/davidsons-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/mge-wholesale-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/gun-accessory-supply-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/camfour-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/iron-valley-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/bill-hicks-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/2nd-amendment-wholesale-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/crow-shooting-supply-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/kroll-international-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/msr-distributions-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/amchar-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/countrywide-sports-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/hicks-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/zanders-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/wholesale-firearms-dropshipping-for-woocommerce",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/rsr-group-firearms-dropshipping-for-ffls",
+      "destination": "/firearms-dropshipping",
+      "permanent": true
+    },
+    {
+      "source": "/ffl-cockpit-distributors-complete-list-of-21-supported-firearm-distributors-for-woocommerce-2026-update",
+      "destination": "/ffl-cockpit",
+      "permanent": true
+    },
+    {
+      "source": "/coriolis-agency-launches-betsy-ai-gun-search-engine-and-gun-search-agent",
+      "destination": "/ai-studio",
+      "permanent": true
+    },
+    {
+      "source": "/coriolis-agency-partners-with-aim-pos-to-deliver-integrated-pos-and-woocommerce-solutions-for-gun-stores-and-shooting-ranges",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/coriolis-agency-announces-support-for-corestore-pos-integration-with-woocommerce",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/ecommerce-for-trident-1-pos",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/aim-pos-integration-for-woocommerce",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/rapid-gun-systems-pos-integration-for-woocommerce-gun-store-ecommerce",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/axis-pos-woocommerce-a-powerful-integration-for-ffl-dealers-looking-for-a-gearfire-alternative",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/coriolis-agency-and-microbiz-partner-to-deliver-seamless-ffl-compliant-pos-ecommerce-and-dropshipping-for-firearms-retailers",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/pos-integration-for-gun-store-ecommerce",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/gun-store-pos-for-ffls",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
+      "source": "/axis-pos-woocommerce-integration-now-available-real-time-sync-for-ffl-dealers",
+      "destination": "/ecommerce",
+      "permanent": true
     }
   ]
 }
