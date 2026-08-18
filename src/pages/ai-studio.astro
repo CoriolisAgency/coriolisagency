@@ -32,8 +32,15 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
           You Have the Idea. We Already Shipped the Proof.
         </h1>
         <p class="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300">
-          Betsy AI, GunSearchAgent, Demand Intelligence, and Gun Store Game are
-          live — not a deck. People with a budget come here when they want a
+          <a href={LINKS.betsy} class={linkClass} {...ext}>Betsy AI</a>,{" "}
+          <a href={LINKS.gsa} class={linkClass} {...ext}>GunSearchAgent</a>,{" "}
+          <a href={LINKS.demandIntel} class={linkClass} {...ext}
+            >Demand Intelligence</a
+          >, and{" "}
+          <a href={LINKS.gunStoreGame} class={linkClass} {...ext}
+            >Gun Store Game</a
+          >{" "}
+          are live — not a deck. People with a budget come here when they want a
           blue-sky app, platform, or agent built by a team that already ships
           software. We are not the vibe-coding FFLs making AI promises they
           cannot keep.
