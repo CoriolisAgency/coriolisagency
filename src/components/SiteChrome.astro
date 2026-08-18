@@ -13,8 +13,10 @@ const path =
 
 const nav = [
   { href: "ecommerce", label: "FFL Ecommerce" },
+  { href: LINKS.fflintel, label: "FFL Intel", external: true },
   { href: "ai-studio", label: "AI Studio" },
   { href: "demand-intelligence", label: "Demand Intelligence" },
+  { href: "about", label: "About" },
 ] as const;
 
 const ecommercePaths = new Set([
@@ -64,37 +66,20 @@ const family = [
       {
         nav.map((item) => (
           <a
-            href={withBase(item.href)}
+            href={"external" in item ? item.href : withBase(item.href)}
             class:list={[
               "rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors sm:text-sm",
-              active(item.href)
+              !("external" in item) && active(item.href)
                 ? "border-gold/50 bg-gold/10 text-gold"
                 : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
             ]}
+            target={"external" in item ? "_blank" : undefined}
+            rel={"external" in item ? "noopener noreferrer" : undefined}
           >
             {item.label}
           </a>
         ))
       }
-      <a
-        href={LINKS.fflintel}
-        class="rounded-sm border border-zinc-700 px-2.5 py-1.5 text-xs font-medium text-zinc-200 hover:bg-zinc-800 sm:text-sm"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        FFL Intel
-      </a>
-      <a
-        href={withBase("about")}
-        class:list={[
-          "rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors sm:text-sm",
-          active("about")
-            ? "border-gold/50 bg-gold/10 text-gold"
-            : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
-        ]}
-      >
-        About
-      </a>
       <a
         href={withBase("contact")}
         class="rounded-sm border border-gold/70 bg-gold px-2.5 py-1.5 text-xs font-semibold text-ink hover:bg-amber-300 sm:text-sm"
@@ -156,37 +141,20 @@ const family = [
     {
       nav.map((item) => (
         <a
-          href={withBase(item.href)}
+          href={"external" in item ? item.href : withBase(item.href)}
           class:list={[
             "rounded-sm border px-3 py-2 text-sm font-medium transition-colors",
-            active(item.href)
+            !("external" in item) && active(item.href)
               ? "border-gold/50 bg-gold/10 text-gold"
               : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
           ]}
+          target={"external" in item ? "_blank" : undefined}
+          rel={"external" in item ? "noopener noreferrer" : undefined}
         >
           {item.label}
         </a>
       ))
     }
-    <a
-      href={LINKS.fflintel}
-      class="rounded-sm border border-zinc-700 px-3 py-2 text-sm font-medium text-zinc-200 hover:bg-zinc-800"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      FFL Intel
-    </a>
-    <a
-      href={withBase("about")}
-      class:list={[
-        "rounded-sm border px-3 py-2 text-sm font-medium transition-colors",
-        active("about")
-          ? "border-gold/50 bg-gold/10 text-gold"
-          : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
-      ]}
-    >
-      About
-    </a>
     <a
       href={withBase("contact")}
       class="rounded-sm border border-gold/70 bg-gold px-3 py-2 text-sm font-semibold text-ink hover:bg-amber-300"
