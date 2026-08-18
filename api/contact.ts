@@ -106,7 +106,7 @@ export async function POST(request: Request): Promise<Response> {
     `About: ${pillar}`,
     `IP: ${ip}`,
     `Sent: ${sentAt}`,
-    ...(osError ? [`OS intake failed: ${osError}`] : []),
+    ...(osError ? [`OS Lead: ${osError}`] : []),
     "",
     message,
   ];
@@ -154,7 +154,7 @@ async function mintOsLead(opts: {
   const secret = process.env.FORM_INTAKE_SECRET?.trim();
   if (!osUrl || !secret) {
     console.warn("contact: CORIOLIS_OS_URL / FORM_INTAKE_SECRET not set; skip Lead");
-    return null;
+    return "skipped — CORIOLIS_OS_URL / FORM_INTAKE_SECRET not set";
   }
 
   const intent = PILLAR_INTENT[opts.pillar] ?? "sell";
@@ -187,12 +187,12 @@ async function mintOsLead(opts: {
     });
     if (res.ok) return null;
     const detail = await res.text();
-    const error = `HTTP ${res.status} ${detail.slice(0, 240)}`;
+    const error = `failed — HTTP ${res.status} ${detail.slice(0, 240)}`;
     console.error("contact: OS intake rejected", error);
     return error;
   } catch (err) {
     const error = err instanceof Error ? err.message : "OS intake failed";
     console.error("contact: OS intake failed", err);
-    return error;
+    return `failed — ${error}`;
   }
 }
