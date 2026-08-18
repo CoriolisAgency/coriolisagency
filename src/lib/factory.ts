@@ -14,7 +14,7 @@ export interface StudioProof {
 export const STUDIO_PROOF: StudioProof[] = [
   {
     id: "betsy",
-    name: "Betsy",
+    name: "Betsy AI",
     urlLabel: "2abetsy.com",
     href: LINKS.betsy,
     job: "Demand intelligence for dealer sites — what people came for, not bounce rate.",
