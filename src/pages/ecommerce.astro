@@ -64,6 +64,54 @@ const checkout = {
     </div>
   </section>
 
+  <section class="border-b border-zinc-800/80 py-12" id="setup">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">One-time setup</h2>
+      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
+        Pay for setup online. Monthly hosting starts after we talk.
+      </p>
+      <div class="mt-8 grid gap-4 md:grid-cols-2">
+        {
+          SETUP.map((s) => (
+            <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
+                {s.hook}
+              </p>
+              <h3 class="mt-2 text-lg font-semibold text-white">{s.name}</h3>
+              <p class="mt-1 text-2xl font-semibold text-white">
+                ${s.price.toLocaleString()}
+                <span class="text-sm font-medium text-zinc-500"> one time</span>
+              </p>
+              <ul class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400">
+                {s.features.map((f) => (
+                  <li>{f}</li>
+                ))}
+              </ul>
+              <a
+                href={checkout[s.checkoutKey]}
+                class={`${btnPlan} mt-6`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Buy {s.name}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+      <p class="mt-6 text-xs leading-relaxed text-zinc-500">
+        By subscribing to any plan or purchasing any setup package you agree to
+        the{" "}
+        <a
+          href={LINKS.msa}
+          class={linkClass}
+          target="_blank"
+          rel="noopener noreferrer">Master Services Agreement</a
+        >.
+      </p>
+    </div>
+  </section>
+
   <section class="border-b border-zinc-800/80 py-12" id="plans">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <div class="flex flex-wrap items-end justify-between gap-4">
@@ -118,54 +166,6 @@ const checkout = {
           ))
         }
       </div>
-    </div>
-  </section>
-
-  <section class="border-b border-zinc-800/80 py-12" id="setup">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">One-time setup</h2>
-      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
-        Pay for setup online. Monthly hosting starts after we talk.
-      </p>
-      <div class="mt-8 grid gap-4 md:grid-cols-2">
-        {
-          SETUP.map((s) => (
-            <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-              <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
-                {s.hook}
-              </p>
-              <h3 class="mt-2 text-lg font-semibold text-white">{s.name}</h3>
-              <p class="mt-1 text-2xl font-semibold text-white">
-                ${s.price.toLocaleString()}
-                <span class="text-sm font-medium text-zinc-500"> one time</span>
-              </p>
-              <ul class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400">
-                {s.features.map((f) => (
-                  <li>{f}</li>
-                ))}
-              </ul>
-              <a
-                href={checkout[s.checkoutKey]}
-                class={`${btnPlan} mt-6`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Buy {s.name}
-              </a>
-            </article>
-          ))
-        }
-      </div>
-      <p class="mt-6 text-xs leading-relaxed text-zinc-500">
-        By subscribing to any plan or purchasing any setup package you agree to
-        the{" "}
-        <a
-          href={LINKS.msa}
-          class={linkClass}
-          target="_blank"
-          rel="noopener noreferrer">Master Services Agreement</a
-        >.
-      </p>
     </div>
   </section>
 
