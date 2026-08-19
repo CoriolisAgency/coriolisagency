@@ -44,7 +44,7 @@ export async function postOsUnsubscribe(
 ): Promise<{ ok: boolean; error?: string }> {
   const osUrl = process.env.CORIOLIS_OS_URL?.trim().replace(/\/$/, "");
   const secret = process.env.FORM_INTAKE_SECRET?.trim();
-  if (!osUrl || !secret) {
+  if (!secret || !osUrl) {
     console.error("unsubscribe: CORIOLIS_OS_URL / FORM_INTAKE_SECRET not set");
     return { ok: false, error: "Unsubscribe is not configured yet." };
   }

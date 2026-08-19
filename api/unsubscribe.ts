@@ -1,4 +1,4 @@
-import { postOsUnsubscribe } from "../src/lib/os-subscribe";
+import { postOsUnsubscribe } from "./os";
 
 function redirectTo(path: string) {
   return new Response(null, {
