@@ -305,7 +305,7 @@ const marketingSource = "popup_coriolis";
         '<p class="coriolis-capture__lede">' +
         lede +
         "</p>" +
-        '<button type="button" class="coriolis-capture__cta" data-capture-done>Done</button>';
+        '<button type="button" class="coriolis-capture__cta coriolis-capture__cta--done" data-capture-done>Done</button>';
       copy.querySelector("[data-capture-done]")?.addEventListener("click", dismiss);
       const done = copy.querySelector("[data-capture-done]");
       if (done instanceof HTMLElement) done.focus();

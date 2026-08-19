@@ -230,6 +230,7 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  margin: 0;
   border: none;
   border-radius: 0.25rem;
   padding: 0.7rem 1.15rem;
@@ -240,6 +241,11 @@ a {
   cursor: pointer;
   background: #d4a017;
   transition: filter 0.15s, background 0.15s;
+}
+.coriolis-capture__cta--done {
+  display: flex;
+  width: fit-content;
+  margin-top: 1.15rem;
 }
 .coriolis-capture__cta:hover:not(:disabled) {
   filter: brightness(1.08);
