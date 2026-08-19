@@ -40,7 +40,7 @@ US API base is the default. Do not commit keys. `FORM_INTAKE_SECRET` must match 
 
 ## Agency intel popup
 
-`POST /api/subscribe` opts in a Person on Coriolis OS (`POST /api/forms/subscribe`). It does **not** mint a Lead and does **not** write GunSearchEngine users. Same `CORIOLIS_OS_URL` + `FORM_INTAKE_SECRET` as contact. The Vercel function lives in `api/` and must not import from `src/` (that path is not in the serverless bundle — it 500s). Localhost posts straight to `http://localhost:3000/api/forms/subscribe` when OS is running with `AUTH_DEV_BYPASS=1`. Unsub: `/unsubscribe`.
+`POST /api/subscribe` opts in a Person on Coriolis OS (`POST /api/forms/subscribe`). It does **not** mint a Lead and does **not** write GunSearchEngine users. Same `CORIOLIS_OS_URL` + `FORM_INTAKE_SECRET` as contact. Keep this function self-contained like `api/contact.ts` — Vercel `api/` functions 500 if they import local modules. Localhost posts straight to `http://localhost:3000/api/forms/subscribe` when OS is running with `AUTH_DEV_BYPASS=1`. Unsub: `/unsubscribe`.
 
 ## What lives where
 
