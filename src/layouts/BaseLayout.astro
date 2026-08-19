@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import SiteChrome from "../components/SiteChrome.astro";
+import CoriolisEmailCapture from "../components/CoriolisEmailCapture.astro";
 import { SITE, CANON_PATHS } from "../lib/site";
 import { LINKS, SAME_AS } from "../lib/links";
 import { withBase } from "../lib/base";
@@ -14,6 +15,7 @@ interface Props {
   canonicalUrl?: string;
   noindex?: boolean;
   faq?: FaqItem[];
+  emailCapture?: boolean;
 }
 
 const {
@@ -24,6 +26,7 @@ const {
   canonicalUrl,
   noindex = false,
   faq,
+  emailCapture = true,
 } = Astro.props;
 
 const siteOrigin = Astro.site ?? new URL("https://coriolisagency.com");
@@ -140,5 +143,6 @@ const jsonLd = {
     <SiteChrome>
       <slot />
     </SiteChrome>
+    {emailCapture || import.meta.env.DEV ? <CoriolisEmailCapture /> : null}
   </body>
 </html>

@@ -38,6 +38,10 @@ FORM_INTAKE_SECRET=<same as the coriolis Vercel project>
 
 US API base is the default. Do not commit keys. `FORM_INTAKE_SECRET` must match the OS project. Missing OS env skips the Lead and still sends mail.
 
+## Agency intel popup
+
+`POST /api/subscribe` opts in a Person on Coriolis OS (`POST /api/forms/subscribe`). It does **not** mint a Lead and does **not** write GunSearchEngine users. Same `CORIOLIS_OS_URL` + `FORM_INTAKE_SECRET` as contact. Localhost posts straight to `http://localhost:3000/api/forms/subscribe` when OS is running with `AUTH_DEV_BYPASS=1`. Unsub: `/unsubscribe`.
+
 ## What lives where
 
 | Intent | Owner |

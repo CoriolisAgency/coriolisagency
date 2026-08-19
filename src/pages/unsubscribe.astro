@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Unsubscribe — Coriolis, LLC"
+  description="Leave the Coriolis Agency intel list."
+  path="/unsubscribe"
+  noindex
+  emailCapture={false}
+>
+  <article class="mx-auto max-w-xl px-4 py-16 sm:px-6">
+    <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">
+      Coriolis, LLC
+    </p>
+    <div id="unsub-done" hidden>
+      <h1 class="mt-3 text-3xl font-semibold tracking-tight text-white">
+        You’re off the list
+      </h1>
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400">
+        We will not send Agency intel to this address. Contact-form and
+        account mail are separate.
+      </p>
+    </div>
+    <div id="unsub-error" hidden>
+      <h1 class="mt-3 text-3xl font-semibold tracking-tight text-white">
+        That link did not work
+      </h1>
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400">
+        Request a new unsubscribe link from a recent Agency intel email, or
+        write paul@coriolisagency.com.
+      </p>
+    </div>
+    <div id="unsub-form">
+      <h1 class="mt-3 text-3xl font-semibold tracking-tight text-white">
+        Leave Agency intel
+      </h1>
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400">
+        Stop product notes from Coriolis. This does not close a Lead or a
+        hosting account.
+      </p>
+      <form method="post" action="/api/unsubscribe" class="mt-8" data-unsub-form>
+        <input type="hidden" name="token" value="" data-unsub-token />
+        <button
+          type="submit"
+          class="rounded-sm border border-gold/70 bg-gold px-5 py-3 text-sm font-semibold text-ink hover:bg-amber-300"
+        >
+          Unsubscribe
+        </button>
+      </form>
+      <p id="unsub-missing" class="mt-8 text-sm text-zinc-500" hidden>
+        Open the unsubscribe link from an Agency intel email.
+      </p>
+    </div>
+  </article>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const done = document.getElementById("unsub-done");
+    const err = document.getElementById("unsub-error");
+    const formWrap = document.getElementById("unsub-form");
+    const missing = document.getElementById("unsub-missing");
+    const tokenInput = document.querySelector("[data-unsub-token]");
+    const form = document.querySelector("[data-unsub-form]");
+
+    if (params.get("done") === "1") {
+      if (done) done.hidden = false;
+      if (formWrap) formWrap.hidden = true;
+    } else if (params.get("error")) {
+      if (err) err.hidden = false;
+      if (formWrap) formWrap.hidden = true;
+    } else {
+      const token = params.get("token") || "";
+      if (tokenInput instanceof HTMLInputElement) tokenInput.value = token;
+      if (!token) {
+        if (form instanceof HTMLElement) form.hidden = true;
+        if (missing) missing.hidden = false;
+      }
+    }
+  </script>
+</BaseLayout>
