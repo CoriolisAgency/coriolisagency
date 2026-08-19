@@ -37,7 +37,7 @@ Same path, new voice, still answer the old query in the first 80 words. **Do not
 | `/ammoready-alternative` | 19 | 1,780 | Query pos 6.1, 9 clicks. Keep the short slug. |
 | `/best-ffl-ecommerce-website` | 17 | 3,047 | Comparison intent still sells ecommerce. |
 
-Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/demand-intelligence`, `/ecommerce`, `/privacy`.
+Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/demand-intelligence`, `/ecommerce`, `/privacy`, `/msa`.
 
 Optional keep (editorial accidents — not company juice, but real clicks). Only if you want the traffic; otherwise 301 or die:
 

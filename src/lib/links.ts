@@ -12,7 +12,7 @@ export const LINKS = {
   login: "/login",
   account: "/account",
   privacy: "/privacy",
-  msa: "https://docs.google.com/document/d/18FcRaIjiZURO5nztD2Tldz9nuZj-cmXwjdcObcjRP3I/edit?usp=sharing",
+  msa: "/msa",
   checkoutBasic:
     "https://checkout.coriolisagency.com/b/eVq3cw4sf3EKg3V2fC1440h",
   checkoutRetail:

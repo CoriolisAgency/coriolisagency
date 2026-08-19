@@ -92,6 +92,16 @@
       "permanent": true
     },
     {
+      "source": "/master-services-agreement",
+      "destination": "/msa",
+      "permanent": true
+    },
+    {
+      "source": "/master-service-agreement",
+      "destination": "/msa",
+      "permanent": true
+    },
+    {
       "source": "/meet-the-team",
       "destination": "/about",
       "permanent": true

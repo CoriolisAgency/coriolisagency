@@ -13,6 +13,32 @@ html {
   color-scheme: dark;
 }
 
+@media print {
+  header,
+  footer,
+  .coriolis-capture {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+  .legal-doc,
+  .legal-doc p,
+  .legal-doc li {
+    color: #222 !important;
+  }
+  .legal-doc h1,
+  .legal-doc h2,
+  .legal-doc strong {
+    color: #000 !important;
+  }
+  .legal-doc a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+}
+
 body {
   margin: 0;
   min-height: 100dvh;

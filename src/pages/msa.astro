@@ -1,0 +1,528 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { LINKS, linkClass } from "../lib/links";
+import { MSA_CURRENT } from "../lib/msa";
+
+const toc = [
+  { href: "#parties", label: "Parties" },
+  { href: "#recitals", label: "Recitals" },
+  { href: "#definitions", label: "1. Definitions" },
+  { href: "#services", label: "2. Services" },
+  { href: "#term", label: "3. Term & Termination" },
+  { href: "#fees", label: "4. Fees & Payment" },
+  { href: "#compliance", label: "5. Client Responsibilities" },
+  { href: "#warranties", label: "6. Warranties & Disclaimers" },
+  { href: "#liability", label: "7. Limitation of Liability" },
+  { href: "#ip", label: "8. Intellectual Property" },
+  { href: "#confidentiality", label: "9. Confidentiality & Data Security" },
+  { href: "#indemnification", label: "10. Indemnification" },
+  { href: "#governing-law", label: "11. Governing Law" },
+  { href: "#miscellaneous", label: "12. Miscellaneous" },
+  { href: "#acceptance", label: "Acceptance" },
+] as const;
+
+const glance = [
+  {
+    k: "Commitment",
+    v: "Month-to-month hosting. Cancel anytime. No long-term lock-in.",
+  },
+  {
+    k: "Ownership",
+    v: "You own the WooCommerce site files and database. Exportable at any time.",
+  },
+  {
+    k: "Setup",
+    v: "Basic $500 or Retail $2,500. Non-refundable once work has begun.",
+  },
+  {
+    k: "Uptime",
+    v: "99.95% monthly target. Service credits if we miss it and you claim in 30 days.",
+  },
+  {
+    k: "Your license",
+    v: "You remain the FFL. We do not run ATF, NICS, or bound-book obligations.",
+  },
+  {
+    k: "How it binds",
+    v: "Paying a Setup Fee, checking agreement, or using the Services is acceptance.",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Master Services Agreement — Coriolis Agency, LLC"
+  description="Month-to-month FFL ecommerce hosting and setup terms. You own the site. Cancel anytime. South Carolina law."
+  path="/msa"
+  emailCapture={false}
+>
+  <article class="legal-doc mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+    <p
+      class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+    >
+      Legal · {MSA_CURRENT.version}
+    </p>
+    <h1 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+      {MSA_CURRENT.title}
+    </h1>
+    <p class="mt-2 text-sm text-zinc-500">
+      {MSA_CURRENT.providerLegalName} · {MSA_CURRENT.providerPlace}
+    </p>
+    <p class="mt-1 text-sm text-zinc-500">
+      Published on this site: {MSA_CURRENT.publishedLabel} · Effective Date: the
+      date Client pays the Setup Fee via Stripe and/or begins using the
+      Services.
+    </p>
+
+    <p
+      class="mt-8 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-sm leading-relaxed text-zinc-300"
+    >
+      <strong class="text-amber-100">Bottom line:</strong> Hosting is{" "}
+      <strong class="text-white">month-to-month</strong>. You may{" "}
+      <strong class="text-white">cancel anytime</strong>. When setup is done,
+      you{" "}
+      <strong class="text-white">own the WooCommerce site</strong>. Setup fees
+      are non-refundable once work has begun. You stay the licensed dealer —
+      Coriolis does not take your ATF, transfer, or bound-book obligations.
+      Paying a Setup Fee, checking agreement, or using the Services binds your
+      entity to this Agreement.
+    </p>
+
+    <div class="mt-8 grid gap-3 sm:grid-cols-2">
+      {
+        glance.map((item) => (
+          <div class="rounded-xl border border-zinc-800 bg-zinc-950/50 px-4 py-3">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-sky-300">
+              {item.k}
+            </p>
+            <p class="mt-1.5 text-sm leading-relaxed text-zinc-400">{item.v}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <section
+      id="parties"
+      class="mt-10 scroll-mt-24 space-y-3 border-t border-zinc-800/80 pt-8"
+    >
+      <h2 class="text-base font-semibold text-white">Parties</h2>
+      <div class="grid gap-3 sm:grid-cols-2">
+        <div class="rounded-xl border border-zinc-800 bg-zinc-950/50 p-4">
+          <p
+            class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500"
+          >
+            Provider
+          </p>
+          <p class="mt-2 text-sm font-medium text-zinc-100">
+            Coriolis Agency, LLC
+          </p>
+          <p class="mt-1 text-sm leading-relaxed text-zinc-400">
+            (“Coriolis,” “we,” “us,” or “our”), a South Carolina limited
+            liability company with its principal place of business at Travelers
+            Rest, South Carolina.
+          </p>
+        </div>
+        <div class="rounded-xl border border-zinc-800 bg-zinc-950/50 p-4">
+          <p
+            class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500"
+          >
+            Client
+          </p>
+          <p class="mt-2 text-sm font-medium text-zinc-100">
+            The licensed dealer or merchant
+          </p>
+          <p class="mt-1 text-sm leading-relaxed text-zinc-400">
+            The federally licensed firearms dealer or merchant purchasing or
+            using the Services (“Client,” “you,” or “your”).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <nav
+      class="mt-8 rounded-xl border border-zinc-800 bg-zinc-950/40 px-4 py-4"
+      aria-label="Agreement contents"
+    >
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500"
+      >
+        Contents
+      </p>
+      <ol class="mt-3 columns-1 gap-x-8 text-sm text-zinc-400 sm:columns-2">
+        {
+          toc.map((item) => (
+            <li class="break-inside-avoid py-0.5">
+              <a href={item.href} class={linkClass}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <div class="mt-10 space-y-10 text-sm leading-relaxed text-zinc-400">
+      <section id="recitals" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">Recitals</h2>
+        <p>
+          WHEREAS, Coriolis specializes in compliant ecommerce solutions for
+          Federal Firearms License (FFL) holders, including WooCommerce website
+          setup, managed hosting, firearms dropshipping integrations, serialized
+          inventory management, and email marketing;
+        </p>
+        <p>
+          WHEREAS, Client desires to engage Coriolis to provide these services
+          on a month-to-month basis without long-term commitments; and
+        </p>
+        <p>
+          WHEREAS, the parties desire to set forth the terms and conditions
+          governing the provision and use of such services;
+        </p>
+        <p>
+          NOW, THEREFORE, in consideration of the mutual promises and covenants
+          contained herein, the parties agree as follows:
+        </p>
+      </section>
+
+      <section id="definitions" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">1. Definitions</h2>
+        <p>
+          <strong class="text-zinc-200">1.1 “Services”</strong> means the
+          one-time Setup Services and the ongoing Managed Hosting &amp; Support
+          Services described on{" "}
+          <a href={LINKS.home} class={linkClass}>CoriolisAgency.com</a> and in
+          Section 2.
+        </p>
+        <p>
+          <strong class="text-zinc-200">1.2 “FFL”</strong> means a valid
+          Federal Firearms License issued by the Bureau of Alcohol, Tobacco,
+          Firearms and Explosives.
+        </p>
+        <p>
+          <strong class="text-zinc-200">1.3 “Setup Fee”</strong> means the
+          one-time non-refundable fee for Basic Setup ($500) or Retail Setup
+          ($2,500).
+        </p>
+        <p>
+          <strong class="text-zinc-200">1.4 “Monthly Fee”</strong> means the
+          recurring hosting fee selected by Client (Minute Man $169/mo through
+          FFL Accelerator $569/mo).
+        </p>
+        <p>
+          <strong class="text-zinc-200">1.5 “Client Data”</strong> means any
+          data, content, materials, or information uploaded, transmitted, or
+          stored by Client through the Services.
+        </p>
+        <p>
+          <strong class="text-zinc-200">1.6 “Security Incident”</strong> means
+          any unauthorized access to, acquisition, disclosure, alteration, or
+          loss of Client Data.
+        </p>
+      </section>
+
+      <section id="services" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">2. Services</h2>
+        <p>
+          <strong class="text-zinc-200">2.1 One-Time Setup Services.</strong>{" "}
+          Client shall pay the Setup Fee via Stripe prior to commencement of
+          work.
+        </p>
+        <p>
+          <strong class="text-zinc-200"
+            >2.2 Ongoing Managed Hosting &amp; Support.</strong
+          >{" "}
+          Services include professionally managed hosting, security updates,
+          uptime monitoring, and customer support. We provide guidance on
+          distributor accounts and API integrations but do not establish
+          distributor relationships or obtain licenses on Client’s behalf.
+        </p>
+        <p>
+          <strong class="text-zinc-200">2.3 Ownership.</strong> Upon completion
+          of Setup Services, Client receives full ownership of the WooCommerce
+          site files and database (exportable at any time). Coriolis retains all
+          rights to its pre-existing proprietary plugins, know-how, custom code
+          improvements, and any anonymized analytics.
+        </p>
+        <p>
+          <strong class="text-zinc-200">2.4 Service Availability (SLA).</strong>{" "}
+          Coriolis shall use commercially reasonable efforts to make the Services
+          available 99.95% of the time in any calendar month (“Uptime
+          Commitment”), excluding scheduled maintenance (with advance notice
+          when practicable), force majeure events, Client-caused issues, or
+          third-party failures beyond Coriolis’s reasonable control. If the
+          Uptime Commitment is not met and Client submits a written claim within
+          thirty (30) days after the end of the month, Client shall be entitled
+          to a service credit of 5% of the applicable monthly Fees for each full
+          hour of downtime in excess of the 99.95% target. Maximum credit: 100%
+          of the monthly Fees for the affected service. Credits must be
+          requested via Support within 30 days, are non-transferable,
+          non-refundable in cash, and cannot be carried over.
+        </p>
+      </section>
+
+      <section id="term" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">
+          3. Term &amp; Termination — No Long-Term Commitment
+        </h2>
+        <p>
+          <strong class="text-zinc-200">3.1</strong> The Agreement begins on the
+          Effective Date and continues on a month-to-month basis for hosting
+          services.
+        </p>
+        <p>
+          <strong class="text-zinc-200">3.2</strong> Client may cancel at any
+          time by (a) using the cancellation link in Stripe receipts or (b)
+          emailing{" "}
+          <a href={`mailto:${MSA_CURRENT.supportEmail}`} class={linkClass}
+            >{MSA_CURRENT.supportEmail}</a
+          >. Cancellation is effective at the end of the paid period.
+        </p>
+        <p>
+          <strong class="text-zinc-200">3.3</strong> A final pro-rated invoice, if
+          applicable, will be issued and charged to the card on file.
+        </p>
+        <p>
+          <strong class="text-zinc-200">3.4</strong> Setup Fees are
+          non-refundable once work has begun.
+        </p>
+        <p>
+          <strong class="text-zinc-200">3.5</strong> Coriolis may suspend or
+          terminate the Services immediately for non-payment (after a 10-day
+          grace period and notice), material breach, or if continued service
+          would create legal or compliance risk for either party.
+        </p>
+      </section>
+
+      <section id="fees" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">4. Fees &amp; Payment</h2>
+        <p>
+          <strong class="text-zinc-200">4.1</strong> Setup Fees are due in full
+          via Stripe before work begins.
+        </p>
+        <p>
+          <strong class="text-zinc-200">4.2</strong> Monthly Fees are billed in
+          advance via Stripe.
+        </p>
+        <p>
+          <strong class="text-zinc-200">4.3</strong> Client is responsible for all
+          applicable sales, use, or other taxes.
+        </p>
+        <p>
+          <strong class="text-zinc-200">4.4</strong> Coriolis may adjust Monthly
+          Fees upon 60 days’ written notice.
+        </p>
+      </section>
+
+      <section id="compliance" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">
+          5. Client Responsibilities &amp; Compliance
+        </h2>
+        <p>
+          Client represents and warrants that it is a federally licensed FFL
+          holder in good standing and shall remain solely responsible for:
+        </p>
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <strong class="text-zinc-200">(a)</strong> Full compliance with all
+            ATF, state, and federal firearms laws, including bound-book
+            maintenance, transfers, age verification, and prohibited-person
+            screening;
+          </li>
+          <li>
+            <strong class="text-zinc-200">(b)</strong> Obtaining and maintaining
+            all distributor accounts, POS licenses (e.g., AIM), and required API
+            keys;
+          </li>
+          <li>
+            <strong class="text-zinc-200">(c)</strong> Accuracy of product data,
+            pricing, inventory, and shipping compliance; and
+          </li>
+          <li>
+            <strong class="text-zinc-200">(d)</strong> End-customer data privacy
+            and PCI-DSS compliance.
+          </li>
+        </ul>
+        <p>
+          Coriolis provides tools that support compliant workflows, but these
+          tools do not relieve Client of its legal obligations as the licensed
+          dealer.
+        </p>
+      </section>
+
+      <section id="warranties" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">
+          6. Representations, Warranties &amp; Disclaimers
+        </h2>
+        <p>
+          <strong class="text-zinc-200">6.1</strong> Coriolis warrants that
+          Services will be performed in a professional manner consistent with
+          industry standards.
+        </p>
+        <p>
+          <strong class="text-zinc-200">6.2</strong> EXCEPT AS EXPRESSLY STATED
+          HEREIN, THE SERVICES ARE PROVIDED “AS IS.” CORIOLIS DISCLAIMS ALL
+          IMPLIED WARRANTIES, INCLUDING MERCHANTABILITY, FITNESS FOR A
+          PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+        </p>
+        <p>
+          <strong class="text-zinc-200">6.3</strong> Coriolis is not liable for
+          any ATF audit outcomes, license issues, or business losses arising
+          from Client’s use of the Services.
+        </p>
+      </section>
+
+      <section id="liability" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">
+          7. Limitation of Liability
+        </h2>
+        <p>
+          In no event shall Coriolis’s aggregate liability exceed the total fees
+          paid by Client in the twelve (12) months preceding the claim. Neither
+          party shall be liable for consequential, incidental, punitive, or
+          lost-profits damages.
+        </p>
+      </section>
+
+      <section id="ip" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">
+          8. Intellectual Property
+        </h2>
+        <p>
+          Client owns all content and data uploaded to the site. Coriolis owns
+          its pre-existing intellectual property and grants Client a limited,
+          revocable license to use proprietary plugins during the term. Upon
+          termination, Client retains its site ownership; Coriolis may retain
+          anonymized data for service improvement.
+        </p>
+      </section>
+
+      <section id="confidentiality" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">
+          9. Confidentiality &amp; Data Security
+        </h2>
+        <p>
+          Each party will maintain the other’s confidential information in
+          confidence and use industry-standard security measures. Client grants
+          Coriolis a limited license to access data solely as necessary to
+          deliver the Services.
+        </p>
+        <p>
+          Coriolis shall implement and maintain commercially reasonable
+          technical and organizational measures to protect Client Data. In the
+          event of a Security Incident affecting Client Data, Coriolis will
+          notify Client as soon as practicable and no later than seventy-two
+          (72) hours after becoming aware of the incident (to the extent
+          permitted by law). Client remains solely responsible for PCI-DSS
+          compliance and all privacy obligations related to its customers’
+          data.
+        </p>
+      </section>
+
+      <section id="indemnification" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">10. Indemnification</h2>
+        <p>
+          Client shall indemnify, defend, and hold harmless Coriolis against any
+          claims arising from Client’s FFL operations, product listings, or
+          breach of Section 5. Coriolis shall indemnify Client against claims
+          that the Services infringe third-party intellectual property rights
+          (subject to standard carve-outs).
+        </p>
+      </section>
+
+      <section id="governing-law" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">
+          11. Governing Law &amp; Dispute Resolution
+        </h2>
+        <p>
+          This Agreement is governed by {MSA_CURRENT.governingLaw} law without
+          regard to conflict-of-laws principles. Venue for any action shall be
+          exclusively in {MSA_CURRENT.venue}. Parties agree to first attempt
+          good-faith negotiation before litigation.
+        </p>
+      </section>
+
+      <section id="miscellaneous" class="scroll-mt-24 space-y-3">
+        <h2 class="text-base font-semibold text-white">12. Miscellaneous</h2>
+        <p>
+          <strong class="text-zinc-200">12.1</strong> This Agreement constitutes
+          the entire understanding and supersedes all prior agreements.
+          Amendments may be made in writing or by posting an updated version on
+          CoriolisAgency.com with 30 days’ notice.
+        </p>
+        <p>
+          <strong class="text-zinc-200">12.2</strong> Force majeure events excuse
+          performance.
+        </p>
+        <p>
+          <strong class="text-zinc-200">12.3</strong> Coriolis may assign this
+          Agreement (e.g., in connection with a sale of the business); Client
+          may not assign without prior written consent.
+        </p>
+        <p>
+          <strong class="text-zinc-200">12.4</strong> If any provision is held
+          invalid, the remainder remains enforceable.
+        </p>
+        <p>
+          <strong class="text-zinc-200">12.5</strong> Electronic acceptance
+          (payment via Stripe, checkbox during onboarding, or continued use of
+          the Services) is binding and equivalent to a handwritten signature.
+        </p>
+        <p>
+          <strong class="text-zinc-200">12.6 Independent Contractor.</strong> The
+          parties intend to create an independent contractor relationship.
+          Nothing in this Agreement shall be construed to create a partnership,
+          joint venture, employment, or agency relationship between the parties.
+        </p>
+        <p>
+          <strong class="text-zinc-200">12.7 Notices.</strong> All legal notices
+          must be in writing and sent to{" "}
+          <a href={`mailto:${MSA_CURRENT.noticesEmail}`} class={linkClass}
+            >{MSA_CURRENT.noticesEmail}</a
+          >{" "}
+          for Coriolis and to Client’s account email for Client. Notices are
+          deemed received 24 hours after email transmission (if no bounce-back
+          is received).
+        </p>
+        <p>
+          <strong class="text-zinc-200">12.8 Survival.</strong> Sections 7
+          (Limitation of Liability), 8 (Intellectual Property), 9
+          (Confidentiality &amp; Data Security), 10 (Indemnification), 11
+          (Governing Law), 12.6, and any provisions that by their nature should
+          survive termination shall survive expiration or termination of this
+          Agreement.
+        </p>
+      </section>
+
+      <section
+        id="acceptance"
+        class="scroll-mt-24 space-y-3 rounded-xl border border-gold/35 bg-gold/10 px-4 py-4 sm:px-5"
+      >
+        <h2 class="text-base font-semibold text-amber-50">Acceptance</h2>
+        <p class="text-zinc-300">
+          By paying any Setup Fee, checking any box indicating agreement to this
+          Master Services Agreement, or using the Services, you accept and agree
+          to be bound by all terms above on behalf of your entity.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base font-semibold text-white">Related</h2>
+        <p>
+          <a href={LINKS.privacy} class={linkClass}>Privacy Policy</a>
+          {" · "}
+          <a href={LINKS.ecommerce} class={linkClass}>FFL Ecommerce plans</a>
+          {" · "}
+          <a href={LINKS.contact} class={linkClass}>Contact</a>
+          . Questions on this Agreement:{" "}
+          <a href={`mailto:${MSA_CURRENT.noticesEmail}`} class={linkClass}
+            >{MSA_CURRENT.noticesEmail}</a
+          >. Print or save as PDF from your browser if you need a copy for your
+          file.
+        </p>
+      </section>
+    </div>
+
+    <p class="mt-10 border-t border-zinc-800 pt-6 text-sm text-zinc-500">
+      {MSA_CURRENT.providerLegalName} · CoriolisAgency.com · {MSA_CURRENT.version}
+    </p>
+  </article>
+</BaseLayout>

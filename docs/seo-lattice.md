@@ -19,7 +19,7 @@
 | DI portal, demo, API, Co-Pilot, depth matrix | **GunSearchEngine** `/demand-intelligence` |
 | GA for FFLs / free agent | **GunSearchAgent** |
 | Three numbers desk | **FFLIntel** |
-| Checkout / MSA | Stripe + Google Doc (this site links) |
+| Checkout / MSA | Stripe checkout + **this site** `/msa` |
 | Customer login / account | **This host** `/login` `/account` — OS portal rewrite, **noindex** |
 | Operator Admin | Coriolis OS on a separate host. Never this marketing chrome. |
 
