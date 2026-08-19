@@ -5,12 +5,13 @@ import { withBase } from "../lib/base";
 interface Props {
   primary?: "contact" | "ecommerce" | "demo";
   showGsa?: boolean;
+  class?: string;
 }
 
-const { primary = "contact", showGsa = true } = Astro.props;
+const { primary = "contact", showGsa = true, class: className } = Astro.props;
 ---
 
-<div class="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+<div class:list={["inline-flex flex-col gap-2.5 sm:flex-row sm:flex-nowrap", className]}>
   {
     primary === "demo" ? (
       <a
