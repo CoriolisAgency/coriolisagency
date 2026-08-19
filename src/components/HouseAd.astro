@@ -1,0 +1,235 @@
+---
+import { withBase } from "../lib/base";
+
+const aimArt = withBase("brand/aim-pos-live-ad.jpg");
+const gsgArt = withBase("brand/gun-store-game-live-ad.jpg");
+const aimHref =
+  "https://aim-pos.com/?utm_source=agency&utm_medium=agency_homepage&utm_campaign=aim-nbs";
+---
+
+<div
+  class="agency-ad agency-ad--aim"
+  data-agency-ad
+  data-aim-art={aimArt}
+  data-gsg-art={gsgArt}
+>
+  <a
+    class="agency-ad__hit"
+    href={aimHref}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="See AIM POS — opens in a new tab"
+    data-agency-ad-link
+  >
+  </a>
+  <img
+    class="agency-ad__art"
+    src={aimArt}
+    alt=""
+    width="503"
+    height="210"
+    data-agency-ad-art
+  />
+  <span class="agency-ad__wash" aria-hidden="true"></span>
+  <span class="agency-ad__kicker" data-agency-ad-kicker>AIM-POS.COM</span>
+  <span class="agency-ad__cta" data-agency-ad-cta>See AIM POS</span>
+  <span class="agency-ad__copy">
+    <span class="agency-ad__title" data-agency-ad-title
+      >AIM<em>POS</em></span
+    >
+    <span class="agency-ad__sub" data-agency-ad-sub
+      >Gun store POS. 4473 and the bound book built in.</span
+    >
+  </span>
+</div>
+
+<script>
+  type Plate = "gsg" | "default" | "aim";
+  const GSE = "https://www.gunsearchengine.com/api/public/ads?vehicle=agency_homepage";
+
+  function paint(
+    root: HTMLElement,
+    plate: Plate,
+    href: string,
+    aimArt: string,
+    gsgArt: string
+  ) {
+    const link = root.querySelector<HTMLAnchorElement>("[data-agency-ad-link]");
+    const art = root.querySelector<HTMLImageElement>("[data-agency-ad-art]");
+    const kicker = root.querySelector("[data-agency-ad-kicker]");
+    const cta = root.querySelector("[data-agency-ad-cta]");
+    const title = root.querySelector("[data-agency-ad-title]");
+    const sub = root.querySelector("[data-agency-ad-sub]");
+    if (!link || !art || !kicker || !cta || !title || !sub) return;
+    root.classList.remove("agency-ad--aim", "agency-ad--gsg", "agency-ad--default");
+    if (plate === "gsg") {
+      root.classList.add("agency-ad--gsg");
+      link.href = href;
+      link.setAttribute("aria-label", "Play Gun Store Game — opens in a new tab");
+      art.hidden = false;
+      art.src = gsgArt;
+      kicker.textContent = "GUNSEARCHAGENT.COM PRESENTS";
+      cta.textContent = "Play Now";
+      title.innerHTML = "GUN<em>STORE</em>GAME";
+      sub.textContent = "Defend the shop. Beat rival gun stores.";
+      return;
+    }
+    if (plate === "default") {
+      root.classList.add("agency-ad--default");
+      link.href = href;
+      link.setAttribute("aria-label", "Claim your Gun Store — opens in a new tab");
+      art.hidden = true;
+      kicker.textContent = "";
+      cta.textContent = "Claim";
+      title.textContent = "GunSearchAgent";
+      sub.textContent = "Put Betsy on your site. Claim your gun store.";
+      return;
+    }
+    root.classList.add("agency-ad--aim");
+    link.href = href;
+    link.setAttribute("aria-label", "See AIM POS — opens in a new tab");
+    art.hidden = false;
+    art.src = aimArt;
+    kicker.textContent = "AIM-POS.COM";
+    cta.textContent = "See AIM POS";
+    title.innerHTML = "AIM<em>POS</em>";
+    sub.textContent = "Gun store POS. 4473 and the bound book built in.";
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>("[data-agency-ad]")) {
+    const aimArt = root.dataset.aimArt || "";
+    const gsgArt = root.dataset.gsgArt || "";
+    void fetch(GSE, { cache: "no-store" })
+      .then((r) => r.json())
+      .then((data: { plate?: Plate; href?: string }) => {
+        const plate: Plate =
+          data.plate === "aim" || data.plate === "gsg" || data.plate === "default"
+            ? data.plate
+            : "aim";
+        const href =
+          typeof data.href === "string" && data.href
+            ? data.href
+            : root.querySelector<HTMLAnchorElement>("[data-agency-ad-link]")
+                ?.href || "";
+        paint(root, plate, href, aimArt, gsgArt);
+      })
+      .catch(() => {
+        /* AIM markup is already in the HTML */
+      });
+  }
+</script>
+
+<style>
+  .agency-ad {
+    position: relative;
+    isolation: isolate;
+    display: block;
+    width: 100%;
+    height: 6.25rem;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(125, 211, 252, 0.35);
+    background: #0a1220;
+    color: #f8fafc;
+  }
+  .agency-ad__hit {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+  }
+  .agency-ad__art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 26%;
+    pointer-events: none;
+  }
+  .agency-ad__wash {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent 28%, rgba(6, 7, 10, 0.55) 72%);
+  }
+  .agency-ad__kicker {
+    position: absolute;
+    z-index: 2;
+    top: 0.35rem;
+    left: 0.5rem;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: #7dd3fc;
+  }
+  .agency-ad__cta {
+    position: absolute;
+    z-index: 2;
+    top: 0.28rem;
+    right: 0.36rem;
+    padding: 0.22rem 0.45rem;
+    border: 1px solid rgba(125, 211, 252, 0.45);
+    background: rgba(10, 18, 32, 0.9);
+    color: #e0f2fe;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+  .agency-ad__copy {
+    position: absolute;
+    z-index: 2;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.4rem;
+    pointer-events: none;
+  }
+  .agency-ad__title {
+    display: block;
+    font-size: 15px;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+  }
+  .agency-ad__title em {
+    color: #7dd3fc;
+    font-style: normal;
+  }
+  .agency-ad__sub {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 10px;
+    line-height: 1.25;
+    color: rgba(226, 232, 240, 0.82);
+  }
+  .agency-ad--gsg {
+    border-color: rgba(255, 193, 77, 0.35);
+    background: #06070a;
+  }
+  .agency-ad--gsg .agency-ad__kicker,
+  .agency-ad--gsg .agency-ad__title em,
+  .agency-ad--gsg .agency-ad__cta {
+    color: #ffc14d;
+    border-color: rgba(255, 193, 77, 0.45);
+  }
+  .agency-ad--default {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0.55rem 0.7rem;
+    border-color: rgba(56, 189, 248, 0.32);
+  }
+  .agency-ad--default .agency-ad__art,
+  .agency-ad--default .agency-ad__wash,
+  .agency-ad--default .agency-ad__kicker {
+    display: none;
+  }
+  .agency-ad--default .agency-ad__copy,
+  .agency-ad--default .agency-ad__cta {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    bottom: auto;
+  }
+</style>
