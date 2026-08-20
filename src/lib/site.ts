@@ -23,4 +23,6 @@ export const CANON_PATHS = {
   gsgHero: "brand/gun-store-game-hero.png",
   contactHero: "brand/contact-hero.jpg",
   grokBot: "brand/grok-bot-official.png",
+  grokBotHero: "brand/hero-grok-bot-setup-counter.png",
+  grokBotBanner: "brand/banner-ai-studio-grok-bot-setup.png",
 } as const;
