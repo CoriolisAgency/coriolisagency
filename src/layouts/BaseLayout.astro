@@ -139,7 +139,7 @@ const jsonLd = {
     <meta name="twitter:image" content={ogAbs} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
-  <body class="min-h-dvh flex flex-col">
+  <body class="flex min-h-dvh min-w-0 flex-col">
     <SiteChrome>
       <slot />
     </SiteChrome>

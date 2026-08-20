@@ -21,9 +21,9 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
     <div
-      class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2"
+      class="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-2"
     >
-      <div>
+      <div class="min-w-0">
         <p
           class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
         >
@@ -58,7 +58,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
       </div>
       <a
         href={LINKS.demandIntel}
-        class="block"
+        class="block min-w-0"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -67,7 +67,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
           alt="Betsy Demand Intelligence — trending intent by caliber, brand, and type over the last 7 days"
           width="1263"
           height="886"
-          class="w-full rounded-2xl object-contain ring-1 ring-white/10 bg-[#0b1220] transition hover:ring-sky-400/50"
+          class="w-full min-w-0 rounded-2xl object-contain ring-1 ring-white/10 bg-[#0b1220] transition hover:ring-sky-400/50"
         />
       </a>
     </div>
@@ -78,7 +78,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
       <h2 class="text-xl font-semibold text-white">
         What brand teams use it for
       </h2>
-      <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+      <ul class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
         {
           DI_OUTCOMES.map((item) => (
             <li class="rounded-xl border border-zinc-800 bg-zinc-950/50 p-4 text-sm text-zinc-300">
@@ -101,7 +101,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
         Seats are $49 per user per month. One Client Admin is free on every
         plan. Plan pricing is in the demo — request one on GunSearchEngine.
       </p>
-      <div class="mt-8 grid gap-4 lg:grid-cols-3">
+      <div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
         {
           DI_PLANS.map((plan) => (
             <article
@@ -141,7 +141,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">How you use it</h2>
-      <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
         <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
           <h3 class="text-sm font-semibold text-sky-300">Portal and API</h3>
           <p class="mt-2 text-sm leading-relaxed text-zinc-400">
