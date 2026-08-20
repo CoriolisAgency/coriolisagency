@@ -2,6 +2,11 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/wp-content/uploads/2026/03/FFL-Ecommerce-Essentials-Checklist-2026-1.pdf",
+      "destination": "/ecommerce",
+      "permanent": true
+    },
+    {
       "source": "/ai-factory",
       "destination": "/ai-studio",
       "permanent": true
