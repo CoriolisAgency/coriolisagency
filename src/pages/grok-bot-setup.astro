@@ -11,21 +11,21 @@ const jobs = [
     kicker: "Your store",
     title: "Morning counter",
     tone: "teal",
-    body: "Last night’s orders and what’s on the shelf, from the store you already run. The brief is waiting when you unlock the door.",
+    body: "Last night’s orders and what is on the shelf, waiting when you unlock the door.",
     never: "It does not touch 4473, the bound book, or a POS.",
   },
   {
-    kicker: "GunSearchAgent MCP",
-    title: "Ask Betsy AI",
+    kicker: "Betsy on the site",
+    title: "Ask Betsy",
     tone: "pink",
-    body: "GunSearchAgent puts Betsy AI on the bot through MCP. The bot asks what the market searched for versus what you have. Any shop with GunSearchAgent on the site can do this. You do not have to host with Coriolis.",
-    never: "This setup is not Betsy. Betsy stays Betsy.",
+    body: "What people searched for versus what you have. Needs Betsy on the site.",
+    never: "This is not Betsy. Betsy stays Betsy.",
   },
   {
-    kicker: "Coriolis",
+    kicker: "Support",
     title: "Send it to Coriolis",
     tone: "orange",
-    body: "It opens a ticket. A human gates it. No money and no metal move without that.",
+    body: "Tell it the site problem and go open. We get a ticket. You hear when a human closed it.",
     never: "It does not change hosting, DNS, or billing.",
   },
 ] as const;
@@ -92,8 +92,8 @@ const plugTone = {
 ---
 
 <BaseLayout
-  title="Grok Bot setup | Coriolis, LLC"
-  description="One session. Your Cursor seat. The Grok Bots you name in the consult, configured and trained. $995. We never rent you ours."
+  title="Grok Bot Setup as a Service | Coriolis, LLC"
+  description="One hour to write your AI strategy. Then we build it and train you. $995. Talk to Coriolis."
   path="/grok-bot-setup"
   ogImagePath={CANON_PATHS.grokBot}
 >
@@ -107,33 +107,37 @@ const plugTone = {
       <h1
         class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
       >
-        Grok Bot setup
+        Grok Bot Setup as a Service
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300 sm:text-lg">
-        The industry is buying chat bots. The retail operators that will survive
-        the AI singularity are buying a teammate with a computer.
+        AI is everywhere. You do not need another chatbot. You need a plan, then
+        a teammate that works the store. One hour with us to write your AI
+        strategy. Then we build it, test it, and train you to run it. One fee.
+        $995. Two meetings. Live the same day.
       </p>
+      <div class="mt-8">
+        <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
+      </div>
       <img
         src={withBase(CANON_PATHS.grokBotHero)}
-        alt="Sample Grok Bot app on a gun store POS, roster of Betsy AI, Support, Website, Facebook, and QuickBooks."
+        alt="Sample Grok Bot app on a gun store counter, roster of Betsy AI, Support, Website, Facebook, and QuickBooks."
         width="1920"
         height="1080"
-        class="mt-8 w-full min-w-0 rounded-2xl object-cover ring-1 ring-white/10"
+        class="mt-10 w-full min-w-0 rounded-2xl object-cover ring-1 ring-white/10"
       />
 
       <div class="mt-10">
         <p
           class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold"
         >
-          Your seat. Your tools.
+          We got you
         </p>
         <h2 class="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-          What a Coriolis shop uses it for
+          Grok Bot in the Gun Store
         </h2>
         <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300 sm:text-base">
-          You do not have to host with us. In the consult you pick the job. We
-          connect the MCP that job needs — GunSearchAgent for Betsy AI, plus the
-          connectors you already own.
+          You pick the job in the one-hour consult. We hook Grok Bot to the
+          tools you already use. You do not have to host with us.
         </p>
 
         <div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -213,13 +217,14 @@ const plugTone = {
                 jobTone.gold.kicker,
               ]}
             >
-              Connectors
+              Your tools
             </p>
             <h3 class="relative mt-3 text-2xl font-semibold tracking-tight text-white sm:text-[1.7rem]">
-              The systems you already live in
+              Tools you already use
             </h3>
             <p class="relative mt-3 text-sm leading-relaxed text-zinc-200 sm:text-[0.95rem]">
-              Same session if that is the one job. Later, tickets:
+              Same day if that is the job. We hook up what you already own. We
+              do not sell you the tool.
             </p>
             <ul class="relative mt-5 grid gap-3">
               {
@@ -243,20 +248,33 @@ const plugTone = {
                 })
               }
             </ul>
-            <p class="relative mt-5 text-sm leading-relaxed text-zinc-400">
-              Connectors you already own. We do not sell you the connector.
-            </p>
           </article>
         </div>
       </div>
+    </div>
+  </section>
 
-      <p class="mt-10 max-w-3xl text-base leading-relaxed text-zinc-300">
-        Coriolis already runs this way. Grok Bot is xAI’s agent: it has its own
-        computer, it signs into the tools you already use, and it keeps working
-        when you close the laptop. We will not rent you our seat. We will sit
-        with you for three hours, configure the Grok Bots you name in the
-        consult on the Cursor account you buy, write the rules, connect the MCP
-        you already own, and train the owner or manager who will live with them.
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        What $995 is
+      </h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300 sm:text-base">
+        One time. Not a monthly bill from us.
+      </p>
+      <ol class="mt-6 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-300 sm:text-base">
+        <li>
+          <strong class="text-white">One-hour consult.</strong> Your AI
+          strategy. What the bot does. What it never does. Who owns it.
+        </li>
+        <li>
+          <strong class="text-white">Same day.</strong> We build the bots, test
+          them, and sit with you until you can run them. Two meetings. Live
+          before you leave.
+        </li>
+      </ol>
+      <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        When we are done, on-demand support. Not 24/7. Not a retainer.
       </p>
       <div class="mt-8">
         <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
@@ -266,97 +284,46 @@ const plugTone = {
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">
-        You buy the seat. We configure it.
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        You buy the login. We set it up.
       </h2>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Grok Bot is included on these plans, billed by Cursor / xAI, not
-        by us:
+        Grok Bot lives on a Cursor / xAI seat you buy. Those prices are theirs
+        (<a href={LINKS.xaiBot} class={linkClass} {...ext}>x.ai/bot</a>):
       </p>
       <ul class="mt-4 max-w-3xl list-disc space-y-1.5 pl-5 text-sm text-zinc-300">
         <li>Cursor Teams Premium — $120 per seat per month</li>
         <li>Cursor Ultra — $200 per month</li>
         <li>SuperGrok Heavy — $300 per month</li>
       </ul>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Those prices are theirs (<a href={LINKS.xaiBot} class={linkClass} {...ext}
-          >https://x.ai/bot</a
-        >). Buy one before the session. Sign in with that account. We configure
-        on your seat.
-      </p>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Cursor’s Terms of Service, section 1.5(iii), bar anyone from renting,
-        leasing, lending, or selling the service. We will not put you on a
-        Coriolis Ultra box and call it a product. If someone offers you “our
-        Grok Bot” as a subscription, they are selling you a seat they do not
-        own.
+        Buy one before we meet. Sign in with that account. We configure on your
+        seat. We never rent you ours.
       </p>
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">What $995 is</h2>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        One time. Not a monthly SKU. $995 is the session, not a unit of bots.
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        What it will not do
+      </h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300 sm:text-base">
+        It is not 4473. It is not a POS. FastBound is read only. It never writes
+        a disposition. It does not change hosting, DNS, or billing.
       </p>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Three hours, on your seat:
-      </p>
-      <ol class="mt-4 max-w-3xl list-decimal space-y-2 pl-5 text-sm text-zinc-300">
-        <li>
-          Consult. Which bots. What they are for, what they must never do, who
-          owns them.
-        </li>
-        <li>
-          Configure. Names, rules, the MCP connectors you already have. We do
-          not sell you connectors. Named bots you pick in this consult can ship
-          in the session.
-        </li>
-        <li>
-          Train. The owner or manager sits in the session and leaves able to
-          run them.
-        </li>
-      </ol>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Then 30 days of async support on the bots from that session. Email and
-        tickets. Not 24/7. Not a helpdesk for the rest of the company.
-      </p>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        After 30 days, anything else is a ticket. Joel gates it. It is billed.
-        There is no retainer. Later bots are tickets.
-      </p>
-    </div>
-  </section>
-
-  <section class="border-b border-zinc-800/80 py-12">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">What it is not</h2>
-      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-300">
-        <p>
-          It is not a Coriolis product. It is a setup session for a product you
-          buy from Cursor and xAI.
-        </p>
-        <p>
-          It is not Grok Bot 24/7 support from us. The bots can work around the
-          clock. We do not.
-        </p>
-        <p>
-          It is not a way around a seat. No shared login. No “we host it for
-          you.”
-        </p>
-        <p>It is not 4473. It is not a POS. FastBound is read only.</p>
-      </div>
     </div>
   </section>
 
   <section class="py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">After the session</h2>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        You leave with the named Grok Bots you picked in the consult, on your
-        account, with rules you approved, and a person in the building who can
-        steer them. Later bots are tickets, not a package we invented.
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        We got you
+      </h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300 sm:text-base">
+        AI is going to show up in every pitch, every inbox, every kid behind the
+        counter with a phone. Talk to us. We write the strategy and hook the
+        store up.
       </p>
       <div class="mt-8">
         <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
