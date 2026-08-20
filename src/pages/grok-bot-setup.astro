@@ -5,10 +5,94 @@ import { LINKS, linkClass, btnPlan } from "../lib/links";
 import { withBase } from "../lib/base";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
+
+const jobs = [
+  {
+    kicker: "Your store",
+    title: "Morning counter",
+    tone: "teal",
+    body: "Last night’s orders and what’s on the shelf, from the store you already run. The brief is waiting when you unlock the door.",
+    never: "It does not touch 4473, the bound book, or a POS.",
+  },
+  {
+    kicker: "GunSearchAgent MCP",
+    title: "Ask Betsy AI",
+    tone: "pink",
+    body: "GunSearchAgent puts Betsy AI on the bot through MCP. The bot asks what the market searched for versus what you have. Any shop with GunSearchAgent on the site can do this. You do not have to host with Coriolis.",
+    never: "This setup is not Betsy. Betsy stays Betsy.",
+  },
+  {
+    kicker: "Coriolis Ops MCP",
+    title: "Send it to Coriolis",
+    tone: "orange",
+    body: "Coriolis Ops is building an MCP server so the bot can open a ticket with us, stay on it, and tell you when a human closed it. That lane is a connector, not a hosting perk.",
+    never: "It does not change hosting, DNS, or billing.",
+  },
+] as const;
+
+const connectors = [
+  {
+    name: "QuickBooks",
+    note: "Books, not the bound book.",
+    tone: "lime",
+  },
+  {
+    name: "FastBound",
+    note: "Read only. It can tell you what the book says. It never writes a disposition.",
+    tone: "sky",
+  },
+  {
+    name: "Facebook",
+    note: "Scheduled posts that are already policy-safe. No comments. No ads. No arguing with the timeline.",
+    tone: "blue",
+  },
+] as const;
+
+const jobTone = {
+  teal: {
+    bar: "from-teal-300 via-teal-400 to-transparent",
+    glow: "bg-teal-400/25",
+    kicker: "text-teal-300",
+    ring: "hover:ring-teal-300/50",
+  },
+  pink: {
+    bar: "from-pink-400 via-fuchsia-400 to-transparent",
+    glow: "bg-pink-500/25",
+    kicker: "text-pink-300",
+    ring: "hover:ring-pink-400/50",
+  },
+  orange: {
+    bar: "from-orange-400 via-amber-400 to-transparent",
+    glow: "bg-orange-400/25",
+    kicker: "text-orange-300",
+    ring: "hover:ring-orange-400/50",
+  },
+  gold: {
+    bar: "from-gold via-amber-200 to-transparent",
+    glow: "bg-gold/20",
+    kicker: "text-gold",
+    ring: "hover:ring-gold/50",
+  },
+} as const;
+
+const plugTone = {
+  lime: {
+    chip: "border-lime-400/35 bg-lime-400/10",
+    name: "text-lime-300",
+  },
+  sky: {
+    chip: "border-sky-400/35 bg-sky-400/10",
+    name: "text-sky-300",
+  },
+  blue: {
+    chip: "border-blue-400/35 bg-blue-400/10",
+    name: "text-blue-300",
+  },
+} as const;
 ---
 
 <BaseLayout
-  title="Grok Bot setup | Coriolis, LLC"
+  title="Grok Bot Setup as a Service | Coriolis, LLC"
   description="One session. Your Cursor seat. One Grok Bot, configured and trained. $995. We never rent you ours."
   path="/grok-bot-setup"
   ogImagePath={CANON_PATHS.grokBot}
@@ -23,26 +107,156 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
       <h1
         class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
       >
-        Grok Bot setup
+        Grok Bot Setup as a Service
       </h1>
-      <p class="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300">
-        The industry is buying chat. The operators who will still be standing
-        are buying a teammate with a computer.
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300 sm:text-lg">
+        The industry is buying chat bots. The retail operators that will survive
+        the AI singularity are buying a teammate with a computer.
       </p>
       <img
         src={withBase(CANON_PATHS.grokBotHero)}
         alt="Sample Grok Bot app on a gun store POS, roster of Betsy AI, Support, Website, Facebook, and QuickBooks."
         width="1920"
         height="1080"
-        class="mt-8 w-full min-w-0"
+        class="mt-8 w-full min-w-0 rounded-2xl object-cover ring-1 ring-white/10"
       />
-      <p class="mt-8 max-w-3xl text-base leading-relaxed text-zinc-300">
-        Coriolis already runs this way. Grok Bot is xAI’s agent: it has
-        its own computer, it signs into the tools you already use, and it keeps
-        working when you close the laptop. We will not rent you our seat. We
-        will sit with you for three hours, configure one Grok Bot on the Cursor
-        account you buy, write the rules, connect the MCP you already own, and
-        train the owner or manager who will live with it.
+
+      <div class="mt-10">
+        <p
+          class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold"
+        >
+          Your seat. Your tools.
+        </p>
+        <h2 class="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+          What a shop uses it for
+        </h2>
+        <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300 sm:text-base">
+          You do not have to host with us. In the consult you pick the job. We
+          connect the MCP that job needs — GunSearchAgent for Betsy AI, Coriolis
+          Ops when you want a ticket lane, plus the connectors you already own.
+        </p>
+
+        <div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {
+            jobs.map((job) => {
+              const t = jobTone[job.tone];
+              return (
+                <article
+                  class:list={[
+                    "group relative overflow-hidden rounded-2xl border border-white/10 bg-[#070c14] p-6 sm:p-7",
+                    "ring-1 ring-white/5 shadow-[0_18px_40px_rgba(0,0,0,0.35)] transition duration-300",
+                    "hover:-translate-y-0.5",
+                    t.ring,
+                  ]}
+                >
+                  <div
+                    class:list={[
+                      "absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r",
+                      t.bar,
+                    ]}
+                    aria-hidden="true"
+                  />
+                  <div
+                    class:list={[
+                      "pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full blur-3xl",
+                      t.glow,
+                    ]}
+                    aria-hidden="true"
+                  />
+                  <p
+                    class:list={[
+                      "relative text-[11px] font-semibold uppercase tracking-[0.16em]",
+                      t.kicker,
+                    ]}
+                  >
+                    {job.kicker}
+                  </p>
+                  <h3 class="relative mt-3 text-2xl font-semibold tracking-tight text-white sm:text-[1.7rem]">
+                    {job.title}
+                  </h3>
+                  <p class="relative mt-3 text-sm leading-relaxed text-zinc-200 sm:text-[0.95rem]">
+                    {job.body}
+                  </p>
+                  <p class="relative mt-5 text-sm leading-relaxed text-zinc-400">
+                    {job.never}
+                  </p>
+                </article>
+              );
+            })
+          }
+
+          <article
+            class:list={[
+              "group relative overflow-hidden rounded-2xl border border-white/10 bg-[#070c14] p-6 sm:p-7",
+              "ring-1 ring-white/5 shadow-[0_18px_40px_rgba(0,0,0,0.35)] transition duration-300",
+              "hover:-translate-y-0.5",
+              jobTone.gold.ring,
+            ]}
+          >
+            <div
+              class:list={[
+                "absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r",
+                jobTone.gold.bar,
+              ]}
+              aria-hidden="true"
+            />
+            <div
+              class:list={[
+                "pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full blur-3xl",
+                jobTone.gold.glow,
+              ]}
+              aria-hidden="true"
+            />
+            <p
+              class:list={[
+                "relative text-[11px] font-semibold uppercase tracking-[0.16em]",
+                jobTone.gold.kicker,
+              ]}
+            >
+              Connectors
+            </p>
+            <h3 class="relative mt-3 text-2xl font-semibold tracking-tight text-white sm:text-[1.7rem]">
+              The systems you already live in
+            </h3>
+            <p class="relative mt-3 text-sm leading-relaxed text-zinc-200 sm:text-[0.95rem]">
+              Same session if that is the one job. Later, tickets:
+            </p>
+            <ul class="relative mt-5 grid gap-3">
+              {
+                connectors.map((c) => {
+                  const p = plugTone[c.tone];
+                  return (
+                    <li
+                      class:list={[
+                        "rounded-xl border px-4 py-3",
+                        p.chip,
+                      ]}
+                    >
+                      <p class:list={["text-sm font-semibold", p.name]}>
+                        {c.name}
+                      </p>
+                      <p class="mt-1 text-sm leading-relaxed text-zinc-300">
+                        {c.note}
+                      </p>
+                    </li>
+                  );
+                })
+              }
+            </ul>
+            <p class="relative mt-5 text-sm leading-relaxed text-zinc-400">
+              Connectors you already own. We do not sell you the connector.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <p class="mt-10 max-w-3xl text-base leading-relaxed text-zinc-300">
+        Grok Bot is xAI’s agent: it has its own computer, it signs into the
+        tools you already use, and it keeps working when you close the laptop.
+        We will not rent you our seat. We sit with you on the Cursor account you
+        buy, write the rules, connect MCP — GunSearchAgent for Betsy AI,
+        Coriolis Ops for tickets as that server ships, plus the connectors you
+        already own — and train the person who will command it.
       </p>
       <div class="mt-8">
         <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
@@ -110,52 +324,6 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
         After 30 days, anything else is a ticket. Joel gates it. It is billed.
         There is no retainer.
       </p>
-    </div>
-  </section>
-
-  <section class="border-b border-zinc-800/80 py-12">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">
-        What a Coriolis shop uses it for
-      </h2>
-      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-300">
-        <p>
-          You already host with us. In the consult you pick the job. The session
-          configures one Grok Bot for that job.
-        </p>
-        <p>
-          <strong>Morning counter.</strong> Last night’s orders and what’s on
-          the shelf, from the WooCommerce store we already host. The brief is
-          waiting when you unlock the door. It does not touch 4473, the bound
-          book, or a POS.
-        </p>
-        <p>
-          <strong>Ask Betsy AI.</strong> Your bot asks Betsy AI what the market
-          searched for versus what you have. That needs GunSearchAgent on the
-          site. This setup is not Betsy. Betsy stays Betsy.
-        </p>
-        <p>
-          <strong>Send it to Coriolis.</strong> Tell it the site problem and go
-          open. It opens a ticket with us, stays on it, and tells you when a
-          human closed it. It does not change hosting, DNS, or billing.
-        </p>
-        <p>
-          <strong>The systems you already live in.</strong> Same session if that
-          is the one job. Later, tickets:
-        </p>
-        <ul class="list-disc space-y-1.5 pl-5">
-          <li>QuickBooks. Books, not the bound book.</li>
-          <li>
-            FastBound. Read only. It can tell you what the book says. It never
-            writes a disposition.
-          </li>
-          <li>
-            Facebook. Scheduled posts that are already policy-safe. No comments.
-            No ads. No arguing with the timeline.
-          </li>
-        </ul>
-        <p>Connectors you already own. We do not sell you the connector.</p>
-      </div>
     </div>
   </section>
 
