@@ -2,6 +2,7 @@ const PILLARS = new Set([
   "Ecommerce",
   "AI Studio",
   "AI Factory",
+  "Grok Bot Setup",
   "Demand Intelligence",
 ]);
 
@@ -11,6 +12,7 @@ const PILLAR_INTENT: Record<string, "make" | "distribute" | "sell"> = {
   Ecommerce: "sell",
   "AI Studio": "sell",
   "AI Factory": "sell",
+  "Grok Bot Setup": "sell",
   "Demand Intelligence": "make",
 };
 
@@ -65,7 +67,7 @@ export async function POST(request: Request): Promise<Response> {
     return json(400, { ok: false, error: "That email does not look valid." });
   }
   if (!PILLARS.has(pillar)) {
-    return json(400, { ok: false, error: "Pick Ecommerce, AI Studio, or Demand Intelligence." });
+    return json(400, { ok: false, error: "Pick Ecommerce, AI Studio, Grok Bot Setup, or Demand Intelligence." });
   }
 
   const apiKey = process.env.MAILGUN_API_KEY?.trim();
