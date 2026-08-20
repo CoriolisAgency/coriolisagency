@@ -31,9 +31,9 @@ const split = [
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
     <div
-      class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2"
+      class="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-2"
     >
-      <div>
+      <div class="min-w-0">
         <p
           class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
         >
@@ -61,7 +61,7 @@ const split = [
         alt="A Coriolis-built gun store website — the storefront FFL Cockpit sells through."
         width="1600"
         height="900"
-        class="w-full rounded-2xl object-cover ring-1 ring-white/10"
+        class="w-full min-w-0 rounded-2xl object-cover ring-1 ring-white/10"
       />
     </div>
   </section>
@@ -69,7 +69,7 @@ const split = [
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">Who does what</h2>
-      <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
         {
           split.map((s) => (
             <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">

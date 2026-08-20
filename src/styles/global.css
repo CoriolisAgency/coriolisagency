@@ -11,6 +11,7 @@
 
 html {
   color-scheme: dark;
+  overflow-x: clip;
 }
 
 @media print {
