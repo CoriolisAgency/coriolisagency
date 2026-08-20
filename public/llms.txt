@@ -26,7 +26,8 @@ This domain is the company home. Checkout for setup packages is on checkout.cori
 - [/ffl-cockpit](/ffl-cockpit): Cockpit is operations; Coriolis is the WooCommerce website.
 - [/ammoready-alternative](/ammoready-alternative): AmmoReady / Gearfire alternative. You own the site.
 - [/best-ffl-ecommerce-website](/best-ffl-ecommerce-website): Comparison. Best FFL store is the one you own.
-- [/ai-studio](/ai-studio): Build custom apps on shipped proof (Betsy, GSA, DI, Gun Store Game). `/ai-factory` 301s here.
+- [/ai-studio](/ai-studio): Build custom apps on shipped proof (Betsy, GSA, DI, Gun Store Game). `/ai-factory` 301s here. Grok Bot setup teaser links to `/grok-bot-setup`.
+- [/grok-bot-setup](/grok-bot-setup): One session. Your Cursor seat. One Grok Bot, configured and trained. $995. We never rent you ours. CTA is `/contact` only. Seat prices are Cursor / SpaceXAI’s.
 - [/demand-intelligence](/demand-intelligence): Demand Intelligence for brands. Demo on GunSearchEngine.
 - [/about](/about): Company and founder.
 - [/contact](/contact): Talk to Coriolis.

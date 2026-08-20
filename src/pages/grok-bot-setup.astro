@@ -1,0 +1,159 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { CANON_PATHS } from "../lib/site";
+import { LINKS, linkClass, btnPlan } from "../lib/links";
+import { withBase } from "../lib/base";
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+---
+
+<BaseLayout
+  title="Grok Bot setup | Coriolis, LLC"
+  description="One session. Your Cursor seat. One Grok Bot, configured and trained. $995. We never rent you ours."
+  path="/grok-bot-setup"
+  ogImagePath={CANON_PATHS.grokBot}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        AI Studio
+      </p>
+      <h1
+        class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        Grok Bot setup
+      </h1>
+      <p class="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300">
+        The industry is buying chat. The operators who will still be standing
+        are buying a teammate with a computer.
+      </p>
+      <img
+        src={withBase(CANON_PATHS.grokBot)}
+        alt="Grok Bot"
+        width="1920"
+        height="1080"
+        class="mt-8 w-full min-w-0"
+      />
+      <p class="mt-8 max-w-3xl text-base leading-relaxed text-zinc-300">
+        Coriolis already runs this way. Grok Bot is SpaceXAI’s agent: it has
+        its own computer, it signs into the tools you already use, and it keeps
+        working when you close the laptop. We will not rent you our seat. We
+        will sit with you for three hours, configure one Grok Bot on the Cursor
+        account you buy, write the rules, connect the MCP you already own, and
+        train the owner or manager who will live with it.
+      </p>
+      <div class="mt-8">
+        <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        You buy the seat. We configure it.
+      </h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
+        Grok Bot is included on these plans, billed by Cursor / SpaceXAI, not
+        by us:
+      </p>
+      <ul class="mt-4 max-w-3xl list-disc space-y-1.5 pl-5 text-sm text-zinc-300">
+        <li>Cursor Teams Premium — $120 per seat per month</li>
+        <li>Cursor Ultra — $200 per month</li>
+        <li>SuperGrok Heavy — $300 per month</li>
+      </ul>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
+        Those prices are theirs (<a href={LINKS.xaiBot} class={linkClass} {...ext}
+          >https://x.ai/bot</a
+        >). Buy one before the session. Sign in with that account. We configure
+        on your seat.
+      </p>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Cursor’s Terms of Service, section 1.5(iii), bar anyone from renting,
+        leasing, lending, or selling the service. We will not put you on a
+        Coriolis Ultra box and call it a product. If someone offers you “our
+        Grok Bot” as a subscription, they are selling you a seat they do not
+        own.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">What $995 is</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
+        One time. Not a monthly SKU.
+      </p>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
+        Three hours, one Grok Bot, on your seat:
+      </p>
+      <ol class="mt-4 max-w-3xl list-decimal space-y-2 pl-5 text-sm text-zinc-300">
+        <li>
+          Consult. What the bot is for, what it must never do, who owns it.
+        </li>
+        <li>
+          Configure. Name, rules, the MCP connectors you already have. We do
+          not sell you connectors.
+        </li>
+        <li>
+          Train. The owner or manager sits in the session and leaves able to
+          run it.
+        </li>
+      </ol>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
+        Then 30 days of async support on that bot only. Email and tickets. Not
+        24/7. Not a second bot. Not a helpdesk for the rest of the company.
+      </p>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        After 30 days, anything else is a ticket. Joel gates it. It is billed.
+        There is no retainer.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">What it is not</h2>
+      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-300">
+        <p>
+          It is not a Coriolis product. It is a setup session for a product you
+          buy from Cursor and SpaceXAI.
+        </p>
+        <p>
+          It is not Grok Bot 24/7 support from us. The bot can work around the
+          clock. We do not.
+        </p>
+        <p>
+          It is not a way around a seat. No shared login. No “we host it for
+          you.”
+        </p>
+        <p>
+          It is not on the homepage. Ecommerce stays the front door.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">After the session</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
+        You have one named Grok Bot, on your account, with rules you approved,
+        and a person in the building who can steer it. You can add more bots
+        later. That is more tickets, not a package we invented.
+      </p>
+      <div class="mt-8">
+        <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
+      </div>
+      <p class="mt-10 max-w-3xl text-xs leading-relaxed text-zinc-500">
+        Disclaimer: Grok Bot is a product of SpaceXAI, available through
+        Cursor. Marks of their owners. Coriolis, LLC configures on the
+        client’s seat. We are not affiliated with SpaceXAI or Anysphere beyond
+        that work. Prices for Cursor Teams Premium, Cursor Ultra, and SuperGrok
+        Heavy are set by them and can change.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

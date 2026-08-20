@@ -22,4 +22,5 @@ export const CANON_PATHS = {
   rangeMckinney: "brand/the-range-mckinney.png",
   gsgHero: "brand/gun-store-game-hero.png",
   contactHero: "brand/contact-hero.jpg",
+  grokBot: "brand/grok-bot-official.png",
 } as const;
