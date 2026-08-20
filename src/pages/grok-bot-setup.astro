@@ -19,13 +19,14 @@ const jobs = [
     title: "Ask Betsy",
     tone: "pink",
     body: "What people searched for versus what you have. Needs Betsy on the site.",
-    never: "This is not Betsy. Betsy stays Betsy.",
+    never: "Free account at GunSearchAgent.com required",
+    neverHref: LINKS.gsa,
   },
   {
-    kicker: "Support",
-    title: "Send it to Coriolis",
+    kicker: "Your site",
+    title: "Send it to Support",
     tone: "orange",
-    body: "Tell it the site problem and go open. We get a ticket. You hear when a human closed it.",
+    body: "Tell your Support bot about site problems and it will contact Support for you.",
     never: "It does not change hosting, DNS, or billing.",
   },
 ] as const;
@@ -33,7 +34,7 @@ const jobs = [
 const connectors = [
   {
     name: "QuickBooks",
-    note: "Books, not the bound book.",
+    note: "Get instant answers to accounting questions like “What are sales looking like this month?”",
     tone: "lime",
   },
   {
@@ -136,8 +137,9 @@ const plugTone = {
           Grok Bot in the Gun Store
         </h2>
         <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300 sm:text-base">
-          You pick the job in the one-hour consult. We hook Grok Bot to the
-          tools you already use. You do not have to host with us.
+          You pick the jobs you want help with in a one-hour consult. We hook
+          Grok Bot to the tools you already use. You do not have to host with
+          us.
         </p>
 
         <div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -182,7 +184,17 @@ const plugTone = {
                     {job.body}
                   </p>
                   <p class="relative mt-5 text-sm leading-relaxed text-zinc-400">
-                    {job.never}
+                    {"neverHref" in job && job.neverHref ? (
+                      <>
+                        Free account at{" "}
+                        <a href={job.neverHref} class={linkClass} {...ext}>
+                          GunSearchAgent.com
+                        </a>{" "}
+                        required
+                      </>
+                    ) : (
+                      job.never
+                    )}
                   </p>
                 </article>
               );
