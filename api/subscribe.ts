@@ -5,7 +5,10 @@ function isValidEmail(email: string): boolean {
   return EMAIL_RE.test(email);
 }
 
-function json(status: number, payload: { ok: boolean; error?: string }) {
+function json(
+  status: number,
+  payload: { ok: boolean; error?: string; needs_activation?: boolean }
+) {
   return new Response(JSON.stringify(payload), {
     status,
     headers: { "content-type": "application/json; charset=utf-8" },
@@ -15,7 +18,7 @@ function json(status: number, payload: { ok: boolean; error?: string }) {
 async function postOsSubscribe(
   email: string,
   source: string
-): Promise<{ ok: boolean; error?: string }> {
+): Promise<{ ok: boolean; error?: string; needs_activation?: boolean }> {
   const osUrl = process.env.CORIOLIS_OS_URL?.trim().replace(/\/$/, "");
   const secret = process.env.FORM_INTAKE_SECRET?.trim();
   if (!osUrl || !secret) {
@@ -33,7 +36,12 @@ async function postOsSubscribe(
       body: JSON.stringify({ email, source }),
       signal: AbortSignal.timeout(OS_TIMEOUT_MS),
     });
-    if (res.ok) return { ok: true };
+    if (res.ok) {
+      const data = (await res.json().catch(() => ({}))) as {
+        needs_activation?: boolean;
+      };
+      return { ok: true, needs_activation: !!data.needs_activation };
+    }
     const detail = await res.text();
     console.error("subscribe: OS rejected", res.status, detail.slice(0, 240));
     if (res.status === 400) {

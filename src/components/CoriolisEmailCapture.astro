@@ -37,7 +37,13 @@ const marketingSource = "popup_coriolis";
       sessionStart: "cor_mkt_session_start",
       routes: "cor_mkt_routes",
     };
-    const PATH_DENY = ["/contact", "/privacy", "/msa", "/unsubscribe"];
+    const PATH_DENY = [
+      "/contact",
+      "/privacy",
+      "/msa",
+      "/unsubscribe",
+      "/confirmed",
+    ];
 
     function isLocalHost() {
       const h = window.location.hostname;
@@ -291,14 +297,24 @@ const marketingSource = "popup_coriolis";
       }
     }
 
-    function showDone() {
+    function showDone(mode) {
       if (!openEl) return;
       const copy = openEl.querySelector(".coriolis-capture__copy");
       if (!copy) return;
-      const headline = "You’re on the list";
-      const lede = "Agency intel only. Unsubscribe anytime from the email footer.";
+      const headline =
+        mode === "activation" ? "Check your inbox" : "You’re on the list";
+      const lede =
+        mode === "activation"
+          ? "Confirmation link is on the way. After you click it, Agency intel can land in your inbox."
+          : "Agency intel only. Unsubscribe anytime from the email footer.";
+      const eyebrow =
+        mode === "activation"
+          ? "Coriolis, LLC · confirm"
+          : "Coriolis, LLC · subscribed";
       copy.innerHTML =
-        '<p class="coriolis-capture__eyebrow">Coriolis, LLC · subscribed</p>' +
+        '<p class="coriolis-capture__eyebrow">' +
+        eyebrow +
+        "</p>" +
         '<h2 id="coriolis-capture-title" class="coriolis-capture__headline">' +
         headline +
         "</h2>" +
@@ -418,7 +434,7 @@ const marketingSource = "popup_coriolis";
             return;
           }
           writeLocal(STORAGE.subscribed, "1");
-          showDone();
+          showDone(data.needs_activation ? "activation" : "ok");
         } catch {
           if (errEl) {
             errEl.hidden = false;
