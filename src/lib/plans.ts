@@ -85,7 +85,10 @@ export const PLANS: Plan[] = [
       "The site watched around the clock",
       "Cloudflare in front of it",
       "The search work a store needs to keep ranking",
-      "Email capture and the campaigns that follow a missed sale",
+      "Unlimited hosting on WP Engine. Coriolis is a WP Engine agency partner.",
+      "99.95% SLA.",
+      "VIP support Monday through Friday.",
+      "Managed email automation: welcome series, back in stock, abandoned cart, thank you for purchase.",
     ],
   },
 ];
