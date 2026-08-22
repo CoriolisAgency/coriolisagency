@@ -1,7 +1,7 @@
 import type { FaqItem } from "./faq";
 
 export const STACK_TITLE =
-  "How the Coriolis stack fits — store, sensor, demand | Coriolis";
+  "How the Coriolis stack fits — store, search, demand | Coriolis";
 
 export const STACK_META =
   "A gun store owns the website and the search on it. Brands buy category demand on the network. Coriolis does not replace the register or the 4473.";
@@ -148,7 +148,7 @@ export const STACK_NODES: StackNode[] = [
   },
   {
     id: "sensor",
-    label: "Sensor",
+    label: "GunSearchAgent writes Search",
     sentence: "GunSearchAgent on that site",
     field: "b",
     x: "26%",
