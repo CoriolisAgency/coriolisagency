@@ -38,7 +38,9 @@ Same path, new voice, still answer the old query in the first 80 words. **Do not
 | `/ammoready-alternative` | 19 | 1,780 | Query pos 6.1, 9 clicks. Keep the short slug. |
 | `/best-ffl-ecommerce-website` | 17 | 3,047 | Comparison intent still sells ecommerce. |
 
-Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/demand-intelligence`, `/ecommerce`, `/privacy`, `/msa`.
+Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`.
+
+`/demand-intelligence` 301s to `https://www.gunsearchengine.com/demand-intelligence/` (`permanent: true` in `vercel.json`). Trailing-slash variant 308s to no-slash first. Do not leave a competing DI page on this host.
 
 Optional keep (editorial accidents — not company juice, but real clicks). Only if you want the traffic; otherwise 301 or die:
 
@@ -75,6 +77,8 @@ Do **not** 410 `/estate` — that string is not unique enough. Trailing-slash va
 ## 301 to a new pillar (do these)
 
 Implemented in `vercel.json` (path sources only; trailing-slash handled by Vercel).
+
+`/demand-intelligence` → `https://www.gunsearchengine.com/demand-intelligence/` is a live-host 301 (not a WordPress leftover). `/sitemap.xml` rewrites to `/sitemap-index.xml` — same index, not a second sitemap.
 
 | Old WordPress | New | Clicks | Why |
 |---------------|-----|-------:|-----|
@@ -180,4 +184,4 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 1. Edit **`vercel.json`** `redirects` (paths only, `permanent: true`). Skip keep-slugs and trailing-slash duplicates. Retired named-vendor slugs go in `rewrites` → `/api/gone` (410), not `redirects`.
 2. Optionally mirror path changes in `scripts/cloudflare-bulk-redirects.csv` for reference — it is not the runtime.
-3. Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/best-ffl-ecommerce-website`, plus `/about`, `/ai-studio`, `/contact`, `/demand-intelligence`, `/ecommerce`, `/privacy`). Do not 301 those.
+3. Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/best-ffl-ecommerce-website`, plus `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/stack`). Do not 301 those. `/demand-intelligence` is the exception: 301 to GunSearchEngine.

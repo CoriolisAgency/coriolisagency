@@ -45,7 +45,7 @@ Incognito checks (expect **301 then 200**, no slash, apex):
 
 Then:
 
-1. Search Console (Domain property) → Sitemaps → `https://coriolisagency.com/sitemap-index.xml`
+1. Search Console (Domain property) → Sitemaps → `https://coriolisagency.com/sitemap-index.xml` (`/sitemap.xml` is a rewrite alias of that same index).
 2. Deploy fflaccelerator if you have not: `plans` → `/ecommerce`, `coriolisSwitch` → `/ammoready-alternative`.
 
 ## Do not
