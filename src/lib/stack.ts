@@ -148,7 +148,7 @@ export const STACK_NODES: StackNode[] = [
   },
   {
     id: "sensor",
-    label: "GunSearchAgent",
+    label: "GunSearchAgent writes Search",
     sentence: "GunSearchAgent on that site",
     field: "b",
     x: "26%",

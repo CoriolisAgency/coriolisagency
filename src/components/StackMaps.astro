@@ -170,11 +170,17 @@ function nodeById(id: StackNodeId) {
         {
           joinEdges.map((e) => (
             <p class="stack-join-fact" data-from={e.from} data-to={e.to}>
-              <span class="stack-join-fact__from">
-                {nodeById(e.from).label}
-              </span>
-              {` ${e.label} `}
-              <span class="stack-join-fact__to">{nodeById(e.to).label}</span>
+              {e.from === "sensor" && e.to === "search" ? (
+                "GunSearchAgent writes Search"
+              ) : (
+                <>
+                  <span class="stack-join-fact__from">
+                    {nodeById(e.from).label}
+                  </span>
+                  {` ${e.label} `}
+                  <span class="stack-join-fact__to">{nodeById(e.to).label}</span>
+                </>
+              )}
             </p>
           ))
         }
@@ -552,10 +558,10 @@ function nodeById(id: StackNodeId) {
   }
 
   .stack-node[data-node="sensor"] .stack-node__name {
-    max-width: 5.1rem;
-    padding: 0 0.3rem;
-    font-size: 0.62rem;
-    line-height: 1.15;
+    max-width: 5.2rem;
+    padding: 0 0.28rem;
+    font-size: 0.58rem;
+    line-height: 1.2;
     text-align: center;
   }
 
