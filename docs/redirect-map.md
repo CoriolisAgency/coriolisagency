@@ -58,9 +58,19 @@ Retired WordPress posts. Soft 404 on the Astro cutover; now rewrite to `/api/gon
 
 | Old WordPress | Status | Clicks | Why |
 |---------------|--------|-------:|-----|
+| `/orchid` | 410 | — | Short leftover. |
+| `/ebound` | 410 | — | Short leftover. |
 | `/orchid-gun-store-pos` | 410 | 0 | Junk POS post. |
-| `/orchid-estate-breaks-new-ground-in-ffl-compliance` | 410 | — | Compliance article. |
-| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 410 | 28 | Bound-book / 4473. Ranking intent is off-strategy. |
+| `/orchid-estate` | 410 | — | Short leftover. |
+| `/orchid-estate-bound-book` | 410 | — | Short leftover. |
+| `/orchid-estate-breaks-new-ground-in-ffl-compliance` | 410 | — | Live WP slug (soft 404). |
+| `/fastbound-vs-orchid` | 410 | — | Short leftover. |
+| `/fastbound-vs-orchid-advisors` | 410 | — | Short leftover. |
+| `/fastbound-vs-orchid-ebound` | 410 | — | Short leftover. |
+| `/fastbound-vs-orchid-ebound-bound-book` | 410 | — | Short leftover. |
+| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 410 | 28 | Bound-book / 4473. Do not 301. |
+
+Do **not** 410 `/estate` — that string is not unique enough. Trailing-slash variants 308 to the no-slash source, then 410.
 
 ## 301 to a new pillar (do these)
 
@@ -151,7 +161,7 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 - Compliance software: `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` (28 c / 16,821 i) — **410**, do not 301. Query cluster is 1 click / 8.5k impr of bound-book noise.
 - `/ammoready-login/` (2 clicks) — not your product.
 - `/types-of-ffls/` (0 / 898) — still a soft 404.
-- `/orchid-gun-store-pos` (0 / 826) and `/orchid-estate-breaks-new-ground-in-ffl-compliance` — **410** via `/api/gone`. Do not keep a slug that names that POS vendor.
+- `/orchid-gun-store-pos` (0 / 826) and the short leftovers in the 410 table — **410** via `/api/gone`. Do not 301 onto `/ecommerce` or `/best-ffl-ecommerce-website`.
 
 **Zero-click infrastructure**
 

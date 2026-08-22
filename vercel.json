@@ -2,11 +2,43 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/orchid",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/ebound",
+      "destination": "/api/gone"
+    },
+    {
       "source": "/orchid-gun-store-pos",
       "destination": "/api/gone"
     },
     {
+      "source": "/orchid-estate",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/orchid-estate-bound-book",
+      "destination": "/api/gone"
+    },
+    {
       "source": "/orchid-estate-breaks-new-ground-in-ffl-compliance",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/fastbound-vs-orchid",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/fastbound-vs-orchid-advisors",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/fastbound-vs-orchid-ebound",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/fastbound-vs-orchid-ebound-bound-book",
       "destination": "/api/gone"
     },
     {
