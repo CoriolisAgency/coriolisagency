@@ -13,6 +13,7 @@ Source: `Downloads/coriolisagency.com-Performance-on-Search-2026-08-16/` (Pages 
 | Layer | Role |
 |-------|------|
 | **Vercel `vercel.json` redirects** | Canonical 301 list for old WordPress paths → new Astro slugs (`permanent: true`). |
+| **Vercel `vercel.json` rewrites → `/api/gone`** | HTTP **410** for retired WordPress slugs that named a locked POS vendor. Vercel redirects cannot emit 410. |
 | **`scripts/cloudflare-bulk-redirects.csv`** | Reference / historical import for Cloudflare Bulk Redirects. Same map as paths; **not** the runtime after DNS-only cutover. |
 | **Cloudflare** | DNS-only. Do not re-enable proxy for these 301s. |
 
@@ -46,10 +47,20 @@ Optional keep (editorial accidents — not company juice, but real clicks). Only
 | `/the-scar-is-dead-long-live-the-xcr-modular-tactical-rifle` | 40 | 3,098 | `xcr vs scar`. Client/editorial. Keep static **or** let die. |
 | `/shadowsmith-ammo-selects-coriolis-agency-…` | 35 | 3,335 | People search the **client**. 301 → `/about` unless you want a news URL. |
 | `/top-us-gun-manufacturers-complete-guide-…` | 30 | 18,031 | Vanity listicle (page 2–3). Let die unless you like the impressions. |
-| `/fastbound-vs-orchid-ebound-…` | 28 | 16,821 | **Do not keep.** Bound-book / 4473. Soft 404. |
+| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 28 | 16,821 | **410** via `/api/gone`. Bound-book / 4473. Do not 301. |
 | `/unleash-hellfire-with-the-diablo-12-gauge-…` | 22 | 2,404 | Product editorial. Let die. |
 | `/meet-the-team` | 26 | 314 | Brand. 301 → `/about` (do not rebuild). |
 | `/ammoready-com-founder-launches-2a-focused-digital-marketing-agency` | 24 | 812 | Origin story. 301 → `/about`. |
+
+## 410 (implemented)
+
+Retired WordPress posts. Soft 404 on the Astro cutover; now rewrite to `/api/gone` (410). Do not recreate the slugs. Do not 301 bound-book comparison traffic onto ecommerce pages.
+
+| Old WordPress | Status | Clicks | Why |
+|---------------|--------|-------:|-----|
+| `/orchid-gun-store-pos` | 410 | 0 | Junk POS post. |
+| `/orchid-estate-breaks-new-ground-in-ffl-compliance` | 410 | — | Compliance article. |
+| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 410 | 28 | Bound-book / 4473. Ranking intent is off-strategy. |
 
 ## 301 to a new pillar (do these)
 
@@ -137,9 +148,10 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 - Email: `/email-marketing-firearms/` (5 clicks), `/email-marketing-for-ffl-ecommerce/` (1), `/the-roi-for-email-marketing-is-42-to-1/` (0 clicks / 1,427 impr). Query cluster: **0 clicks**.
 - Agency/SEO vanity: `/firearms-digital-marketing-agency/` (15 clicks — only if you still want that door; else die), `/gun-industry-seo-company-…/` (10 c / 10,184 i), `/firearms-seo-marketing/` (7 c / 10,201 i). Query cluster: **6 clicks / 20k impr**.
-- Compliance software: `/fastbound-vs-orchid-ebound-…/` (28 c / 16,821 i) — **die, do not 301**. Query cluster is 1 click / 8.5k impr of bound-book noise.
+- Compliance software: `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` (28 c / 16,821 i) — **410**, do not 301. Query cluster is 1 click / 8.5k impr of bound-book noise.
 - `/ammoready-login/` (2 clicks) — not your product.
-- `/types-of-ffls/` (0 / 898), `/orchid-gun-store-pos/` (0 / 826).
+- `/types-of-ffls/` (0 / 898) — still a soft 404.
+- `/orchid-gun-store-pos` (0 / 826) and `/orchid-estate-breaks-new-ground-in-ffl-compliance` — **410** via `/api/gone`. Do not keep a slug that names that POS vendor.
 
 **Zero-click infrastructure**
 
@@ -156,6 +168,6 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 ## Maintaining the list
 
-1. Edit **`vercel.json`** `redirects` (paths only, `permanent: true`). Skip keep-slugs and trailing-slash duplicates.
+1. Edit **`vercel.json`** `redirects` (paths only, `permanent: true`). Skip keep-slugs and trailing-slash duplicates. Retired named-vendor slugs go in `rewrites` → `/api/gone` (410), not `redirects`.
 2. Optionally mirror path changes in `scripts/cloudflare-bulk-redirects.csv` for reference — it is not the runtime.
 3. Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/best-ffl-ecommerce-website`, plus `/about`, `/ai-studio`, `/contact`, `/demand-intelligence`, `/ecommerce`, `/privacy`). Do not 301 those.

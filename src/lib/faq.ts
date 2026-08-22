@@ -80,7 +80,7 @@ export const FAQ_AMMOREADY: FaqItem[] = [
 export const FAQ_BEST: FaqItem[] = [
   {
     q: "What is the best FFL ecommerce website?",
-    a: "The one you own. Closed platforms (AmmoReady, Gearfire, Orchid storefronts) rent you a catalog. Coriolis builds WooCommerce on your domain — inventory, dropshipping, or both — and you can take it with you.",
+    a: "The one you own. Closed platforms (AmmoReady, Gearfire) rent you a catalog. Coriolis builds WooCommerce on your domain — inventory, dropshipping, or both — and you can take it with you.",
   },
   {
     q: "Does WooCommerce handle FFL checkout and dropshipping?",
