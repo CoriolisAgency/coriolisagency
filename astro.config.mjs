@@ -16,7 +16,6 @@ export default defineConfig({
   trailingSlash: "never",
   redirects: {
     "/ai-factory": "/ai-studio",
-    "/demand-intelligence": "https://www.gunsearchengine.com/demand-intelligence/",
   },
   integrations: [sitemap()],
   vite: {
