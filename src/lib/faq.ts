@@ -1,5 +1,3 @@
-import { SWITCH_FOUNDER, SWITCH_STEPS } from "./switch";
-
 export interface FaqItem {
   q: string;
   a: string;
@@ -7,43 +5,47 @@ export interface FaqItem {
 
 export const FAQ_ECOMMERCE: FaqItem[] = [
   {
-    q: "What is included in every monthly plan?",
-    a: "Minute Man is the base: a custom WooCommerce site on your domain with unlimited hosting, storage, bandwidth, products, and orders, plus 24×7 uptime monitoring. Every higher plan includes everything below it.",
-  },
-  {
-    q: "Do I buy the monthly plan online?",
-    a: "You do not buy monthly hosting on a checkout page. Talk to us and we set the site up. One-time Basic ($500) and Retail ($2,500) setup packages can be purchased on checkout.coriolisagency.com.",
-  },
-  {
     q: "What is FFL Accelerator?",
-    a: "FFL Accelerator is Coriolis’s managed WooCommerce program for FFLs ($569/mo). It includes GunSearchAgent Pro (Betsy on the dealer site). The site is yours. Betsy on it is included. That feed is what OEMs buy as Demand Intelligence.",
+    a: "It is the Coriolis plan for a gun store that wants a real website. $569 a month. We build WooCommerce on your domain, connect catalogs and checkout, and put Betsy on the shop. The site is yours.",
   },
   {
-    q: "Do you replace my bound book or run NICS?",
-    a: "No. Coriolis is not 4473 software, not a NICS system, and not a bound-book replacement. Ecommerce workflows are designed to coexist with electronic bound books and licensed retailers.",
+    q: "What do I pay to start?",
+    a: "Setup is $500 for a clean launch or $2,500 for the full custom site and email. Then $569 a month. No annual contract. If you walk, you take the website.",
   },
   {
-    q: "How do I leave Gearfire or AmmoReady?",
-    a: "New Woo on your domain, catalog and redirects, Cockpit and checkout, then DNS. Start on /ammoready-alternative, then talk to us. Do not give notice until the new store is ready.",
+    q: "Can I sell guns I do not stock?",
+    a: "Yes. FFL Cockpit streams twenty-one distributor catalogs. A serialized firearm ships to a receiving FFL. You can still sell what is in the safe. This is not legal advice. We are not your 4473, your NICS, or your bound book.",
+  },
+  {
+    q: "I already have a register. Do I throw it out?",
+    a: "No. Bring the register you already run. We connect it when you want the floor and the site in sync.",
+  },
+  {
+    q: "I am on AmmoReady or Gearfire. Can I leave without going dark?",
+    a: "Yes. We build on your domain first, move what ranks, test a live cart, then cut DNS. Do not give notice until the new store is ready.",
+  },
+  {
+    q: "Do I own it?",
+    a: "Yes. It is WordPress. Cancel and the site goes with you.",
   },
 ];
 
 export const FAQ_DROPSHIP: FaqItem[] = [
   {
     q: "Do I need an FFL to dropship firearms?",
-    a: "Yes. Only a licensed dealer can sell firearms this way. Serialized firearms ship to another FFL for transfer — not to the buyer’s door. This page is not legal advice.",
+    a: "Yes. Only a licensed dealer can sell firearms this way. Serialized firearms ship to another FFL for transfer, not to the buyer’s door. This page is not legal advice.",
   },
   {
     q: "Which distributors can I stream?",
-    a: "Militia and above include an FFL Cockpit license and 21 distributor catalogs with automated lowest-cost fulfillment. Sports South, RSR, Zanders, and Lipsey’s are typical starting points; we add catalogs during setup.",
+    a: "Militia and above include an FFL Cockpit license and 21 distributor catalogs with automated lowest-cost fulfillment. Sports South, RSR, Zanders, and Lipsey’s are typical starting points. We add catalogs during setup.",
   },
   {
     q: "Can I dropship ammunition and accessories too?",
-    a: "Yes, where the destination allows it. Non-serialized goods often ship to the customer. State and local rules still apply — the store has to respect them at checkout.",
+    a: "Yes, where the destination allows it. Non-serialized goods often ship to the customer. State and local rules still apply. The store has to respect them at checkout.",
   },
   {
     q: "What if I also stock my own inventory?",
-    a: "Run both. Minute Man is own-inventory WooCommerce. Militia adds dropshipping on top. Brick-and-mortar stores usually want Warlord so the POS and the site stay in sync.",
+    a: "Run both. Minute Man is own-inventory WooCommerce. Militia adds dropshipping on top. Brick-and-mortar stores usually want Warlord so the register and the site stay in sync. The full program is FFL Accelerator.",
   },
 ];
 
@@ -69,11 +71,11 @@ export const FAQ_AMMOREADY: FaqItem[] = [
   },
   {
     q: "What about Gearfire?",
-    a: "Same answer. Gearfire is a closed network. Coriolis is managed WooCommerce plus the tools you pick — Cockpit, your POS, your payments. We are not affiliated with Gearfire or RetailBI.",
+    a: "Same answer. Gearfire is a closed network. Coriolis is managed WooCommerce plus the tools you pick — Cockpit, your register, your payments. We are not affiliated with Gearfire or RetailBI.",
   },
   {
     q: "How do you migrate a live store?",
-    a: `${SWITCH_STEPS.map((step, i) => `${i + 1}. ${step}`).join(" ")} ${SWITCH_FOUNDER}`,
+    a: "Keep your domain. We stand up Woo on it before you give notice. Map the catalog and 301 the URLs that already rank. Wire FFL Checkout, payments, and taxes, then test a mixed cart. Connect the register only if you want the floor and the site in sync. Cut DNS. You leave with the site. Coriolis was founded by the person who ran AmmoReady for nine years.",
   },
 ];
 
@@ -84,15 +86,15 @@ export const FAQ_BEST: FaqItem[] = [
   },
   {
     q: "Does WooCommerce handle FFL checkout and dropshipping?",
-    a: "Yes, when it is built that way. We use FFL Cockpit and FFL Checkout for dealer selection, 21 distributor catalogs, MAP, and lowest-cost routing. Militia ($269/mo) is the dropshipping plan.",
+    a: "Yes, when it is built that way. We use FFL Cockpit and FFL Checkout for dealer selection, 21 distributor catalogs, MAP, and lowest-cost routing. Militia ($269/mo) is the dropshipping plan. The plan we want you on is FFL Accelerator ($569/mo).",
   },
   {
     q: "What about POS and the bound book?",
-    a: "Bring your POS. Warlord integrates AIM, MicroBiz, Rapid, Trident 1, and Corestore. Coriolis is not 4473, NICS, or bound-book software — those stay with the systems licensed for them.",
+    a: "Bring the register you already run. Warlord and Accelerator connect AIM, MicroBiz, Rapid, Trident 1, and Corestore. Coriolis is not 4473, NICS, or bound-book software. Those stay with the systems licensed for them. This is not legal advice.",
   },
   {
     q: "Why can’t an AmmoReady or Gearfire site rank like a shop you own?",
-    a: "Because Google sees one template repeated across the network. Your inventory is unique. The HTML is not. You do not control titles, slugs, or on-page copy beyond what the platform allows.",
+    a: "Because Google sees one template repeated across the network. Your inventory is unique. The HTML is not. You do not control titles, slugs, or page copy beyond what the platform allows.",
   },
 ];
 

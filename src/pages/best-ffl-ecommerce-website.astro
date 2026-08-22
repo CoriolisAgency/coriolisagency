@@ -16,17 +16,16 @@ const rows = [
   ["Own inventory + dropship", "Varies", "Yes", "Yes, or either one"],
   ["Distributor catalogs", "Limited set", "Their set", "21 via FFL Cockpit"],
   ["FFL dealer checkout", "Built-in", "Built-in", "FFL Checkout"],
-  ["POS", "Their partner", "Axis and others", "AIM, MicroBiz, Rapid, Trident 1, Corestore"],
+  ["POS", "Their register partner", "The register they already run", "AIM, MicroBiz, Rapid, Trident 1, Corestore"],
   ["AmmoSeek / GunBroker", "Add-on or no", "Limited", "Included on Militia+"],
   ["SEO control", "Theirs", "Theirs", "Yours"],
-  ["On-page uniqueness", "Shared network template", "Shared network template", "Your pages, your markup"],
   ["4473 / bound book", "Sometimes bundled", "Third-party", "Your POS or FastBound — not us"],
 ] as const;
 ---
 
 <BaseLayout
-  title="Best FFL Ecommerce Website — WooCommerce vs Closed Platforms | Coriolis"
-  description="The best FFL ecommerce website is the one you own. Honest comparison of AmmoReady, Gearfire, and Coriolis-managed WooCommerce with FFL Cockpit."
+  title="Best FFL ecommerce website — WooCommerce vs closed platforms | Coriolis"
+  description="The best FFL ecommerce website is the one the dealer owns. AmmoReady and Gearfire rent you a catalog. Coriolis builds WooCommerce on your domain with FFL Cockpit and FFL Checkout."
   path="/best-ffl-ecommerce-website"
   ogImagePath={CANON_PATHS.storefront}
   faq={FAQ_BEST}
@@ -45,17 +44,18 @@ const rows = [
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
         The best FFL ecommerce website is the one the dealer owns. AmmoReady
-        and Gearfire rent you a catalog. Coriolis builds ATF-aware WooCommerce
-        on your domain — inventory,{" "}
-        <a href={withBase("firearms-dropshipping")} class={linkClass}
-          >firearms dropshipping</a
-        >, or both — with{" "}
+        and Gearfire rent you a catalog. Coriolis builds WooCommerce on your
+        domain so you can sell what you stock, dropship from distributor
+        catalogs, or do both.{" "}
         <a href={LINKS.fflCockpit} class={linkClass} {...ext}>FFL Cockpit</a>
         {" "}
-        for feeds and checkout. You can leave with the site.
+        handles the feeds.{" "}
+        <a href={LINKS.fflCheckout} class={linkClass} {...ext}>FFL Checkout</a>
+        {" "}
+        handles dealer selection. You can leave with the site.
       </p>
       <div class="mt-8">
-        <CtaRow />
+        <CtaRow showGsa={false} showAccelerator />
       </div>
       <EcommerceCluster current="best-ffl-ecommerce-website" />
     </div>
@@ -65,8 +65,9 @@ const rows = [
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">What actually differs</h2>
       <p class="mt-2 max-w-2xl text-sm text-zinc-400">
-        “Not built in” is not the same as “not supported.” Closed platforms
-        bundle. WooCommerce integrates. Marks belong to their owners.
+        Closed platforms bundle the catalog, the chrome, and the checkout.
+        WooCommerce lets you own the store and plug in the parts you need.
+        Coriolis is not affiliated with Gearfire or RetailBI.
       </p>
       <div class="mt-6 overflow-x-auto">
         <table class="w-full min-w-[40rem] text-left text-sm">
@@ -102,15 +103,15 @@ const rows = [
       </h2>
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
         We opened live AmmoReady and Gearfire Classic dealer sites. The
-        inventory changes. The document does not.
+        inventory changes. The page does not.
       </p>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        AmmoReady titles are a formula: shop name, city, ZIP. Homepage and
-        category meta descriptions are empty. There is no canonical tag.
-        Product H1 is the manufacturer, not the product. Category Open Graph
-        images are the same Filestack file across different shops. The
-        chrome, the cart, and the age-gate are the same module. Homepage
-        rails are platform blocks you pick from, not pages you write.
+        AmmoReady titles follow a formula: shop name, city, ZIP. Homepage and
+        category meta descriptions are empty. There is no canonical tag. The
+        product H1 is the manufacturer, not the product. Category Open Graph
+        images are the same Filestack file across different shops. The chrome,
+        the cart, and the age-gate are the same module. Homepage rails are
+        platform blocks you pick from, not pages you write.
       </p>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
         Gearfire Classic shops share the same nav (Home, Store Policies,
@@ -118,13 +119,13 @@ const rows = [
         financing FAQ.
       </p>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Google does not need another copy of that document. You do not
-        control the title tag, the slugs, or the markup. That is what “SEO
-        control: theirs” means.
+        Google does not need another copy of that template. You do not control
+        the title tag, the slugs, or the markup. That is what “SEO control:
+        theirs” means.
       </p>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Owned Woo is a different document on your domain. Your H1, your
-        about, your transfer page, your schema.
+        On owned WooCommerce, the page lives on your domain. You write the H1,
+        the about page, the transfer page, and the schema.
       </p>
     </div>
   </section>
@@ -132,12 +133,15 @@ const rows = [
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
       <p class="max-w-3xl text-sm text-zinc-400">
-        Leaving a closed platform?{" "}
+        Leaving a closed platform? Start at the{" "}
         <a href={withBase("ammoready-alternative")} class={linkClass}
-          >AmmoReady / Gearfire alternative</a
+          >AmmoReady alternative</a
         >
-        {" · "}
-        <a href={withBase("ecommerce")} class={linkClass}>Plans from $169/mo</a>.
+        {" "}
+        page, then talk to us about{" "}
+        <a href={`${withBase("ecommerce")}#ffl-accelerator`} class={linkClass}
+          >FFL Accelerator ($569/mo)</a
+        >.
       </p>
       <p class="max-w-3xl text-sm text-zinc-400">
         Switch checklist:{" "}
@@ -146,7 +150,7 @@ const rows = [
           class={linkClass}>Leave a rented storefront</a
         >.
       </p>
-      <CtaRow primary="ecommerce" />
+      <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
     </div>
   </section>
 

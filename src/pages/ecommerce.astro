@@ -3,22 +3,39 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
-import SwitchChecklist from "../components/SwitchChecklist.astro";
 import { FAQ_ECOMMERCE } from "../lib/faq";
-import { LINKS, linkClass, btnPlan, btnSecondary } from "../lib/links";
-import { CAPABILITIES, PLANS, SETUP } from "../lib/plans";
+import { LINKS, linkClass, btnPlan } from "../lib/links";
+import { PLANS } from "../lib/plans";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
 
-const checkout = {
-  checkoutBasic: LINKS.checkoutBasic,
-  checkoutRetail: LINKS.checkoutRetail,
-} as const;
+const switchSteps = [
+  "Keep your domain. We build the new WooCommerce store on it before you give notice.",
+  "Move the catalog you care about (your stock, the distributor feeds, or both) and redirect the pages that already rank.",
+  "Turn on FFL Checkout, payments, and tax. Buy a mixed cart yourself and make sure it clears.",
+  "Connect the register only if you want the counter and the site to share inventory.",
+  "Point the domain. You leave with the site.",
+] as const;
+
+const setupOffers = [
+  {
+    price: 500,
+    name: "Open the store",
+    body: "A branded WooCommerce shop on your domain. Theme, homepage, search, tax and shipping, payments, FFL Checkout, FFL Cockpit, and Betsy’s free layer. Extra pages are $125.",
+    href: LINKS.checkoutBasic,
+  },
+  {
+    price: 2500,
+    name: "Build the store you will keep",
+    body: "Everything in the $500 build, then the full custom site: up to ten pages, unlimited revisions, email that actually sends (welcome, abandoned cart, back in stock), and the analytics a buyer will ask you for.",
+    href: LINKS.checkoutRetail,
+  },
+] as const;
 ---
 
 <BaseLayout
-  title="FFL Ecommerce Plans — WooCommerce + FFL Cockpit | Coriolis"
-  description="WooCommerce and FFL Cockpit hosting for FFLs. Minute Man $169 through FFL Accelerator $569. Setup $500 or $2,500. The site is yours. Betsy on it is included."
+  title="WooCommerce and FFL Cockpit hosting for FFLs | Coriolis"
+  description="Most gun stores do not own their website. Coriolis builds WooCommerce on your domain. FFL Accelerator is $569 a month."
   path="/ecommerce"
   ogImagePath={CANON_PATHS.rangeMckinney}
   faq={FAQ_ECOMMERCE}
@@ -31,7 +48,7 @@ const checkout = {
         <p
           class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
         >
-          Ecommerce
+          FFL ecommerce
         </p>
         <h1
           class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
@@ -39,86 +56,116 @@ const checkout = {
           WooCommerce and FFL Cockpit hosting for FFLs
         </h1>
         <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-          We build, host, support, and promote ATF-aware WooCommerce for
-          online-only FFLs, gun stores, shooting ranges, and firearms brands. Sell your
-          inventory, dropship from distributor catalogs, or both.
+          Most gun stores do not own their website. They rent a catalog, hope
+          the platform ranks, and find out too late that they cannot take the
+          shop with them. Coriolis builds WooCommerce on your domain and runs
+          it with you. You sell what is on the shelf, you dropship from
+          twenty-one distributors, or you do both. The plan built for that is
+          FFL Accelerator.
+        </p>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-zinc-300">
+          FFL Accelerator is $569 a month. Standing the store up is a one-time
+          $500 if we launch a clean branded shop, or $2,500 if you want the
+          full custom site and email. There is no year-long lock. If you
+          leave, the website goes with you.
         </p>
         <div class="mt-8">
-          <CtaRow />
+          <CtaRow showGsa={false} showAccelerator />
         </div>
         <EcommerceCluster current="ecommerce" />
       </div>
-      <a
-        href="https://store.therangeinmckinney.com/"
-        class="block min-w-0"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src={withBase(CANON_PATHS.rangeMckinney)}
-          alt="The Range in McKinney — a Coriolis FFL ecommerce site. Browse and buy online, pick up in store."
-          width="1283"
-          height="965"
-          class="w-full min-w-0 rounded-2xl object-contain ring-1 ring-white/10 bg-[#111] transition hover:ring-gold/50"
-        />
-      </a>
+      <img
+        src={withBase(CANON_PATHS.rangeMckinney)}
+        alt="A Coriolis FFL ecommerce site. Browse and buy online, pick up in store."
+        width="1283"
+        height="965"
+        class="w-full min-w-0 rounded-2xl object-contain ring-1 ring-white/10 bg-[#111]"
+      />
     </div>
   </section>
 
-  <section class="border-b border-zinc-800/80 py-12" id="setup">
+  <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">One-time setup</h2>
-      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
-        Pay for setup online. Monthly hosting starts after we talk.
-      </p>
-      <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-        {
-          SETUP.map((s) => (
-            <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-              <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
-                {s.hook}
-              </p>
-              <h3 class="mt-2 text-lg font-semibold text-white">{s.name}</h3>
-              <p class="mt-1 text-2xl font-semibold text-white">
-                ${s.price.toLocaleString()}
-                <span class="text-sm font-medium text-zinc-500"> one time</span>
-              </p>
-              <ul class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400">
-                {s.features.map((f) => (
-                  <li>{f}</li>
-                ))}
-              </ul>
-              <a
-                href={checkout[s.checkoutKey]}
-                class={`${btnPlan} mt-6`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Buy {s.name}
-              </a>
-            </article>
-          ))
-        }
+      <h2 class="text-xl font-semibold text-white">What you get for $569</h2>
+      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
+        <p>You get a store you own, on your name, that can take a real firearms order.</p>
+        <p>
+          We build the WooCommerce site, wire FFL Checkout so a serialized gun
+          routes to a receiving dealer, and connect FFL Cockpit so twenty-one
+          distributor catalogs stay priced and in stock. AmmoSeek and
+          GunBroker ride along. If you already run a register, we connect it
+          so the floor and the site stay in step.
+        </p>
+        <p>
+          Betsy lives on that site. She writes down what people searched for,
+          including the models you did not have. That is search demand on your
+          shop. It is not a second product and it is not a pitch to
+          manufacturers.
+        </p>
+        <p>
+          We also keep the site fast, watched, and findable: page speed, cart
+          work, Cloudflare, and the on-page work a store needs if it is going
+          to rank for the guns you actually sell.
+        </p>
       </div>
-      <p class="mt-6 text-xs leading-relaxed text-zinc-500">
-        By subscribing to any plan or purchasing any setup package you agree to
-        the{" "}
-        <a href={LINKS.msa} class={linkClass}>Master Services Agreement</a>.
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">How a shop starts</h2>
+      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
+        <p>
+          <a href={withBase("contact")} class={linkClass}>Call or write us</a>.
+          We look at the store you have now, pick Basic or Retail setup, and
+          build on your domain before you give anyone notice. When the new
+          shop is ready, we cut DNS and you are live. The monthly plan is FFL
+          Accelerator.
+        </p>
+        <p>
+          If you are on{" "}
+          <a href={withBase("ammoready-alternative")} class={linkClass}
+            >AmmoReady or Gearfire</a
+          >{" "}
+          today, that is a normal week for us. We stand the new store up
+          first. You do not burn the old one down until this one works.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="scroll-mt-24 border-b border-zinc-800/80 py-12"
+    id="leave-a-rented-storefront"
+  >
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Leave a rented storefront</h2>
+      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
+        <p>
+          AmmoReady and Gearfire rent you a catalog. The inventory on those
+          sites changes. The page does not. You do not control the title, the
+          slugs, or the copy. Coriolis is not affiliated with Gearfire or
+          RetailBI.
+        </p>
+        <p>
+          If you still report units through the register you already run, keep
+          it. We are here for the website.
+        </p>
+        <p>Switch, in order:</p>
+      </div>
+      <ol
+        class="mt-4 max-w-3xl list-decimal space-y-2 pl-5 text-sm leading-relaxed text-zinc-400"
+      >
+        {switchSteps.map((step) => <li>{step}</li>)}
+      </ol>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Coriolis was founded by the person who ran AmmoReady for nine years.
       </p>
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12" id="plans">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h2 class="text-xl font-semibold text-white">Monthly plans</h2>
-          <p class="mt-2 max-w-2xl text-sm text-zinc-400">
-            Each plan includes everything in the one below it. Monthly hosting
-            starts after we talk. We set the site up with you.
-          </p>
-        </div>
-      </div>
       <div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-5">
         {
           PLANS.map((plan) => (
@@ -132,16 +179,27 @@ const checkout = {
               ]}
             >
               <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
-                {plan.hook}
+                {plan.featured ? "For" : plan.hook}
               </p>
               <h3 class="mt-2 text-lg font-semibold text-white">{plan.name}</h3>
               <p class="mt-1 text-2xl font-semibold text-gold">
                 ${plan.price}
-                <span class="text-sm font-medium text-zinc-500">/mo</span>
+                <span class="text-sm font-medium text-zinc-500">
+                  {plan.featured ? " a month" : "/mo"}
+                </span>
               </p>
-              {plan.includesFrom && (
+              {plan.featured ? (
+                <p class="mt-2 text-xs leading-relaxed text-zinc-400">
+                  {plan.hook}
+                </p>
+              ) : plan.includesFrom ? (
                 <p class="mt-2 text-xs text-zinc-500">
                   Everything in {plan.includesFrom} +
+                </p>
+              ) : null}
+              {plan.featured && (
+                <p class="mt-3 text-xs text-zinc-500">
+                  Everything in the plans below it, plus:
                 </p>
               )}
               <ul class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400">
@@ -149,77 +207,58 @@ const checkout = {
                   <li>{f}</li>
                 ))}
               </ul>
-              {plan.featured && (
-                <a
-                  href={LINKS.fflaccelerator}
-                  class={`${linkClass} mt-4 text-sm`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  FFL Accelerator program →
-                </a>
-              )}
             </article>
           ))
         }
       </div>
-    </div>
-  </section>
-
-  <section
-    class="scroll-mt-24 border-b border-zinc-800/80 py-12"
-    id="leave-a-rented-storefront"
-  >
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">Leave a rented storefront</h2>
-      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        AmmoReady and Gearfire rent you a catalog. This plan is owned
-        WooCommerce on your domain. Keep RetailBI if you still report units. We
-        are not affiliated with Gearfire or RetailBI.
-      </p>
-      <h3 class="mt-8 text-lg font-semibold text-white">Switch checklist</h3>
-      <SwitchChecklist />
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Setup is $500 or $2,500. Monthly starts after we talk. FFL Accelerator
-        ($569/mo) is the full program: managed Woo, POS path, Betsy on the
-        domain.
+      <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        The rungs under it are still true, and they are not the ask. Minute
+        Man is inventory-only. Militia adds dropshipping. Gun Runner adds
+        faster support. Warlord adds the register. Accelerator is the one we
+        put a working shop on.
       </p>
     </div>
   </section>
 
-  <section class="border-b border-zinc-800/80 py-12">
+  <section class="border-b border-zinc-800/80 py-12" id="setup">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">What the store can do</h2>
-      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
         {
-          CAPABILITIES.map((c) => (
-            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-              <h3 class="text-sm font-semibold text-sky-300">{c.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-zinc-400">{c.body}</p>
+          setupOffers.map((s) => (
+            <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+              <p class="text-2xl font-semibold text-white">
+                ${s.price.toLocaleString()}
+                <span class="text-sm font-medium text-zinc-500">
+                  {" "}
+                  · {s.name}
+                </span>
+              </p>
+              <p class="mt-4 flex-1 text-sm leading-relaxed text-zinc-400">
+                {s.body}
+              </p>
+              <a
+                href={s.href}
+                class={`${btnPlan} mt-6`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {s.name}
+              </a>
             </article>
           ))
         }
       </div>
-      <p class="mt-6 text-sm text-zinc-500">
-        FFL Cockpit and FFL Checkout licenses live on{" "}
-        <a
-          href={LINKS.fflCockpit}
-          class={linkClass}
-          target="_blank"
-          rel="noopener noreferrer">fflcockpit.com</a
-        >. We configure them as part of setup.
+      <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        You pay setup once. The $569 starts when the shop is yours to run.
       </p>
-    </div>
-  </section>
-
-  <section class="py-12">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
-      <div class="flex flex-col gap-2.5 sm:flex-row">
-        <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
-        <a href="#setup" class={btnSecondary}>See setup packages</a>
-      </div>
     </div>
   </section>
 
   <FaqBlock items={FAQ_ECOMMERCE} />
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
+      <CtaRow showGsa={false} showAccelerator />
+    </div>
+  </section>
 </BaseLayout>

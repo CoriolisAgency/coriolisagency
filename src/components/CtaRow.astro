@@ -6,6 +6,7 @@ interface Props {
   primary?: "contact" | "ecommerce" | "demo";
   ecommerceHash?: string;
   showGsa?: boolean;
+  showAccelerator?: boolean;
   class?: string;
 }
 
@@ -13,10 +14,12 @@ const {
   primary = "contact",
   ecommerceHash,
   showGsa = true,
+  showAccelerator = false,
   class: className,
 } = Astro.props;
 
 const ecommerceHref = `${withBase("ecommerce")}${ecommerceHash ? `#${ecommerceHash}` : ""}`;
+const acceleratorHref = `${withBase("ecommerce")}#ffl-accelerator`;
 ---
 
 <div
@@ -73,6 +76,13 @@ const ecommerceHref = `${withBase("ecommerce")}${ecommerceHash ? `#${ecommerceHa
     primary !== "contact" && (
       <a href={withBase("contact")} class={btnSecondary}>
         Talk to Coriolis
+      </a>
+    )
+  }
+  {
+    showAccelerator && (
+      <a href={acceleratorHref} class={btnSecondary}>
+        FFL Accelerator $569
       </a>
     )
   }
