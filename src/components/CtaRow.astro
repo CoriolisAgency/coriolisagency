@@ -3,7 +3,7 @@ import { LINKS, btnPlan, btnSky, btnSecondary } from "../lib/links";
 import { withBase } from "../lib/base";
 
 interface Props {
-  primary?: "contact" | "ecommerce" | "demo";
+  primary?: "contact" | "ecommerce" | "demo" | "stack";
   ecommerceHash?: string;
   showGsa?: boolean;
   showAccelerator?: boolean;
@@ -29,7 +29,16 @@ const acceleratorHref = `${withBase("ecommerce")}#ffl-accelerator`;
   ]}
 >
   {
-    primary === "demo" ? (
+    primary === "stack" ? (
+      <>
+        <a href={withBase("ecommerce")} class={btnPlan}>
+          FFL Ecommerce
+        </a>
+        <a href={withBase("demand-intelligence")} class={btnSky}>
+          Demand Intelligence
+        </a>
+      </>
+    ) : primary === "demo" ? (
       <a
         href={LINKS.demandIntel}
         target="_blank"
@@ -49,7 +58,7 @@ const acceleratorHref = `${withBase("ecommerce")}#ffl-accelerator`;
     )
   }
   {
-    showGsa && (
+    showGsa && primary !== "stack" && (
       <a
         href={LINKS.gsa}
         target="_blank"
@@ -73,7 +82,7 @@ const acceleratorHref = `${withBase("ecommerce")}#ffl-accelerator`;
     )
   }
   {
-    primary !== "contact" && (
+    primary !== "contact" && primary !== "stack" && (
       <a href={withBase("contact")} class={btnSecondary}>
         Talk to Coriolis
       </a>

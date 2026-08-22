@@ -1,0 +1,680 @@
+---
+import {
+  STACK_EDGES,
+  STACK_GRAPH_A_CAPTION,
+  STACK_GRAPH_B_CAPTION,
+  STACK_JOIN,
+  STACK_NEIGHBORS,
+  STACK_NODES,
+  type StackNodeId,
+} from "../lib/stack";
+
+const fieldA = STACK_NODES.filter((n) => n.field === "a");
+const fieldB = STACK_NODES.filter((n) => n.field === "b");
+const fieldAEdges = STACK_EDGES.filter((e) => !e.join);
+const joinEdges = STACK_EDGES.filter((e) => e.join);
+
+function pct(value: string) {
+  return Number.parseFloat(value);
+}
+
+function quad(
+  from: { x: string; y: string },
+  to: { x: string; y: string },
+) {
+  const x1 = pct(from.x);
+  const y1 = pct(from.y);
+  const x2 = pct(to.x);
+  const y2 = pct(to.y);
+  const cx = (x1 + x2) / 2 + (y1 - y2) * 0.12;
+  const cy = (y1 + y2) / 2 + (x2 - x1) * 0.12;
+  return {
+    d: `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`,
+    mx: (x1 + x2) / 2 + (y1 - y2) * 0.06,
+    my: (y1 + y2) / 2 + (x2 - x1) * 0.06,
+  };
+}
+
+function nodeById(id: StackNodeId) {
+  return STACK_NODES.find((n) => n.id === id)!;
+}
+---
+
+<section class="border-b border-zinc-800/80 py-12" data-stack-maps>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="stack-maps">
+      <figure class="stack-field">
+        <div
+          class="stack-canvas"
+          data-field="a"
+          role="group"
+          aria-label={STACK_GRAPH_A_CAPTION}
+        >
+          <div class="stack-orbits" aria-hidden="true">
+            <span class="stack-orbit stack-orbit--a"></span>
+            <span class="stack-orbit stack-orbit--b"></span>
+          </div>
+          <svg
+            class="stack-edges"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="stack-edge-a" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgba(14,165,233,0.85)"></stop>
+                <stop offset="100%" stop-color="rgba(212,160,23,0.7)"></stop>
+              </linearGradient>
+            </defs>
+            {
+              fieldAEdges
+                .filter((e) => nodeById(e.from).field === "a")
+                .map((e) => {
+                  const path = quad(nodeById(e.from), nodeById(e.to));
+                  return (
+                    <g
+                      data-edge={`${e.from}-${e.to}`}
+                      data-from={e.from}
+                      data-to={e.to}
+                    >
+                      <path
+                        d={path.d}
+                        fill="none"
+                        stroke="url(#stack-edge-a)"
+                        stroke-width="0.45"
+                        stroke-linecap="round"
+                        class="stack-edge"
+                      ></path>
+                    </g>
+                  );
+                })
+            }
+          </svg>
+          {
+            fieldAEdges
+              .filter((e) => nodeById(e.from).field === "a")
+              .map((e) => {
+                const path = quad(nodeById(e.from), nodeById(e.to));
+                return (
+                  <span
+                    class="stack-edge-label"
+                    data-from={e.from}
+                    data-to={e.to}
+                    style={`left:${path.mx}%;top:${path.my}%`}
+                  >
+                    {e.label}
+                    {e.sublabel ? <em>{e.sublabel}</em> : null}
+                  </span>
+                );
+              })
+          }
+          {
+            fieldA.map((node) => (
+              <button
+                type="button"
+                class:list={[
+                  "stack-node",
+                  node.hub && "stack-node--hub",
+                  node.id === "seller" && "stack-node--seller",
+                ]}
+                style={`left:${node.x};top:${node.y}`}
+                data-node={node.id}
+                aria-pressed="false"
+                aria-label={`${node.label}: ${node.sentence}`}
+              >
+                <span class="stack-node__disk">
+                  <span class="stack-node__name">{node.label}</span>
+                </span>
+                {node.sublabel ? (
+                  <span class="stack-node__sub">{node.sublabel}</span>
+                ) : null}
+              </button>
+            ))
+          }
+        </div>
+        <figcaption class="stack-caption">
+          {STACK_GRAPH_A_CAPTION}
+        </figcaption>
+      </figure>
+
+      <div class="stack-gutter" aria-label={STACK_JOIN}>
+        <svg
+          class="stack-gutter-lines"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            class="stack-edge stack-edge--join"
+            data-from="store"
+            data-to="seller"
+            d="M 88 18 Q 50 28 12 18"
+            fill="none"
+            stroke="rgba(212,160,23,0.85)"
+            stroke-width="1.1"
+            stroke-linecap="round"
+            stroke-dasharray="3 2.2"
+          ></path>
+          <path
+            class="stack-edge stack-edge--join"
+            data-from="sensor"
+            data-to="search"
+            d="M 88 78 Q 50 70 12 78"
+            fill="none"
+            stroke="rgba(14,165,233,0.85)"
+            stroke-width="1.1"
+            stroke-linecap="round"
+            stroke-dasharray="3 2.2"
+          ></path>
+        </svg>
+        {
+          joinEdges.map((e) => (
+            <p class="stack-join-fact" data-from={e.from} data-to={e.to}>
+              <span class="stack-join-fact__from">
+                {nodeById(e.from).label}
+              </span>
+              {` ${e.label} `}
+              <span class="stack-join-fact__to">{nodeById(e.to).label}</span>
+            </p>
+          ))
+        }
+        <p class="stack-join-fact stack-join-fact--not">
+          Company is not Seller
+        </p>
+      </div>
+
+      <figure class="stack-field">
+        <div
+          class="stack-canvas"
+          data-field="b"
+          role="group"
+          aria-label={STACK_GRAPH_B_CAPTION}
+        >
+          <div class="stack-orbits" aria-hidden="true">
+            <span class="stack-orbit stack-orbit--a"></span>
+            <span class="stack-orbit stack-orbit--b"></span>
+          </div>
+          <svg
+            class="stack-edges"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="stack-edge-b" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgba(212,160,23,0.85)"></stop>
+                <stop offset="100%" stop-color="rgba(14,165,233,0.7)"></stop>
+              </linearGradient>
+            </defs>
+            {
+              fieldAEdges
+                .filter((e) => nodeById(e.from).field === "b")
+                .map((e) => {
+                  const path = quad(nodeById(e.from), nodeById(e.to));
+                  return (
+                    <g
+                      data-edge={`${e.from}-${e.to}`}
+                      data-from={e.from}
+                      data-to={e.to}
+                    >
+                      <path
+                        d={path.d}
+                        fill="none"
+                        stroke="url(#stack-edge-b)"
+                        stroke-width="0.45"
+                        stroke-linecap="round"
+                        class="stack-edge"
+                      ></path>
+                    </g>
+                  );
+                })
+            }
+          </svg>
+          {
+            fieldAEdges
+              .filter((e) => nodeById(e.from).field === "b")
+              .map((e) => {
+                const path = quad(nodeById(e.from), nodeById(e.to));
+                return (
+                  <span
+                    class="stack-edge-label"
+                    data-from={e.from}
+                    data-to={e.to}
+                    style={`left:${path.mx}%;top:${path.my}%`}
+                  >
+                    {e.label}
+                  </span>
+                );
+              })
+          }
+          {
+            fieldB.map((node) => (
+              <button
+                type="button"
+                class:list={[
+                  "stack-node",
+                  node.hub && "stack-node--hub",
+                  node.id === "company" && "stack-node--company",
+                ]}
+                style={`left:${node.x};top:${node.y}`}
+                data-node={node.id}
+                aria-pressed="false"
+                aria-label={`${node.label}: ${node.sentence}`}
+              >
+                <span class="stack-node__disk">
+                  <span class="stack-node__name">{node.label}</span>
+                </span>
+                {node.sublabel ? (
+                  <span class="stack-node__sub">{node.sublabel}</span>
+                ) : null}
+              </button>
+            ))
+          }
+        </div>
+        <figcaption class="stack-caption">
+          {STACK_GRAPH_B_CAPTION}
+        </figcaption>
+      </figure>
+    </div>
+
+    <p class="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-zinc-300">
+      {STACK_JOIN}
+    </p>
+
+    <aside
+      class="stack-drawer"
+      data-stack-drawer
+      hidden
+      aria-live="polite"
+    >
+      <p class="stack-drawer__name" data-stack-drawer-name></p>
+      <p class="stack-drawer__sentence" data-stack-drawer-sentence></p>
+    </aside>
+  </div>
+</section>
+
+<script
+  define:vars={{
+    neighbors: STACK_NEIGHBORS,
+    nodes: STACK_NODES,
+  }}
+>
+  const root = document.querySelector("[data-stack-maps]");
+  if (root instanceof HTMLElement) {
+    const map = neighbors;
+    const sentences = Object.fromEntries(
+      nodes.map((n) => [n.id, { label: n.label, sentence: n.sentence }]),
+    );
+    const nodeEls = [...root.querySelectorAll("[data-node]")];
+    const edgeEls = [
+      ...root.querySelectorAll("[data-from][data-to]"),
+    ];
+    const drawer = root.querySelector("[data-stack-drawer]");
+    const drawerName = root.querySelector("[data-stack-drawer-name]");
+    const drawerSentence = root.querySelector(
+      "[data-stack-drawer-sentence]",
+    );
+
+    let selected = null;
+    let hovered = null;
+
+    const lit = (id) => {
+      const focus = hovered || selected;
+      if (!focus) return true;
+      return id === focus || (map[focus] || []).includes(id);
+    };
+
+    const paint = () => {
+      for (const el of nodeEls) {
+        const id = el.getAttribute("data-node");
+        const on = lit(id);
+        el.classList.toggle("stack-node--dim", !on);
+        el.classList.toggle("stack-node--lit", on);
+        el.classList.toggle("stack-node--selected", id === selected);
+        if (el instanceof HTMLButtonElement) {
+          el.setAttribute("aria-pressed", id === selected ? "true" : "false");
+        }
+      }
+      for (const el of edgeEls) {
+        const from = el.getAttribute("data-from");
+        const to = el.getAttribute("data-to");
+        const on = lit(from) && lit(to);
+        el.classList.toggle("stack-edge--dim", !on);
+        el.classList.toggle("stack-edge--lit", on);
+      }
+    };
+
+    const openDrawer = (id) => {
+      const item = sentences[id];
+      if (!item || !drawer || !drawerName || !drawerSentence) return;
+      drawerName.textContent = item.label;
+      drawerSentence.textContent = item.sentence;
+      drawer.hidden = false;
+    };
+
+    for (const el of nodeEls) {
+      const id = el.getAttribute("data-node");
+      el.addEventListener("mouseenter", () => {
+        hovered = id;
+        paint();
+      });
+      el.addEventListener("mouseleave", () => {
+        hovered = null;
+        paint();
+      });
+      el.addEventListener("focus", () => {
+        hovered = id;
+        paint();
+      });
+      el.addEventListener("blur", () => {
+        hovered = null;
+        paint();
+      });
+      el.addEventListener("click", () => {
+        selected = selected === id ? null : id;
+        if (selected) openDrawer(selected);
+        else if (drawer) drawer.hidden = true;
+        paint();
+      });
+    }
+
+    paint();
+  }
+</script>
+
+<style>
+  .stack-maps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .stack-maps {
+      grid-template-columns: minmax(0, 1fr) 8.75rem minmax(0, 1fr);
+      align-items: stretch;
+    }
+  }
+
+  .stack-field {
+    margin: 0;
+    min-width: 0;
+  }
+
+  .stack-canvas {
+    position: relative;
+    overflow: hidden;
+    height: clamp(28rem, 78vw, 34rem);
+    border-radius: 1rem;
+    border: 1px solid rgba(63, 75, 95, 0.85);
+    background:
+      radial-gradient(
+        ellipse 70% 55% at 50% 42%,
+        rgba(14, 165, 233, 0.1),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 40% 35% at 80% 25%,
+        rgba(212, 160, 23, 0.08),
+        transparent 50%
+      ),
+      linear-gradient(180deg, rgba(12, 18, 32, 0.95), rgba(8, 12, 22, 0.98));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 24px 48px -24px rgba(0, 0, 0, 0.55);
+  }
+
+  .stack-orbits {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+  }
+
+  .stack-orbit {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 9999px;
+    border: 1px solid rgba(14, 165, 233, 0.12);
+    transform: translate(-50%, -50%);
+  }
+
+  .stack-orbit--a {
+    width: min(42%, 12rem);
+    height: min(42%, 12rem);
+  }
+
+  .stack-orbit--b {
+    width: min(72%, 21rem);
+    height: min(72%, 21rem);
+    border-color: rgba(212, 160, 23, 0.12);
+    border-style: dashed;
+  }
+
+  .stack-edges,
+  .stack-gutter-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .stack-edge {
+    opacity: 0.88;
+    transition: opacity 0.25s ease;
+  }
+
+  .stack-edge--dim {
+    opacity: 0.12 !important;
+  }
+
+  .stack-edge--lit {
+    opacity: 1 !important;
+  }
+
+  .stack-edge-label {
+    position: absolute;
+    z-index: 4;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    max-width: 8.5rem;
+    text-align: center;
+    font-size: 0.625rem;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    color: #e4e4e7;
+    text-shadow: 0 1px 8px rgba(10, 18, 32, 0.95);
+    transition: opacity 0.25s ease;
+  }
+
+  .stack-edge-label em {
+    display: block;
+    font-style: normal;
+    color: #a1a1aa;
+  }
+
+  .stack-edge-label.stack-edge--dim {
+    opacity: 0.16;
+  }
+
+  .stack-node {
+    position: absolute;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    appearance: none;
+    transition:
+      opacity 0.25s ease,
+      filter 0.25s ease;
+  }
+
+  .stack-node__disk {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.6rem;
+    height: 5.6rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(14, 165, 233, 0.45);
+    background: rgba(14, 165, 233, 0.16);
+    box-shadow: 0 0 22px rgba(14, 165, 233, 0.18);
+    backdrop-filter: blur(8px);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .stack-node--hub .stack-node__disk {
+    width: 7.15rem;
+    height: 7.15rem;
+    border-color: rgba(212, 160, 23, 0.65);
+    background: rgba(212, 160, 23, 0.16);
+    box-shadow: 0 0 28px rgba(212, 160, 23, 0.22);
+  }
+
+  .stack-node__name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #fafafa;
+  }
+
+  .stack-node--hub .stack-node__name {
+    font-size: 0.95rem;
+  }
+
+  .stack-node__sub {
+    position: absolute;
+    top: calc(100% + 0.28rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 9.5rem;
+    text-align: center;
+    font-size: 0.625rem;
+    line-height: 1.25;
+    color: #d4a017;
+  }
+
+  .stack-node:hover .stack-node__disk,
+  .stack-node:focus-visible .stack-node__disk,
+  .stack-node--selected .stack-node__disk {
+    transform: scale(1.06);
+  }
+
+  .stack-node:focus-visible .stack-node__disk {
+    outline: 2px solid rgba(14, 165, 233, 0.75);
+    outline-offset: 3px;
+  }
+
+  .stack-node--selected .stack-node__disk {
+    box-shadow:
+      0 0 0 1px rgba(212, 160, 23, 0.4),
+      0 0 32px rgba(212, 160, 23, 0.28);
+  }
+
+  .stack-node--dim {
+    opacity: 0.22;
+    filter: saturate(0.55);
+  }
+
+  .stack-node--lit {
+    opacity: 1;
+    filter: none;
+  }
+
+  .stack-caption {
+    margin-top: 0.85rem;
+    max-width: 36rem;
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: #a1a1aa;
+  }
+
+  .stack-gutter {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 1.1rem 0.25rem 1.35rem;
+    min-height: 7.5rem;
+  }
+
+  .stack-gutter-lines {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .stack-gutter {
+      min-height: 0;
+      padding: 0 0.15rem;
+      justify-content: space-evenly;
+    }
+
+    .stack-gutter-lines {
+      display: block;
+      pointer-events: none;
+    }
+  }
+
+  .stack-join-fact {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    text-align: center;
+    font-size: 0.6875rem;
+    line-height: 1.4;
+    color: #d4d4d8;
+  }
+
+  .stack-join-fact__from,
+  .stack-join-fact__to {
+    font-weight: 600;
+    color: #fafafa;
+  }
+
+  .stack-join-fact--not {
+    color: #d4a017;
+    font-weight: 600;
+  }
+
+  .stack-drawer {
+    margin-top: 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(63, 75, 95, 0.85);
+    background: rgba(10, 18, 32, 0.72);
+    padding: 1rem 1.15rem;
+  }
+
+  .stack-drawer__name {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fafafa;
+  }
+
+  .stack-drawer__sentence {
+    margin: 0.35rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: #a1a1aa;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stack-node,
+    .stack-node__disk,
+    .stack-edge,
+    .stack-edge-label {
+      transition: none;
+    }
+  }
+</style>
