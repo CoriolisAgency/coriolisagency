@@ -42,7 +42,7 @@ const pillars = [
     >
     </div>
     <div
-      class="relative mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:items-stretch lg:py-20"
+      class="relative mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-4 py-14 sm:px-6 lg:py-20 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] xl:items-stretch"
     >
       <div class="flex min-h-0 w-full min-w-0 flex-col">
         <p
@@ -55,7 +55,7 @@ const pillars = [
         >
           FFL Ecommerce. AI Studio. Demand Intelligence.
         </h1>
-        <p class="mt-5 max-w-xl text-base leading-relaxed text-zinc-300 sm:text-lg">
+        <p class="mt-5 text-base leading-relaxed text-zinc-300 sm:text-lg">
           We build, host, and support WooCommerce websites powered by{" "}
           <a
             href={LINKS.fflCockpit}
@@ -76,31 +76,16 @@ const pillars = [
             rel="noopener noreferrer">GunSearchAgent.com</a
           >.
         </p>
-        <div class="mt-8 w-full min-w-0">
-          <CtaRow primary="ecommerce" />
-          <p class="mt-6 text-sm text-zinc-500">
-            Already have a site?{" "}
-            <a
-              href={LINKS.gsa}
-              class={linkClass}
-              target="_blank"
-              rel="noopener noreferrer">Put Betsy AI on it free</a
-            >. Watch the online market on{" "}
-            <a
-              href={LINKS.betsyLive}
-              class={linkClass}
-              target="_blank"
-              rel="noopener noreferrer">Betsy Live</a
-            >.
-          </p>
-          <div class="mt-8 w-full min-w-0">
+        <div class="mt-5 w-full min-w-0">
+          <CtaRow primary="ecommerce" class="sm:!flex-nowrap" />
+          <div class="mt-5 w-full min-w-0">
             <HouseAd />
           </div>
         </div>
       </div>
       <a
         href={LINKS.betsyLive}
-        class="relative block w-full min-w-0 lg:h-full"
+        class="relative block w-full min-w-0 overflow-hidden rounded-2xl ring-1 ring-white/10 transition hover:ring-gold/50 xl:h-full"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -109,7 +94,7 @@ const pillars = [
           alt="Betsy Demand Intelligence — trending intent by caliber, brand, type, and seller over the last 30 days"
           width="1339"
           height="922"
-          class="h-auto w-full min-w-0 rounded-2xl object-contain object-center ring-1 ring-white/10 bg-[#0b1220] transition hover:ring-gold/50 lg:absolute lg:inset-0 lg:h-full lg:w-full"
+          class="h-auto w-full object-cover object-center xl:absolute xl:inset-0 xl:h-full xl:w-full"
         />
       </a>
     </div>
