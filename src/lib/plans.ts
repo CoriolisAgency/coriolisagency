@@ -69,9 +69,7 @@ export const PLANS: Plan[] = [
     hook: "Add point-of-sale",
     includesFrom: "Gun Runner",
     features: [
-      "Connect your register",
-      "AIM, MicroBiz, Rapid, Trident 1, Corestore",
-      "Concierge onboarding",
+      "Connect the register you already run. We wire AIM, MicroBiz, Rapid, Trident 1, or Corestore when that is the register on the floor.",
     ],
   },
   {
@@ -82,13 +80,7 @@ export const PLANS: Plan[] = [
     featured: true,
     includesFrom: "Warlord",
     features: [
-      "GunSearchAgent Pro (Betsy on your site)",
-      "Page speed optimization",
-      "Shopping cart optimization",
-      "Advanced site monitoring",
-      "Cloudflare DNS and CDN",
-      "On-site technical SEO",
-      "Email capture, list, and campaign management",
+      "Everything in Warlord, plus GunSearchAgent Pro. That is Betsy on their site. She answers search demand on the store. She is not a sell-through pitch and this page does not sell Demand Intelligence to OEMs.",
     ],
   },
 ];
@@ -141,15 +133,15 @@ export const CAPABILITIES = [
   },
   {
     title: "POS when you need it",
-    body: "Warlord and Accelerator connect AIM, MicroBiz, Rapid, Trident 1, and Corestore so the floor and the site stay in sync.",
+    body: "Warlord and Accelerator connect the register you already run so the floor and the site stay in sync.",
   },
   {
     title: "Feeds that sell",
-    body: "AmmoSeek product feed and GunBroker listing automation are included on Militia — not a separate project.",
+    body: "AmmoSeek product feed and GunBroker listing automation are included on Militia. They are not a separate project.",
   },
   {
     title: "Betsy on the domain",
-    body: "Basic setup includes free GunSearchAgent. Accelerator includes Pro. That on-site demand is what OEMs buy as Demand Intelligence.",
+    body: "Basic setup includes free GunSearchAgent. Accelerator includes Pro. Betsy lives on their site and answers search demand. This page is not an OEM product.",
   },
 ] as const;
 

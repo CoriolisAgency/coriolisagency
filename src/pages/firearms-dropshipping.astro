@@ -17,18 +17,18 @@ const steps = [
   },
   {
     title: "The customer checks out",
-    body: "Serialized firearms go through FFL Checkout — the buyer picks a receiving dealer. Accessories and ammo follow destination rules.",
+    body: "Serialized firearms go through FFL Checkout. The buyer picks a receiving dealer. Accessories and ammo follow destination rules.",
   },
   {
     title: "The distributor ships",
-    body: "Orders route to the lowest-cost (or fastest) vendor. You never have to stock the SKU. You can still sell what you keep on the shelf.",
+    body: "Orders route to the lowest-cost or fastest vendor. You never have to stock that SKU. You can still sell what you keep on the shelf.",
   },
 ] as const;
 ---
 
 <BaseLayout
-  title="Firearms Dropshipping for FFLs — WooCommerce + FFL Cockpit | Coriolis"
-  description="Firearms dropshipping lets an FFL sell guns without holding the inventory. Coriolis builds the WooCommerce store, wires FFL Cockpit, and hosts it. Militia $269/mo."
+  title="Firearms dropshipping for FFLs — WooCommerce + FFL Cockpit | Coriolis"
+  description="Firearms dropshipping lets a licensed FFL sell guns without stocking every SKU. Coriolis builds the WooCommerce store, wires FFL Cockpit, and hosts it. Militia is the dropship rung. The plan is FFL Accelerator."
   path="/firearms-dropshipping"
   ogImagePath={CANON_PATHS.rangeMckinney}
   faq={FAQ_DROPSHIP}
@@ -50,30 +50,25 @@ const steps = [
         </h1>
         <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
           Firearms dropshipping lets a licensed FFL sell guns, parts, and
-          accessories without stocking them. The customer orders on your site.
-          The distributor ships to the receiving FFL for transfer. Coriolis
+          accessories without stocking every SKU. The customer orders on your
+          site. The distributor ships to the receiving FFL for transfer. Coriolis
           builds the WooCommerce store, wires{" "}
           <a href={LINKS.fflCockpit} class={linkClass} {...ext}>FFL Cockpit</a>,
-          and hosts it — own inventory, dropship, or both.
+          and hosts it. You can sell what you keep on the shelf, dropship, or do
+          both.
         </p>
         <div class="mt-8">
-          <CtaRow />
+          <CtaRow showGsa={false} showAccelerator />
         </div>
         <EcommerceCluster current="firearms-dropshipping" />
       </div>
-      <a
-        href="https://store.therangeinmckinney.com/"
-        class="block min-w-0"
-        {...ext}
-      >
-        <img
-          src={withBase(CANON_PATHS.rangeMckinney)}
-          alt="The Range in McKinney — a Coriolis FFL store that can sell stock and dropship."
-          width="1283"
-          height="965"
-          class="w-full min-w-0 rounded-2xl object-contain ring-1 ring-white/10 bg-[#111] transition hover:ring-gold/50"
-        />
-      </a>
+      <img
+        src={withBase(CANON_PATHS.rangeMckinney)}
+        alt="A Coriolis FFL store that can sell stock and dropship."
+        width="1283"
+        height="965"
+        class="w-full min-w-0 rounded-2xl object-contain ring-1 ring-white/10 bg-[#111]"
+      />
     </div>
   </section>
 
@@ -100,39 +95,10 @@ const steps = [
       </h2>
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
         Militia and above include an FFL Cockpit license and 21 distributor
-        catalogs. We add houses at setup. Typical starting points:
-      </p>
-      <div class="mt-6 overflow-x-auto">
-        <table class="w-full min-w-[28rem] text-left text-sm">
-          <thead>
-            <tr class="border-b border-zinc-800 text-zinc-500">
-              <th class="py-3 pr-4 font-medium">House</th>
-              <th class="py-3 font-medium">On the aisle</th>
-            </tr>
-          </thead>
-          <tbody class="text-zinc-400">
-            <tr class="border-b border-zinc-800/80">
-              <th class="py-3 pr-4 font-medium text-zinc-300">Sports South</th>
-              <td class="py-3">Firearms and accessories</td>
-            </tr>
-            <tr class="border-b border-zinc-800/80">
-              <th class="py-3 pr-4 font-medium text-zinc-300">RSR</th>
-              <td class="py-3">Firearms and accessories</td>
-            </tr>
-            <tr class="border-b border-zinc-800/80">
-              <th class="py-3 pr-4 font-medium text-zinc-300">Zanders</th>
-              <td class="py-3">Firearms and accessories</td>
-            </tr>
-            <tr class="border-b border-zinc-800/80">
-              <th class="py-3 pr-4 font-medium text-zinc-300">Lipsey’s</th>
-              <td class="py-3">Firearms and accessories</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Availability and MAP come from the feed. Updates run on a short cycle
-        (about 20 minutes on Militia+). This is not a complete 21-row list.
+        catalogs. We add houses at setup. Typical starting points: Sports South,
+        RSR, Zanders, Lipsey’s — Firearms and accessories each. Availability and
+        MAP come from the feed. Updates run on a short cycle (about 20 minutes
+        on Militia+). This is not a complete 21-row list.
       </p>
     </div>
   </section>
@@ -152,12 +118,10 @@ const steps = [
       <div>
         <h2 class="text-xl font-semibold text-white">Who it is for</h2>
         <p class="mt-3 text-sm leading-relaxed text-zinc-400">
-          Home-based Type 01 dealers who need a nationwide aisle. Gun stores
-          and ranges that want to sell past the glass case. Brands that want
-          dealer sites streaming the same catalogs. Militia ($269/mo) is the
-          dropshipping rung — 21 distributors, AmmoSeek feed, GunBroker
-          listings.{" "}
-          <a href={withBase("ecommerce")} class={linkClass}>See the plans</a>.
+          Gun stores and ranges that want to sell past the glass case. Militia
+          ($269/mo) is the dropshipping plan: 21 distributors, AmmoSeek feed,
+          GunBroker listings. The plan we put dealers on is FFL Accelerator
+          ($569/mo).
         </p>
       </div>
     </div>
@@ -172,7 +136,7 @@ const steps = [
         >{" "}
         page, then talk to us.
       </p>
-      <CtaRow primary="ecommerce" />
+      <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
     </div>
   </section>
 
