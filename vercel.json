@@ -44,9 +44,18 @@
     {
       "source": "/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions",
       "destination": "/api/gone"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-index.xml"
     }
   ],
   "redirects": [
+    {
+      "source": "/demand-intelligence",
+      "destination": "https://www.gunsearchengine.com/demand-intelligence/",
+      "permanent": true
+    },
     {
       "source": "/wp-content/uploads/2026/03/FFL-Ecommerce-Essentials-Checklist-2026-1.pdf",
       "destination": "/ecommerce",

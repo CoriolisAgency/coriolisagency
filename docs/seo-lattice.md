@@ -15,9 +15,8 @@
 | FFL Accelerator $569 program story | **fflaccelerator.com** |
 | AI Studio / Coriolis products as capability | **This site** `/ai-studio` (`/ai-factory` → 301) |
 | Betsy AI character | **2abetsy.com** |
-| Demand Intelligence enterprise VP | **This site** `/demand-intelligence` |
+| Demand Intelligence (enterprise VP, portal, demo, API, Co-Pilot) | **GunSearchEngine** `/demand-intelligence` — this host 301s `/demand-intelligence` there |
 | How store, sensor, and demand fit | **This site** `/stack` |
-| DI portal, demo, API, Co-Pilot, depth matrix | **GunSearchEngine** `/demand-intelligence` |
 | GA for FFLs / free agent | **GunSearchAgent** |
 | Three numbers desk | **FFLIntel** |
 | Checkout / MSA | Stripe checkout + **this site** `/msa` |
@@ -28,7 +27,7 @@
 
 1. Conversion: monthly ecommerce → `/contact`. Setup → existing Stripe links. DI → GSE demo. GSA → gunsearchagent.com.
 2. First ~80 words of each commercial page answer the query.
-3. FAQ JSON-LD on `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/best-ffl-ecommerce-website`, `/demand-intelligence`, and `/stack`.
+3. FAQ JSON-LD on `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/best-ffl-ecommerce-website`, and `/stack`.
 4. Organization `sameAs`: listed in `src/lib/links.ts`.
 5. Never H1 “RetailBI alternative.” Never “switch off RetailBI.” Never 4473 automation claims.
 6. Frozen strings from `src/lib/frozen.ts`.
@@ -39,5 +38,5 @@
 - Home → three pillars
 - Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / best-store cluster + `/stack`
 - AI Studio → live product URLs (proof, not a catalog)
-- Demand Intelligence → GSE demo, Co-Pilot, Betsy vs RetailBI + `/stack`
+- Demand Intelligence lives on GunSearchEngine; this host 301s `/demand-intelligence` there. `/stack` inbound uses the GSE URL.
 - About → family lattice

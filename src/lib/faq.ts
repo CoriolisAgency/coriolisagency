@@ -97,22 +97,3 @@ export const FAQ_BEST: FaqItem[] = [
     a: "Because Google sees one template repeated across the network. Your inventory is unique. The HTML is not. You do not control titles, slugs, or page copy beyond what the platform allows.",
   },
 ];
-
-export const FAQ_DI: FaqItem[] = [
-  {
-    q: "Is this a RetailBI replacement?",
-    a: "No. RetailBI’s intelligence is a byproduct of retail operations software. Betsy’s intelligence is a byproduct of online and in-store product discovery.",
-  },
-  {
-    q: "Do I only see my brand and three competitors?",
-    a: "No. Every plan includes full-market anonymized demand — the whole category, not four brands. Optional brand pins highlight your labels; they do not hide the rest of the market.",
-  },
-  {
-    q: "How do Insight, Growth, and Platform differ?",
-    a: "Insight is full-market demand signals for up to 30 days. Growth adds 60 days of history, anonymized sessions, and CSV. Platform is unlimited history, JSON and CSV, Enterprise Co-Pilot, and warehouse inventory search when a feed is linked.",
-  },
-  {
-    q: "How do team seats work?",
-    a: "Every plan includes 1 free Client Admin seat. Additional named users are $49 per user per month. Add seats through Coriolis when you start or grow the team.",
-  },
-];
