@@ -8,6 +8,7 @@ export const LINKS = {
   aiStudio: "/ai-studio",
   grokBotSetup: "/grok-bot-setup",
   demandIntelPage: "/demand-intelligence",
+  stack: "/stack",
   about: "/about",
   contact: "/contact",
   login: "/login",
