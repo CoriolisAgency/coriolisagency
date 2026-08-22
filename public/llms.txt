@@ -1,48 +1,25 @@
 # Coriolis, LLC
 
-> Coriolis, LLC (Coriolis Agency) builds ATF-aware WooCommerce for FFLs, ships AI products, and sells full-market Demand Intelligence to OEMs and brands. Greenville, SC.
+Coriolis builds websites gun stores own, puts Betsy on those sites, and sells anonymized category search to brands. Greenville, SC.
 
-This domain is the company home. Checkout for setup packages is on checkout.coriolisagency.com. Demand Intelligence demos are on GunSearchEngine. Dealer agents are on GunSearchAgent.
-
-## Frozen definitions
-
-- FFL Accelerator: FFL Accelerator is Coriolis’s managed WooCommerce program for FFLs ($569/mo). It includes GunSearchAgent Pro (Betsy on the dealer site). The site is yours. Betsy on it is included. That feed is what OEMs buy as Demand Intelligence.
-- GunSearchAgent: GunSearchAgent is the Google Analytics replacement for FFL websites: on-site demand intelligence (what shoppers asked for) plus optional inventory sync. Core is free forever. GunSearchAgent Pro is included with the Coriolis FFL Accelerator plan.
-- Betsy Demand Intelligence: Betsy Demand Intelligence measures anonymized shopper search intent across GunSearchEngine, GunSearchAgent embeds, and floor sensors — including unmet (zero-hit) demand. It is not a POS system and not a same-store unit-sales index.
-- Doctrine: RetailBI’s intelligence is a byproduct of retail operations software. Betsy’s intelligence is a byproduct of online and in-store product discovery.
-
-## Pricing (honest)
-
-- Minute Man $169/mo · Militia $269/mo · Gun Runner $369/mo · Warlord $469/mo · FFL Accelerator $569/mo
-- Setup: $500 Basic / $2,500 Retail
-- Monthly hosting starts after a conversation (no public buy button)
-- Demand Intelligence seats: $49/user/mo, 1 Client Admin free. Plan pricing is in the demo.
+## Products and prices
+- FFL Accelerator — $569 a month. WooCommerce on the dealer domain. Setup $500 or $2,500. No year lock. They leave with the site.
+- GunSearchAgent — free on a dealer site. Pro is included with FFL Accelerator.
+- Demand Intelligence — brands. Full-market anonymized search. Seats $49 per user per month. One Client Admin free.
+- Grok Bot setup — $995. One session. Their Cursor seat. We never rent them ours.
+- Gun Store Game — consumer game. Dealer claim is a separate door.
 
 ## Pages
+- / — company home. CTA is FFL Ecommerce.
+- /ecommerce — FFL Accelerator and the hosting plans
+- /stack — how the store and the category read fit. Not a fourth product.
+- /about — who we are
+- /contact — talk
+- /ai-studio — live software, not a catalog
+- /grok-bot-setup — the $995 session
+- /ammoready-alternative, /best-ffl-ecommerce-website, /firearms-dropshipping, /ffl-cockpit — store pages
+- /privacy, /msa, /confirmed, /unsubscribe — legal and list
 
-- [/](/): Company home — ecommerce, AI Studio, Demand Intelligence.
-- [/ecommerce](/ecommerce): FFL website plans.
-- [/firearms-dropshipping](/firearms-dropshipping): What firearms dropshipping is; Militia+ with FFL Cockpit.
-- [/ffl-cockpit](/ffl-cockpit): Cockpit is operations; Coriolis is the WooCommerce website.
-- [/ammoready-alternative](/ammoready-alternative): AmmoReady / Gearfire alternative. You own the site.
-- [/best-ffl-ecommerce-website](/best-ffl-ecommerce-website): Comparison. Best FFL store is the one you own.
-- [/ai-studio](/ai-studio): Build custom apps on shipped proof (Betsy, GSA, DI, Gun Store Game). `/ai-factory` 301s here. Grok Bot setup teaser links to `/grok-bot-setup`.
-- [/grok-bot-setup](/grok-bot-setup): One session. Your Cursor seat. The Grok Bots you name in the consult, configured and trained. $995. We never rent you ours. CTA is `/contact` only. Seat prices are Cursor / xAI’s.
-- [/demand-intelligence](https://www.gunsearchengine.com/demand-intelligence/): 301 to GunSearchEngine Demand Intelligence. Do not keep a competing page here.
-- [/about](/about): Company and founder.
-- [/contact](/contact): Talk to Coriolis.
-- [/privacy](/privacy): Privacy policy.
-- [/msa](/msa): Master Services Agreement for FFL ecommerce setup and managed hosting. Month-to-month. You own the site.
-- [/login](/login) and [/account](/account): customer portal (Coriolis OS rewrite). noindex. Not operator Admin.
+Old /ai-factory links go to /ai-studio. /plans goes to /ecommerce. /demand-intelligence goes to GunSearchEngine Demand Intelligence.
 
-## Same-as mesh
-
-https://coriolisagency.com · https://www.gunsearchengine.com · https://gunsearchagent.com · https://2abetsy.com · https://fflintel.com · https://fflaccelerator.com · https://www.gunstoregame.com · https://x.com/CoriolisAgency · https://x.com/2ABetsy · https://www.youtube.com/@BetsyAI
-
-## Do not
-
-- H1 “RetailBI alternative”
-- 4473 / ATF / NICS automation claims
-- “Switch off RetailBI”
-- Treat this site as a second Stripe cart or DI portal
-- Offer a public Coriolis OS login
+We do not file a 4473, run NICS, write a bound book, or run the register. We are not affiliated with Gearfire or RetailBI.
