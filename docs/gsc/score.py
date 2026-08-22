@@ -134,7 +134,7 @@ def cluster(q):
         return "competitor alt"
     if any(k in s for k in ("ffl cockpit", "fflcockpit")):
         return "ffl cockpit"
-    if any(k in s for k in ("orchid", "fastbound", "ebound", "bound book", "4473", "a&d")):
+    if any(k in s for k in ("fastbound", "bound book", "4473", "a&d")):
         return "compliance software"
     if any(k in s for k in ("pos", "point of sale")):
         return "pos"
