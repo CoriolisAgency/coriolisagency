@@ -5,24 +5,28 @@ export interface FaqItem {
 
 export const FAQ_ECOMMERCE: FaqItem[] = [
   {
-    q: "What is included in every monthly plan?",
-    a: "Minute Man is the base: a custom WooCommerce site on your domain with unlimited hosting, storage, bandwidth, products, and orders, plus 24×7 uptime monitoring. Every higher plan includes everything below it.",
-  },
-  {
-    q: "Do I buy the monthly plan online?",
-    a: "You do not buy monthly hosting on a checkout page. Talk to us and we set the site up. One-time Basic ($500) and Retail ($2,500) setup packages can be purchased on checkout.coriolisagency.com.",
-  },
-  {
     q: "What is FFL Accelerator?",
-    a: "FFL Accelerator is Coriolis’s managed WooCommerce program for FFLs ($569/mo). It includes GunSearchAgent Pro, which is Betsy on the dealer site. The site is yours. Betsy on it is included.",
+    a: "It is the Coriolis plan for a gun store that wants a real website. $569 a month. We build WooCommerce on your domain, connect catalogs and checkout, and put Betsy on the shop. The site is yours.",
   },
   {
-    q: "Do you replace my bound book or run NICS?",
-    a: "No. Coriolis is not 4473 software, not a NICS system, and not a bound-book replacement. Ecommerce workflows sit next to the electronic bound book and the licensed retailer. This is not legal advice.",
+    q: "What do I pay to start?",
+    a: "Setup is $500 for a clean launch or $2,500 for the full custom site and email. Then $569 a month. No annual contract. If you walk, you take the website.",
   },
   {
-    q: "How do I leave Gearfire or AmmoReady?",
-    a: "New Woo on your domain, catalog and redirects, Cockpit and checkout, then DNS. Start on /ammoready-alternative, then talk to us. Do not give notice until the new store is ready.",
+    q: "Can I sell guns I do not stock?",
+    a: "Yes. FFL Cockpit streams twenty-one distributor catalogs. A serialized firearm ships to a receiving FFL. You can still sell what is in the safe. This is not legal advice. We are not your 4473, your NICS, or your bound book.",
+  },
+  {
+    q: "I already have a register. Do I throw it out?",
+    a: "No. Bring the register you already run. We connect it when you want the floor and the site in sync.",
+  },
+  {
+    q: "I am on AmmoReady or Gearfire. Can I leave without going dark?",
+    a: "Yes. We build on your domain first, move what ranks, test a live cart, then cut DNS. Do not give notice until the new store is ready.",
+  },
+  {
+    q: "Do I own it?",
+    a: "Yes. It is WordPress. Cancel and the site goes with you.",
   },
 ];
 
