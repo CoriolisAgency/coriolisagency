@@ -90,6 +90,10 @@ export const FAQ_BEST: FaqItem[] = [
     q: "What about POS and the bound book?",
     a: "Bring your POS. Warlord integrates AIM, MicroBiz, Rapid, Trident 1, and Corestore. Coriolis is not 4473, NICS, or bound-book software — those stay with the systems licensed for them.",
   },
+  {
+    q: "Why can’t an AmmoReady or Gearfire site rank like a shop you own?",
+    a: "Because Google sees one template repeated across the network. Your inventory is unique. The HTML is not. You do not control titles, slugs, or on-page copy beyond what the platform allows.",
+  },
 ];
 
 export const FAQ_DI: FaqItem[] = [
