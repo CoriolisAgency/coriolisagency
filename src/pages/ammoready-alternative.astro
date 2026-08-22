@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
+import SwitchChecklist from "../components/SwitchChecklist.astro";
 import { FAQ_AMMOREADY } from "../lib/faq";
 import { LINKS, linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
@@ -85,6 +86,13 @@ const rows = [
     </div>
   </section>
 
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Switch checklist</h2>
+      <SwitchChecklist founderNote />
+    </div>
+  </section>
+
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
       <p class="max-w-3xl text-sm text-zinc-400">
@@ -95,7 +103,7 @@ const rows = [
           >FFL Accelerator</a
         >.
       </p>
-      <CtaRow primary="ecommerce" />
+      <CtaRow primary="ecommerce" ecommerceHash="ffl-accelerator" />
     </div>
   </section>
 

@@ -3,6 +3,7 @@ import { withBase } from "../lib/base";
 
 const items = [
   { href: "ecommerce", label: "FFL website plans" },
+  { href: "ecommerce", hash: "ffl-accelerator", label: "FFL Accelerator" },
   { href: "firearms-dropshipping", label: "Firearms dropshipping" },
   { href: "ffl-cockpit", label: "FFL Cockpit websites" },
   { href: "ammoready-alternative", label: "AmmoReady alternative" },
@@ -21,14 +22,19 @@ const { current } = Astro.props;
   aria-label="FFL ecommerce"
 >
   {
-    items.map((item) =>
-      item.href === current ? (
+    items.map((item) => {
+      const hash = "hash" in item && item.hash ? `#${item.hash}` : "";
+      const isCurrent = !hash && item.href === current;
+      return isCurrent ? (
         <span class="text-zinc-200">{item.label}</span>
       ) : (
-        <a href={withBase(item.href)} class="text-sky-400 hover:underline underline-offset-2">
+        <a
+          href={`${withBase(item.href)}${hash}`}
+          class="text-sky-400 hover:underline underline-offset-2"
+        >
           {item.label}
         </a>
-      ),
-    )
+      );
+    })
   }
 </nav>

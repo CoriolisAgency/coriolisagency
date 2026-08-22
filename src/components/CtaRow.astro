@@ -4,11 +4,19 @@ import { withBase } from "../lib/base";
 
 interface Props {
   primary?: "contact" | "ecommerce" | "demo";
+  ecommerceHash?: string;
   showGsa?: boolean;
   class?: string;
 }
 
-const { primary = "contact", showGsa = true, class: className } = Astro.props;
+const {
+  primary = "contact",
+  ecommerceHash,
+  showGsa = true,
+  class: className,
+} = Astro.props;
+
+const ecommerceHref = `${withBase("ecommerce")}${ecommerceHash ? `#${ecommerceHash}` : ""}`;
 ---
 
 <div
@@ -28,7 +36,7 @@ const { primary = "contact", showGsa = true, class: className } = Astro.props;
         Demand Intelligence Home
       </a>
     ) : primary === "ecommerce" ? (
-      <a href={withBase("ecommerce")} class={btnPlan}>
+      <a href={ecommerceHref} class={btnPlan}>
         FFL Ecommerce Plans
       </a>
     ) : (

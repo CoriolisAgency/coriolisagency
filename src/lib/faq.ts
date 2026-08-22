@@ -1,3 +1,5 @@
+import { SWITCH_FOUNDER, SWITCH_STEPS } from "./switch";
+
 export interface FaqItem {
   q: string;
   a: string;
@@ -19,6 +21,10 @@ export const FAQ_ECOMMERCE: FaqItem[] = [
   {
     q: "Do you replace my bound book or run NICS?",
     a: "No. Coriolis is not 4473 software, not a NICS system, and not a bound-book replacement. Ecommerce workflows are designed to coexist with electronic bound books and licensed retailers.",
+  },
+  {
+    q: "How do I leave Gearfire or AmmoReady?",
+    a: "New Woo on your domain, catalog and redirects, Cockpit and checkout, then DNS. Start on /ammoready-alternative, then talk to us. Do not give notice until the new store is ready.",
   },
 ];
 
@@ -67,7 +73,7 @@ export const FAQ_AMMOREADY: FaqItem[] = [
   },
   {
     q: "How do you migrate a live store?",
-    a: "New WooCommerce on your domain, catalog and redirects, Cockpit and checkout, then DNS. Talk to us before you give notice on the old platform.",
+    a: `${SWITCH_STEPS.map((step, i) => `${i + 1}. ${step}`).join(" ")} ${SWITCH_FOUNDER}`,
   },
 ];
 

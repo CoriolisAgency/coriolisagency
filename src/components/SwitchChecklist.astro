@@ -1,0 +1,18 @@
+---
+import { SWITCH_FOUNDER, SWITCH_STEPS } from "../lib/switch";
+
+interface Props {
+  founderNote?: boolean;
+}
+
+const { founderNote = false } = Astro.props;
+---
+
+<ol class="mt-4 list-decimal space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
+  {SWITCH_STEPS.map((step) => <li>{step}</li>)}
+</ol>
+{
+  founderNote && (
+    <p class="mt-4 text-sm leading-relaxed text-zinc-400">{SWITCH_FOUNDER}</p>
+  )
+}
