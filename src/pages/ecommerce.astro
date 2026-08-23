@@ -79,13 +79,20 @@ const setupOffers = [
         </p>
         <EcommerceCluster current="ecommerce" />
       </div>
-      <img
-        src={withBase(CANON_PATHS.rangeMckinney)}
-        alt="A Coriolis FFL ecommerce site. Browse and buy online, pick up in store."
-        width="1283"
-        height="965"
-        class="w-full min-w-0 rounded-2xl object-contain ring-1 ring-white/10 bg-[#111]"
-      />
+      <a
+        href="https://store.therangeinmckinney.com/"
+        class="block w-full min-w-0 overflow-hidden rounded-2xl ring-1 ring-white/10 transition hover:ring-gold/50"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={withBase(CANON_PATHS.rangeMckinney)}
+          alt="A live Coriolis FFL ecommerce site. Browse and buy online, pick up in store. Opens in a new tab."
+          width="1283"
+          height="965"
+          class="w-full min-w-0 object-contain bg-[#111]"
+        />
+      </a>
     </div>
   </section>
 
