@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import StackPreviewMaps from "../components/StackPreviewMaps.astro";
+import {
+  PREVIEW_EYEBROW,
+  PREVIEW_FACTS,
+  PREVIEW_H1,
+  PREVIEW_LEDE,
+  PREVIEW_META,
+  PREVIEW_TITLE,
+} from "../lib/stack-preview";
+---
+
+<BaseLayout
+  title={PREVIEW_TITLE}
+  description={PREVIEW_META}
+  path="/stack-preview"
+  noindex
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        {PREVIEW_EYEBROW}
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]"
+      >
+        {PREVIEW_H1}
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        {PREVIEW_LEDE}
+      </p>
+      <ul class="mt-6 max-w-3xl space-y-2 text-sm leading-relaxed text-zinc-300">
+        {
+          PREVIEW_FACTS.map((fact) => (
+            <li class="flex gap-2">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold"></span>
+              <span>{fact}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-8">
+        <CtaRow primary="stack" showGsa={false} />
+      </div>
+    </div>
+  </section>
+
+  <StackPreviewMaps />
+</BaseLayout>
