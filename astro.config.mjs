@@ -17,7 +17,11 @@ export default defineConfig({
   redirects: {
     "/ai-factory": "/ai-studio",
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes("/stack-preview"),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

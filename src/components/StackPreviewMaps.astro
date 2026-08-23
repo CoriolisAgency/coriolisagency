@@ -1,0 +1,151 @@
+---
+import StackPreviewGraph from "./StackPreviewGraph.astro";
+import {
+  PREVIEW_GRAPHS,
+  PREVIEW_NEXT,
+  PREVIEW_NEXT_HEAD,
+  PREVIEW_NEXT_LEDE,
+  PREVIEW_NOW,
+  PREVIEW_NOW_HEAD,
+  PREVIEW_NOW_LEDE,
+  previewNeighbors,
+} from "../lib/stack-preview";
+
+const neighborMaps = Object.fromEntries(
+  PREVIEW_GRAPHS.map((graph) => [graph.id, previewNeighbors(graph.edges)]),
+);
+
+const nodeCopy = Object.fromEntries(
+  PREVIEW_GRAPHS.flatMap((graph) =>
+    graph.nodes.map((n) => [n.id, { label: n.label, sentence: n.sentence }]),
+  ),
+);
+---
+
+<section class="border-b border-zinc-800/80 py-12" id="now">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <h2 class="text-xl font-semibold text-white sm:text-2xl">
+      {PREVIEW_NOW_HEAD}
+    </h2>
+    <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+      {PREVIEW_NOW_LEDE}
+    </p>
+    <div class="mt-8">
+      <StackPreviewGraph graph={PREVIEW_NOW} size="wide" />
+    </div>
+  </div>
+</section>
+
+<section class="border-b border-zinc-800/80 py-12" id="next">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <h2 class="text-xl font-semibold text-white sm:text-2xl">
+      {PREVIEW_NEXT_HEAD}
+    </h2>
+    <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+      {PREVIEW_NEXT_LEDE}
+    </p>
+    <ol class="mt-6 grid grid-cols-1 gap-3 lg:grid-cols-3">
+      {
+        PREVIEW_NEXT.map((graph) => (
+          <li class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-4">
+            <p class="text-sm font-semibold text-sky-300">{graph.title}</p>
+            <p class="mt-2 text-sm leading-relaxed text-zinc-400">
+              {graph.body}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3">
+      {
+        PREVIEW_NEXT.map((graph) => (
+          <StackPreviewGraph graph={graph} size="path" />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script
+  define:vars={{
+    neighborMaps,
+    nodeCopy,
+  }}
+>
+  const roots = document.querySelectorAll("[data-sp-root]");
+  for (const root of roots) {
+    if (!(root instanceof HTMLElement)) continue;
+    const graphId = root.getAttribute("data-sp-root");
+    const map = (graphId && neighborMaps[graphId]) || {};
+    const nodeEls = [...root.querySelectorAll("[data-node]")];
+    const edgeEls = [...root.querySelectorAll("[data-from][data-to]")];
+    const drawer = root.querySelector("[data-sp-drawer]");
+    const drawerName = root.querySelector("[data-sp-drawer-name]");
+    const drawerSentence = root.querySelector("[data-sp-drawer-sentence]");
+
+    let selected = null;
+    let hovered = null;
+
+    const lit = (id) => {
+      const focus = hovered || selected;
+      if (!focus) return true;
+      return id === focus || (map[focus] || []).includes(id);
+    };
+
+    const paint = () => {
+      for (const el of nodeEls) {
+        const id = el.getAttribute("data-node");
+        const on = lit(id);
+        el.classList.toggle("sp-node--dim", !on);
+        el.classList.toggle("sp-node--lit", on);
+        el.classList.toggle("sp-node--selected", id === selected);
+        if (el instanceof HTMLButtonElement) {
+          el.setAttribute("aria-pressed", id === selected ? "true" : "false");
+        }
+      }
+      for (const el of edgeEls) {
+        const from = el.getAttribute("data-from");
+        const to = el.getAttribute("data-to");
+        const on = lit(from) && lit(to);
+        el.classList.toggle("sp-edge--dim", !on);
+        el.classList.toggle("sp-edge--lit", on);
+      }
+    };
+
+    const openDrawer = (id) => {
+      const item = nodeCopy[id];
+      if (!item || !drawer || !drawerName || !drawerSentence) return;
+      drawerName.textContent = item.label;
+      drawerSentence.textContent = item.sentence;
+      drawer.hidden = false;
+    };
+
+    for (const el of nodeEls) {
+      const id = el.getAttribute("data-node");
+      el.addEventListener("mouseenter", () => {
+        hovered = id;
+        paint();
+      });
+      el.addEventListener("mouseleave", () => {
+        hovered = null;
+        paint();
+      });
+      el.addEventListener("focus", () => {
+        hovered = id;
+        paint();
+      });
+      el.addEventListener("blur", () => {
+        hovered = null;
+        paint();
+      });
+      el.addEventListener("click", () => {
+        selected = selected === id ? null : id;
+        if (selected) openDrawer(selected);
+        else if (drawer) drawer.hidden = true;
+        paint();
+      });
+    }
+
+    paint();
+  }
+</script>
