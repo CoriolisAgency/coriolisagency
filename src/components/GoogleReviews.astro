@@ -1,0 +1,57 @@
+---
+import { linkClass } from "../lib/links";
+import {
+  GOOGLE_REVIEW_COUNT,
+  GOOGLE_REVIEW_QUOTES,
+  GOOGLE_REVIEW_RATING,
+  GOOGLE_REVIEWS_HREF,
+} from "../lib/google-reviews";
+
+const stars = "★★★★★";
+---
+
+<section class="border-b border-zinc-800/80 bg-zinc-950/40">
+  <div class="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p
+          class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold"
+        >
+          Google reviews
+        </p>
+        <p class="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span class="text-3xl font-semibold tracking-tight text-white"
+            >{GOOGLE_REVIEW_RATING.toFixed(1)}</span
+          >
+          <span class="text-gold" aria-hidden="true">{stars}</span>
+          <span class="text-sm text-zinc-400">
+            {GOOGLE_REVIEW_COUNT} reviews on Google
+          </span>
+        </p>
+      </div>
+      <a
+        href={GOOGLE_REVIEWS_HREF}
+        class={linkClass}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Read on Google →
+      </a>
+    </div>
+    <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+      {
+        GOOGLE_REVIEW_QUOTES.map((q) => (
+          <blockquote class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6">
+            <p class="flex-1 text-sm leading-relaxed text-zinc-300">
+              “{q.body}”
+            </p>
+            <footer class="mt-4 text-sm text-zinc-500">
+              <span class="font-medium text-zinc-200">{q.name}</span>
+              {"shop" in q && q.shop ? ` · ${q.shop}` : ""}
+            </footer>
+          </blockquote>
+        ))
+      }
+    </div>
+  </div>
+</section>

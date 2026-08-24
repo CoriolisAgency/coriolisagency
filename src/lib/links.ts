@@ -19,6 +19,7 @@ export const LINKS = {
     "https://checkout.coriolisagency.com/b/eVq3cw4sf3EKg3V2fC1440h",
   checkoutRetail:
     "https://checkout.coriolisagency.com/b/4gMdRa7ErdfkbNF9I41440l",
+  googleReviews: "https://share.google/2GndbFD893itrVBdo",
   contactEmail: "mailto:paul@coriolisagency.com",
   contactEmailAddress: "paul@coriolisagency.com",
   gsa: "https://gunsearchagent.com",
