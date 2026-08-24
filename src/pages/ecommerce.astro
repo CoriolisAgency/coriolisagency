@@ -63,12 +63,6 @@ const setupOffers = [
           twenty-one distributors, or you do both. The plan built for that is
           FFL Accelerator.
         </p>
-        <p class="mt-4 max-w-3xl text-base leading-relaxed text-zinc-300">
-          FFL Accelerator is $569 a month. Standing the store up is a one-time
-          $500 if we launch a clean branded shop, or $2,500 if you want the
-          full custom site and email. There is no year-long lock. If you
-          leave, the website goes with you.
-        </p>
         <div class="mt-8">
           <CtaRow showGsa={false} showAccelerator />
         </div>
@@ -93,6 +87,40 @@ const setupOffers = [
           class="w-full min-w-0 object-contain bg-[#111]"
         />
       </a>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="setup">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {
+          setupOffers.map((s) => (
+            <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+              <p class="text-2xl font-semibold text-white">
+                ${s.price.toLocaleString()}
+                <span class="text-sm font-medium text-zinc-500">
+                  {" "}
+                  · {s.name}
+                </span>
+              </p>
+              <p class="mt-4 flex-1 text-sm leading-relaxed text-zinc-400">
+                {s.body}
+              </p>
+              <a
+                href={s.href}
+                class={`${btnPlan} mt-6`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {s.name}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+      <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        You pay setup once. The $569 starts when the shop is yours to run.
+      </p>
     </div>
   </section>
 
@@ -238,40 +266,6 @@ const setupOffers = [
         Man is inventory-only. Militia adds dropshipping. Gun Runner adds
         faster support. Warlord adds the register. Accelerator is the one we
         put a working shop on.
-      </p>
-    </div>
-  </section>
-
-  <section class="border-b border-zinc-800/80 py-12" id="setup">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-        {
-          setupOffers.map((s) => (
-            <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-              <p class="text-2xl font-semibold text-white">
-                ${s.price.toLocaleString()}
-                <span class="text-sm font-medium text-zinc-500">
-                  {" "}
-                  · {s.name}
-                </span>
-              </p>
-              <p class="mt-4 flex-1 text-sm leading-relaxed text-zinc-400">
-                {s.body}
-              </p>
-              <a
-                href={s.href}
-                class={`${btnPlan} mt-6`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {s.name}
-              </a>
-            </article>
-          ))
-        }
-      </div>
-      <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        You pay setup once. The $569 starts when the shop is yours to run.
       </p>
     </div>
   </section>
