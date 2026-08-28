@@ -14,7 +14,6 @@ const path =
 
 const nav = [
   { href: "ecommerce", label: "FFL Ecommerce" },
-  { href: LINKS.fflintel, label: "FFL Intel", external: true },
   { href: "ai-studio", label: "AI Studio" },
   { href: "demand-intelligence", label: "Demand Intelligence" },
   { href: "about", label: "About" },
@@ -67,15 +66,13 @@ const family = [
       {
         nav.map((item) => (
           <a
-            href={"external" in item ? item.href : withBase(item.href)}
+            href={withBase(item.href)}
             class:list={[
               "rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors sm:text-sm",
-              !("external" in item) && active(item.href)
+              active(item.href)
                 ? "border-gold/50 bg-gold/10 text-gold"
                 : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
             ]}
-            target={"external" in item ? "_blank" : undefined}
-            rel={"external" in item ? "noopener noreferrer" : undefined}
           >
             {item.label}
           </a>
@@ -142,15 +139,13 @@ const family = [
     {
       nav.map((item) => (
         <a
-          href={"external" in item ? item.href : withBase(item.href)}
+          href={withBase(item.href)}
           class:list={[
             "rounded-sm border px-3 py-2 text-sm font-medium transition-colors",
-            !("external" in item) && active(item.href)
+            active(item.href)
               ? "border-gold/50 bg-gold/10 text-gold"
               : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
           ]}
-          target={"external" in item ? "_blank" : undefined}
-          rel={"external" in item ? "noopener noreferrer" : undefined}
         >
           {item.label}
         </a>
