@@ -20,13 +20,15 @@ const switchSteps = [
 const setupOffers = [
   {
     price: 500,
-    name: "Open the store",
+    name: "Basic Setup - Open the store",
+    cta: "Basic Setup",
     body: "A branded WooCommerce shop on your domain. Theme, homepage, search, tax and shipping, payments, FFL Checkout, FFL Cockpit, and Betsy’s free layer. Extra pages are $125.",
     href: LINKS.checkoutBasic,
   },
   {
     price: 2500,
-    name: "Build the store you will keep",
+    name: "Retail Setup - Full custom build",
+    cta: "Retail Setup",
     body: "Everything in the $500 build, then the full custom site: up to ten pages, unlimited revisions, email that actually sends (welcome, abandoned cart, back in stock), and the analytics a buyer will ask you for.",
     href: LINKS.checkoutRetail,
   },
@@ -112,7 +114,7 @@ const setupOffers = [
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {s.name}
+                {s.cta}
               </a>
             </article>
           ))
