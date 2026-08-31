@@ -16,9 +16,9 @@ export const LINKS = {
   privacy: "/privacy",
   msa: "/msa",
   checkoutBasic:
-    "https://checkout.coriolisagency.com/b/eVq3cw4sf3EKg3V2fC1440h",
+    "https://ops.coriolisagency.com/api/checkout/setup?sku=basic_setup",
   checkoutRetail:
-    "https://checkout.coriolisagency.com/b/4gMdRa7ErdfkbNF9I41440l",
+    "https://ops.coriolisagency.com/api/checkout/setup?sku=retail_setup",
   googleReviews: "https://g.page/r/Ca-DxrPglsXcEAI",
   contactEmail: "mailto:paul@coriolisagency.com",
   contactEmailAddress: "paul@coriolisagency.com",
