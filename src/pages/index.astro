@@ -47,6 +47,11 @@ const heroSlides = [
     alt: "A live Coriolis FFL ecommerce site. Allied Arms. Opens in a new tab.",
     label: "Allied Arms",
   },
+  {
+    src: CANON_PATHS.highlineFirearms,
+    alt: "A Coriolis FFL ecommerce site in progress. Highline Firearms.",
+    label: "Highline Firearms",
+  },
 ] as const;
 ---
 
@@ -106,23 +111,13 @@ const heroSlides = [
         data-hero-slider
         role="region"
         aria-roledescription="carousel"
-        aria-label="Live Coriolis FFL ecommerce sites"
+        aria-label="Coriolis FFL ecommerce sites"
       >
         <div class="grid w-full min-w-0">
           {
-            heroSlides.map((slide, i) => (
-              <a
-                href={slide.href}
-                class:list={[
-                  "hero-slider__slide col-start-1 row-start-1 block w-full min-w-0",
-                  i === 0 && "is-active",
-                ]}
-                data-slide={i}
-                aria-hidden={i === 0 ? "false" : "true"}
-                tabindex={i === 0 ? 0 : -1}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+            heroSlides.map((slide, i) => {
+              const linked = "href" in slide;
+              const img = (
                 <img
                   src={withBase(slide.src)}
                   alt={slide.alt}
@@ -132,8 +127,33 @@ const heroSlides = [
                   loading={i === 0 ? "eager" : "lazy"}
                   fetchpriority={i === 0 ? "high" : "low"}
                 />
-              </a>
-            ))
+              );
+              const cls = [
+                "hero-slider__slide col-start-1 row-start-1 block w-full min-w-0",
+                i === 0 && "is-active",
+              ];
+              return linked ? (
+                <a
+                  href={slide.href}
+                  class:list={cls}
+                  data-slide={i}
+                  aria-hidden={i === 0 ? "false" : "true"}
+                  tabindex={i === 0 ? 0 : -1}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {img}
+                </a>
+              ) : (
+                <div
+                  class:list={cls}
+                  data-slide={i}
+                  aria-hidden={i === 0 ? "false" : "true"}
+                >
+                  {img}
+                </div>
+              );
+            })
           }
         </div>
         <div
@@ -271,7 +291,7 @@ const heroSlides = [
           const on = i === index;
           slide.classList.toggle("is-active", on);
           slide.setAttribute("aria-hidden", on ? "false" : "true");
-          if (slide instanceof HTMLElement) slide.tabIndex = on ? 0 : -1;
+          if (slide instanceof HTMLAnchorElement) slide.tabIndex = on ? 0 : -1;
         });
         dots.forEach((dot, i) => {
           const on = i === index;

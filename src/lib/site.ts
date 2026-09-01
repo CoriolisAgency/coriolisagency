@@ -28,4 +28,5 @@ export const CANON_PATHS = {
   naplesGunShop: "brand/naples-gun-shop.jpg",
   wftc: "brand/wftc.jpg",
   alliedArms: "brand/allied-arms.jpg",
+  highlineFirearms: "brand/highline-firearms.jpg",
 } as const;
