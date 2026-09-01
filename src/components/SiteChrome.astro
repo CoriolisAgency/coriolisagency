@@ -15,8 +15,7 @@ const path =
 const nav = [
   { href: "ecommerce", label: "FFL Ecommerce" },
   { href: "ai-studio", label: "AI Studio" },
-  { href: "demand-intelligence", label: "Demand Intelligence" },
-  { href: "about", label: "About" },
+  { href: LINKS.gsa, label: "GunSearchAgent", external: true },
 ] as const;
 
 const ecommercePaths = new Set([
@@ -64,19 +63,24 @@ const family = [
       aria-label="Main"
     >
       {
-        nav.map((item) => (
-          <a
-            href={withBase(item.href)}
-            class:list={[
-              "rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors sm:text-sm",
-              active(item.href)
-                ? "border-gold/50 bg-gold/10 text-gold"
-                : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
-            ]}
-          >
-            {item.label}
-          </a>
-        ))
+        nav.map((item) => {
+          const external = "external" in item && item.external;
+          return (
+            <a
+              href={external ? item.href : withBase(item.href)}
+              class:list={[
+                "rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors sm:text-sm",
+                !external && active(item.href)
+                  ? "border-gold/50 bg-gold/10 text-gold"
+                  : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
+              ]}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noopener noreferrer" : undefined}
+            >
+              {item.label}
+            </a>
+          );
+        })
       }
       <a
         href={withBase("contact")}
@@ -137,19 +141,24 @@ const family = [
       </svg>
     </button>
     {
-      nav.map((item) => (
-        <a
-          href={withBase(item.href)}
-          class:list={[
-            "rounded-sm border px-3 py-2 text-sm font-medium transition-colors",
-            active(item.href)
-              ? "border-gold/50 bg-gold/10 text-gold"
-              : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
-          ]}
-        >
-          {item.label}
-        </a>
-      ))
+      nav.map((item) => {
+        const external = "external" in item && item.external;
+        return (
+          <a
+            href={external ? item.href : withBase(item.href)}
+            class:list={[
+              "rounded-sm border px-3 py-2 text-sm font-medium transition-colors",
+              !external && active(item.href)
+                ? "border-gold/50 bg-gold/10 text-gold"
+                : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
+            ]}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
+          >
+            {item.label}
+          </a>
+        );
+      })
     }
     <a
       href={withBase("contact")}
