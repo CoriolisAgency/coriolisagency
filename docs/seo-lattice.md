@@ -20,6 +20,7 @@
 | GA for FFLs / free agent | **GunSearchAgent** |
 | Three numbers desk | **FFLIntel** |
 | Checkout / MSA | Stripe checkout + **this site** `/msa` |
+| Press / newsroom | **This site** `/press` |
 | Customer login / account | **This host** `/login` `/account` — OS portal rewrite, **noindex** |
 | Operator Admin | Coriolis OS on a separate host. Never this marketing chrome. |
 
@@ -40,3 +41,4 @@
 - AI Studio → live product URLs (proof, not a catalog)
 - Demand Intelligence lives on GunSearchEngine; this host 301s `/demand-intelligence` there. `/stack` inbound uses the GSE URL.
 - About → family lattice
+- Press → `/press` (releases). First post: five FFL AIM POS integrations. Not a product page.

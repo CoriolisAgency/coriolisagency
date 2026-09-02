@@ -14,6 +14,8 @@ Coriolis builds websites gun stores own, puts Betsy on those sites, and sells an
 - /ecommerce — FFL Accelerator and the hosting plans
 - /stack — how the store and the category read fit. Not a fourth product.
 - /about — who we are
+- /press — newsroom
+- /press/five-ffls-choose-coriolis-for-aim-pos-integration — AIM POS + WooCommerce deployments
 - /contact — talk
 - /ai-studio — live software, not a catalog
 - /grok-bot-setup — the $995 session
