@@ -5,7 +5,7 @@ import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import { FAQ_ECOMMERCE } from "../lib/faq";
 import { LINKS, linkClass, btnPlan } from "../lib/links";
-import { PLANS } from "../lib/plans";
+import { PLANS, SETUP } from "../lib/plans";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
 
@@ -15,23 +15,6 @@ const switchSteps = [
   "Turn on FFL Checkout, payments, and tax. Buy a mixed cart yourself and make sure it clears.",
   "Connect the register only if you want the counter and the site to share inventory.",
   "Point the domain. You leave with the site.",
-] as const;
-
-const setupOffers = [
-  {
-    price: 500,
-    name: "Basic Setup - Open the store",
-    cta: "Basic Setup",
-    body: "A branded WooCommerce shop on your domain. Theme, homepage, search, tax and shipping, payments, FFL Checkout, FFL Cockpit, and Betsy’s free layer. Extra pages are $125.",
-    href: LINKS.checkoutBasic,
-  },
-  {
-    price: 2500,
-    name: "Retail Setup - Full custom build",
-    cta: "Retail Setup",
-    body: "Everything in the $500 build, then the full custom site: up to ten pages, unlimited revisions, email that actually sends (welcome, abandoned cart, back in stock), and the analytics a buyer will ask you for.",
-    href: LINKS.checkoutRetail,
-  },
 ] as const;
 ---
 
@@ -69,9 +52,7 @@ const setupOffers = [
           <CtaRow showGsa={false} showAccelerator />
         </div>
         <p class="mt-6 text-sm text-zinc-500">
-          <a href={withBase("stack")} class={linkClass}
-            >How the Coriolis stack fits</a
-          >
+          <a href="#setup" class={linkClass}>FFL Website Setup Packages</a>
         </p>
         <EcommerceCluster current="ecommerce" />
       </div>
@@ -92,73 +73,9 @@ const setupOffers = [
     </div>
   </section>
 
-  <section class="border-b border-zinc-800/80 py-12" id="setup">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {
-          setupOffers.map((s) => (
-            <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-              <p class="text-2xl font-semibold text-white">
-                ${s.price.toLocaleString()}
-                <span class="text-sm font-medium text-zinc-500">
-                  {" "}
-                  · {s.name}
-                </span>
-              </p>
-              <p class="mt-4 flex-1 text-sm leading-relaxed text-zinc-400">
-                {s.body}
-              </p>
-              <a
-                href={s.href}
-                class={`${btnPlan} mt-6`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {s.cta}
-              </a>
-            </article>
-          ))
-        }
-      </div>
-      <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        You pay setup once. The $569 starts when the shop is yours to run.
-      </p>
-    </div>
-  </section>
-
-  <section
-    class="scroll-mt-24 border-b border-zinc-800/80 py-12"
-    id="leave-a-rented-storefront"
-  >
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">Leave a rented storefront</h2>
-      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
-        <p>
-          AmmoReady and Gearfire rent you a catalog. The inventory on those
-          sites changes. The page does not. You do not control the title, the
-          slugs, or the copy. Coriolis is not affiliated with Gearfire or
-          RetailBI.
-        </p>
-        <p>
-          If you still report units through the register you already run, keep
-          it. We are here for the website.
-        </p>
-        <p>Switch, in order:</p>
-      </div>
-      <ol
-        class="mt-4 max-w-3xl list-decimal space-y-2 pl-5 text-sm leading-relaxed text-zinc-400"
-      >
-        {switchSteps.map((step) => <li>{step}</li>)}
-      </ol>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Coriolis was founded by the person who ran AmmoReady for nine years.
-      </p>
-    </div>
-  </section>
-
   <section class="border-b border-zinc-800/80 py-12" id="plans">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-5">
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-5">
         {
           PLANS.map((plan) => (
             <article
@@ -171,29 +88,18 @@ const setupOffers = [
               ]}
             >
               <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
-                {plan.featured ? "Add rocket fuel" : plan.hook}
+                {plan.featured ? "Most Popular" : plan.hook}
               </p>
               <h3 class="mt-2 text-lg font-semibold text-white">{plan.name}</h3>
               <p class="mt-1 text-2xl font-semibold text-gold">
                 ${plan.price}
-                <span class="text-sm font-medium text-zinc-500">
-                  {plan.featured ? " a month" : "/mo"}
-                </span>
+                <span class="text-sm font-medium text-zinc-500">/mo</span>
               </p>
-              {plan.featured ? (
-                <p class="mt-2 text-xs leading-relaxed text-zinc-400">
-                  {plan.hook}
-                </p>
-              ) : plan.includesFrom ? (
+              {plan.includesFrom ? (
                 <p class="mt-2 text-xs text-zinc-500">
                   Everything in {plan.includesFrom} +
                 </p>
               ) : null}
-              {plan.featured && (
-                <p class="mt-3 text-xs text-zinc-500">
-                  Everything in the plans below it, plus:
-                </p>
-              )}
               <ul class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400">
                 {plan.features.map((f) => (
                   <li>{f}</li>
@@ -203,20 +109,88 @@ const setupOffers = [
           ))
         }
       </div>
-      <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        The rungs under it are still true, and they are not the ask. Minute
-        Man is inventory-only. Militia adds dropshipping. Gun Runner adds
-        faster support. Warlord adds the register. Accelerator is the one we
-        put a working shop on.
-      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="setup">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        FFL Website Setup Packages
+      </h2>
+      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+        {
+          SETUP.map((s) => (
+            <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
+                {s.hook}
+              </p>
+              <h3 class="mt-2 text-lg font-semibold text-white">{s.name}</h3>
+              <p class="mt-1 text-2xl font-semibold text-gold">
+                ${s.price.toLocaleString()}
+                <span class="text-sm font-medium text-zinc-500"> one-time</span>
+              </p>
+              <ul class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400">
+                {s.features.map((f) => (
+                  <li>{f}</li>
+                ))}
+              </ul>
+              <a
+                href={LINKS[s.checkoutKey]}
+                class={`${btnPlan} mt-6`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {s.name}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="scroll-mt-24 border-b border-zinc-800/80 py-12"
+    id="leave-a-rented-storefront"
+  >
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Leave a rented storefront</h2>
+      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
+        <p>
+          AmmoReady and Gearfire rent you a catalog. Inventory changes; the page
+          does not. You do not control title, slugs, or copy. Coriolis is not
+          affiliated with Gearfire or RetailBI.
+        </p>
+        <p>Switch, in order:</p>
+      </div>
+      <ol
+        class="mt-4 max-w-3xl list-decimal space-y-2 pl-5 text-sm leading-relaxed text-zinc-400"
+      >
+        {switchSteps.map((step) => <li>{step}</li>)}
+      </ol>
     </div>
   </section>
 
   <FaqBlock items={FAQ_ECOMMERCE} />
 
+  <section class="border-b border-zinc-800/80 py-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="max-w-3xl text-sm leading-relaxed text-zinc-500">
+        By subscribing to any plan or purchasing any setup package you are
+        agreeing to the terms of our{" "}
+        <a href={withBase("msa")} class={linkClass}>Master Services Agreement</a
+        >.
+      </p>
+    </div>
+  </section>
+
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
       <CtaRow showGsa={false} showAccelerator />
+      <p class="max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Our Founder and CEO is the guy that built and ran AmmoReady.com for 9
+        years.
+      </p>
     </div>
   </section>
 </BaseLayout>

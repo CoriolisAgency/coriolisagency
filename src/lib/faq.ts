@@ -14,7 +14,7 @@ export const FAQ_ECOMMERCE: FaqItem[] = [
   },
   {
     q: "Can I sell guns I do not stock?",
-    a: "Yes. FFL Cockpit streams twenty-one distributor catalogs. A serialized firearm ships to a receiving FFL. You can still sell what is in the safe. This is not legal advice. We are not your 4473, your NICS, or your bound book.",
+    a: "Yes. FFL Cockpit streams twenty-one distributor catalogs. A serialized firearm ships to a receiving FFL. You can still sell what is in the safe. This is not legal advice. We do not run your 4473, NICS, or bound book.",
   },
   {
     q: "I already have a register. Do I throw it out?",
