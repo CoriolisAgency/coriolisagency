@@ -15,7 +15,7 @@ export interface Plan {
   features: string[];
 }
 
-/** Monthly hosting ladder. Checkout is contact / onboarding — no Stripe buy buttons. */
+/** Monthly hosting ladder. Checkout is contact / onboarding â€” no Stripe buy buttons. */
 export const PLANS: Plan[] = [
   {
     id: "minute-man",
@@ -27,7 +27,7 @@ export const PLANS: Plan[] = [
       "Your custom domain",
       "Unlimited hosting, storage, and bandwidth",
       "Unlimited products and orders",
-      "24×7 uptime monitoring",
+      "24Ã—7 uptime monitoring",
       "On-demand paid support ($125 per incident)",
     ],
   },
@@ -61,7 +61,7 @@ export const PLANS: Plan[] = [
       "Advanced Search & Filter",
       "Google Analytics Admin",
       "VIP Support for: WordPress, WooCommerce, Custom Theme, AmmoSeek Data Feed, GunBroker Integration, All Other Plugins",
-      "Free Email & Chat Support — One Hour Response Time",
+      "Free Email & Chat Support â€” One Hour Response Time",
     ],
   },
   {
@@ -81,8 +81,7 @@ export const PLANS: Plan[] = [
     id: "ffl-accelerator",
     name: "FFL Accelerator",
     price: 569,
-    hook: "Everything in the plans below it, plus",
-    includesFrom: "the plans below it",
+    hook: "Add Jet Fuel",
     features: [
       "GunSearchAgent.com Pro (Betsy on the shop)",
       "Page speed optimization",
