@@ -21,8 +21,8 @@ export const FAQ_ECOMMERCE: FaqItem[] = [
     a: "No. Bring the register you already run. We connect it when you want the floor and the site in sync.",
   },
   {
-    q: "I am on AmmoReady or Gearfire. Can I leave without going dark?",
-    a: "Yes. We build on your domain first, move what ranks, test a live cart, then cut DNS. Do not give notice until the new store is ready.",
+    q: "I'm on AmmoReady or Gearfire. Can you replace the site without going dark?",
+    a: "Yes. We build WooCommerce on your domain first, move what ranks, test a live cart, then cut DNS. Do not give notice until the new store is ready.",
   },
   {
     q: "Do I own it?",
@@ -82,7 +82,7 @@ export const FAQ_AMMOREADY: FaqItem[] = [
 export const FAQ_BEST: FaqItem[] = [
   {
     q: "What is the best FFL ecommerce website?",
-    a: "The one you own. Closed platforms (AmmoReady, Gearfire) rent you a catalog. Coriolis builds WooCommerce on your domain — inventory, dropshipping, or both — and you can take it with you.",
+    a: "The one you own. AmmoReady and Gearfire are template platforms — ads you can't strip, shared HTML, pages you don't write. Coriolis builds WooCommerce on your domain — inventory, dropshipping, or both — and you can take it with you.",
   },
   {
     q: "Does WooCommerce handle FFL checkout and dropshipping?",
