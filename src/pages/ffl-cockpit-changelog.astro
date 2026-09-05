@@ -1,0 +1,89 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import {
+  FFL_COCKPIT_CHANGELOG,
+  FFL_COCKPIT_PLUGIN,
+} from "../lib/ffl-cockpit-changelog";
+import { LINKS, linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+const plugin = FFL_COCKPIT_PLUGIN;
+---
+
+<BaseLayout
+  title="FFL Cockpit changelog — g-FFL Cockpit | Coriolis"
+  description={`Release notes for FFL Cockpit (g-FFL Cockpit). Current version ${plugin.currentVersion}. Notes from the WordPress.org developers tab.`}
+  path="/ffl-cockpit-changelog"
+  ogImagePath={CANON_PATHS.storefront}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        Ecommerce · FFL Cockpit
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        FFL Cockpit changelog
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        Release notes for {plugin.publicName}. On WordPress.org the title is{" "}
+        {plugin.wpTitle} (slug {plugin.slug}). Current version{" "}
+        {plugin.currentVersion}. The plugin was added {plugin.added}. Last
+        updated {plugin.lastUpdated}.
+      </p>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Notes are copied from the{" "}
+        <a href={plugin.developersUrl} class={linkClass} {...ext}
+          >WordPress.org developers tab</a
+        >. That tab does not publish per-version dates. Tag dates on this page
+        come from plugins.trac.wordpress.org tagging-version commits (via
+        CockBot). Versions without a sourced tag date are marked as such.
+      </p>
+      <p class="mt-4 text-sm text-zinc-500">
+        <a href={withBase("ffl-cockpit")} class={linkClass}
+          >FFL Cockpit websites</a
+        >
+        {" · "}
+        <a href={LINKS.fflCockpit} class={linkClass} {...ext}>fflcockpit.com</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <ol class="rounded-2xl border border-zinc-800 bg-zinc-950/50">
+        {
+          FFL_COCKPIT_CHANGELOG.map((release) => (
+            <li class="border-b border-zinc-800 px-5 py-5 last:border-b-0 sm:px-6">
+              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h2 class="text-sm font-semibold text-white">
+                  {release.version}
+                </h2>
+                {release.tagged ? (
+                  <p class="text-xs text-zinc-500">{release.tagged}</p>
+                ) : (
+                  <p class="text-xs text-zinc-600">Date not sourced</p>
+                )}
+              </div>
+              <p class="mt-2 text-sm leading-relaxed text-zinc-400">
+                {release.note}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <CtaRow primary="ecommerce" />
+    </div>
+  </section>
+</BaseLayout>
