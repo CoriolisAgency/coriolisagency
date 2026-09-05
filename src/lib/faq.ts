@@ -101,11 +101,11 @@ export const FAQ_BEST: FaqItem[] = [
 export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
   {
     q: "How is Demand Intelligence different from RetailBI?",
-    a: "RetailBI measures sell-through — completed POS and ecommerce tickets, including the monthly RetailBI Firearm Sales Index of same-store new firearm units. Demand Intelligence measures search intent — what shoppers typed, including empty / unmet searches that never become a sale. Different factories. Different questions.",
+    a: "RetailBI measures sell-through — completed POS and ecommerce tickets, including the monthly RetailBI Firearm Sales Index of same-store new firearm units. Demand Intelligence measures search intent — what shoppers typed, including empty / unmet searches that never become a sale. One measures register tickets. The other measures what people typed.",
   },
   {
     q: "Is Demand Intelligence a RetailBI replacement?",
-    a: "No. Keep the Index for register truth. Add the ask for typed intent and unmet demand. Demand Intelligence does not claim Gearfire’s panel.",
+    a: "No. Keep the Index for register truth. Add the ask for typed intent and unmet demand. We do not sell Gearfire's sell-through data.",
   },
   {
     q: "I searched retailbi alternative — do I rip out sell-through?",
@@ -113,10 +113,10 @@ export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
   },
   {
     q: "Is Coriolis affiliated with Gearfire or RetailBI?",
-    a: "No. We are not affiliated with Gearfire or RetailBI. We do not claim their panel.",
+    a: "No. We are not affiliated with Gearfire or RetailBI. We do not sell their sell-through data.",
   },
   {
-    q: "Do you claim Gearfire’s panel?",
+    q: "Do you sell Gearfire's sell-through data?",
     a: "No. RetailBI sell-through is their network. Demand Intelligence is anonymized search intent from GunSearchEngine, GunSearchAgent embeds, and related demand surfaces.",
   },
   {
