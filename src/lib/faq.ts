@@ -101,15 +101,15 @@ export const FAQ_BEST: FaqItem[] = [
 export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
   {
     q: "How is Demand Intelligence different from RetailBI?",
-    a: "RetailBI measures sell-through — completed POS and ecommerce tickets, including the monthly RetailBI Firearm Sales Index of same-store new firearm units. Demand Intelligence measures search intent — what shoppers typed, including empty / unmet searches that never become a sale. One is what sold. The other is what they asked for.",
+    a: "RetailBI tells you what sold - guns that rang at the register or checked out online, including their monthly Index of new guns sold at the same stores as last year. Demand Intelligence tells you what people typed when they searched, including empty searches. One is what sold. The other is what they asked for.",
   },
   {
     q: "Is Demand Intelligence a RetailBI replacement?",
-    a: "No. Keep the Index for register truth. Add the ask for typed intent and unmet demand. We do not sell Gearfire's sales data.",
+    a: "No. Keep the Index for what sold at the register. Add the ask for typed intent and empty searches. We do not sell Gearfire's sales data.",
   },
   {
     q: "I searched retailbi alternative — do I rip out sell-through?",
-    a: "No. Searching alternative often means you want a second number, not to rip out what sold. Add Demand Intelligence beside what sold.",
+    a: "No. Searching \"alternative\" often means you want a second number, not to rip out what sold. Add Demand Intelligence beside what sold.",
   },
   {
     q: "Is Coriolis affiliated with Gearfire or RetailBI?",
@@ -121,14 +121,14 @@ export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
   },
   {
     q: "Is this ATF / 4473 software?",
-    a: "No. Not 4473, NICS processing, or bound-book software. Those stay with the systems licensed for them.",
+    a: "No. Not 4473 software. Not NICS. Not your bound book. Those stay with the systems licensed for them.",
   },
   {
     q: "How do I see guns and ammo people searched for but could not find?",
     a: "That is empty-search demand - they looked, nothing matched. Request a Demand Intelligence demo, or see Unmet Demand on the Demand Intelligence page. Dealer sites can also write empty searches down with GunSearchAgent.",
   },
   {
-    q: "What should OEMs use instead of only NICS or sell-through?",
-    a: "Use three numbers and do not mix them up: NICS is checks, not sales. RetailBI Index is sold units at the same stores. Search intent is what people typed — including empties. Keep sell-through. Add the ask.",
+    q: "What should brands use instead of only NICS or what sold?",
+    a: "Use three numbers and do not mix them up: NICS is checks, not sales. RetailBI Index is sold units at the same stores. Search intent is what people typed - including empties. Keep what sold. Add the ask.",
   },
 ];
