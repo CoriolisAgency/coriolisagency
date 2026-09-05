@@ -17,7 +17,7 @@ export const STUDIO_PROOF: StudioProof[] = [
     name: "Betsy AI",
     urlLabel: "2abetsy.com",
     href: LINKS.betsy,
-    job: "Demand intelligence for dealer sites — what people came for, not bounce rate.",
+    job: "Shows what people searched on the dealer site — including empty searches. Not bounce rate cosplay.",
     proof:
       "Built for this market. Live on GunSearchEngine embeds and dealer sites. Not 4473 software.",
     cta: "Meet Betsy",
