@@ -1,0 +1,340 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_DI_VS_RETAILBI } from "../lib/faq";
+import { LINKS, linkClass, btnPlan, btnSecondary } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+
+const three = [
+  ["NICS", "FBI background-check counts", "Gun sales"],
+  ["RetailBI Index", "New guns sold last month at the same stores as last year", "What people searched for"],
+  ["Search intent", "What people searched for — including searches that came back empty", "A sales report"],
+] as const;
+
+const vsRows = [
+  ["Raw material", "Completed POS and ecommerce tickets", "Typed searches and product clicks — including zero-hit"],
+  ["When the signal appears", "After checkout / register close", "As people search"],
+  ['What “demand” means', "Units sold (sell-through / Index)", "Asked-for language, including empties"],
+  ["Headline cadence", "Monthly Index prints", "Continuous capture · portal + API"],
+  ["Explicit non-goal", "Not a search-intent agent", "Not a POS or same-store Index"],
+] as const;
+
+const monday = [
+  [
+    "Inventory",
+    "What sold last period at reporting stores?",
+    "What are people typing that is thin or empty on participating feeds?",
+  ],
+  [
+    "Production",
+    "Which SKUs moved at the register?",
+    "Which calibers, loads, and models are getting asked for before the Index prints?",
+  ],
+  [
+    "Sales",
+    "Who bought?",
+    "Who is hunting language you can call on — heat days before the monthly print?",
+  ],
+  [
+    "Ads",
+    "What creatives matched sold units?",
+    "What shopper language should PDPs and ads use?",
+  ],
+  [
+    "Forecast",
+    "Same-store new-gun trend",
+    "Leading intent and unmet gaps the receipt never saw",
+  ],
+] as const;
+---
+
+<BaseLayout
+  title="Demand Intelligence vs RetailBI: what shoppers typed vs what sold | Coriolis"
+  description="Demand Intelligence vs RetailBI: sell-through shows what sold; search intent shows what people typed — including empty searches. Not a RetailBI replacement. Coriolis is not affiliated with Gearfire or RetailBI."
+  path="/demand-intelligence-vs-retailbi"
+  ogImagePath={CANON_PATHS.unmet}
+  faq={FAQ_DI_VS_RETAILBI}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">
+        Demand Intelligence · OEM
+      </p>
+      <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl">
+        What shoppers typed vs what sold
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        RetailBI tells you what sold at the register. Demand Intelligence tells
+        you what shoppers typed — including the searches that came back empty.
+        Keep the Index. Add the ask. This is not a fourth plate. RetailBI stays
+        in the frame.
+      </p>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Coriolis is not affiliated with Gearfire or RetailBI.
+      </p>
+      <div class="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+        <a href={withBase("contact")} class={btnPlan}>Request a Demand Intelligence demo</a>
+        <a href={LINKS.demandIntel} class={btnSecondary} target="_blank" rel="noopener noreferrer"
+          >See Unmet Demand</a
+        >
+      </div>
+      <p class="mt-6 max-w-3xl rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5 text-sm leading-relaxed text-zinc-300">
+        <strong class="font-semibold text-zinc-100">How is Demand Intelligence different from RetailBI?</strong>{" "}
+        RetailBI (Gearfire) measures sell-through — completed POS and ecommerce
+        tickets, including the monthly RetailBI Firearm Sales Index of same-store
+        new firearm units. Demand Intelligence (Betsy / Coriolis) measures search
+        intent — what shoppers typed, including empty / unmet searches that never
+        become a sale. Different factories: register tickets vs discovery
+        sessions. Demand Intelligence is <strong class="text-zinc-100">not</strong> a
+        RetailBI replacement. It does not claim Gearfire’s panel. NICS
+        background-check counts are not gun sales. OEMs that only watch NICS or
+        sell-through still lack the ask-side for inventory, production, sales
+        calls, ads, and forecast moves before the receipt. Not 4473, NICS
+        processing, or bound-book software.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        Three numbers. Stop mixing them up.
+      </h2>
+      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
+        Same spirit as the{" "}
+        <a href={LINKS.fflintel} class={linkClass} target="_blank" rel="noopener noreferrer"
+          >FFLintel</a
+        >{" "}
+        three-numbers desk. Checks ≠ units. Sold ≠ asked. Empties are real demand
+        that never becomes a receipt.
+      </p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[36rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              <th class="py-3 pr-4 font-medium">Number</th>
+              <th class="py-3 pr-4 font-medium">What it is</th>
+              <th class="py-3 font-medium">What it is not</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              three.map(([n, is, not]) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class="py-3 pr-4 font-medium text-zinc-200">{n}</th>
+                  <td class="py-3 pr-4">{is}</td>
+                  <td class="py-3">{not}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 max-w-2xl text-sm text-zinc-400">
+        More literacy:{" "}
+        <a href={`${LINKS.gse}/nics-vs-firearm-sales`} class={linkClass} target="_blank" rel="noopener noreferrer"
+          >NICS vs firearm sales</a
+        >
+        {" · "}
+        <a href={`${LINKS.gse}/retailbi-firearm-sales-index`} class={linkClass} target="_blank" rel="noopener noreferrer"
+          >RetailBI Firearm Sales Index</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        What RetailBI measures
+      </h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
+        Fair, from their public pages: NICS mixes permits, used guns, transfers,
+        multi-gun checks, and denials — so a same-store <strong class="text-zinc-100">new firearm</strong> POS/ecom
+        Index is a better <strong class="text-zinc-100">sales</strong> series than raw checks. RetailBI
+        aggregates network sell-through for brands. Useful for share, category,
+        and inventory planning from <strong class="text-zinc-100">completed</strong> transactions. We do not invent
+        panel size. Read their public Index and RetailBI pages for how they
+        describe the network.
+      </p>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        RetailBI remains the right tool for register truth and same-store new-gun
+        performance. Raid stands. We are not replacing that plate.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        What Demand Intelligence measures
+      </h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
+        Demand is what people typed. Demand Intelligence packages anonymized
+        search intent across GunSearchEngine, GunSearchAgent embeds, and related
+        demand surfaces — <strong class="text-zinc-100">including unmet (zero-hit) searches</strong>. Not a POS.
+        Not a same-store unit-sales index. Not 4473 / NICS / bound book.
+      </p>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Plans are public on{" "}
+        <a href={withBase(LINKS.demandIntelPage)} class={linkClass}>Demand Intelligence</a>
+        {" "}
+        (Insight / Growth / Platform — seats $49/user/mo, 1 Client Admin free).
+        Coriolis builds the OEM door. Public AI product name elsewhere:{" "}
+        <a href={withBase(LINKS.aiStudio)} class={linkClass}>AI Studio</a>.
+      </p>
+
+      <h3 class="mt-10 text-lg font-semibold text-white">
+        Betsy — leading 2A AI brand
+      </h3>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300">
+        Betsy is the product face behind Demand Intelligence: she turns typed
+        intent (and empties) into something OEMs and brands can act on — add a
+        SKU, run another lot, call accounts, move ad spend. Coriolis ships that
+        door. We do not invent usage stats.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        Demand Intelligence vs RetailBI
+      </h2>
+      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
+        Side-by-side. Different factories. Different questions. Use both when you
+        need lagging sell-through and leading intent.
+      </p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[40rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              <th class="py-3 pr-4 font-medium"> </th>
+              <th class="py-3 pr-4 font-medium">RetailBI (Gearfire)</th>
+              <th class="py-3 font-medium text-zinc-200">Demand Intelligence (Betsy / Coriolis)</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              vsRows.map(([k, a, b]) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class="py-3 pr-4 font-medium text-zinc-300">{k}</th>
+                  <td class="py-3 pr-4">{a}</td>
+                  <td class="py-3 text-zinc-200">{b}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 max-w-2xl text-sm text-zinc-400">
+        Long doctrine:{" "}
+        <a href={LINKS.betsyVsRetailBi} class={linkClass} target="_blank" rel="noopener noreferrer"
+          >RetailBI vs Betsy on GunSearchEngine</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        Monday jobs sell-through cannot see alone
+      </h2>
+      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
+        Same OEM jobs frame as{" "}
+        <a href={LINKS.oemDemand} class={linkClass} target="_blank" rel="noopener noreferrer"
+          >OEM firearms demand analytics</a
+        >. Days of heat and zero-hit gaps can show up before the monthly Index
+        prints. No invented heat percentages.
+      </p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[40rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              <th class="py-3 pr-4 font-medium">Job</th>
+              <th class="py-3 pr-4 font-medium">Sell-through asks</th>
+              <th class="py-3 font-medium text-zinc-200">Search demand asks</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              monday.map(([job, sold, ask]) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class="py-3 pr-4 font-medium text-zinc-300">{job}</th>
+                  <td class="py-3 pr-4">{sold}</td>
+                  <td class="py-3 text-zinc-200">{ask}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        Unmet demand: the empty search
+      </h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
+        Unmet = searched, zero stocked rows on participating feeds. The Index
+        cannot see a gun that was not on the shelf. Those searches also happen on
+        the dealer site —{" "}
+        <a href={LINKS.gsa} class={linkClass} target="_blank" rel="noopener noreferrer"
+          >GunSearchAgent</a
+        >{" "}
+        writes them down. The OEM door for full-market ask-side stays Demand
+        Intelligence.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        Who this is for / not for
+      </h2>
+      <ul class="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
+        <li>
+          <strong class="text-zinc-100">For:</strong> OEMs, distributors, and brands who already buy or trust
+          sell-through and still need the ask-side.
+        </li>
+        <li>
+          <strong class="text-zinc-100">Not for:</strong> someone who only wants a monthly sales Index and will
+          never act on search language.
+        </li>
+        <li>
+          <strong class="text-zinc-100">Fair:</strong> RetailBI remains the right tool for register truth. We
+          are not donating this page — and we are not tearing out sell-through.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_DI_VS_RETAILBI} />
+
+  <section class="border-t border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">
+        Keep the Index. Add the ask.
+      </h2>
+      <p class="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
+        Request a Demand Intelligence demo on the Coriolis form. See Unmet Demand
+        on the product page. Doctrine journal:{" "}
+        <a href={LINKS.fflintel} class={linkClass} target="_blank" rel="noopener noreferrer"
+          >fflintel.com</a
+        >.
+      </p>
+      <div class="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+        <a href={withBase("contact")} class={btnPlan}>Request a Demand Intelligence demo</a>
+        <a href={LINKS.demandIntel} class={btnSecondary} target="_blank" rel="noopener noreferrer"
+          >See Unmet Demand</a
+        >
+        <a href={withBase(LINKS.demandIntelPage)} class={btnSecondary}>Demand Intelligence plans</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

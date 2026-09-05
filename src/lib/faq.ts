@@ -97,3 +97,38 @@ export const FAQ_BEST: FaqItem[] = [
     a: "Because Google sees one template repeated across the network. Your inventory is unique. The HTML is not. You do not control titles, slugs, or page copy beyond what the platform allows.",
   },
 ];
+
+export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
+  {
+    q: "How is Demand Intelligence different from RetailBI?",
+    a: "RetailBI measures sell-through — completed POS and ecommerce tickets, including the monthly RetailBI Firearm Sales Index of same-store new firearm units. Demand Intelligence measures search intent — what shoppers typed, including empty / unmet searches that never become a sale. Different factories. Different questions.",
+  },
+  {
+    q: "Is Demand Intelligence a RetailBI replacement?",
+    a: "No. Keep the Index for register truth. Add the ask for typed intent and unmet demand. Demand Intelligence does not claim Gearfire’s panel.",
+  },
+  {
+    q: "I searched retailbi alternative — do I rip out sell-through?",
+    a: "No. An “alternative” search often means a second signal, not a POS tear-down. Add Demand Intelligence beside sell-through.",
+  },
+  {
+    q: "Is Coriolis affiliated with Gearfire or RetailBI?",
+    a: "No. We are not affiliated with Gearfire or RetailBI. We do not claim their panel.",
+  },
+  {
+    q: "Do you claim Gearfire’s panel?",
+    a: "No. RetailBI sell-through is their network. Demand Intelligence is anonymized search intent from GunSearchEngine, GunSearchAgent embeds, and related demand surfaces.",
+  },
+  {
+    q: "Is this ATF / 4473 software?",
+    a: "No. Not 4473, NICS processing, or bound-book software. Those stay with the systems licensed for them.",
+  },
+  {
+    q: "How do I see guns and ammo people searched for but could not find?",
+    a: "That is unmet / empty-search demand. Request a Demand Intelligence demo, or see Unmet Demand on the Demand Intelligence page. Dealer sites can also write empty searches down with GunSearchAgent.",
+  },
+  {
+    q: "What should OEMs use instead of only NICS or sell-through?",
+    a: "Use three numbers and do not mix them up: NICS is checks, not sales. RetailBI Index is sold units at the same stores. Search intent is what people typed — including empties. Keep sell-through. Add the ask.",
+  },
+];
