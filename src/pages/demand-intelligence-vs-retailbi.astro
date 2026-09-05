@@ -13,18 +13,18 @@ const three = [
 ] as const;
 
 const vsRows = [
-  ["Where the numbers come from", "Completed POS and ecommerce tickets", "Typed searches and product clicks - including zero-hit"],
-  ["When the signal appears", "After checkout / register close", "As people search"],
-  ['What "demand" means', "Units sold (sell-through / Index)", "Asked-for language, including empties"],
-  ["How often it updates", "Monthly Index prints", "Continuous capture · portal + API"],
-  ["What it is not", "Not a search-intent agent", "Not a POS or same-store Index"],
+  ["Where the numbers come from", "Guns that sold at the register or online", "What people typed and clicked - including empty searches"],
+  ["When you see it", "After the sale", "While they search"],
+  ['What "demand" means here', "Units sold (their Index)", "What they typed, including empties"],
+  ["How often it updates", "Monthly Index", "Ongoing in the portal and API"],
+  ["What it is not", "Not a search tool for shoppers", "Not a register or same-store sales Index"],
 ] as const;
 
 const monday = [
   [
     "Inventory",
-    "What sold last period at reporting stores?",
-    "What are people typing that is thin or empty on participating feeds?",
+    "What sold last period at stores in their network?",
+    "What are people typing that is thin or empty in live stock?",
   ],
   [
     "Production",
@@ -38,13 +38,13 @@ const monday = [
   ],
   [
     "Ads",
-    "What creatives matched sold units?",
-    "What shopper language should PDPs and ads use?",
+    "Which ads matched what sold?",
+    "What words should product pages and ads use?",
   ],
   [
     "Forecast",
     "Same-store new-gun trend",
-    "What people typed and empty searches the receipt never saw",
+    "What people typed and empty searches the sale never saw",
   ],
 ] as const;
 ---
@@ -59,7 +59,7 @@ const monday = [
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
       <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">
-        Demand Intelligence · OEM
+        Demand Intelligence · Brands and distributors
       </p>
       <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl">
         What shoppers typed vs what sold
@@ -81,17 +81,7 @@ const monday = [
       </div>
       <p class="mt-6 max-w-3xl rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5 text-sm leading-relaxed text-zinc-300">
         <strong class="font-semibold text-zinc-100">How is Demand Intelligence different from RetailBI?</strong>{" "}
-        RetailBI (Gearfire) measures sell-through - completed POS and ecommerce
-        tickets, including the monthly RetailBI Firearm Sales Index of same-store
-        new firearm units. Demand Intelligence (Betsy / Coriolis) measures search
-        intent - what shoppers typed, including empty / unmet searches that never
-        become a sale. One measures tickets at the register. The other measures
-        what people typed. Demand Intelligence is <strong class="text-zinc-100">not</strong> a
-        RetailBI replacement. We do not sell Gearfire's sell-through data. NICS
-        background-check counts are not gun sales. OEMs that only watch NICS or
-        sell-through still cannot see what people typed before a receipt -
-        inventory, production, sales calls, ads, and forecast moves. Not 4473,
-        NICS processing, or bound-book software.
+        RetailBI (Gearfire) tells you what sold - guns that rang at the register or checked out online. Their monthly Index tracks new guns sold at the same stores as last year. Demand Intelligence (Betsy / Coriolis) tells you what people typed when they searched - including searches that came back empty. One is what sold. The other is what they asked for. Demand Intelligence is <strong class="text-zinc-100">not</strong> a RetailBI replacement. We do not sell Gearfire's sales data. NICS background-check counts are not gun sales. If you only watch NICS or what sold, you still cannot see what people typed before anyone bought - so you guess on stock, production, sales calls, ads, and forecasts. Not 4473 software. Not NICS. Not your bound book.
       </p>
     </div>
   </section>
@@ -132,7 +122,7 @@ const monday = [
         </table>
       </div>
       <p class="mt-4 max-w-2xl text-sm text-zinc-400">
-        More literacy:{" "}
+        More detail:{" "}
         <a href={`${LINKS.gse}/nics-vs-firearm-sales`} class={linkClass} target="_blank" rel="noopener noreferrer"
           >NICS vs firearm sales</a
         >
@@ -150,16 +140,10 @@ const monday = [
         What RetailBI measures
       </h2>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Fair, from their public pages: NICS mixes permits, used guns, transfers,
-        multi-gun checks, and denials - so a same-store <strong class="text-zinc-100">new firearm</strong> POS/ecom
-        Index is a better <strong class="text-zinc-100">sales</strong> series than raw checks. RetailBI
-        aggregates network sell-through for brands. Useful for share, category,
-        and inventory planning from <strong class="text-zinc-100">completed</strong> transactions. We do not invent
-        how many stores report to them. Read their public Index and RetailBI pages for how they
-        describe the network.
+        Fair, from their public pages: NICS mixes permits, used guns, transfers, multi-gun checks, and denials. So their Index - new guns sold at the same stores as last year - is a better read on sales than raw NICS. RetailBI rolls up what sold across their dealer network for brands. Useful for share, category, and inventory planning from real sales. We do not invent how many stores report to them. Read their public Index and RetailBI pages.
       </p>
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        RetailBI remains the right tool for register truth and same-store new-gun
+        RetailBI remains the right tool for what sold at the register and same-store new-gun
         performance. Demand Intelligence is not a RetailBI replacement.
       </p>
     </div>
@@ -171,27 +155,22 @@ const monday = [
         What Demand Intelligence measures
       </h2>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Demand is what people typed. Demand Intelligence packages anonymized
-        search intent across GunSearchEngine, GunSearchAgent embeds, and related
-        demand surfaces - <strong class="text-zinc-100">including unmet (zero-hit) searches</strong>. Not a POS.
-        Not a same-store unit-sales index. Not 4473 / NICS / bound book.
+        Demand is what people typed. Demand Intelligence pulls anonymized searches from GunSearchEngine, GunSearchAgent on dealer sites, and related search tools - <strong class="text-zinc-100">including empty searches</strong>. Not a register. Not a same-store sales Index. Not 4473, NICS, or bound book.
       </p>
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
         Plans are public on{" "}
         <a href={withBase(LINKS.demandIntelPage)} class={linkClass}>Demand Intelligence</a>
         {" "}
         (Insight / Growth / Platform - seats $49/user/mo, 1 Client Admin free).
-        Coriolis builds Demand Intelligence for OEMs and brands. Public AI product name elsewhere:{" "}
+        Coriolis builds Demand Intelligence for brands and distributors. Elsewhere we call the AI work{" "}
         <a href={withBase(LINKS.aiStudio)} class={linkClass}>AI Studio</a>.
       </p>
 
       <h3 class="mt-10 text-lg font-semibold text-white">
-        Betsy - leading 2A AI brand
+        Betsy - our 2A AI
       </h3>
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Betsy is the product face behind Demand Intelligence: she turns typed
-        intent (and empties) into something OEMs and brands can act on - add a
-        SKU, run another lot, call accounts, move ad spend. Coriolis builds that product. We do not invent usage stats.
+        Betsy powers Demand Intelligence. She turns what people typed (and empty searches) into moves you can make - add a SKU, run another lot, call accounts, move ad spend. Coriolis builds that. We do not invent usage stats.
       </p>
     </div>
   </section>
@@ -202,7 +181,7 @@ const monday = [
         Demand Intelligence vs RetailBI
       </h2>
       <p class="mt-2 max-w-2xl text-sm text-zinc-400">
-        Side-by-side. Use both when you need what sold and what people typed.
+        Side by side. Use both when you need what sold and what people typed.
       </p>
       <div class="mt-6 overflow-x-auto">
         <table class="w-full min-w-[40rem] text-left text-sm">
@@ -227,7 +206,7 @@ const monday = [
         </table>
       </div>
       <p class="mt-4 max-w-2xl text-sm text-zinc-400">
-        Long doctrine:{" "}
+        Longer write-up:{" "}
         <a href={LINKS.betsyVsRetailBi} class={linkClass} target="_blank" rel="noopener noreferrer"
           >RetailBI vs Betsy on GunSearchEngine</a
         >.
@@ -238,7 +217,7 @@ const monday = [
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white sm:text-2xl">
-        What sell-through misses on Monday
+        What "what sold" misses on Monday
       </h2>
       <p class="mt-2 max-w-2xl text-sm text-zinc-400">
         Same jobs as{" "}
@@ -251,8 +230,8 @@ const monday = [
           <thead>
             <tr class="border-b border-zinc-800 text-zinc-500">
               <th class="py-3 pr-4 font-medium">Job</th>
-              <th class="py-3 pr-4 font-medium">Sell-through asks</th>
-              <th class="py-3 font-medium text-zinc-200">Search demand asks</th>
+              <th class="py-3 pr-4 font-medium">What sold asks</th>
+              <th class="py-3 font-medium text-zinc-200">What they typed asks</th>
             </tr>
           </thead>
           <tbody class="text-zinc-400">
@@ -277,13 +256,13 @@ const monday = [
         Unmet demand: the empty search
       </h2>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Unmet = searched, zero stocked rows on participating feeds. The Index
+        Unmet = they searched, and nothing in stock matched. The Index
         cannot see a gun that was not on the shelf. Those searches also happen on
         the dealer site -{" "}
         <a href={LINKS.gsa} class={linkClass} target="_blank" rel="noopener noreferrer"
           >GunSearchAgent</a
         >{" "}
-        writes them down. Full-market search intent for brands stays on Demand
+        writes them down. Brands who want the full market use Demand
         Intelligence.
       </p>
     </div>
@@ -296,16 +275,15 @@ const monday = [
       </h2>
       <ul class="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
         <li>
-          <strong class="text-zinc-100">For:</strong> OEMs, distributors, and brands who already buy or trust
-          sell-through and still need to see what people typed, including empties.
+          <strong class="text-zinc-100">For:</strong> brands and distributors who already watch what sold and still need to see what people typed, including empties.
         </li>
         <li>
           <strong class="text-zinc-100">Not for:</strong> someone who only wants a monthly sales Index and will
-          never act on search language.
+          never change a SKU or an ad based on searches.
         </li>
         <li>
-          <strong class="text-zinc-100">Fair:</strong> RetailBI remains the right tool for register truth. We
-          are not asking you to drop sell-through.
+          <strong class="text-zinc-100">Fair:</strong> RetailBI remains the right tool for what sold at the register. We
+          are not asking you to drop it.
         </li>
       </ul>
     </div>
