@@ -8,7 +8,7 @@ const posts = [...PRESS_POSTS].sort((a, b) => b.date.localeCompare(a.date));
 ---
 
 <BaseLayout
-  title="Press â€” Coriolis Agency"
+  title="Press — Coriolis Agency"
   description="Press releases from Coriolis Agency, the managed WooCommerce provider for FFLs. Greenville, SC."
   path="/press"
   ogImagePath={posts[0]?.ogImagePath ?? CANON_PATHS.rangeMckinney}
@@ -43,7 +43,7 @@ const posts = [...PRESS_POSTS].sort((a, b) => b.date.localeCompare(a.date));
               >
                 <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">
                   {post.kicker}
-                  <span class="text-zinc-500"> Â· {post.dateLabel}</span>
+                  <span class="text-zinc-500"> · {post.dateLabel}</span>
                 </p>
                 <h2 class="mt-2 text-lg font-semibold tracking-tight text-white">
                   {post.title}
