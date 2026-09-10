@@ -56,11 +56,7 @@ const acceleratorHref = `${withBase("ecommerce")}#ffl-accelerator`;
       <a href={ecommerceHref} class={btnPlan}>
         FFL Ecommerce Plans
       </a>
-    ) : (
-      <a href={withBase("contact")} class={btnPlan}>
-        Talk to Coriolis
-      </a>
-    )
+    ) : null
   }
   {
     showGsa && primary !== "stack" && (
@@ -68,9 +64,9 @@ const acceleratorHref = `${withBase("ecommerce")}#ffl-accelerator`;
         href={LINKS.gsa}
         target="_blank"
         rel="noopener noreferrer"
-        class={primary === "demo" ? btnSecondary : btnSky}
+        class={primary === "demo" ? btnSecondary : primary === "contact" ? btnPlan : btnSky}
       >
-        Put Betsy AI on my website
+        Claim GunSearchAgent.com Beta Account
       </a>
     )
   }
@@ -86,13 +82,7 @@ const acceleratorHref = `${withBase("ecommerce")}#ffl-accelerator`;
       </a>
     )
   }
-  {
-    primary !== "contact" && primary !== "stack" && (
-      <a href={withBase("contact")} class={btnSecondary}>
-        Talk to Coriolis
-      </a>
-    )
-  }
+
   {
     showAccelerator && (
       <a href={acceleratorHref} class={btnSecondary}>
