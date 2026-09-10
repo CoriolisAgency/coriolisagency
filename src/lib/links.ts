@@ -3,6 +3,7 @@ export const LINKS = {
   ecommerce: "/ecommerce",
   dropshipping: "/firearms-dropshipping",
   cockpitPage: "/ffl-cockpit",
+  cockpitChangelog: "/ffl-cockpit-changelog",
   ammoreadyAlt: "/ammoready-alternative",
   bestStore: "/best-ffl-ecommerce-website",
   aiStudio: "/ai-studio",

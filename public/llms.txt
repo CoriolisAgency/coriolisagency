@@ -19,7 +19,7 @@ Coriolis builds websites gun stores own, puts Betsy on those sites, and sells an
 - /contact — talk
 - /ai-studio — live software, not a catalog
 - /grok-bot-setup — the $995 session
-- /ammoready-alternative, /best-ffl-ecommerce-website, /firearms-dropshipping, /ffl-cockpit — store pages
+- /ammoready-alternative, /best-ffl-ecommerce-website, /firearms-dropshipping, /ffl-cockpit, /ffl-cockpit-changelog — store pages
 - /privacy, /msa, /confirmed, /unsubscribe — legal and list
 
 Old /ai-factory links go to /ai-studio. /plans goes to /ecommerce. /demand-intelligence goes to GunSearchEngine Demand Intelligence.
