@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { LINKS, linkClass } from "../../lib/links";
 import { PRESS_POSTS } from "../../lib/press";
 import { CANON_PATHS } from "../../lib/site";
 import { withBase } from "../../lib/base";
@@ -9,7 +8,7 @@ const posts = [...PRESS_POSTS].sort((a, b) => b.date.localeCompare(a.date));
 ---
 
 <BaseLayout
-  title="Press — Coriolis Agency"
+  title="Press â€” Coriolis Agency"
   description="Press releases from Coriolis Agency, the managed WooCommerce provider for FFLs. Greenville, SC."
   path="/press"
   ogImagePath={posts[0]?.ogImagePath ?? CANON_PATHS.rangeMckinney}
@@ -27,10 +26,7 @@ const posts = [...PRESS_POSTS].sort((a, b) => b.date.localeCompare(a.date));
         Newsroom
       </h1>
       <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300">
-        Releases from Coriolis Agency. For media inquiries:{" "}
-        <a href={LINKS.contactEmail} class={linkClass}
-          >{LINKS.contactEmailAddress}</a
-        >.
+        Releases from Coriolis Agency.
       </p>
     </div>
   </section>
@@ -47,7 +43,7 @@ const posts = [...PRESS_POSTS].sort((a, b) => b.date.localeCompare(a.date));
               >
                 <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">
                   {post.kicker}
-                  <span class="text-zinc-500"> · {post.dateLabel}</span>
+                  <span class="text-zinc-500"> Â· {post.dateLabel}</span>
                 </p>
                 <h2 class="mt-2 text-lg font-semibold tracking-tight text-white">
                   {post.title}
