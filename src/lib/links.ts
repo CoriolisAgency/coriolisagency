@@ -66,10 +66,10 @@ export const linkClass =
   "font-medium text-sky-400 hover:underline underline-offset-2";
 
 export const btnPlan =
-  "inline-flex w-full sm:w-auto items-center justify-center rounded-sm border border-gold/70 bg-gold px-5 py-3 text-sm font-semibold text-ink transition hover:bg-amber-300";
+  "inline-flex w-full sm:w-auto items-center justify-center rounded-sm border border-[#8a6a0a] bg-[#c8960c] px-5 py-3 text-sm font-semibold !text-[#05080f] transition hover:bg-[#e0a910]";
 
 export const btnSecondary =
   "inline-flex w-full sm:w-auto items-center justify-center rounded-sm border border-zinc-500 bg-transparent px-5 py-3 text-sm font-semibold text-zinc-100 transition hover:bg-zinc-800";
 
 export const btnSky =
-  "inline-flex w-full sm:w-auto items-center justify-center rounded-sm border border-sky-400 bg-sky-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-400";
+  "inline-flex w-full sm:w-auto items-center justify-center rounded-sm border border-[#1a3a5c] bg-[#0f2744] px-5 py-3 text-sm font-semibold !text-[#f8fafc] transition hover:bg-[#163556]";
