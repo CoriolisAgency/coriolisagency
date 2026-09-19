@@ -95,11 +95,11 @@ export const FAQ_AMMOREADY: FaqItem[] = [
   },
   {
     q: "What about Gearfire?",
-    a: "Leaving Gearfire is a separate pillar — see the Gearfire alternative page. Same owned-Woo model. We are not affiliated with Gearfire or RetailBI.",
+    a: "See the Gearfire alternative page. Same owned-Woo model. We are not affiliated with Gearfire or RetailBI.",
   },
   {
     q: "How do you migrate a live AmmoReady store?",
-    a: "Keep your domain. We stand up Woo on it before you give notice. Map the catalog and 301 the URLs that already rank. Wire FFL Checkout, payments, and taxes, then test a mixed cart. Connect the register only if you want the floor and the site in sync. Cut DNS. You leave with the site. Coriolis was founded by the person who ran AmmoReady for nine years.",
+    a: "Keep your domain. We stand up Woo on it before you give notice. Map the catalog and redirect the pages that already rank. Wire FFL Checkout, payments, and taxes, then test a mixed cart. Connect the register only if you want the floor and the site in sync. Cut DNS. You leave with the site. Coriolis was founded by the person who ran AmmoReady for nine years.",
   },
   {
     q: "What does setup cost?",
@@ -114,7 +114,7 @@ export const FAQ_GEARFIRE: FaqItem[] = [
   },
   {
     q: "Can I leave Gearfire without going dark?",
-    a: "Yes. Keep your domain. We stand up WooCommerce before you give notice, map the catalog, 301 the URLs that already rank, test a mixed cart, then cut DNS. Do not give notice until the new store is ready.",
+    a: "Yes. Keep your domain. We stand up WooCommerce before you give notice, map the catalog, redirect the pages that already rank, test a mixed cart, then cut DNS. Do not give notice until the new store is ready.",
   },
   {
     q: "What is Gearfire’s 2026 price?",
