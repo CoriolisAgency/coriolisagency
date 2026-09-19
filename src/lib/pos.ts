@@ -40,7 +40,7 @@ export const POS_PAGES: PosPage[] = [
     keepRegister:
       "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based MicroBiz POS integration so the floor and the site stay in sync. Unlimited API requests and webhooks. Coriolis does not file a 4473, run NICS, or replace the bound book.",
     extra:
-      "Coriolis connects MicroBiz for POS, ecommerce, and dropshipping: keep the register, own the website.",
+      "We keep MicroBiz on the counter and put WooCommerce on your domain.",
   },
   {
     slug: "trident-1-pos",
