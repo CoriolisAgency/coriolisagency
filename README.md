@@ -2,7 +2,7 @@
 
 Company home for **Coriolis, LLC** — Ecommerce, AI Studio, and Demand Intelligence.
 
-This repo is the company site on [coriolisagency.com](https://www.coriolisagency.com/). It is not a second checkout, not FFL Accelerator, and not GunSearchEngine.
+This repo is the company site on [www.coriolisagency.com](https://www.coriolisagency.com/) (apex 308s to www). It is not a second checkout, not FFL Accelerator, and not GunSearchEngine.
 
 ## Stack
 

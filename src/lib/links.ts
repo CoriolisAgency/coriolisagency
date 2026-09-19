@@ -1,10 +1,18 @@
 export const LINKS = {
-  home: "https://coriolisagency.com",
+  home: "https://www.coriolisagency.com",
   ecommerce: "/ecommerce",
   dropshipping: "/firearms-dropshipping",
   cockpitPage: "/ffl-cockpit",
   ammoreadyAlt: "/ammoready-alternative",
+  gearfireAlt: "/gearfire-alternative",
   bestStore: "/best-ffl-ecommerce-website",
+  emailFfl: "/email-marketing-for-ffl-ecommerce",
+  wooVsShopify: "/woocommerce-vs-shopify-for-gun-stores",
+  aimPosPage: "/aim-pos",
+  microbizPosPage: "/microbiz-pos",
+  tridentPosPage: "/trident-1-pos",
+  corestorePosPage: "/corestore-pos",
+  rapidPosPage: "/rapid-gun-systems-pos",
   aiStudio: "/ai-studio",
   grokBotSetup: "/grok-bot-setup",
   demandIntelPage: "/demand-intelligence",
@@ -50,7 +58,7 @@ export const LINKS = {
 } as const;
 
 export const SAME_AS = [
-  "https://coriolisagency.com",
+  "https://www.coriolisagency.com",
   "https://www.gunsearchengine.com",
   "https://gunsearchagent.com",
   "https://2abetsy.com",

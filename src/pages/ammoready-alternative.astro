@@ -5,6 +5,7 @@ import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import SwitchChecklist from "../components/SwitchChecklist.astro";
 import { FAQ_AMMOREADY } from "../lib/faq";
+import { HOWTO_SWITCH } from "../lib/howto";
 import { linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
@@ -21,10 +22,11 @@ const rows = [
 
 <BaseLayout
   title="AmmoReady alternative — WooCommerce + FFL Cockpit | Coriolis"
-  description="Coriolis is the AmmoReady alternative: WooCommerce you own, 21 distributor catalogs through FFL Cockpit, and a five-step switch. Same answer if you are leaving Gearfire."
+  description="Coriolis is the AmmoReady alternative: WooCommerce you own, 21 distributor catalogs through FFL Cockpit, and a five-step migration playbook. Founded by the person who ran AmmoReady for nine years."
   path="/ammoready-alternative"
   ogImagePath={CANON_PATHS.rangeMckinney}
   faq={FAQ_AMMOREADY}
+  extraJsonLd={[HOWTO_SWITCH]}
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
@@ -39,9 +41,18 @@ const rows = [
         AmmoReady alternative
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        AmmoReady is a fine place to start. It is a template website you don't own — ads you can't strip, their URLs, their race. When you want a site that actually works under your name, Coriolis is the AmmoReady alternative — and the same answer if you're leaving Gearfire. Template-based websites kill SEO in the cradle. We replace them with WooCommerce on your domain.</p>
+        AmmoReady is a fine place to start. It is a template website you don't
+        own — ads you can't strip, their URLs, their race. When you want a site
+        that actually works under your name, Coriolis is the AmmoReady
+        alternative. Template-based websites kill SEO in the cradle. We replace
+        them with WooCommerce on your domain. Leaving Gearfire? That is the{" "}
+        <a href={withBase("gearfire-alternative")} class={linkClass}
+          >Gearfire alternative</a
+        >{" "}
+        pillar — not this page.
+      </p>
       <div class="mt-8">
-        <CtaRow showGsa={false} showAccelerator />
+        <CtaRow primary="ecommerce" showGsa={false} showAccelerator showContact />
       </div>
       <EcommerceCluster current="ammoready-alternative" />
     </div>
@@ -50,11 +61,15 @@ const rows = [
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">
-        AmmoReady or Gearfire vs Coriolis
+        AmmoReady vs Coriolis
       </h2>
       <p class="mt-2 max-w-2xl text-sm text-zinc-400">
-        Gearfire is the other closed network people compare. Same column.
-        Coriolis is not affiliated with Gearfire or RetailBI.
+        Closed-platform column is AmmoReady. Gearfire, FirearmCart, and Gunpowdr
+        live on the{" "}
+        <a href={withBase("gearfire-alternative")} class={linkClass}
+          >Gearfire alternative</a
+        >{" "}
+        table.
       </p>
       <div class="mt-6 overflow-x-auto">
         <table class="w-full min-w-[36rem] text-left text-sm">
@@ -83,7 +98,9 @@ const rows = [
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">Switch checklist</h2>
+      <h2 class="text-xl font-semibold text-white">
+        AmmoReady migration playbook
+      </h2>
       <SwitchChecklist founderNote />
     </div>
   </section>

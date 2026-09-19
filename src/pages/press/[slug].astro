@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import CtaRow from "../../components/CtaRow.astro";
 import { LINKS, linkClass } from "../../lib/links";
 import { PRESS_POSTS, pressBySlug } from "../../lib/press";
-import { SITE } from "../../lib/site";
+import { SITE, SITE_ORIGIN } from "../../lib/site";
 import { withBase } from "../../lib/base";
 
 export function getStaticPaths() {
@@ -16,7 +16,7 @@ if (!post) {
   throw new Error(`Unknown press slug: ${slug}`);
 }
 
-const siteOrigin = Astro.site ?? new URL("https://coriolisagency.com");
+const siteOrigin = Astro.site ?? new URL(SITE_ORIGIN);
 const pageUrl = new URL(withBase(post.path), siteOrigin).href;
 const imageUrl = new URL(withBase(post.ogImagePath), siteOrigin).href;
 const ext = { target: "_blank", rel: "noopener noreferrer" };

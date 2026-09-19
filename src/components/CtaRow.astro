@@ -7,6 +7,7 @@ interface Props {
   ecommerceHash?: string;
   showGsa?: boolean;
   showAccelerator?: boolean;
+  showContact?: boolean;
   class?: string;
 }
 
@@ -15,6 +16,7 @@ const {
   ecommerceHash,
   showGsa = true,
   showAccelerator = false,
+  showContact = false,
   class: className,
 } = Astro.props;
 
@@ -87,6 +89,13 @@ const acceleratorHref = `${withBase("ecommerce")}#ffl-accelerator`;
     showAccelerator && (
       <a href={acceleratorHref} class={btnSecondary}>
         FFL Accelerator $569
+      </a>
+    )
+  }
+  {
+    showContact && primary !== "contact" && (
+      <a href={withBase("contact")} class={btnSecondary}>
+        Talk to Coriolis
       </a>
     )
   }

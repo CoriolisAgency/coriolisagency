@@ -4,6 +4,8 @@ import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import { FAQ_ECOMMERCE } from "../lib/faq";
+import { HOWTO_SWITCH, HOWTO_WOO_SELL_GUNS } from "../lib/howto";
+import { POS_PAGES } from "../lib/pos";
 import { LINKS, linkClass, btnPlan } from "../lib/links";
 import { PLANS, SETUP } from "../lib/plans";
 import { CANON_PATHS } from "../lib/site";
@@ -19,11 +21,12 @@ const switchSteps = [
 ---
 
 <BaseLayout
-  title="WooCommerce and FFL Cockpit hosting for FFLs | Coriolis"
-  description="Most gun store websites are template platforms you don’t control. Coriolis replaces them with WooCommerce on your domain. FFL Accelerator is $569 a month."
+  title="FFL Ecommerce Website Builder & Plans for Gun Stores | Coriolis"
+  description="FFL ecommerce websites you own: WooCommerce + FFL Cockpit, published plans from $169/mo, setup $500 or $2,500. Dealer website, dropshipping, and the register you already run."
   path="/ecommerce"
   ogImagePath={CANON_PATHS.rangeMckinney}
   faq={FAQ_ECOMMERCE}
+  extraJsonLd={[HOWTO_SWITCH, HOWTO_WOO_SELL_GUNS]}
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
     <div
@@ -38,15 +41,19 @@ const switchSteps = [
         <h1
           class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
         >
-          WooCommerce and FFL Cockpit hosting for FFLs
+          FFL ecommerce website builder and plans
         </h1>
         <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-          Most gun store “websites” are template platforms you don’t control.
-          AmmoReady and Gearfire put your inventory on pages you don’t own —
-          same templates, ads you can’t strip, titles and slugs you don’t write.
-          Template-based websites kill SEO in the cradle. Coriolis replaces that
-          with WooCommerce on your domain: sell what’s on the shelf, dropship
-          from twenty-one distributors, or both. Works with AIM, MicroBiz, Rapid Gun Systems, and Trident 1 POS systems. All plans now include <a href={LINKS.gsa} class={linkClass} target="_blank" rel="noopener noreferrer">GunSearchAgent.com</a> Pro.
+          This is the Coriolis FFL ecommerce page: dealer website, builder, and
+          published pricing. Most gun store “websites” are template platforms
+          you don’t control. AmmoReady and Gearfire put your inventory on pages
+          you don’t own — same templates, ads you can’t strip, titles and slugs
+          you don’t write. Coriolis replaces that with WooCommerce on your
+          domain: sell what’s on the shelf, dropship from twenty-one
+          distributors, or both. Works with AIM, MicroBiz, Rapid Gun Systems,
+          Trident 1, and Corestore. Monthly plans start at Minute Man $169.
+          FFL Accelerator is $569. Setup is $500 or $2,500. All plans include{" "}
+          <a href={LINKS.gsa} class={linkClass} target="_blank" rel="noopener noreferrer">GunSearchAgent.com</a> Pro.
         </p>
         <div class="mt-8">
           <CtaRow showGsa={false} />
@@ -162,7 +169,13 @@ const switchSteps = [
           the copy; you’re in the same HTML race as every other dealer on that
           platform. Coriolis is not affiliated with Gearfire or RetailBI.
         </p>
-        <p>Keep the register you already run. We replace the website.</p>
+        <p>
+          Keep the register you already run. We replace the website. WooCommerce
+          can sell guns when a licensed FFL owns the store and checkout is built
+          for dealer transfer — see the questions below. That is not a second
+          URL. Old “can you use WooCommerce to sell guns” and “is WooCommerce
+          good for firearms” posts 301 here.
+        </p>
         <p>Switch, in order:</p>
       </div>
       <ol
@@ -170,6 +183,45 @@ const switchSteps = [
       >
         {switchSteps.map((step) => <li>{step}</li>)}
       </ol>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="pos">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Keep your POS</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Warlord ($469/mo) and FFL Accelerator ($569/mo) connect the register you
+        already run. One page per register. No fake screenshots.
+      </p>
+      <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        {
+          POS_PAGES.map((p) => (
+            <li>
+              <a href={withBase(p.slug)} class={linkClass}>
+                {p.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="woocommerce">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        WooCommerce for firearms
+      </h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Yes — when the dealer is a licensed FFL and checkout is built for
+        transfer. Serialized firearms ship FFL-to-FFL. You write the titles and
+        slugs. Coriolis does not run 4473, NICS, or the bound book. This is not
+        legal advice. Shopify is a different platform; we do not sell a Shopify
+        gun-store product. See{" "}
+        <a href={withBase("woocommerce-vs-shopify-for-gun-stores")} class={linkClass}
+          >WooCommerce vs Shopify for gun stores</a
+        >.
+      </p>
     </div>
   </section>
 

@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_EMAIL } from "../lib/faq";
+import { LINKS, linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+---
+
+<BaseLayout
+  title="Email marketing for FFL ecommerce — Accelerator | Coriolis"
+  description="FFL Accelerator ($569/mo) includes email capture, list management, and welcome / abandoned-cart / back-in-stock / thank-you campaigns. Retail Setup ($2,500) is the full email build. No invented LTV."
+  path="/email-marketing-for-ffl-ecommerce"
+  ogImagePath={CANON_PATHS.storefront}
+  faq={FAQ_EMAIL}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        Ecommerce · Email
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        Email marketing for FFL ecommerce
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        Email on a gun store site is part of{" "}
+        <a href={`${withBase("ecommerce")}#ffl-accelerator`} class={linkClass}
+          >FFL Accelerator</a
+        >
+        {" "}at $569 a month: capture, list management, and campaign management
+        (welcome, abandoned cart, back in stock, thank you). We do not publish
+        an LTV multiple and we do not repeat old “42-to-1” headlines. The site
+        is yours.
+      </p>
+      <div class="mt-8">
+        <CtaRow primary="ecommerce" showGsa={false} showAccelerator showContact />
+      </div>
+      <EcommerceCluster current="email-marketing-for-ffl-ecommerce" />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">What is on which plan</h2>
+      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+        <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+          <h3 class="text-sm font-semibold text-sky-300">
+            FFL Accelerator · $569/mo
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">
+            Email capture, list management, and campaign management: welcome,
+            abandoned cart, back in stock, thank you. Plus GunSearchAgent Pro,
+            on-site technical SEO, and hosting on WP Engine.
+          </p>
+        </article>
+        <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+          <h3 class="text-sm font-semibold text-sky-300">
+            Retail Setup · $2,500 one-time
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400">
+            Complete email marketing setup, CRM integration, custom brand kit
+            and template, the welcome / abandoned-cart / back-in-stock series,
+            and deliverability work. Basic Setup ($500) includes email capture
+            implementation only.
+          </p>
+        </article>
+      </div>
+      <p class="mt-6 max-w-3xl text-sm text-zinc-500">
+        Program door:{" "}
+        <a href={LINKS.fflaccelerator} class={linkClass} target="_blank" rel="noopener noreferrer"
+          >fflaccelerator.com</a
+        >. Old{" "}
+        <span class="text-zinc-400">/email-marketing-firearms</span> and the
+        retired ROI headline 301 here. We do not claim that ratio.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_EMAIL} />
+</BaseLayout>

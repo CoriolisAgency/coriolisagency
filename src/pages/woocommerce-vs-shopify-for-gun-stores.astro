@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_SHOPIFY } from "../lib/faq";
+import { linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+---
+
+<BaseLayout
+  title="WooCommerce vs Shopify for gun stores | Coriolis"
+  description="Coriolis builds WooCommerce gun store websites you own. We do not sell a Shopify FFL product. FFL Cockpit and FFL Checkout are WooCommerce plugins."
+  path="/woocommerce-vs-shopify-for-gun-stores"
+  ogImagePath={CANON_PATHS.storefront}
+  faq={FAQ_SHOPIFY}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        Ecommerce · WooCommerce
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        WooCommerce vs Shopify for gun stores
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        Coriolis builds WooCommerce you own. We do not sell a Shopify gun-store
+        product. FFL Cockpit and FFL Checkout are WooCommerce plugins. Shopify
+        is a hosted platform with its own acceptable-use rules — we do not
+        republish their fee card or write their policy. If the question is “can
+        WooCommerce sell guns,” the answer lives on{" "}
+        <a href={withBase("ecommerce")} class={linkClass}>/ecommerce</a>: yes,
+        when a licensed FFL owns the store and checkout is built for dealer
+        transfer. This is not legal advice.
+      </p>
+      <div class="mt-8">
+        <CtaRow primary="ecommerce" showGsa={false} showAccelerator showContact />
+      </div>
+      <EcommerceCluster current="ecommerce" />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">What we publish</h2>
+      <ul class="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
+        <li>You leave with the WooCommerce site. No annual contract.</li>
+        <li>
+          Minute Man $169 through FFL Accelerator $569. Setup $500 or $2,500.
+        </li>
+        <li>
+          Militia+ includes FFL Cockpit (21 distributors) and FFL Checkout.
+        </li>
+        <li>
+          Warlord+ connects AIM, MicroBiz, Rapid Gun Systems, Trident 1, and
+          Corestore.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_SHOPIFY} />
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+import { CLOSED_PLATFORM_ROWS, PLATFORM_HEADERS } from "../lib/platforms";
+---
+
+<div class="mt-6 overflow-x-auto">
+  <table class="w-full min-w-[52rem] text-left text-sm">
+    <thead>
+      <tr class="border-b border-zinc-800 text-zinc-500">
+        {
+          PLATFORM_HEADERS.map((h, i) => (
+            <th
+              class:list={[
+                "py-3 pr-3 font-medium",
+                i === PLATFORM_HEADERS.length - 1 && "text-zinc-200",
+              ]}
+            >
+              {h}
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    <tbody class="text-zinc-400">
+      {
+        CLOSED_PLATFORM_ROWS.map((row) => (
+          <tr class="border-b border-zinc-800/80">
+            {row.map((cell, i) =>
+              i === 0 ? (
+                <th class="py-3 pr-3 font-medium text-zinc-300">{cell}</th>
+              ) : (
+                <td
+                  class:list={[
+                    "py-3 pr-3",
+                    i === row.length - 1 && "text-zinc-200",
+                  ]}
+                >
+                  {cell}
+                </td>
+              ),
+            )}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+<p class="mt-3 max-w-3xl text-xs leading-relaxed text-zinc-500">
+  FirearmCart and Gunpowdr appear because dealers compare them. We do not
+  republish their fee cards or invent catalog internals. AmmoReady and Gearfire
+  cells restate copy already published on this site. Coriolis is not affiliated
+  with Gearfire or RetailBI.
+</p>

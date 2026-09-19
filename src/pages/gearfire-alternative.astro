@@ -1,0 +1,119 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import PlatformTable from "../components/PlatformTable.astro";
+import SwitchChecklist from "../components/SwitchChecklist.astro";
+import { FAQ_GEARFIRE } from "../lib/faq";
+import { HOWTO_SWITCH } from "../lib/howto";
+import { LINKS, linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+---
+
+<BaseLayout
+  title="Gearfire alternative — WooCommerce you own | Coriolis"
+  description="Coriolis is the Gearfire alternative: WooCommerce on your domain, FFL Cockpit catalogs, and a five-step switch that does not take you dark. We do not republish Gearfire’s 2026 fee card."
+  path="/gearfire-alternative"
+  ogImagePath={CANON_PATHS.rangeMckinney}
+  faq={FAQ_GEARFIRE}
+  extraJsonLd={[HOWTO_SWITCH]}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        Ecommerce · Gearfire
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        Gearfire alternative
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        Gearfire is a closed network. The shops share chrome, nav, and a
+        “member of GEARFIRE” footer. You do not write the titles or the slugs.
+        Coriolis is the Gearfire alternative: WooCommerce on your domain, 21
+        distributor catalogs through FFL Cockpit, and the register you already
+        run. We are not affiliated with Gearfire or RetailBI. Leaving AmmoReady
+        is a{" "}
+        <a href={withBase("ammoready-alternative")} class={linkClass}
+          >separate pillar</a
+        >.
+      </p>
+      <div class="mt-8">
+        <CtaRow primary="ecommerce" showGsa={false} showAccelerator showContact />
+      </div>
+      <EcommerceCluster current="gearfire-alternative" />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="vs-woocommerce">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        Gearfire vs WooCommerce
+      </h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Gearfire Classic shops we opened share the same nav (Home, Store
+        Policies, Firearms News), the same footer, and the same financing FAQ.
+        Inventory changes. The page does not. On owned WooCommerce the page
+        lives on your domain. You write the H1, the about page, the transfer
+        page, and the schema. FirearmCart and Gunpowdr sit in the table because
+        dealers compare those storefronts too — we do not republish their fee
+        cards.
+      </p>
+      <PlatformTable />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="pricing-2026">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        Gearfire pricing 2026
+      </h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        We do not republish Gearfire’s fee card. It is theirs and it changes.
+        This site already calls that model “network-priced.” Bring their
+        invoice if you want it mapped to the published Coriolis ladder: Minute
+        Man $169, Militia $269, Gun Runner $369, Warlord $469, FFL Accelerator
+        $569. Setup is $500 or $2,500. No annual contract. If you walk, you
+        take the website.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="no-downtime">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        Leave Gearfire without going dark
+      </h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Keep the live Gearfire shop until the new store is ready. Do not give
+        notice first. Same five steps we publish on the AmmoReady pillar.
+      </p>
+      <SwitchChecklist />
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
+      <p class="max-w-3xl text-sm text-zinc-400">
+        Plans live on{" "}
+        <a href={`${withBase("ecommerce")}#ffl-accelerator`} class={linkClass}
+          >FFL ecommerce / Accelerator ($569)</a
+        >. Demand Intelligence is{" "}
+        <a href={withBase("demand-intelligence-vs-retailbi")} class={linkClass}
+          >not a RetailBI replacement</a
+        >. Vendor site:{" "}
+        <a href={LINKS.fflaccelerator} class={linkClass} target="_blank" rel="noopener noreferrer"
+          >fflaccelerator.com</a
+        >.
+      </p>
+      <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_GEARFIRE} />
+</BaseLayout>
