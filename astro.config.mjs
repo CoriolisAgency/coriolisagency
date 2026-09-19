@@ -4,11 +4,11 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 /**
- * Custom domain (default): https://coriolisagency.com → base /
+ * Custom domain (default): https://www.coriolisagency.com → base /
  * GitHub project path only: ASTRO_BASE=/coriolisagency/ ASTRO_SITE=https://coriolisagency.github.io
  */
 const base = process.env.ASTRO_BASE || "/";
-const site = process.env.ASTRO_SITE || "https://coriolisagency.com";
+const site = process.env.ASTRO_SITE || "https://www.coriolisagency.com";
 
 export default defineConfig({
   site,

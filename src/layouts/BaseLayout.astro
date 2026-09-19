@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import SiteChrome from "../components/SiteChrome.astro";
 import CoriolisEmailCapture from "../components/CoriolisEmailCapture.astro";
-import { SITE, CANON_PATHS } from "../lib/site";
+import { SITE, SITE_ORIGIN, CANON_PATHS } from "../lib/site";
 import { LINKS, SAME_AS } from "../lib/links";
 import { withBase } from "../lib/base";
 import type { FaqItem } from "../lib/faq";
@@ -35,7 +35,7 @@ const {
   extraJsonLd,
 } = Astro.props;
 
-const siteOrigin = Astro.site ?? new URL("https://coriolisagency.com");
+const siteOrigin = Astro.site ?? new URL(SITE_ORIGIN);
 const pagePath = path === "/" ? withBase("/") : withBase(path);
 const canonical = canonicalUrl ?? new URL(pagePath, siteOrigin).href;
 const ogAbs = new URL(withBase(ogImagePath), siteOrigin).href;

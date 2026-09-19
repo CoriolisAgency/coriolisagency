@@ -4,6 +4,7 @@ import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import { FAQ_DROPSHIP } from "../lib/faq";
+import { HOWTO_DROPSHIP } from "../lib/howto";
 import { LINKS, linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
@@ -32,6 +33,7 @@ const steps = [
   path="/firearms-dropshipping"
   ogImagePath={CANON_PATHS.rangeMckinney}
   faq={FAQ_DROPSHIP}
+  extraJsonLd={[HOWTO_DROPSHIP]}
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
     <div
@@ -112,7 +114,8 @@ const steps = [
           rules. Serialized firearms ship FFL-to-FFL. You log the transaction
           in the bound book you already use. Coriolis is not 4473 software, not
           a NICS system, and not a bound-book replacement. This is not legal
-          advice.
+          advice. FAQ JSON-LD on this page answers the legality questions
+          dealers type.
         </p>
       </div>
       <div>
@@ -127,13 +130,32 @@ const steps = [
     </div>
   </section>
 
+  <section class="border-b border-zinc-800/80 py-12" id="home-based-ffl">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Home-based FFLs</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Old home-based FFL dropshipping posts 301 here. Dropshipping can run
+        without a retail floor. You still need a valid FFL. We do not publish a
+        zoning or HOA checklist, a first-90-days timeline, or margin math —
+        those are not facts on this site, and we do not give legal advice. Talk
+        to your attorney and the ATF about premises rules.
+      </p>
+    </div>
+  </section>
+
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
       <p class="max-w-3xl text-sm text-zinc-400">
         Switching off a closed catalog? Start at the{" "}
         <a href={withBase("ammoready-alternative")} class={linkClass}
           >AmmoReady alternative</a
-        >{" "}
+        >
+        {" "}
+        or{" "}
+        <a href={withBase("gearfire-alternative")} class={linkClass}
+          >Gearfire alternative</a
+        >
+        {" "}
         page, then talk to us.
       </p>
       <CtaRow primary="ecommerce" showGsa={false} showAccelerator />

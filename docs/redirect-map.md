@@ -4,7 +4,7 @@ WordPress → this Astro site. **301s run on Vercel** (`vercel.json`), not Cloud
 
 Cloudflare is **DNS-only** after cutover (orange cloud off). Vercel security stays in front — do **not** proxy through Cloudflare. Bulk Redirect lists never fire in DNS-only mode; that is why old WP paths 404’d until they lived in `vercel.json`.
 
-Also 301 **`www.coriolisagency.com/*` → `https://coriolisagency.com/$1`** (host redirect elsewhere — see `docs/dns-cutover.md`). GSC (Domain property, last 16 months, Web): **1,426 of 1,441 clicks are on `www`**. Apex has 3 impressions and 0 clicks. Trailing-slash variants 308 to no-slash via `"trailingSlash": false` in `vercel.json` — do not duplicate slash rows in the redirects array.
+**Preferred host is `www`.** GSC (Domain property, last 16 months, Web): **1,426 of 1,441 clicks are on `www`**. Apex has 3 impressions and 0 clicks. Live already 308s `https://coriolisagency.com/*` → `https://www.coriolisagency.com/$1` (Vercel domains). `vercel.json` also has a host-conditioned 301 (`has.host = coriolisagency.com`). Canonicals, `LINKS.home`, sitemap, and `robots.txt` emit www. Trailing-slash variants 308 to no-slash via `"trailingSlash": false` in `vercel.json` — do not duplicate slash rows in the redirects array.
 
 Source: `Downloads/coriolisagency.com-Performance-on-Search-2026-08-16/` (Pages + Queries). Links export not in yet.
 
@@ -35,10 +35,10 @@ Same path, new voice, still answer the old query in the first 80 words. **Do not
 | `/` | 571 | 10,669 | Brand. New three-pillar home is fine. |
 | `/firearms-dropshipping` | 55 | 9,340 | Best non-brand URL. Query `firearms dropshipping` is pos 22 with 7 clicks — this page is the absorber. |
 | `/ffl-cockpit` | 33 | 2,390 | Partner product, pos ~8 for `ffl cockpit`. |
-| `/ammoready-alternative` | 19 | 1,780 | Query pos 6.1, 9 clicks. Keep the short slug. |
+| `/ammoready-alternative` | 19 | 1,780 | Query pos 6.1, 9 clicks. **AmmoReady pillar.** |
 | `/best-ffl-ecommerce-website` | 17 | 3,047 | Comparison intent still sells ecommerce. |
 
-Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`.
+Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/aim-pos`, `/microbiz-pos`, `/trident-1-pos`, `/corestore-pos`, `/rapid-gun-systems-pos`.
 
 `/demand-intelligence` 301s to `https://www.gunsearchengine.com/demand-intelligence/` (`permanent: true` in `vercel.json`). Trailing-slash variant 308s to no-slash first. Do not leave a competing DI page on this host.
 
@@ -96,9 +96,9 @@ Implemented in `vercel.json` (path sources only; trailing-slash handled by Verce
 | `/partners/` | `/about` | 16 | Trust page; no partners template on Astro. |
 | `/faq/` | `/ecommerce` | 5 | FAQ JSON-LD already on `/ecommerce`. |
 | `/payments/` and `/ffl-payments/` | `/ecommerce` | 10+1 | Capability of ecommerce. |
-| `/ammoready-alternative-why-ffls-are-switching-to-coriolis/` | `/ammoready-alternative` | 1 | Cannibal. |
-| `/gearfire-alternative-why-ffls-are-choosing-coriolis-instead/` | `/ammoready-alternative` | 9 | Same comparison cluster. |
-| `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026/` | `/ammoready-alternative` | 14 | |
+| `/ammoready-alternative-why-ffls-are-switching-to-coriolis/` | `/ammoready-alternative` | 1 | AmmoReady cannibal → AmmoReady pillar. |
+| `/gearfire-alternative-why-ffls-are-choosing-coriolis-instead/` | `/gearfire-alternative` | 9 | Gearfire cannibal → **Gearfire pillar** (was wrongly folded into AmmoReady). |
+| `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026/` | `/best-ffl-ecommerce-website` | 14 | Mixed both-platforms post → comparison page, not a third pillar. |
 | `/ffl-dropshipping/` | `/firearms-dropshipping` | 0 | 508 impr, 0 clicks — fold into the winner. |
 | `/what-is-firearms-dropshipping/` | `/firearms-dropshipping` | 4 | |
 | `/firearms-dropshipping-woocommerce/` | `/firearms-dropshipping` | 5 | |
@@ -107,8 +107,8 @@ Implemented in `vercel.json` (path sources only; trailing-slash handled by Verce
 | `/dropshipping-for-home-based-ffls-how-to-build-a-scalable-firearms-business-without-a-storefront/` | `/firearms-dropshipping` | 12 | |
 | `/home-based-ffl-dropshipping-with-woocommerce-ffl-cockpit-2026-complete-setup-guide/` | `/firearms-dropshipping` | 6 | |
 | `/ffl-cockpit-distributors-complete-list-of-21-supported-firearm-distributors-for-woocommerce-2026-update/` | `/ffl-cockpit` | 11 | |
-| `/coriolis-agency-announces-fully-managed-woocommerce-hosting-for-ffl-cockpit/` | `/ecommerce` | 11 | |
-| `/ffl-cockpit-woocommerce-hosting/` | `/ecommerce` | 2 | |
+| `/coriolis-agency-announces-fully-managed-woocommerce-hosting-for-ffl-cockpit/` | `/ffl-cockpit` | 11 | Cockpit hosting capture, not plans. |
+| `/ffl-cockpit-woocommerce-hosting/` | `/ffl-cockpit` | 2 | |
 | `/gun-store-ecommerce/` | `/ecommerce` | 8 | |
 | `/gun-store-website-builder-for-ffls/` | `/ecommerce` | 5 | |
 | `/best-ffl-ecommerce-website/` | *(keep — see above)* | 17 | |
@@ -140,19 +140,38 @@ Sum of clones with clicks is ~50, split thin. Do not keep 20 near-duplicate page
 | `/iron-valley-firearms-dropshipping-for-woocommerce/` | 1 |
 | All other `*-firearms-dropshipping-for-woocommerce/` | 0 |
 
-### POS integration posts → `/ecommerce`
+### POS integration posts → one page per register
 
-| Old | Clicks |
-|-----|-------:|
-| `/coriolis-agency-partners-with-aim-pos-…/` | 10 |
-| `/coriolis-agency-announces-support-for-corestore-pos-…/` | 6 |
-| `/ecommerce-for-trident-1-pos/` | 5 |
-| `/aim-pos-integration-for-woocommerce/` | 3 |
-| `/rapid-gun-systems-pos-integration-…/` | 3 |
-| `/axis-pos-woocommerce-a-powerful-integration-…/` | 3 |
-| `/coriolis-agency-and-microbiz-partner-…/` | 3 |
-| `/pos-integration-for-gun-store-ecommerce/` | 2 |
-| `/gun-store-pos-for-ffls/` | 0 (646 impr) |
+| Old | New | Clicks |
+|-----|-----|-------:|
+| `/coriolis-agency-partners-with-aim-pos-…/` | `/aim-pos` | 10 |
+| `/aim-pos-integration-for-woocommerce/` | `/aim-pos` | 3 |
+| `/coriolis-agency-and-microbiz-partner-…/` | `/microbiz-pos` | 3 |
+| `/ecommerce-for-trident-1-pos/` | `/trident-1-pos` | 5 |
+| `/coriolis-agency-announces-support-for-corestore-pos-…/` | `/corestore-pos` | 6 |
+| `/rapid-gun-systems-pos-integration-…/` | `/rapid-gun-systems-pos` | 3 |
+| `/axis-pos-woocommerce-a-powerful-integration-…/` | `/ecommerce` | 3 |
+| `/pos-integration-for-gun-store-ecommerce/` | `/ecommerce` | 2 |
+| `/gun-store-pos-for-ffls/` | `/ecommerce` | 0 (646 impr) |
+
+### Email (was “let die”) → Accelerator page
+
+| Old | New |
+|-----|-----|
+| `/email-marketing-for-ffl-ecommerce/` | **live page** (do not 301) |
+| `/email-marketing-firearms/` | `/email-marketing-for-ffl-ecommerce` |
+| `/the-roi-for-email-marketing-is-42-to-1/` | `/email-marketing-for-ffl-ecommerce` — do **not** repeat the 42:1 claim |
+
+### SEO ship 2026-09 — comparison consolidation
+
+| Intent | Canonical | 301 the rest |
+|--------|-----------|--------------|
+| AmmoReady alternative | `/ammoready-alternative` | `/ammoready-alternative-why-…`, `/switch`, `/switch-n-save` |
+| Gearfire alternative | `/gearfire-alternative` | `/gearfire-alternative-why-…` |
+| Best / beats both | `/best-ffl-ecommerce-website` | `/why-woocommerce-…-beats-gearfire-and-ammoready-…` |
+| FFL ecommerce / builder / Woo sell guns | `/ecommerce` | `/ffl-website-plans`, `/gun-store-website-builder-for-ffls`, `/can-you-use-woocommerce-to-sell-guns-…`, `/is-woocommerce-good-for-firearms`, `/woocommerce-for-firearms` |
+| FFL Cockpit website / hosting | `/ffl-cockpit` | hosting announcement slugs |
+| Dropshipping / home-based FFL | `/firearms-dropshipping` | home-based + distributor clones (unchanged) |
 
 ## Let die (do not 301 to `/`)
 
@@ -160,7 +179,7 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 **Off-strategy with impressions, almost no clicks**
 
-- Email: `/email-marketing-firearms/` (5 clicks), `/email-marketing-for-ffl-ecommerce/` (1), `/the-roi-for-email-marketing-is-42-to-1/` (0 clicks / 1,427 impr). Query cluster: **0 clicks**.
+- Email ROI headline only: the **42-to-1** claim is not republished. The slug 301s to `/email-marketing-for-ffl-ecommerce` (Accelerator facts only).
 - Agency/SEO vanity: `/firearms-digital-marketing-agency/` (15 clicks — only if you still want that door; else die), `/gun-industry-seo-company-…/` (10 c / 10,184 i), `/firearms-seo-marketing/` (7 c / 10,201 i). Query cluster: **6 clicks / 20k impr**.
 - Compliance software: `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` (28 c / 16,821 i) — **410**, do not 301. Query cluster is 1 click / 8.5k impr of bound-book noise.
 - `/ammoready-login/` (2 clicks) — not your product.
@@ -184,4 +203,4 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 1. Edit **`vercel.json`** `redirects` (paths only, `permanent: true`). Skip keep-slugs and trailing-slash duplicates. Retired named-vendor slugs go in `rewrites` → `/api/gone` (410), not `redirects`.
 2. Optionally mirror path changes in `scripts/cloudflare-bulk-redirects.csv` for reference — it is not the runtime.
-3. Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/best-ffl-ecommerce-website`, plus `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/stack`). Do not 301 those. `/demand-intelligence` is the exception: 301 to GunSearchEngine.
+3. Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, plus `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/stack`, the five POS slugs, `/woocommerce-vs-shopify-for-gun-stores`). Do not 301 those. `/demand-intelligence` is the exception: 301 to GunSearchEngine.

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://coriolisagency.com/sitemap-index.xml
+Sitemap: https://www.coriolisagency.com/sitemap-index.xml

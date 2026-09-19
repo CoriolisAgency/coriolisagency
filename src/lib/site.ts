@@ -1,10 +1,13 @@
+/** Preferred public host. Vercel already 308s apex → www. */
+export const SITE_ORIGIN = "https://www.coriolisagency.com";
+
 export const SITE = {
   name: "Coriolis",
   legalName: "Coriolis, LLC",
   titleDefault:
-    "Coriolis, LLC — FFL Ecommerce, AI Studio, Demand Intelligence",
+    "FFL Ecommerce Websites for Gun Stores | Coriolis, LLC",
   description:
-    "Coriolis builds ATF-aware WooCommerce for FFLs, ships AI products, and sells full-market Demand Intelligence to OEMs and brands. Greenville, SC.",
+    "Coriolis builds WooCommerce gun store websites you own — FFL Cockpit, dropshipping, and the register you already run. Greenville, SC.",
   role: "FFL Ecommerce · AI Studio · Demand Intelligence",
   origin: "Greenville, SC",
 } as const;

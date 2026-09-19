@@ -1,0 +1,134 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_POS, POS_PAGES, posBySlug } from "../lib/pos";
+import { linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+
+export function getStaticPaths() {
+  return POS_PAGES.map((page) => ({ params: { pos: page.slug } }));
+}
+
+const page = posBySlug(Astro.params.pos ?? "");
+if (!page) {
+  throw new Error(`Unknown POS slug: ${Astro.params.pos}`);
+}
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  path={page.path}
+  ogImagePath={CANON_PATHS.storefront}
+  faq={[...FAQ_POS]}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        Ecommerce · POS
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        {page.name} + WooCommerce
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        {page.lede}
+      </p>
+      <div class="mt-8">
+        <CtaRow primary="ecommerce" showGsa={false} showAccelerator showContact />
+      </div>
+      <EcommerceCluster current="ecommerce" />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Keep the register</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        {page.keepRegister}
+      </p>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        {page.extra}
+      </p>
+      {
+        page.vendorHref ? (
+          <p class="mt-4 text-sm text-zinc-500">
+            Vendor site:{" "}
+            <a href={page.vendorHref} class={linkClass} {...ext}>
+              {page.vendorHref.replace("https://", "")}
+            </a>
+            . Marks of their owners.
+          </p>
+        ) : (
+          <p class="mt-4 text-sm text-zinc-500">
+            {page.name} marks belong to their owners. Coriolis builds the
+            website.
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">The other registers</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Same keep-your-register message. Warlord and FFL Accelerator list all
+        five.
+      </p>
+      <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        {
+          POS_PAGES.filter((p) => p.slug !== page.slug).map((p) => (
+            <li>
+              <a href={withBase(p.slug)} class={linkClass}>
+                {p.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      {
+        page.slug === "aim-pos" ? (
+          <p class="mt-6 max-w-3xl text-sm text-zinc-400">
+            Named AIM deployments:{" "}
+            <a
+              href={withBase(
+                "press/five-ffls-choose-coriolis-for-aim-pos-integration",
+              )}
+              class={linkClass}
+            >
+              September 2026 press release
+            </a>
+            .
+          </p>
+        ) : null
+      }
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
+      <p class="max-w-3xl text-sm text-zinc-400">
+        Plans and setup live on{" "}
+        <a href={withBase("ecommerce")} class={linkClass}>FFL ecommerce</a>.
+        Leaving a closed storefront?{" "}
+        <a href={withBase("ammoready-alternative")} class={linkClass}
+          >AmmoReady</a
+        >
+        {" · "}
+        <a href={withBase("gearfire-alternative")} class={linkClass}>Gearfire</a>.
+      </p>
+      <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
+    </div>
+  </section>
+
+  <FaqBlock items={[...FAQ_POS]} />
+</BaseLayout>

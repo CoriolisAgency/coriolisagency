@@ -3,7 +3,7 @@
 Name the three offerings. Same sentence everywhere.
 
 1. **FFL Ecommerce** — managed WooCommerce for FFLs. Custom stores with FFL features, managed by Coriolis on WP Engine. The dealer owns the site.
-2. **AI Studio** — live products we built and run. URL `/ai-factory`.
+2. **AI Studio** — live products we built and run. URL `/ai-studio` (`/ai-factory` 301s here).
 3. **Demand Intelligence** — what the market searched for, including what it could not find.
 
 Home H1 is the inventory, not a count: **FFL Ecommerce. AI Studio. Demand Intelligence.**

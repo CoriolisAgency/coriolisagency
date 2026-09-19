@@ -10,8 +10,12 @@
 | FFL website plans / WooCommerce hosting ladder | **This site** `/ecommerce` |
 | Firearms dropshipping / FFL dropshipping | **This site** `/firearms-dropshipping` |
 | FFL Cockpit + “what website do I use” | **This site** `/ffl-cockpit` |
-| AmmoReady alternative / Gearfire alternative | **This site** `/ammoready-alternative` |
+| AmmoReady alternative | **This site** `/ammoready-alternative` |
+| Gearfire alternative / FirearmCart / Gunpowdr compare | **This site** `/gearfire-alternative` |
 | Best FFL ecommerce website | **This site** `/best-ffl-ecommerce-website` |
+| Email for FFL ecommerce | **This site** `/email-marketing-for-ffl-ecommerce` |
+| WooCommerce vs Shopify (gun stores) | **This site** `/woocommerce-vs-shopify-for-gun-stores` |
+| AIM / MicroBiz / Trident 1 / Corestore / Rapid + Woo | **This site** `/aim-pos` `/microbiz-pos` `/trident-1-pos` `/corestore-pos` `/rapid-gun-systems-pos` |
 | FFL Accelerator $569 program story | **fflaccelerator.com** |
 | AI Studio / Coriolis products as capability | **This site** `/ai-studio` (`/ai-factory` → 301) |
 | Betsy AI character | **2abetsy.com** |
@@ -28,7 +32,7 @@
 
 1. Conversion: monthly ecommerce → `/contact`. Setup → existing Stripe links. DI → GSE demo. GSA → gunsearchagent.com.
 2. First ~80 words of each commercial page answer the query.
-3. FAQ JSON-LD on `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/best-ffl-ecommerce-website`, and `/stack`.
+3. FAQ JSON-LD on `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, the five POS pages, and `/stack`. HowTo JSON-LD on `/ecommerce` (switch + Woo sell guns), `/firearms-dropshipping`, `/ammoready-alternative`, and `/gearfire-alternative`.
 4. Organization `sameAs`: listed in `src/lib/links.ts`.
 5. Never H1 “RetailBI alternative.” Never “switch off RetailBI.” Never 4473 automation claims.
 6. Frozen strings from `src/lib/frozen.ts`.
@@ -37,7 +41,7 @@
 ## Internal links
 
 - Home → three pillars
-- Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / best-store cluster + `/stack`
+- Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / Gearfire / best-store / email / POS cluster + `/stack`
 - AI Studio → live product URLs (proof, not a catalog)
 - Demand Intelligence lives on GunSearchEngine; this host 301s `/demand-intelligence` there. `/stack` inbound uses the GSE URL.
 - About → family lattice
