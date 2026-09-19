@@ -40,7 +40,7 @@ export const POS_PAGES: PosPage[] = [
     keepRegister:
       "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based MicroBiz POS integration so the floor and the site stay in sync. Unlimited API requests and webhooks. Coriolis does not file a 4473, run NICS, or replace the bound book.",
     extra:
-      "A WordPress-era Coriolis post described a MicroBiz partnership for POS, ecommerce, and dropshipping. That slug now lands here. The public offer is the same: keep the register, own the website.",
+      "We keep MicroBiz on the counter and put WooCommerce on your domain.",
   },
   {
     slug: "trident-1-pos",
@@ -54,7 +54,7 @@ export const POS_PAGES: PosPage[] = [
     keepRegister:
       "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based Trident 1 POS integration so the floor and the site stay in sync. Unlimited API requests and webhooks. Coriolis does not file a 4473, run NICS, or replace the bound book.",
     extra:
-      "The old /ecommerce-for-trident-1-pos post now lives here. Same job: a store you own in front of the register you already run.",
+      "Same job: a store you own in front of the register you already run.",
   },
   {
     slug: "corestore-pos",
@@ -68,7 +68,7 @@ export const POS_PAGES: PosPage[] = [
     keepRegister:
       "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based Corestore POS integration so the floor and the site stay in sync. Unlimited API requests and webhooks. Coriolis does not file a 4473, run NICS, or replace the bound book.",
     extra:
-      "The old Corestore support announcement now lands here. We do not publish Corestore’s fee card. Compare the published Coriolis ladder.",
+      "We do not publish Corestore’s fee card. Compare the published Coriolis ladder.",
   },
   {
     slug: "rapid-gun-systems-pos",
@@ -82,7 +82,7 @@ export const POS_PAGES: PosPage[] = [
     keepRegister:
       "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based Rapid Gun Systems integration so the floor and the site stay in sync. Unlimited API requests and webhooks. Coriolis does not file a 4473, run NICS, or replace the bound book.",
     extra:
-      "The old Rapid Gun Systems integration post now lands here. Same keep-your-register message as AIM, MicroBiz, Trident 1, and Corestore.",
+      "Same keep-your-register message as AIM, MicroBiz, Trident 1, and Corestore.",
   },
 ];
 

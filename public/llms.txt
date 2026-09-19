@@ -19,8 +19,8 @@ Coriolis builds websites gun stores own, puts Betsy on those sites, and sells an
 - /contact — talk
 - /ai-studio — live software, not a catalog
 - /grok-bot-setup — the $995 session
-- /ammoready-alternative — AmmoReady pillar
-- /gearfire-alternative — Gearfire pillar (FirearmCart / Gunpowdr named on that table)
+- /ammoready-alternative — AmmoReady alternative
+- /gearfire-alternative — Gearfire alternative (FirearmCart / Gunpowdr named on that table)
 - /best-ffl-ecommerce-website, /firearms-dropshipping, /ffl-cockpit — store pages
 - /email-marketing-for-ffl-ecommerce — Accelerator email (no LTV claim)
 - /woocommerce-vs-shopify-for-gun-stores — owned Woo vs hosted Shopify
