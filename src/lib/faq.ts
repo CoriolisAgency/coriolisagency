@@ -198,7 +198,7 @@ export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
   },
   {
     q: "Do you sell Gearfire's sales data?",
-    a: "No. RetailBI sales data is theirs. Demand Intelligence is anonymized searches from GunSearchEngine, GunSearchAgent on dealer sites, and related search tools.",
+    a: "No. RetailBI sales data is theirs. Demand Intelligence is anonymized searches from Gun Search Engine, including on dealer sites, and related search tools.",
   },
   {
     q: "Is this ATF / 4473 software?",
@@ -206,7 +206,7 @@ export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
   },
   {
     q: "How do I see guns and ammo people searched for but could not find?",
-    a: "That is empty-search demand - they looked, nothing matched. Request a Demand Intelligence demo, or see Unmet Demand on the Demand Intelligence page. Dealer sites can also write empty searches down with GunSearchAgent.",
+    a: "That is empty-search demand - they looked, nothing matched. Request a Demand Intelligence demo, or see Unmet Demand on the Demand Intelligence page. Dealer sites can also write empty searches down with Gun Search Engine.",
   },
   {
     q: "What should brands use instead of only NICS or what sold?",

@@ -171,7 +171,7 @@ function nodeById(id: StackNodeId) {
           joinEdges.map((e) => (
             <p class="stack-join-fact" data-from={e.from} data-to={e.to}>
               {e.from === "sensor" && e.to === "search" ? (
-                "GunSearchAgent writes Search"
+                "Gun Search Engine writes Search"
               ) : (
                 <>
                   <span class="stack-join-fact__from">

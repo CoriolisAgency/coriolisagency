@@ -83,7 +83,7 @@ export const PLANS: Plan[] = [
     price: 569,
     hook: "Add Jet Fuel",
     features: [
-      "GunSearchAgent.com Pro (Betsy on the shop)",
+      "Gun Search Engine (Betsy on the shop)",
       "Page speed optimization",
       "Shopping cart optimization",
       "Advanced site monitoring",
@@ -116,7 +116,7 @@ export const SETUP = [
       "FFL Checkout License & Configuration",
       "Payment Gateway Installation",
       "Email Capture Implementation",
-      "GunSearchAgent.com Setup (Free plan)",
+      "Gun Search Engine setup (free plan)",
       "DNS Configuration (Launch)",
       "Additional custom pages $125 each",
     ],
@@ -160,7 +160,7 @@ export const CAPABILITIES = [
   },
   {
     title: "Betsy on the domain",
-    body: "Basic setup includes free GunSearchAgent. Accelerator includes Pro. Betsy lives on their site and answers search demand. This page is not an OEM product.",
+    body: "Basic setup includes free Gun Search Engine. Accelerator includes Betsy on the shop. Betsy lives on their site and answers search demand. This page is not an OEM product.",
   },
 ] as const;
 

@@ -33,8 +33,8 @@ export const LINKS = {
   googleReviews: "https://g.page/r/Ca-DxrPglsXcEAI",
   contactEmail: "mailto:paul@coriolisagency.com",
   contactEmailAddress: "paul@coriolisagency.com",
-  gsa: "https://gunsearchagent.com",
-  gsaGa: "https://gunsearchagent.com/google-analytics-alternative-for-ffls",
+  gsa: "https://www.gunsearchengine.com/for-dealers",
+  gsaGa: "https://www.gunsearchengine.com/google-analytics-alternative-for-ffls",
   gse: "https://www.gunsearchengine.com",
   demandIntel: "https://www.gunsearchengine.com/demand-intelligence",
   demandDemo: "https://www.gunsearchengine.com/demand-intelligence#demo",
@@ -60,7 +60,6 @@ export const LINKS = {
 export const SAME_AS = [
   "https://www.coriolisagency.com",
   "https://www.gunsearchengine.com",
-  "https://gunsearchagent.com",
   "https://2abetsy.com",
   "https://fflintel.com",
   "https://fflaccelerator.com",

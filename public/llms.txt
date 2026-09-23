@@ -4,7 +4,7 @@ Coriolis builds websites gun stores own, puts Betsy on those sites, and sells an
 
 ## Products and prices
 - FFL Accelerator — $569 a month. WooCommerce on the dealer domain. Setup $500 or $2,500. No year lock. They leave with the site.
-- GunSearchAgent — free on a dealer site. Pro is included with FFL Accelerator.
+- Gun Search Engine — free on a dealer site. Included with FFL Accelerator.
 - Demand Intelligence — brands. Full-market anonymized search. Seats $49 per user per month. One Client Admin free.
 - Grok Bot setup — $995. One session. Their Cursor seat. We never rent them ours.
 - Gun Store Game — consumer game. Dealer claim is a separate door.

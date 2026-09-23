@@ -12,13 +12,13 @@ export const STACK_H1 = "Two maps. One store. One market.";
 
 export const STACK_LEDE = [
   "A gun store should own its website and see what people typed on it. A brand should see what the category asked for, without buying a shopper list. Those are different jobs. They share a map. They are not one product.",
-  "Coriolis builds the store. GunSearchAgent sits on that store and writes down the searches, including the ones that came back empty. Demand Intelligence is the category read of that same search, sold to brands. The register and the 4473 stay where they are.",
+  "Coriolis builds the store. Gun Search Engine sits on that store and writes down the searches, including the ones that came back empty. Demand Intelligence is the category read of that same search, sold to brands. The register and the 4473 stay where they are.",
 ] as const;
 
 export const STACK_ADVANTAGE = [
   {
     head: "The store is yours.",
-    body: "WooCommerce on your domain. GunSearchAgent on that site. You leave with both.",
+    body: "WooCommerce on your domain. Gun Search Engine on that site. You leave with both.",
   },
   {
     head: "Search, not bounce.",
@@ -148,8 +148,8 @@ export const STACK_NODES: StackNode[] = [
   },
   {
     id: "sensor",
-    label: "GunSearchAgent writes Search",
-    sentence: "GunSearchAgent on that site",
+    label: "Gun Search Engine writes Search",
+    sentence: "Gun Search Engine on that site",
     field: "b",
     x: "26%",
     y: "78%",
