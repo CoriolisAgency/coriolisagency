@@ -7,8 +7,7 @@ export const POS_ECOM_EYEBROW = "POS + ecommerce";
 
 export const POS_ECOM_H1 = "Gun Runner by Coriolis";
 
-export const POS_ECOM_LEDE =
-  "One stack for a dealer, and one partner. It wins on value at a competitive price, not on being the cheapest.";
+export const POS_ECOM_LEDE = "Everything you need, and you own it.";
 
 export const POS_ECOM_WHO = "Independent FFL dealers.";
 
