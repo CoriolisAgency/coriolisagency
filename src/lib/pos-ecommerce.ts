@@ -13,11 +13,11 @@ export const POS_ECOM_WHO = "Independent FFL dealers.";
 
 export const POS_ECOM_SECTIONS = [
   {
-    title: "Gun Runner",
+    title: "Gun Store POS",
     body: "Gun Runner, the in-store register for FFLs, built on WooCommerce POS. It shares one catalog and one inventory with the website.",
   },
   {
-    title: "Coriolis Web",
+    title: "FFL Ecommerce",
     body: "A custom WooCommerce store built by Coriolis on the Kadence theme.",
   },
   {
@@ -25,7 +25,7 @@ export const POS_ECOM_SECTIONS = [
     body: "Unlimited hosting with a 99.95% uptime SLA. Managed by Coriolis on WP Engine.",
   },
   {
-    title: "Coriolis Payments",
+    title: "2A Payment Processing",
     body: "The only supported processor. Firearms-friendly card processing for the counter and online. No bring-your-own gateway.",
   },
   {
