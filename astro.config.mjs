@@ -19,7 +19,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes("/stack-preview"),
+      filter: (page) =>
+        !page.includes("/stack-preview") && !page.includes("/pos-ecommerce"),
     }),
   ],
   vite: {
