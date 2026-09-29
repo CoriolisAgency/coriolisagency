@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { btnPlan } from "../lib/links";
+import { withBase } from "../lib/base";
+import {
+  POS_ECOM_EYEBROW,
+  POS_ECOM_FITS,
+  POS_ECOM_FITS_TITLE,
+  POS_ECOM_H1,
+  POS_ECOM_LEDE,
+  POS_ECOM_META,
+  POS_ECOM_SECTIONS,
+  POS_ECOM_TITLE,
+  POS_ECOM_WHO,
+} from "../lib/pos-ecommerce";
+---
+
+<BaseLayout
+  title={POS_ECOM_TITLE}
+  description={POS_ECOM_META}
+  path="/gun-store-pos"
+  noindex
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        {POS_ECOM_EYEBROW}
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]"
+      >
+        {POS_ECOM_H1}
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        {POS_ECOM_LEDE}
+      </p>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
+        <span class="font-semibold text-white">Who it's for.</span>{" "}
+        {POS_ECOM_WHO}
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {
+          POS_ECOM_SECTIONS.map((section) => (
+            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+              <h2 class="text-lg font-semibold text-white">{section.title}</h2>
+              <p class="mt-3 text-sm leading-relaxed text-zinc-400">
+                {section.body}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">{POS_ECOM_FITS_TITLE}</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        {POS_ECOM_FITS}
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Talk with Coriolis</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Tell us about the counter and the website.
+      </p>
+      <div class="mt-6">
+        <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
