@@ -41,10 +41,12 @@ function assertLandingPage(rel, { h1, campaign, notice }) {
   assert.match(src, /utm_source=coriolisagency/);
   assert.match(src, new RegExp(`utm_campaign=${campaign}`));
   assert.match(src, new RegExp(notice.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  assert.match(src, /Sign up by Dec 31, 2026 and get Pro free through Dec 31, 2027\./);
+  assert.match(src, /Sign up by Dec 31, 2026 and get Pro free through Dec 31, 2027\. \$99\/month after that\./);
   assert.doesNotMatch(src, /Free through December 31, 2026/);
-  assert.doesNotMatch(src, /\$\d/);
-  assert.doesNotMatch(src, /\/month/);
+  // The only price allowed on these pages is the Pro line's "$99/month after that".
+  const priceless = src.replace("$99/month after that.", "");
+  assert.doesNotMatch(priceless, /\$\d/);
+  assert.doesNotMatch(priceless, /\/month/);
   assert.doesNotMatch(src, bannedCopy);
   assert.doesNotMatch(src, /noindex/);
   assert.doesNotMatch(src, /<img/);
