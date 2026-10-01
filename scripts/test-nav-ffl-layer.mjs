@@ -53,6 +53,7 @@ function assertLandingPage(rel, { h1, campaign, notice }) {
   const gseUrls = src.match(/https?:\/\/(?:www\.)?gunsearchengine\.com[^"'\s]*/g) ?? [];
   assert.ok(gseUrls.length >= 1, `${rel} missing dealer register CTA`);
   for (const url of gseUrls) {
+    if (url === "https://www.gunsearchengine.com/for-dealers/gse-demand-intelligence-august-2026.png") continue;
     assert.match(
       url,
       /\/dealers\/register/,
@@ -158,6 +159,11 @@ for (const rel of ["src/pages/ffl-analytics.astro", "src/pages/ffl-search-consol
   for (const f of PRO_FEATURES) assert.ok(plate.includes(f), `${rel} Pro plate missing: ${f}`);
   assert.equal([...plate.matchAll(/<li\b/g)].length, 5, `${rel} Pro plate must list exactly 5 features`);
   assert.doesNotMatch(src, /Otter Text|More Pro features are on the way/);
+  assert.match(
+    plate,
+    /Monthly Demand Intelligence reports\{" "\}\s*<a\s+href="https:\/\/www\.gunsearchengine\.com\/for-dealers\/gse-demand-intelligence-august-2026\.png"\s+target="_blank"\s+rel="noopener noreferrer"\s+class="[^"]*text-gold[^"]*"\s*>\(see sample\)<\/a/,
+    `${rel} missing gold "(see sample)" link`,
+  );
 }
 
 console.log("test-nav-ffl-layer: ok");
