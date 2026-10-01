@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import gseLinks from "./src/integrations/gse-links.mjs";
 
 /**
  * Custom domain (default): https://www.coriolisagency.com → base /
@@ -18,6 +19,7 @@ export default defineConfig({
     "/ai-factory": "/ai-studio",
   },
   integrations: [
+    gseLinks(),
     sitemap({
       filter: (page) =>
         !page.includes("/stack-preview") && !page.includes("/gun-store-pos"),

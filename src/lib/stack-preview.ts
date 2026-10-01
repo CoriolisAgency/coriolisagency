@@ -65,7 +65,7 @@ export const PREVIEW_FACTS = [
 export const PREVIEW_NOW_HEAD = "NOW — the store you run today";
 
 export const PREVIEW_NOW_LEDE =
-  "Shopper to your Woo store. Gun Search Engine is a doorbell on that store, not a warehouse. FFL Cockpit writes Woo. Distributors feed Cockpit. The office pays Stripe for hosting. Dotted lines are claim and host only.";
+  "Shopper to your Woo store. GunSearchEngine.com is a doorbell on that store, not a warehouse. FFL Cockpit writes Woo. Distributors feed Cockpit. The office pays Stripe for hosting. Dotted lines are claim and host only.";
 
 export const PREVIEW_NEXT_HEAD = "NEXT — three paths";
 
@@ -74,16 +74,16 @@ export const PREVIEW_NEXT_LEDE =
 
 export const PREVIEW_NOW: PreviewGraph = {
   id: "now",
-  aria: "Now store: shopper to Woo, Gun Search Engine doorbell and FFL Checkout, FFL Cockpit, distributors, office Stripe hosting bill",
+  aria: "Now store: shopper to Woo, GunSearchEngine.com doorbell and FFL Checkout, FFL Cockpit, distributors, office Stripe hosting bill",
   caption:
-    "Gun Search Engine sits on the store as a doorbell. Stripe is the hosting bill. It is not on the cart.",
+    "GunSearchEngine.com sits on the store as a doorbell. Stripe is the hosting bill. It is not on the cart.",
   nodes: [
     {
       id: "now-gsa",
-      label: "Gun Search Engine",
+      label: "GunSearchEngine.com",
       sublabel: "doorbell, not a warehouse",
       sentence:
-        "Gun Search Engine on the store. A doorbell that hears search. Not a warehouse.",
+        "GunSearchEngine.com on the store. A doorbell that hears search. Not a warehouse.",
       x: "50%",
       y: "16%",
     },

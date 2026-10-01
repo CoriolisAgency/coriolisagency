@@ -19,12 +19,12 @@ export const STUDIO_PROOF: StudioProof[] = [
     href: LINKS.betsy,
     job: "Shows what people searched on the dealer site — including empty searches. Not bounce rate cosplay.",
     proof:
-      "Built for this market. Live on Gun Search Engine embeds and dealer sites. Not 4473 software.",
+      "Built for this market. Live on GunSearchEngine.com embeds and dealer sites. Not 4473 software.",
     cta: "Meet Betsy",
   },
   {
     id: "gsa",
-    name: "Gun Search Engine",
+    name: "GunSearchEngine.com",
     urlLabel: "gunsearchengine.com/for-dealers",
     href: LINKS.gsa,
     job: "Google Analytics replacement for FFL websites.",
@@ -39,7 +39,7 @@ export const STUDIO_PROOF: StudioProof[] = [
     href: LINKS.demandIntel,
     job: "Full-market search intent for OEMs, distributors, and brands.",
     proof:
-      "What the market asked for — including what it could not find. Portal, demo, API, and Co-Pilot on Gun Search Engine.",
+      "What the market asked for — including what it could not find. Portal, demo, API, and Co-Pilot on GunSearchEngine.com.",
     cta: "See Demand Intelligence",
   },
   {
