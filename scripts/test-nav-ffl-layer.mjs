@@ -137,6 +137,9 @@ assert.doesNotMatch(plate, /<section[^>]*>\s*<a\b/, "plate must not be wrapped i
 assert.equal([...plate.matchAll(/href=\{withBase\("grok-bot-setup"\)\}/g)].length, 1);
 assert.match(plate, /after:absolute after:inset-0/);
 assert.match(plate, /withBase\("ai-studio"\)\} class=\{`\$\{linkClass\} relative z-10`\}/);
+// Ad-safe Demand Intelligence sample is hosted on this site.
+assert.ok(fs.existsSync(path.join(root, "public/images/ffl-demand-intelligence-sample-august-2026.png")));
+
 // Pro plate: black and gold card with Paul's exact five features.
 const PRO_FEATURES = [
   "Monthly Demand Intelligence reports",
@@ -158,6 +161,11 @@ for (const rel of ["src/pages/ffl-analytics.astro", "src/pages/ffl-search-consol
   for (const f of PRO_FEATURES) assert.ok(plate.includes(f), `${rel} Pro plate missing: ${f}`);
   assert.equal([...plate.matchAll(/<li\b/g)].length, 5, `${rel} Pro plate must list exactly 5 features`);
   assert.doesNotMatch(src, /Otter Text|More Pro features are on the way/);
+  assert.match(
+    plate,
+    /Monthly Demand Intelligence reports\{" "\}\s*<a\s+href="\/images\/ffl-demand-intelligence-sample-august-2026\.png"\s+target="_blank"\s+rel="noopener noreferrer"\s+class="[^"]*text-gold[^"]*"\s*>\(see sample\)<\/a/,
+    `${rel} missing gold "(see sample)" link`,
+  );
 }
 
 console.log("test-nav-ffl-layer: ok");
