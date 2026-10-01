@@ -129,5 +129,27 @@ assert.doesNotMatch(plate, /<section[^>]*>\s*<a\b/, "plate must not be wrapped i
 assert.equal([...plate.matchAll(/href=\{withBase\("grok-bot-setup"\)\}/g)].length, 1);
 assert.match(plate, /after:absolute after:inset-0/);
 assert.match(plate, /withBase\("ai-studio"\)\} class=\{`\$\{linkClass\} relative z-10`\}/);
+// Pro plate: black and gold card with Paul's exact five features.
+const PRO_FEATURES = [
+  "Monthly Demand Intelligence reports",
+  "Sightline embed with custom styling",
+  "(the Free plan gets the standard Sightline embed)",
+  "OtterText integration for Sightline alerts",
+  "(uses your own OtterText account)",
+  "Pro (Verified) status on GunSearchEngine.com",
+  "Coming soon",
+  "All future Pro features",
+];
+for (const rel of ["src/pages/ffl-analytics.astro", "src/pages/ffl-search-console.astro"]) {
+  const src = read(rel);
+  const start = src.indexOf("data-pro-plate");
+  assert.ok(start !== -1, `${rel} missing Pro plate`);
+  const plate = src.slice(src.lastIndexOf("<div", start), src.indexOf("</ul>", start));
+  assert.match(plate, /bg-black/);
+  assert.match(plate, /border-gold\/60/);
+  for (const f of PRO_FEATURES) assert.ok(plate.includes(f), `${rel} Pro plate missing: ${f}`);
+  assert.equal([...plate.matchAll(/<li\b/g)].length, 5, `${rel} Pro plate must list exactly 5 features`);
+  assert.doesNotMatch(src, /Otter Text|More Pro features are on the way/);
+}
 
 console.log("test-nav-ffl-layer: ok");
