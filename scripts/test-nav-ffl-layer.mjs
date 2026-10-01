@@ -120,4 +120,14 @@ assert.equal(transformHtml('<a href="/ffl-analytics" class="c">x</a>'), '<a targ
 assert.equal(transformHtml('<a href="https://www.gunsearchengine.com/for-dealers" target="_self">x</a>'), '<a target="_blank" rel="noopener noreferrer" href="https://www.gunsearchengine.com/for-dealers">x</a>');
 assert.equal(transformHtml('<a href="/ecommerce">x</a>'), '<a href="/ecommerce">x</a>');
 
+// Homepage Grok Bot plate: a card (div) with a stretched primary link, not a link wrapping a link.
+const home = read("src/pages/index.astro");
+const plateStart = home.indexOf("data-grok-bot-plate");
+assert.ok(plateStart !== -1, "Grok Bot plate marker missing");
+const plate = home.slice(home.lastIndexOf("<section", plateStart), home.indexOf("</section>", plateStart));
+assert.doesNotMatch(plate, /<section[^>]*>\s*<a\b/, "plate must not be wrapped in a link");
+assert.equal([...plate.matchAll(/href=\{withBase\("grok-bot-setup"\)\}/g)].length, 1);
+assert.match(plate, /after:absolute after:inset-0/);
+assert.match(plate, /withBase\("ai-studio"\)\} class=\{`\$\{linkClass\} relative z-10`\}/);
+
 console.log("test-nav-ffl-layer: ok");
