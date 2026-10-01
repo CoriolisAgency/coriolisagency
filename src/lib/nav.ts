@@ -3,5 +3,5 @@ export const MAIN_NAV = [
   { href: "ffl-analytics", label: "FFL Analytics" },
   { href: "ffl-search-console", label: "FFL Search Console" },
   { href: "ai-studio", label: "AI Studio" },
-  { href: "press", label: "Press" },
+  { href: "press", label: "Press Room" },
 ] as const;

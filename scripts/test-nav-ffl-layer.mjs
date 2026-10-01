@@ -15,7 +15,7 @@ assert.deepEqual(labels, [
   "FFL Analytics",
   "FFL Search Console",
   "AI Studio",
-  "Press",
+  "Press Room",
 ]);
 assert.deepEqual(hrefs, [
   "ecommerce",
