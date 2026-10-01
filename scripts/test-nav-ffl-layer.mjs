@@ -81,10 +81,9 @@ assertLandingPage("src/pages/ffl-search-console.astro", {
 const consoleSrc = read("src/pages/ffl-search-console.astro");
 assert.doesNotMatch(consoleSrc, /\b(is live|now available|now live)\b/i);
 
-// FFL pages open in a new tab from the header nav.
-assert.match(navSrc, /href: "ffl-analytics", label: "FFL Analytics", newTab: true/);
-assert.match(navSrc, /href: "ffl-search-console", label: "FFL Search Console", newTab: true/);
-assert.equal([...chrome.matchAll(/target=\{newTab \? "_blank" : undefined\}/g)].length, 2);
+// On-site FFL pages open in the same tab (Paul, 1:38 PM ET).
+assert.doesNotMatch(navSrc, /newTab/);
+assert.doesNotMatch(chrome, /newTab/);
 
 // Footer: product line + exactly three family links.
 assert.doesNotMatch(chrome, /2aBetsy|Betsy Live|FFL Accelerator|Demand Intelligence|AI Studio/);
@@ -92,8 +91,8 @@ const familyBlock = chrome.slice(chrome.indexOf("const family = ["), chrome.inde
 assert.deepEqual([...familyBlock.matchAll(/label:\s*"([^"]+)"/g)].map((m) => m[1]), ["GunSearchEngine.com", "GunStoreGame.com", "FFLIntel"]);
 assert.deepEqual([...familyBlock.matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]), ["https://www.gunsearchengine.com/", "https://www.gunstoregame.com/", "https://fflintel.com/"]);
 assert.match(chrome, />FFL Ecommerce<\/a>/);
-assert.match(chrome, /withBase\("ffl-analytics"\)[\s\S]{0,120}target="_blank"[\s\S]{0,60}>FFL Analytics<\/a/);
-assert.match(chrome, /withBase\("ffl-search-console"\)[\s\S]{0,120}target="_blank"[\s\S]{0,60}>FFL Search Console<\/a/);
+assert.match(chrome, /<a href=\{withBase\("ffl-analytics"\)\} class="hover:text-sky-300">FFL Analytics<\/a>/);
+assert.match(chrome, /<a href=\{withBase\("ffl-search-console"\)\} class="hover:text-sky-300">FFL Search Console<\/a>/);
 
 // "Gun Search Engine" is now "GunSearchEngine.com" everywhere in src.
 function walkSrc(dir, out = []) {
@@ -116,7 +115,16 @@ assert.equal(
 );
 assert.equal(transformHtml('<a href="/x">GunSearchEngine.com</a>'), '<a href="/x">GunSearchEngine.com</a>');
 assert.equal(transformHtml("<button><span>GunSearchEngine.com</span></button>"), "<button><span>GunSearchEngine.com</span></button>");
-assert.equal(transformHtml('<a href="/ffl-analytics" class="c">x</a>'), '<a target="_blank" rel="noopener noreferrer" href="/ffl-analytics" class="c">x</a>');
+assert.equal(transformHtml('<a href="/ffl-analytics" class="c">x</a>'), '<a href="/ffl-analytics" class="c">x</a>');
+assert.equal(transformHtml('<a href="/ffl-search-console" target="_blank" rel="noopener noreferrer">x</a>'), '<a href="/ffl-search-console">x</a>');
+for (const host of ["https://www.gunstoregame.com/", "https://fflintel.com/", "https://fflanalytics.com", "https://www.fflsearchconsole.com/x"]) {
+  assert.equal(transformHtml(`<a href="${host}">x</a>`), `<a target="_blank" rel="noopener noreferrer" href="${host}">x</a>`);
+}
+assert.equal(transformHtml('<a href="https://example.com/">x</a>'), '<a href="https://example.com/">x</a>');
+// "2A Analytics" is now "FFL Analytics" everywhere in src.
+for (const f of walkSrc(path.join(root, "src"))) {
+  assert.doesNotMatch(fs.readFileSync(f, "utf8"), /2\s*a[\s_-]*analytics/i, `${f} still says 2A Analytics`);
+}
 assert.equal(transformHtml('<a href="https://www.gunsearchengine.com/for-dealers" target="_self">x</a>'), '<a target="_blank" rel="noopener noreferrer" href="https://www.gunsearchengine.com/for-dealers">x</a>');
 assert.equal(transformHtml('<a href="/ecommerce">x</a>'), '<a href="/ecommerce">x</a>');
 

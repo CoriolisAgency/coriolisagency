@@ -1,8 +1,11 @@
 // Build step (astro:build:done) over the generated HTML:
 // 1. Plain-text "GunSearchEngine.com" (not already inside a link or other
 //    interactive/non-body element) becomes a link to https://gunsearchengine.com.
-// 2. Every <a> pointing at gunsearchengine.com, /ffl-analytics or
-//    /ffl-search-console opens in a new tab (target="_blank" rel="noopener noreferrer").
+// 2. Links to off-site family hosts (gunsearchengine.com, gunstoregame.com,
+//    fflintel.com, fflanalytics.com, fflsearchconsole.com) open in a new tab
+//    (target="_blank" rel="noopener noreferrer"). On-site links such as
+//    /ffl-analytics and /ffl-search-console open in the same tab, so any
+//    target/rel on them is removed.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,13 +14,18 @@ export const GSE_ROOT = "https://gunsearchengine.com";
 const LABEL = "GunSearchEngine.com";
 const LINK = `<a href="${GSE_ROOT}" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-sky-300">${LABEL}</a>`;
 const SKIP = new Set(["a", "button", "summary", "label", "option", "select", "textarea", "title", "script", "style", "svg", "head", "noscript", "template"]);
-const NEW_TAB_HREF = /^(?:https?:\/\/(?:www\.)?gunsearchengine\.com(?:[/?#]|$)|(?:\/[^"?#]*)?\/ffl-(?:analytics|search-console)(?:[?#]|$))/i;
+const NEW_TAB_HREF = /^https?:\/\/(?:www\.)?(?:gunsearchengine|gunstoregame|fflintel|fflanalytics|fflsearchconsole)\.com(?:[/?#:]|$)/i;
+const SAME_TAB_HREF = /^(?:\/[^"?#]*)?\/ffl-(?:analytics|search-console)(?:[?#]|$)/i;
 
 function fixAnchor(tag) {
   const href = /\shref="([^"]*)"/i.exec(tag)?.[1];
-  if (href === undefined || !NEW_TAB_HREF.test(href)) return tag;
-  let t = tag.replace(/\s(target|rel)="[^"]*"/gi, "");
-  return t.replace(/^<a\b/i, '<a target="_blank" rel="noopener noreferrer"');
+  if (href === undefined) return tag;
+  if (NEW_TAB_HREF.test(href)) {
+    const t = tag.replace(/\s(target|rel)="[^"]*"/gi, "");
+    return t.replace(/^<a\b/i, '<a target="_blank" rel="noopener noreferrer"');
+  }
+  if (SAME_TAB_HREF.test(href)) return tag.replace(/\s(target|rel)="[^"]*"/gi, "");
+  return tag;
 }
 
 export function transformHtml(html) {
