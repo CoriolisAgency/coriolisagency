@@ -41,7 +41,8 @@ function assertLandingPage(rel, { h1, campaign, notice }) {
   assert.match(src, /utm_source=coriolisagency/);
   assert.match(src, new RegExp(`utm_campaign=${campaign}`));
   assert.match(src, new RegExp(notice.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  assert.match(src, /Free through December 31, 2026/);
+  assert.match(src, /Sign up by Dec 31, 2026 and get Pro free through Dec 31, 2027\./);
+  assert.doesNotMatch(src, /Free through December 31, 2026/);
   assert.doesNotMatch(src, /\$\d/);
   assert.doesNotMatch(src, /\/month/);
   assert.doesNotMatch(src, bannedCopy);
