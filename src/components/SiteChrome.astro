@@ -63,7 +63,6 @@ const family = [
       {
         MAIN_NAV.map((item) => {
           const external = "external" in item && item.external;
-          const newTab = external || ("newTab" in item && item.newTab);
           return (
             <a
               href={external ? item.href : withBase(item.href)}
@@ -73,8 +72,8 @@ const family = [
                   ? "border-gold/50 bg-gold/10 text-gold"
                   : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
               ]}
-              target={newTab ? "_blank" : undefined}
-              rel={newTab ? "noopener noreferrer" : undefined}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noopener noreferrer" : undefined}
             >
               {item.label}
             </a>
@@ -142,7 +141,6 @@ const family = [
     {
       MAIN_NAV.map((item) => {
         const external = "external" in item && item.external;
-          const newTab = external || ("newTab" in item && item.newTab);
         return (
           <a
             href={external ? item.href : withBase(item.href)}
@@ -152,8 +150,8 @@ const family = [
                 ? "border-gold/50 bg-gold/10 text-gold"
                 : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
             ]}
-            target={newTab ? "_blank" : undefined}
-            rel={newTab ? "noopener noreferrer" : undefined}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
           >
             {item.label}
           </a>
@@ -228,19 +226,9 @@ const family = [
       <p class="text-sm text-zinc-400">
         <a href={withBase("ecommerce")} class="hover:text-sky-300">FFL Ecommerce</a>
         {" · "}
-        <a
-          href={withBase("ffl-analytics")}
-          class="hover:text-sky-300"
-          target="_blank"
-          rel="noopener noreferrer">FFL Analytics</a
-        >
+        <a href={withBase("ffl-analytics")} class="hover:text-sky-300">FFL Analytics</a>
         {" · "}
-        <a
-          href={withBase("ffl-search-console")}
-          class="hover:text-sky-300"
-          target="_blank"
-          rel="noopener noreferrer">FFL Search Console</a
-        >
+        <a href={withBase("ffl-search-console")} class="hover:text-sky-300">FFL Search Console</a>
       </p>
       <p class="text-xs leading-relaxed text-zinc-500">
         {SITE.legalName} · {SITE.origin}.
