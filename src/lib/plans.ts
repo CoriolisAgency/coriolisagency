@@ -25,7 +25,7 @@ export const PLANS: Plan[] = [
     id: "minute-man",
     name: "Minute Man",
     price: 169,
-    hook: "Sell your inventory",
+    hook: "Your inventory",
     features: [
       "Custom website design",
       "Your custom domain",
@@ -56,7 +56,7 @@ export const PLANS: Plan[] = [
     id: "gun-runner",
     name: "Gun Runner",
     price: 369,
-    hook: "Add VIP support",
+    hook: "Add VIP Support",
     featured: true,
     includesFrom: "Militia",
     features: [
@@ -86,6 +86,7 @@ export const PLANS: Plan[] = [
     name: "FFL Accelerator",
     price: 569,
     hook: "Add Jet Fuel",
+    includesFrom: "Warlord",
     description:
       "A single, all-in-one, managed ecommerce plan. It includes hosting, site design (Basic or Retail), VIP support, POS integration (any POS), email automation, and analytics (Google Analytics, Google Search Console, GunSearchEngine.com, and email/SMS).",
     bullets: "bullet-holes",
