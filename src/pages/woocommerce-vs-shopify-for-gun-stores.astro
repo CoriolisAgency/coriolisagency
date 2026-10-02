@@ -4,7 +4,7 @@ import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import { FAQ_SHOPIFY } from "../lib/faq";
-import { linkClass } from "../lib/links";
+import { LINKS, linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
 ---
@@ -33,10 +33,11 @@ import { withBase } from "../lib/base";
         product. FFL Cockpit and FFL Checkout are WooCommerce plugins. Shopify
         is a hosted platform with its own acceptable-use rules — we do not
         republish their fee card or write their policy. If the question is “can
-        WooCommerce sell guns,” the answer is on the{" "}
-        <a href={withBase("ecommerce")} class={linkClass}>FFL ecommerce</a> page:
-        yes,
-        when a licensed FFL owns the store and checkout is built for dealer
+        WooCommerce sell guns,” the answer is here:{" "}
+        <a href={withBase(LINKS.wooSellGuns)} class={linkClass}
+          >Can you use WooCommerce to sell guns?</a
+        >{" "}
+        Yes, when a licensed FFL owns the store and checkout is built for dealer
         transfer. This is not legal advice.
       </p>
       <div class="mt-8">

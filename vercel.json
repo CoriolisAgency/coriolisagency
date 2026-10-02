@@ -134,7 +134,12 @@
     },
     {
       "source": "/can-you-use-woocommerce-to-sell-guns-the-complete-compliance-first-guide-for-ffl-holders-gun-stores-2a-brands-in-2026",
-      "destination": "/ecommerce",
+      "destination": "/can-you-use-woocommerce-to-sell-guns",
+      "permanent": true
+    },
+    {
+      "source": "/woocommerce-for-guns",
+      "destination": "/can-you-use-woocommerce-to-sell-guns",
       "permanent": true
     },
     {

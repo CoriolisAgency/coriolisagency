@@ -8,6 +8,7 @@ export const LINKS = {
   bestStore: "/best-ffl-ecommerce-website",
   emailFfl: "/email-marketing-for-ffl-ecommerce",
   wooVsShopify: "/woocommerce-vs-shopify-for-gun-stores",
+  wooSellGuns: "/can-you-use-woocommerce-to-sell-guns",
   aimPosPage: "/aim-pos",
   microbizPosPage: "/microbiz-pos",
   tridentPosPage: "/trident-1-pos",

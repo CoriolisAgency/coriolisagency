@@ -145,6 +145,41 @@ export const FAQ_EMAIL: FaqItem[] = [
   },
 ];
 
+export const FAQ_WOO_SELL_GUNS: FaqItem[] = [
+  {
+    q: "Can you use WooCommerce to sell guns?",
+    a: "Yes. WooCommerce is open-source, and a licensed FFL can run a gun store on it when it is self-hosted. You need a payment processor that accepts firearms, a host that allows them, and a checkout that ships every gun to a receiving FFL. This is not legal advice.",
+  },
+  {
+    q: "Does WooPayments allow firearms?",
+    a: "No. WooPayments lists firearms and ammunition as prohibited. Use a merchant account approved for firearms and connect it through a gateway such as Authorize.net.",
+  },
+  {
+    q: "Can I use Stripe, Square, or PayPal for a gun store?",
+    a: "Square and PayPal prohibit firearm sales. Stripe moved legal firearms to a restricted category in late 2025 and asks those businesses to contact its sales team, so expect a review before approval.",
+  },
+  {
+    q: "Can I host a WooCommerce gun store on WordPress.com?",
+    a: "No. WordPress.com prohibits selling firearms, parts, accessories, and ammunition on its hosted sites. It does not prohibit firearms merchants from running the WooCommerce software on another host.",
+  },
+  {
+    q: "Do guns sold online have to ship to an FFL?",
+    a: "When an unlicensed buyer orders from out of state, the gun ships to a licensed dealer in the buyer's home state, who handles the transfer. Your checkout should only offer FFL shipping for firearms. This is not legal advice.",
+  },
+  {
+    q: "What plugin adds an FFL dealer selector to WooCommerce?",
+    a: "FFL Checkout from FFL Cockpit, Automatic FFL, and FFL Bridge all add a dealer search to checkout. Coriolis includes FFL Checkout on Militia and above.",
+  },
+  {
+    q: "Can WooCommerce block shipments to restricted states?",
+    a: "Yes, with shipping rules and an FFL plugin that has state restriction settings. California, for example, requires ammunition bought online to go to a licensed ammunition vendor. Someone has to keep those rules current.",
+  },
+  {
+    q: "Does Coriolis handle background checks or the bound book?",
+    a: "No. Coriolis builds and runs the WooCommerce store. The 4473, NICS, and the bound book stay with the systems licensed for them.",
+  },
+];
+
 export const FAQ_SHOPIFY: FaqItem[] = [
   {
     q: "Does Coriolis build Shopify gun stores?",
