@@ -13,6 +13,7 @@ export interface Plan {
   price: number;
   hook: string;
   featured?: boolean;
+  badge?: string;
   includesFrom?: string;
   description?: string;
   bullets?: "bullet-holes";
@@ -57,7 +58,6 @@ export const PLANS: Plan[] = [
     name: "Gun Runner",
     price: 369,
     hook: "Add VIP Support",
-    featured: true,
     includesFrom: "Militia",
     features: [
       "DNS & Email Administration",
@@ -86,6 +86,8 @@ export const PLANS: Plan[] = [
     name: "FFL Accelerator",
     price: 569,
     hook: "Add Jet Fuel",
+    featured: true,
+    badge: "Web Master Included",
     includesFrom: "Warlord",
     description:
       "A single, all-in-one, managed ecommerce plan. It includes hosting, site design (Basic or Retail), VIP support, POS integration (any POS), email automation, and analytics (Google Analytics, Google Search Console, GunSearchEngine.com, and email/SMS).",

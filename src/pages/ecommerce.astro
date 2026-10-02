@@ -93,12 +93,17 @@ const switchSteps = [
             <article
               id={plan.id}
               class:list={[
-                "flex scroll-mt-24 flex-col rounded-2xl border p-5",
+                "relative flex scroll-mt-24 flex-col rounded-2xl border p-5",
                 plan.featured
                   ? "border-gold/60 bg-gold/5 lg:col-span-1"
                   : "border-zinc-800 bg-zinc-950/50",
               ]}
             >
+              {plan.badge ? (
+                <span class="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-gold px-3 py-0.5 text-[11px] font-semibold leading-5 tracking-[0.04em] text-zinc-950 shadow-md shadow-black/40 ring-1 ring-black/20">
+                  {plan.badge}
+                </span>
+              ) : null}
               <p class="text-[13.2px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
                 {plan.hook} <span aria-hidden="true">{PLAN_TAGLINE_EMOJI[plan.id]}</span>
               </p>
