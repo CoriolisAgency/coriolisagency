@@ -56,7 +56,7 @@ export const PLANS: Plan[] = [
     id: "gun-runner",
     name: "Gun Runner",
     price: 369,
-    hook: "Add VIP support",
+    hook: "Add VIP Support",
     featured: true,
     includesFrom: "Militia",
     features: [

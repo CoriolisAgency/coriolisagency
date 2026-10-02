@@ -8,9 +8,17 @@ import { FAQ_ECOMMERCE } from "../lib/faq";
 import { HOWTO_SWITCH, HOWTO_WOO_SELL_GUNS } from "../lib/howto";
 import { POS_PAGES } from "../lib/pos";
 import { LINKS, linkClass, btnPlan } from "../lib/links";
-import { PLANS, SETUP } from "../lib/plans";
+import { PLANS, SETUP, type PlanId } from "../lib/plans";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
+
+const PLAN_TAGLINE_EMOJI: Record<PlanId, string> = {
+  "minute-man": "📦",
+  militia: "🚚",
+  "gun-runner": "🎧",
+  warlord: "🏪",
+  "ffl-accelerator": "🔥",
+};
 
 const switchSteps = [
   "Keep your domain. We build the new WooCommerce store on it before you give notice.",
@@ -92,7 +100,7 @@ const switchSteps = [
               ]}
             >
               <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
-                {plan.featured ? "Most Popular" : plan.hook}
+                {plan.hook} <span aria-hidden="true">{PLAN_TAGLINE_EMOJI[plan.id]}</span>
               </p>
               <h3 class="mt-2 text-lg font-semibold text-white">{plan.name}</h3>
               <p class="mt-1 text-2xl font-semibold text-gold">
