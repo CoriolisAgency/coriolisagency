@@ -87,7 +87,7 @@ export const PLANS: Plan[] = [
     price: 569,
     hook: "Add Jet Fuel",
     featured: true,
-    badge: "Web Master Included",
+    badge: "Webmaster Included",
     includesFrom: "Warlord",
     description:
       "A single, all-in-one, managed ecommerce plan. It includes hosting, site design (Basic or Retail), VIP support, POS integration (any POS), email automation, and analytics (Google Analytics, Google Search Console, GunSearchEngine.com, and email/SMS).",
