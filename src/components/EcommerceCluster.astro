@@ -1,5 +1,6 @@
 ---
 import { withBase } from "../lib/base";
+import { LINKS } from "../lib/links";
 
 const items = [
   { href: "ecommerce", label: "FFL website plans" },
@@ -10,6 +11,7 @@ const items = [
   { href: "gearfire-alternative", label: "Gearfire alternative" },
   { href: "best-ffl-ecommerce-website", label: "Best FFL ecommerce website" },
   { href: "email-marketing-for-ffl-ecommerce", label: "FFL email marketing" },
+  { href: LINKS.gse, label: "GunSearchEngine.com", external: true },
 ] as const;
 
 interface Props {
@@ -25,14 +27,17 @@ const { current } = Astro.props;
 >
   {
     items.map((item) => {
+      const external = "external" in item && item.external;
       const hash = "hash" in item && item.hash ? `#${item.hash}` : "";
-      const isCurrent = !hash && item.href === current;
+      const isCurrent = !external && !hash && item.href === current;
       return isCurrent ? (
         <span class="text-zinc-200">{item.label}</span>
       ) : (
         <a
-          href={`${withBase(item.href)}${hash}`}
+          href={external ? item.href : `${withBase(item.href)}${hash}`}
           class="text-sky-400 hover:underline underline-offset-2"
+          target={external ? "_blank" : undefined}
+          rel={external ? "noopener noreferrer" : undefined}
         >
           {item.label}
         </a>

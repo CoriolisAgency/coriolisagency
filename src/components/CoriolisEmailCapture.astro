@@ -1,7 +1,7 @@
 ---
 /**
  * Marketing email capture. Preview: ?capture=1
- * Localhost always opens until we turn that off.
+ * Localhost does not auto-open; use the chip or ?capture=1.
  */
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
@@ -466,8 +466,13 @@ const marketingSource = "popup_coriolis";
       if (result.show && result.reason) tryOpen(result.reason);
     }
 
-    if (forceCapture || isLocalHost()) {
-      tryOpen(forceCapture ? "force" : "localhost");
+    if (forceCapture) {
+      tryOpen("force");
+      return;
+    }
+
+    if (isLocalHost()) {
+      showPreviewChip();
       return;
     }
 
