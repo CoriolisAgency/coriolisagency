@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import SiteChrome from "../components/SiteChrome.astro";
 import CoriolisEmailCapture from "../components/CoriolisEmailCapture.astro";
+import UtmCapture from "@coriolis/lead-form/UtmCapture.astro";
 import { SITE, SITE_ORIGIN, CANON_PATHS } from "../lib/site";
 import { LINKS, SAME_AS } from "../lib/links";
 import { withBase } from "../lib/base";
@@ -153,6 +154,7 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogAbs} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <UtmCapture />
   </head>
   <body class="flex min-h-dvh min-w-0 flex-col">
     <SiteChrome>

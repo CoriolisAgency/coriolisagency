@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import LeadForm from "@coriolis/lead-form/LeadForm.astro";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
 ---
@@ -38,151 +39,28 @@ import { withBase } from "../lib/base";
         </p>
       </div>
 
-      <form
-        id="contact-form"
-        class="relative min-w-0 rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6 space-y-4"
-      >
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <label class="block text-xs font-medium text-zinc-400">
-            Name
-            <input
-              name="name"
-              required
-              class="mt-1 w-full rounded-sm border border-zinc-700 bg-ink px-3 py-2 text-sm text-zinc-100"
-            />
-          </label>
-          <label class="block text-xs font-medium text-zinc-400">
-            Company
-            <input
-              name="company"
-              required
-              class="mt-1 w-full rounded-sm border border-zinc-700 bg-ink px-3 py-2 text-sm text-zinc-100"
-            />
-          </label>
-          <label class="block text-xs font-medium text-zinc-400">
-            Email
-            <input
-              name="email"
-              type="email"
-              required
-              class="mt-1 w-full rounded-sm border border-zinc-700 bg-ink px-3 py-2 text-sm text-zinc-100"
-            />
-          </label>
-          <label class="block text-xs font-medium text-zinc-400">
-            Phone
-            <input
-              name="phone"
-              type="tel"
-              class="mt-1 w-full rounded-sm border border-zinc-700 bg-ink px-3 py-2 text-sm text-zinc-100"
-            />
-          </label>
-        </div>
-        <label class="block text-xs font-medium text-zinc-400">
-          Website
-          <input
-            name="website"
-            type="url"
-            placeholder="https://"
-            class="mt-1 w-full rounded-sm border border-zinc-700 bg-ink px-3 py-2 text-sm text-zinc-100"
-          />
-        </label>
-        <label class="block text-xs font-medium text-zinc-400">
-          What this is about
-          <select
-            name="pillar"
-            required
-            class="mt-1 w-full rounded-sm border border-zinc-700 bg-ink px-3 py-2 text-sm text-zinc-100"
-          >
-            <option value="Ecommerce">Ecommerce</option>
-            <option value="AI Studio">AI Studio</option>
-            <option value="Grok Bot Setup">Grok Bot Setup</option>
-            <option value="Demand Intelligence">Demand Intelligence</option>
-          </select>
-        </label>
-        <label class="block text-xs font-medium text-zinc-400">
-          Message
-          <textarea
-            name="message"
-            required
-            rows="5"
-            class="mt-1 w-full rounded-sm border border-zinc-700 bg-ink px-3 py-2 text-sm text-zinc-100"
-          ></textarea>
-        </label>
-        <label class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
-          Company URL
-          <input
-            name="company_url"
-            tabindex="-1"
-            autocomplete="off"
-          />
-        </label>
-        <p id="contact-status" class="text-sm text-zinc-400" role="status"></p>
-        <button
-          id="contact-submit"
-          type="submit"
-          class="inline-flex w-full sm:w-auto items-center justify-center rounded-sm border border-gold/70 bg-gold px-5 py-3 text-sm font-semibold text-ink transition hover:bg-amber-300 disabled:opacity-60"
-        >
-          Send
-        </button>
-        <p class="text-xs text-zinc-600">
-          Goes to Coriolis. We will get back to you.
-        </p>
-      </form>
+      <LeadForm site="coriolisagency" />
     </div>
   </section>
 </BaseLayout>
 
-<script>
-  const form = document.getElementById("contact-form");
-  const statusEl = document.getElementById("contact-status");
-  const submitBtn = document.getElementById("contact-submit");
-
-  form?.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    if (!(event.target instanceof HTMLFormElement)) return;
-    if (!(submitBtn instanceof HTMLButtonElement)) return;
-
-    const data = new FormData(event.target);
-    const payload = {
-      name: String(data.get("name") || ""),
-      company: String(data.get("company") || ""),
-      email: String(data.get("email") || ""),
-      phone: String(data.get("phone") || ""),
-      website: String(data.get("website") || ""),
-      pillar: String(data.get("pillar") || ""),
-      message: String(data.get("message") || ""),
-      company_url: String(data.get("company_url") || ""),
-    };
-
-    submitBtn.disabled = true;
-    if (statusEl) {
-      statusEl.className = "text-sm text-zinc-400";
-      statusEl.textContent = "Sending…";
-    }
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const json = (await res.json()) as { ok?: boolean; error?: string };
-      if (!res.ok || !json.ok) {
-        throw new Error(json.error || "Could not send.");
-      }
-      if (statusEl) {
-        statusEl.className = "text-sm text-sky-300";
-        statusEl.textContent = "Sent. We will get back to you.";
-      }
-      event.target.reset();
-      submitBtn.disabled = true;
-    } catch (err) {
-      submitBtn.disabled = false;
-      if (statusEl) {
-        statusEl.className = "text-sm text-amber-300";
-        statusEl.textContent =
-          err instanceof Error ? err.message : "Could not send. Try again.";
-      }
-    }
-  });
-</script>
+<style is:global>
+  /* Theme the shared form to the live /contact Tailwind tokens. */
+  form.lf-form[data-lf-form] {
+    --lf-fg: #a1a1aa;
+    --lf-muted: #52525b;
+    --lf-border: #3f3f46;
+    --lf-card-border: #27272a;
+    --lf-surface: rgba(9, 9, 11, 0.5);
+    --lf-field: var(--color-ink);
+    --lf-input: #f4f4f5;
+    --lf-accent: var(--color-gold);
+    --lf-accent-ink: var(--color-ink);
+    --lf-success: #7dd3fc;
+    --lf-error: #fcd34d;
+  }
+  form.lf-form[data-lf-form] .lf-submit:hover:not(:disabled) {
+    background: #fcd34d;
+    filter: none;
+  }
+</style>
