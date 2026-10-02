@@ -97,10 +97,11 @@ const switchSteps = [
                 plan.featured
                   ? "border-gold/60 bg-gold/5 lg:col-span-1"
                   : "border-zinc-800 bg-zinc-950/50",
+                plan.badge ? "mt-3 lg:mt-0" : null,
               ]}
             >
               {plan.badge ? (
-                <span class="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-gold px-3 py-0.5 text-[11px] font-semibold leading-5 tracking-[0.04em] text-zinc-950 shadow-md shadow-black/40 ring-1 ring-black/20">
+                <span class="pointer-events-none absolute bottom-[calc(100%+1px)] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-t-full rounded-b-none bg-gold px-4 pt-1 pb-0.5 text-[11px] font-semibold leading-4 tracking-[0.04em] text-zinc-950">
                   {plan.badge}
                 </span>
               ) : null}
