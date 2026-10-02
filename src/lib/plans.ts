@@ -27,6 +27,7 @@ export const PLANS: Plan[] = [
     name: "Minute Man",
     price: 169,
     hook: "Your inventory",
+    bullets: "bullet-holes",
     features: [
       "Custom website design",
       "Your custom domain",
@@ -42,6 +43,7 @@ export const PLANS: Plan[] = [
     price: 269,
     hook: "Add dropshipping",
     includesFrom: "Minute Man",
+    bullets: "bullet-holes",
     features: [
       "FFL Cockpit license",
       "FFL Checkout license",
@@ -59,6 +61,7 @@ export const PLANS: Plan[] = [
     price: 369,
     hook: "Add VIP Support",
     includesFrom: "Militia",
+    bullets: "bullet-holes",
     features: [
       "DNS & Email Administration",
       "SMTP Mail Server",
@@ -74,6 +77,7 @@ export const PLANS: Plan[] = [
     price: 469,
     hook: "Add point-of-sale",
     includesFrom: "Gun Runner",
+    bullets: "bullet-holes",
     features: [
       "API Based POS Integration: AIM Point of Sale, MicroBiz POS, Rapid Gun Systems, Trident 1 POS, Corestore POS",
       "Unlimited API Requests",
