@@ -22,9 +22,9 @@ npm run build
 
 Node `>=22.12.0`.
 
-## Contact form (`@coriolis/lead-form` v0.1.0)
+## Contact form (`@coriolis/lead-form` v0.1.1)
 
-`/contact` renders the shared form from `@coriolis/lead-form` v0.1.0 (`github:CoriolisAgency/lead-form#v0.1.0`). The browser posts to `/api/lead`. `/api/contact` is a legacy alias that stamps `started_at` (and `page=/contact` when missing) so old callers are not silently dropped.
+`/contact` renders the shared form from `@coriolis/lead-form` v0.1.1 (`git+https://github.com/CoriolisAgency/lead-form.git#v0.1.1`). The browser posts to `/api/lead`. `/api/contact` is a legacy alias that stamps `started_at` (and `page=/contact` when missing) so old callers are not silently dropped.
 
 The handler forwards to Ops `POST /api/forms/lead` in the same request. A successful Ops response is the only confirmation path. Ops failure returns **502** and does not email as a fallback.
 
@@ -38,7 +38,7 @@ CORIOLIS_OS_URL=https://<os-host>
 FORM_INTAKE_SECRET=<same as the coriolis Vercel project>
 ```
 
-Optional Mailgun copy, sent only after Ops accepts the lead. All three of `MAILGUN_API_KEY`, `MAILGUN_DOMAIN`, and `CONTACT_TO` are required or mail is skipped. There is no default recipient.
+Optional Mailgun copy, sent only after Ops accepts the lead. Mail is skipped unless `MAILGUN_API_KEY` and `MAILGUN_DOMAIN` are set. `CONTACT_TO` falls back to `paul@coriolisagency.com` for this door (`coriolisagency`).
 
 ```
 MAILGUN_API_KEY=
@@ -51,7 +51,7 @@ MAILGUN_API_BASE=https://api.mailgun.net
 
 US API base is the default. Do not commit keys. `FORM_INTAKE_SECRET` must match the OS project.
 
-The Vercel GitHub App needs access to the private `CoriolisAgency/lead-form` repo so `npm install` can fetch the tag. The v0.1.0 tag commits `dist/`; its `prepare` script runs `tsc` without `@types/node` and fails, so this repo sets `ignore-scripts=true` in `.npmrc`.
+The package is a private git dependency over **https** (`git+https://github.com/CoriolisAgency/lead-form.git#v0.1.1`). There is no `.npmrc`. `vercel.json` `installCommand` runs `npm install`, and when `LEAD_FORM_READ_TOKEN` is set it first adds git `insteadOf` rewrites so that `https://github.com/` and `ssh://git@github.com/` fetch via `https://x-access-token:${LEAD_FORM_READ_TOKEN}@github.com/`. The token is a fine-grained PAT with Contents: Read on `CoriolisAgency/lead-form` only. Set it on the Vercel project for Production and Preview, marked sensitive. Local `npm install` does not use `installCommand`.
 
 Vercel `api/` functions 500 if they import **local** modules. Importing `@coriolis/lead-form` is fine.
 

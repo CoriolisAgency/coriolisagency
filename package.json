@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
-    "@coriolis/lead-form": "github:CoriolisAgency/lead-form#v0.1.0",
+    "@coriolis/lead-form": "git+https://github.com/CoriolisAgency/lead-form.git#v0.1.1",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.0",
     "tailwindcss": "^4.3.3"
