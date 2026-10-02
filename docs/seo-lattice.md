@@ -15,6 +15,7 @@
 | Best FFL ecommerce website | **This site** `/best-ffl-ecommerce-website` |
 | Email for FFL ecommerce | **This site** `/email-marketing-for-ffl-ecommerce` |
 | WooCommerce vs Shopify (gun stores) | **This site** `/woocommerce-vs-shopify-for-gun-stores` |
+| Can you use WooCommerce to sell guns | **This site** `/can-you-use-woocommerce-to-sell-guns` |
 | AIM / MicroBiz / Trident 1 / Corestore / Rapid + Woo | **This site** `/aim-pos` `/microbiz-pos` `/trident-1-pos` `/corestore-pos` `/rapid-gun-systems-pos` |
 | FFL Accelerator $569 program story | **fflaccelerator.com** |
 | AI Studio / Coriolis products as capability | **This site** `/ai-studio` (`/ai-factory` → 301) |
@@ -32,7 +33,7 @@
 
 1. Conversion: monthly ecommerce → `/contact`. Setup → existing Stripe links. DI → GSE demo. GSA → gunsearchagent.com.
 2. First ~80 words of each commercial page answer the query.
-3. FAQ JSON-LD on `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, the five POS pages, and `/stack`. HowTo JSON-LD on `/ecommerce` (switch + Woo sell guns), `/firearms-dropshipping`, `/ammoready-alternative`, and `/gearfire-alternative`.
+3. FAQ JSON-LD on `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, the five POS pages, and `/stack`. HowTo JSON-LD on `/ecommerce` (switch + Woo sell guns), `/can-you-use-woocommerce-to-sell-guns`, `/firearms-dropshipping`, `/ammoready-alternative`, and `/gearfire-alternative`.
 4. Organization `sameAs`: listed in `src/lib/links.ts`.
 5. Never H1 “RetailBI alternative.” Never “switch off RetailBI.” Never 4473 automation claims.
 6. Frozen strings from `src/lib/frozen.ts`.

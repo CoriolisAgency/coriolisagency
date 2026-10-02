@@ -38,7 +38,7 @@ Same path, new voice, still answer the old query in the first 80 words. **Do not
 | `/ammoready-alternative` | 19 | 1,780 | Query pos 6.1, 9 clicks. **AmmoReady pillar.** |
 | `/best-ffl-ecommerce-website` | 17 | 3,047 | Comparison intent still sells ecommerce. |
 
-Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/aim-pos`, `/microbiz-pos`, `/trident-1-pos`, `/corestore-pos`, `/rapid-gun-systems-pos`.
+Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/aim-pos`, `/microbiz-pos`, `/trident-1-pos`, `/corestore-pos`, `/rapid-gun-systems-pos`.
 
 `/demand-intelligence` 301s to `https://www.gunsearchengine.com/demand-intelligence/` (`permanent: true` in `vercel.json`). Trailing-slash variant 308s to no-slash first. Do not leave a competing DI page on this host.
 
@@ -113,7 +113,8 @@ Implemented in `vercel.json` (path sources only; trailing-slash handled by Verce
 | `/gun-store-website-builder-for-ffls/` | `/ecommerce` | 5 | |
 | `/best-ffl-ecommerce-website/` | *(keep — see above)* | 17 | |
 | `/distributor-program/` | `/ecommerce` | 7 | |
-| `/can-you-use-woocommerce-to-sell-guns-…/` | `/ecommerce` | 4 | |
+| `/can-you-use-woocommerce-to-sell-guns-…/` | `/can-you-use-woocommerce-to-sell-guns` | 4 | Old long-slug article → new SEO page. |
+| `/woocommerce-for-guns` | `/can-you-use-woocommerce-to-sell-guns` | 0 | 203 impressions, was 404. |
 | `/is-woocommerce-good-for-firearms/` | `/ecommerce` | 1 | 1,267 impr, 1 click. Not worth a slug. |
 | `/coriolis-agency-launches-betsy-ai-gun-search-engine-and-gun-search-agent/` | `/ai-studio` | 1 | Only Betsy URL with a click. (`/ai-factory` 301s to `/ai-studio`.) |
 
@@ -169,7 +170,7 @@ Sum of clones with clicks is ~50, split thin. Do not keep 20 near-duplicate page
 | AmmoReady alternative | `/ammoready-alternative` | `/ammoready-alternative-why-…`, `/switch`, `/switch-n-save` |
 | Gearfire alternative | `/gearfire-alternative` | `/gearfire-alternative-why-…` |
 | Best / beats both | `/best-ffl-ecommerce-website` | `/why-woocommerce-…-beats-gearfire-and-ammoready-…` |
-| FFL ecommerce / builder / Woo sell guns | `/ecommerce` | `/ffl-website-plans`, `/gun-store-website-builder-for-ffls`, `/can-you-use-woocommerce-to-sell-guns-…`, `/is-woocommerce-good-for-firearms`, `/woocommerce-for-firearms` |
+| FFL ecommerce / builder / Woo sell guns | `/ecommerce` (plans) and `/can-you-use-woocommerce-to-sell-guns` (Woo sell guns) | Plans: `/ffl-website-plans`, `/gun-store-website-builder-for-ffls`, `/is-woocommerce-good-for-firearms`, `/woocommerce-for-firearms`. Woo sell guns: `/can-you-use-woocommerce-to-sell-guns-…`, `/woocommerce-for-guns` |
 | FFL Cockpit website / hosting | `/ffl-cockpit` | hosting announcement slugs |
 | Dropshipping / home-based FFL | `/firearms-dropshipping` | home-based + distributor clones (unchanged) |
 
