@@ -31,8 +31,11 @@ export const PLANS: Plan[] = [
     features: [
       "Custom website design",
       "Your custom domain",
-      "Unlimited hosting, storage, and bandwidth",
-      "Unlimited products and orders",
+      "Unlimited hosting",
+      "Unlimited storage",
+      "Unlimited bandwidth",
+      "Unlimited products",
+      "Unlimited orders",
       "24×7 uptime monitoring",
       "On-demand paid support ($125 per incident)",
     ],
