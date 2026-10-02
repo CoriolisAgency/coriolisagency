@@ -67,7 +67,10 @@ export const PLANS: Plan[] = [
       "SMTP Mail Server",
       "Advanced Search & Filter",
       "Google Analytics Admin",
-      "VIP Support for: WordPress, WooCommerce, Custom Theme, AmmoSeek Data Feed, GunBroker Integration, All Other Plugins",
+      {
+        label: "VIP Support for:",
+        items: ["WordPress", "WooCommerce", "Custom Theme", "AmmoSeek Data Feed", "GunBroker Integration", "All Other Plugins"],
+      },
       "Free Email & Chat Support — One Hour Response Time",
     ],
   },
@@ -79,7 +82,10 @@ export const PLANS: Plan[] = [
     includesFrom: "Gun Runner",
     bullets: "bullet-holes",
     features: [
-      "API Based POS Integration: AIM Point of Sale, MicroBiz POS, Rapid Gun Systems, Trident 1 POS, Corestore POS",
+      {
+        label: "API Based POS Integration:",
+        items: ["AIM Point of Sale", "MicroBiz POS", "Rapid Gun Systems", "Trident 1 POS", "Corestore POS"],
+      },
       "Unlimited API Requests",
       "Unlimited Webhooks",
       "Concierge Onboarding",
@@ -104,7 +110,7 @@ export const PLANS: Plan[] = [
       "Cloudflare Web Rules (bot mitigation)",
       "On-site email capture optimization",
       {
-        label: "Automated email campaigns",
+        label: "Automated email campaigns:",
         items: [
           "Welcome",
           "Back In Stock",
