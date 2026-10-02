@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BulletList from "../components/BulletList.astro";
 import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
@@ -103,11 +104,15 @@ const switchSteps = [
                   Everything in {plan.includesFrom} +
                 </p>
               ) : null}
-              <ul class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400">
-                {plan.features.map((f) => (
-                  <li>{f}</li>
-                ))}
-              </ul>
+              {plan.description ? (
+                <p class="mt-2 text-xs leading-relaxed text-zinc-300">{plan.description}</p>
+              ) : null}
+              <BulletList
+                items={plan.features}
+                variant={plan.bullets ?? "default"}
+                listKey={plan.id}
+                class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400"
+              />
             </article>
           ))
         }

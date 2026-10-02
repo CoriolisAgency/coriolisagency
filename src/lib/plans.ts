@@ -5,6 +5,8 @@ export type PlanId =
   | "warlord"
   | "ffl-accelerator";
 
+export type PlanFeature = string | { label: string; items: string[] };
+
 export interface Plan {
   id: PlanId;
   name: string;
@@ -12,7 +14,9 @@ export interface Plan {
   hook: string;
   featured?: boolean;
   includesFrom?: string;
-  features: string[];
+  description?: string;
+  bullets?: "bullet-holes";
+  features: PlanFeature[];
 }
 
 /** Monthly hosting ladder. Checkout is contact / onboarding — no Stripe buy buttons. */
@@ -82,17 +86,27 @@ export const PLANS: Plan[] = [
     name: "FFL Accelerator",
     price: 569,
     hook: "Add Jet Fuel",
+    description:
+      "A single, all-in-one, managed ecommerce plan. It includes hosting, site design (Basic or Retail), VIP support, POS integration (any POS), email automation, and analytics (Google Analytics, Google Search Console, GunSearchEngine.com, and email/SMS).",
+    bullets: "bullet-holes",
     features: [
-      "GunSearchEngine.com (Betsy on the shop)",
-      "Page speed optimization",
-      "Shopping cart optimization",
-      "Advanced site monitoring",
-      "Cloudflare DNS & CDN",
-      "On-site search basics (titles, speed, crawl health)",
-      "Email capture, list management, and campaign management (welcome, abandoned cart, back in stock, thank you)",
-      "Unlimited hosting on WP Engine (Coriolis is a WP Engine agency partner)",
-      "99.95% SLA",
-      "VIP support Monday through Friday",
+      "GunSearchEngine.com Pro",
+      "Page speed optimization (EverCache)",
+      "Shopping cart optimization (LiveCart)",
+      "Advanced site monitoring (Uptime Robot)",
+      "Cloudflare Web Rules (bot mitigation)",
+      "On-site email capture optimization",
+      {
+        label: "Automated email campaigns",
+        items: [
+          "Welcome",
+          "Back In Stock",
+          "Browse Abandonment",
+          "Thank You for Purchase",
+          "Abandoned Cart",
+        ],
+      },
+      "SLA with 99.95% uptime guarantee",
     ],
   },
 ];
