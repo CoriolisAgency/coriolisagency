@@ -22,25 +22,42 @@ npm run build
 
 Node `>=22.12.0`.
 
-## Contact form (Mailgun + Coriolis OS Lead)
+## Contact form (`@coriolis/lead-form` v0.1.1)
 
-`POST /api/contact` emails `CONTACT_TO` (default `paul@coriolisagency.com`) and, when OS env is set, mints a Lead on Coriolis OS via signed `POST /api/forms/lead`. Set these on the Vercel project (and in `.env.local` for local `vercel dev`):
+`/contact` renders the shared form from `@coriolis/lead-form` v0.1.1 (`git+https://github.com/CoriolisAgency/lead-form.git#v0.1.1`). The browser posts to `/api/lead`. `/api/contact` is a legacy alias that stamps `started_at` (and `page=/contact` when missing) so old callers are not silently dropped.
+
+The handler forwards to Ops `POST /api/forms/lead` in the same request. A successful Ops response is the only confirmation path. Ops failure returns **502** and does not email as a fallback.
+
+Set these on the Vercel project (and in `.env.local` for local `vercel dev`). They are server-only. Do not prefix them with `PUBLIC_`.
+
+Required:
 
 ```
-MAILGUN_API_KEY=
-MAILGUN_DOMAIN=
-MAILGUN_API_BASE=https://api.mailgun.net
-CONTACT_TO=paul@coriolisagency.com
-CONTACT_FROM=Coriolis <forms@YOUR_MAILGUN_DOMAIN>
+LEAD_FORM_SITE=coriolisagency
 CORIOLIS_OS_URL=https://<os-host>
 FORM_INTAKE_SECRET=<same as the coriolis Vercel project>
 ```
 
-US API base is the default. Do not commit keys. `FORM_INTAKE_SECRET` must match the OS project. Missing OS env skips the Lead and still sends mail.
+Optional Mailgun copy, sent only after Ops accepts the lead. Mail is skipped unless `MAILGUN_API_KEY` and `MAILGUN_DOMAIN` are set. `CONTACT_TO` falls back to `paul@coriolisagency.com` for this door (`coriolisagency`).
+
+```
+MAILGUN_API_KEY=
+MAILGUN_DOMAIN=
+CONTACT_TO=
+CONTACT_FROM=Coriolis <forms@YOUR_MAILGUN_DOMAIN>
+CONTACT_SUBJECT_PREFIX=Coriolis
+MAILGUN_API_BASE=https://api.mailgun.net
+```
+
+US API base is the default. Do not commit keys. `FORM_INTAKE_SECRET` must match the OS project.
+
+The package is a private git dependency over **https** (`git+https://github.com/CoriolisAgency/lead-form.git#v0.1.1`). There is no `.npmrc`. `vercel.json` `installCommand` runs `npm install`, and when `LEAD_FORM_READ_TOKEN` is set it first adds git `insteadOf` rewrites so that `https://github.com/` and `ssh://git@github.com/` fetch via `https://x-access-token:${LEAD_FORM_READ_TOKEN}@github.com/`. The token is a fine-grained PAT with Contents: Read on `CoriolisAgency/lead-form` only. Set it on the Vercel project for Production and Preview, marked sensitive. Local `npm install` does not use `installCommand`.
+
+Vercel `api/` functions 500 if they import **local** modules. Importing `@coriolis/lead-form` is fine.
 
 ## Agency intel popup
 
-`POST /api/subscribe` asks Coriolis OS to send a confirmation email (`POST /api/forms/subscribe`). The Lead is minted only after they click the link (`GET /api/forms/confirm-email` → `/confirmed`). Does **not** write GunSearchEngine users. Same `CORIOLIS_OS_URL` + `FORM_INTAKE_SECRET` as contact. Keep this function self-contained like `api/contact.ts` — Vercel `api/` functions 500 if they import local modules. Localhost posts straight to `http://localhost:3000/api/forms/subscribe`. Unsub: `/unsubscribe`.
+`POST /api/subscribe` asks Coriolis OS to send a confirmation email (`POST /api/forms/subscribe`). The Lead is minted only after they click the link (`GET /api/forms/confirm-email` → `/confirmed`). Does **not** write GunSearchEngine users. Same `CORIOLIS_OS_URL` + `FORM_INTAKE_SECRET` as contact. Keep this function self-contained — Vercel `api/` functions 500 if they import local modules. Localhost posts straight to `http://localhost:3000/api/forms/subscribe`. Unsub: `/unsubscribe`.
 
 ## What lives where
 
