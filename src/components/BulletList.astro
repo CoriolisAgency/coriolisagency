@@ -1,0 +1,76 @@
+---
+import { bulletHoleSrc, pickBulletHoles } from "../lib/bullet-holes";
+
+type BulletItem = string | { label: string; items: string[] };
+
+interface Props {
+  items: BulletItem[];
+  variant?: "default" | "bullet-holes";
+  listKey?: string;
+  class?: string;
+}
+
+const { items, variant = "default", listKey, class: className } = Astro.props;
+
+function itemText(item: BulletItem): string {
+  return typeof item === "string" ? item : [item.label, ...item.items].join("\n");
+}
+
+const itemsText = items.map(itemText).join("\n");
+const holes =
+  variant === "bullet-holes"
+    ? pickBulletHoles(listKey ?? itemsText, items.length)
+    : [];
+---
+
+{
+  variant === "bullet-holes" ? (
+    <ul class:list={[className, "list-bullet-holes"]}>
+      {items.map((item, i) => {
+        const n = holes[i]!;
+        const label = typeof item === "string" ? item : item.label;
+        const nested = typeof item === "string" ? null : item.items;
+        return (
+          <li>
+            <img
+              class="list-bullet-holes__icon"
+              src={bulletHoleSrc(n, 64)}
+              alt=""
+              aria-hidden="true"
+              width="64"
+              height="64"
+              decoding="async"
+            />
+            <span class="list-bullet-holes__text">
+              {label}
+              {nested ? (
+                <ul class="list-bullet-holes__sub">
+                  {nested.map((s) => (
+                    <li>{s}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </span>
+          </li>
+        );
+      })}
+    </ul>
+  ) : (
+    <ul class={className}>
+      {items.map((item) =>
+        typeof item === "string" ? (
+          <li>{item}</li>
+        ) : (
+          <li>
+            {item.label}
+            <ul class="mt-1.5 list-disc space-y-1 pl-5">
+              {item.items.map((s) => (
+                <li>{s}</li>
+              ))}
+            </ul>
+          </li>
+        ),
+      )}
+    </ul>
+  )
+}
