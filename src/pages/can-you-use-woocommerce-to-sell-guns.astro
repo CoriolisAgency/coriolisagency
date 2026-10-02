@@ -1,0 +1,382 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_WOO_SELL_GUNS } from "../lib/faq";
+import { HOWTO_WOO_SELL_GUNS } from "../lib/howto";
+import { LINKS, linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+
+const automaticFfl = "https://wordpress.org/plugins/automatic-ffl-for-wc/";
+const fflBridge = "https://www.fflbridge.com/woocommerce-ffl-plugin";
+
+const sources = [
+  {
+    label: "WooPayments prohibited and restricted products",
+    href: "https://woocommerce.com/document/woopayments/our-policies/prohibited-and-restricted-products/",
+  },
+  {
+    label: "WordPress.com store guidelines (reviewed Aug 11, 2026)",
+    href: "https://wordpress.com/support/store-guidelines/",
+  },
+  {
+    label: "Stripe prohibited and restricted businesses (updated Sept 22, 2026)",
+    href: "https://stripe.com/legal/restricted-businesses",
+  },
+  {
+    label: "NSSF on Stripe's policy change (Nov 25, 2025)",
+    href: "https://www.nssf.org/articles/more-positive-news-stripe-updates-policies-to-reverse-firearm-industry-discrimination/",
+  },
+  {
+    label: "Square General Terms of Service (updated Sept 14, 2026)",
+    href: "https://squareup.com/us/en/legal/general/ua",
+  },
+  {
+    label: "PayPal Acceptable Use Policy",
+    href: "https://www.paypal.com/us/legalhub/paypal/acceptableuse-full",
+  },
+  {
+    label: "WooCommerce Authorize.net documentation",
+    href: "https://woocommerce.com/document/authorize-net/",
+  },
+  {
+    label: "18 U.S.C. § 922",
+    href: "https://www.law.cornell.edu/uscode/text/18/922",
+  },
+  {
+    label: "DOJ on handgun sales to 18 to 20-year-olds (Sept 18, 2026)",
+    href: "https://www.justice.gov/opa/pr/justice-department-concludes-federal-ban-handgun-sales-18-20-year-olds-unconstitutional-and",
+  },
+  {
+    label: "California Penal Code § 30312",
+    href: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=PEN&sectionNum=30312",
+  },
+  {
+    label: "FFL Checkout",
+    href: "https://fflcockpit.com/product/ffl-checkout/",
+  },
+  {
+    label: "Automatic FFL",
+    href: automaticFfl,
+  },
+  {
+    label: "FFL Bridge",
+    href: fflBridge,
+  },
+  {
+    label: "UPS firearms shipping",
+    href: "https://www.ups.com/us/en/support/shipping-support/shipping-special-care-regulated-items/prohibited-items/firearms",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Can you use WooCommerce to sell guns? Yes. Here is how | Coriolis"
+  description="Yes. WooCommerce is open-source and can sell firearms when a licensed FFL owns the store. Which processors and hosts say no, and how FFL checkout works."
+  path="/can-you-use-woocommerce-to-sell-guns"
+  ogImagePath={CANON_PATHS.storefront}
+  ogType="article"
+  publishedTime="2026-10-02"
+  faq={FAQ_WOO_SELL_GUNS}
+  extraJsonLd={[HOWTO_WOO_SELL_GUNS]}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        Ecommerce · WooCommerce
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        Can you use WooCommerce to sell guns?
+      </h1>
+      <p class="mt-2 text-xs text-zinc-500">Updated October 2, 2026</p>
+      <div class="mt-5 max-w-3xl space-y-4 text-base leading-relaxed text-zinc-300">
+        <p>
+          Yes. WooCommerce is free, open-source store software, and nothing in
+          it stops a licensed dealer from selling firearms. The limits come from
+          the companies around it. WooPayments, Square, and PayPal do not allow
+          firearm sales. WordPress.com will not host a gun store. So you run
+          WooCommerce on your own hosting, take cards through a merchant account
+          approved for firearms, and ship every gun to a receiving FFL. Coriolis
+          builds and runs that store for dealers.
+        </p>
+        <p>
+          This is not legal advice. Talk to your attorney about federal, state,
+          and local rules before you sell.
+        </p>
+      </div>
+      <div class="mt-8">
+        <CtaRow primary="ecommerce" showGsa={false} showContact />
+      </div>
+      <EcommerceCluster />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        What WooCommerce does, and what it does not
+      </h2>
+      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
+        <p>
+          WooCommerce gives you the store. Product pages, cart, checkout,
+          shipping zones, taxes, orders, and customer accounts all come with it.
+          You can add plugins for the parts a gun store needs.
+        </p>
+        <p>
+          Out of the box it does not know a rifle from a T-shirt. It has no FFL
+          dealer selector. It has no state-by-state firearm rules. It does not
+          run background checks, fill out a 4473, or keep your bound book. Those
+          stay with you, the receiving dealer, and the systems licensed for
+          them.
+        </p>
+        <p>
+          Automattic, the company behind WooCommerce, says this in its
+          WordPress.com store guidelines. It does not prohibit the WooCommerce
+          software for firearms merchants who host somewhere else. Those
+          merchants can still buy Woo Marketplace extensions with a valid dealer
+          license.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        Payment processors: who says no
+      </h2>
+      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
+        <p>
+          This is the part that trips people up. The store software is fine. The
+          default payment options are not.
+        </p>
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <strong class="font-semibold text-zinc-200">WooPayments: no.</strong>
+            {" "}Its prohibited list includes "Firearms and ammunition."
+            WordPress.com's guidelines also bar firearms merchants from
+            WooPayments and other Jetpack-based extensions, such as WooShipping
+            and Tax.
+          </li>
+          <li>
+            <strong class="font-semibold text-zinc-200">Square: no.</strong>
+            {" "}Square's General Terms bar using its services "for the sale of
+            firearms, firearm parts, ammunition, weapons."
+          </li>
+          <li>
+            <strong class="font-semibold text-zinc-200">PayPal: no.</strong>
+            {" "}PayPal's Acceptable Use Policy prohibits transactions involving
+            "ammunition, firearms, or certain firearm parts or accessories."
+          </li>
+          <li>
+            <strong class="font-semibold text-zinc-200"
+              >Stripe: maybe, with review.</strong
+            >
+            {" "}In late 2025 Stripe moved legal firearms from prohibited to
+            restricted. Its list now shows firearms under "limited availability"
+            and tells you to contact its sales team. Expect underwriting before
+            you take a payment. WooPayments runs on Stripe and still lists
+            firearms as prohibited, so do not assume one means the other.
+          </li>
+        </ul>
+        <p>
+          What dealers use instead is a merchant account underwritten for
+          firearms by a bank or processor that accepts FFLs. That account
+          connects to WooCommerce through a payment gateway. WooCommerce has an
+          official Authorize.net extension, for example. The gateway moves the
+          card data. The merchant account is the part that gets approved for
+          your business. Get that approval in writing before you launch.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        Hosting: where the store can live
+      </h2>
+      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
+        <p>
+          WordPress.com's store guidelines prohibit selling "firearms or other
+          weaponry, including parts, accessories, and ammunition." A gun store
+          cannot run there.
+        </p>
+        <p>
+          Self-hosted WooCommerce is the answer. You install it on a host whose
+          terms allow a firearms business, and you own the site and the data.
+          Coriolis runs its dealer stores on WP Engine and manages them for you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        Compliance: what your store has to get right
+      </h2>
+
+      <h3 class="mt-8 text-lg font-semibold text-white">
+        Ship firearms to an FFL
+      </h3>
+      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
+        <p>
+          Federal law keeps a dealer from selling a gun straight to an
+          unlicensed buyer in another state. When someone buys a gun online from
+          out of state, it ships to a licensed dealer in the buyer's home state.
+          That dealer runs the transfer. Your checkout should make "ship to an
+          FFL" the only option when a firearm is in the cart.
+        </p>
+        <p>That takes a dealer selector at checkout. Three WooCommerce plugins that do it:</p>
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <a href={LINKS.fflCheckout} class={linkClass} {...ext}>FFL Checkout</a>
+            {" "}(<a href={LINKS.fflCockpit} class={linkClass} {...ext}>FFL Cockpit</a>, listed on
+            WordPress.org as g-FFL Checkout). FFL search by ZIP and map, sync
+            with the ATF FFL database, ATF eZ Check, an FFL document database,
+            and state shipping restrictions. $15.99 a month on{" "}
+            <a href={LINKS.fflCockpit} class={linkClass} {...ext}>FFL Cockpit</a>'s
+            site. Coriolis includes it on Militia and above.
+          </li>
+          <li>
+            <a href={automaticFfl} class={linkClass} {...ext}>Automatic FFL</a>
+            {" "}(Refactored Group). A dealer map at checkout, automatic
+            detection of FFL-required products, and state ammunition rules. From
+            $99 a month.
+          </li>
+          <li>
+            <a href={fflBridge} class={linkClass} {...ext}>FFL Bridge</a>.
+            ZIP-based dealer lookup that saves the chosen dealer to the order.
+            Has a free plan.
+          </li>
+        </ul>
+      </div>
+
+      <h3 class="mt-8 text-lg font-semibold text-white">Age</h3>
+      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
+        <p>
+          Federal law bars a dealer from selling any firearm or ammunition to
+          someone under 18. For handguns and other non-long-gun ammunition, the
+          federal age in the statute is 21. On September 18, 2026, the Justice
+          Department's Office of Legal Counsel said it will not criminally
+          enforce the under-21 handgun rule against dealers who sell to
+          law-abiding adults aged 18 to 20. The statute is still on the books,
+          and many states set their own age limits. Ask your attorney before you
+          change your age rules.
+        </p>
+        <p>
+          A pop-up that asks "Are you 21?" proves nothing. For a firearm, the
+          receiving FFL checks ID at transfer. For anything you ship to a home
+          address, decide how you will verify age before you launch.
+        </p>
+      </div>
+
+      <h3 class="mt-8 text-lg font-semibold text-white">State rules</h3>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Some products cannot ship to some states, and some states add their own
+        process. California is the common example. Since January 1, 2018,
+        ammunition bought online must go to a licensed ammunition vendor in
+        California, who completes the sale face to face. Your store needs
+        shipping rules by state and by product. FFL Checkout and Automatic FFL
+        both have state restriction settings. Someone still has to keep them
+        current.
+      </p>
+
+      <h3 class="mt-8 text-lg font-semibold text-white">Shipping carriers</h3>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Carriers have their own rules on top of the law. UPS, for example, only
+        takes firearm shipments from licensees who sign a UPS agreement, and
+        handguns have to go by a Next Day Air service. Read your carrier's
+        firearm rules before you set shipping rates.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Where Coriolis fits</h2>
+      <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
+        <p>
+          Coriolis builds WooCommerce stores for FFLs on your domain. Managed by
+          Coriolis on WP Engine. You own the site. If you leave, it goes with
+          you.
+        </p>
+        <ul class="list-disc space-y-2 pl-5">
+          <li>
+            <strong class="font-semibold text-zinc-200">Minute Man, $169/mo.</strong>
+            {" "}Your inventory on a custom WooCommerce store.
+          </li>
+          <li>
+            <strong class="font-semibold text-zinc-200">Militia, $269/mo.</strong>
+            {" "}Adds FFL Cockpit and FFL Checkout, 21 distributor catalogs, and
+            automated dropshipping.
+          </li>
+          <li>
+            <strong class="font-semibold text-zinc-200">Gun Runner, $369/mo.</strong>
+            {" "}Adds VIP support.
+          </li>
+          <li>
+            <strong class="font-semibold text-zinc-200">Warlord, $469/mo.</strong>
+            {" "}Adds POS integration with AIM, MicroBiz, Rapid Gun Systems,
+            Trident 1, and Corestore.
+          </li>
+          <li>
+            <strong class="font-semibold text-zinc-200"
+              >FFL Accelerator, $569/mo.</strong
+            >
+            {" "}One managed plan with hosting, site design, VIP support, any POS
+            integration, email automation, and analytics. Includes a 99.95%
+            uptime SLA.
+          </li>
+        </ul>
+        <p>
+          Setup is $500 or $2,500. No annual contract. We install the payment
+          gateway at setup. The merchant account is yours.
+        </p>
+        <p>
+          Coriolis does not run 4473, NICS, or the bound book. Those stay with
+          the systems licensed for them.
+        </p>
+      </div>
+      <div class="mt-8">
+        <CtaRow primary="ecommerce" showGsa={false} showContact />
+      </div>
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_WOO_SELL_GUNS} />
+
+  <section class="border-t border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-sm font-semibold text-zinc-400">Sources</h2>
+      <ul class="mt-4 max-w-3xl list-disc space-y-1.5 pl-5 text-xs text-zinc-500">
+        {
+          sources.map((s) => (
+            <li>
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-zinc-300 hover:underline underline-offset-2"
+              >
+                {s.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 max-w-3xl text-xs text-zinc-500">
+        This page is general information, not legal advice. Rules change. Check
+        current law and your providers' terms before you sell.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
