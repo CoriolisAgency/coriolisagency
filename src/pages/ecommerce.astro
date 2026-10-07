@@ -127,6 +127,13 @@ const switchSteps = [
                 listKey={plan.id}
                 class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400"
               />
+              {plan.offerSite ? (
+                <p class="mt-4 text-sm">
+                  <a href={plan.offerSite.href} class={linkClass} target="_blank" rel="noopener">
+                    {plan.offerSite.label}
+                  </a>
+                </p>
+              ) : null}
             </article>
           ))
         }

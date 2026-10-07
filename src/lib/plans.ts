@@ -18,6 +18,11 @@ export interface Plan {
   description?: string;
   bullets?: "bullet-holes";
   features: PlanFeature[];
+  /**
+   * One outbound link on the plan card to the site that owns the offer name
+   * (SEO S3.1, Paul 2026-10-07). Organic only: no UTMs, no nofollow.
+   */
+  offerSite?: { href: string; label: string };
 }
 
 /** Monthly hosting ladder. Checkout is contact / onboarding — no Stripe buy buttons. */
@@ -118,6 +123,10 @@ export const PLANS: Plan[] = [
     featured: true,
     badge: "Webmaster Included",
     includesFrom: "Warlord",
+    offerSite: {
+      href: "https://fflaccelerator.com/",
+      label: "See the FFL Accelerator offer at FFLAccelerator.com",
+    },
     description:
       "A single, all-in-one, managed ecommerce plan. It includes hosting, site design (Basic or Retail), VIP support, POS integration (any POS), email automation, and analytics (Google Analytics, Google Search Console, GunSearchEngine.com, and email/SMS).",
     bullets: "bullet-holes",
