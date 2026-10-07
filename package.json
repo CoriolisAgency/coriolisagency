@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test:ci": "node scripts/test-nav-ffl-layer.mjs"
+    "test:ci": "node scripts/test-nav-ffl-layer.mjs",
+    "lastmod:gen": "node scripts/gen-lastmod.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

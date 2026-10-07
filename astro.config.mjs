@@ -15,6 +15,26 @@ const base = process.env.ASTRO_BASE || "/";
 const site = process.env.ASTRO_SITE || "https://www.coriolisagency.com";
 
 /**
+ * Per-page sitemap lastmod from lastmod.json (path -> ISO date of the page
+ * source's last commit; regenerate with `npm run lastmod:gen`). Checked in
+ * because Vercel builds from a shallow clone. Pages missing from the file
+ * fall back to the build date.
+ */
+const LASTMOD = JSON.parse(
+  fs.readFileSync(fileURLToPath(new URL("./lastmod.json", import.meta.url)), "utf8"),
+);
+const BUILD_DATE = new Date().toISOString();
+const basePrefix = base.replace(/\/$/, "");
+function pageLastmod(url) {
+  let p = new URL(url).pathname;
+  if (basePrefix && p.startsWith(basePrefix)) p = p.slice(basePrefix.length) || "/";
+  if (p.length > 1) p = p.replace(/\/$/, "");
+  if (LASTMOD[p]) return new Date(LASTMOD[p]).toISOString();
+  console.warn(`[sitemap] lastmod: ${p} not in lastmod.json, using build date`);
+  return BUILD_DATE;
+}
+
+/**
  * @astrojs/sitemap drops the root slash when trailingSlash is "never". Put it
  * back after the sitemap is written so the homepage <loc> matches its
  * canonical tag (https://www.coriolisagency.com/). Other URLs are untouched.
@@ -52,9 +72,10 @@ export default defineConfig({
         !page.includes("/gun-store-pos") &&
         !page.includes("/confirmed") &&
         !page.includes("/unsubscribe"),
-      // lastmod = build date. Vercel builds from a shallow clone and pages
-      // share layouts and components, so per-file git dates are not reliable.
-      lastmod: new Date(),
+      serialize(item) {
+        item.lastmod = pageLastmod(item.url);
+        return item;
+      },
     }),
     sitemapHomeSlash(),
   ],
