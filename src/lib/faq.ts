@@ -130,6 +130,34 @@ export const FAQ_GEARFIRE: FaqItem[] = [
   },
 ];
 
+/** /orchid-alternative (SEO S4). No Orchid prices beyond POS Spark's published $99/mo. */
+export const FAQ_ORCHID: FaqItem[] = [
+  {
+    q: "Is Coriolis an Orchid reseller or partner?",
+    a: "No. We are not affiliated with Orchid. We build and host WooCommerce stores.",
+  },
+  {
+    q: "Can I keep Orchid eBound and use a Coriolis website?",
+    a: "Yes. Your bound book is your compliance record and stays where it is. The website is a separate decision.",
+  },
+  {
+    q: "FastBound or Orchid eBound: which is better?",
+    a: "Both are electronic A&D bound books with e4473. Pick on compliance support and how it connects to your register. The comparison section on this page lays out what each vendor publishes.",
+  },
+  {
+    q: "How much does Orchid eBound cost?",
+    a: "Orchid sets its own eBound pricing; check Orchid’s pricing page or ask Orchid. POS Spark lists at $99/mo. Coriolis plans start at $169/mo for the website only.",
+  },
+  {
+    q: "Does Coriolis do 4473 or NICS?",
+    a: "No. Not 4473 software. Not a NICS system. Not a bound-book replacement.",
+  },
+  {
+    q: "What do I keep if I leave?",
+    a: "The website: your domain, your content, and your WooCommerce data.",
+  },
+];
+
 export const FAQ_EMAIL: FaqItem[] = [
   {
     q: "What email is included with FFL Accelerator?",
