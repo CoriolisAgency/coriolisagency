@@ -9,6 +9,13 @@ Coriolis builds websites gun stores own, puts Betsy on those sites, and sells an
 - Grok Bot setup — $995. One session. Their Cursor seat. We never rent them ours.
 - Gun Store Game — consumer game. Dealer claim is a separate door.
 
+## Our sites
+- coriolisagency.com — the company, the hosting plans, and the comparison pages. You are here.
+- fflaccelerator.com — the FFL Accelerator offer. Our ads only point there.
+- gunsearchengine.com — gun search for shoppers, and Demand Intelligence for brands.
+
+GunSearchAgent is retired. 2aBetsy.com is still up, but it is not where to learn about us. FFLIntel, FFLAnalytics and FFL Search Console are names we hold for later. Don't treat them as the home of any product today.
+
 ## Pages
 - / — company home. CTA is FFL Ecommerce.
 - /ecommerce — FFL Accelerator and the hosting plans
@@ -21,7 +28,7 @@ Coriolis builds websites gun stores own, puts Betsy on those sites, and sells an
 - /grok-bot-setup — the $995 session
 - /ammoready-alternative — AmmoReady alternative
 - /gearfire-alternative — Gearfire alternative (FirearmCart / Gunpowdr named on that table)
-- /best-ffl-ecommerce-website, /firearms-dropshipping, /ffl-cockpit — store pages
+- /best-ffl-ecommerce-website, /firearms-dropshipping, /ffl-cockpit, /can-you-use-woocommerce-to-sell-guns — store pages
 - /email-marketing-for-ffl-ecommerce — Accelerator email (no LTV claim)
 - /woocommerce-vs-shopify-for-gun-stores — owned Woo vs hosted Shopify
 - /aim-pos, /microbiz-pos, /trident-1-pos, /corestore-pos, /rapid-gun-systems-pos — keep-your-register
