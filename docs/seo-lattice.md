@@ -21,7 +21,7 @@
 | Intent | Ranking owner |
 |--------|----------------|
 | Coriolis / Coriolis Agency / Coriolis LLC | **This site** `/` |
-| FFL website plans / WooCommerce hosting ladder | **This site** `/ecommerce` |
+| FFL website plans / WooCommerce hosting ladder / plan prices (Minute Man $169 → FFL Accelerator $569), "ffl website pricing", "gun store website plans" | **This site** `/ecommerce` — owns the ladder. The `#ffl-accelerator` card links once to `https://fflaccelerator.com/` (S3.1) |
 | Firearms dropshipping / FFL dropshipping | **This site** `/firearms-dropshipping` |
 | FFL Cockpit + “what website do I use” | **This site** `/ffl-cockpit` |
 | AmmoReady alternative | **This site** `/ammoready-alternative` |
@@ -31,7 +31,7 @@
 | WooCommerce vs Shopify (gun stores) | **This site** `/woocommerce-vs-shopify-for-gun-stores` |
 | Can you use WooCommerce to sell guns | **This site** `/can-you-use-woocommerce-to-sell-guns` |
 | AIM / MicroBiz / Trident 1 / Corestore / Rapid + Woo | **This site** `/aim-pos` `/microbiz-pos` `/trident-1-pos` `/corestore-pos` `/rapid-gun-systems-pos` |
-| FFL Accelerator $569 program story / offer name | **fflaccelerator.com** (owns the offer name; only ads destination `/lp/`) |
+| FFL Accelerator $569 program story / offer name ("FFL Accelerator", "ffl accelerator", "fflaccelerator") | **fflaccelerator.com** `/` (owns the offer name; only ads destination `/lp/`). No agency page targets the offer name in a title or H1. Ads never land on coriolisagency.com |
 | AI Studio / Coriolis products as capability | **This site** `/ai-studio` (`/ai-factory` → 301) |
 | Betsy AI character | **None** — 2abetsy.com stays up, not a door |
 | Demand Intelligence (enterprise VP, portal, demo, API, Co-Pilot) | **GunSearchEngine** `/demand-intelligence` — this host 301s `/demand-intelligence` there |
@@ -56,6 +56,7 @@
 5. Never H1 “RetailBI alternative.” Never “switch off RetailBI.” Never 4473 automation claims.
 6. Frozen strings from `src/lib/frozen.ts`.
 7. Pricing honesty: Minute Man $169, Militia $269, Gun Runner $369, Warlord $469, Accelerator $569. Setup $500 / $2,500. Do not invent DI plan dollars.
+8. Cross-links: agency `/ecommerce` → `fflaccelerator.com/` (one link on the plan card). `fflaccelerator.com/` → `coriolisagency.com/about` (one link, homepage only, Paul override 2026-10-07). No other new cross-links between the two sites (the existing agency mentions of fflaccelerator.com on `/about`, `/gearfire-alternative`, `/email-marketing-for-ffl-ecommerce` and press posts predate this rule and stay). All are organic only: no UTMs, no `nofollow`.
 
 ## Internal links
 
