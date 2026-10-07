@@ -38,7 +38,7 @@ Same path, new voice, still answer the old query in the first 80 words. **Do not
 | `/ammoready-alternative` | 19 | 1,780 | Query pos 6.1, 9 clicks. **AmmoReady pillar.** |
 | `/best-ffl-ecommerce-website` | 17 | 3,047 | Comparison intent still sells ecommerce. |
 
-Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/aim-pos`, `/microbiz-pos`, `/trident-1-pos`, `/corestore-pos`, `/rapid-gun-systems-pos`.
+Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), **`/orchid-alternative`** (Orchid comparison, S4), **`/orchid-alternative`** (Orchid comparison, S4), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/aim-pos`, `/microbiz-pos`, `/trident-1-pos`, `/corestore-pos`, `/rapid-gun-systems-pos`.
 
 `/demand-intelligence` 301s to `https://www.gunsearchengine.com/demand-intelligence/` (`permanent: true` in `vercel.json`). Trailing-slash variant 308s to no-slash first. Do not leave a competing DI page on this host.
 
@@ -49,7 +49,7 @@ Optional keep (editorial accidents — not company juice, but real clicks). Only
 | `/the-scar-is-dead-long-live-the-xcr-modular-tactical-rifle` | 40 | 3,098 | `xcr vs scar`. Client/editorial. Keep static **or** let die. |
 | `/shadowsmith-ammo-selects-coriolis-agency-…` | 35 | 3,335 | People search the **client**. 301 → `/about` unless you want a news URL. |
 | `/top-us-gun-manufacturers-complete-guide-…` | 30 | 18,031 | Vanity listicle (page 2–3). Let die unless you like the impressions. |
-| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 28 | 16,821 | **410** via `/api/gone`. Bound-book / 4473. Do not 301. |
+| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 28 | 16,821 | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
 | `/unleash-hellfire-with-the-diablo-12-gauge-…` | 22 | 2,404 | Product editorial. Let die. |
 | `/meet-the-team` | 26 | 314 | Brand. 301 → `/about` (do not rebuild). |
 | `/ammoready-com-founder-launches-2a-focused-digital-marketing-agency` | 24 | 812 | Origin story. 301 → `/about`. |
@@ -60,23 +60,32 @@ Retired WordPress posts. Soft 404 on the Astro cutover; now rewrite to `/api/gon
 
 | Old WordPress | Status | Clicks | Why |
 |---------------|--------|-------:|-----|
-| `/orchid` | 410 | — | Short leftover. |
 | `/ebound` | 410 | — | Short leftover. |
 | `/orchid-gun-store-pos` | 410 | 0 | Junk POS post. |
 | `/orchid-estate` | 410 | — | Short leftover. |
 | `/orchid-estate-bound-book` | 410 | — | Short leftover. |
 | `/orchid-estate-breaks-new-ground-in-ffl-compliance` | 410 | — | Live WP slug (soft 404). |
-| `/fastbound-vs-orchid` | 410 | — | Short leftover. |
-| `/fastbound-vs-orchid-advisors` | 410 | — | Short leftover. |
-| `/fastbound-vs-orchid-ebound` | 410 | — | Short leftover. |
-| `/fastbound-vs-orchid-ebound-bound-book` | 410 | — | Short leftover. |
-| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 410 | 28 | Bound-book / 4473. Do not 301. |
+
+The six Orchid / fastbound-vs-orchid slugs that used to be in this table now 301 to `/orchid-alternative` (S4; see below). The five Orchid slugs above stay **410**.
 
 Do **not** 410 `/estate` — that string is not unique enough. Trailing-slash variants 308 to the no-slash source, then 410.
 
 ## 301 to a new pillar (do these)
 
 Implemented in `vercel.json` (path sources only; trailing-slash handled by Vercel).
+
+### S4: Orchid comparison slugs → `/orchid-alternative`
+
+Moved from the 410 rewrites to `redirects` with `"statusCode": 301` (exact path sources; the slashed form 308s to no-slash first, then 301s). The five Orchid slugs in the 410 table (`/ebound`, `/orchid-gun-store-pos`, `/orchid-estate`, `/orchid-estate-bound-book`, `/orchid-estate-breaks-new-ground-in-ffl-compliance`) stay 410.
+
+| Old WordPress | Status | Clicks | Why |
+|---------------|--------|-------:|-----|
+| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 301 → `/orchid-alternative` | 28 | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
+| `/fastbound-vs-orchid` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
+| `/fastbound-vs-orchid-ebound` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
+| `/fastbound-vs-orchid-ebound-bound-book` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
+| `/fastbound-vs-orchid-advisors` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
+| `/orchid` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
 
 `/demand-intelligence` → `https://www.gunsearchengine.com/demand-intelligence/` is a live-host 301 (not a WordPress leftover). `/sitemap.xml` rewrites to `/sitemap-index.xml` — same index, not a second sitemap.
 
@@ -182,7 +191,7 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 - Email ROI headline only: the **42-to-1** claim is not republished. The slug 301s to `/email-marketing-for-ffl-ecommerce` (Accelerator facts only).
 - Agency/SEO vanity: `/firearms-digital-marketing-agency/` (15 clicks — only if you still want that door; else die), `/gun-industry-seo-company-…/` (10 c / 10,184 i), `/firearms-seo-marketing/` (7 c / 10,201 i). Query cluster: **6 clicks / 20k impr**.
-- Compliance software: `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` (28 c / 16,821 i) — **410**, do not 301. Query cluster is 1 click / 8.5k impr of bound-book noise.
+- Compliance software: `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` (28 c / 16,821 i) — 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page.
 - `/ammoready-login/` (2 clicks) — not your product.
 - `/types-of-ffls/` (0 / 898) — still a soft 404.
 - `/orchid-gun-store-pos` (0 / 826) and the short leftovers in the 410 table — **410** via `/api/gone`. Do not 301 onto `/ecommerce` or `/best-ffl-ecommerce-website`.

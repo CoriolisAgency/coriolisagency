@@ -1,4 +1,4 @@
-import { SWITCH_STEPS } from "./switch";
+import { SWITCH_STEPS, SWITCH_STEPS_NEUTRAL } from "./switch";
 
 export type HowToStep = {
   name: string;
@@ -80,4 +80,12 @@ export const HOWTO_WOO_SELL_GUNS = howToJsonLd({
       text: "Warlord and FFL Accelerator connect AIM, MicroBiz, Rapid Gun Systems, Trident 1, and Corestore. Coriolis does not run 4473, NICS, or the bound book.",
     },
   ],
+});
+
+/** HOWTO_SWITCH with the tier-neutral steps (used on /orchid-alternative). */
+export const HOWTO_SWITCH_NEUTRAL = howToJsonLd({
+  name: "Switch from a template FFL website without downtime",
+  description:
+    "Keep your domain. Coriolis stands up WooCommerce before you give notice, then you cut DNS. You leave with the site.",
+  steps: SWITCH_STEPS_NEUTRAL,
 });

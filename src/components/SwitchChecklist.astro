@@ -3,13 +3,15 @@ import { SWITCH_FOUNDER, SWITCH_STEPS } from "../lib/switch";
 
 interface Props {
   founderNote?: boolean;
+  /** Override the default steps (e.g. SWITCH_STEPS_NEUTRAL). */
+  steps?: readonly string[];
 }
 
-const { founderNote = false } = Astro.props;
+const { founderNote = false, steps = SWITCH_STEPS } = Astro.props;
 ---
 
 <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
-  {SWITCH_STEPS.map((step) => <li>{step}</li>)}
+  {steps.map((step) => <li>{step}</li>)}
 </ol>
 {
   founderNote && (
