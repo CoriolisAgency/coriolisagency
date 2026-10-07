@@ -35,6 +35,10 @@
 | Betsy AI character | **None** — 2abetsy.com stays up, not a door |
 | Demand Intelligence (enterprise VP, portal, demo, API, Co-Pilot) | **GunSearchEngine** `/demand-intelligence` — this host 301s `/demand-intelligence` there |
 | How store, sensor, and demand fit | **This site** `/stack` |
+| Demand Intelligence vs RetailBI (what shoppers typed vs what sold) | **This site** `/demand-intelligence-vs-retailbi` — comparison page; Demand Intelligence itself stays on GunSearchEngine |
+| FFL analytics, agency side (how Coriolis reads a dealer's site search) | **This site** `/ffl-analytics` — agency page only. The FFL Analytics product intent is not owned here; that name is a reserved satellite |
+| Search Console for FFLs, agency side (how Coriolis puts site search next to Google Search Console) | **This site** `/ffl-search-console` — agency page only. The FFL Search Console product intent is not owned here; that name is a reserved satellite |
+| Grok Bot setup ($995 session) | **This site** `/grok-bot-setup` |
 | GA for FFLs / free agent | **None** — GunSearchAgent retired |
 | Three numbers desk | **None** — FFLIntel reserved |
 | Checkout / MSA | Stripe checkout + **this site** `/msa` |

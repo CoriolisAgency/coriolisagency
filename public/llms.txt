@@ -31,6 +31,9 @@ GunSearchAgent is retired. 2aBetsy.com is still up, but it is not where to learn
 - /best-ffl-ecommerce-website, /firearms-dropshipping, /ffl-cockpit, /can-you-use-woocommerce-to-sell-guns — store pages
 - /email-marketing-for-ffl-ecommerce — Accelerator email (no LTV claim)
 - /woocommerce-vs-shopify-for-gun-stores — owned Woo vs hosted Shopify
+- /demand-intelligence-vs-retailbi — what shoppers typed vs what sold. Not a RetailBI replacement.
+- /ffl-analytics — how we read a gun store's site search. Our take, not a separate FFL Analytics product.
+- /ffl-search-console — how site search sits next to Google Search Console. Our take, not a separate FFL Search Console product.
 - /aim-pos, /microbiz-pos, /trident-1-pos, /corestore-pos, /rapid-gun-systems-pos — keep-your-register
 - /privacy, /msa, /confirmed, /unsubscribe — legal and list
 
