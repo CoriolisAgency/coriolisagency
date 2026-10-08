@@ -1,0 +1,87 @@
+---
+/**
+ * /gun-store-pos-comparison (OPS-31, decision 2026-10-08-gun-store-pos-comparison).
+ * Orphan and noindex: nothing links here, and astro.config.mjs keeps it out of the sitemap.
+ * The table is Paul's canonical table, cells verbatim
+ * (coriolis docs/reference/2026-10-08-gun-store-pos-comparison-table.md). Do not edit cells.
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const HEAD = ["Feature", "Gearfire GPOS", "Orchid Spark", "GunBiz POS", "Gun Runner"] as const;
+
+const ROWS = [
+  ["Starting price", "$149/mo", "$99/mo", "$65/mo", "$369/mo"],
+  ["You own the website", "No", "No", "No", "Yes"],
+  ["In-store register", "Yes", "Yes", "Yes", "Planned"],
+  ["Online store", "Separate product", "Yes", "$95/mo plan", "Yes"],
+  ["Bound book", "FastBound, extra", "Included", "FastBound, extra", "FastBound, extra"],
+  ["Electronic 4473", "FastBound", "Included", "FastBound", "FastBound"],
+  ["Background check", "FastBound", "—", "FastBound", "FastBound"],
+  ["Serial number tracking", "Yes", "Yes", "Yes", "Yes"],
+  ["Firearm-friendly payments", "Gearfire Payments", "—", "Payroc or Gearfire", "GOAT (only)"],
+  ["Distributor catalogs", "Gearfire catalog", "1 distributor", "Yes", "21 catalogs"],
+  ["Dropshipping", "Gearfire store only", "Yes", "No", "Unlimited"],
+  ["Register and website share stock", "With Gearfire store", "Yes", "$95/mo plan", "Yes"],
+  ["Layaway and trades", "Yes", "—", "Yes", "TBD"],
+  ["Gunsmithing work orders", "Yes", "—", "Yes", "TBD"],
+  ["FFL transfers", "—", "—", "Yes", "TBD"],
+  ["Range, lanes, memberships", "No", "No", "Yes", "No"],
+  ["Extra location", "No", "No", "$65/mo", "Yes"],
+  ["Unlimited products and orders", "—", "—", "No", "Yes"],
+  ["Unlimited hosting and storage", "—", "—", "—", "Yes"],
+  ["Support", "1 hour setup", "Live US support", "Free", "VIP"],
+  ["Attorney compliance guarantee", "No", "Yes", "No", "No"],
+  ["Contract", "—", "Cancel anytime", "Cancel anytime", "Cancel anytime"],
+] as const;
+---
+
+<BaseLayout
+  title="Gun store POS comparison"
+  description="How four gun store POS options compare, feature by feature."
+  path="/gun-store-pos-comparison"
+  noindex
+>
+  <section class="py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h1
+        class="max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]"
+      >
+        Gun store POS comparison
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        How four gun store POS options compare, feature by feature.
+      </p>
+      <div class="mt-8 overflow-x-auto rounded-2xl border border-zinc-800">
+        <table class="w-full min-w-[44rem] border-collapse text-left text-sm">
+          <thead class="bg-zinc-950/80">
+            <tr>
+              {
+                HEAD.map((cell) => (
+                  <th scope="col" class="border-b border-zinc-800 px-4 py-3 font-semibold text-white">
+                    {cell}
+                  </th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              ROWS.map(([feature, ...cells]) => (
+                <tr class="border-b border-zinc-800/70 last:border-b-0">
+                  <th scope="row" class="px-4 py-3 font-medium text-zinc-200">
+                    {feature}
+                  </th>
+                  {cells.map((cell) => (
+                    <td class="px-4 py-3 text-zinc-300">{cell}</td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-sm text-zinc-400">A dash means the vendor did not state it.</p>
+      <p class="mt-1 text-sm text-zinc-400">FastBound is not included in the $369 Gun Runner price.</p>
+    </div>
+  </section>
+</BaseLayout>
