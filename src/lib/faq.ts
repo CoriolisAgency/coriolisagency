@@ -180,7 +180,7 @@ export const FAQ_WOO_SELL_GUNS: FaqItem[] = [
   },
   {
     q: "Does WooPayments allow firearms?",
-    a: "No. WooPayments lists firearms and ammunition as prohibited. Use a merchant account approved for firearms and connect it through a gateway such as Authorize.net.",
+    a: "No. WooPayments lists firearms and ammunition as prohibited. Use a merchant account approved for firearms and connect it through a gateway: GOAT Payments, or bring your own.",
   },
   {
     q: "Can I use Stripe, Square, or PayPal for a gun store?",
