@@ -1,0 +1,116 @@
+---
+// OPS-3 support page (decision 2026-10-07-seo-ownership, Execute order 2).
+// /gearfire-alternative owns the head term. This page answers "how do I
+// leave" and links to the owner. It does not repeat the owner's H1.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
+import SwitchChecklist from "../components/SwitchChecklist.astro";
+import { linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+---
+
+<BaseLayout
+  title="Leaving Gearfire: the order that keeps you online | Coriolis"
+  description="How to leave Gearfire without going dark: keep your domain, stand up WooCommerce before you give notice, redirect the URLs that rank, then cut DNS."
+  path="/leave-gearfire"
+  ogImagePath={CANON_PATHS.rangeMckinney}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        Ecommerce · Switch guide
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        How to leave Gearfire without going dark
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        You can leave Gearfire without a day offline. Keep your domain. Stand up
+        WooCommerce before you give notice. Redirect the URLs that already rank.
+        Test a mixed cart. Then cut DNS. This page is the order. The
+        side-by-side (closed network vs a site where you write the titles and
+        the slugs) is on the{" "}
+        <a href={withBase("gearfire-alternative")} class={linkClass}
+          >Gearfire alternative</a
+        >{" "}
+        page. We are not affiliated with Gearfire.
+      </p>
+      <div class="mt-8">
+        <CtaRow primary="ecommerce" showGsa={false} showContact />
+      </div>
+      <EcommerceCluster />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Before you give notice</h2>
+      <ul
+        class="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-400"
+      >
+        <li>
+          Find out who holds the domain. If the registrar account is not in your
+          name, fix that first. Everything else depends on it.
+        </li>
+        <li>
+          List the pages that bring you traffic. The product, category, and info
+          pages that already rank are the ones to redirect. Google Search
+          Console shows them.
+        </li>
+        <li>
+          Decide what you sell: your own stock, distributor catalogs, or both.
+          Own stock is Minute Man. Distributor catalogs through FFL Cockpit start
+          at Militia.
+        </li>
+        <li>
+          Line up payments. We install the payment gateway at setup. The
+          merchant account is yours.
+        </li>
+      </ul>
+      <p class="mt-4 max-w-3xl text-sm text-zinc-300">
+        Do not give notice until the new store is ready.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">The five steps</h2>
+      <SwitchChecklist />
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
+      <h2 class="text-xl font-semibold text-white">What the switch costs</h2>
+      <p class="max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Setup is $500 or $2,500. Plans run from Minute Man at $169 a month to
+        FFL Accelerator at $569. No annual contract. We do not republish
+        Gearfire’s fee card; it is theirs and it changes. Put your current
+        invoice next to the{" "}
+        <a href={withBase("ecommerce")} class={linkClass}>plan ladder</a>. What
+        each setup and plan includes is on the{" "}
+        <a href={withBase("ffl-website-cost")} class={linkClass}
+          >FFL website cost</a
+        >{" "}
+        page.
+      </p>
+      <p class="max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Still comparing? Read the{" "}
+        <a href={withBase("gearfire-alternative")} class={linkClass}
+          >Gearfire alternative</a
+        >{" "}
+        side-by-side. Leaving AmmoReady instead? That’s{" "}
+        <a href={withBase("leave-ammoready")} class={linkClass}
+          >a different guide</a
+        >.
+      </p>
+      <CtaRow primary="ecommerce" showGsa={false} showContact />
+    </div>
+  </section>
+</BaseLayout>

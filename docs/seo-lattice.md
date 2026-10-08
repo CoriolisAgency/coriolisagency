@@ -22,10 +22,13 @@
 |--------|----------------|
 | Coriolis / Coriolis Agency / Coriolis LLC | **This site** `/` |
 | FFL website plans / WooCommerce hosting ladder / plan prices (Minute Man $169 → FFL Accelerator $569), "ffl website pricing", "gun store website plans" | **This site** `/ecommerce` — owns the ladder. The `#ffl-accelerator` card links once to `https://fflaccelerator.com/` (S3.1) |
+| Support (OPS-3): "ffl website cost", "how much does an ffl website cost" | **This site** `/ffl-website-cost`. Support page, not an owner: links to `/ecommerce`, never takes the `/ecommerce` H1 or "plans / pricing" terms in a title or H1. Prices render from `src/lib/plans.ts`. No AmmoReady or Gearfire prices. No FAQ or HowTo JSON-LD |
 | Firearms dropshipping / FFL dropshipping | **This site** `/firearms-dropshipping` |
 | FFL Cockpit + “what website do I use” | **This site** `/ffl-cockpit` |
 | AmmoReady alternative | **This site** `/ammoready-alternative`. Retired duplicates redirect here (OPS-2): `/ammoready-alternative-why-ffls-are-switching-to-coriolis` 301s here; the old trailing-slash blog URL `/ammoready-alternative/` 308s here (Vercel trailing-slash rule, one hop) |
 | Gearfire alternative / FirearmCart / Gunpowdr compare | **This site** `/gearfire-alternative` |
+| Support (OPS-3): "leave ammoready", "how to leave ammoready" | **This site** `/leave-ammoready`. Support page, not an owner: links to `/ammoready-alternative`, never repeats its H1. No FAQ or HowTo JSON-LD (the owner carries the HowTo) |
+| Support (OPS-3): "leave gearfire", "how to leave gearfire" | **This site** `/leave-gearfire`. Support page, not an owner: links to `/gearfire-alternative`, never repeats its H1. No FAQ or HowTo JSON-LD (the owner carries the HowTo) |
 | Orchid comparison: "orchid alternative", "orchid ebound (alternatives / pricing)", "fastbound vs orchid", "orchid ecommerce / pos spark vs" | **This site** `/orchid-alternative` (S4). Retired fastbound-vs-orchid slugs and `/orchid` 301 here: 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. FFLA keeps its Orchid slugs at 410 and never targets Orchid. Organic only: no paid Orchid ads |
 | Bound-book how-to / A&D compliance | **None** (out of lane). Answer only inside comparison pages; no stand-alone bound-book pages |
 | Best FFL ecommerce website | **This site** `/best-ffl-ecommerce-website`. Retired duplicates redirect here (OPS-2): the Dec 2025 trailing-slash post `/best-ffl-ecommerce-website/` 308s here (Vercel trailing-slash rule, one hop); `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026` and `/gun-store-ecommerce-platforms` 301 here (slashed forms: Vercel 308, then the 301) |
@@ -67,6 +70,7 @@
 
 - Home → four pillars (FFL Ecommerce, Gun Store POS, AI Studio, Demand Intelligence)
 - Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / Gearfire / Orchid / best-store / email / POS cluster (Gun Store POS `/gun-store-pos`, AIM POS, GunBiz POS, Trident 1 POS, Rapid Gun Systems) + `/stack`
+- Support pages (OPS-3, one per owned intent) → their owner: `/leave-ammoready` → `/ammoready-alternative`, `/leave-gearfire` → `/gearfire-alternative`, `/ffl-website-cost` → `/ecommerce`. They also link each other and `/ecommerce`. FFLA gets no comparison posts.
 - Gun Store POS `/gun-store-pos` → `/gunbiz-pos`, `/aim-pos` (main cards), `/trident-1-pos`, `/rapid-gun-systems-pos` ("Also works with WooCommerce"), `/contact`
 - AI Studio → live product URLs (proof, not a catalog)
 - Demand Intelligence lives on GunSearchEngine; this host 301s `/demand-intelligence` there. `/stack` inbound uses the GSE URL.

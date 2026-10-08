@@ -1,0 +1,182 @@
+---
+// OPS-3 support page (decision 2026-10-07-seo-ownership, Execute order 2).
+// /ecommerce owns the plan ladder and "ffl website pricing / plans". This page
+// answers "what does it cost" and links to /ecommerce. It does not repeat the
+// owner's H1 and does not publish AmmoReady or Gearfire prices. Prices come
+// from src/lib/plans.ts so the two pages cannot drift.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
+import { linkClass } from "../lib/links";
+import { PLANS, SETUP, type PlanId } from "../lib/plans";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+
+const usd = (n: number) => `$${n.toLocaleString("en-US")}`;
+
+const adds: Record<PlanId, string> = {
+  "minute-man":
+    "The website: custom design on your domain, unlimited hosting, products, and orders.",
+  militia:
+    "Dropshipping: FFL Cockpit and FFL Checkout licenses, 21 distributor catalogs, marketplace feeds.",
+  "gun-runner":
+    "VIP support: DNS and email administration, one-hour email and chat response.",
+  warlord:
+    "POS integration: API sync with any POS that works with WooCommerce.",
+  "ffl-accelerator":
+    "Webmaster included: email automation, GunSearchEngine.com Pro, 99.95% uptime SLA.",
+};
+
+const setupNote: Record<(typeof SETUP)[number]["id"], string> = {
+  basic: "A clean launch. Additional custom pages are $125 each.",
+  retail: "The full custom site and email, up to ten custom pages.",
+};
+
+const low = PLANS[0];
+const high = PLANS[PLANS.length - 1];
+const [basic, retail] = SETUP;
+---
+
+<BaseLayout
+  title="How much does an FFL website cost? Setup + monthly | Coriolis"
+  description={`What an FFL website costs at Coriolis: setup ${usd(basic.price)} or ${usd(retail.price)}, then a monthly plan from ${usd(low.price)} to ${usd(high.price)}. What each step up adds, and what is not in the price.`}
+  path="/ffl-website-cost"
+  ogImagePath={CANON_PATHS.rangeMckinney}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        Ecommerce · Cost
+      </p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        How much does an FFL website cost?
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        At Coriolis, an FFL website is two numbers: a one-time setup of{" "}
+        {usd(basic.price)} or {usd(retail.price)}, and a monthly plan from{" "}
+        {usd(low.price)} to {usd(high.price)}. Which plan depends on three
+        questions. Do you dropship? Do you want VIP support? Do you want the
+        register you already run connected to the site? The plan cards, with
+        everything each one includes, are on{" "}
+        <a href={withBase("ecommerce")} class={linkClass}>FFL website plans</a>.
+      </p>
+      <div class="mt-8">
+        <CtaRow primary="ecommerce" showGsa={false} showContact />
+      </div>
+      <EcommerceCluster />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">One-time setup</h2>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[36rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              <th class="py-3 pr-4 font-medium">Setup</th>
+              <th class="py-3 pr-4 font-medium">Price</th>
+              <th class="py-3 font-medium">What you get</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              SETUP.map((s) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class="py-3 pr-4 font-medium text-zinc-300">{s.name}</th>
+                  <td class="py-3 pr-4 text-zinc-200">{usd(s.price)}</td>
+                  <td class="py-3">{setupNote[s.id]}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Monthly</h2>
+      <p class="mt-2 max-w-3xl text-sm text-zinc-400">
+        Each plan includes everything in the one before it. No annual contract.
+      </p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[36rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              <th class="py-3 pr-4 font-medium">Plan</th>
+              <th class="py-3 pr-4 font-medium">Per month</th>
+              <th class="py-3 font-medium">What it adds</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              PLANS.map((p) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class="py-3 pr-4 font-medium text-zinc-300">{p.name}</th>
+                  <td class="py-3 pr-4 text-zinc-200">{usd(p.price)}</td>
+                  <td class="py-3">{adds[p.id]}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">
+        What is not in the plan price
+      </h2>
+      <ul
+        class="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-400"
+      >
+        <li>
+          Card processing. We install the payment gateway at setup: GOAT
+          Payments, or bring your own gateway. The merchant account is yours,
+          and so are its fees.
+        </li>
+        <li>
+          Your POS subscription. Warlord and FFL Accelerator connect the
+          register you already run. The register stays with your POS company.
+        </li>
+        <li>
+          Support on Minute Man is on demand at $125 per incident. Militia and
+          up include email support.
+        </li>
+        <li>
+          Compliance software. Coriolis does not run 4473, NICS, or the bound
+          book. Those stay with the tools you use today.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
+      <h2 class="text-xl font-semibold text-white">
+        Comparing against another platform
+      </h2>
+      <p class="max-w-3xl text-sm leading-relaxed text-zinc-400">
+        We publish our numbers. We do not republish other platforms’ fee cards;
+        they are theirs and they change. Put your current invoice next to the
+        ladder above. Leaving a template platform? The switch guides are{" "}
+        <a href={withBase("leave-ammoready")} class={linkClass}
+          >how to leave AmmoReady</a
+        >{" "}
+        and{" "}
+        <a href={withBase("leave-gearfire")} class={linkClass}
+          >how to leave Gearfire</a
+        >.
+      </p>
+      <CtaRow primary="ecommerce" showGsa={false} showContact />
+    </div>
+  </section>
+</BaseLayout>
