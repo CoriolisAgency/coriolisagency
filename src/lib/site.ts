@@ -13,7 +13,10 @@ export const SITE = {
 } as const;
 
 export const CANON_PATHS = {
-  logo: "brand/coriolis-wordmark-white.png",
+  /** Outlined SVG wordmark (white, for the dark header, footer and popup). No font file is loaded. */
+  logo: "brand/coriolis-wordmark-white.svg",
+  /** Raster copy of the same wordmark, kept for anything that needs a PNG (old links, email). */
+  logoPng: "brand/coriolis-wordmark-white.png",
   icon: "favicon.png",
   headshot: "betsy/images/betsy-headshot-work.png",
   gaHero: "betsy/images/betsy-ga-alternative-hero.jpg",
