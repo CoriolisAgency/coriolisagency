@@ -69,7 +69,6 @@ export default defineConfig({
       // Keep out: preview/legacy pages and the noindex list pages.
       filter: (page) =>
         !page.includes("/stack-preview") &&
-        !page.includes("/gun-store-pos") &&
         !page.includes("/confirmed") &&
         !page.includes("/unsubscribe"),
       serialize(item) {

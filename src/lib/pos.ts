@@ -29,18 +29,19 @@ export const POS_PAGES: PosPage[] = [
     vendorHref: LINKS.aimPos,
   },
   {
-    slug: "microbiz-pos",
-    path: "/microbiz-pos",
-    name: "MicroBiz POS",
-    title: "MicroBiz POS + WooCommerce — keep your register | Coriolis",
+    slug: "gunbiz-pos",
+    path: "/gunbiz-pos",
+    name: "GunBiz POS",
+    title: "GunBiz POS + WooCommerce — keep your register | Coriolis",
     description:
-      "Keep MicroBiz POS. Coriolis builds the WooCommerce website that talks to it. Warlord and FFL Accelerator connect the register you already run.",
+      "Keep GunBiz POS. Coriolis builds the WooCommerce website that talks to it. Warlord and FFL Accelerator connect the register you already run.",
     lede:
-      "MicroBiz is the register. Coriolis builds the WooCommerce website. Keep MicroBiz. We replace the rented storefront, not the counter.",
+      "GunBiz is the register. Coriolis builds the WooCommerce website. Keep GunBiz. We replace the rented storefront, not the counter.",
     keepRegister:
-      "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based MicroBiz POS integration so the floor and the site stay in sync. Unlimited API requests and webhooks. Coriolis does not file a 4473, run NICS, or replace the bound book.",
+      "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based GunBiz POS integration so the floor and the site stay in sync. Unlimited API requests and webhooks. Coriolis does not file a 4473, run NICS, or replace the bound book.",
     extra:
-      "We keep MicroBiz on the counter and put WooCommerce on your domain.",
+      "GunBiz was formerly MicroBiz. GunBiz has a fully developed, tested and supported WooCommerce integration, and it uses FastBound. We keep GunBiz on the counter and put WooCommerce on your domain.",
+    vendorHref: LINKS.gunbizPos,
   },
   {
     slug: "trident-1-pos",
@@ -57,20 +58,6 @@ export const POS_PAGES: PosPage[] = [
       "Same job: a store you own in front of the register you already run.",
   },
   {
-    slug: "corestore-pos",
-    path: "/corestore-pos",
-    name: "Corestore POS",
-    title: "Corestore POS + WooCommerce — keep your register | Coriolis",
-    description:
-      "Keep Corestore POS. Coriolis builds the WooCommerce website that talks to it. Warlord and FFL Accelerator connect the register you already run.",
-    lede:
-      "Corestore is the register. Coriolis builds the WooCommerce website. Keep Corestore. We replace the rented storefront, not the counter.",
-    keepRegister:
-      "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based Corestore POS integration so the floor and the site stay in sync. Unlimited API requests and webhooks. Coriolis does not file a 4473, run NICS, or replace the bound book.",
-    extra:
-      "We do not publish Corestore’s fee card. Compare the published Coriolis ladder.",
-  },
-  {
     slug: "rapid-gun-systems-pos",
     path: "/rapid-gun-systems-pos",
     name: "Rapid Gun Systems",
@@ -82,7 +69,7 @@ export const POS_PAGES: PosPage[] = [
     keepRegister:
       "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based Rapid Gun Systems integration so the floor and the site stay in sync. Unlimited API requests and webhooks. Coriolis does not file a 4473, run NICS, or replace the bound book.",
     extra:
-      "Same keep-your-register message as AIM, MicroBiz, Trident 1, and Corestore.",
+      "Same keep-your-register message as AIM, GunBiz, and Trident 1.",
   },
 ];
 
@@ -93,7 +80,7 @@ export function posBySlug(slug: string): PosPage | undefined {
 export const FAQ_POS = [
   {
     q: "Do I have to throw out my register?",
-    a: "No. Bring the register you already run. Warlord and FFL Accelerator connect AIM, MicroBiz, Rapid Gun Systems, Trident 1, and Corestore.",
+    a: "No. Bring the register you already run. Warlord and FFL Accelerator connect AIM, GunBiz, Trident 1, and Rapid Gun Systems.",
   },
   {
     q: "Does Coriolis replace 4473 or the bound book?",

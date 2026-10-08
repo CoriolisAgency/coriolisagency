@@ -2,7 +2,7 @@
 
 ## Role
 
-**coriolisagency.com** is the company home for Coriolis, LLC: Ecommerce, AI Studio, Demand Intelligence.
+**coriolisagency.com** is the company home for Coriolis, LLC. Four pillars: FFL Ecommerce, Gun Store POS, AI Studio, Demand Intelligence.
 
 ## Standing hosts
 
@@ -32,14 +32,16 @@
 | Email for FFL ecommerce | **This site** `/email-marketing-for-ffl-ecommerce` |
 | WooCommerce vs Shopify (gun stores) | **This site** `/woocommerce-vs-shopify-for-gun-stores` |
 | Can you use WooCommerce to sell guns | **This site** `/can-you-use-woocommerce-to-sell-guns` |
-| AIM / MicroBiz / Trident 1 / Corestore / Rapid + Woo | **This site** `/aim-pos` `/microbiz-pos` `/trident-1-pos` `/corestore-pos` `/rapid-gun-systems-pos` |
+| Gun Store POS pillar: "gun store pos", "gun store pos software", "gun store pos system", "gun store point of sale", "ffl pos (software)", "point of sale software for gun shop", "pos system that integrates with ecommerce for gun store" | **This site** `/gun-store-pos` (promotes GunBiz and AIM + WooCommerce). Never targets plan-price terms (`/ecommerce` owns them), "how the stack fits" (`/stack` owns it), "woocommerce firearms/guns" (`/can-you-use-woocommerce-to-sell-guns`), Orchid or "fastbound vs orchid" terms (`/orchid-alternative`), FastBound review or alternatives terms (bound-book evaluation, out of lane), or Axis terms. Keyword targets and GSC actuals: [`docs/gun-store-pos-keywords.md`](gun-store-pos-keywords.md) |
+| Supporting (promoted): "aim pos", "aim point of sale"; "gunbiz pos" | **This site** `/aim-pos`, `/gunbiz-pos` (`/microbiz-pos` 301s here) |
+| Siblings: "trident 1 pos", "trident1", "trident one"; "rapid gun systems pos" | **This site** `/trident-1-pos`, `/rapid-gun-systems-pos` |
 | FFL Accelerator $569 program story / offer name ("FFL Accelerator", "ffl accelerator", "fflaccelerator") | **fflaccelerator.com** `/` (owns the offer name; only ads destination `/lp/`). No agency page targets the offer name in a title or H1. Ads never land on coriolisagency.com |
 | AI Studio / Coriolis products as capability | **This site** `/ai-studio` (`/ai-factory` → 301) |
 | Betsy AI character | **None** — 2abetsy.com stays up, not a door |
 | Demand Intelligence (enterprise VP, portal, demo, API, Co-Pilot) | **GunSearchEngine** `/demand-intelligence` — this host 301s `/demand-intelligence` there |
 | How store, sensor, and demand fit | **This site** `/stack` |
 | Demand Intelligence vs RetailBI (what shoppers typed vs what sold) | **This site** `/demand-intelligence-vs-retailbi` — comparison page; Demand Intelligence itself stays on GunSearchEngine |
-| FFL analytics, agency side (how Coriolis reads a dealer's site search) | **This site** `/ffl-analytics` — agency page only. The FFL Analytics product intent is not owned here; that name is a reserved satellite |
+| FFL analytics, agency side (how Coriolis reads a dealer's site search) | **This site** `/ffl-analytics` — agency page only. The FFL Analytics product intent is not owned here; that name is a reserved satellite. FFL Analytics is the product name of the Analytics page in the GunSearchEngine.com Dealer Dashboard (a GSE feature); copy may name it as a GSE feature. The fflanalytics.com satellite still owns no intent, and nothing links there |
 | Search Console for FFLs, agency side (how Coriolis puts site search next to Google Search Console) | **This site** `/ffl-search-console` — agency page only. The FFL Search Console product intent is not owned here; that name is a reserved satellite |
 | Grok Bot setup ($995 session) | **This site** `/grok-bot-setup` |
 | GA for FFLs / free agent | **None** — GunSearchAgent retired |
@@ -53,7 +55,7 @@
 
 1. Conversion: monthly ecommerce → `/contact`. Setup → existing Stripe links. DI → GSE demo. Ads → `fflaccelerator.com/lp/` only.
 2. First ~80 words of each commercial page answer the query.
-3. FAQ JSON-LD on `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/orchid-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, the five POS pages, and `/stack`. HowTo JSON-LD on `/ecommerce` (switch + Woo sell guns), `/can-you-use-woocommerce-to-sell-guns`, `/firearms-dropshipping`, `/ammoready-alternative`, `/gearfire-alternative`, and `/orchid-alternative` (tier-neutral steps).
+3. FAQ JSON-LD on `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/orchid-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/gun-store-pos` plus the four POS pages, and `/stack`. HowTo JSON-LD on `/ecommerce` (switch + Woo sell guns), `/can-you-use-woocommerce-to-sell-guns`, `/firearms-dropshipping`, `/ammoready-alternative`, `/gearfire-alternative`, and `/orchid-alternative` (tier-neutral steps).
 4. Organization `sameAs`: listed in `src/lib/links.ts`.
 5. Never H1 “RetailBI alternative.” Never “switch off RetailBI.” Never 4473 automation claims.
 6. Frozen strings from `src/lib/frozen.ts`.
@@ -62,8 +64,9 @@
 
 ## Internal links
 
-- Home → three pillars
-- Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / Gearfire / Orchid / best-store / email / POS cluster + `/stack`
+- Home → four pillars (FFL Ecommerce, Gun Store POS, AI Studio, Demand Intelligence)
+- Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / Gearfire / Orchid / best-store / email / POS cluster (Gun Store POS `/gun-store-pos`, AIM POS, GunBiz POS, Trident 1 POS, Rapid Gun Systems) + `/stack`
+- Gun Store POS `/gun-store-pos` → `/gunbiz-pos`, `/aim-pos` (main cards), `/trident-1-pos`, `/rapid-gun-systems-pos` ("Also works with WooCommerce"), `/contact`
 - AI Studio → live product URLs (proof, not a catalog)
 - Demand Intelligence lives on GunSearchEngine; this host 301s `/demand-intelligence` there. `/stack` inbound uses the GSE URL.
 - About → family lattice

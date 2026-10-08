@@ -26,7 +26,7 @@ export const FAQ_ECOMMERCE: FaqItem[] = [
   },
   {
     q: "I already have a register. Do I throw it out?",
-    a: "No. Bring the register you already run. Warlord and Accelerator connect AIM, MicroBiz, Rapid Gun Systems, Trident 1, and Corestore.",
+    a: "No. Bring the register you already run. Warlord and Accelerator connect AIM, GunBiz, Rapid Gun Systems, and Trident 1.",
   },
   {
     q: "I'm on AmmoReady or Gearfire. Can you replace the site without going dark?",
@@ -234,7 +234,7 @@ export const FAQ_BEST: FaqItem[] = [
   },
   {
     q: "What about POS and the bound book?",
-    a: "Bring the register you already run. Warlord and Accelerator connect AIM, MicroBiz, Rapid, Trident 1, and Corestore. Coriolis is not 4473, NICS, or bound-book software. Those stay with the systems licensed for them. This is not legal advice.",
+    a: "Bring the register you already run. Warlord and Accelerator connect AIM, GunBiz, Rapid, and Trident 1. Coriolis is not 4473, NICS, or bound-book software. Those stay with the systems licensed for them. This is not legal advice.",
   },
   {
     q: "Why can’t an AmmoReady or Gearfire site rank like a shop you own?",

@@ -9,10 +9,10 @@ This repo follows the Coriolis AI Studio process. At the start of every session,
 4. `docs/board.md`: the work list
 
 Then:
-- Use the six moves: decide, lock, park, unlock, queue, ship. Only Paul locks, unlocks, queues or parks.
-- Build only a board line that is `queued` or `shipping`. One item in shipping, plus one urgent fix if production is broken. If there's no line for the work, you're deciding, not building.
+- Status words, and only these: decide, locked, parked, queued, coding, verifying, shipped. Only Paul locks, unlocks, queues or parks.
+- Build only a board line that is `queued`, `coding` or `verifying`. Work moves `queued` → `coding` (branch start to an open PR) → `verifying` (PR open through merge until "done when" is checked) → `shipped`. One item in coding or verifying, plus one urgent fix if production is broken. If there's no line for the work, you're deciding, not building.
 - Code goes on a branch and through a PR that names the decision and the board line. Never push code to `main`. Paul merges unless he says "merge N".
-- Done means merged. Then set the board line to `shipped` on coriolis main and push.
+- Done means merged and "done when" checked. Board edits are doc-only commits on coriolis main.
 - Hard stops need Paul's explicit OK: migrations or prod data writes, sends of any kind, anything that costs money, secrets or env changes, force-push, prod flag flips.
 
 This block wins over anything below it, including any "push it" or work-on-main instructions. `BATTLEPLAN.md` and `BATTLEPLAN-ARCHIVE.md` in coriolis are a read-only archive now.
@@ -21,7 +21,7 @@ Lane for this repo: Ops / Coriolis (board prefix OPS).
 
 # Coriolis, LLC — agent notes
 
-Static company site (Astro → **Vercel**) for the three-pillar model. Not GitHub Pages.
+Static company site (Astro → **Vercel**) for the four-pillar model: FFL Ecommerce, Gun Store POS, AI Studio, Demand Intelligence. Not GitHub Pages.
 
 ## Product lattice
 
@@ -47,6 +47,7 @@ Copy from `src/lib/frozen.ts`. Do not rewrite the RetailBI doctrine line or FFL 
 ## Hard no
 
 - 4473 / NICS / bound-book automation claims
+- Saying or implying Coriolis builds or sells its own POS. Coriolis builds the website and connects your POS (GunBiz, AIM, Trident 1, Rapid Gun Systems).
 - H1 “RetailBI alternative” / “switch off RetailBI”
 - Inventing Insight/Growth/Platform dollar amounts
 - Public login for Coriolis OS Admin (Workspace). Do not put **Log in** in the header until the OS portal rewrite exists.

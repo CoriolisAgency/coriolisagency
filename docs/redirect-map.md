@@ -38,7 +38,7 @@ Same path, new voice, still answer the old query in the first 80 words. **Do not
 | `/ammoready-alternative` | 19 | 1,780 | Query pos 6.1, 9 clicks. **AmmoReady pillar.** |
 | `/best-ffl-ecommerce-website` | 17 | 3,047 | Comparison intent still sells ecommerce. |
 
-Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), **`/orchid-alternative`** (Orchid comparison, S4), **`/orchid-alternative`** (Orchid comparison, S4), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/aim-pos`, `/microbiz-pos`, `/trident-1-pos`, `/corestore-pos`, `/rapid-gun-systems-pos`.
+Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), **`/orchid-alternative`** (Orchid comparison, S4), **`/orchid-alternative`** (Orchid comparison, S4), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/gun-store-pos` (Gun Store POS pillar), `/aim-pos`, `/gunbiz-pos`, `/trident-1-pos`, `/rapid-gun-systems-pos`. `/microbiz-pos` 301s to `/gunbiz-pos` and `/corestore-pos` 301s to `/gun-store-pos` (OPS-29).
 
 `/demand-intelligence` 301s to `https://www.gunsearchengine.com/demand-intelligence/` (`permanent: true` in `vercel.json`). Trailing-slash variant 308s to no-slash first. Do not leave a competing DI page on this host.
 
@@ -156,9 +156,9 @@ Sum of clones with clicks is ~50, split thin. Do not keep 20 near-duplicate page
 |-----|-----|-------:|
 | `/coriolis-agency-partners-with-aim-pos-…/` | `/aim-pos` | 10 |
 | `/aim-pos-integration-for-woocommerce/` | `/aim-pos` | 3 |
-| `/coriolis-agency-and-microbiz-partner-…/` | `/microbiz-pos` | 3 |
+| `/coriolis-agency-and-microbiz-partner-…/` | `/gunbiz-pos` (OPS-29; was `/microbiz-pos`) | 3 |
 | `/ecommerce-for-trident-1-pos/` | `/trident-1-pos` | 5 |
-| `/coriolis-agency-announces-support-for-corestore-pos-…/` | `/corestore-pos` | 6 |
+| `/coriolis-agency-announces-support-for-corestore-pos-…/` | `/gun-store-pos` (OPS-29; was `/corestore-pos`) | 6 |
 | `/rapid-gun-systems-pos-integration-…/` | `/rapid-gun-systems-pos` | 3 |
 | `/axis-pos-woocommerce-a-powerful-integration-…/` | `/ecommerce` | 3 |
 | `/pos-integration-for-gun-store-ecommerce/` | `/ecommerce` | 2 |
