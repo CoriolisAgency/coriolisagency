@@ -1,0 +1,52 @@
+---
+/**
+ * Homepage partner logo row (OPS-30, decision 2026-10-08-gun-store-pos-pillar).
+ * Official logos from each partner's own site, shown as one light-gray
+ * silhouette style. Not links. No captions or stats.
+ * width/height are the intrinsic aspect ratio at 40px tall, so the row has no layout shift.
+ */
+import { withBase } from "../lib/base";
+
+const PARTNERS = [
+  { name: "WP Engine", src: "partners/wp-engine.svg", width: 205, height: 40 },
+  { name: "FFL Cockpit", src: "partners/ffl-cockpit.svg", width: 130, height: 40 },
+  { name: "AIM POS", src: "partners/aim-pos.svg", width: 99, height: 40 },
+  { name: "FastBound", src: "partners/fastbound.svg", width: 169, height: 40 },
+  { name: "GOAT Payments", src: "partners/goat-payments.png", width: 72, height: 40 },
+  { name: "GunSearchEngine.com", src: "partners/gunsearchengine.png", width: 204, height: 40 },
+] as const;
+---
+
+<section
+  class="border-b border-zinc-800/80 bg-zinc-950/40"
+  aria-labelledby="partners-heading"
+  data-partner-logos
+>
+  <div class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
+    <h2
+      id="partners-heading"
+      class="text-center text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-500"
+    >
+      Partners
+    </h2>
+    <ul
+      class="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-14"
+    >
+      {
+        PARTNERS.map((p) => (
+          <li class="flex items-center">
+            <img
+              src={withBase(p.src)}
+              alt={`${p.name} logo`}
+              width={p.width}
+              height={p.height}
+              loading="lazy"
+              decoding="async"
+              class="h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
