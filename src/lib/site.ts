@@ -17,6 +17,8 @@ export const CANON_PATHS = {
   icon: "favicon.png",
   headshot: "betsy/images/betsy-headshot-work.png",
   gaHero: "betsy/images/betsy-ga-alternative-hero.jpg",
+  /** Default og:image / twitter:image (Betsy-free, 3200x1179). gaHero stays so old share cards keep resolving. */
+  ogDefault: "brand/og-default.jpg",
   trendingIntent: "betsy/images/betsy-trending-intent.png",
   copilot: "betsy/images/betsy-ai-brand-intelligence-enterprise-co-pilot.jpg",
   range: "betsy/images/betsy-at-the-range.jpg",
@@ -26,7 +28,7 @@ export const CANON_PATHS = {
   gsgHero: "brand/gun-store-game-hero.png",
   contactHero: "brand/contact-hero.jpg",
   grokBot: "brand/grok-bot-official.png",
-  grokBotHero: "brand/hero-grok-bot-setup-counter.png",
+  grokBotHero: "brand/hero-grok-bot-setup-counter-v2.png",
   grokBotBanner: "brand/banner-ai-studio-grok-bot-setup.png",
   grokBotBannerHome: "brand/banner-grok-bot-setup-home.png",
   naplesGunShop: "brand/naples-gun-shop.jpg",
