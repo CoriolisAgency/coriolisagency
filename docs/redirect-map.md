@@ -87,6 +87,19 @@ Moved from the 410 rewrites to `redirects` with `"statusCode": 301` (exact path 
 | `/fastbound-vs-orchid-advisors` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
 | `/orchid` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
 
+### OPS-2: clean the index (decision 2026-10-07-seo-ownership)
+
+How this host handles slashes: Astro `trailingSlash: "never"` and Vercel `"trailingSlash": false`. Vercel runs its slash rule before any `vercel.json` redirect, so every `/x/` 308s to `/x` first. A `redirects` source that ends in `/` never matches, and a no-slash rule for a live owner page would loop it. So:
+
+| Old URL | Live result | Hops | Change in OPS-2 |
+|---------|-------------|-----:|-----------------|
+| `/ammoready-alternative/` (old trailing-slash blog) | 308 → `/ammoready-alternative` (owner) | 1 | None possible or needed. No rule: the no-slash path is the owner page. |
+| `/best-ffl-ecommerce-website/` (Dec 2025 long post) | 308 → `/best-ffl-ecommerce-website` (owner) | 1 | None possible or needed. No rule: the no-slash path is the owner page. |
+| `/ammoready-alternative-why-ffls-are-switching-to-coriolis` | 301 → `/ammoready-alternative` | 1 | `permanent: true` (308) → `"statusCode": 301`, the S4 pattern. |
+| `/ammoready-alternative-why-ffls-are-switching-to-coriolis/` | 308 → no-slash, then 301 → `/ammoready-alternative` | 2 | Same as the S4 Orchid slugs. A one-hop slashed form needs a platform change (see the OPS-2 PR). |
+
+`/why-woocommerce-…-beats-gearfire-and-ammoready-…` (row below and the 2026-09 table) and `/gun-store-ecommerce-platforms/` (404, no rule) are not changed in OPS-2: the lattice names no owner for either. Waiting on Chief.
+
 `/demand-intelligence` → `https://www.gunsearchengine.com/demand-intelligence/` is a live-host 301 (not a WordPress leftover). `/sitemap.xml` rewrites to `/sitemap-index.xml` — same index, not a second sitemap.
 
 | Old WordPress | New | Clicks | Why |
@@ -105,7 +118,7 @@ Moved from the 410 rewrites to `redirects` with `"statusCode": 301` (exact path 
 | `/partners/` | `/about` | 16 | Trust page; no partners template on Astro. |
 | `/faq/` | `/ecommerce` | 5 | FAQ JSON-LD already on `/ecommerce`. |
 | `/payments/` and `/ffl-payments/` | `/ecommerce` | 10+1 | Capability of ecommerce. |
-| `/ammoready-alternative-why-ffls-are-switching-to-coriolis/` | `/ammoready-alternative` | 1 | AmmoReady cannibal → AmmoReady pillar. |
+| `/ammoready-alternative-why-ffls-are-switching-to-coriolis/` | `/ammoready-alternative` | 1 | AmmoReady cannibal → AmmoReady pillar. 301 (OPS-2). |
 | `/gearfire-alternative-why-ffls-are-choosing-coriolis-instead/` | `/gearfire-alternative` | 9 | Gearfire cannibal → **Gearfire pillar** (was wrongly folded into AmmoReady). |
 | `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026/` | `/best-ffl-ecommerce-website` | 14 | Mixed both-platforms post → comparison page, not a third pillar. |
 | `/ffl-dropshipping/` | `/firearms-dropshipping` | 0 | 508 impr, 0 clicks — fold into the winner. |

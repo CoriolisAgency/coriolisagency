@@ -24,11 +24,11 @@
 | FFL website plans / WooCommerce hosting ladder / plan prices (Minute Man $169 → FFL Accelerator $569), "ffl website pricing", "gun store website plans" | **This site** `/ecommerce` — owns the ladder. The `#ffl-accelerator` card links once to `https://fflaccelerator.com/` (S3.1) |
 | Firearms dropshipping / FFL dropshipping | **This site** `/firearms-dropshipping` |
 | FFL Cockpit + “what website do I use” | **This site** `/ffl-cockpit` |
-| AmmoReady alternative | **This site** `/ammoready-alternative` |
+| AmmoReady alternative | **This site** `/ammoready-alternative`. Retired duplicates redirect here (OPS-2): `/ammoready-alternative-why-ffls-are-switching-to-coriolis` 301s here; the old trailing-slash blog URL `/ammoready-alternative/` 308s here (Vercel trailing-slash rule, one hop) |
 | Gearfire alternative / FirearmCart / Gunpowdr compare | **This site** `/gearfire-alternative` |
 | Orchid comparison: "orchid alternative", "orchid ebound (alternatives / pricing)", "fastbound vs orchid", "orchid ecommerce / pos spark vs" | **This site** `/orchid-alternative` (S4). Retired fastbound-vs-orchid slugs and `/orchid` 301 here: 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. FFLA keeps its Orchid slugs at 410 and never targets Orchid. Organic only: no paid Orchid ads |
 | Bound-book how-to / A&D compliance | **None** (out of lane). Answer only inside comparison pages; no stand-alone bound-book pages |
-| Best FFL ecommerce website | **This site** `/best-ffl-ecommerce-website` |
+| Best FFL ecommerce website | **This site** `/best-ffl-ecommerce-website`. The retired Dec 2025 trailing-slash post `/best-ffl-ecommerce-website/` 308s here (OPS-2; Vercel trailing-slash rule, one hop) |
 | Email for FFL ecommerce | **This site** `/email-marketing-for-ffl-ecommerce` |
 | WooCommerce vs Shopify (gun stores) | **This site** `/woocommerce-vs-shopify-for-gun-stores` |
 | Can you use WooCommerce to sell guns | **This site** `/can-you-use-woocommerce-to-sell-guns` |

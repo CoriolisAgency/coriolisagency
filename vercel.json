@@ -227,7 +227,7 @@
     {
       "source": "/ammoready-alternative-why-ffls-are-switching-to-coriolis",
       "destination": "/ammoready-alternative",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/gearfire-alternative-why-ffls-are-choosing-coriolis-instead",
