@@ -28,7 +28,7 @@
 | Gearfire alternative / FirearmCart / Gunpowdr compare | **This site** `/gearfire-alternative` |
 | Orchid comparison: "orchid alternative", "orchid ebound (alternatives / pricing)", "fastbound vs orchid", "orchid ecommerce / pos spark vs" | **This site** `/orchid-alternative` (S4). Retired fastbound-vs-orchid slugs and `/orchid` 301 here: 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. FFLA keeps its Orchid slugs at 410 and never targets Orchid. Organic only: no paid Orchid ads |
 | Bound-book how-to / A&D compliance | **None** (out of lane). Answer only inside comparison pages; no stand-alone bound-book pages |
-| Best FFL ecommerce website | **This site** `/best-ffl-ecommerce-website`. The retired Dec 2025 trailing-slash post `/best-ffl-ecommerce-website/` 308s here (OPS-2; Vercel trailing-slash rule, one hop) |
+| Best FFL ecommerce website | **This site** `/best-ffl-ecommerce-website`. Retired duplicates redirect here (OPS-2): the Dec 2025 trailing-slash post `/best-ffl-ecommerce-website/` 308s here (Vercel trailing-slash rule, one hop); `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026` and `/gun-store-ecommerce-platforms` 301 here (slashed forms: Vercel 308, then the 301) |
 | Email for FFL ecommerce | **This site** `/email-marketing-for-ffl-ecommerce` |
 | WooCommerce vs Shopify (gun stores) | **This site** `/woocommerce-vs-shopify-for-gun-stores` |
 | Can you use WooCommerce to sell guns | **This site** `/can-you-use-woocommerce-to-sell-guns` |

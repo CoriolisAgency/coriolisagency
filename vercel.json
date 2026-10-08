@@ -237,7 +237,12 @@
     {
       "source": "/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026",
       "destination": "/best-ffl-ecommerce-website",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/gun-store-ecommerce-platforms",
+      "destination": "/best-ffl-ecommerce-website",
+      "statusCode": 301
     },
     {
       "source": "/switch",
