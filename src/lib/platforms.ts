@@ -44,7 +44,7 @@ export const CLOSED_PLATFORM_ROWS = [
     "The register they already run",
     "Their pairing — not republished here",
     "Their pairing — not republished here",
-    "AIM, MicroBiz, Rapid Gun Systems, Trident 1, Corestore (Warlord+)",
+    "AIM, GunBiz, Rapid Gun Systems, Trident 1 (Warlord+)",
   ],
   [
     "SEO",

@@ -40,6 +40,16 @@
       "permanent": true
     },
     {
+      "source": "/microbiz-pos",
+      "destination": "/gunbiz-pos",
+      "statusCode": 301
+    },
+    {
+      "source": "/corestore-pos",
+      "destination": "/gun-store-pos",
+      "statusCode": 301
+    },
+    {
       "source": "/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions",
       "destination": "/orchid-alternative",
       "statusCode": 301
@@ -421,7 +431,7 @@
     },
     {
       "source": "/coriolis-agency-announces-support-for-corestore-pos-integration-with-woocommerce",
-      "destination": "/corestore-pos",
+      "destination": "/gun-store-pos",
       "permanent": true
     },
     {
@@ -446,7 +456,7 @@
     },
     {
       "source": "/coriolis-agency-and-microbiz-partner-to-deliver-seamless-ffl-compliant-pos-ecommerce-and-dropshipping-for-firearms-retailers",
-      "destination": "/microbiz-pos",
+      "destination": "/gunbiz-pos",
       "permanent": true
     },
     {

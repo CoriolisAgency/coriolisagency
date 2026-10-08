@@ -1,57 +1,78 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { btnPlan } from "../lib/links";
+import FaqBlock from "../components/FaqBlock.astro";
+import { btnPlan, linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
 import {
-  POS_ECOM_EYEBROW,
-  POS_ECOM_FITS,
-  POS_ECOM_FITS_TITLE,
-  POS_ECOM_H1,
-  POS_ECOM_LEDE,
-  POS_ECOM_META,
-  POS_ECOM_SECTIONS,
-  POS_ECOM_TITLE,
-  POS_ECOM_WHO,
+  FAQ_POS_PILLAR,
+  POS_PILLAR_ALSO,
+  POS_PILLAR_EYEBROW,
+  POS_PILLAR_FASTBOUND,
+  POS_PILLAR_FASTBOUND_TITLE,
+  POS_PILLAR_H1,
+  POS_PILLAR_LEDE,
+  POS_PILLAR_META,
+  POS_PILLAR_PLANS,
+  POS_PILLAR_POINTS,
+  POS_PILLAR_PROMOTED,
+  POS_PILLAR_TITLE,
+  POS_PILLAR_WHY,
+  POS_PILLAR_WHY_TITLE,
 } from "../lib/pos-ecommerce";
 ---
 
 <BaseLayout
-  title={POS_ECOM_TITLE}
-  description={POS_ECOM_META}
+  title={POS_PILLAR_TITLE}
+  description={POS_PILLAR_META}
   path="/gun-store-pos"
-  noindex
+  ogImagePath={CANON_PATHS.storefront}
+  faq={FAQ_POS_PILLAR}
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
       <p
         class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
       >
-        {POS_ECOM_EYEBROW}
+        {POS_PILLAR_EYEBROW}
       </p>
       <h1
         class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]"
       >
-        {POS_ECOM_H1}
+        {POS_PILLAR_H1}
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        {POS_ECOM_LEDE}
+        {POS_PILLAR_LEDE}
       </p>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        <span class="font-semibold text-white">Who it's for.</span>{" "}
-        {POS_ECOM_WHO}
-      </p>
+      <div class="mt-8">
+        <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
+      </div>
     </div>
   </section>
 
-  <section class="border-b border-zinc-800/80 py-12">
+  <section class="border-b border-zinc-800/80 py-12" id="promoted">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <h2 class="text-xl font-semibold text-white">The POS systems we promote</h2>
+      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
         {
-          POS_ECOM_SECTIONS.map((section) => (
-            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-              <h2 class="text-lg font-semibold text-white">{section.title}</h2>
-              <p class="mt-3 text-sm leading-relaxed text-zinc-400">
-                {section.body}
+          POS_PILLAR_PROMOTED.map((card) => (
+            <article class="flex flex-col rounded-2xl border border-gold/40 bg-gold/5 p-6">
+              <h3 class="text-2xl font-semibold text-white">{card.name}</h3>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-zinc-300">
+                {card.body}
+              </p>
+              <p class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                <a href={withBase(card.slug)} class={linkClass}>
+                  {card.name} + WooCommerce →
+                </a>
+                <a
+                  href={card.vendorHref}
+                  class={linkClass}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {card.vendorLabel}
+                </a>
               </p>
             </article>
           ))
@@ -62,18 +83,62 @@ import {
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">{POS_ECOM_FITS_TITLE}</h2>
+      <h2 class="text-xl font-semibold text-white">{POS_PILLAR_WHY_TITLE}</h2>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        {POS_ECOM_FITS}
+        {POS_PILLAR_WHY}
+      </p>
+      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+        {
+          POS_PILLAR_POINTS.map((point) => (
+            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+              <h3 class="text-base font-semibold text-white">{point.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-zinc-400">
+                {point.body}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="fastbound">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">{POS_PILLAR_FASTBOUND_TITLE}</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        {POS_PILLAR_FASTBOUND}
       </p>
     </div>
   </section>
 
-  <section class="py-12">
+  <section class="border-b border-zinc-800/80 py-10" id="also-works">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-base font-semibold text-zinc-200">Also works with WooCommerce</h2>
+      <ul class="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+        {
+          POS_PILLAR_ALSO.map((p) => (
+            <li>
+              <a href={withBase(p.slug)} class={linkClass}>
+                {p.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        {POS_PILLAR_PLANS}{" "}
+        <a href={withBase("ecommerce#pos")} class={linkClass}>See FFL Ecommerce plans</a>.
+      </p>
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_POS_PILLAR} />
+
+  <section class="border-t border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">Talk with Coriolis</h2>
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Tell us about the counter and the website.
+        Tell us which POS you run, or plan to run, and what the website needs to do.
       </p>
       <div class="mt-6">
         <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>

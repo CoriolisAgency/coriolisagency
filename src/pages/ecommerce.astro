@@ -58,8 +58,8 @@ const switchSteps = [
           you don’t own — same templates, ads you can’t strip, titles and slugs
           you don’t write. Coriolis replaces that with WooCommerce on your
           domain: sell what’s on the shelf, dropship from twenty-one
-          distributors, or both. Works with AIM, MicroBiz, Rapid Gun Systems,
-          Trident 1, and Corestore. Monthly plans start at Minute Man $169.
+          distributors, or both. Works with AIM, GunBiz, Trident 1, and Rapid
+          Gun Systems. Monthly plans start at Minute Man $169.
           FFL Accelerator is $569. Setup is $500 or $2,500. All plans include{" "}
           <a href={LINKS.gsa} class={linkClass} target="_blank" rel="noopener noreferrer">GunSearchEngine.com</a>.
         </p>
@@ -220,6 +220,9 @@ const switchSteps = [
         already run.
       </p>
       <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        <li>
+          <a href={withBase("gun-store-pos")} class={linkClass}>Gun Store POS</a>
+        </li>
         {
           POS_PAGES.map((p) => (
             <li>

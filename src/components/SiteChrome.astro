@@ -22,16 +22,21 @@ const ecommercePaths = new Set([
   "/best-ffl-ecommerce-website",
   "/email-marketing-for-ffl-ecommerce",
   "/woocommerce-vs-shopify-for-gun-stores",
+]);
+
+// Gun Store POS pillar and its four POS pages.
+const posPaths = new Set([
+  "/gun-store-pos",
   "/aim-pos",
-  "/microbiz-pos",
+  "/gunbiz-pos",
   "/trident-1-pos",
-  "/corestore-pos",
   "/rapid-gun-systems-pos",
 ]);
 
 function active(slug: string) {
   const p = `/${slug}`;
   if (slug === "ecommerce") return ecommercePaths.has(path);
+  if (slug === "gun-store-pos") return posPaths.has(path);
   return path === p || path.startsWith(p + "/");
 }
 
