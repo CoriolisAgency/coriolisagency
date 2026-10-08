@@ -11,7 +11,7 @@ const pagesDir = path.join(root, "src", "pages");
 const outFile = path.join(root, "lastmod.json");
 
 // Same pages the sitemap filter in astro.config.mjs leaves out, plus 404.
-const SKIP = new Set(["/404", "/stack-preview", "/confirmed", "/unsubscribe"]);
+const SKIP = new Set(["/404", "/stack-preview", "/gun-store-pos-comparison", "/confirmed", "/unsubscribe"]);
 
 // Dynamic routes: the data file that holds their slugs and content.
 const DYNAMIC = {
