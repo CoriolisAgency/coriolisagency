@@ -61,7 +61,7 @@
 5. Never H1 “RetailBI alternative.” Never “switch off RetailBI.” Never 4473 automation claims.
 6. Frozen strings from `src/lib/frozen.ts`.
 7. Pricing honesty: Minute Man $169, Militia $269, Gun Runner $369, Warlord $469, Accelerator $569. Setup $500 / $2,500. Do not invent DI plan dollars.
-8. Cross-links: agency `/ecommerce` → `fflaccelerator.com/` (one link on the plan card). `fflaccelerator.com/` → `coriolisagency.com/about` (one link, homepage only, Paul override 2026-10-07). No other new cross-links between the two sites (the existing agency mentions of fflaccelerator.com on `/about`, `/gearfire-alternative`, `/email-marketing-for-ffl-ecommerce` and press posts predate this rule and stay). All are organic only: no UTMs, no `nofollow`.
+8. Cross-links: agency `/ecommerce` → `fflaccelerator.com/` (one link on the plan card). `fflaccelerator.com/` → `coriolisagency.com/about` (one link, homepage only, Paul override 2026-10-07). No other new cross-links between the two sites (the existing agency mentions of fflaccelerator.com on `/about`, `/gearfire-alternative`, `/email-marketing-for-ffl-ecommerce` and press posts predate this rule and stay). All are organic only: no UTMs, no `nofollow`. docs.coriolisagency.com is exempt: it may link to fflaccelerator.com per DOCS-2 (decision `2026-10-08-docs-ecosystem-links`: offer-name anchors only, to `/` and `/plan/`, never `/lp/`); this rule governs www.coriolisagency.com only.
 
 ## Internal links
 
