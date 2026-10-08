@@ -87,6 +87,23 @@ Moved from the 410 rewrites to `redirects` with `"statusCode": 301` (exact path 
 | `/fastbound-vs-orchid-advisors` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
 | `/orchid` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
 
+### OPS-2: clean the index (decision 2026-10-07-seo-ownership)
+
+How this host handles slashes: Astro `trailingSlash: "never"` and Vercel `"trailingSlash": false`. Vercel runs its slash rule before any `vercel.json` redirect, so every `/x/` 308s to `/x` first. A `redirects` source that ends in `/` never matches, and a no-slash rule for a live owner page would loop it. So:
+
+| Old URL | Live result | Hops | Change in OPS-2 |
+|---------|-------------|-----:|-----------------|
+| `/ammoready-alternative/` (old trailing-slash blog) | 308 → `/ammoready-alternative` (owner) | 1 | None possible or needed. No rule: the no-slash path is the owner page. |
+| `/best-ffl-ecommerce-website/` (Dec 2025 long post) | 308 → `/best-ffl-ecommerce-website` (owner) | 1 | None possible or needed. No rule: the no-slash path is the owner page. |
+| `/ammoready-alternative-why-ffls-are-switching-to-coriolis` | 301 → `/ammoready-alternative` | 1 | `permanent: true` (308) → `"statusCode": 301`, the S4 pattern. |
+| `/ammoready-alternative-why-ffls-are-switching-to-coriolis/` | 308 → no-slash, then 301 → `/ammoready-alternative` | 2 | Same as the S4 Orchid slugs. |
+| `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026` | 301 → `/best-ffl-ecommerce-website` | 1 | `permanent: true` (308) → `"statusCode": 301` (Chief owner call, 2026-10-08). |
+| `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026/` | 308 → no-slash, then 301 → `/best-ffl-ecommerce-website` | 2 | Same shape as the S4 Orchid slugs. |
+| `/gun-store-ecommerce-platforms` | 301 → `/best-ffl-ecommerce-website` | 1 | New rule (was 404; Chief owner call, 2026-10-08). |
+| `/gun-store-ecommerce-platforms/` | 308 → no-slash, then 301 → `/best-ffl-ecommerce-website` | 2 | Same shape as the S4 Orchid slugs. |
+
+Accepted (Chief, 2026-10-08): Vercel's trailing-slash 308s stay; no site-wide routing change. Done when each old URL reaches its owner through a 301, or through Vercel's slash 308 and then a 301, with no longer chains.
+
 `/demand-intelligence` → `https://www.gunsearchengine.com/demand-intelligence/` is a live-host 301 (not a WordPress leftover). `/sitemap.xml` rewrites to `/sitemap-index.xml` — same index, not a second sitemap.
 
 | Old WordPress | New | Clicks | Why |
@@ -105,9 +122,9 @@ Moved from the 410 rewrites to `redirects` with `"statusCode": 301` (exact path 
 | `/partners/` | `/about` | 16 | Trust page; no partners template on Astro. |
 | `/faq/` | `/ecommerce` | 5 | FAQ JSON-LD already on `/ecommerce`. |
 | `/payments/` and `/ffl-payments/` | `/ecommerce` | 10+1 | Capability of ecommerce. |
-| `/ammoready-alternative-why-ffls-are-switching-to-coriolis/` | `/ammoready-alternative` | 1 | AmmoReady cannibal → AmmoReady pillar. |
+| `/ammoready-alternative-why-ffls-are-switching-to-coriolis/` | `/ammoready-alternative` | 1 | AmmoReady cannibal → AmmoReady pillar. 301 (OPS-2). |
 | `/gearfire-alternative-why-ffls-are-choosing-coriolis-instead/` | `/gearfire-alternative` | 9 | Gearfire cannibal → **Gearfire pillar** (was wrongly folded into AmmoReady). |
-| `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026/` | `/best-ffl-ecommerce-website` | 14 | Mixed both-platforms post → comparison page, not a third pillar. |
+| `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026/` | `/best-ffl-ecommerce-website` | 14 | Mixed both-platforms post → comparison page, not a third pillar. 301 (OPS-2). |
 | `/ffl-dropshipping/` | `/firearms-dropshipping` | 0 | 508 impr, 0 clicks — fold into the winner. |
 | `/what-is-firearms-dropshipping/` | `/firearms-dropshipping` | 4 | |
 | `/firearms-dropshipping-woocommerce/` | `/firearms-dropshipping` | 5 | |
@@ -178,7 +195,7 @@ Sum of clones with clicks is ~50, split thin. Do not keep 20 near-duplicate page
 |--------|-----------|--------------|
 | AmmoReady alternative | `/ammoready-alternative` | `/ammoready-alternative-why-…`, `/switch`, `/switch-n-save` |
 | Gearfire alternative | `/gearfire-alternative` | `/gearfire-alternative-why-…` |
-| Best / beats both | `/best-ffl-ecommerce-website` | `/why-woocommerce-…-beats-gearfire-and-ammoready-…` |
+| Best / beats both | `/best-ffl-ecommerce-website` | `/why-woocommerce-…-beats-gearfire-and-ammoready-…`, `/gun-store-ecommerce-platforms` (OPS-2) |
 | FFL ecommerce / builder / Woo sell guns | `/ecommerce` (plans) and `/can-you-use-woocommerce-to-sell-guns` (Woo sell guns) | Plans: `/ffl-website-plans`, `/gun-store-website-builder-for-ffls`, `/is-woocommerce-good-for-firearms`, `/woocommerce-for-firearms`. Woo sell guns: `/can-you-use-woocommerce-to-sell-guns-…`, `/woocommerce-for-guns` |
 | FFL Cockpit website / hosting | `/ffl-cockpit` | hosting announcement slugs |
 | Dropshipping / home-based FFL | `/firearms-dropshipping` | home-based + distributor clones (unchanged) |
