@@ -8,24 +8,34 @@ import { CANON_PATHS } from "../lib/site";
 import { LINKS, linkClass } from "../lib/links";
 import { withBase } from "../lib/base";
 
-const pillars = [
+type Pillar = {
+  href: string;
+  kicker: string;
+  title: string;
+  body: string;
+  /** Inline external link inside `body` (rendered above the card's stretched link). */
+  link?: { text: string; href: string };
+};
+
+const pillars: readonly Pillar[] = [
   {
     href: "ecommerce",
     kicker: "For FFLs, ranges, and firearms brands",
     title: "Ecommerce",
-    body: "Managed WooCommerce you own — inventory, dropship, POS, and Betsy on the domain.",
+    body: "Managed WooCommerce you own — inventory, dropship, and POS.",
   },
   {
     href: "gun-store-pos",
-    kicker: "Keep the register you run",
+    kicker: "Keep the bound book and register you already run",
     title: "Gun Store POS",
     body: "GunBiz or AIM at the counter, connected to the WooCommerce store you own.",
   },
   {
     href: "ai-studio",
-    kicker: "Shipped proof, not a pitch",
+    kicker: "AI-powered solutions we've already shipped",
     title: "AI Studio",
-    body: "Betsy, GunSearchEngine.com, Demand Intelligence, and Gun Store Game — bring the idea and the budget.",
+    body: "Botopticon.com, GunSearchEngine.com, Demand Intelligence, and Gun Store Game — bring the idea and the budget.",
+    link: { text: "Botopticon.com", href: "https://botopticon.com" },
   },
   {
     href: "demand-intelligence",
@@ -33,7 +43,17 @@ const pillars = [
     title: "Demand Intelligence",
     body: "What shoppers typed — including the searches that found nothing.",
   },
-] as const;
+];
+
+// gse-links (src/integrations/gse-links.mjs) links plain-text "GunSearchEngine.com" that is
+// not inside an <a>. The pillar cards used to be one <a>, so the card text stayed plain.
+// Keep it plain under the stretched link: an auto-link there would sit under the card
+// overlay and could not be clicked. The empty comment splits the token; the text reads the same.
+const GSE_LABEL = "GunSearchEngine.com";
+const escapeHtml = (t: string) =>
+  t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const plainCardText = (t: string) =>
+  escapeHtml(t).split(GSE_LABEL).join("GunSearchEngine<!-- -->.com");
 
 const heroSlides = [
   {
@@ -361,23 +381,35 @@ const heroSlides = [
       </p>
       <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {
-          pillars.map((p) => (
-            <a
-              href={withBase(p.href)}
-              class="group flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 transition hover:border-gold/50"
-            >
-              <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
-                {p.kicker}
-              </p>
-              <h2 class="mt-2 text-xl font-semibold text-white group-hover:text-gold">
-                {p.title}
-              </h2>
-              <p class="mt-3 flex-1 text-sm leading-relaxed text-zinc-400">
-                {p.body}
-              </p>
-              <p class="mt-5 text-sm font-medium text-sky-400">See {p.title} →</p>
-            </a>
-          ))
+          pillars.map((p) => {
+            const [before, after] = p.link
+              ? [
+                  p.body.slice(0, p.body.indexOf(p.link.text)),
+                  p.body.slice(p.body.indexOf(p.link.text) + p.link.text.length),
+                ]
+              : [p.body, ""];
+            return (
+              <div class="group relative flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 transition hover:border-gold/50">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
+                  {p.kicker}
+                </p>
+                <h2 class="mt-2 text-xl font-semibold text-white group-hover:text-gold">
+                  <a
+                    href={withBase(p.href)}
+                    class="focus-visible:outline-none after:absolute after:inset-0 after:rounded-2xl after:content-[''] focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-gold"
+                  >
+                    {p.title}
+                  </a>
+                </h2>
+                <p class="mt-3 flex-1 text-sm leading-relaxed text-zinc-400">
+                  <Fragment set:html={plainCardText(before)} />{p.link && (<a href={p.link.href} target="_blank" rel="noopener noreferrer" class={`${linkClass} relative z-10`}>{p.link.text}</a>)}<Fragment set:html={plainCardText(after)} />
+                </p>
+                <p class="mt-5 text-sm font-medium text-sky-400" aria-hidden="true">
+                  See {p.title} →
+                </p>
+              </div>
+            );
+          })
         }
       </div>
     </div>
@@ -389,10 +421,10 @@ const heroSlides = [
       data-grok-bot-plate
     >
       <img
-        src={withBase(CANON_PATHS.grokBotBanner)}
+        src={withBase(CANON_PATHS.grokBotBannerHome)}
         alt="Sample Grok Bot setup UI on a gun store counter."
-        width="1920"
-        height="1080"
+        width="1536"
+        height="1024"
         class="w-full min-w-0 max-w-[16rem]"
       />
       <div class="min-w-0">
@@ -409,12 +441,9 @@ const heroSlides = [
           >
         </h2>
         <p class="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
-          Under{" "}
-          <a href={withBase("ai-studio")} class={`${linkClass} relative z-10`}
-            >AI Studio</a
-          >.
-          {" "}If you already have a website and want a same-day bot on your
-          Cursor seat. $995. Two meetings. Live the same day.
+          Use Grok Bot to help run your gun store. We will help you design your
+          AI strategy then create, configure, train, and test your bots. One time
+          fee. Live the same day.
         </p>
         <p class={`${linkClass} mt-5 inline-flex text-sm`} aria-hidden="true">
           Grok Bot setup — $995. →
