@@ -6,21 +6,19 @@ export interface StudioProof {
   urlLabel: string;
   href: string | null;
   job: string;
-  proof: string;
+  proof?: string;
   cta: string;
 }
 
 /** Shipped work we point to — not a product aisle. */
 export const STUDIO_PROOF: StudioProof[] = [
   {
-    id: "betsy",
-    name: "Betsy AI",
-    urlLabel: "2abetsy.com",
-    href: LINKS.betsy,
-    job: "Shows what people searched on the dealer site — including empty searches. Not bounce rate cosplay.",
-    proof:
-      "Built for this market. Live on GunSearchEngine.com embeds and dealer sites. Not 4473 software.",
-    cta: "Meet Betsy",
+    id: "botopticon",
+    name: "Botopticon",
+    urlLabel: "botopticon.com",
+    href: LINKS.botopticon,
+    job: "The control room for your AI agents. See what every bot is doing and step in when it matters.",
+    cta: "Visit Botopticon.com",
   },
   {
     id: "gsa",

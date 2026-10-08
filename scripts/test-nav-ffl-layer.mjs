@@ -92,7 +92,15 @@ assert.deepEqual([...familyBlock.matchAll(/label:\s*"([^"]+)"/g)].map((m) => m[1
 assert.deepEqual([...familyBlock.matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]), ["https://www.gunsearchengine.com/", "https://www.gunstoregame.com/", "https://fflintel.com/"]);
 assert.match(chrome, />FFL Ecommerce<\/a>/);
 assert.match(chrome, /<a href=\{withBase\("ffl-analytics"\)\} class="hover:text-sky-300">FFL Analytics<\/a>/);
-assert.match(chrome, /<a href=\{withBase\("ffl-search-console"\)\} class="hover:text-sky-300">FFL Search Console<\/a>/);
+// OPS-34 (2026-10-08-homepage-clients-footer): footer row is exactly "FFL Ecommerce · Gun Store POS · FFL Analytics", same tab;
+// the FFL Search Console footer link is gone (the page stays live).
+assert.match(chrome, /<a href=\{withBase\("gun-store-pos"\)\} class="hover:text-sky-300">Gun Store POS<\/a>/);
+assert.doesNotMatch(chrome, /withBase\("ffl-search-console"\)/);
+{
+  const row = chrome.slice(chrome.indexOf(">FFL Ecommerce</a>") - 200, chrome.indexOf(">FFL Analytics</a>") + 20);
+  assert.deepEqual([...row.matchAll(/>([^<>{}]+)<\/a>/g)].map((m) => m[1]), ["FFL Ecommerce", "Gun Store POS", "FFL Analytics"]);
+  assert.doesNotMatch(row, /target=/);
+}
 
 // "Gun Search Engine" is now "GunSearchEngine.com" everywhere in src.
 function walkSrc(dir, out = []) {
@@ -150,7 +158,9 @@ const pillarsBlock = home.slice(pillarsStart, home.indexOf("</section>", pillars
 assert.doesNotMatch(pillarsBlock, /return \(\s*<a\b/, "pillar card must not be a link");
 assert.match(pillarsBlock, /<div class="group relative /);
 assert.match(pillarsBlock, /after:absolute after:inset-0/);
-assert.match(pillarsBlock, /class=\{`\$\{linkClass\} relative z-10`\}/);
+assert.match(pillarsBlock, /class=\{cardLinkClass\}/);
+// OPS-34: inline card links must render sky-blue even though global CSS sets `a { color: inherit }`.
+assert.match(home, /const cardLinkClass = `\$\{linkClass\} !text-sky-400 relative z-10`;/);
 // Ad-safe Demand Intelligence sample is hosted on this site.
 assert.ok(fs.existsSync(path.join(root, "public/images/ffl-demand-intelligence-sample-august-2026.png")));
 

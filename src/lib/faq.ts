@@ -6,7 +6,7 @@ export interface FaqItem {
 export const FAQ_ECOMMERCE: FaqItem[] = [
   {
     q: "What is FFL Accelerator?",
-    a: "It is the Coriolis plan for a gun store that wants a real website. $569 a month. We build WooCommerce on your domain, connect catalogs and checkout, and put Betsy on the shop. The site is yours.",
+    a: "It is the Coriolis plan for a gun store that wants a real website. $569 a month. We build WooCommerce on your domain and connect catalogs and checkout. The site is yours.",
   },
   {
     q: "What do I pay to start?",

@@ -1,6 +1,6 @@
 # Coriolis, LLC
 
-Coriolis builds websites gun stores own, puts Betsy on those sites, and sells anonymized category search to brands. Greenville, SC.
+Coriolis builds websites gun stores own and sells anonymized category search to brands. Greenville, SC.
 
 ## Products and prices
 - FFL Accelerator — $569 a month. WooCommerce on the dealer domain. Setup $500 or $2,500. No year lock. They leave with the site.
@@ -14,7 +14,7 @@ Coriolis builds websites gun stores own, puts Betsy on those sites, and sells an
 - fflaccelerator.com — the FFL Accelerator offer. Our ads only point there.
 - gunsearchengine.com — gun search for shoppers, and Demand Intelligence for brands.
 
-GunSearchAgent is retired. 2aBetsy.com is still up, but it is not where to learn about us. FFLIntel, FFLAnalytics and FFL Search Console are names we hold for later. Don't treat them as the home of any product today.
+GunSearchAgent is retired. FFLIntel, FFLAnalytics and FFL Search Console are names we hold for later. Don't treat them as the home of any product today.
 
 ## Pages
 - / — company home. CTA is FFL Ecommerce.

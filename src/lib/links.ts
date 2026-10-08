@@ -46,7 +46,7 @@ export const LINKS = {
   betsyLive: "https://www.gunsearchengine.com/betsy-live",
   oemDemand: "https://www.gunsearchengine.com/oem-firearms-demand-analytics",
   enterpriseApi: "https://www.gunsearchengine.com/docs/enterprise-api",
-  betsy: "https://2abetsy.com",
+  botopticon: "https://botopticon.com",
   fflaccelerator: "https://fflaccelerator.com",
   fflintel: "https://fflintel.com",
   gunStoreGame: "https://www.gunstoregame.com",
@@ -56,20 +56,15 @@ export const LINKS = {
   facebook: "https://www.facebook.com/coriolisagency",
   x: "https://x.com/CoriolisAgency",
   instagram: "https://www.instagram.com/coriolisagency/",
-  xBetsy: "https://x.com/2ABetsy",
-  youtube: "https://www.youtube.com/@BetsyAI",
 } as const;
 
 export const SAME_AS = [
   "https://www.coriolisagency.com",
   "https://www.gunsearchengine.com",
-  "https://2abetsy.com",
   "https://fflintel.com",
   "https://fflaccelerator.com",
   "https://www.gunstoregame.com",
   "https://x.com/CoriolisAgency",
-  "https://x.com/2ABetsy",
-  "https://www.youtube.com/@BetsyAI",
 ] as const;
 
 export const linkClass =

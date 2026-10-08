@@ -13,8 +13,8 @@ type Pillar = {
   kicker: string;
   title: string;
   body: string;
-  /** Inline external link inside `body` (rendered above the card's stretched link). */
-  link?: { text: string; href: string };
+  /** Inline external links inside `body`, in order (rendered above the card's stretched link). */
+  links?: readonly { text: string; href: string }[];
 };
 
 const pillars: readonly Pillar[] = [
@@ -34,8 +34,12 @@ const pillars: readonly Pillar[] = [
     href: "ai-studio",
     kicker: "AI-powered solutions we've already shipped",
     title: "AI Studio",
-    body: "Botopticon.com, GunSearchEngine.com, Demand Intelligence, and Gun Store Game — bring the idea and the budget.",
-    link: { text: "Botopticon.com", href: "https://botopticon.com" },
+    body: "Botopticon.com, GunSearchEngine.com, and GunStoreGame.com — bring the idea and the budget.",
+    links: [
+      { text: "Botopticon.com", href: "https://botopticon.com" },
+      { text: "GunSearchEngine.com", href: "https://www.gunsearchengine.com/" },
+      { text: "GunStoreGame.com", href: "https://www.gunstoregame.com/" },
+    ],
   },
   {
     href: "demand-intelligence",
@@ -54,6 +58,27 @@ const escapeHtml = (t: string) =>
   t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const plainCardText = (t: string) =>
   escapeHtml(t).split(GSE_LABEL).join("GunSearchEngine<!-- -->.com");
+
+/** Split a card body into plain-text runs and its inline links, in order. */
+type BodyPart = { text: string; href?: string };
+const bodyParts = (p: Pillar): BodyPart[] => {
+  const parts: BodyPart[] = [];
+  let rest = p.body;
+  for (const l of p.links ?? []) {
+    const i = rest.indexOf(l.text);
+    if (i === -1) throw new Error(`pillar "${p.title}": link text "${l.text}" not in body`);
+    if (i > 0) parts.push({ text: rest.slice(0, i) });
+    parts.push({ text: l.text, href: l.href });
+    rest = rest.slice(i + l.text.length);
+  }
+  if (rest) parts.push({ text: rest });
+  return parts;
+};
+
+// Global CSS sets `a { color: inherit }` outside Tailwind's layers, so it beats the
+// `text-sky-400` utility in linkClass. `!text-sky-400` (important, as btnPlan does) keeps
+// the inline card links sky-blue.
+const cardLinkClass = `${linkClass} !text-sky-400 relative z-10`;
 
 const heroSlides = [
   {
@@ -382,12 +407,7 @@ const heroSlides = [
       <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {
           pillars.map((p) => {
-            const [before, after] = p.link
-              ? [
-                  p.body.slice(0, p.body.indexOf(p.link.text)),
-                  p.body.slice(p.body.indexOf(p.link.text) + p.link.text.length),
-                ]
-              : [p.body, ""];
+            const parts = bodyParts(p);
             return (
               <div class="group relative flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 transition hover:border-gold/50">
                 <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
@@ -402,7 +422,7 @@ const heroSlides = [
                   </a>
                 </h2>
                 <p class="mt-3 flex-1 text-sm leading-relaxed text-zinc-400">
-                  <Fragment set:html={plainCardText(before)} />{p.link && (<a href={p.link.href} target="_blank" rel="noopener noreferrer" class={`${linkClass} relative z-10`}>{p.link.text}</a>)}<Fragment set:html={plainCardText(after)} />
+                  {parts.map((part) => part.href ? (<a href={part.href} target="_blank" rel="noopener noreferrer" class={cardLinkClass}>{part.text}</a>) : (<Fragment set:html={plainCardText(part.text)} />))}
                 </p>
                 <p class="mt-5 text-sm font-medium text-sky-400" aria-hidden="true">
                   See {p.title} →

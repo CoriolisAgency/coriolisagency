@@ -26,7 +26,7 @@ export const CANON_PATHS = {
   gsgHero: "brand/gun-store-game-hero.png",
   contactHero: "brand/contact-hero.jpg",
   grokBot: "brand/grok-bot-official.png",
-  grokBotHero: "brand/hero-grok-bot-setup-counter.png",
+  grokBotHero: "brand/hero-grok-bot-setup-counter-v2.png",
   grokBotBanner: "brand/banner-ai-studio-grok-bot-setup.png",
   grokBotBannerHome: "brand/banner-grok-bot-setup-home.png",
   naplesGunShop: "brand/naples-gun-shop.jpg",
