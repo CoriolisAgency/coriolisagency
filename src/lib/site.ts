@@ -17,6 +17,8 @@ export const CANON_PATHS = {
   icon: "favicon.png",
   headshot: "betsy/images/betsy-headshot-work.png",
   gaHero: "betsy/images/betsy-ga-alternative-hero.jpg",
+  /** Default og:image / twitter:image (Betsy-free, 3200x1179). gaHero stays so old share cards keep resolving. */
+  ogDefault: "brand/og-default.jpg",
   trendingIntent: "betsy/images/betsy-trending-intent.png",
   copilot: "betsy/images/betsy-ai-brand-intelligence-enterprise-co-pilot.jpg",
   range: "betsy/images/betsy-at-the-range.jpg",
