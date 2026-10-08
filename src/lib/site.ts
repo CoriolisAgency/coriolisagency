@@ -28,6 +28,7 @@ export const CANON_PATHS = {
   grokBot: "brand/grok-bot-official.png",
   grokBotHero: "brand/hero-grok-bot-setup-counter.png",
   grokBotBanner: "brand/banner-ai-studio-grok-bot-setup.png",
+  grokBotBannerHome: "brand/banner-grok-bot-setup-home.png",
   naplesGunShop: "brand/naples-gun-shop.jpg",
   wftc: "brand/wftc.jpg",
   alliedArms: "brand/allied-arms.jpg",

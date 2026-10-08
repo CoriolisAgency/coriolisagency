@@ -136,7 +136,21 @@ const plate = home.slice(home.lastIndexOf("<section", plateStart), home.indexOf(
 assert.doesNotMatch(plate, /<section[^>]*>\s*<a\b/, "plate must not be wrapped in a link");
 assert.equal([...plate.matchAll(/href=\{withBase\("grok-bot-setup"\)\}/g)].length, 1);
 assert.match(plate, /after:absolute after:inset-0/);
-assert.match(plate, /withBase\("ai-studio"\)\} class=\{`\$\{linkClass\} relative z-10`\}/);
+// OPS-33 (2026-10-08-homepage-betsy-out): the plate body is Paul's locked blurb with no inner link.
+assert.equal([...plate.matchAll(/<a\b/g)].length, 1, "plate has exactly one link (the stretched Grok Bot setup link)");
+assert.match(
+  plate.replace(/\s+/g, " "),
+  /Use Grok Bot to help run your gun store\. We will help you design your AI strategy then create, configure, train, and test your bots\. One time fee\. Live the same day\./
+);
+assert.doesNotMatch(plate, /betsy/i);
+// What we do pillars: card with a stretched title link; the inline Botopticon.com link sits above it (no link inside a link).
+const pillarsStart = home.indexOf("pillars.map(");
+assert.ok(pillarsStart !== -1, "pillars map missing");
+const pillarsBlock = home.slice(pillarsStart, home.indexOf("</section>", pillarsStart));
+assert.doesNotMatch(pillarsBlock, /return \(\s*<a\b/, "pillar card must not be a link");
+assert.match(pillarsBlock, /<div class="group relative /);
+assert.match(pillarsBlock, /after:absolute after:inset-0/);
+assert.match(pillarsBlock, /class=\{`\$\{linkClass\} relative z-10`\}/);
 // Ad-safe Demand Intelligence sample is hosted on this site.
 assert.ok(fs.existsSync(path.join(root, "public/images/ffl-demand-intelligence-sample-august-2026.png")));
 
