@@ -19,6 +19,7 @@ GunSearchAgent is retired. FFLIntel, FFLAnalytics and FFL Search Console are nam
 ## Pages
 - / — company home. CTA is FFL Ecommerce.
 - /ecommerce — FFL Accelerator and the hosting plans
+- /ffl-website-cost — what an FFL website costs: setup plus the monthly ladder, and what is not in the price. Supports /ecommerce.
 - /stack — how the store and the category read fit. Not a fourth product.
 - /about — who we are
 - /press — newsroom
@@ -28,6 +29,7 @@ GunSearchAgent is retired. FFLIntel, FFLAnalytics and FFL Search Console are nam
 - /grok-bot-setup — the $995 session
 - /ammoready-alternative — AmmoReady alternative
 - /gearfire-alternative — Gearfire alternative (FirearmCart / Gunpowdr named on that table)
+- /leave-ammoready, /leave-gearfire — how to leave without going dark (switch guides). Support /ammoready-alternative and /gearfire-alternative.
 - /orchid-alternative — Orchid comparison: keep your bound book (eBound or FastBound), own the WooCommerce store. Not affiliated with Orchid; we do not sell a bound book.
 - /best-ffl-ecommerce-website, /firearms-dropshipping, /ffl-cockpit, /can-you-use-woocommerce-to-sell-guns — store pages
 - /email-marketing-for-ffl-ecommerce — Accelerator email (no LTV claim)
