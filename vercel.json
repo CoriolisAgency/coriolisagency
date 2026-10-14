@@ -23,6 +23,10 @@
       "destination": "/api/gone"
     },
     {
+      "source": "/gun-store-pos-comparison",
+      "destination": "/api/gone"
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/sitemap-index.xml"
     }
