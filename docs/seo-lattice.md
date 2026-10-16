@@ -76,3 +76,17 @@
 - Demand Intelligence lives on GunSearchEngine; this host 301s `/demand-intelligence` there. `/stack` inbound uses the GSE URL.
 - About → family lattice
 - Press → `/press` (releases). First post: five FFL AIM POS integrations. Not a product page.
+
+## FFLA keyword split (FFLA-L1, locked by Paul 2026-10-16)
+
+Decision `2026-10-16-ffla-lattice-l1-l4` (coriolis repo). The full FFLA target table lives in `fflaccelerator/docs/seo-lattice.md`. Ownership rows for this site:
+
+| Intent | Ranking owner |
+|--------|----------------|
+| FFL software (store software): "ffl software", "ffl dealer software", "ffl order management software", "software for ffl dealers" | **fflaccelerator.com** `/guides/gun-store-software/`. No agency page targets these in a title or H1 |
+| Managed / done-for-you FFL website | **fflaccelerator.com** `/`. This site keeps the head terms ("ffl website", "ffl website design", "ffl website builder", "best") on `/ecommerce` and `/best-ffl-ecommerce-website` |
+| Generic FFL website migration / redesign | **fflaccelerator.com** (planned `/ffl-website-migration/`). This site keeps the competitor-named alternatives pages |
+| FFL website maintenance / webmaster / support / managed hosting | **fflaccelerator.com** (planned `/managed-ffl-website-hosting/`). This site keeps "hosting" head terms and plans on `/ecommerce` |
+| Plans / pricing, ffl ecommerce, dropshipping, register integrations, email, WooCommerce explainers, FFL Cockpit, competitor names | **This site** (unchanged). FFLA may bid on some of them on `/lp/` (noindex), which does not compete with these rankings |
+
+- **Gun-word SEO = agency only.** fflaccelerator.com's ad-copy gate bans gun, firearm and ammo words in visible copy, so every gun-word SEO target stays on this site.
