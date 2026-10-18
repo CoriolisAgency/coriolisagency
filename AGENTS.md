@@ -63,3 +63,23 @@ npm run build
 ## Deploy
 
 Vercel project, domain `coriolisagency.com`. DNS cutover is a later, explicit step — see `docs/dns-cutover.md`. Do not flip to GitHub Pages.
+
+## Coriolis stack and product data rules (public-safe summary)
+
+Coriolis builds and runs a dealer-owned stack:
+- **WooCommerce** on the dealer's domain, hosted on WP Engine.
+- **FFL Cockpit** for distributor catalogs and FFL checkout.
+- A product feed into **GunSearchEngine.com** for consumer search and FFL Analytics.
+- **Managed services**: Coriolis people install, run and support it.
+
+The dealer keeps the register they already run (GunBiz, AIM, Trident 1, Rapid Gun Systems) and their bound book.
+
+Rules for this public repo:
+- Describe only those layers. Don't add unreleased products, codenames or internal plans here; ask Paul before naming anything not already on the live site.
+- Keep the existing hard-nos: no claim that Coriolis builds or sells its own POS, and no 4473/NICS/bound-book automation claims.
+
+Product data rules (safe to state publicly):
+- **UPC (GTIN) is the product key.** Match products by normalized UPC (digits only, valid check digit), never by SKU or URL.
+- **Coriolis never receives serial numbers, Form 4473 data or bound-book records.** They stay in the dealer's store and bound book. Private SKUs aren't shared either. Never write copy or code that implies otherwise.
+- Don't describe search-data collection beyond what the live privacy policy says, and don't claim "including empty searches" data (that copy was removed).
+- Internal stack notes live in the private `CoriolisAgency/coriolis` repo.
