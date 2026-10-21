@@ -1,12 +1,15 @@
 import { LINKS } from "./links";
 
+/** A proof line part: plain text, or a same-site link. */
+export type ProofPart = string | { label: string; href: string };
+
 export interface StudioProof {
   id: string;
   name: string;
   urlLabel: string;
   href: string | null;
   job: string;
-  proof?: string;
+  proof?: string | ProofPart[];
   cta: string;
 }
 
@@ -27,17 +30,20 @@ export const STUDIO_PROOF: StudioProof[] = [
     href: LINKS.gsa,
     job: "Google Analytics replacement for FFL websites.",
     proof:
-      "On-site demand plus optional inventory sync. Core is free forever. Pro ships with FFL Accelerator.",
+      "On-site demand plus optional inventory sync. GSE Basic is free forever. FFL Analytics and FFL Search Console included, no Pro required. Pro ships with FFL Accelerator.",
     cta: "For dealers",
   },
   {
     id: "di",
     name: "Demand Intelligence",
-    urlLabel: "gunsearchengine.com",
+    urlLabel: "coriolisagency.com/demand-intelligence",
     href: LINKS.demandIntel,
     job: "Full-market search intent for OEMs, distributors, and brands.",
-    proof:
-      "What the market asked for — including what it could not find. Portal, demo, API, and Co-Pilot on GunSearchEngine.com.",
+    proof: [
+      "What shoppers searched for, including what they couldn't find. ",
+      { label: "Book a demo", href: LINKS.demandDemo },
+      ". The dashboard and API run on GunSearchEngine.com.",
+    ],
     cta: "See Demand Intelligence",
   },
   {

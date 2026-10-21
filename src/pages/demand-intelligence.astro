@@ -10,6 +10,8 @@ import { CANON_PATHS } from "../lib/site";
 // (blob 1fd8ae25), including its data-feed wording. Accounts and plans stay on GSE.
 const GSE = "https://www.gunsearchengine.com";
 const UNMET_HREF = `${GSE}/oem-firearms-demand-analytics#unmet`;
+// GSE brand apply flow: the BrandIntelApplyLauncher opens on #demo on this GSE page.
+const APPLY_HREF = `${GSE}/betsy/enterprise-copilot#demo`;
 const ext = { target: "_blank", rel: "noopener noreferrer" };
 
 const SHARED_INCLUDES = [
@@ -91,7 +93,6 @@ const PLANS: Plan[] = [
       "JSON and CSV export",
       "Connect with Sellers who opt-in",
       "Assistant hook for Grok, Claude, or Cursor (Platform)",
-      "Linked inventory feed powers stock questions inside Grok, Claude, or Cursor",
       "1 free Client Admin - named seats",
     ],
     ctaLabel: "Request demo - Platform",
@@ -150,6 +151,10 @@ const h2Class = "text-xl font-semibold tracking-tight text-white sm:text-2xl";
           <span>Search feedstock</span>
         </li>
         <li class="inline-flex items-center gap-1.5">
+          <span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+          <span>Demand data</span>
+        </li>
+        <li class="inline-flex items-center gap-1.5">
           <span class="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>
           <span>Betsy - decisions</span>
         </li>
@@ -162,7 +167,7 @@ const h2Class = "text-xl font-semibold tracking-tight text-white sm:text-2xl";
         for.
       </p>
       <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Search and stock meet in Betsy. On Platform, when your inventory feed is linked, you can ask what you have in stock.
+        Search and stock meet in Betsy. Betsy turns every search into clean, structured demand data.
       </p>
     </div>
   </section>
@@ -304,7 +309,11 @@ const h2Class = "text-xl font-semibold tracking-tight text-white sm:text-2xl";
 
   <section id="demo" class="border-t border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-2xl px-4 sm:px-6">
+      <p class="mb-6 text-sm leading-relaxed text-zinc-300">Tell us what you want to see, and we'll book your demo.</p>
       <LeadForm site="coriolisagency" defaultPillar="Demand Intelligence" />
+      <p class="mt-6 text-sm text-zinc-400">
+        Ready to apply now? <a href={APPLY_HREF} class={textLink} data-cta="apply" {...ext}>Start on GunSearchEngine.com</a>.
+      </p>
     </div>
   </section>
 

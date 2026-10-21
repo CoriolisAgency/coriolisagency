@@ -192,4 +192,44 @@ for (const rel of ["src/pages/ffl-analytics.astro", "src/pages/ffl-search-consol
   );
 }
 
+// SEO-U24 PR A (Chief, 2026-10-21 7:35 PM ET).
+{
+  const flat = (rel) => read(rel).replace(/\s+/g, " ").replace(/\{" "\}/g, " ").replace(/\s+/g, " ");
+  // Embargo: no "warehouse" on the DI page, its FAQ, or the proof cards; stale NBS date gone.
+  for (const rel of ["src/pages/demand-intelligence.astro", "src/lib/faq.ts", "src/lib/factory.ts", "src/lib/stack-preview.ts"]) {
+    assert.doesNotMatch(read(rel), /warehouse/i, `${rel} mentions the embargoed term`);
+  }
+  assert.doesNotMatch(read("src/pages/demand-intelligence.astro") + read("src/lib/faq.ts"), /NBS Fall Market|Aug(ust)? 24/);
+  const di = flat("src/pages/demand-intelligence.astro");
+  assert.match(di, /Tell us what you want to see, and we'll book your demo\./);
+  assert.match(di, /Ready to apply now\? <a href=\{APPLY_HREF\}[^>]*>Start on GunSearchEngine\.com<\/a>\./);
+  assert.match(di, /const APPLY_HREF = `\$\{GSE\}\/betsy\/enterprise-copilot#demo`;/);
+  assert.match(di, /<LeadForm site="coriolisagency" defaultPillar="Demand Intelligence" \/>/);
+  // Owner-term links: same tab, withBase + linkClass.
+  const anchor = (rel, before, path, label, after) => {
+    const src = flat(rel);
+    const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    assert.match(
+      src,
+      new RegExp(`${esc(before)} ?<a href=\\{withBase\\("${esc(path)}"\\)\\} class=\\{linkClass\\}>${esc(label)}</a> ?${esc(after)}`),
+      `${rel} missing owner-term link "${label}"`,
+    );
+  };
+  anchor("src/pages/best-ffl-ecommerce-website.astro", "See our", "ecommerce", "FFL website design and plans", ", from a branded storefront to a full custom build.");
+  anchor("src/pages/ffl-cockpit.astro", "It all runs on your", "ecommerce", "FFL website", ", so your catalog and your orders stay in one place.");
+  anchor("src/pages/ffl-cockpit.astro", "Want more guns online without more on the shelf? Add", "firearms-dropshipping", "FFL dropshipping", "from your distributors.");
+  anchor("src/pages/ecommerce.astro", "Use", "firearms-dropshipping", "FFL dropshipping", "to list distributor stock you don't keep on hand.");
+  anchor("src/pages/ecommerce.astro", "Then bring buyers back with", "email-marketing-for-ffl-ecommerce", "FFL email marketing", "built for gun stores.");
+  for (const rel of ["src/pages/ammoready-alternative.astro", "src/pages/gearfire-alternative.astro"]) {
+    anchor(rel, "Want an FFL website you own, built and run by people who know the trade?", "ecommerce", "Start here", ".");
+  }
+  anchor("src/pages/ai-studio.astro", "Want an AI assistant that works for your shop? Start with", "grok-bot-setup", "Grok Bot setup for gun stores", ".");
+  // Proof cards.
+  const fx = read("src/lib/factory.ts");
+  assert.match(fx, /urlLabel: "coriolisagency\.com\/demand-intelligence"/);
+  assert.match(fx, /"What shoppers searched for, including what they couldn't find\. ",\s*\{ label: "Book a demo", href: LINKS\.demandDemo \},\s*"\. The dashboard and API run on GunSearchEngine\.com\."/);
+  assert.match(fx, /GSE Basic is free forever\. FFL Analytics and FFL Search Console included, no Pro required\./);
+  assert.doesNotMatch(fx, /Core is free forever/);
+  assert.match(read("src/lib/links.ts"), /demandIntel: "\/demand-intelligence",\s*demandDemo: "\/demand-intelligence#demo",/);
+}
 console.log("test-nav-ffl-layer: ok");
