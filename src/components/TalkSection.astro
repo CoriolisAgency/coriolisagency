@@ -1,0 +1,25 @@
+---
+/**
+ * SEO-U5 (D-N14): the shared lead form, in-page, with a pillar preset.
+ * Heading and line reuse the approved SEO-U4 home copy; no new public words.
+ * The form posts the page path, so fills can be counted by page.
+ */
+import LeadForm from "@coriolis/lead-form/LeadForm.astro";
+
+interface Props {
+  /** One of the shared pillar options. Defaults to Ecommerce. */
+  pillar?: "Ecommerce" | "AI Studio" | "Grok Bot Setup" | "Demand Intelligence";
+}
+
+const { pillar = "Ecommerce" } = Astro.props;
+---
+
+<section id="talk" class="border-t border-zinc-800/80 py-12" data-inpage-form={pillar}>
+  <div class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-2">
+    <div>
+      <h2 class="text-2xl font-semibold tracking-tight text-white">Tell us about your store</h2>
+      <p class="mt-3 text-sm leading-relaxed text-zinc-400">No contract, and you can cancel any time. Paul answers.</p>
+    </div>
+    <LeadForm site="coriolisagency" defaultPillar={pillar} />
+  </div>
+</section>

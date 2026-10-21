@@ -53,6 +53,7 @@ const OWN_ROWS = [
   ["Export", "Ask for the export format for products, orders and customers", "Standard WooCommerce export"],
   ["Leaving", "Ask what you keep if you cancel", "You leave with the site, the domain and the data"],
 ] as const;
+import TalkSection from "../components/TalkSection.astro";
 ---
 
 <BaseLayout
@@ -217,4 +218,6 @@ const OWN_ROWS = [
   </section>
 
   <FaqBlock items={FAQ_ORCHID} />
+
+  <TalkSection />
 </BaseLayout>

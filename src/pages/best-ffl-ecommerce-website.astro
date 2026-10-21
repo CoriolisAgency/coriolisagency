@@ -21,6 +21,7 @@ const rows = [
   ["SEO control", "Theirs", "Theirs", "Yours"],
   ["4473 / bound book", "Sometimes bundled", "Third-party", "Your POS or FastBound — not us"],
 ] as const;
+import TalkSection from "../components/TalkSection.astro";
 ---
 
 <BaseLayout
@@ -162,4 +163,6 @@ const rows = [
   </section>
 
   <FaqBlock items={FAQ_BEST} />
+
+  <TalkSection />
 </BaseLayout>
