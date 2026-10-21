@@ -42,6 +42,30 @@ export const FAQ_ECOMMERCE: FaqItem[] = [
   },
 ];
 
+/** Agency home (SEO-U4). Facts and prices as FAQ_ECOMMERCE states them. */
+export const FAQ_HOME: FaqItem[] = [
+  {
+    q: "What does Coriolis do?",
+    a: "We build and host WooCommerce websites for FFL dealers: gun shops, online-only FFLs, ranges and gunsmiths. The store is on your domain and you own it.",
+  },
+  {
+    q: "What does an FFL website cost?",
+    a: "Setup is $500 for a clean launch or $2,500 for the full custom site and email. Monthly plans run from Minute Man at $169 to FFL Accelerator at $569. No annual contract.",
+  },
+  {
+    q: "Can I leave AmmoReady or Gearfire without my site going dark?",
+    a: "Yes. Our switch guides for AmmoReady and Gearfire walk through it step by step. And if you ever leave us, you take the website with you.",
+  },
+  {
+    q: "Does it work with my register?",
+    a: "Yes. We connect the WooCommerce store to the register you already run, such as GunBiz or AIM.",
+  },
+  {
+    q: "Do you file 4473s or run NICS?",
+    a: "No. We don't file a 4473, run NICS, keep your bound book or run your register. Serialized guns ship to a receiving FFL.",
+  },
+];
+
 export const FAQ_DROPSHIP: FaqItem[] = [
   {
     q: "Is firearms dropshipping legal?",

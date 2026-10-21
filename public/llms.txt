@@ -2,6 +2,8 @@
 
 Coriolis builds websites gun stores own and sells anonymized category search to brands. Greenville, SC.
 
+Facts: 100+ clients. 5-star Google rating from 17 reviews. Phone (279) 258-6771. Greenville, SC; we serve FFL dealers across the US as a service-area business (no street address).
+
 ## Products and prices
 - FFL Accelerator — $569 a month. WooCommerce on the dealer domain. Setup $500 or $2,500. No year lock. They leave with the site.
 - Gun Search Engine — free on a dealer site. Included with FFL Accelerator.
@@ -14,7 +16,7 @@ Coriolis builds websites gun stores own and sells anonymized category search to 
 - fflaccelerator.com — the FFL Accelerator offer. Our ads only point there.
 - gunsearchengine.com — gun search for shoppers, and Demand Intelligence for brands.
 
-GunSearchAgent is retired. FFLIntel, FFLAnalytics and FFL Search Console are names we hold for later. Don't treat them as the home of any product today.
+GunSearchAgent is retired. FFLIntel is our journal on gun demand numbers (fflintel.com). FFLAnalytics and FFL Search Console are names we hold; FFL Search Console is a free feature of a GunSearchEngine dealer account.
 
 ## Pages
 - / — company home. CTA is FFL Ecommerce.
