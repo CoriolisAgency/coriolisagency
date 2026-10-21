@@ -65,7 +65,7 @@ import TalkSection from "../components/TalkSection.astro";
           <a href={LINKS.gsa} class={linkClass} target="_blank" rel="noopener noreferrer">GunSearchEngine.com</a>.
         </p>
         <div class="mt-8">
-          <CtaRow showGsa={false} />
+          <CtaRow talk showGsa={false} />
         </div>
         <EcommerceCluster current="ecommerce" />
       </div>
@@ -141,6 +141,8 @@ import TalkSection from "../components/TalkSection.astro";
       </div>
     </div>
   </section>
+
+  <TalkSection id="talk-plans" />
 
   <section class="border-b border-zinc-800/80 py-12" id="setup">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
