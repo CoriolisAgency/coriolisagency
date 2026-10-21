@@ -61,7 +61,6 @@ export const LINKS = {
 export const SAME_AS = [
   "https://www.coriolisagency.com",
   "https://www.gunsearchengine.com",
-  "https://fflintel.com",
   "https://fflaccelerator.com",
   "https://www.gunstoregame.com",
   "https://x.com/CoriolisAgency",

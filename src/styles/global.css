@@ -367,3 +367,22 @@ a {
   content: ""; position: absolute; left: 0.15em; top: calc(0.5lh - 0.15em);
   width: 0.3em; height: 0.3em; border-radius: 9999px; background: currentColor; opacity: 0.6;
 }
+
+/* Theme the shared lead form (/ and /contact) to the site Tailwind tokens. */
+form.lf-form[data-lf-form] {
+  --lf-fg: #a1a1aa;
+  --lf-muted: #52525b;
+  --lf-border: #3f3f46;
+  --lf-card-border: #27272a;
+  --lf-surface: rgba(9, 9, 11, 0.5);
+  --lf-field: var(--color-ink);
+  --lf-input: #f4f4f5;
+  --lf-accent: var(--color-gold);
+  --lf-accent-ink: var(--color-ink);
+  --lf-success: #7dd3fc;
+  --lf-error: #fcd34d;
+}
+form.lf-form[data-lf-form] .lf-submit:hover:not(:disabled) {
+  background: #fcd34d;
+  filter: none;
+}
