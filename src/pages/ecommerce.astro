@@ -27,6 +27,7 @@ const switchSteps = [
   "Connect the register only if you want the counter and the site to share inventory.",
   "Point the domain. You leave with the site.",
 ] as const;
+import TalkSection from "../components/TalkSection.astro";
 ---
 
 <BaseLayout
@@ -289,4 +290,6 @@ const switchSteps = [
       </p>
     </div>
   </section>
+
+  <TalkSection />
 </BaseLayout>

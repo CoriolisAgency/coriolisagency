@@ -10,6 +10,7 @@ import { HOWTO_SWITCH } from "../lib/howto";
 import { LINKS, linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
+import TalkSection from "../components/TalkSection.astro";
 ---
 
 <BaseLayout
@@ -126,4 +127,6 @@ import { withBase } from "../lib/base";
   </section>
 
   <FaqBlock items={FAQ_GEARFIRE} />
+
+  <TalkSection />
 </BaseLayout>

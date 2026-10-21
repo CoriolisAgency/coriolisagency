@@ -18,6 +18,7 @@ if (!page) {
 }
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
+import TalkSection from "../components/TalkSection.astro";
 ---
 
 <BaseLayout
@@ -119,4 +120,6 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
   </section>
 
   <FaqBlock items={[...FAQ_POS]} />
+
+  <TalkSection />
 </BaseLayout>

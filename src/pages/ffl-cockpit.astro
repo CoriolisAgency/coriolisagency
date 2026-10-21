@@ -20,6 +20,7 @@ const split = [
     body: "The public store. Your domain, your theme, your pages. We build, host, and support it so Cockpit has somewhere to sell.",
   },
 ] as const;
+import TalkSection from "../components/TalkSection.astro";
 ---
 
 <BaseLayout
@@ -112,4 +113,6 @@ const split = [
   </section>
 
   <FaqBlock items={FAQ_COCKPIT} />
+
+  <TalkSection />
 </BaseLayout>

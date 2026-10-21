@@ -18,6 +18,7 @@ const rows = [
   ["SEO", "Their URLs, their templates", "Your slugs, your content, your schema"],
   ["Exit", "Export what they allow", "Take the site. It is WordPress."],
 ] as const;
+import TalkSection from "../components/TalkSection.astro";
 ---
 
 <BaseLayout
@@ -131,4 +132,6 @@ const rows = [
   </section>
 
   <FaqBlock items={FAQ_AMMOREADY} />
+
+  <TalkSection />
 </BaseLayout>

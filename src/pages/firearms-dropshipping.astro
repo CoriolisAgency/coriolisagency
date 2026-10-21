@@ -25,6 +25,7 @@ const steps = [
     body: "Orders route to the lowest-cost or fastest vendor. You never have to stock that SKU. You can still sell what you keep on the shelf.",
   },
 ] as const;
+import TalkSection from "../components/TalkSection.astro";
 ---
 
 <BaseLayout
@@ -161,4 +162,6 @@ const steps = [
   </section>
 
   <FaqBlock items={FAQ_DROPSHIP} />
+
+  <TalkSection />
 </BaseLayout>
