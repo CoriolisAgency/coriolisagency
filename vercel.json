@@ -502,6 +502,36 @@
       "source": "/woocommerce-vs-shopify",
       "destination": "/woocommerce-vs-shopify-for-gun-stores",
       "permanent": true
+    },
+    {
+      "source": "/all-in-one-ffl-ecommerce-platforms-vs-best-in-class-tech-stack-for-gun-store-ecommerce",
+      "destination": "/best-ffl-ecommerce-website",
+      "statusCode": 301
+    },
+    {
+      "source": "/enterprise-ecommerce-hosting-gun-stores",
+      "destination": "/ecommerce",
+      "statusCode": 301
+    },
+    {
+      "source": "/suppressor-sales-surging-as-ammo-demand-increases-dual-opportunity-for-ffls-to-drive-online-sales",
+      "destination": "/press",
+      "statusCode": 301
+    },
+    {
+      "source": "/firearms-sales-decline-12-compared-to-q1-2024",
+      "destination": "/press",
+      "statusCode": 301
+    },
+    {
+      "source": "/gunpro-com-chooses-coriolis-agency-for-firearms-dropshipping-and-gunbroker-automation",
+      "destination": "/press",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/grow-your-ffl/page/2",
+      "destination": "/",
+      "statusCode": 301
     }
   ]
 }
