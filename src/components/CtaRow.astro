@@ -8,6 +8,8 @@ interface Props {
   showGsa?: boolean;
   showAccelerator?: boolean;
   showContact?: boolean;
+  /** Send "Talk to Coriolis" to this page's #talk form instead of /contact. */
+  talk?: boolean;
   class?: string;
 }
 
@@ -17,6 +19,7 @@ const {
   showGsa = true,
   showAccelerator = false,
   showContact = false,
+  talk = false,
   class: className,
 } = Astro.props;
 
@@ -83,10 +86,16 @@ const acceleratorHref = `${withBase("ecommerce")}#ffl-accelerator`;
     )
   }
   {
-    showContact && primary !== "contact" && (
-      <a href={withBase("contact")} class={btnSecondary}>
+    talk ? (
+      <a href="#talk" class={btnSecondary} data-cta="talk">
         Talk to Coriolis
       </a>
+    ) : (
+      showContact && primary !== "contact" && (
+        <a href={withBase("contact")} class={btnSecondary}>
+          Talk to Coriolis
+        </a>
+      )
     )
   }
 </div>

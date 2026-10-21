@@ -9,12 +9,14 @@ import LeadForm from "@coriolis/lead-form/LeadForm.astro";
 interface Props {
   /** One of the shared pillar options. Defaults to Ecommerce. */
   pillar?: "Ecommerce" | "AI Studio" | "Grok Bot Setup" | "Demand Intelligence";
+  /** Section id. Keep it unique per page; "talk" is the #talk target. */
+  id?: string;
 }
 
-const { pillar = "Ecommerce" } = Astro.props;
+const { pillar = "Ecommerce", id = "talk" } = Astro.props;
 ---
 
-<section id="talk" class="border-t border-zinc-800/80 py-12" data-inpage-form={pillar}>
+<section id={id} class="border-t border-zinc-800/80 py-12" data-inpage-form={pillar}>
   <div class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-2">
     <div>
       <h2 class="text-2xl font-semibold tracking-tight text-white">Tell us about your store</h2>
