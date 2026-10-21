@@ -300,3 +300,39 @@ export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
     a: "Use three numbers and do not mix them up: NICS is checks, not sales. RetailBI Index is sold units at the same stores. Search intent is what people typed - including empties. Keep what sold. Add the ask.",
   },
 ];
+
+/** /demand-intelligence (SEO-U24, D-N16). Ported word for word from the GSE page's FAQS. */
+export const FAQ_DEMAND_INTELLIGENCE: FaqItem[] = [
+  {
+    q: "Do I only see my brand and three competitors?",
+    a: "No. Every plan includes full-market anonymized demand - the whole category, not a tiny competitor-only view. Optional brand pins help dashboards and digests highlight your labels; they do not hide the rest of the market.",
+  },
+  {
+    q: "How do the three plans differ?",
+    a: "Insight: full market demand for brand managers who don't have a data team (what's rising for up to 30 Eastern Time days - no session list or export). Growth: same market view, plus privacy-safe sessions and CSV when you need to dig (longer lookback). Platform: full feed for analysts - export, inventory search when linked, and an assistant hook if you want it. (Dealer market pulse is a separate 7-day view.)",
+  },
+  {
+    q: "How do team seats work?",
+    a: "Every plan includes 1 free Client Admin seat. Additional named users (Client Users or extra admins) are $49/user/month. Seat headcount is enforced in the portal Team page; purchase additional seats through Coriolis during onboarding or expansion.",
+  },
+  {
+    q: "What are rising totals vs sessions vs export?",
+    a: "Rising totals are aggregates (calibers/brands/loads going up). Sessions are privacy-safe journey rows (no emails or session ids). Export packages those rows as CSV and/or JSON for data teams. Full-market rising totals are available on every plan; depth and portability increase with Growth and Platform.",
+  },
+  {
+    q: "How fresh is the data?",
+    a: "Sessions are captured as shoppers search (including dealer embeds). Dashboard and API windows use Eastern Time calendar ranges. Short windows use a live sample; multi-day windows use saved daily totals where available.",
+  },
+  {
+    q: "What do I get via API?",
+    a: "REST with secure keys. All plans: demand endpoints within your max lookback. Growth+: sessions list. Growth: CSV export. Platform: JSON and CSV export with optional search-event detail. Docs: gunsearchengine.com/docs/enterprise-api.",
+  },
+  {
+    q: "How do I request a demo?",
+    a: "Request a demo on any plan. We capture company, contact, phone, and email, then follow up to schedule a demo. Portal and API keys open after review.",
+  },
+  {
+    q: "Is this a RetailBI replacement?",
+    a: "No. RetailBI reports what sold. This reports what people asked for. We are not affiliated with Gearfire or RetailBI.",
+  },
+];

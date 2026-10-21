@@ -36,22 +36,12 @@ const acceleratorHref = `${withBase("ecommerce")}#ffl-accelerator`;
         <a href={withBase("ecommerce")} class={btnPlan}>
           FFL Ecommerce
         </a>
-        <a
-          href={LINKS.demandIntel}
-          target="_blank"
-          rel="noopener noreferrer"
-          class={btnSky}
-        >
+        <a href={withBase(LINKS.demandIntel)} class={btnSky}>
           Demand Intelligence
         </a>
       </>
     ) : primary === "demo" ? (
-      <a
-        href={LINKS.demandIntel}
-        target="_blank"
-        rel="noopener noreferrer"
-        class={btnPlan}
-      >
+      <a href={withBase(LINKS.demandIntel)} class={btnPlan}>
         Demand Intelligence Home
       </a>
     ) : primary === "ecommerce" ? (

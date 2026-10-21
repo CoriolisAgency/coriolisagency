@@ -44,9 +44,9 @@
 | FFL Accelerator $569 program story / offer name ("FFL Accelerator", "ffl accelerator", "fflaccelerator") | **fflaccelerator.com** `/` (owns the offer name; only ads destination `/lp/`). No agency page targets the offer name in a title or H1. Ads never land on coriolisagency.com |
 | AI Studio / Coriolis products as capability | **This site** `/ai-studio` (`/ai-factory` → 301) |
 | Betsy AI character | **None** — 2abetsy.com stays up, not a door |
-| Demand Intelligence (enterprise VP, portal, demo, API, Co-Pilot) | **GunSearchEngine** `/demand-intelligence` — this host 301s `/demand-intelligence` there |
+| Demand Intelligence (enterprise VP, portal, demo, API, Co-Pilot) | **This site** `/demand-intelligence` (moved from GunSearchEngine, D-N16); accounts and the portal stay on GunSearchEngine |
 | How store, sensor, and demand fit | **This site** `/stack` |
-| Demand Intelligence vs RetailBI (what shoppers typed vs what sold) | **This site** `/demand-intelligence-vs-retailbi` — comparison page; Demand Intelligence itself stays on GunSearchEngine |
+| Demand Intelligence vs RetailBI (what shoppers typed vs what sold) | **This site** `/demand-intelligence-vs-retailbi` — comparison page |
 | FFL analytics, agency side (how Coriolis reads a dealer's site search) | **This site** `/ffl-analytics` — agency page only. The FFL Analytics product intent is not owned here; that name is a reserved satellite. FFL Analytics is the product name of the Analytics page in the GunSearchEngine.com Dealer Dashboard (a GSE feature); copy may name it as a GSE feature. The fflanalytics.com satellite still owns no intent, and nothing links there |
 | Search Console for FFLs, agency side (how Coriolis puts site search next to Google Search Console) | **This site** `/ffl-search-console` — agency page only. The FFL Search Console product intent is not owned here; that name is a reserved satellite |
 | Grok Bot setup ($995 session) | **This site** `/grok-bot-setup` |
@@ -78,7 +78,7 @@
 - Support pages (OPS-3, one per owned intent) → their owner: `/leave-ammoready` → `/ammoready-alternative`, `/leave-gearfire` → `/gearfire-alternative`, `/ffl-website-cost` → `/ecommerce`. They also link each other and `/ecommerce`. FFLA gets no comparison posts.
 - Gun Store POS `/gun-store-pos` → `/gunbiz-pos`, `/aim-pos` (main cards), `/trident-1-pos`, `/rapid-gun-systems-pos` ("Also works with WooCommerce"), `/contact`
 - AI Studio → live product URLs (proof, not a catalog)
-- Demand Intelligence lives on GunSearchEngine; this host 301s `/demand-intelligence` there. `/stack` inbound uses the GSE URL.
+- Demand Intelligence lives on this site at `/demand-intelligence` (D-N16). Accounts, the portal and the API stay on GunSearchEngine.
 - About → family lattice
 - Press → `/press` (releases). First post: five FFL AIM POS integrations. Not a product page.
 

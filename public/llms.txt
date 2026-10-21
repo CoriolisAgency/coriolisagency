@@ -14,7 +14,7 @@ Facts: 100+ clients. 5-star Google rating from 17 reviews. Phone (279) 258-6771.
 ## Our sites
 - coriolisagency.com — the company, the hosting plans, and the comparison pages. You are here.
 - fflaccelerator.com — the FFL Accelerator offer. Our ads only point there.
-- gunsearchengine.com — gun search for shoppers, and Demand Intelligence for brands.
+- gunsearchengine.com — gun search for shoppers, and the dealer tools.
 
 GunSearchAgent is retired. FFLIntel is our journal on gun demand numbers (fflintel.com). FFLAnalytics and FFL Search Console are names we hold; FFL Search Console is a free feature of a GunSearchEngine dealer account.
 
@@ -36,12 +36,13 @@ GunSearchAgent is retired. FFLIntel is our journal on gun demand numbers (fflint
 - /best-ffl-ecommerce-website, /firearms-dropshipping, /ffl-cockpit, /can-you-use-woocommerce-to-sell-guns — store pages
 - /email-marketing-for-ffl-ecommerce — Accelerator email (no LTV claim)
 - /woocommerce-vs-shopify-for-gun-stores — owned Woo vs hosted Shopify
+- /demand-intelligence — Demand Intelligence for brands: plans, use cases, demo request. Accounts run on GunSearchEngine.
 - /demand-intelligence-vs-retailbi — what shoppers typed vs what sold. Not a RetailBI replacement.
 - /ffl-analytics — how we read a gun store's site search. Our take, not a separate FFL Analytics product.
 - /ffl-search-console — how site search sits next to Google Search Console. Our take, not a separate FFL Search Console product.
 - /gun-store-pos (Gun Store POS pillar: GunBiz and AIM + WooCommerce), /aim-pos, /gunbiz-pos, /trident-1-pos, /rapid-gun-systems-pos
 - /privacy, /msa, /confirmed, /unsubscribe — legal and list
 
-Old /ai-factory links go to /ai-studio. /plans goes to /ecommerce. /demand-intelligence goes to GunSearchEngine Demand Intelligence.
+Old /ai-factory links go to /ai-studio. /plans goes to /ecommerce.
 
 We do not file a 4473, run NICS, write a bound book, or run the register. We are not affiliated with Gearfire or RetailBI.

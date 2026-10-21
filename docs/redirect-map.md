@@ -40,7 +40,7 @@ Same path, new voice, still answer the old query in the first 80 words. **Do not
 
 Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), **`/orchid-alternative`** (Orchid comparison, S4), **`/orchid-alternative`** (Orchid comparison, S4), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/gun-store-pos` (Gun Store POS pillar), `/aim-pos`, `/gunbiz-pos`, `/trident-1-pos`, `/rapid-gun-systems-pos`. `/microbiz-pos` 301s to `/gunbiz-pos` and `/corestore-pos` 301s to `/gun-store-pos` (OPS-29).
 
-`/demand-intelligence` 301s to `https://www.gunsearchengine.com/demand-intelligence/` (`permanent: true` in `vercel.json`). Trailing-slash variant 308s to no-slash first. Do not leave a competing DI page on this host.
+`/demand-intelligence` is a page on this host (SEO-U24, D-N16; moved from GunSearchEngine). The old 301 to GunSearchEngine is removed from `vercel.json`.
 
 Optional keep (editorial accidents — not company juice, but real clicks). Only if you want the traffic; otherwise 301 or die:
 
@@ -104,7 +104,7 @@ How this host handles slashes: Astro `trailingSlash: "never"` and Vercel `"trail
 
 Accepted (Chief, 2026-10-08): Vercel's trailing-slash 308s stay; no site-wide routing change. Done when each old URL reaches its owner through a 301, or through Vercel's slash 308 and then a 301, with no longer chains.
 
-`/demand-intelligence` → `https://www.gunsearchengine.com/demand-intelligence/` is a live-host 301 (not a WordPress leftover). `/sitemap.xml` rewrites to `/sitemap-index.xml` — same index, not a second sitemap.
+`/sitemap.xml` rewrites to `/sitemap-index.xml` — same index, not a second sitemap.
 
 | Old WordPress | New | Clicks | Why |
 |---------------|-----|-------:|-----|
@@ -230,4 +230,4 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 1. Edit **`vercel.json`** `redirects` (paths only, `permanent: true`). Skip keep-slugs and trailing-slash duplicates. Retired named-vendor slugs go in `rewrites` → `/api/gone` (410), not `redirects`.
 2. Optionally mirror path changes in `scripts/cloudflare-bulk-redirects.csv` for reference — it is not the runtime.
-3. Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, plus `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/stack`, the five POS slugs, `/woocommerce-vs-shopify-for-gun-stores`). Do not 301 those. `/demand-intelligence` is the exception: 301 to GunSearchEngine.
+3. Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, plus `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/stack`, the five POS slugs, `/woocommerce-vs-shopify-for-gun-stores`, `/demand-intelligence`). Do not 301 those.

@@ -65,7 +65,7 @@ export const PREVIEW_FACTS = [
 export const PREVIEW_NOW_HEAD = "NOW — the store you run today";
 
 export const PREVIEW_NOW_LEDE =
-  "Shopper to your Woo store. GunSearchEngine.com is a doorbell on that store, not a warehouse. FFL Cockpit writes Woo. Distributors feed Cockpit. The office pays Stripe for hosting. Dotted lines are claim and host only.";
+  "Shopper to your Woo store. GunSearchEngine.com is a doorbell on that store, not a stockroom. FFL Cockpit writes Woo. Distributors feed Cockpit. The office pays Stripe for hosting. Dotted lines are claim and host only.";
 
 export const PREVIEW_NEXT_HEAD = "NEXT — three paths";
 
@@ -81,9 +81,9 @@ export const PREVIEW_NOW: PreviewGraph = {
     {
       id: "now-gsa",
       label: "GunSearchEngine.com",
-      sublabel: "doorbell, not a warehouse",
+      sublabel: "doorbell, not a stockroom",
       sentence:
-        "GunSearchEngine.com on the store. A doorbell that hears search. Not a warehouse.",
+        "GunSearchEngine.com on the store. A doorbell that hears search. Not a stockroom.",
       x: "50%",
       y: "16%",
     },
@@ -234,8 +234,8 @@ export const PREVIEW_NEXT_CART: PreviewGraph = {
 export const PREVIEW_NEXT_TICKET: PreviewGraph = {
   id: "next-ticket",
   title: "2. After the order",
-  body: "Woo Order → order ticket → catalog warehouse → distributor. Not a charge. Not Stripe.",
-  aria: "After the order: Woo Order to order ticket to catalog warehouse to distributor",
+  body: "Woo Order → order ticket → catalog → distributor. Not a charge. Not Stripe.",
+  aria: "After the order: Woo Order to order ticket to catalog to distributor",
   caption: "The ticket is not a charge. Stripe is not on this path.",
   nodes: [
     {
@@ -256,9 +256,9 @@ export const PREVIEW_NEXT_TICKET: PreviewGraph = {
     },
     {
       id: "ticket-wh",
-      label: "Warehouse",
-      sublabel: "catalog",
-      sentence: "The catalog warehouse reads the ticket. Still not a charge.",
+      label: "Catalog",
+      sublabel: "SKU source",
+      sentence: "The catalog reads the ticket. Still not a charge.",
       x: "64%",
       y: "50%",
     },
@@ -280,8 +280,8 @@ export const PREVIEW_NEXT_TICKET: PreviewGraph = {
 export const PREVIEW_NEXT_OFFICE: PreviewGraph = {
   id: "next-office",
   title: "3. Office",
-  body: "Coriolis → Stripe hosting bill. Dotted claim and seed to Woo. Warehouse → a person publishes SKUs to Woo.",
-  aria: "Office path: Coriolis to Stripe hosting bill, dotted claim to Woo, warehouse human publish to Woo",
+  body: "Coriolis → Stripe hosting bill. Dotted claim and seed to Woo. Catalog → a person publishes SKUs to Woo.",
+  aria: "Office path: Coriolis to Stripe hosting bill, dotted claim to Woo, catalog human publish to Woo",
   caption: "Hosting bill on Stripe. Claim and seed are dotted. A person publishes to Woo.",
   nodes: [
     {
@@ -304,7 +304,7 @@ export const PREVIEW_NEXT_OFFICE: PreviewGraph = {
     },
     {
       id: "office-wh",
-      label: "Warehouse",
+      label: "Catalog",
       sentence: "A person publishes SKUs onto Woo. Not a charge.",
       x: "22%",
       y: "74%",
