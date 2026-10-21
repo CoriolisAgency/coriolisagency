@@ -329,7 +329,7 @@ export const FAQ_DEMAND_INTELLIGENCE: FaqItem[] = [
   },
   {
     q: "How do I request a demo?",
-    a: "Request a demo on any plan. We capture company, contact, phone, and email, then follow up to schedule - including one-on-one demos at NBS Fall Market in Oklahoma City, August 24-27, 2026. Portal and API keys open after review.",
+    a: "Request a demo on any plan. We capture company, contact, phone, and email, then follow up to schedule a demo. Portal and API keys open after review.",
   },
   {
     q: "Is this a RetailBI replacement?",
