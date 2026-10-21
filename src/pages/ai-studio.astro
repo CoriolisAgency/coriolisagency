@@ -11,7 +11,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
 ---
 
 <BaseLayout
-  title="AI Studio — Build on what Coriolis already shipped | Coriolis, LLC"
+  title="AI Studio: AI Tools for Gun Stores and FFLs | Coriolis"
   description="Coriolis AI Studio: bring the idea and the budget. Botopticon.com, GunSearchEngine.com, Demand Intelligence, and Gun Store Game are live proof we can ship your app, platform, or agent."
   path="/ai-studio"
   ogImagePath={CANON_PATHS.gsgHero}
@@ -29,13 +29,14 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
         <h1
           class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
         >
-          You Have the Idea. We Already Shipped the Proof.
+          AI Studio: AI tools for gun stores and FFLs
         </h1>
         <p class="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300">
-          AI Studio is the public name for this work — not AI Factory.{" "}
+          You have the idea. We already shipped the proof. AI Studio is the
+          public name for this work — not AI Factory.{" "}
           <a href={LINKS.botopticon} class={linkClass} {...ext}>Botopticon.com</a>,{" "}
           <a href={LINKS.gsa} class={linkClass} {...ext}>GunSearchEngine.com</a>,{" "}
-          <a href={LINKS.demandIntel} class={linkClass} {...ext}
+          <a href={withBase(LINKS.demandIntel)} class={linkClass}
             >Demand Intelligence</a
           >, and{" "}
           <a href={LINKS.gunStoreGame} class={linkClass} {...ext}
@@ -128,9 +129,9 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
               )}
               {plate.href ? (
                 <a
-                  href={plate.href}
+                  href={plate.href.startsWith("/") ? withBase(plate.href) : plate.href}
                   class={`${linkClass} mt-5 text-sm`}
-                  {...ext}
+                  {...(plate.href.startsWith("/") ? {} : ext)}
                 >
                   {plate.cta} →
                 </a>

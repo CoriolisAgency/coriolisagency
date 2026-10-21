@@ -39,8 +39,11 @@ export const LINKS = {
   gsa: "https://www.gunsearchengine.com/for-dealers",
   gsaGa: "https://www.gunsearchengine.com/google-analytics-alternative-for-ffls",
   gse: "https://www.gunsearchengine.com",
-  demandIntel: "https://www.gunsearchengine.com/demand-intelligence",
-  demandDemo: "https://www.gunsearchengine.com/demand-intelligence#demo",
+  // SEO-U24 (D-N16): Demand Intelligence lives on this site now.
+  demandIntel: "/demand-intelligence",
+  demandDemo: "/demand-intelligence#demo",
+  /** GSE B2B page that keeps the Unmet Demand lightbox. */
+  unmetDemand: "https://www.gunsearchengine.com/oem-firearms-demand-analytics#unmet",
   copilot: "https://www.gunsearchengine.com/betsy/enterprise-copilot",
   betsyVsRetailBi: "https://www.gunsearchengine.com/betsy-vs-retailbi",
   betsyLive: "https://www.gunsearchengine.com/betsy-live",
