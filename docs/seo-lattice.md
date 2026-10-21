@@ -1,8 +1,10 @@
 # Coriolis, LLC — SEO lattice
 
+> **Governed by `coriolis/docs/seo/`.** The canonical ecosystem SEO docs live in `CoriolisAgency/coriolis` under [`docs/seo/`](https://github.com/CoriolisAgency/coriolis/tree/main/docs/seo); start with [`ARCHITECTURE.md`](https://github.com/CoriolisAgency/coriolis/blob/main/docs/seo/ARCHITECTURE.md). This file keeps only this site's page table and points back there. Where they differ for agency terms, `docs/seo/PAGE-MAP.md` wins.
+
 ## Role
 
-**coriolisagency.com** is the company home for Coriolis, LLC. Four pillars: FFL Ecommerce, Gun Store POS, AI Studio, Demand Intelligence.
+**coriolisagency.com** is the company home for Coriolis, LLC. Four pillars: FFL Ecommerce, Gun Store POS, AI Studio, Demand Intelligence (matches `coriolis/docs/rules.md` §5). Gun Store POS is the SEO pillar for integrations with third-party POS systems; POS copy names third-party systems only (D-N1).
 
 ## Standing hosts
 
@@ -48,6 +50,9 @@
 | FFL analytics, agency side (how Coriolis reads a dealer's site search) | **This site** `/ffl-analytics` — agency page only. The FFL Analytics product intent is not owned here; that name is a reserved satellite. FFL Analytics is the product name of the Analytics page in the GunSearchEngine.com Dealer Dashboard (a GSE feature); copy may name it as a GSE feature. The fflanalytics.com satellite still owns no intent, and nothing links there |
 | Search Console for FFLs, agency side (how Coriolis puts site search next to Google Search Console) | **This site** `/ffl-search-console` — agency page only. The FFL Search Console product intent is not owned here; that name is a reserved satellite |
 | Grok Bot setup ($995 session) | **This site** `/grok-bot-setup` |
+| FFL SEO: "ffl dealer seo", "gun industry seo company", "gun store seo", "ffl seo", "firearms seo", "gun store marketing", "firearms marketing agency", "seo automation for gun stores" | **This site** `/ffl-seo` (new owner page, D-N15; SEO-U32). Coriolis SEO plus SEO automation through GSE's FFL Search Console features (free with a GSE Basic account). `/ffl-search-console` links here |
+| FFL payment processing ("Coriolis Payments"): "ffl payment processing", "firearms payment processor", "firearm credit card processing", "gun store merchant account", "high-risk payment processing for firearms", "woocommerce payment gateway for ffl", "ecommerce firearms merchant" | **This site** `/ffl-payment-processing` (new owner page; SEO-U30). Generic Coriolis Payments copy only: no processor names, rates or approval claims unless verified. POS references name third-party systems only. `/payments` and `/ffl-payments` 308 to `/ecommerce` today |
+| Websites for ranges, gunsmiths and instructors: "gun range website", "shooting range website design", "range booking website", "gunsmith website (design)", "firearms instructor website", "ccw instructor website", "firearms training website" | **This site** `/websites-for-ranges-gunsmiths-instructors` (new owner page; SEO-U31). One page with three sections (range, gunsmith, instructor), each with its own H2 and FAQ. Confirm what Coriolis builds for each segment before any claim |
 | GA for FFLs / free agent | **None** — GunSearchAgent retired |
 | Three numbers desk | **None** — FFLIntel reserved |
 | Checkout / MSA | Stripe checkout + **this site** `/msa` |
