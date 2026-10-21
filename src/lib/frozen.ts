@@ -16,7 +16,7 @@ export const FROZEN = {
   commercialLine:
     "The site is yours. Betsy on it is included. That feed is what OEMs buy as Demand Intelligence.",
   copilot:
-    "Betsy Enterprise Co-Pilot is the MCP face of Demand Intelligence — welcome cards, demand briefs, and (on Platform, with a warehouse feed) inventory Q&A inside hosted AI tools. It is not a shopper chatbot.",
+    "Betsy Enterprise Co-Pilot is the MCP face of Demand Intelligence — welcome cards, demand briefs, and (on Platform, with clean, structured demand data) inventory Q&A inside hosted AI tools. It is not a shopper chatbot.",
   fflintel:
     "FFLIntel is the industry desk that keeps three numbers from becoming one: background checks (NICS), register sell-through (including the RetailBI Firearm Sales Index), and search intent. Published by Coriolis, LLC. Not affiliated with Gearfire.",
 } as const;
