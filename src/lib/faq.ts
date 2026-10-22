@@ -483,7 +483,7 @@ export const FAQ_FFL_ANALYTICS: FaqItem[] = [
   },
   {
     q: "Is FFL Analytics free?",
-    a: "Yes. It's free with any GSE dealer account, including free GSE Basic, and GSE Basic is free forever. Pro is optional: sign up by Dec 31, 2026 and get Pro free through Dec 31, 2027, then it's $99 a month.",
+    a: "Yes. It's free with any GSE dealer account, including free GSE Basic, and GSE Basic is free forever. Pro is optional. Pro is normally $99/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026.",
   },
   {
     q: "How is FFL Analytics different from Google Analytics?",
@@ -499,15 +499,15 @@ export const FAQ_FFL_ANALYTICS: FaqItem[] = [
   },
 ];
 
-/** SEO-U32 /ffl-seo FAQ (Brandy FINAL; FAQ 1 [CONFIRM: Paul] placeholder deleted). */
+/** SEO-U32 /ffl-seo FAQ (Brandy FINAL plus PAUL-0901: not a paid service). */
 export const FAQ_FFL_SEO: FaqItem[] = [
   {
     q: "What is FFL SEO?",
-    a: "FFL SEO is search engine optimization for gun stores and FFL dealers: getting your own website found on Google when shoppers search for what you sell. Coriolis does SEO for FFL dealers.",
+    a: "FFL SEO is search engine optimization for gun stores and FFL dealers: getting your own website found on Google when shoppers search for what you sell. FFL Search Console, free with any GSE dealer account, shows what to fix and the Google searches that find you.",
   },
   {
     q: "Is there free SEO help for gun stores?",
-    a: "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic, with no Pro required. It gives you a weekly fix list and shows the Google searches that find you.",
+    a: "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic, with no Pro required. It gives you a weekly fix list and shows the Google searches that find you. GSE Basic also includes premium SEO backlinks and a dedicated Seller page on GunSearchEngine.com.",
   },
   {
     q: "What does FFL Search Console show?",
