@@ -35,13 +35,13 @@ assert.doesNotMatch(chrome, /const nav = \[/);
 const bannedCopy =
   /Gun Runner|Warlord|\bPOS\b|Betsy|\bGSA\b|GunSearchAgent/;
 
-function assertLandingPage(rel, { h1, campaign, notice }) {
+function assertLandingPage(rel, { h1, campaign, notice, pro = true, gseAllowed = /\/dealers\/register/ }) {
   const src = read(rel);
   assert.match(src, new RegExp(h1.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(src, /utm_source=coriolisagency/);
   assert.match(src, new RegExp(`utm_campaign=${campaign}`));
   assert.match(src, new RegExp(notice.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  assert.match(src, /Sign up by Dec 31, 2026 and get Pro free through Dec 31, 2027\. \$99\/month after that\./);
+  if (pro) assert.match(src, /Sign up by Dec 31, 2026 and get Pro free through Dec 31, 2027\. \$99\/month after that\./);
   assert.doesNotMatch(src, /Free through December 31, 2026/);
   // The only price allowed on these pages is the Pro line's "$99/month after that".
   const priceless = src.replace("$99/month after that.", "");
@@ -55,7 +55,7 @@ function assertLandingPage(rel, { h1, campaign, notice }) {
   for (const url of gseUrls) {
     assert.match(
       url,
-      /\/dealers\/register/,
+      gseAllowed,
       `${rel} unexpected gunsearchengine.com link: ${url}`,
     );
   }
@@ -71,8 +71,11 @@ assertLandingPage("src/pages/ffl-analytics.astro", {
     "Not affiliated with Google. Google Analytics is a trademark of Google LLC.",
 });
 
+// SEO-U32 (Brandy FINAL, Chief 10/21): rewritten from GSE's live copy; Pro block cut, one Pro line to GSE /pro.
 assertLandingPage("src/pages/ffl-search-console.astro", {
-  h1: "The 2A layer for Google Search Console users",
+  h1: "FFL Search Console: see how Google finds your gun store",
+  pro: false,
+  gseAllowed: /\/dealers\/register|\/dealers\/ffl-search-console$|\/pro$/,
   campaign: "ffl-search-console",
   notice:
     "Not affiliated with Google. Google Search Console is a trademark of Google LLC.",
@@ -80,6 +83,9 @@ assertLandingPage("src/pages/ffl-search-console.astro", {
 
 const consoleSrc = read("src/pages/ffl-search-console.astro");
 assert.doesNotMatch(consoleSrc, /\b(is live|now available|now live)\b/i);
+assert.doesNotMatch(consoleSrc, /data-pro-plate|\$99|Coming soon|All future Pro features|being built|More Pro features are on the way/);
+assert.match(consoleSrc, /Want more\? GunSearchEngine\.com Pro is free through Dec 31, 2027 for dealers who sign up by Dec 31, 2026\./);
+assert.match(consoleSrc, /withBase\("ffl-seo"\)/);
 
 // On-site FFL pages open in the same tab (Paul, 1:38 PM ET).
 assert.doesNotMatch(navSrc, /newTab/);
@@ -175,7 +181,7 @@ const PRO_FEATURES = [
   "Coming soon",
   "All future Pro features",
 ];
-for (const rel of ["src/pages/ffl-analytics.astro", "src/pages/ffl-search-console.astro"]) {
+for (const rel of ["src/pages/ffl-analytics.astro"]) {
   const src = read(rel);
   const start = src.indexOf("data-pro-plate");
   assert.ok(start !== -1, `${rel} missing Pro plate`);

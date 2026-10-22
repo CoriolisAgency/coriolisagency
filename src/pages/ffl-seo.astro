@@ -1,0 +1,107 @@
+---
+/**
+ * SEO-U32 (a): /ffl-seo, new page. Copy is Brandy's FINAL (handoff/SEO-U32/FINAL.md).
+ * The two [CONFIRM: Paul] slots (service scope) are deleted until Paul answers. No price.
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import TalkSection from "../components/TalkSection.astro";
+import { LINKS, btnPlan, linkClass } from "../lib/links";
+import { withBase } from "../lib/base";
+import { GOOGLE_REVIEWS_HREF, GOOGLE_REVIEW_COUNT } from "../lib/google-reviews";
+import { FAQ_FFL_SEO } from "../lib/faq";
+import { FSC_TABS } from "../lib/fsc-tabs";
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+---
+
+<BaseLayout
+  title="FFL SEO: SEO for Gun Stores and FFL Dealers | Coriolis"
+  description="SEO for gun stores and FFL dealers by Coriolis, plus free SEO automation in FFL Search Console. Free with any GSE dealer account, no Pro required."
+  path="/ffl-seo"
+  faq={FAQ_FFL_SEO}
+  extraJsonLd={[
+    {
+      "@type": "Service",
+      name: "FFL SEO",
+      serviceType: "Search engine optimization",
+      provider: { "@id": `${LINKS.home}/#organization` },
+      areaServed: { "@type": "Country", name: "United States" },
+    },
+  ]}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">FFL SEO</p>
+      <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]">
+        FFL SEO for gun stores and FFL dealers
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        Coriolis does SEO for FFL dealers: gun shops, online-only FFLs, ranges, gunsmiths and instructors. If you’d rather do it yourself, FFL Search Console on GunSearchEngine.com (GSE) is free SEO automation. It runs a light check of your website at most once a week, gives you a short list to fix, and shows you the Google searches that find you. It’s read-only and free with any GSE dealer account, no Pro required.
+      </p>
+      <div class="mt-8">
+        <a href="#talk" class={btnPlan}>Tell us what you want to rank for</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="fsc">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Free SEO automation: FFL Search Console</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        FFL Search Console is in your GSE dealer dashboard. It works with Google Search Console, and it has four tabs.
+      </p>
+      <ul class="mt-4 max-w-3xl space-y-3 text-sm leading-relaxed text-zinc-300">
+        {FSC_TABS.map((t) => (
+          <li><strong class="text-white">{t.name}</strong> {t.body}</li>
+        ))}
+      </ul>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        It pulls your Google data on a schedule: a starting baseline, then regular snapshots and updates. It isn’t a live, minute-by-minute view. It doesn’t change anything in your Google account or on your website. It reads and shows, and you decide what to fix.
+      </p>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        FFL Search Console and FFL Analytics are both free with any GSE dealer account, including free GSE Basic. No Pro required.
+      </p>
+      <p class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+        <a href="https://www.gunsearchengine.com/dealers/register" class={linkClass} {...ext}>Create your free dealer account</a>
+        <a href="https://www.gunsearchengine.com/for-dealers/ffl-search-console" class={linkClass} {...ext}>See FFL Search Console</a>
+        <a href={withBase("ffl-analytics")} class={linkClass}>FFL Analytics</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="seo-work">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">When you want Coriolis to do the SEO work</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        When we build your WooCommerce store on your domain, you own the parts Google reads: the titles, the slugs, the page copy and the schema. FFL Accelerator includes Google Analytics and Google Search Console, plus page speed optimization.
+      </p>
+      <p class="mt-4 text-sm">
+        <a href={withBase("ecommerce")} class={linkClass}>FFL ecommerce plans</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12" id="own-site">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Why your own website matters for SEO</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        On template platforms like AmmoReady and Gearfire, you don’t control the title tag, the slugs or the markup. Google sees one template repeated across hundreds of shops. On WooCommerce on your own domain, you write the H1, the about page, the transfer page and the schema.
+      </p>
+      <p class="mt-4 text-sm">
+        <a href={withBase("best-ffl-ecommerce-website")} class={linkClass}>Why owned beats template</a>
+      </p>
+      <p class="mt-8 text-sm text-zinc-400">
+        100+ clients. <a href={GOOGLE_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating from {GOOGLE_REVIEW_COUNT} reviews</a>. Member of NSSF, FPC and GOA.
+      </p>
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_FFL_SEO} />
+
+  <TalkSection
+    pillar="Ecommerce"
+    heading="Tell us what you want to rank for"
+    subline="Send your website and the searches you want to show up for. Paul answers."
+  />
+</BaseLayout>
