@@ -1,9 +1,8 @@
 ---
 /**
  * SEO-U30: /ffl-payment-processing (new). Copy is Brandy's FINAL (handoff/SEO-U30/FINAL.md).
- * The four [CONFIRM: Paul] slots have no fallback text, so each is left out until Paul answers.
- * Payment methods are an open Paul call: no line on the page limits them (Chief 9:21 PM ET).
- * No processor, gateway or bank names. No rates, approval promises or timelines.
+ * Slots filled from Paul's 10/21 answers (PAUL-0901). GOAT Payments and Payroc may be named on this page.
+ * No payments brand name, no fee figures, no approval promises, no timelines.
  */
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FaqBlock from "../components/FaqBlock.astro";
@@ -20,7 +19,7 @@ const para = "mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400";
 
 <BaseLayout
   title="FFL Payment Processing for Gun Store Websites | Coriolis"
-  description="Take cards on your FFL website. Coriolis installs and tests the payment gateway at setup, and the merchant account stays in your store's name."
+  description="Take cards and other payments on your FFL website. Coriolis works with GOAT Payments and Payroc and installs the gateway at setup."
   path="/ffl-payment-processing"
   faq={FAQ_PAYMENTS}
   extraJsonLd={[
@@ -40,10 +39,10 @@ const para = "mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400";
         FFL payment processing for your gun store website
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        To take cards for guns and ammo online, an FFL needs a merchant account that allows firearm sales, connected to the website through a payment gateway. Many mainstream processors don’t allow firearm sales. Coriolis installs and tests the payment gateway as part of setup, on Basic Setup ($500) or Retail Setup ($2,500). The merchant account stays in your store’s legal name, and its fees are yours.
+        To take cards for guns and ammo online, an FFL needs a merchant account that allows firearm sales, connected to the website through a payment gateway. Many mainstream processors don’t allow firearm sales. Coriolis works with GOAT Payments and Payroc, and installs and tests the payment gateway as part of setup, on Basic Setup ($500) or Retail Setup ($2,500). The merchant account stays in your store’s legal name, and its fees are yours.
       </p>
       <div class="mt-8">
-        <a href="#talk" class={btnPlan}>Tell us how you take cards today</a>
+        <a href="#talk" class={btnPlan}>Tell us how you take payments today</a>
       </div>
     </div>
   </section>
@@ -64,13 +63,25 @@ const para = "mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400";
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
       <h2 class={h2}>What Coriolis sets up</h2>
       <p class={para}>
-        Payment gateway installation is part of setup, on Basic Setup ($500) and Retail Setup ($2,500).
+        Coriolis works with GOAT Payments and Payroc. We can provide the gateway, help you set it up, and set up other payment options during setup. Gateway installation is part of setup, on Basic Setup ($500) and Retail Setup ($2,500).
+      </p>
+      <p class={para}>
+        Already have a gateway approved for firearms? You can bring your own, and Coriolis puts it on checkout.
       </p>
       <p class={para}>
         Once your merchant account is approved, Coriolis enables the gateway, runs a small live authorization and voids it. Then you place a test order for a non-firearm product with a real card. The second test, with a firearm in the cart, comes only after ship-to-FFL is on.
       </p>
       <p class={para}>
         Checkout runs one card plugin, because two gateways side by side drop orders.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="take">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>What you can take</h2>
+      <p class={para}>
+        Cards, through your merchant account and the gateway on your checkout. Payments aren’t limited to cards: Coriolis can set up other payment options during setup. Tell us what you want to take when we talk.
       </p>
     </div>
   </section>
@@ -122,7 +133,7 @@ const para = "mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400";
 
   <TalkSection
     pillar="Ecommerce"
-    heading="Tell us how you take cards today"
-    subline="Tell us what you sell and how you take cards now. No contract, and you can cancel any time. Paul answers."
+    heading="Tell us how you take payments today"
+    subline="Tell us what you sell and how you take payments now. No contract, and you can cancel any time. Paul answers."
   />
 </BaseLayout>

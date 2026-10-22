@@ -547,11 +547,11 @@ export const FAQ_FFL_SEARCH_CONSOLE: FaqItem[] = [
   },
 ];
 
-/** SEO-U30 /ffl-payment-processing FAQ (Brandy FINAL; the FAQ 3 [CONFIRM: Paul] slot is left out until Paul answers). */
+/** SEO-U30 /ffl-payment-processing FAQ (Brandy FINAL plus PAUL-0901: slots filled from Paul's 10/21 answers). */
 export const FAQ_PAYMENTS: FaqItem[] = [
   {
     q: "What is FFL payment processing?",
-    a: "It\u2019s how a gun store takes cards online: a merchant account that allows firearm sales, connected to your website through a payment gateway. The gateway moves the card data. The merchant account is the part that gets approved for your business.",
+    a: "It\u2019s how a gun store takes payments online: a merchant account that allows firearm sales, connected to your website through a payment gateway. The gateway moves the card data. The merchant account is the part that gets approved for your business.",
   },
   {
     q: "Why do payment processors turn down gun stores?",
@@ -559,11 +559,15 @@ export const FAQ_PAYMENTS: FaqItem[] = [
   },
   {
     q: "What does Coriolis set up for payments?",
-    a: "Coriolis installs the payment gateway as part of setup, on Basic Setup ($500) or Retail Setup ($2,500). We enable it, run a small live authorization and void it. Then you test a non-firearm order, and a firearm order once ship-to-FFL is on.",
+    a: "Coriolis works with GOAT Payments and Payroc, so we can provide the gateway, help you set it up, or put your own firearms-approved gateway on checkout. Installation is part of setup, on Basic Setup ($500) or Retail Setup ($2,500). We enable it, run a small live authorization and void it. Then you test a non-firearm order, and a firearm order once ship-to-FFL is on.",
   },
   {
     q: "Who owns the merchant account, and who pays the fees?",
     a: "You do. The merchant account is in your store\u2019s legal name, and its fees are yours.",
+  },
+  {
+    q: "What payments can my store take?",
+    a: "Cards, through your merchant account and the gateway on your checkout. It isn\u2019t cards-only: Coriolis can set up other payment options during setup. Tell us what you want to take.",
   },
   {
     q: "Can Coriolis get my store approved?",
