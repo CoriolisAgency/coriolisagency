@@ -36,6 +36,7 @@ export const CANON_PATHS = {
   grokBotBannerHome: "brand/banner-grok-bot-setup-home.png",
   naplesGunShop: "brand/naples-gun-shop.jpg",
   wftc: "brand/wftc.jpg",
-  alliedArms: "brand/allied-arms.jpg",
+  alleghenyArms: "brand/allegheny-arms.jpg",
   highlineFirearms: "brand/highline-firearms.jpg",
+  theGunRange: "brand/the-gun-range.jpg",
 } as const;
