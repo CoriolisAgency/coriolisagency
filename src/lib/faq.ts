@@ -252,7 +252,7 @@ export const FAQ_SHOPIFY: FaqItem[] = [
 export const FAQ_BEST: FaqItem[] = [
   {
     q: "What is the best FFL ecommerce website?",
-    a: "The one you own. AmmoReady and Gearfire are template platforms — ads you can't strip, shared HTML, pages you don't write. Coriolis builds WooCommerce on your domain — inventory, dropshipping, or both — and you can take it with you.",
+    a: "The one you own. AmmoReady and Gearfire are template platforms: ads you can't strip, shared HTML, pages you don't write. Coriolis builds WooCommerce on your domain (inventory, dropshipping, or both), and you can take it with you.",
   },
   {
     q: "Does WooCommerce handle FFL checkout and dropshipping?",
@@ -278,7 +278,7 @@ export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
     a: "No. Keep the Index for what sold at the register. Add the ask for typed intent and empty searches. We do not sell Gearfire's sales data.",
   },
   {
-    q: "I searched retailbi alternative — do I rip out sell-through?",
+    q: "I searched retailbi alternative. Do I rip out sell-through?",
     a: "No. Searching \"alternative\" often means you want a second number, not to rip out what sold. Add Demand Intelligence beside what sold.",
   },
   {
