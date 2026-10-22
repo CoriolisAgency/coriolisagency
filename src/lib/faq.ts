@@ -64,7 +64,7 @@ export const FAQ_HOME: FaqItem[] = [
   },
   {
     q: "Do you file 4473s or run NICS?",
-    a: "No. We don't file a 4473, run NICS, keep your bound book or run your register. Serialized guns ship to a receiving FFL.",
+    a: "No. We don't file a 4473, run NICS or keep your bound book. Your register stays with your POS company, and we connect your website to it. Serialized guns ship to a receiving FFL.",
   },
 ];
 
