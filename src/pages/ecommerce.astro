@@ -107,7 +107,7 @@ import TalkSection from "../components/TalkSection.astro";
                   {plan.badge}
                 </span>
               ) : null}
-              <p class="text-[13.2px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
+              <p class="text-[13.2px] lg:text-[length:clamp(9px,calc(1.25vw_-_4px),12px)] font-semibold uppercase tracking-[0.14em] text-zinc-500">
                 {plan.hook} <span aria-hidden="true">{PLAN_TAGLINE_EMOJI[plan.id]}</span>
               </p>
               <h3 class="mt-2 text-[1.35rem]/[2.1rem] font-semibold text-white">{plan.name}</h3>
