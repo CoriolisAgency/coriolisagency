@@ -11,7 +11,7 @@ import { withBase } from "../lib/base";
 const ext = { target: "_blank", rel: "noopener noreferrer" };
 
 const rows = [
-  ["You own the website", "No", "No", "Yes — open WooCommerce"],
+  ["You own the website", "No", "No", "Yes, open WooCommerce"],
   ["Monthly (dropshipping rung)", "Usage-priced", "Network-priced", "Militia $269/mo"],
   ["Own inventory + dropship", "Varies", "Yes", "Yes, or either one"],
   ["Distributor catalogs", "Limited set", "Their set", "21 via FFL Cockpit"],
@@ -19,7 +19,7 @@ const rows = [
   ["POS", "Their register partner", "The register they already run", "AIM, GunBiz, Rapid, Trident 1"],
   ["AmmoSeek / GunBroker", "Add-on or no", "Limited", "Included on Militia+"],
   ["SEO control", "Theirs", "Theirs", "Yours"],
-  ["4473 / bound book", "Sometimes bundled", "Third-party", "Your POS or FastBound — not us"],
+  ["4473 / bound book", "Sometimes bundled", "Third-party", "Your POS or FastBound, not us"],
 ] as const;
 import TalkSection from "../components/TalkSection.astro";
 ---
@@ -44,7 +44,7 @@ import TalkSection from "../components/TalkSection.astro";
         Best FFL ecommerce website
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        The best FFL ecommerce website is the one the dealer owns. AmmoReady and Gearfire are template platforms — ads you can't strip, shared HTML, pages you don't write. Coriolis builds a gun-friendly WooCommerce store on your
+        The best FFL ecommerce website is the one the dealer owns. AmmoReady and Gearfire are template platforms: ads you can't strip, shared HTML, pages you don't write. Coriolis builds a gun-friendly WooCommerce store on your
         domain, with SEO you control, so you can sell what you stock, dropship from distributor
         catalogs, or do both.{" "}
         <a href={LINKS.fflCockpit} class={linkClass} {...ext}>FFL Cockpit</a>

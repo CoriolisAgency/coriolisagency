@@ -95,7 +95,7 @@ export const PLANS: Plan[] = [
         label: "VIP Support for:",
         items: ["WordPress", "WooCommerce", "Custom Theme", "All Other Plugins"],
       },
-      "Free Email & Chat Support — One Hour Response Time",
+      "Free Email & Chat Support: One Hour Response Time",
     ],
   },
   {

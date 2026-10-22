@@ -17,7 +17,7 @@ export const POS_PAGES: PosPage[] = [
     slug: "aim-pos",
     path: "/aim-pos",
     name: "AIM POS",
-    title: "AIM POS + WooCommerce — keep your register | Coriolis",
+    title: "AIM POS + WooCommerce: keep your register | Coriolis",
     description:
       "Keep AIM POS. Coriolis builds the WooCommerce website that talks to it. Warlord and FFL Accelerator connect the register you already run.",
     lede:
@@ -32,7 +32,7 @@ export const POS_PAGES: PosPage[] = [
     slug: "gunbiz-pos",
     path: "/gunbiz-pos",
     name: "GunBiz POS",
-    title: "GunBiz POS + WooCommerce — keep your register | Coriolis",
+    title: "GunBiz POS + WooCommerce: keep your register | Coriolis",
     description:
       "Keep GunBiz POS. Coriolis builds the WooCommerce website that talks to it. Warlord and FFL Accelerator connect the register you already run.",
     lede:
@@ -47,7 +47,7 @@ export const POS_PAGES: PosPage[] = [
     slug: "trident-1-pos",
     path: "/trident-1-pos",
     name: "Trident 1 POS",
-    title: "Trident 1 POS + WooCommerce — keep your register | Coriolis",
+    title: "Trident 1 POS + WooCommerce: keep your register | Coriolis",
     description:
       "Keep Trident 1 POS. Coriolis builds the WooCommerce website that talks to it. Warlord and FFL Accelerator connect the register you already run.",
     lede:
@@ -61,7 +61,7 @@ export const POS_PAGES: PosPage[] = [
     slug: "rapid-gun-systems-pos",
     path: "/rapid-gun-systems-pos",
     name: "Rapid Gun Systems",
-    title: "Rapid Gun Systems + WooCommerce — keep your register | Coriolis",
+    title: "Rapid Gun Systems + WooCommerce: keep your register | Coriolis",
     description:
       "Keep Rapid Gun Systems. Coriolis builds the WooCommerce website that talks to it. Warlord and FFL Accelerator connect the register you already run.",
     lede:

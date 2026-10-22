@@ -64,7 +64,7 @@ export const FAQ_HOME: FaqItem[] = [
   },
   {
     q: "Do you file 4473s or run NICS?",
-    a: "No. We don't file a 4473, run NICS, keep your bound book or run your register. Serialized guns ship to a receiving FFL.",
+    a: "No. We don't file a 4473, run NICS or keep your bound book. Your register stays with your POS company, and we connect your website to it. Serialized guns ship to a receiving FFL.",
   },
 ];
 
@@ -224,7 +224,7 @@ export const FAQ_SHOPIFY: FaqItem[] = [
 export const FAQ_BEST: FaqItem[] = [
   {
     q: "What is the best FFL ecommerce website?",
-    a: "The one you own. AmmoReady and Gearfire are template platforms — ads you can't strip, shared HTML, pages you don't write. Coriolis builds WooCommerce on your domain — inventory, dropshipping, or both — and you can take it with you.",
+    a: "The one you own. AmmoReady and Gearfire are template platforms: ads you can't strip, shared HTML, pages you don't write. Coriolis builds WooCommerce on your domain (inventory, dropshipping, or both), and you can take it with you.",
   },
   {
     q: "Does WooCommerce handle FFL checkout and dropshipping?",
@@ -250,7 +250,7 @@ export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
     a: "No. Keep the Index for what sold at the register. Add the ask for typed intent and empty searches. We do not sell Gearfire's sales data.",
   },
   {
-    q: "I searched retailbi alternative — do I rip out sell-through?",
+    q: "I searched retailbi alternative. Do I rip out sell-through?",
     a: "No. Searching \"alternative\" often means you want a second number, not to rip out what sold. Add Demand Intelligence beside what sold.",
   },
   {
@@ -335,7 +335,7 @@ export const FAQ_COST: FaqItem[] = [
   },
   {
     q: "Who is Coriolis?",
-    a: `Coriolis builds and hosts WooCommerce websites for FFLs: gun shops, online-only FFLs, ranges, gunsmiths and instructors. We have 100+ clients and a 5-star Google rating from ${GOOGLE_REVIEW_COUNT} reviews, and we're members of NSSF, Firearms Policy Coalition and Gun Owners of America. Our founder ran AmmoReady for nine years. Call (279) 258-6771.`,
+    a: `Coriolis builds and hosts WooCommerce websites for gun shops, online-only FFLs, ranges, gunsmiths and firearms instructors. We have 100+ clients and a 5-star Google rating from ${GOOGLE_REVIEW_COUNT} reviews, and we're members of NSSF, Firearms Policy Coalition and Gun Owners of America. Our founder ran AmmoReady for nine years. Call (279) 258-6771.`,
   },
 ];
 
@@ -455,7 +455,7 @@ export const FAQ_FFL_ANALYTICS: FaqItem[] = [
   },
   {
     q: "Is FFL Analytics free?",
-    a: "Yes. It's free with any GSE dealer account, including free GSE Basic, and GSE Basic is free forever. Pro is optional: sign up by Dec 31, 2026 and get Pro free through Dec 31, 2027, then it's $99 a month.",
+    a: "Yes. It's free with any GSE dealer account, including free GSE Basic, and GSE Basic is free forever. Pro is optional. Pro is normally $99/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026.",
   },
   {
     q: "How is FFL Analytics different from Google Analytics?",
@@ -471,15 +471,15 @@ export const FAQ_FFL_ANALYTICS: FaqItem[] = [
   },
 ];
 
-/** SEO-U32 /ffl-seo FAQ (Brandy FINAL; FAQ 1 [CONFIRM: Paul] placeholder deleted). */
+/** SEO-U32 /ffl-seo FAQ (Brandy FINAL plus PAUL-0901: not a paid service). */
 export const FAQ_FFL_SEO: FaqItem[] = [
   {
     q: "What is FFL SEO?",
-    a: "FFL SEO is search engine optimization for gun stores and FFL dealers: getting your own website found on Google when shoppers search for what you sell. Coriolis does SEO for FFL dealers.",
+    a: "FFL SEO is search engine optimization for gun stores and FFL dealers: getting your own website found on Google when shoppers search for what you sell. FFL Search Console, free with any GSE dealer account, shows what to fix and the Google searches that find you.",
   },
   {
     q: "Is there free SEO help for gun stores?",
-    a: "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic, with no Pro required. It gives you a weekly fix list and shows the Google searches that find you.",
+    a: "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic, with no Pro required. It gives you a weekly fix list and shows the Google searches that find you. GSE Basic also includes premium SEO backlinks and a dedicated Seller page on GunSearchEngine.com.",
   },
   {
     q: "What does FFL Search Console show?",
@@ -519,11 +519,11 @@ export const FAQ_FFL_SEARCH_CONSOLE: FaqItem[] = [
   },
 ];
 
-/** SEO-U30 /ffl-payment-processing FAQ (Brandy FINAL; the FAQ 3 [CONFIRM: Paul] slot is left out until Paul answers). */
+/** SEO-U30 /ffl-payment-processing FAQ (Brandy FINAL plus PAUL-0901: slots filled from Paul's 10/21 answers). */
 export const FAQ_PAYMENTS: FaqItem[] = [
   {
     q: "What is FFL payment processing?",
-    a: "It\u2019s how a gun store takes cards online: a merchant account that allows firearm sales, connected to your website through a payment gateway. The gateway moves the card data. The merchant account is the part that gets approved for your business.",
+    a: "It\u2019s how a gun store takes payments online: a merchant account that allows firearm sales, connected to your website through a payment gateway. The gateway moves the card data. The merchant account is the part that gets approved for your business.",
   },
   {
     q: "Why do payment processors turn down gun stores?",
@@ -531,11 +531,15 @@ export const FAQ_PAYMENTS: FaqItem[] = [
   },
   {
     q: "What does Coriolis set up for payments?",
-    a: "Coriolis installs the payment gateway as part of setup, on Basic Setup ($500) or Retail Setup ($2,500). We enable it, run a small live authorization and void it. Then you test a non-firearm order, and a firearm order once ship-to-FFL is on.",
+    a: "Coriolis works with GOAT Payments and Payroc, so we can provide the gateway, help you set it up, or put your own firearms-approved gateway on checkout. Installation is part of setup, on Basic Setup ($500) or Retail Setup ($2,500). We enable it, run a small live authorization and void it. Then you test a non-firearm order, and a firearm order once ship-to-FFL is on.",
   },
   {
     q: "Who owns the merchant account, and who pays the fees?",
     a: "You do. The merchant account is in your store\u2019s legal name, and its fees are yours.",
+  },
+  {
+    q: "What payments can my store take?",
+    a: "Cards, through your merchant account and the gateway on your checkout. It isn\u2019t cards-only: Coriolis can set up other payment options during setup. Tell us what you want to take.",
   },
   {
     q: "Can Coriolis get my store approved?",
@@ -547,7 +551,7 @@ export const FAQ_PAYMENTS: FaqItem[] = [
   },
 ];
 
-/** SEO-U31 /websites-for-ranges-gunsmiths-instructors FAQ (Brandy FINAL Part 2, the no-ruling fallback). One FAQPage from all three. */
+/** SEO-U31 /websites-for-ranges-gunsmiths-instructors FAQ (Brandy FINAL Part 2 plus PAUL-0901). One FAQPage from all three. */
 export const FAQ_RANGES: FaqItem[] = [
   {
     q: "Do you build websites for shooting ranges?",
@@ -557,6 +561,10 @@ export const FAQ_RANGES: FaqItem[] = [
     q: "Who owns my range website?",
     a: "You do. We build the WooCommerce store on your own domain, and you own it. There\u2019s no annual contract, and if you walk, you take the website.",
   },
+  {
+    q: "Can customers book a lane online?",
+    a: "Yes. We build lane reservations into range websites, along with memberships, waivers, and event and league calendars.",
+  },
 ];
 
 export const FAQ_GUNSMITHS: FaqItem[] = [
@@ -565,18 +573,22 @@ export const FAQ_GUNSMITHS: FaqItem[] = [
     a: "Yes. Coriolis builds and hosts WooCommerce websites for gunsmiths, on your own domain, and you own the site.",
   },
   {
-    q: "What does a gunsmith website cost?",
-    a: "Setup is Basic Setup ($500) or Retail Setup ($2,500), then a plan from $169 a month. Minute Man, at $169, covers custom design on your domain, unlimited hosting, products and orders. There\u2019s no annual contract.",
+    q: "Can customers request a repair or a quote?",
+    a: "Yes. We build service and quote request forms for gunsmith websites, plus job status pages and service and parts sales.",
   },
 ];
 
 export const FAQ_INSTRUCTORS: FaqItem[] = [
   {
     q: "Do you build websites for firearms and CCW instructors?",
-    a: "Yes. Coriolis builds and hosts WooCommerce websites for firearms instructors, on your own domain, and you own the site.",
+    a: "Yes. Coriolis builds and hosts WooCommerce websites for firearms instructors, on your own domain, and you own the site. You don\u2019t need an FFL.",
   },
   {
     q: "What does an instructor website cost?",
     a: "Setup is a one-time $500 (Basic Setup) or $2,500 (Retail Setup), and monthly plans run from $169 to $569. There\u2019s no annual contract.",
+  },
+  {
+    q: "Can students sign up and pay for a class?",
+    a: "Yes. We build class schedules and paid class sign-ups for instructor websites.",
   },
 ];
