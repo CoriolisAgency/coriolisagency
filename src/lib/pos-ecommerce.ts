@@ -94,7 +94,7 @@ export function posPillarItemList(home: string) {
 export const POS_PILLAR_HOW_TITLE = "How gun store POS integration works";
 
 export const POS_PILLAR_HOW = [
-  "Coriolis builds the WooCommerce store on your domain and connects it to your register through an API-based integration. Stock and prices come from the register, and web orders go back to it. Warlord includes unlimited API requests and webhooks. The counter and the website share one inventory, so the floor and the site stay in sync.",
+  "Coriolis builds the WooCommerce store on your domain and connects it to your register through an API-based integration. The register and the website sync both ways. Warlord includes unlimited API requests and webhooks. The counter and the website share one inventory, so the floor and the site stay in sync.",
   "The POS company runs the register. You own the website.",
 ] as const;
 
@@ -127,7 +127,7 @@ export const POS_PILLAR_FORM_LINE =
 export const FAQ_POS_PILLAR: FaqItem[] = [
   {
     q: "What is gun store POS integration?",
-    a: "It\u2019s a connection between the register you already run and your WooCommerce website, so the counter and the website share one inventory. Coriolis builds the store on your domain and connects the register through an API-based integration. Stock and prices come from the register, and web orders go back to it.",
+    a: "It\u2019s a connection between the register you already run and your WooCommerce website, so the counter and the website share one inventory. Coriolis builds the store on your domain and connects the register through an API-based integration. The register and the website sync both ways.",
   },
   {
     q: "Which POS systems integrate with my website?",
@@ -147,6 +147,6 @@ export const FAQ_POS_PILLAR: FaqItem[] = [
   },
   {
     q: "Does inventory sync both ways?",
-    a: "Yes. Stock and prices come from the register, and web orders go back to it, so the counter and the website share one inventory. Warlord includes unlimited API requests and webhooks.",
+    a: "Yes. The register and the website sync both ways, for any POS that works with WooCommerce. The counter and the website share one inventory, and Warlord includes unlimited API requests and webhooks.",
   },
 ];

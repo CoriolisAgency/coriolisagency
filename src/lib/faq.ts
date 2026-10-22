@@ -327,7 +327,7 @@ export const FAQ_COST: FaqItem[] = [
   },
   {
     q: "What does it cost to connect my register to the website?",
-    a: "Connecting your register is the Warlord plan at $469 a month. It syncs the site with any POS that works with WooCommerce, such as AIM, GunBiz, Rapid Gun Systems or Trident 1. Stock and prices come from the register, and web orders go back to it. FFL Accelerator at $569 includes it too, and your register subscription stays with the company you buy it from.",
+    a: "Connecting your register is the Warlord plan at $469 a month. It syncs the site both ways with any POS that works with WooCommerce, such as AIM, GunBiz, Rapid Gun Systems or Trident 1. FFL Accelerator at $569 includes it too, and your register subscription stays with the company you buy it from.",
   },
   {
     q: "What isn't included in the monthly price?",
@@ -551,7 +551,7 @@ export const FAQ_PAYMENTS: FaqItem[] = [
   },
 ];
 
-/** SEO-U31 /websites-for-ranges-gunsmiths-instructors FAQ (Brandy FINAL Part 2 plus PAUL-0901). One FAQPage from all three. */
+/** SEO-U31 /websites-for-ranges-gunsmiths-instructors FAQ (Brandy FINAL, Chief 8:57 AM ET). One FAQPage from all three. */
 export const FAQ_RANGES: FaqItem[] = [
   {
     q: "Do you build websites for shooting ranges?",
@@ -561,10 +561,6 @@ export const FAQ_RANGES: FaqItem[] = [
     q: "Who owns my range website?",
     a: "You do. We build the WooCommerce store on your own domain, and you own it. There\u2019s no annual contract, and if you walk, you take the website.",
   },
-  {
-    q: "Can customers book a lane online?",
-    a: "Yes. We build lane reservations into range websites, along with memberships, waivers, and event and league calendars.",
-  },
 ];
 
 export const FAQ_GUNSMITHS: FaqItem[] = [
@@ -573,8 +569,8 @@ export const FAQ_GUNSMITHS: FaqItem[] = [
     a: "Yes. Coriolis builds and hosts WooCommerce websites for gunsmiths, on your own domain, and you own the site.",
   },
   {
-    q: "Can customers request a repair or a quote?",
-    a: "Yes. We build service and quote request forms for gunsmith websites, plus job status pages and service and parts sales.",
+    q: "What does a gunsmith website cost?",
+    a: "Setup is Basic Setup ($500) or Retail Setup ($2,500), and monthly plans run from $169 to $569. There\u2019s no annual contract, and if you walk, you take the website.",
   },
 ];
 
@@ -586,10 +582,6 @@ export const FAQ_INSTRUCTORS: FaqItem[] = [
   {
     q: "What does an instructor website cost?",
     a: "Setup is a one-time $500 (Basic Setup) or $2,500 (Retail Setup), and monthly plans run from $169 to $569. There\u2019s no annual contract.",
-  },
-  {
-    q: "Can students sign up and pay for a class?",
-    a: "Yes. We build class schedules and paid class sign-ups for instructor websites.",
   },
 ];
 
