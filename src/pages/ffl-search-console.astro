@@ -1,114 +1,89 @@
 ---
+/**
+ * SEO-U32 (b): /ffl-search-console rewrite. Copy is Brandy's FINAL (handoff/SEO-U32/FINAL.md),
+ * from GSE's live copy. The old lede, the "Free today" block and the Pro block are cut.
+ * One optional Pro line (Chief) matches GSE's live /pro wording.
+ */
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { btnPlan } from "../lib/links";
+import FaqBlock from "../components/FaqBlock.astro";
+import { btnPlan, linkClass } from "../lib/links";
+import { withBase } from "../lib/base";
+import { FAQ_FFL_SEARCH_CONSOLE } from "../lib/faq";
+import { FSC_TABS } from "../lib/fsc-tabs";
 ---
 
 <BaseLayout
-  title="FFL Search Console: The 2A Layer for Google Search Console | Coriolis"
-  description="FFL Search Console is being built to show what shoppers searched for on your gun store's website alongside the Google Search Console reports you already use."
+  title="FFL Search Console: See How Google Finds Your Gun Store | Coriolis"
+  description="FFL Search Console shows the Google searches that find your gun store and what to fix this week. Read-only. Free with any GSE dealer account."
   path="/ffl-search-console"
+  faq={FAQ_FFL_SEARCH_CONSOLE}
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
       <h1
         class="text-3xl font-semibold tracking-tight text-white sm:text-4xl"
       >
-        The 2A layer for Google Search Console users
+        FFL Search Console: see how Google finds your gun store
       </h1>
       <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300">
-        Google Search Console shows how people find you on Google. FFL Search
-        Console is being built to show what shoppers searched for on your
-        website, alongside the reports you already use.
+        FFL Search Console is in your GunSearchEngine.com (GSE) dealer dashboard. It works with Google Search Console, it’s read-only, and it’s free with any GSE dealer account, no Pro required. Google Search Console shows how people find you on Google. FFL Search Console adds what shoppers searched for on your store and a short list of what to fix this week.
       </p>
     </div>
   </section>
 
   <section class="py-12">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold tracking-tight text-white">
-        Free today, in your GunSearchEngine.com dealer account
-      </h2>
-      <ul
-        class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300"
-      >
-        <li>What shoppers searched for on your website</li>
-        <li>Which of those searches found nothing</li>
+      <h2 class="text-xl font-semibold tracking-tight text-white">Four tabs</h2>
+      <ul class="mt-4 space-y-3 text-sm leading-relaxed text-zinc-300">
+        {FSC_TABS.map((t) => (
+          <li><strong class="text-white">{t.name}</strong> {t.body}</li>
+        ))}
       </ul>
+
+      <h2 class="mt-10 text-xl font-semibold tracking-tight text-white">How often it updates</h2>
       <p class="mt-4 text-sm leading-relaxed text-zinc-400">
-        These reports live in the analytics area of a free GunSearchEngine.com
-        dealer account today. FFL Search Console is being built to show them
-        alongside Google Search Console.
+        FFL Search Console pulls your Google data on a schedule: a starting baseline, then regular snapshots and updates. It isn’t a live, minute-by-minute view.
+      </p>
+
+      <h2 class="mt-10 text-xl font-semibold tracking-tight text-white">What it isn’t</h2>
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400">
+        It doesn’t change anything in your Google account or on your website. It reads and shows, and you decide what to fix. It works alongside Google Search Console, not in place of it.
       </p>
 
       <p class="mt-8 text-sm leading-relaxed text-zinc-400">
-        Designed to work alongside Google Search Console, not replace it.
+        Want someone to do the SEO work for you? Coriolis does <a href={withBase("ffl-seo")} class={linkClass}>FFL SEO</a>.
       </p>
 
-      <div
-        class="relative mt-8 overflow-hidden rounded-2xl border border-gold/60 bg-black p-6 shadow-[0_18px_48px_-20px_rgba(200,150,12,0.55)] sm:p-8"
-        data-pro-plate
-      >
-        <div
-          aria-hidden="true"
-          class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-gold to-transparent"
-        ></div>
-        <h2
-          class="inline-flex items-center rounded-sm bg-gold px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-black"
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400">
+        <a href="https://gunsearchengine.com/pro" class={linkClass}>Want more? GunSearchEngine.com Pro is free through Dec 31, 2027 for dealers who sign up by Dec 31, 2026.</a>
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <a
+          href="https://gunsearchengine.com/dealers/register?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-search-console&ref=coriolis-ffl-search-console"
+          class={btnPlan}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Pro
-        </h2>
-        <p class="mt-4 text-base font-semibold leading-relaxed text-white">
-          Sign up by Dec 31, 2026 and get Pro free through Dec 31, 2027. $99/month after that.
-        </p>
-        <ul class="mt-5 space-y-3 text-sm leading-relaxed text-zinc-200">
-          <li class="flex gap-3">
-            <span aria-hidden="true" class="mt-px shrink-0 font-semibold text-gold">✓</span>
-            <span
-              >Monthly Demand Intelligence reports{" "}
-              <a
-                href="/images/ffl-demand-intelligence-sample-august-2026.png"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="font-medium text-gold underline decoration-gold/60 underline-offset-2 hover:text-[#e0a910]"
-                >(see sample)</a
-              ></span
-            >
-          </li>
-          <li class="flex gap-3">
-            <span aria-hidden="true" class="mt-px shrink-0 font-semibold text-gold">✓</span>
-            <span>Sightline embed with custom styling{" "}
-              <span class="text-zinc-400">(the Free plan gets the standard Sightline embed)</span></span>
-          </li>
-          <li class="flex gap-3">
-            <span aria-hidden="true" class="mt-px shrink-0 font-semibold text-gold">✓</span>
-            <span>OtterText integration for Sightline alerts{" "}
-              <span class="text-zinc-400">(uses your own OtterText account)</span></span>
-          </li>
-          <li class="flex gap-3">
-            <span aria-hidden="true" class="mt-px shrink-0 font-semibold text-gold">✓</span>
-            <span>Pro (Verified) status on GunSearchEngine.com{" "}
-              <span
-                class="ml-1 inline-flex rounded-sm border border-gold/60 px-1.5 py-0.5 align-middle text-[11px] font-semibold uppercase tracking-[0.12em] text-gold"
-                >Coming soon</span
-              ></span>
-          </li>
-          <li class="flex gap-3">
-            <span aria-hidden="true" class="mt-px shrink-0 font-semibold text-gold">✓</span>
-            <span>All future Pro features</span>
-          </li>
-        </ul>
+          Create your free dealer account
+        </a>
+        <a
+          href="https://www.gunsearchengine.com/dealers/ffl-search-console"
+          class={linkClass}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Already a dealer? Open FFL Search Console
+        </a>
       </div>
+    </div>
+  </section>
 
-      <a
-        href="https://gunsearchengine.com/dealers/register?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-search-console&ref=coriolis-ffl-search-console"
-        class={`${btnPlan} mt-8`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Create a free dealer account
-      </a>
+  <FaqBlock items={FAQ_FFL_SEARCH_CONSOLE} />
 
-      <p class="mt-8 text-xs leading-relaxed text-zinc-500">
+  <section class="pb-12">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class="text-xs leading-relaxed text-zinc-500">
         Not affiliated with Google. Google Search Console is a trademark of Google LLC.
       </p>
     </div>

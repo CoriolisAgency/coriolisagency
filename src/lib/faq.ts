@@ -498,3 +498,51 @@ export const FAQ_FFL_ANALYTICS: FaqItem[] = [
     a: "Just the GSE script on your website. You don't have to list any inventory on GunSearchEngine.com to use it. Once the script is running, you get the dashboard and the morning email.",
   },
 ];
+
+/** SEO-U32 /ffl-seo FAQ (Brandy FINAL; FAQ 1 [CONFIRM: Paul] placeholder deleted). */
+export const FAQ_FFL_SEO: FaqItem[] = [
+  {
+    q: "What is FFL SEO?",
+    a: "FFL SEO is search engine optimization for gun stores and FFL dealers: getting your own website found on Google when shoppers search for what you sell. Coriolis does SEO for FFL dealers.",
+  },
+  {
+    q: "Is there free SEO help for gun stores?",
+    a: "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic, with no Pro required. It gives you a weekly fix list and shows the Google searches that find you.",
+  },
+  {
+    q: "What does FFL Search Console show?",
+    a: "Four tabs: Fix this week, Google searches that find you, What shoppers ask for, and How your GSE listing shows on Google. Fix this week is a short list from a light check run at most once a week. The shopper tab covers the last 7 days, and the listing tab covers the last 28 days.",
+  },
+  {
+    q: "Do I have to connect my Google account?",
+    a: "No. Two tabs work without it: what shoppers ask for, and how your GSE listing shows on Google. Connect Google Search Console to see the searches that find your own website.",
+  },
+  {
+    q: "Can it change my website or my Google account?",
+    a: "No. It\u2019s read-only. It reads and shows, and you decide what to fix.",
+  },
+  {
+    q: "Can I do SEO on a template FFL website?",
+    a: "Only a little, because on template platforms you don\u2019t control the title tag, the slugs or the markup. A WooCommerce site on your own domain gives you your slugs, your content and your schema.",
+  },
+];
+
+/** SEO-U32 /ffl-search-console FAQ (Brandy FINAL). */
+export const FAQ_FFL_SEARCH_CONSOLE: FaqItem[] = [
+  {
+    q: "Is FFL Search Console free?",
+    a: "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic. No Pro required.",
+  },
+  {
+    q: "Do I have to connect Google?",
+    a: "No. Two tabs work without it: what shoppers ask for, and how your GSE listing shows on Google. Connect Google Search Console to see the searches that find your own website.",
+  },
+  {
+    q: "Can it change my site or my Google account?",
+    a: "No. It\u2019s read-only. It reads and shows, and you decide what to fix.",
+  },
+  {
+    q: "Is FFL Search Console real-time?",
+    a: "No. It pulls your Google data on a schedule: a starting baseline, then regular snapshots and updates. The fix list comes from a check run at most once a week.",
+  },
+];
