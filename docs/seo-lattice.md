@@ -31,13 +31,13 @@
 | Gearfire alternative / FirearmCart / Gunpowdr compare | **This site** `/gearfire-alternative` |
 | Support (OPS-3): "leave ammoready", "how to leave ammoready" | **This site** `/leave-ammoready`. Support page, not an owner: links to `/ammoready-alternative`, never repeats its H1. No FAQ or HowTo JSON-LD (the owner carries the HowTo) |
 | Support (OPS-3): "leave gearfire", "how to leave gearfire" | **This site** `/leave-gearfire`. Support page, not an owner: links to `/gearfire-alternative`, never repeats its H1. No FAQ or HowTo JSON-LD (the owner carries the HowTo) |
-| Orchid comparison: "orchid alternative", "orchid ebound (alternatives / pricing)", "fastbound vs orchid", "orchid ecommerce / pos spark vs" | **This site** `/orchid-alternative` (S4). Retired fastbound-vs-orchid slugs and `/orchid` 301 here: 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. FFLA keeps its Orchid slugs at 410 and never targets Orchid. Organic only: no paid Orchid ads |
+| Orchid comparison: "orchid alternative", "orchid ebound (alternatives / pricing)", "fastbound vs orchid", "orchid ecommerce / pos spark vs" | **Retired** (ORCHID-RM, Paul 2026-10-21): `/orchid-alternative` is removed. It, the retired fastbound-vs-orchid slugs and `/orchid` 301 to `/ecommerce`. No Orchid targeting. FFLA keeps its Orchid slugs at 410 and never targets Orchid. Organic only: no paid Orchid ads |
 | Bound-book how-to / A&D compliance | **None** (out of lane). Answer only inside comparison pages; no stand-alone bound-book pages |
 | Best FFL ecommerce website | **This site** `/best-ffl-ecommerce-website`. Retired duplicates redirect here (OPS-2): the Dec 2025 trailing-slash post `/best-ffl-ecommerce-website/` 308s here (Vercel trailing-slash rule, one hop); `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026` and `/gun-store-ecommerce-platforms` 301 here (slashed forms: Vercel 308, then the 301) |
 | Email for FFL ecommerce | **This site** `/email-marketing-for-ffl-ecommerce` |
 | WooCommerce vs Shopify (gun stores) | **This site** `/woocommerce-vs-shopify-for-gun-stores` |
 | Can you use WooCommerce to sell guns | **This site** `/can-you-use-woocommerce-to-sell-guns` |
-| Gun Store POS pillar: "gun store pos", "gun store pos software", "gun store pos system", "gun store point of sale", "ffl pos (software)", "point of sale software for gun shop", "pos system that integrates with ecommerce for gun store" | **This site** `/gun-store-pos` (promotes GunBiz and AIM + WooCommerce). Never targets plan-price terms (`/ecommerce` owns them), "how the stack fits" (`/stack` owns it), "woocommerce firearms/guns" (`/can-you-use-woocommerce-to-sell-guns`), Orchid or "fastbound vs orchid" terms (`/orchid-alternative`), FastBound review or alternatives terms (bound-book evaluation, out of lane), or Axis terms. Keyword targets and GSC actuals: [`docs/gun-store-pos-keywords.md`](gun-store-pos-keywords.md) |
+| Gun Store POS pillar: "gun store pos", "gun store pos software", "gun store pos system", "gun store point of sale", "ffl pos (software)", "point of sale software for gun shop", "pos system that integrates with ecommerce for gun store" | **This site** `/gun-store-pos` (promotes GunBiz and AIM + WooCommerce). Never targets plan-price terms (`/ecommerce` owns them), "how the stack fits" (`/stack` owns it), "woocommerce firearms/guns" (`/can-you-use-woocommerce-to-sell-guns`), FastBound review or alternatives terms (bound-book evaluation, out of lane), or Axis terms. Keyword targets and GSC actuals: [`docs/gun-store-pos-keywords.md`](gun-store-pos-keywords.md) |
 | Supporting (promoted): "aim pos", "aim point of sale"; "gunbiz pos" | **This site** `/aim-pos`, `/gunbiz-pos` (`/microbiz-pos` 301s here) |
 | Siblings: "trident 1 pos", "trident1", "trident one"; "rapid gun systems pos" | **This site** `/trident-1-pos`, `/rapid-gun-systems-pos` |
 | Gun store POS comparison | None. `/gun-store-pos-comparison` is an orphan, noindex page: owns no keywords, linked from no page, out of the sitemap. |
@@ -64,7 +64,7 @@
 
 1. Conversion: monthly ecommerce → `/contact`. Setup → existing Stripe links. DI → GSE demo. Ads → `fflaccelerator.com/lp/` only.
 2. First ~80 words of each commercial page answer the query.
-3. FAQ JSON-LD on `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/orchid-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/gun-store-pos` plus the four POS pages, and `/stack`. HowTo JSON-LD on `/ecommerce` (switch + Woo sell guns), `/can-you-use-woocommerce-to-sell-guns`, `/firearms-dropshipping`, `/ammoready-alternative`, `/gearfire-alternative`, and `/orchid-alternative` (tier-neutral steps).
+3. FAQ JSON-LD on `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/gun-store-pos` plus the four POS pages, and `/stack`. HowTo JSON-LD on `/ecommerce` (switch + Woo sell guns), `/can-you-use-woocommerce-to-sell-guns`, `/firearms-dropshipping`, `/ammoready-alternative`, and `/gearfire-alternative`.
 4. Organization `sameAs`: listed in `src/lib/links.ts`.
 5. Never H1 “RetailBI alternative.” Never “switch off RetailBI.” Never 4473 automation claims.
 6. Frozen strings from `src/lib/frozen.ts`.
@@ -74,7 +74,7 @@
 ## Internal links
 
 - Home → four pillars (FFL Ecommerce, Gun Store POS, AI Studio, Demand Intelligence)
-- Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / Gearfire / Orchid / best-store / email / POS cluster (Gun Store POS `/gun-store-pos`, AIM POS, GunBiz POS, Trident 1 POS, Rapid Gun Systems) + `/stack`
+- Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / Gearfire / best-store / email / POS cluster (Gun Store POS `/gun-store-pos`, AIM POS, GunBiz POS, Trident 1 POS, Rapid Gun Systems) + `/stack`
 - Support pages (OPS-3, one per owned intent) → their owner: `/leave-ammoready` → `/ammoready-alternative`, `/leave-gearfire` → `/gearfire-alternative`, `/ffl-website-cost` → `/ecommerce`. They also link each other and `/ecommerce`. FFLA gets no comparison posts.
 - Gun Store POS `/gun-store-pos` → `/gunbiz-pos`, `/aim-pos` (main cards), `/trident-1-pos`, `/rapid-gun-systems-pos` ("Also works with WooCommerce"), `/contact`
 - AI Studio → live product URLs (proof, not a catalog)

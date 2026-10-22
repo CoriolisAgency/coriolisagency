@@ -32,7 +32,6 @@ GunSearchAgent is retired. FFLIntel is our journal on gun demand numbers (fflint
 - /ammoready-alternative — AmmoReady alternative
 - /gearfire-alternative — Gearfire alternative (FirearmCart / Gunpowdr named on that table)
 - /leave-ammoready, /leave-gearfire — how to leave without going dark (switch guides). Support /ammoready-alternative and /gearfire-alternative.
-- /orchid-alternative — Orchid comparison: keep your bound book (eBound or FastBound), own the WooCommerce store. Not affiliated with Orchid; we do not sell a bound book.
 - /best-ffl-ecommerce-website, /firearms-dropshipping, /ffl-cockpit, /can-you-use-woocommerce-to-sell-guns — store pages
 - /email-marketing-for-ffl-ecommerce — Accelerator email (no LTV claim)
 - /woocommerce-vs-shopify-for-gun-stores — owned Woo vs hosted Shopify

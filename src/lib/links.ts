@@ -5,7 +5,6 @@ export const LINKS = {
   cockpitPage: "/ffl-cockpit",
   ammoreadyAlt: "/ammoready-alternative",
   gearfireAlt: "/gearfire-alternative",
-  orchidAlt: "/orchid-alternative",
   bestStore: "/best-ffl-ecommerce-website",
   emailFfl: "/email-marketing-for-ffl-ecommerce",
   wooVsShopify: "/woocommerce-vs-shopify-for-gun-stores",
