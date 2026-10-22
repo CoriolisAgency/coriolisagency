@@ -59,7 +59,7 @@ Pages: /rapid-gun-systems-pos 11 impr @ 8.5 (90 d); legacy Rapid post (301 to /r
 No GSC rows in 16 months for any query that combines "woocommerce" or "woo" with "pos". Target "gun store pos woocommerce integration": proposed, no GSC data yet. Nearby: "ffl software integration with woocommerce" 6 / 0 / 7.0 (16 mo). "woocommerce firearms" (559 @ 33.0) and "woocommerce guns" (185 @ 6.7) belong to /can-you-use-woocommerce-to-sell-guns; the pillar does not target them.
 
 ## FastBound
-FastBound queries have real impressions but are bound-book software evaluations, which the lattice keeps out of lane: fastbound 309 / 0 / 29.8; fastbound ffl software review 134 / 0 / 8.4; fastbound alternatives 113 / 0 / 35.4; fastbound reviews 71 / 0 / 23.5; fastbound vs orchid 38 / 0 / 4.1 (owned by /orchid-alternative); fastbound ffl api woocommerce 9 / 0 / 6.8. The pillar names FastBound as the compliance platform both promoted POS systems use; it does not target fastbound review, alternatives or vs terms.
+FastBound queries have real impressions but are bound-book software evaluations, which the lattice keeps out of lane: fastbound 309 / 0 / 29.8; fastbound ffl software review 134 / 0 / 8.4; fastbound alternatives 113 / 0 / 35.4; fastbound reviews 71 / 0 / 23.5; fastbound vs orchid 38 / 0 / 4.1 (no owner; page retired 2026-10-21); fastbound ffl api woocommerce 9 / 0 / 6.8. The pillar names FastBound as the compliance platform both promoted POS systems use; it does not target fastbound review, alternatives or vs terms.
 
 ## Corestore (leaving)
 corestore 18 / 0 / 21.3; corestor 13 / 0 / 1.0; corstore 3 / 0 / 2.0; corestore login 1 / 0 / 3.0 (16 mo). /corestore-pos 4 impr @ 7.2 (90 d). Not targeted; the 301 to /gun-store-pos handles it.

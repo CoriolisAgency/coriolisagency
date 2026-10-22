@@ -38,7 +38,7 @@ Same path, new voice, still answer the old query in the first 80 words. **Do not
 | `/ammoready-alternative` | 19 | 1,780 | Query pos 6.1, 9 clicks. **AmmoReady pillar.** |
 | `/best-ffl-ecommerce-website` | 17 | 3,047 | Comparison intent still sells ecommerce. |
 
-Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), **`/orchid-alternative`** (Orchid comparison, S4), **`/orchid-alternative`** (Orchid comparison, S4), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/gun-store-pos` (Gun Store POS pillar), `/aim-pos`, `/gunbiz-pos`, `/trident-1-pos`, `/rapid-gun-systems-pos`. `/microbiz-pos` 301s to `/gunbiz-pos` and `/corestore-pos` 301s to `/gun-store-pos` (OPS-29).
+Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/gun-store-pos` (Gun Store POS pillar), `/aim-pos`, `/gunbiz-pos`, `/trident-1-pos`, `/rapid-gun-systems-pos`. `/microbiz-pos` 301s to `/gunbiz-pos` and `/corestore-pos` 301s to `/gun-store-pos` (OPS-29).
 
 `/demand-intelligence` is a page on this host (SEO-U24, D-N16; moved from GunSearchEngine). The old 301 to GunSearchEngine is removed from `vercel.json`.
 
@@ -49,7 +49,7 @@ Optional keep (editorial accidents — not company juice, but real clicks). Only
 | `/the-scar-is-dead-long-live-the-xcr-modular-tactical-rifle` | 40 | 3,098 | `xcr vs scar`. Client/editorial. Keep static **or** let die. |
 | `/shadowsmith-ammo-selects-coriolis-agency-…` | 35 | 3,335 | People search the **client**. 301 → `/about` unless you want a news URL. |
 | `/top-us-gun-manufacturers-complete-guide-…` | 30 | 18,031 | Vanity listicle (page 2–3). Let die unless you like the impressions. |
-| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 28 | 16,821 | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
+| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 28 | 16,821 | 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4). |
 | `/unleash-hellfire-with-the-diablo-12-gauge-…` | 22 | 2,404 | Product editorial. Let die. |
 | `/meet-the-team` | 26 | 314 | Brand. 301 → `/about` (do not rebuild). |
 | `/ammoready-com-founder-launches-2a-focused-digital-marketing-agency` | 24 | 812 | Origin story. 301 → `/about`. |
@@ -66,7 +66,7 @@ Retired WordPress posts. Soft 404 on the Astro cutover; now rewrite to `/api/gon
 | `/orchid-estate-bound-book` | 410 | — | Short leftover. |
 | `/orchid-estate-breaks-new-ground-in-ffl-compliance` | 410 | — | Live WP slug (soft 404). |
 
-The six Orchid / fastbound-vs-orchid slugs that used to be in this table now 301 to `/orchid-alternative` (S4; see below). The five Orchid slugs above stay **410**.
+The six Orchid / fastbound-vs-orchid slugs that used to be in this table now 301 to `/ecommerce` (ORCHID-RM; see below). The five Orchid slugs above stay **410**.
 
 Do **not** 410 `/estate` — that string is not unique enough. Trailing-slash variants 308 to the no-slash source, then 410.
 
@@ -74,18 +74,21 @@ Do **not** 410 `/estate` — that string is not unique enough. Trailing-slash va
 
 Implemented in `vercel.json` (path sources only; trailing-slash handled by Vercel).
 
-### S4: Orchid comparison slugs → `/orchid-alternative`
+### ORCHID-RM: Orchid comparison slugs → `/ecommerce` (was S4 → `/orchid-alternative`)
+
+Paul 2026-10-21 (9:03 PM ET): the `/orchid-alternative` page is removed. It and the six slugs below 301 straight to `/ecommerce`, one hop, no chain.
 
 Moved from the 410 rewrites to `redirects` with `"statusCode": 301` (exact path sources; the slashed form 308s to no-slash first, then 301s). The five Orchid slugs in the 410 table (`/ebound`, `/orchid-gun-store-pos`, `/orchid-estate`, `/orchid-estate-bound-book`, `/orchid-estate-breaks-new-ground-in-ffl-compliance`) stay 410.
 
 | Old WordPress | Status | Clicks | Why |
 |---------------|--------|-------:|-----|
-| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 301 → `/orchid-alternative` | 28 | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
-| `/fastbound-vs-orchid` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
-| `/fastbound-vs-orchid-ebound` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
-| `/fastbound-vs-orchid-ebound-bound-book` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
-| `/fastbound-vs-orchid-advisors` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
-| `/orchid` | 301 → `/orchid-alternative` | — | 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page. |
+| `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` | 301 → `/ecommerce` | 28 | 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4). |
+| `/fastbound-vs-orchid` | 301 → `/ecommerce` | — | 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4). |
+| `/fastbound-vs-orchid-ebound` | 301 → `/ecommerce` | — | 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4). |
+| `/fastbound-vs-orchid-ebound-bound-book` | 301 → `/ecommerce` | — | 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4). |
+| `/fastbound-vs-orchid-advisors` | 301 → `/ecommerce` | — | 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4). |
+| `/orchid` | 301 → `/ecommerce` | — | 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4). |
+| `/orchid-alternative` | 301 → `/ecommerce` | — | Page removed (ORCHID-RM, Paul 2026-10-21). |
 
 ### OPS-2: clean the index (decision 2026-10-07-seo-ownership)
 
@@ -96,11 +99,11 @@ How this host handles slashes: Astro `trailingSlash: "never"` and Vercel `"trail
 | `/ammoready-alternative/` (old trailing-slash blog) | 308 → `/ammoready-alternative` (owner) | 1 | None possible or needed. No rule: the no-slash path is the owner page. |
 | `/best-ffl-ecommerce-website/` (Dec 2025 long post) | 308 → `/best-ffl-ecommerce-website` (owner) | 1 | None possible or needed. No rule: the no-slash path is the owner page. |
 | `/ammoready-alternative-why-ffls-are-switching-to-coriolis` | 301 → `/ammoready-alternative` | 1 | `permanent: true` (308) → `"statusCode": 301`, the S4 pattern. |
-| `/ammoready-alternative-why-ffls-are-switching-to-coriolis/` | 308 → no-slash, then 301 → `/ammoready-alternative` | 2 | Same as the S4 Orchid slugs. |
+| `/ammoready-alternative-why-ffls-are-switching-to-coriolis/` | 308 → no-slash, then 301 → `/ammoready-alternative` | 2 | Same shape as the S4 slugs. |
 | `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026` | 301 → `/best-ffl-ecommerce-website` | 1 | `permanent: true` (308) → `"statusCode": 301` (Chief owner call, 2026-10-08). |
-| `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026/` | 308 → no-slash, then 301 → `/best-ffl-ecommerce-website` | 2 | Same shape as the S4 Orchid slugs. |
+| `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026/` | 308 → no-slash, then 301 → `/best-ffl-ecommerce-website` | 2 | Same shape as the S4 slugs. |
 | `/gun-store-ecommerce-platforms` | 301 → `/best-ffl-ecommerce-website` | 1 | New rule (was 404; Chief owner call, 2026-10-08). |
-| `/gun-store-ecommerce-platforms/` | 308 → no-slash, then 301 → `/best-ffl-ecommerce-website` | 2 | Same shape as the S4 Orchid slugs. |
+| `/gun-store-ecommerce-platforms/` | 308 → no-slash, then 301 → `/best-ffl-ecommerce-website` | 2 | Same shape as the S4 slugs. |
 
 Accepted (Chief, 2026-10-08): Vercel's trailing-slash 308s stay; no site-wide routing change. Done when each old URL reaches its owner through a 301, or through Vercel's slash 308 and then a 301, with no longer chains.
 
@@ -208,7 +211,7 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 - Email ROI headline only: the **42-to-1** claim is not republished. The slug 301s to `/email-marketing-for-ffl-ecommerce` (Accelerator facts only).
 - Agency/SEO vanity: `/firearms-digital-marketing-agency/` (15 clicks — only if you still want that door; else die), `/gun-industry-seo-company-…/` (10 c / 10,184 i), `/firearms-seo-marketing/` (7 c / 10,201 i). Query cluster: **6 clicks / 20k impr**.
-- Compliance software: `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` (28 c / 16,821 i) — 301 to /orchid-alternative (S4, Paul 2026-10-07). The target is a comparison page with a bound-book section, not an ecommerce sales page.
+- Compliance software: `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` (28 c / 16,821 i) — 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4).
 - `/ammoready-login/` (2 clicks) — not your product.
 - `/types-of-ffls/` (0 / 898) — still a soft 404.
 - `/orchid-gun-store-pos` (0 / 826) and the short leftovers in the 410 table — **410** via `/api/gone`. Do not 301 onto `/ecommerce` or `/best-ffl-ecommerce-website`.

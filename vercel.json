@@ -55,32 +55,37 @@
     },
     {
       "source": "/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions",
-      "destination": "/orchid-alternative",
+      "destination": "/ecommerce",
       "statusCode": 301
     },
     {
       "source": "/fastbound-vs-orchid",
-      "destination": "/orchid-alternative",
+      "destination": "/ecommerce",
       "statusCode": 301
     },
     {
       "source": "/fastbound-vs-orchid-ebound",
-      "destination": "/orchid-alternative",
+      "destination": "/ecommerce",
       "statusCode": 301
     },
     {
       "source": "/fastbound-vs-orchid-ebound-bound-book",
-      "destination": "/orchid-alternative",
+      "destination": "/ecommerce",
       "statusCode": 301
     },
     {
       "source": "/fastbound-vs-orchid-advisors",
-      "destination": "/orchid-alternative",
+      "destination": "/ecommerce",
       "statusCode": 301
     },
     {
       "source": "/orchid",
-      "destination": "/orchid-alternative",
+      "destination": "/ecommerce",
+      "statusCode": 301
+    },
+    {
+      "source": "/orchid-alternative",
+      "destination": "/ecommerce",
       "statusCode": 301
     },
     {
