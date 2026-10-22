@@ -26,6 +26,10 @@ GunSearchAgent is retired. FFLIntel is our journal on gun demand numbers (fflint
 - /about: who we are
 - /press: newsroom
 - /press/five-ffls-choose-coriolis-for-aim-pos-integration: AIM POS + WooCommerce deployments
+- /case-studies: case studies, gun store websites we built
+- /case-studies/naples-gun-shop: Naples Gun Shop, a WooCommerce store connected to AIM POS
+- /case-studies/allegheny-arms: Allegheny Arms, a WooCommerce store on its own domain
+- /case-studies/target-shotguns: Target Shotguns, a shotgun specialist's store connected to GunBiz POS
 - /contact: talk
 - /ai-studio: live software, not a catalog
 - /grok-bot-setup: the $995 session

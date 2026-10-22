@@ -1,0 +1,126 @@
+---
+/**
+ * SEO-U8v2: case-study story template. Copy is Brandy's FINAL (Chief 9:23 AM ET).
+ * All five slugs build a route. Drafts (`draft: true`) get robots noindex,nofollow,
+ * are filtered out of the sitemap in astro.config.mjs, and nothing links to them.
+ * Article JSON-LD only: no Review, no AggregateRating, no FAQPage.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TalkSection from "../../components/TalkSection.astro";
+import CaseParagraph from "../../components/CaseParagraph.astro";
+import { CASE_STUDIES, CASE_STUDIES_HUB, CASE_STUDIES_PUBLISHED, caseBySlug, casePath } from "../../lib/case-studies";
+import { LINKS, linkClass } from "../../lib/links";
+import { SITE_ORIGIN } from "../../lib/site";
+import { withBase } from "../../lib/base";
+
+export function getStaticPaths() {
+  return CASE_STUDIES.map((c) => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const cs = caseBySlug(slug ?? "");
+if (!cs) {
+  throw new Error(`Unknown case study slug: ${slug}`);
+}
+
+const siteOrigin = Astro.site ?? new URL(SITE_ORIGIN);
+const path = casePath(cs.slug);
+const pageUrl = new URL(withBase(path), siteOrigin).href;
+const imageUrl = new URL(withBase(cs.og), siteOrigin).href;
+
+const about: Record<string, unknown> = { "@type": "Store", name: cs.name };
+if (!cs.draft && cs.siteUrl) about.url = cs.siteUrl;
+
+const h2 = "text-xl font-semibold text-white";
+const para = "mt-4 max-w-3xl text-base leading-relaxed text-zinc-300";
+---
+
+<BaseLayout
+  title={cs.title}
+  description={cs.meta}
+  path={path}
+  ogImagePath={cs.og}
+  ogType="article"
+  publishedTime={CASE_STUDIES_PUBLISHED}
+  robots={cs.draft ? "noindex,nofollow" : undefined}
+  extraJsonLd={[
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      headline: cs.h1,
+      description: cs.meta,
+      image: imageUrl,
+      url: pageUrl,
+      datePublished: CASE_STUDIES_PUBLISHED,
+      dateModified: CASE_STUDIES_PUBLISHED,
+      inLanguage: "en-US",
+      author: { "@id": `${LINKS.home}/#organization` },
+      publisher: { "@id": `${LINKS.home}/#organization` },
+      about,
+      isPartOf: { "@id": `${pageUrl}#webpage` },
+    },
+  ]}
+>
+  <article>
+    <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+      <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+        <p class="text-xs text-zinc-500">
+          <a href={withBase(CASE_STUDIES_HUB.path)} class="hover:text-sky-300">Case studies</a>
+          <span class="px-1.5">/</span>
+          {cs.name}
+        </p>
+        <h1 class="mt-4 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12] text-balance">
+          {cs.h1}
+        </h1>
+        <dl class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          {
+            cs.facts.map((f) => (
+              <div class="flex gap-1.5">
+                <dt class="text-zinc-500">{f.label}:</dt>
+                <dd class="font-medium text-zinc-200">
+                  {f.href ? (
+                    <a href={f.href} class={linkClass} target="_blank" rel="noopener noreferrer">{f.value}</a>
+                  ) : (
+                    f.value
+                  )}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+        <figure class="mt-8 overflow-hidden rounded-2xl ring-1 ring-white/10">
+          <img
+            src={withBase(cs.hero)}
+            alt={cs.alt}
+            width="1920"
+            height="1080"
+            fetchpriority="high"
+            decoding="async"
+            class="w-full bg-[#091220]"
+          />
+        </figure>
+      </div>
+    </section>
+
+    {
+      cs.sections.map((s) => (
+        <section class="pt-12">
+          <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+            <h2 class={h2}>{s.heading}</h2>
+            {s.paragraphs.map((p) => (
+              <CaseParagraph p={p} class={para} />
+            ))}
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="py-12">
+      <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+        <CaseParagraph p={cs.cta} class="max-w-3xl text-base leading-relaxed text-zinc-200" />
+      </div>
+    </section>
+  </article>
+
+  {cs.talkHeading ? <TalkSection heading={cs.talkHeading} /> : <TalkSection />}
+</BaseLayout>
