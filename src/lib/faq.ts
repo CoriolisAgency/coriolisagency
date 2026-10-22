@@ -355,7 +355,7 @@ export const FAQ_COST: FaqItem[] = [
   },
   {
     q: "What does it cost to connect my register to the website?",
-    a: "Connecting your register is the Warlord plan at $469 a month. It syncs the site with any third-party register that works with WooCommerce. FFL Accelerator at $569 includes it too, and your register subscription stays with the company you buy it from.",
+    a: "Connecting your register is the Warlord plan at $469 a month. It syncs the site with any POS that works with WooCommerce, such as AIM, GunBiz, Rapid Gun Systems or Trident 1. Stock and prices come from the register, and web orders go back to it. FFL Accelerator at $569 includes it too, and your register subscription stays with the company you buy it from.",
   },
   {
     q: "What isn't included in the monthly price?",
