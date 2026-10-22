@@ -1,5 +1,6 @@
 ---
 import { linkClass } from "../lib/links";
+import { withBase } from "../lib/base";
 import {
   GOOGLE_REVIEW_COUNT,
   GOOGLE_REVIEW_QUOTES,
@@ -72,14 +73,19 @@ const ratingLabel = `${GOOGLE_REVIEW_RATING.toFixed(1)} out of 5 stars from ${GO
           </p>
         </div>
       </div>
-      <a
-        href={GOOGLE_REVIEWS_HREF}
-        class={linkClass}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Read on Google →
-      </a>
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <a
+          href={GOOGLE_REVIEWS_HREF}
+          class={linkClass}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Read on Google →
+        </a>
+        <a href={withBase("case-studies")} class={linkClass}>
+          Read the case studies →
+        </a>
+      </div>
     </div>
     <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
       {
@@ -99,7 +105,7 @@ const ratingLabel = `${GOOGLE_REVIEW_RATING.toFixed(1)} out of 5 stars from ${GO
               “{q.body}”
             </p>
             <footer class="mt-4 text-sm">
-              <p class="font-medium text-zinc-100">{q.shop}</p>
+              <p class="font-medium text-zinc-100"><a href={withBase(q.story)} class={linkClass}>{q.shop}</a></p>
               <p class="mt-0.5 text-zinc-500">{q.name}</p>
             </footer>
           </blockquote>

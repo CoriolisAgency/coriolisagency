@@ -26,6 +26,8 @@ GunSearchAgent is retired. FFLIntel is our journal on gun demand numbers (fflint
 - /about: who we are
 - /press: newsroom
 - /press/five-ffls-choose-coriolis-for-aim-pos-integration: AIM POS + WooCommerce deployments
+- /case-studies: case studies, told in the owners' words
+- /case-studies/down-range-chico, /case-studies/nightshade-optics, /case-studies/big-randaddys: one story each
 - /contact: talk
 - /ai-studio: live software, not a catalog
 - /grok-bot-setup: the $995 session
