@@ -26,7 +26,7 @@ export const PRESS_POSTS: PressPost[] = [
     location: "Greenville, S.C.",
     ogImagePath: CANON_PATHS.rangeMckinney,
     imageAlt:
-      "The Range in McKinney — a Coriolis-built WooCommerce storefront for an indoor range and online gun store.",
+      "The Range in McKinney: a Coriolis-built WooCommerce storefront for an indoor range and online gun store.",
   },
 ];
 

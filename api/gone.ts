@@ -4,7 +4,7 @@ const BODY = `<!DOCTYPE html>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Gone — Coriolis, LLC</title>
+    <title>Gone | Coriolis, LLC</title>
     <style>
       :root { color-scheme: dark; }
       body {

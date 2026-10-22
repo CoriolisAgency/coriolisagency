@@ -62,12 +62,12 @@ export const PREVIEW_FACTS = [
   "We do not run the register or the 4473.",
 ] as const;
 
-export const PREVIEW_NOW_HEAD = "NOW — the store you run today";
+export const PREVIEW_NOW_HEAD = "NOW: the store you run today";
 
 export const PREVIEW_NOW_LEDE =
   "Shopper to your Woo store. GunSearchEngine.com is a doorbell on that store, not a stockroom. FFL Cockpit writes Woo. Distributors feed Cockpit. The office pays Stripe for hosting. Dotted lines are claim and host only.";
 
-export const PREVIEW_NEXT_HEAD = "NEXT — three paths";
+export const PREVIEW_NEXT_HEAD = "NEXT: three paths";
 
 export const PREVIEW_NEXT_LEDE =
   "Three paths. The cart does not go through the office. Office Stripe is the hosting bill, not the shopper card.";
