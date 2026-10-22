@@ -2,9 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { btnPlan } from "../lib/links";
 import TalkSection from "../components/TalkSection.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_FFL_ANALYTICS } from "../lib/faq";
 ---
 
 <BaseLayout
+  faq={FAQ_FFL_ANALYTICS}
   title="FFL Analytics: Search Analytics for FFL Websites | Coriolis"
   description="See what shoppers search for on your gun store's website and what they couldn't find. Free with a GunSearchEngine.com dealer account. Works alongside Google Analytics."
   path="/ffl-analytics"
@@ -17,8 +20,7 @@ import TalkSection from "../components/TalkSection.astro";
         Understand your gun store's website
       </h1>
       <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300">
-        See what shoppers search for on your site and what they couldn't find.
-        FFL Analytics is free with a GunSearchEngine.com dealer account.
+        FFL Analytics shows what shoppers searched for on your gun store's website, including the searches that found nothing. It's free with any GunSearchEngine.com (GSE) dealer account, including free GSE Basic, no Pro required. Google Analytics tells you how many people visited, and FFL Analytics tells you what they were looking for.
       </p>
       <a
         href="https://gunsearchengine.com/dealers/register?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-analytics&ref=coriolis-ffl-analytics"
@@ -103,11 +105,22 @@ import TalkSection from "../components/TalkSection.astro";
         </ul>
       </div>
 
+      <a
+        href="https://gunsearchengine.com/dealers/register?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-analytics&ref=coriolis-ffl-analytics"
+        class={`${btnPlan} mt-8`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Create a free dealer account
+      </a>
+
       <p class="mt-8 text-xs leading-relaxed text-zinc-500">
         Not affiliated with Google. Google Analytics is a trademark of Google LLC.
       </p>
     </div>
   </section>
+
+  <FaqBlock items={FAQ_FFL_ANALYTICS} />
 
   <TalkSection />
 </BaseLayout>

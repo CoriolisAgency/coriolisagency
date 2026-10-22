@@ -90,9 +90,20 @@ const plugTone = {
     name: "text-blue-300",
   },
 } as const;
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_GROK_BOT } from "../lib/faq";
 ---
 
 <BaseLayout
+  faq={FAQ_GROK_BOT}
+  extraJsonLd={[
+    {
+      "@type": "Service",
+      name: "Grok Bot setup",
+      provider: { "@id": `${LINKS.home}/#organization` },
+      offers: { "@type": "Offer", price: "995", priceCurrency: "USD" },
+    },
+  ]}
   title="Grok Bot Setup for Gun Stores ($995) | Coriolis"
   description="One hour to write your AI strategy. Then we build it and train you. $995. Talk to Coriolis."
   path="/grok-bot-setup"
@@ -111,9 +122,10 @@ const plugTone = {
         Grok Bot setup: AI for your gun store, set up with you
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300 sm:text-lg">
-        You do not need another chatbot. In one hour we pick what to automate.
-        Then we build it, test it, and show you how to run it. $995. Two meetings.
-        Live the same day.
+        You do not need another chatbot.
+      </p>
+      <p class="mt-4 max-w-3xl text-base leading-relaxed text-zinc-300 sm:text-lg">
+        Grok Bot setup puts an AI assistant to work for you and your staff. In a one-hour consult we pick the jobs, then we hook it to tools you already use, like QuickBooks, FastBound (read only) and Facebook. It's $995 one time, two meetings, and live the same day. It runs on a Cursor or xAI seat you buy, so the login is yours.
       </p>
       <div class="mt-8">
         <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
@@ -325,6 +337,8 @@ const plugTone = {
       </p>
     </div>
   </section>
+
+  <FaqBlock items={FAQ_GROK_BOT} />
 
   <section class="py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
