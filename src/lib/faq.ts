@@ -574,3 +574,37 @@ export const FAQ_PAYMENTS: FaqItem[] = [
     a: "No. The gateway charges the card. It doesn\u2019t check a 4473, run a background check or pick the receiving dealer. FFL Checkout handles dealer selection on Militia and above. This is not legal advice.",
   },
 ];
+
+/** SEO-U31 /websites-for-ranges-gunsmiths-instructors FAQ (Brandy FINAL Part 2, the no-ruling fallback). One FAQPage from all three. */
+export const FAQ_RANGES: FaqItem[] = [
+  {
+    q: "Do you build websites for shooting ranges?",
+    a: "Yes. Coriolis builds and hosts WooCommerce websites for ranges, on your own domain, and you own the site.",
+  },
+  {
+    q: "Who owns my range website?",
+    a: "You do. We build the WooCommerce store on your own domain, and you own it. There\u2019s no annual contract, and if you walk, you take the website.",
+  },
+];
+
+export const FAQ_GUNSMITHS: FaqItem[] = [
+  {
+    q: "Do you build websites for gunsmiths?",
+    a: "Yes. Coriolis builds and hosts WooCommerce websites for gunsmiths, on your own domain, and you own the site.",
+  },
+  {
+    q: "What does a gunsmith website cost?",
+    a: "Setup is Basic Setup ($500) or Retail Setup ($2,500), then a plan from $169 a month. Minute Man, at $169, covers custom design on your domain, unlimited hosting, products and orders. There\u2019s no annual contract.",
+  },
+];
+
+export const FAQ_INSTRUCTORS: FaqItem[] = [
+  {
+    q: "Do you build websites for firearms and CCW instructors?",
+    a: "Yes. Coriolis builds and hosts WooCommerce websites for firearms instructors, on your own domain, and you own the site.",
+  },
+  {
+    q: "What does an instructor website cost?",
+    a: "Setup is a one-time $500 (Basic Setup) or $2,500 (Retail Setup), and monthly plans run from $169 to $569. There\u2019s no annual contract.",
+  },
+];

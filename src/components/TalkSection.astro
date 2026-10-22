@@ -3,6 +3,11 @@
  * SEO-U5 (D-N14): the shared lead form, in-page, with a pillar preset.
  * Heading and line reuse the approved SEO-U4 home copy; no new public words.
  * The form posts the page path, so fills can be counted by page.
+ *
+ * SEO-U31 (Chief 9:12 PM ET): optional `segmentField` adds a "What kind of business?"
+ * select. It sits outside the LeadForm <form>, so the payload keys are unchanged; on submit
+ * its value is appended to the message body as `segment=range|gunsmith|instructor|other`.
+ * No LeadForm schema change, no Ops DB change. Off by default, so other pages render unchanged.
  */
 import LeadForm from "@coriolis/lead-form/LeadForm.astro";
 
@@ -15,6 +20,10 @@ interface Props {
   heading?: string;
   /** Line under the heading. Defaults to the approved SEO-U4 line. */
   subline?: string;
+  /** Opt-in segment select (SEO-U31), written into the message body. */
+  segmentField?: boolean;
+  /** Optional phone line under the heading, e.g. "(279) 258-6771". */
+  phone?: string;
 }
 
 const {
@@ -22,15 +31,80 @@ const {
   id = "talk",
   heading = "Tell us about your store",
   subline = "No contract, and you can cancel any time. Paul answers.",
+  segmentField = false,
+  phone,
 } = Astro.props;
+
+const SEGMENTS = [
+  { value: "range", label: "Shooting range" },
+  { value: "gunsmith", label: "Gunsmith" },
+  { value: "instructor", label: "Firearms instructor" },
+  { value: "other", label: "Gun shop or other FFL" },
+];
+const segmentId = `${id}-segment`;
+const tel = phone ? `tel:+1${phone.replace(/\D/g, "")}` : "";
 ---
 
-<section id={id} class="border-t border-zinc-800/80 py-12" data-inpage-form={pillar}>
+<section id={id} class="border-t border-zinc-800/80 py-12" data-inpage-form={pillar} data-talk-segment={segmentField ? "1" : undefined}>
   <div class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-2">
     <div>
       <h2 class="text-2xl font-semibold tracking-tight text-white">{heading}</h2>
       <p class="mt-3 text-sm leading-relaxed text-zinc-400">{subline}</p>
+      {phone && <p class="mt-3 text-sm text-zinc-300"><a href={tel} class="hover:text-white">{phone}</a></p>}
     </div>
-    <LeadForm site="coriolisagency" defaultPillar={pillar} />
+    {
+      segmentField ? (
+        <div>
+          <label for={segmentId} class="mb-4 block text-sm text-zinc-300">
+            What kind of business?
+            <select
+              id={segmentId}
+              data-segment-select
+              required
+              class="mt-1 block w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm text-zinc-100"
+            >
+              <option value="" selected disabled hidden></option>
+              {SEGMENTS.map((s) => <option value={s.value}>{s.label}</option>)}
+            </select>
+          </label>
+          <LeadForm site="coriolisagency" defaultPillar={pillar} />
+        </div>
+      ) : (
+        <LeadForm site="coriolisagency" defaultPillar={pillar} />
+      )
+    }
   </div>
 </section>
+
+{
+  segmentField && (
+    <script is:inline>
+      (function () {
+        document.querySelectorAll("[data-talk-segment]").forEach(function (section) {
+          if (section.getAttribute("data-segment-ready") === "1") return;
+          section.setAttribute("data-segment-ready", "1");
+          section.addEventListener(
+            "submit",
+            function (event) {
+              var select = section.querySelector("[data-segment-select]");
+              var form = event.target;
+              if (!select || !form || !form.matches("[data-lf-form]")) return;
+              if (!select.value) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                select.reportValidity();
+                select.focus();
+                return;
+              }
+              var box = form.querySelector('textarea[name="message"]');
+              if (!box) return;
+              var body = box.value.replace(/\s*segment=[a-z]+\s*$/, "");
+              box.value = body + "\n\nsegment=" + select.value;
+            },
+            true
+          );
+        });
+      })();
+    </script>
+  )
+}
