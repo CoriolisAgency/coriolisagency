@@ -95,7 +95,7 @@ import TalkSection from "../components/TalkSection.astro";
             <article
               id={plan.id}
               class:list={[
-                "relative flex scroll-mt-24 flex-col rounded-2xl border p-5",
+                "relative flex scroll-mt-24 flex-col rounded-2xl border p-5 lg:max-xl:px-3",
                 plan.featured
                   ? "border-gold/60 bg-gold/5 lg:col-span-1"
                   : "border-zinc-800 bg-zinc-950/50",
@@ -110,7 +110,7 @@ import TalkSection from "../components/TalkSection.astro";
               <p class="text-[13.2px] lg:text-[length:clamp(9px,calc(1.25vw_-_4px),12px)] font-semibold uppercase tracking-[0.14em] text-zinc-500">
                 {plan.hook} <span aria-hidden="true">{PLAN_TAGLINE_EMOJI[plan.id]}</span>
               </p>
-              <h3 class="mt-2 text-[1.35rem]/[2.1rem] font-semibold text-white">{plan.name}</h3>
+              <h3 class="mt-2 text-[1.35rem]/[2.1rem] lg:max-xl:text-[19px]/[2.1rem] font-semibold text-white">{plan.name}</h3>
               <p class="mt-1 text-2xl font-semibold text-gold">
                 ${plan.price}
                 <span class="text-sm font-medium text-zinc-500">/mo</span>
@@ -127,7 +127,7 @@ import TalkSection from "../components/TalkSection.astro";
                 items={plan.features}
                 variant={plan.bullets ?? "default"}
                 listKey={plan.id}
-                class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400"
+                class="mt-4 flex-1 space-y-1.5 text-sm lg:max-xl:text-[12.5px] text-zinc-400"
               />
               {plan.offerSite ? (
                 <p class="mt-4 text-sm">
