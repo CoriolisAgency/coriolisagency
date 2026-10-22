@@ -483,7 +483,7 @@ export const FAQ_FFL_ANALYTICS: FaqItem[] = [
   },
   {
     q: "Is FFL Analytics free?",
-    a: "Yes. It's free with any GSE dealer account, including free GSE Basic, and GSE Basic is free forever. Pro is optional: sign up by Dec 31, 2026 and get Pro free through Dec 31, 2027, then it's $99 a month.",
+    a: "Yes. It's free with any GSE dealer account, including free GSE Basic, and GSE Basic is free forever. Pro is optional. Pro is normally $99/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026.",
   },
   {
     q: "How is FFL Analytics different from Google Analytics?",

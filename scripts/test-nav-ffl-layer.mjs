@@ -41,10 +41,11 @@ function assertLandingPage(rel, { h1, campaign, notice, pro = true, gseAllowed =
   assert.match(src, /utm_source=coriolisagency/);
   assert.match(src, new RegExp(`utm_campaign=${campaign}`));
   assert.match(src, new RegExp(notice.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  if (pro) assert.match(src, /Sign up by Dec 31, 2026 and get Pro free through Dec 31, 2027\. \$99\/month after that\./);
+  // Paul's Pro sentence, verbatim (PAUL-0901, Chief 9:24 PM ET).
+  if (pro) assert.match(src, /Pro is normally \$99\/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026\./);
   assert.doesNotMatch(src, /Free through December 31, 2026/);
-  // The only price allowed on these pages is the Pro line's "$99/month after that".
-  const priceless = src.replace("$99/month after that.", "");
+  // The only price allowed on these pages is the $99/month in Paul's Pro sentence.
+  const priceless = src.replace("Pro is normally $99/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026.", "");
   assert.doesNotMatch(priceless, /\$\d/);
   assert.doesNotMatch(priceless, /\/month/);
   assert.doesNotMatch(src, bannedCopy);
@@ -83,8 +84,8 @@ assertLandingPage("src/pages/ffl-search-console.astro", {
 
 const consoleSrc = read("src/pages/ffl-search-console.astro");
 assert.doesNotMatch(consoleSrc, /\b(is live|now available|now live)\b/i);
-assert.doesNotMatch(consoleSrc, /data-pro-plate|\$99|Coming soon|All future Pro features|being built|More Pro features are on the way/);
-assert.match(consoleSrc, /Want more\? GunSearchEngine\.com Pro is free through Dec 31, 2027 for dealers who sign up by Dec 31, 2026\./);
+assert.doesNotMatch(consoleSrc, /data-pro-plate|Coming soon|All future Pro features|being built|More Pro features are on the way|sign up by/);
+assert.match(consoleSrc, /<a href="https:\/\/www\.gunsearchengine\.com\/pro" class=\{linkClass\}>Want more\? Pro is normally \$99\/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026\.<\/a>/);
 assert.match(consoleSrc, /withBase\("ffl-seo"\)/);
 
 // On-site FFL pages open in the same tab (Paul, 1:38 PM ET).
@@ -170,7 +171,7 @@ assert.match(home, /const cardLinkClass = `\$\{linkClass\} !text-sky-400 relativ
 // Ad-safe Demand Intelligence sample is hosted on this site.
 assert.ok(fs.existsSync(path.join(root, "public/images/ffl-demand-intelligence-sample-august-2026.png")));
 
-// Pro plate: black and gold card with Paul's exact five features.
+// Pro plate: black and gold card with Paul's four features. "Coming soon" and "All future Pro features" are cut (Chief 9:24 PM ET).
 const PRO_FEATURES = [
   "Monthly Demand Intelligence reports",
   "Sightline embed with custom styling",
@@ -178,8 +179,6 @@ const PRO_FEATURES = [
   "OtterText integration for Sightline alerts",
   "(uses your own OtterText account)",
   "Pro (Verified) status on GunSearchEngine.com",
-  "Coming soon",
-  "All future Pro features",
 ];
 for (const rel of ["src/pages/ffl-analytics.astro"]) {
   const src = read(rel);
@@ -189,7 +188,8 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
   assert.match(plate, /bg-black/);
   assert.match(plate, /border-gold\/60/);
   for (const f of PRO_FEATURES) assert.ok(plate.includes(f), `${rel} Pro plate missing: ${f}`);
-  assert.equal([...plate.matchAll(/<li\b/g)].length, 5, `${rel} Pro plate must list exactly 5 features`);
+  assert.equal([...plate.matchAll(/<li\b/g)].length, 4, `${rel} Pro plate must list exactly 4 features`);
+  assert.doesNotMatch(src, /Coming soon|All future Pro features|Sign up by/);
   assert.doesNotMatch(src, /Otter Text|More Pro features are on the way/);
   assert.match(
     plate,
