@@ -61,8 +61,10 @@ import { FAQ_COST } from "../lib/faq";
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
         An FFL website at Coriolis is two numbers: a one-time setup of{" "}
-        {usd(basic.price)} or {usd(retail.price)}, then a monthly plan from{" "}
-        {usd(low.price)} to {usd(high.price)}. There's no annual contract, and if
+        {usd(basic.price)} or {usd(retail.price)}, then{" "}
+        <a href={withBase("ecommerce")} class={linkClass}
+          >a monthly plan from {usd(low.price)} to {usd(high.price)}</a
+        >. There's no annual contract, and if
         you leave, you take the website. Which plan you need comes down to three
         things: dropshipping, VIP support, and whether you want the register you
         already run connected to the site.
