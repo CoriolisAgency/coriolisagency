@@ -7,7 +7,7 @@ export const SITE = {
   titleDefault:
     "FFL Ecommerce Websites for Gun Stores | Coriolis, LLC",
   description:
-    "Coriolis builds WooCommerce gun store websites you own — FFL Cockpit, dropshipping, and the register you already run. Greenville, SC.",
+    "Coriolis builds WooCommerce gun store websites you own: FFL Cockpit, dropshipping, and the register you already run. Greenville, SC.",
   role: "FFL Ecommerce · FFL Analytics · FFL Search Console",
   origin: "Greenville, SC",
 } as const;
