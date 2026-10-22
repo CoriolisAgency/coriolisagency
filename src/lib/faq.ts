@@ -498,3 +498,31 @@ export const FAQ_FFL_ANALYTICS: FaqItem[] = [
     a: "Just the GSE script on your website. You don't have to list any inventory on GunSearchEngine.com to use it. Once the script is running, you get the dashboard and the morning email.",
   },
 ];
+
+/** SEO-U30 /ffl-payment-processing FAQ (Brandy FINAL; the FAQ 3 [CONFIRM: Paul] slot is left out until Paul answers). */
+export const FAQ_PAYMENTS: FaqItem[] = [
+  {
+    q: "What is FFL payment processing?",
+    a: "It\u2019s how a gun store takes cards online: a merchant account that allows firearm sales, connected to your website through a payment gateway. The gateway moves the card data. The merchant account is the part that gets approved for your business.",
+  },
+  {
+    q: "Why do payment processors turn down gun stores?",
+    a: "Many mainstream processors and store payment add-ons list firearms and ammunition as prohibited, and the card industry generally treats firearms as high-risk. Dealers use a merchant account underwritten for firearms by a bank or processor that accepts FFLs.",
+  },
+  {
+    q: "What does Coriolis set up for payments?",
+    a: "Coriolis installs the payment gateway as part of setup, on Basic Setup ($500) or Retail Setup ($2,500). We enable it, run a small live authorization and void it. Then you test a non-firearm order, and a firearm order once ship-to-FFL is on.",
+  },
+  {
+    q: "Who owns the merchant account, and who pays the fees?",
+    a: "You do. The merchant account is in your store\u2019s legal name, and its fees are yours.",
+  },
+  {
+    q: "Can Coriolis get my store approved?",
+    a: "No one can promise approval, because the processor decides. Make sure the account is approved for what you sell (firearms, ammunition or both), and get that approval in writing before you launch.",
+  },
+  {
+    q: "Does the payment step handle the 4473 or the transfer?",
+    a: "No. The gateway charges the card. It doesn\u2019t check a 4473, run a background check or pick the receiving dealer. FFL Checkout handles dealer selection on Militia and above. This is not legal advice.",
+  },
+];
