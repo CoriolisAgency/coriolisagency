@@ -1,0 +1,28 @@
+---
+/** SEO-U8v2: one case-study paragraph, plain text plus inline links. External links open in a new tab. */
+import type { Paragraph } from "../lib/case-studies";
+import { linkClass } from "../lib/links";
+import { withBase } from "../lib/base";
+
+interface Props {
+  p: Paragraph;
+  class?: string;
+}
+
+const { p, class: className } = Astro.props;
+const isExternal = (href: string) => /^https?:\/\//.test(href);
+---
+
+<p class={className}>
+  {
+    p.map((seg) =>
+      typeof seg === "string" ? (
+        seg
+      ) : isExternal(seg.href) ? (
+        <a href={seg.href} class={linkClass} target="_blank" rel="noopener noreferrer">{seg.text}</a>
+      ) : (
+        <a href={withBase(seg.href)} class={linkClass}>{seg.text}</a>
+      )
+    )
+  }
+</p>

@@ -11,12 +11,22 @@ const pagesDir = path.join(root, "src", "pages");
 const outFile = path.join(root, "lastmod.json");
 
 // Same pages the sitemap filter in astro.config.mjs leaves out, plus 404.
-const SKIP = new Set(["/404", "/stack-preview", "/gun-store-pos-comparison", "/confirmed", "/unsubscribe"]);
+// SEO-U8v2: the two draft case studies are noindex and off the sitemap too.
+const SKIP = new Set([
+  "/404",
+  "/stack-preview",
+  "/gun-store-pos-comparison",
+  "/confirmed",
+  "/unsubscribe",
+  "/case-studies/the-gun-range",
+  "/case-studies/acme",
+]);
 
 // Dynamic routes: the data file that holds their slugs and content.
 const DYNAMIC = {
   "src/pages/[pos].astro": { data: "src/lib/pos.ts", prefix: "/" },
   "src/pages/press/[slug].astro": { data: "src/lib/press.ts", prefix: "/press/" },
+  "src/pages/case-studies/[slug].astro": { data: "src/lib/case-studies.ts", prefix: "/case-studies/" },
 };
 
 const git = (...args) => execFileSync("git", args, { cwd: root, encoding: "utf8" }).trim();
@@ -50,7 +60,7 @@ for (const rel of walk(pagesDir)) {
     const date = lastCommit(file, dyn.data);
     const src = fs.readFileSync(path.join(root, dyn.data), "utf8");
     for (const m of src.matchAll(/^\s*slug:\s*"([^"]+)"/gm)) {
-      if (date) map[dyn.prefix + m[1]] = date;
+      if (date && !SKIP.has(dyn.prefix + m[1])) map[dyn.prefix + m[1]] = date;
     }
     continue;
   }

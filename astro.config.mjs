@@ -71,7 +71,10 @@ export default defineConfig({
         !page.includes("/stack-preview") &&
         !page.includes("/gun-store-pos-comparison") &&
         !page.includes("/confirmed") &&
-        !page.includes("/unsubscribe"),
+        !page.includes("/unsubscribe") &&
+        // SEO-U8v2 draft case studies (Chief 9:06): committed routes, noindex,nofollow, off the sitemap.
+        !page.includes("/case-studies/the-gun-range") &&
+        !page.includes("/case-studies/acme"),
       serialize(item) {
         item.lastmod = pageLastmod(item.url);
         return item;
