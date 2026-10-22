@@ -39,4 +39,6 @@ export const CANON_PATHS = {
   alleghenyArms: "brand/allegheny-arms.jpg",
   highlineFirearms: "brand/highline-firearms.jpg",
   theGunRange: "brand/the-gun-range.jpg",
+  /** /gun-store-pos hero (1499x1059, one file for desktop and mobile, like the homepage slides). */
+  gunStorePosHero: "brand/gun-store-pos-hero.jpg",
 } as const;
