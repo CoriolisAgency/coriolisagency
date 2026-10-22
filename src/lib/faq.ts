@@ -544,6 +544,8 @@ export const FAQ_FFL_SEARCH_CONSOLE: FaqItem[] = [
   {
     q: "Is FFL Search Console real-time?",
     a: "No. It pulls your Google data on a schedule: a starting baseline, then regular snapshots and updates. The fix list comes from a check run at most once a week.",
+  },
+];
 
 /** SEO-U30 /ffl-payment-processing FAQ (Brandy FINAL; the FAQ 3 [CONFIRM: Paul] slot is left out until Paul answers). */
 export const FAQ_PAYMENTS: FaqItem[] = [
