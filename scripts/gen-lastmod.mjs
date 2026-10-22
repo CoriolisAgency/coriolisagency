@@ -17,6 +17,7 @@ const SKIP = new Set(["/404", "/stack-preview", "/gun-store-pos-comparison", "/c
 const DYNAMIC = {
   "src/pages/[pos].astro": { data: "src/lib/pos.ts", prefix: "/" },
   "src/pages/press/[slug].astro": { data: "src/lib/press.ts", prefix: "/press/" },
+  "src/pages/case-studies/[slug].astro": { data: "src/lib/case-studies.ts", prefix: "/case-studies/" },
 };
 
 const git = (...args) => execFileSync("git", args, { cwd: root, encoding: "utf8" }).trim();

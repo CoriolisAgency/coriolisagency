@@ -1,0 +1,142 @@
+---
+/**
+ * SEO-U8: /case-studies/[slug] (Brandy's FINAL sections 2 to 5, no-numbers fallback).
+ * Story runs: H1, fact strip, Situation, What we built, Where it stands, Quote, CTA.
+ * Article schema (headline = H1). No Review or AggregateRating markup, no FAQPage.
+ * The quote is pulled verbatim from GOOGLE_REVIEW_QUOTES.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TalkSection from "../../components/TalkSection.astro";
+import { CASE_STUDIES, caseStudyBySlug, quoteFor, type Part } from "../../lib/case-studies";
+import { LINKS, linkClass } from "../../lib/links";
+import { CANON_PATHS, SITE, SITE_ORIGIN } from "../../lib/site";
+import { withBase } from "../../lib/base";
+
+export function getStaticPaths() {
+  return CASE_STUDIES.map((c) => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const story = caseStudyBySlug(slug ?? "");
+if (!story) {
+  throw new Error(`Unknown case study slug: ${slug}`);
+}
+const quote = quoteFor(story.shop);
+
+const path = `/case-studies/${story.slug}`;
+const siteOrigin = Astro.site ?? new URL(SITE_ORIGIN);
+const pageUrl = new URL(withBase(path), siteOrigin).href;
+const imageUrl = new URL(withBase(CANON_PATHS.storefront), siteOrigin).href;
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+const h2 = "text-xl font-semibold text-white";
+const para = "mt-4 max-w-3xl text-base leading-relaxed text-zinc-300";
+const sections: { id: string; heading: string; paras: Part[][] }[] = [
+  { id: "situation", heading: "The situation", paras: story.situation },
+  { id: "what-we-built", heading: "What we built", paras: story.built },
+  { id: "where-it-stands", heading: "Where it stands", paras: story.stands },
+];
+---
+
+<BaseLayout
+  title={story.title}
+  description={story.description}
+  path={path}
+  ogImagePath={CANON_PATHS.storefront}
+  ogType="article"
+  extraJsonLd={[
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      headline: story.h1,
+      description: story.description,
+      url: pageUrl,
+      image: imageUrl,
+      inLanguage: "en-US",
+      author: {
+        "@type": "Organization",
+        name: SITE.legalName,
+        url: LINKS.home,
+      },
+      publisher: { "@id": `${LINKS.home}/#organization` },
+      isPartOf: { "@id": `${pageUrl}#webpage` },
+      mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+    },
+  ]}
+>
+  <article>
+    <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+      <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+        <p class="text-xs text-zinc-500">
+          <a href={withBase("case-studies")} class="hover:text-sky-300">Case studies</a>
+          <span class="px-1.5">/</span>
+          {story.shop}
+        </p>
+        <h1 class="mt-4 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]">
+          {story.h1}
+        </h1>
+        <dl class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+          {
+            story.facts.map((f) => (
+              <div>
+                <dt class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">{f.label}</dt>
+                <dd class="mt-1 text-zinc-200">{f.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+
+    {
+      sections.map((s) => (
+        <section class="border-b border-zinc-800/80 py-12" id={s.id}>
+          <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+            <h2 class={h2}>{s.heading}</h2>
+            {s.paras.map((p) => (
+              <p class={para}>
+                {p.map((part) =>
+                  typeof part === "string" ? (
+                    part
+                  ) : part.ext ? (
+                    <a href={part.href} class={linkClass} {...ext}>{part.label}</a>
+                  ) : (
+                    <a href={withBase(part.href)} class={linkClass}>{part.label}</a>
+                  ),
+                )}
+              </p>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="border-b border-zinc-800/80 py-12" id="in-their-words">
+      <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+        <blockquote class="max-w-3xl rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6 ring-1 ring-gold/15">
+          <p class="text-base leading-relaxed text-zinc-200">&ldquo;{quote.body}&rdquo;</p>
+          <footer class="mt-4 text-sm">
+            <p class="font-medium text-zinc-100">{quote.name}, {quote.shop}</p>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="py-12" id="next">
+      <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+        <p class="max-w-3xl text-base leading-relaxed text-zinc-300">
+          {
+            story.cta.map((part) =>
+              typeof part === "string" ? (
+                part
+              ) : (
+                <a href={withBase(part.href)} class={linkClass}>{part.label}</a>
+              ),
+            )
+          }
+        </p>
+      </div>
+    </section>
+  </article>
+
+  {story.talkHeading ? <TalkSection heading={story.talkHeading} /> : <TalkSection />}
+</BaseLayout>

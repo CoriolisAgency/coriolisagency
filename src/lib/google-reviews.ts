@@ -17,16 +17,22 @@ export const GOOGLE_REVIEW_QUOTES = [
   {
     name: "Steve Dyke",
     shop: "Down Range Chico",
+    /** SEO-U8: the shop name in the review strip links here. */
+    story: "case-studies/down-range-chico",
     body: "Paul and his team took the time to understand that we are not a simple one-category retail operation. Responsive, patient, and willing to work through the details instead of a one-size-fits-all website.",
   },
   {
     name: "Thomas",
     shop: "Nightshade Optics",
+    /** SEO-U8: the shop name in the review strip links here. */
+    story: "case-studies/nightshade-optics",
     body: "Paul took the time to understand the vision and personality behind Nightshade Optics. He didn’t just create the site and disappear — ongoing support after launch. Five stars all the way.",
   },
   {
     name: "Carl Giuffre",
     shop: "Big RanDaddy's",
+    /** SEO-U8: the shop name in the review strip links here. */
+    story: "case-studies/big-randaddys",
     body: "POS, ecommerce, and a dozen distributors. Coriolis was the only one able to get it done. Our business has doubled. Email Paul and you get an immediate response.",
   },
 ] as const;
