@@ -10,9 +10,12 @@ import { linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
 import TalkSection from "../components/TalkSection.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_LEAVE_AMMOREADY } from "../lib/faq";
 ---
 
 <BaseLayout
+  faq={FAQ_LEAVE_AMMOREADY}
   title="Leaving AmmoReady: the order that keeps you online | Coriolis"
   description="How to leave AmmoReady without going dark: keep your domain, build the new store before you give notice, redirect the URLs that rank, then cut DNS."
   path="/leave-ammoready"
@@ -31,10 +34,10 @@ import TalkSection from "../components/TalkSection.astro";
         How to leave AmmoReady without going dark
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        Leaving AmmoReady is mostly about order. Keep your domain. Build the new
-        store before you give notice. Redirect the URLs that already rank. Then
-        cut DNS, and you leave with the site. This page is the order. The
-        side-by-side (what you own, how you grow, what happens to your SEO) is
+        You can leave AmmoReady without your site going dark if you do it in order. Keep your domain, build the new store before you give notice, redirect the pages that already rank, then switch DNS. Setup is $500 or $2,500, plans run $169 to $569 a month, and there's no annual contract. Coriolis was founded by the guy who ran AmmoReady for nine years.
+      </p>
+      <p class="mt-4 max-w-3xl text-base leading-relaxed text-zinc-300">
+        The side-by-side (what you own, how you grow, what happens to your SEO) is
         on the{" "}
         <a href={withBase("ammoready-alternative")} class={linkClass}
           >AmmoReady alternative</a
@@ -113,6 +116,8 @@ import TalkSection from "../components/TalkSection.astro";
       <CtaRow primary="ecommerce" showGsa={false} showContact />
     </div>
   </section>
+
+  <FaqBlock items={FAQ_LEAVE_AMMOREADY} />
 
   <TalkSection />
 </BaseLayout>

@@ -9,9 +9,12 @@ import gsgHero from "../assets/gun-store-game-hero.png";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
 import TalkSection from "../components/TalkSection.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { FAQ_AI_STUDIO } from "../lib/faq";
 ---
 
 <BaseLayout
+  faq={FAQ_AI_STUDIO}
   title="AI Studio: AI Tools for Gun Stores and FFLs | Coriolis"
   description="Coriolis AI Studio: bring the idea and the budget. Botopticon.com, GunSearchEngine.com, Demand Intelligence, and Gun Store Game are live proof we can ship your app, platform, or agent."
   path="/ai-studio"
@@ -33,7 +36,13 @@ import TalkSection from "../components/TalkSection.astro";
           AI Studio: AI tools for gun stores and FFLs
         </h1>
         <p class="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300">
-          You have the idea. We already shipped the proof. AI Studio is the
+          You have the idea. We already shipped the proof.
+        </p>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300">
+          AI can do the daily jobs in a gun store: a morning summary of last night's orders and what's on the shelf, sales answers from QuickBooks, and a bot that reports site problems to support for you. Grok Bot setup gets you started for $995, one time. In a one-hour consult we pick the jobs, then we build it and show you how to run it, live the same day. For a bigger custom build, bring the brief and the budget.
+        </p>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300">
+          AI Studio is the
           public name for this work — not AI Factory.{" "}
           <a href={LINKS.botopticon} class={linkClass} {...ext}>Botopticon.com</a>,{" "}
           <a href={LINKS.gsa} class={linkClass} {...ext}>GunSearchEngine.com</a>,{" "}
@@ -165,6 +174,8 @@ import TalkSection from "../components/TalkSection.astro";
       </p>
     </div>
   </section>
+
+  <FaqBlock items={FAQ_AI_STUDIO} />
 
   <TalkSection pillar="AI Studio" />
 </BaseLayout>
