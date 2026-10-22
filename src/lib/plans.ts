@@ -226,7 +226,6 @@ export const CLIENTS = [
   { name: "Reynolds Ranch & Farm", href: "https://reynoldsranchandfarm.com/" },
   { name: "Freedom First Ammo", href: "https://freedomfirstammo.com/" },
   { name: "Crown Ridge Barrel Works", href: "https://crownridgebarrelworks.com/" },
-  { name: "The Smoking Gun", href: "https://smokinggunstore.com/" },
   { name: "Frontline Firearms", href: "https://frontlinefirearmsco.com/" },
   { name: "Green Mountain Sporting Goods", href: "https://www.gmsgvt.com/" },
   { name: "US AR Parts", href: "https://usarparts.com/" },
