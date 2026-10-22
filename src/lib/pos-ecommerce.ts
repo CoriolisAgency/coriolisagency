@@ -1,23 +1,34 @@
 /**
- * /gun-store-pos: the Gun Store POS pillar (OPS-29, decision 2026-10-08-gun-store-pos-pillar).
+ * /gun-store-pos: the Gun Store POS integration pillar (SEO-U29, D-N1).
+ * Copy is Brandy's FINAL (handoff/SEO-U29/FINAL.md) with the no-ruling fallback:
+ * the four POS systems are named, with no "any POS" and no "only these" claim;
+ * no sync-direction sentence; FAQ 6 is out; no register-check line.
  * Coriolis builds the website and connects your POS. It does not build or sell a POS.
  */
 import type { FaqItem } from "./faq";
 import { LINKS } from "./links";
 
 export const POS_PILLAR_TITLE =
-  "Gun Store POS + WooCommerce: GunBiz and AIM | Coriolis";
+  "Gun Store POS Integration for WooCommerce | Coriolis";
 
 export const POS_PILLAR_META =
-  "Gun store POS, connected to your website. Coriolis promotes GunBiz POS and AIM POS: best-in-class POS systems with tested WooCommerce integrations. Both use FastBound.";
+  "Gun store POS integration on the Warlord plan, $469 a month. Keep the register you already run. Coriolis connects it to the WooCommerce website you own.";
 
 export const POS_PILLAR_EYEBROW = "Gun Store POS";
 
-export const POS_PILLAR_H1 = "Gun store POS, connected to your website";
+export const POS_PILLAR_H1 =
+  "Gun store POS integration: keep your register, connect your website";
 
-/** First ~80 words answer the query (lattice rule 2). */
+/** Opening: first <p> after the H1. */
 export const POS_PILLAR_LEDE =
-  "Keep your existing POS and connect it to your new website. For gun stores, Coriolis promotes two point-of-sale systems: GunBiz POS and AIM POS. Both are best-in-class POS systems with fully developed, tested and supported WooCommerce integrations, and both use FastBound for compliance. Coriolis builds the WooCommerce store on your domain and connects the register, so the counter and the website share one inventory. The POS company runs the register. You own the website.";
+  "Gun store POS integration means the register you already run and your WooCommerce website share one inventory. On the Warlord plan, $469 a month, Coriolis builds the store on your domain and connects your POS through an API-based integration, so the floor and the site stay in sync. Warlord connects AIM, GunBiz, Rapid Gun Systems and Trident 1. The POS company runs the register, and you own the website.";
+
+export const POS_PILLAR_JUMP = "Tell us which POS you run";
+
+export const POS_PILLAR_CONNECT_TITLE = "Connect the POS you already run";
+
+export const POS_PILLAR_CONNECT_INTRO =
+  "Keep the register at your counter. Coriolis connects it to the WooCommerce store we build for you.";
 
 export type PosPillarCard = {
   name: string;
@@ -25,82 +36,115 @@ export type PosPillarCard = {
   vendorHref: string;
   vendorLabel: string;
   body: string;
+  note?: string;
+  noteLink?: { href: string; label: string };
 };
 
-/** Main cards near the top: the two promoted POS systems. */
+/** Main cards: the two promoted POS systems. */
 export const POS_PILLAR_PROMOTED: PosPillarCard[] = [
   {
     name: "GunBiz POS",
     slug: "gunbiz-pos",
     vendorHref: LINKS.gunbizPos,
     vendorLabel: "GunBizPOS.com",
-    body: "A best-in-class gun store POS with a fully developed, tested and supported WooCommerce integration. GunBiz uses FastBound.",
+    body: "A gun store POS with a fully developed, tested and supported WooCommerce integration. GunBiz uses FastBound.",
   },
   {
     name: "AIM POS",
     slug: "aim-pos",
     vendorHref: LINKS.aimPos,
     vendorLabel: "AIM-POS.com",
-    body: "A best-in-class gun store POS with a fully developed, tested and supported WooCommerce integration. AIM uses FastBound.",
+    body: "A gun store POS with a fully developed, tested and supported WooCommerce integration. AIM uses FastBound.",
+    note: "Coriolis announced its AIM POS partnership in April 2026. In September 2026, five FFL shops (Naples Gun Shop, Down Range Chico, Lawful Defense, 2A Firearms and The Range in McKinney) announced they run AIM POS with a WooCommerce store they own, built by Coriolis on FFL Accelerator.",
+    noteLink: {
+      href: "press/five-ffls-choose-coriolis-for-aim-pos-integration",
+      label: "Read the release",
+    },
   },
 ];
 
-/** Smaller row lower on the page. */
+export const POS_PILLAR_ALSO_TITLE = "Also connects on Warlord";
+
+export const POS_PILLAR_ALSO_LINE = "Trident 1 POS and Rapid Gun Systems.";
+
+/** Smaller row under the cards. */
 export const POS_PILLAR_ALSO = [
   { name: "Trident 1 POS", slug: "trident-1-pos" },
   { name: "Rapid Gun Systems", slug: "rapid-gun-systems-pos" },
 ] as const;
 
-export const POS_PILLAR_WHY_TITLE = "Best-in-class, not all-in-one";
+export const POS_PILLAR_MARKS = "Marks of their owners.";
+
+/** ItemList of the POS systems, built from the same constants as the visible cards. */
+export function posPillarItemList(home: string) {
+  const items = [...POS_PILLAR_PROMOTED, ...POS_PILLAR_ALSO];
+  return {
+    "@type": "ItemList",
+    "@id": `${home}/gun-store-pos#pos-list`,
+    name: "Third-party POS systems that integrate with your website on the Warlord plan",
+    itemListOrder: "https://schema.org/ItemListUnordered",
+    numberOfItems: items.length,
+    itemListElement: items.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: p.name,
+      url: `${home}/${p.slug}`,
+    })),
+  };
+}
+
+export const POS_PILLAR_HOW_TITLE = "How gun store POS integration works";
+
+export const POS_PILLAR_HOW = [
+  "Coriolis builds the WooCommerce store on your domain and connects it to your register through an API-based integration. Warlord includes unlimited API requests and webhooks. The counter and the website share one inventory, so the floor and the site stay in sync.",
+  "The POS company runs the register. You own the website.",
+] as const;
+
+export const POS_PILLAR_OPENING_TITLE = "Opening a gun store?";
+
+export const POS_PILLAR_OPENING =
+  "Start on GunBiz or AIM at the counter, and Coriolis connects it to the WooCommerce store we build.";
+
+export const POS_PILLAR_PLAN_TITLE = "Which plan includes POS integration";
+
+export const POS_PILLAR_PLAN =
+  "Gun store POS integration is part of the Warlord plan at $469 a month. FFL Accelerator, at $569 a month, includes everything in Warlord, so it connects your register too. Setup is Basic Setup at $500 for a clean launch, or Retail Setup at $2,500 for the full custom site and email. There\u2019s no annual contract, and if you walk, you take the website.";
+
+export const POS_PILLAR_WHY_TITLE = "Each piece does its own job";
 
 export const POS_PILLAR_WHY =
-  "You pick the best POS, the best website and the best compliance tool, and they connect. GunBiz or AIM runs the counter. FastBound keeps the bound book. Coriolis builds the WooCommerce store you own and wires it to the register, so each piece does its own job well and the website stays yours.";
-
-/** Paul's copy points (verbatim), each with one plain line under it. */
-export const POS_PILLAR_POINTS = [
-  {
-    title: "Keep your existing POS and connect it to your new website.",
-    body: "If you already run GunBiz or AIM, keep it. Coriolis builds the new WooCommerce site and connects it to the register you have.",
-  },
-  {
-    title:
-      "Fully integrated POS, ecommerce, and automated email marketing for new gun stores.",
-    body: "Opening a store? Start on GunBiz or AIM at the counter, connected to a WooCommerce store Coriolis builds, with automated email marketing on the site.",
-  },
-  {
-    title:
-      "GunSearchEngine.com Pro included (sync inventory to GSE and FFL Analytics).",
-    body: "FFL Analytics is the Analytics page in the GunSearchEngine.com Dealer Dashboard, a GunSearchEngine.com feature for dealers.",
-  },
-] as const;
+  "You pick the POS, the website and the compliance tool, and they connect. GunBiz or AIM runs the counter. FastBound keeps the bound book. Coriolis builds the WooCommerce store you own and wires it to your register.";
 
 export const POS_PILLAR_FASTBOUND_TITLE = "FastBound and compliance";
 
 export const POS_PILLAR_FASTBOUND =
-  "FastBound runs the bound book and the 4473. GunBiz and AIM both use FastBound. Coriolis does not file the 4473, run NICS, or keep the bound book. Those stay with the systems licensed for them. This is not legal advice.";
+  "FastBound runs the bound book and the 4473. GunBiz and AIM both use FastBound. Coriolis doesn\u2019t file the 4473, run NICS or keep the bound book. Those stay with the systems licensed for them. This is not legal advice.";
 
-export const POS_PILLAR_PLANS =
-  "POS integration is part of the Warlord and FFL Accelerator plans.";
+export const POS_PILLAR_FORM_HEADING = "Tell us which POS you run";
 
+export const POS_PILLAR_FORM_LINE =
+  "Tell us which POS you run, or plan to run, and what the website needs to do. No contract, and you can cancel any time. Paul answers.";
+
+/** FAQ 1-5 from FINAL, in order. FAQ 6 (sync direction) stays out until Paul answers. */
 export const FAQ_POS_PILLAR: FaqItem[] = [
   {
-    q: "Do I have to replace my POS?",
-    a: "No. Keep your existing POS and connect it to your new website. Coriolis builds the WooCommerce store and connects the register you already run. We build the website, not the register.",
+    q: "What is gun store POS integration?",
+    a: "It\u2019s a connection between the register you already run and your WooCommerce website, so the counter and the website share one inventory. Coriolis builds the store on your domain and connects the register through an API-based integration.",
   },
   {
-    q: "Which POS systems connect to WooCommerce?",
-    a: "We promote GunBiz POS and AIM POS. Both have fully developed, tested and supported WooCommerce integrations, and both use FastBound. Trident 1 POS and Rapid Gun Systems also work with WooCommerce.",
+    q: "Which POS systems integrate with my website?",
+    a: "On the Warlord plan, Coriolis connects AIM, GunBiz, Rapid Gun Systems and Trident 1. GunBiz and AIM are the two we promote. Both have tested, supported WooCommerce integrations and both use FastBound.",
   },
   {
-    q: "Why do you promote GunBiz and AIM?",
-    a: "They are best-in-class POS systems with fully developed, tested and supported WooCommerce integrations, and both use FastBound. You pick the best POS, the best website and the best compliance tool, and they connect.",
+    q: "Which plan includes POS integration, and what does it cost?",
+    a: "Warlord includes it at $469 a month. FFL Accelerator, at $569 a month, includes everything in Warlord, so it connects your register too. Setup is Basic Setup at $500 or Retail Setup at $2,500, and there\u2019s no annual contract.",
+  },
+  {
+    q: "Do I have to switch POS systems to get a website?",
+    a: "No. Keep the register you already run, and Coriolis connects your website to it. We build the website, not the register.",
   },
   {
     q: "Does Coriolis handle the 4473, NICS or the bound book?",
-    a: "No. FastBound runs the bound book and the 4473. Coriolis does not file the 4473, run NICS, or keep the bound book. This is not legal advice.",
-  },
-  {
-    q: "Which plans include POS integration?",
-    a: "Warlord and FFL Accelerator include API-based POS integration. Plans and prices are on the FFL Ecommerce page.",
+    a: "No. FastBound runs the bound book and the 4473, and GunBiz and AIM both use FastBound. Coriolis doesn\u2019t file the 4473, run NICS or keep the bound book. This is not legal advice.",
   },
 ];
