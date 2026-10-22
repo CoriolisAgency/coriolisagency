@@ -121,7 +121,7 @@ Accepted (Chief, 2026-10-08): Vercel's trailing-slash 308s stay; no site-wide ro
 | `/author/coriolisagency/` | `/about` | 0 | |
 | `/partners/` | `/about` | 16 | Trust page; no partners template on Astro. |
 | `/faq/` | `/ecommerce` | 5 | FAQ JSON-LD already on `/ecommerce`. |
-| `/payments/` and `/ffl-payments/` | `/ecommerce` | 10+1 | Capability of ecommerce. |
+| `/payments/` and `/ffl-payments/` | `/ffl-payment-processing` | 10+1 | Payments owner page (SEO-U30). |
 | `/ammoready-alternative-why-ffls-are-switching-to-coriolis/` | `/ammoready-alternative` | 1 | AmmoReady cannibal → AmmoReady pillar. 301 (OPS-2). |
 | `/gearfire-alternative-why-ffls-are-choosing-coriolis-instead/` | `/gearfire-alternative` | 9 | Gearfire cannibal → **Gearfire pillar** (was wrongly folded into AmmoReady). |
 | `/why-woocommerce-ffl-cockpit-managed-by-coriolisagency-beats-gearfire-and-ammoready-for-ffl-dealers-in-2026/` | `/best-ffl-ecommerce-website` | 14 | Mixed both-platforms post → comparison page, not a third pillar. 301 (OPS-2). |
