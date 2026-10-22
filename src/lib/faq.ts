@@ -363,7 +363,7 @@ export const FAQ_COST: FaqItem[] = [
   },
   {
     q: "Who is Coriolis?",
-    a: `Coriolis builds and hosts WooCommerce websites for FFLs: gun shops, online-only FFLs, ranges, gunsmiths and instructors. We have 100+ clients and a 5-star Google rating from ${GOOGLE_REVIEW_COUNT} reviews, and we're members of NSSF, Firearms Policy Coalition and Gun Owners of America. Our founder ran AmmoReady for nine years. Call (279) 258-6771.`,
+    a: `Coriolis builds and hosts WooCommerce websites for gun shops, online-only FFLs, ranges, gunsmiths and firearms instructors. We have 100+ clients and a 5-star Google rating from ${GOOGLE_REVIEW_COUNT} reviews, and we're members of NSSF, Firearms Policy Coalition and Gun Owners of America. Our founder ran AmmoReady for nine years. Call (279) 258-6771.`,
   },
 ];
 
@@ -579,7 +579,7 @@ export const FAQ_PAYMENTS: FaqItem[] = [
   },
 ];
 
-/** SEO-U31 /websites-for-ranges-gunsmiths-instructors FAQ (Brandy FINAL Part 2, the no-ruling fallback). One FAQPage from all three. */
+/** SEO-U31 /websites-for-ranges-gunsmiths-instructors FAQ (Brandy FINAL Part 2 plus PAUL-0901). One FAQPage from all three. */
 export const FAQ_RANGES: FaqItem[] = [
   {
     q: "Do you build websites for shooting ranges?",
@@ -589,6 +589,10 @@ export const FAQ_RANGES: FaqItem[] = [
     q: "Who owns my range website?",
     a: "You do. We build the WooCommerce store on your own domain, and you own it. There\u2019s no annual contract, and if you walk, you take the website.",
   },
+  {
+    q: "Can customers book a lane online?",
+    a: "Yes. We build lane reservations into range websites, along with memberships, waivers, and event and league calendars.",
+  },
 ];
 
 export const FAQ_GUNSMITHS: FaqItem[] = [
@@ -597,18 +601,22 @@ export const FAQ_GUNSMITHS: FaqItem[] = [
     a: "Yes. Coriolis builds and hosts WooCommerce websites for gunsmiths, on your own domain, and you own the site.",
   },
   {
-    q: "What does a gunsmith website cost?",
-    a: "Setup is Basic Setup ($500) or Retail Setup ($2,500), then a plan from $169 a month. Minute Man, at $169, covers custom design on your domain, unlimited hosting, products and orders. There\u2019s no annual contract.",
+    q: "Can customers request a repair or a quote?",
+    a: "Yes. We build service and quote request forms for gunsmith websites, plus job status pages and service and parts sales.",
   },
 ];
 
 export const FAQ_INSTRUCTORS: FaqItem[] = [
   {
     q: "Do you build websites for firearms and CCW instructors?",
-    a: "Yes. Coriolis builds and hosts WooCommerce websites for firearms instructors, on your own domain, and you own the site.",
+    a: "Yes. Coriolis builds and hosts WooCommerce websites for firearms instructors, on your own domain, and you own the site. You don\u2019t need an FFL.",
   },
   {
     q: "What does an instructor website cost?",
     a: "Setup is a one-time $500 (Basic Setup) or $2,500 (Retail Setup), and monthly plans run from $169 to $569. There\u2019s no annual contract.",
+  },
+  {
+    q: "Can students sign up and pay for a class?",
+    a: "Yes. We build class schedules and paid class sign-ups for instructor websites.",
   },
 ];
