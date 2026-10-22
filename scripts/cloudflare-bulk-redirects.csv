@@ -9,10 +9,10 @@ https://coriolisagency.com/pricing,https://coriolisagency.com/ecommerce,301,TRUE
 https://coriolisagency.com/pricing/,https://coriolisagency.com/ecommerce,301,TRUE,FALSE,FALSE,FALSE
 https://coriolisagency.com/faq,https://coriolisagency.com/ecommerce,301,TRUE,FALSE,FALSE,FALSE
 https://coriolisagency.com/faq/,https://coriolisagency.com/ecommerce,301,TRUE,FALSE,FALSE,FALSE
-https://coriolisagency.com/payments,https://coriolisagency.com/ecommerce,301,TRUE,FALSE,FALSE,FALSE
-https://coriolisagency.com/payments/,https://coriolisagency.com/ecommerce,301,TRUE,FALSE,FALSE,FALSE
-https://coriolisagency.com/ffl-payments,https://coriolisagency.com/ecommerce,301,TRUE,FALSE,FALSE,FALSE
-https://coriolisagency.com/ffl-payments/,https://coriolisagency.com/ecommerce,301,TRUE,FALSE,FALSE,FALSE
+https://coriolisagency.com/payments,https://coriolisagency.com/ffl-payment-processing,301,TRUE,FALSE,FALSE,FALSE
+https://coriolisagency.com/payments/,https://coriolisagency.com/ffl-payment-processing,301,TRUE,FALSE,FALSE,FALSE
+https://coriolisagency.com/ffl-payments,https://coriolisagency.com/ffl-payment-processing,301,TRUE,FALSE,FALSE,FALSE
+https://coriolisagency.com/ffl-payments/,https://coriolisagency.com/ffl-payment-processing,301,TRUE,FALSE,FALSE,FALSE
 https://coriolisagency.com/gun-store-ecommerce,https://coriolisagency.com/ecommerce,301,TRUE,FALSE,FALSE,FALSE
 https://coriolisagency.com/gun-store-ecommerce/,https://coriolisagency.com/ecommerce,301,TRUE,FALSE,FALSE,FALSE
 https://coriolisagency.com/gun-store-website-builder-for-ffls,https://coriolisagency.com/ecommerce,301,TRUE,FALSE,FALSE,FALSE

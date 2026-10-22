@@ -120,12 +120,12 @@
     },
     {
       "source": "/payments",
-      "destination": "/ecommerce",
+      "destination": "/ffl-payment-processing",
       "permanent": true
     },
     {
       "source": "/ffl-payments",
-      "destination": "/ecommerce",
+      "destination": "/ffl-payment-processing",
       "permanent": true
     },
     {
