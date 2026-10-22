@@ -79,7 +79,7 @@ export const FAQ_DROPSHIP: FaqItem[] = [
   },
   {
     q: "Which distributors can I stream?",
-    a: "Militia and above include an FFL Cockpit license and 21 distributor catalogs with automated lowest-cost fulfillment. Sports South, RSR, Zanders, and Lipsey’s are typical starting points. We add catalogs during setup.",
+    a: "Militia and above include an FFL Cockpit license and 21 distributor catalogs with automated lowest-cost fulfillment. Sports South, RSR, and Zanders are typical starting points. We add catalogs during setup.",
   },
   {
     q: "Can I dropship ammunition and accessories too?",
