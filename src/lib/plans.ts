@@ -108,7 +108,7 @@ export const PLANS: Plan[] = [
     features: [
       {
         label: "API Based POS Integration:",
-        items: ["AIM Point of Sale", "GunBiz POS", "Rapid Gun Systems", "Trident 1 POS"],
+        items: ["AIM Point of Sale", "GunBiz POS", "Rapid Gun Systems", "Trident 1 POS", "Any other POS that works with WooCommerce"],
       },
       "Unlimited API Requests",
       "Unlimited Webhooks",

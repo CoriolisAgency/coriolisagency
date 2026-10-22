@@ -1,0 +1,104 @@
+---
+/**
+ * SEO-U31: /websites-for-ranges-gunsmiths-instructors (new). Copy is Brandy's FINAL Part 2,
+ * the no-ruling fallback (handoff/SEO-U31/FINAL.md). Part 1's [CONFIRM: Paul] slots stay out.
+ * The range section's plan line is cut (Chief 9:24 PM ET: plan per segment is Paul's slot 4).
+ * Clients named in plain text only, with no POS context and no press link (Chief 9:18/9:19 PM ET).
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import TalkSection from "../components/TalkSection.astro";
+import { LINKS, linkClass } from "../lib/links";
+import { withBase } from "../lib/base";
+import { GOOGLE_REVIEW_COUNT } from "../lib/google-reviews";
+import { FAQ_RANGES, FAQ_GUNSMITHS, FAQ_INSTRUCTORS } from "../lib/faq";
+
+const h2 = "text-xl font-semibold text-white";
+const para = "mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400";
+---
+
+<BaseLayout
+  title="Gun Range, Gunsmith and Instructor Websites | Coriolis"
+  description="WooCommerce websites for shooting ranges, gunsmiths and firearms instructors, built and hosted by Coriolis. On your domain, and you own the site."
+  path="/websites-for-ranges-gunsmiths-instructors"
+  faq={[...FAQ_RANGES, ...FAQ_GUNSMITHS, ...FAQ_INSTRUCTORS]}
+  extraJsonLd={[
+    {
+      "@type": "Service",
+      name: "Websites for shooting ranges, gunsmiths and firearms instructors",
+      provider: { "@id": `${LINKS.home}/#organization` },
+      areaServed: { "@type": "Country", name: "United States" },
+    },
+  ]}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">Ecommerce · Who we build for</p>
+      <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]">
+        Websites for gun ranges, gunsmiths and firearms instructors
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        Coriolis builds and hosts WooCommerce websites for FFLs: shooting ranges, gunsmiths and firearms instructors, plus gun shops and online-only FFLs. We build the store on your own domain, and you own it. Setup is Basic Setup ($500) or Retail Setup ($2,500), plans run $169 to $569 a month, and there’s no annual contract.
+      </p>
+      <p class="mt-6 flex flex-wrap gap-x-3 gap-y-2 text-sm text-zinc-500">
+        <a href="#ranges" class={linkClass}>Ranges</a><span aria-hidden="true">·</span>
+        <a href="#gunsmiths" class={linkClass}>Gunsmiths</a><span aria-hidden="true">·</span>
+        <a href="#instructors" class={linkClass}>Instructors</a><span aria-hidden="true">·</span>
+        <a href="#talk" class={linkClass}>Tell us about your business</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="pt-12" id="ranges">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Shooting range websites</h2>
+      <p class={para}>
+        Coriolis builds and hosts WooCommerce websites for ranges. We build the store on your own domain, and you own it.
+      </p>
+    </div>
+  </section>
+  <FaqBlock items={FAQ_RANGES} heading="Range website questions" headingLevel={3} />
+
+  <section class="border-t border-zinc-800/80 pt-12" id="gunsmiths">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Gunsmith websites</h2>
+      <p class={para}>
+        Coriolis builds and hosts WooCommerce websites for gunsmiths. We build the store on your own domain, and you own it. WooCommerce comes with product pages, cart, checkout, shipping, taxes, orders and customer accounts.
+      </p>
+    </div>
+  </section>
+  <FaqBlock items={FAQ_GUNSMITHS} heading="Gunsmith website questions" headingLevel={3} />
+
+  <section class="border-t border-zinc-800/80 pt-12" id="instructors">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Firearms instructor websites</h2>
+      <p class={para}>
+        Coriolis builds and hosts WooCommerce websites for firearms instructors. We build the store on your own domain, and you own it.
+      </p>
+    </div>
+  </section>
+  <FaqBlock items={FAQ_INSTRUCTORS} heading="Instructor website questions" headingLevel={3} />
+
+  <section class="border-t border-zinc-800/80 py-12" id="cost">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>What it costs</h2>
+      <p class={para}>
+        Setup is Basic Setup at $500 for a clean launch, with extra custom pages at $125 each, or Retail Setup at $2,500 for the full custom site and email, with up to ten custom pages. Monthly plans run from $169 to $569, and each plan includes everything in the one before it. There’s no annual contract, and if you walk, you take the website. Card processing isn’t in the plan price. Coriolis installs the payment gateway at setup, and the merchant account and its fees are yours.
+      </p>
+      <p class={para}>
+        See <a href={withBase("ffl-website-cost")} class={linkClass}>what an FFL website costs</a> or the <a href={withBase("ecommerce")} class={linkClass}>FFL website plans</a>.
+      </p>
+      <p class="mt-8 max-w-3xl text-sm text-zinc-400">
+        100+ clients. 5-star Google rating from {GOOGLE_REVIEW_COUNT} reviews. Member of NSSF, FPC and GOA. Recent clients include Down Range Chico and The Range in McKinney.
+      </p>
+    </div>
+  </section>
+
+  <TalkSection
+    pillar="Ecommerce"
+    heading="Tell us about your range, shop or classes"
+    subline="No contract, and you can cancel any time. Paul answers."
+    segmentField
+    phone="(279) 258-6771"
+  />
+</BaseLayout>

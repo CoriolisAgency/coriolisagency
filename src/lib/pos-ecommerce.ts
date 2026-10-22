@@ -1,9 +1,7 @@
 /**
  * /gun-store-pos: the Gun Store POS integration pillar (SEO-U29, D-N1).
- * Copy is Brandy's FINAL (handoff/SEO-U29/FINAL.md) with the no-ruling fallback:
- * the four POS systems are named, with no "any POS" and no "only these" claim;
- * no sync-direction sentence; FAQ 6 is out; no register-check line.
- * Coriolis builds the website and connects your POS. It does not build or sell a POS.
+ * Copy is Brandy's FINAL plus PAUL-0901: Warlord connects any POS that works with WooCommerce,
+ * with four named as examples. Two-way sync. FAQ 6 is in. No register-check line.
  */
 import type { FaqItem } from "./faq";
 import { LINKS } from "./links";
@@ -21,7 +19,7 @@ export const POS_PILLAR_H1 =
 
 /** Opening: first <p> after the H1. */
 export const POS_PILLAR_LEDE =
-  "Gun store POS integration means the register you already run and your WooCommerce website share one inventory. On the Warlord plan, $469 a month, Coriolis builds the store on your domain and connects your POS through an API-based integration, so the floor and the site stay in sync. Warlord connects AIM, GunBiz, Rapid Gun Systems and Trident 1. The POS company runs the register, and you own the website.";
+  "Gun store POS integration means the register you already run and your WooCommerce website share one inventory. On the Warlord plan, $469 a month, Coriolis builds the store on your domain and connects your POS through an API-based integration, so the floor and the site stay in sync. Warlord connects any POS that works with WooCommerce, including AIM, GunBiz, Rapid Gun Systems and Trident 1. The POS company runs the register, and you own the website.";
 
 export const POS_PILLAR_JUMP = "Tell us which POS you run";
 
@@ -65,7 +63,7 @@ export const POS_PILLAR_PROMOTED: PosPillarCard[] = [
 
 export const POS_PILLAR_ALSO_TITLE = "Also connects on Warlord";
 
-export const POS_PILLAR_ALSO_LINE = "Trident 1 POS and Rapid Gun Systems.";
+export const POS_PILLAR_ALSO_LINE = "Trident 1 POS, Rapid Gun Systems and any other POS that works with WooCommerce.";
 
 /** Smaller row under the cards. */
 export const POS_PILLAR_ALSO = [
@@ -81,7 +79,7 @@ export function posPillarItemList(home: string) {
   return {
     "@type": "ItemList",
     "@id": `${home}/gun-store-pos#pos-list`,
-    name: "Third-party POS systems that integrate with your website on the Warlord plan",
+    name: "Examples of POS systems that connect to your website on the Warlord plan",
     itemListOrder: "https://schema.org/ItemListUnordered",
     numberOfItems: items.length,
     itemListElement: items.map((p, i) => ({
@@ -96,7 +94,7 @@ export function posPillarItemList(home: string) {
 export const POS_PILLAR_HOW_TITLE = "How gun store POS integration works";
 
 export const POS_PILLAR_HOW = [
-  "Coriolis builds the WooCommerce store on your domain and connects it to your register through an API-based integration. Warlord includes unlimited API requests and webhooks. The counter and the website share one inventory, so the floor and the site stay in sync.",
+  "Coriolis builds the WooCommerce store on your domain and connects it to your register through an API-based integration. Stock and prices come from the register, and web orders go back to it. Warlord includes unlimited API requests and webhooks. The counter and the website share one inventory, so the floor and the site stay in sync.",
   "The POS company runs the register. You own the website.",
 ] as const;
 
@@ -125,15 +123,15 @@ export const POS_PILLAR_FORM_HEADING = "Tell us which POS you run";
 export const POS_PILLAR_FORM_LINE =
   "Tell us which POS you run, or plan to run, and what the website needs to do. No contract, and you can cancel any time. Paul answers.";
 
-/** FAQ 1-5 from FINAL, in order. FAQ 6 (sync direction) stays out until Paul answers. */
+/** FAQ 1-6 from FINAL, in order. FAQ 6 approved by Paul 10/21. */
 export const FAQ_POS_PILLAR: FaqItem[] = [
   {
     q: "What is gun store POS integration?",
-    a: "It\u2019s a connection between the register you already run and your WooCommerce website, so the counter and the website share one inventory. Coriolis builds the store on your domain and connects the register through an API-based integration.",
+    a: "It\u2019s a connection between the register you already run and your WooCommerce website, so the counter and the website share one inventory. Coriolis builds the store on your domain and connects the register through an API-based integration. Stock and prices come from the register, and web orders go back to it.",
   },
   {
     q: "Which POS systems integrate with my website?",
-    a: "On the Warlord plan, Coriolis connects AIM, GunBiz, Rapid Gun Systems and Trident 1. GunBiz and AIM are the two we promote. Both have tested, supported WooCommerce integrations and both use FastBound.",
+    a: "On the Warlord plan, Coriolis connects any POS that works with WooCommerce. AIM, GunBiz, Rapid Gun Systems and Trident 1 are four examples. GunBiz and AIM are the two we promote. Both have tested, supported WooCommerce integrations and both use FastBound.",
   },
   {
     q: "Which plan includes POS integration, and what does it cost?",
@@ -141,10 +139,14 @@ export const FAQ_POS_PILLAR: FaqItem[] = [
   },
   {
     q: "Do I have to switch POS systems to get a website?",
-    a: "No. Keep the register you already run, and Coriolis connects your website to it. We build the website, not the register.",
+    a: "No. Keep the register you already run, and Coriolis connects your website to it.",
   },
   {
     q: "Does Coriolis handle the 4473, NICS or the bound book?",
     a: "No. FastBound runs the bound book and the 4473, and GunBiz and AIM both use FastBound. Coriolis doesn\u2019t file the 4473, run NICS or keep the bound book. This is not legal advice.",
+  },
+  {
+    q: "Does inventory sync both ways?",
+    a: "Yes. Stock and prices come from the register, and web orders go back to it, so the counter and the website share one inventory. Warlord includes unlimited API requests and webhooks.",
   },
 ];
