@@ -311,17 +311,21 @@ const marketingSource = "popup_coriolis";
         mode === "activation"
           ? "Coriolis, LLC · confirm"
           : "Coriolis, LLC · subscribed";
-      copy.innerHTML =
-        '<p class="coriolis-capture__eyebrow">' +
-        eyebrow +
-        "</p>" +
-        '<h2 id="coriolis-capture-title" class="coriolis-capture__headline">' +
-        headline +
-        "</h2>" +
-        '<p class="coriolis-capture__lede">' +
-        lede +
-        "</p>" +
-        '<button type="button" class="coriolis-capture__cta coriolis-capture__cta--done" data-capture-done>Done</button>';
+      // Keep the open card's eyebrow, headline and lede elements (so the dialog's
+      // aria-labelledby target keeps its one id) and drop the rest; same DOM as before.
+      const eyebrowEl = copy.querySelector(".coriolis-capture__eyebrow");
+      const headlineEl = copy.querySelector(".coriolis-capture__headline");
+      const ledeEl = copy.querySelector(".coriolis-capture__lede");
+      if (!eyebrowEl || !headlineEl || !ledeEl) return;
+      eyebrowEl.textContent = eyebrow;
+      headlineEl.textContent = headline;
+      ledeEl.textContent = lede;
+      const doneBtn = document.createElement("button");
+      doneBtn.type = "button";
+      doneBtn.className = "coriolis-capture__cta coriolis-capture__cta--done";
+      doneBtn.setAttribute("data-capture-done", "");
+      doneBtn.textContent = "Done";
+      copy.replaceChildren(eyebrowEl, headlineEl, ledeEl, doneBtn);
       copy.querySelector("[data-capture-done]")?.addEventListener("click", dismiss);
       const done = copy.querySelector("[data-capture-done]");
       if (done instanceof HTMLElement) done.focus();
