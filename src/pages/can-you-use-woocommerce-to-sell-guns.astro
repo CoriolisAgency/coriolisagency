@@ -6,6 +6,7 @@ import FaqBlock from "../components/FaqBlock.astro";
 import { FAQ_WOO_SELL_GUNS } from "../lib/faq";
 import { HOWTO_WOO_SELL_GUNS } from "../lib/howto";
 import { LINKS, linkClass } from "../lib/links";
+import { withBase } from "../lib/base";
 import { CANON_PATHS } from "../lib/site";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
@@ -209,7 +210,8 @@ import TalkSection from "../components/TalkSection.astro";
         <p>
           Self-hosted WooCommerce is the answer. You install it on a host whose
           terms allow a firearms business, and you own the site and the data.
-          Coriolis runs its dealer stores on WP Engine and manages them for you.
+          Coriolis runs its dealer stores on WP Engine and manages them for you. More on{" "}
+          <a href={withBase("gun-friendly-hosting")} class={linkClass}>gun-friendly website hosting</a>.
         </p>
       </div>
     </div>
@@ -330,8 +332,8 @@ import TalkSection from "../components/TalkSection.astro";
               >FFL Accelerator, $569/mo.</strong
             >
             {" "}One managed plan with hosting, site design, VIP support, any POS
-            integration, email automation, and analytics. Includes a 99.95%
-            uptime SLA.
+            integration, email automation, and analytics. Like every plan, it's backed by
+            WP Engine's 99.95% uptime SLA.
           </li>
         </ul>
         <p>

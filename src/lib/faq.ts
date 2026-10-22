@@ -110,7 +110,7 @@ export const FAQ_COCKPIT: FaqItem[] = [
   },
   {
     q: "Who hosts FFL Cockpit WooCommerce?",
-    a: "Coriolis hosts the WooCommerce store. FFL Accelerator includes unlimited hosting on WP Engine (Coriolis is a WP Engine agency partner) and a 99.95% SLA. Militia and above include the Cockpit and Checkout licenses we configure at setup.",
+    a: "Coriolis hosts the WooCommerce store. FFL Accelerator includes unlimited hosting on WP Engine (Coriolis is a WP Engine agency partner), backed by WP Engine\u2019s 99.95% uptime SLA. Militia and above include the Cockpit and Checkout licenses we configure at setup.",
   },
 ];
 
@@ -590,5 +590,40 @@ export const FAQ_INSTRUCTORS: FaqItem[] = [
   {
     q: "Can students sign up and pay for a class?",
     a: "Yes. We build class schedules and paid class sign-ups for instructor websites.",
+  },
+];
+
+export const FAQ_HOSTING: FaqItem[] = [
+  {
+    q: "What is gun-friendly hosting?",
+    a: "Web hosting whose terms allow a firearms business. A gun store needs it, because some hosted platforms, including WordPress.com, prohibit selling firearms, parts, accessories and ammunition.",
+  },
+  {
+    q: "Can a gun store use any web host?",
+    a: "No. Check the host\u2019s terms before you build. WordPress.com prohibits selling firearms on its hosted sites, but it doesn\u2019t stop firearms merchants from running WooCommerce on another host. Coriolis runs every dealer store on WP Engine.",
+  },
+  {
+    q: "Where does Coriolis host dealer websites?",
+    a: "On WP Engine, every one of them. Coriolis is a WP Engine agency partner, and we manage the hosting for you, with security updates, uptime monitoring and support.",
+  },
+  {
+    q: "What does FFL website hosting cost?",
+    a: "Hosting is part of every plan, from $169 to $569 a month. Setup is $500 (Basic Setup) or $2,500 (Retail Setup). There\u2019s no annual contract.",
+  },
+  {
+    q: "Is there an uptime SLA?",
+    a: "Every store runs on WP Engine, so every plan is backed by WP Engine\u2019s 99.95% uptime SLA, with 24\u00d77 uptime monitoring on top.",
+  },
+  {
+    q: "Do I own the website?",
+    a: "Yes. When setup is done, you own the WooCommerce site files and database, exportable at any time. Cancel and the site goes with you.",
+  },
+  {
+    q: "Can you move my site without going dark?",
+    a: "Yes. We build WooCommerce on your domain first, move what ranks, test a live cart, then switch DNS. Don\u2019t give notice until the new store is ready.",
+  },
+  {
+    q: "Does hosting cover card payments?",
+    a: "No. Payments run through a merchant account approved for firearms, connected to checkout through a payment gateway. Coriolis installs the gateway at setup, and the merchant account and its fees are yours.",
   },
 ];

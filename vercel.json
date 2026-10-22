@@ -510,7 +510,7 @@
     },
     {
       "source": "/enterprise-ecommerce-hosting-gun-stores",
-      "destination": "/ecommerce",
+      "destination": "/gun-friendly-hosting",
       "statusCode": 301
     },
     {
