@@ -110,7 +110,7 @@ export const FAQ_COCKPIT: FaqItem[] = [
   },
   {
     q: "Who hosts FFL Cockpit WooCommerce?",
-    a: "Coriolis hosts the WooCommerce store. FFL Accelerator includes unlimited hosting on WP Engine (Coriolis is a WP Engine agency partner), backed by WP Engine\u2019s 99.95% uptime SLA. Militia and above include the Cockpit and Checkout licenses we configure at setup.",
+    a: "Coriolis hosts every WooCommerce store on WP Engine, with unlimited hosting on every plan. Coriolis is a WP Engine agency partner, and every store is backed by WP Engine\u2019s 99.95% uptime SLA. Militia and above include the Cockpit and Checkout licenses we configure at setup.",
   },
 ];
 

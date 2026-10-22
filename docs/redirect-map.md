@@ -90,6 +90,14 @@ Moved from the 410 rewrites to `redirects` with `"statusCode": 301` (exact path 
 | `/orchid` | 301 → `/ecommerce` | — | 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4). |
 | `/orchid-alternative` | 301 → `/ecommerce` | — | Page removed (ORCHID-RM, Paul 2026-10-21). |
 
+### SEO-U25: hosting slug → `/gun-friendly-hosting`
+
+The page exists now, so the old hosting slug points at it (single-hop 301 in `vercel.json`, was `/ecommerce`).
+
+| Old WordPress | Status | Clicks | Why |
+|---------------|--------|-------:|-----|
+| `/enterprise-ecommerce-hosting-gun-stores` | 301 → `/gun-friendly-hosting` | - | SEO-U25 (was `/ecommerce`; SPRINTS U22 said repoint once the page exists). |
+
 ### OPS-2: clean the index (decision 2026-10-07-seo-ownership)
 
 How this host handles slashes: Astro `trailingSlash: "never"` and Vercel `"trailingSlash": false`. Vercel runs its slash rule before any `vercel.json` redirect, so every `/x/` 308s to `/x` first. A `redirects` source that ends in `/` never matches, and a no-slash rule for a live owner page would loop it. So:

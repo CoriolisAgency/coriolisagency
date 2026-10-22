@@ -44,7 +44,7 @@ export const CLOSED_PLATFORM_ROWS = [
     "The register they already run",
     "Their pairing, not republished here",
     "Their pairing, not republished here",
-    "AIM, GunBiz, Rapid Gun Systems, Trident 1 (Warlord+)",
+    "Any POS that works with WooCommerce, such as AIM or GunBiz (Warlord+)",
   ],
   [
     "SEO",
