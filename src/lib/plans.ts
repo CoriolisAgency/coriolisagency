@@ -42,6 +42,7 @@ export const PLANS: Plan[] = [
       "Unlimited products",
       "Unlimited orders",
       "24×7 uptime monitoring",
+      "99.95% uptime SLA from WP Engine",
       "On-demand paid support ($125 per incident)",
     ],
   },
@@ -147,7 +148,6 @@ export const PLANS: Plan[] = [
           "Abandoned Cart",
         ],
       },
-      "SLA with 99.95% uptime guarantee",
     ],
   },
 ];

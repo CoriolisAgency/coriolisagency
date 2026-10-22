@@ -77,7 +77,7 @@ export const HOWTO_WOO_SELL_GUNS = howToJsonLd({
     },
     {
       name: "Keep the register you already run",
-      text: "Warlord and FFL Accelerator connect AIM, GunBiz, Rapid Gun Systems, and Trident 1. Coriolis does not run 4473, NICS, or the bound book.",
+      text: "Warlord and FFL Accelerator connect any POS that works with WooCommerce, such as AIM, GunBiz, Rapid Gun Systems or Trident 1. Coriolis does not run 4473, NICS, or the bound book.",
     },
   ],
 });

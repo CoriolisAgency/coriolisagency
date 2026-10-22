@@ -16,7 +16,7 @@ const rows = [
   ["Own inventory + dropship", "Varies", "Yes", "Yes, or either one"],
   ["Distributor catalogs", "Limited set", "Their set", "21 via FFL Cockpit"],
   ["FFL dealer checkout", "Built-in", "Built-in", "FFL Checkout"],
-  ["POS", "Their register partner", "The register they already run", "AIM, GunBiz, Rapid, Trident 1"],
+  ["POS", "Their register partner", "The register they already run", "Any POS that works with WooCommerce, such as AIM or GunBiz"],
   ["AmmoSeek / GunBroker", "Add-on or no", "Limited", "Included on Militia+"],
   ["SEO control", "Theirs", "Theirs", "Yours"],
   ["4473 / bound book", "Sometimes bundled", "Third-party", "Your POS or FastBound, not us"],
@@ -124,7 +124,9 @@ import TalkSection from "../components/TalkSection.astro";
         theirs” means.
       </p>
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        On owned WooCommerce, the page lives on your domain. You write the H1,
+        On owned WooCommerce, the page lives on your domain, on{" "}
+        <a href={withBase("gun-friendly-hosting")} class={linkClass}>firearm-friendly web hosting</a>{" "}
+        whose terms allow a gun store. You write the H1,
         the about page, the transfer page, and the schema.
       </p>
     </div>

@@ -80,7 +80,7 @@ export function posBySlug(slug: string): PosPage | undefined {
 export const FAQ_POS = [
   {
     q: "Do I have to throw out my register?",
-    a: "No. Bring the register you already run. Warlord and FFL Accelerator connect AIM, GunBiz, Trident 1, and Rapid Gun Systems.",
+    a: "No. Bring the register you already run. Warlord and FFL Accelerator connect any POS that works with WooCommerce, such as AIM, GunBiz, Trident 1 or Rapid Gun Systems.",
   },
   {
     q: "Does Coriolis replace 4473 or the bound book?",

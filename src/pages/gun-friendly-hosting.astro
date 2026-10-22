@@ -1,0 +1,137 @@
+---
+/**
+ * SEO-U25: /gun-friendly-hosting (new). Copy is Brandy's FINAL (handoff/SEO-U25/FINAL.md, base 8435d3a).
+ * WP Engine and the 99.95% uptime SLA cover every client store (Paul via Chief, 10:23 PM ET: "All sites are WPE").
+ * The 99.95% figure is WP Engine's SLA, not a Coriolis guarantee.
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaRow from "../components/CtaRow.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import TalkSection from "../components/TalkSection.astro";
+import { FAQ_HOSTING } from "../lib/faq";
+import { LINKS, linkClass } from "../lib/links";
+import { CANON_PATHS } from "../lib/site";
+import { withBase } from "../lib/base";
+import { GOOGLE_REVIEWS_HREF, GOOGLE_REVIEW_COUNT } from "../lib/google-reviews";
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+const h2 = "text-xl font-semibold text-white";
+const para = "mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400";
+const list = "mt-4 max-w-3xl list-disc space-y-1 pl-5 text-sm leading-relaxed text-zinc-400";
+---
+
+<BaseLayout
+  title="Gun-Friendly Hosting for FFL Websites | Coriolis"
+  description="FFL website hosting that allows a gun store. WooCommerce on your domain, run by Coriolis on WP Engine. Month to month, and you own the site."
+  path="/gun-friendly-hosting"
+  ogImagePath={CANON_PATHS.storefront}
+  faq={FAQ_HOSTING}
+  extraJsonLd={[
+    {
+      "@type": "Service",
+      name: "Gun-friendly FFL website hosting",
+      serviceType: "Website hosting for FFL ecommerce",
+      provider: { "@id": `${LINKS.home}/#organization` },
+      areaServed: { "@type": "Country", name: "United States" },
+    },
+  ]}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">Ecommerce · Hosting</p>
+      <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]">
+        Gun-friendly hosting for FFL websites
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        Gun-friendly hosting means a host whose terms allow a firearms business. WordPress.com’s store guidelines prohibit selling firearms, parts, accessories and ammunition, so a gun store can’t run there. Coriolis builds WooCommerce on your own domain and runs every dealer store on WP Engine. Hosting is in every plan, from $169 to $569 a month. It’s month to month, and you own the site.
+      </p>
+      <div class="mt-8">
+        <CtaRow talk />
+      </div>
+      <EcommerceCluster current="gun-friendly-hosting" />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="why">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Why the host matters for a gun store</h2>
+      <p class={para}>
+        WooCommerce is open-source, and a licensed FFL can run a gun store on it when it’s self-hosted. The catch is the companies around it. WordPress.com won’t host a gun store, and many payment processors won’t take firearm sales either. So you need three things: a host whose terms allow a firearms business, a merchant account approved for firearms, and a checkout that ships every gun to a receiving FFL.
+      </p>
+      <p class={para}>
+        WordPress.com doesn’t stop firearms merchants from running the WooCommerce software on another host. That’s what we do: your store runs self-hosted on WP Engine, and you own the site and the data.
+      </p>
+      <p class={para}>
+        More on the payment side: <a href={withBase("ffl-payment-processing")} class={linkClass}>FFL payment processing</a>. The full answer on the software: <a href={withBase("can-you-use-woocommerce-to-sell-guns")} class={linkClass}>can you use WooCommerce to sell guns</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="every-plan">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>What hosting includes on every plan</h2>
+      <p class={para}>Every plan is a hosting plan. Minute Man, at $169 a month, includes:</p>
+      <ul class={list}>
+        <li>your custom domain and a custom website design</li>
+        <li>unlimited hosting, storage and bandwidth</li>
+        <li>unlimited products and orders</li>
+        <li>24×7 uptime monitoring, backed by WP Engine’s 99.95% uptime SLA</li>
+      </ul>
+      <p class={para}>
+        Coriolis manages the hosting: security updates, uptime monitoring and support. On Minute Man, support is $125 per incident. Militia ($269 a month) and above include free email support with a 24-hour response. Higher plans add DNS and email administration, VIP support and register integration. See every plan on <a href={`${withBase("ecommerce")}#plans`} class={linkClass}>FFL website plans</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="ffl-accelerator">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>FFL Accelerator: hosting we tune and watch for you</h2>
+      <p class={para}>FFL Accelerator ($569 a month) is the all-in-one managed plan. On the hosting side, it adds:</p>
+      <ul class={list}>
+        <li>page speed optimization (EverCache)</li>
+        <li>shopping cart optimization (LiveCart)</li>
+        <li>advanced site monitoring (Uptime Robot)</li>
+        <li>Cloudflare Web Rules for bot mitigation</li>
+      </ul>
+      <p class={para}>
+        A webmaster is included. Coriolis is a WP Engine agency partner. See the <a href={`${LINKS.fflaccelerator}/`} class={linkClass} {...ext}>FFL Accelerator</a> offer.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="own">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>You own the site, and you can leave with it</h2>
+      <p class={para}>
+        When setup is done, you own the WooCommerce site: the files and the database, exportable at any time. Hosting is month to month, there’s no annual contract, and you can cancel any time. If you walk, you take the website.
+      </p>
+      <p class={para}>
+        Every plan runs under our <a href={withBase("msa")} class={linkClass}>Master Services Agreement</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12" id="moving">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Moving from a template platform</h2>
+      <p class={para}>
+        Keep your domain. We build the new WooCommerce store on it before you give notice, move the catalog you care about, and redirect the pages that already rank. Then we turn on FFL Checkout, payments and tax, buy a mixed cart to make sure it clears, and point the domain. Don’t give notice until the new store is ready.
+      </p>
+      <p class={para}>
+        Leaving a specific platform? <a href={withBase("leave-ammoready")} class={linkClass}>Leave AmmoReady</a>{" · "}<a href={withBase("leave-gearfire")} class={linkClass}>Leave Gearfire</a>. Setup is $500 (Basic Setup) or $2,500 (Retail Setup), and DNS configuration at launch is included in both. Setup and monthly side by side: <a href={withBase("ffl-website-cost")} class={linkClass}>what an FFL website costs</a>.
+      </p>
+      <p class="mt-8 text-sm text-zinc-400">
+        100+ clients. <a href={GOOGLE_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating from {GOOGLE_REVIEW_COUNT} reviews</a>. Member of NSSF, FPC and GOA.
+      </p>
+    </div>
+  </section>
+
+  <FaqBlock items={FAQ_HOSTING} />
+
+  <TalkSection
+    pillar="Ecommerce"
+    heading="Tell us where your site is hosted today"
+    subline="Tell us what you sell and where the site runs now. No contract, and you can cancel any time. Paul answers."
+  />
+</BaseLayout>

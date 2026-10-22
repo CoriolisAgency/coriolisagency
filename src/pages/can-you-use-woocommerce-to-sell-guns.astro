@@ -6,6 +6,7 @@ import FaqBlock from "../components/FaqBlock.astro";
 import { FAQ_WOO_SELL_GUNS } from "../lib/faq";
 import { HOWTO_WOO_SELL_GUNS } from "../lib/howto";
 import { LINKS, linkClass } from "../lib/links";
+import { withBase } from "../lib/base";
 import { CANON_PATHS } from "../lib/site";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
@@ -209,7 +210,8 @@ import TalkSection from "../components/TalkSection.astro";
         <p>
           Self-hosted WooCommerce is the answer. You install it on a host whose
           terms allow a firearms business, and you own the site and the data.
-          Coriolis runs its dealer stores on WP Engine and manages them for you.
+          Coriolis runs its dealer stores on WP Engine and manages them for you. More on{" "}
+          <a href={withBase("gun-friendly-hosting")} class={linkClass}>gun-friendly website hosting</a>.
         </p>
       </div>
     </div>
@@ -302,9 +304,9 @@ import TalkSection from "../components/TalkSection.astro";
       <h2 class="text-xl font-semibold text-white">Where Coriolis fits</h2>
       <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
         <p>
-          Coriolis builds WooCommerce stores for FFLs on your domain. Managed by
-          Coriolis on WP Engine. You own the site. If you leave, it goes with
-          you.
+          Coriolis builds WooCommerce stores for FFLs on your domain. Every plan is
+          managed by Coriolis on WP Engine, backed by WP Engine's 99.95% uptime SLA.
+          You own the site. If you leave, it goes with you.
         </p>
         <ul class="list-disc space-y-2 pl-5">
           <li>
@@ -322,16 +324,15 @@ import TalkSection from "../components/TalkSection.astro";
           </li>
           <li>
             <strong class="font-semibold text-zinc-200">Warlord, $469/mo.</strong>
-            {" "}Adds POS integration with AIM, GunBiz, Rapid Gun Systems, and
-            Trident 1.
+            {" "}Adds two-way sync with any POS that works with WooCommerce, such as AIM,
+            GunBiz, Rapid Gun Systems or Trident 1.
           </li>
           <li>
             <strong class="font-semibold text-zinc-200"
               >FFL Accelerator, $569/mo.</strong
             >
             {" "}One managed plan with hosting, site design, VIP support, any POS
-            integration, email automation, and analytics. Includes a 99.95%
-            uptime SLA.
+            integration, email automation, and analytics.
           </li>
         </ul>
         <p>
