@@ -120,7 +120,7 @@ export const PLANS: Plan[] = [
     id: "ffl-accelerator",
     name: "FFL Accelerator",
     price: 569,
-    hook: "Add Jet Fuel",
+    hook: "Hand off the store",
     featured: true,
     badge: "Webmaster Included",
     includesFrom: "Warlord",
@@ -129,17 +129,13 @@ export const PLANS: Plan[] = [
       label: "See the FFL Accelerator offer at FFLAccelerator.com",
     },
     description:
-      "A single, all-in-one, managed ecommerce plan. It includes hosting, site design (Basic or Retail), VIP support, POS integration (any POS), email automation, and analytics (Google Analytics, Google Search Console, GunSearchEngine.com, and email/SMS).",
+      "Premium hosting with your ecommerce run for you and VIP support included.",
     bullets: "bullet-holes",
     features: [
-      "GunSearchEngine.com Pro",
-      "Page speed optimization (EverCache)",
-      "Shopping cart optimization (LiveCart)",
-      "Advanced site monitoring (Uptime Robot)",
-      "Cloudflare Web Rules (bot mitigation)",
-      "On-site email capture optimization",
+      "Premium hosting, backed by WP Engine's 99.95% uptime SLA",
+      "WordPress and plugin updates, plus backups",
       {
-        label: "Automated email campaigns:",
+        label: "Managed email marketing:",
         items: [
           "Welcome",
           "Back In Stock",
@@ -148,6 +144,18 @@ export const PLANS: Plan[] = [
           "Abandoned Cart",
         ],
       },
+      {
+        label: "Analytics monitoring across:",
+        items: [
+          "Google Analytics",
+          "Google Search Console",
+          "GunSearchEngine.com",
+          "Email & SMS",
+        ],
+      },
+      "Minor site updates as needed",
+      "Up to 2 hours of other tech work a month ($250 value at $125/hour)",
+      "GunSearchEngine.com Pro",
     ],
   },
 ];
