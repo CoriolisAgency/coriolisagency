@@ -619,3 +619,31 @@ export const FAQ_HOSTING: FaqItem[] = [
     a: "No. Payments run through a merchant account approved for firearms, connected to checkout through a payment gateway. Coriolis installs the gateway at setup, and the merchant account and its fees are yours.",
   },
 ];
+
+/** /ffl-messenger-enterprise. Brandy mock, Paul approved. First item opens in the accordion. */
+export const FAQ_FFL_MESSENGER_ENTERPRISE: FaqItem[] = [
+  {
+    q: "What's the difference between Pro and Enterprise?",
+    a: "Pro adds employee and rep seats, Tickets and fixed ticket rules. Enterprise adds the API, an MCP server, SSO, the Workflow builder and custom work by Coriolis.",
+  },
+  {
+    q: "Who can get Enterprise?",
+    a: "Any verified FFL that wants Enterprise features. One counter or many.",
+  },
+  {
+    q: "Can you read our messages?",
+    a: "No. Messages, documents and tickets are end-to-end encrypted. Custom integrations run on your side as your own connected FFL.",
+  },
+  {
+    q: "Can we see the DPA before we sign?",
+    a: "Yes. The DPAs are pre-planned, and you review them during scoping.",
+  },
+  {
+    q: "Where are you on SOC 2?",
+    a: "SOC 2 readiness planning is part of scoping. We walk your IT lead through it.",
+  },
+  {
+    q: "Why do you need our FFL number?",
+    a: "Everyone on FFL Messenger holds a license. Your FFL license is a public document, so we match the number to the ATF record and check that you run the shop.",
+  },
+];
