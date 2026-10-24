@@ -620,30 +620,30 @@ export const FAQ_HOSTING: FaqItem[] = [
   },
 ];
 
-/** /ffl-messenger-enterprise. Present tense. Enterprise is written as shipped. */
+/** /ffl-messenger-enterprise. Brandy mock, Paul approved. First item opens in the accordion. */
 export const FAQ_FFL_MESSENGER_ENTERPRISE: FaqItem[] = [
   {
-    q: "What does Enterprise include?",
-    a: "The API, an MCP server, SSO, custom integrations and custom work by Coriolis, Tickets, Workflows and Pro multi-user seats. In Pro, Workflows are fixed ticket rules that route, auto-assign and escalate tickets. Enterprise adds a Workflow builder so you can build your own custom workflows. Pro seats are for employees and sales and inventory reps. Enterprise is for any FFL that wants these features. Data processing agreements are available to review, and SOC 2 readiness planning is part of scoping.",
+    q: "What's the difference between Pro and Enterprise?",
+    a: "Pro adds employee and rep seats, Tickets and fixed ticket rules. Enterprise adds the API, an MCP server, SSO, the Workflow builder and custom work by Coriolis.",
+  },
+  {
+    q: "Who can get Enterprise?",
+    a: "Any verified FFL that wants Enterprise features. One counter or many.",
   },
   {
     q: "Can you read our messages?",
-    a: "No. Every message, document, and ticket is end-to-end encrypted.",
+    a: "No. Messages, documents and tickets are end-to-end encrypted. Custom integrations run on your side as your own connected FFL.",
   },
   {
-    q: "What about SOC 2?",
-    a: "SOC 2 readiness planning. We show you where we are during scoping.",
+    q: "Can we see the DPA before we sign?",
+    a: "Yes. The DPAs are pre-planned, and you review them during scoping.",
   },
   {
-    q: "Can we see the DPA before we sign anything?",
-    a: "Yes. You can review the data processing agreements during scoping.",
+    q: "Where are you on SOC 2?",
+    a: "SOC 2 readiness planning is part of scoping. We walk your IT lead through it.",
   },
   {
-    q: "Who can get on FFL Messenger?",
-    a: "Verified FFL holders only. Sign-up starts with your FFL number. No brands, no consumers, no public feed.",
-  },
-  {
-    q: "What’s an MCP server?",
-    a: "It lets your own AI tools read and act on FFL Messenger with the permissions you set.",
+    q: "Why do you need our FFL number?",
+    a: "Everyone on FFL Messenger holds a license. Your FFL license is a public document, so we match the number to the ATF record and check that you run the shop.",
   },
 ];
