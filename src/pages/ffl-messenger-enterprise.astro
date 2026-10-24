@@ -1,0 +1,253 @@
+---
+/**
+ * /ffl-messenger-enterprise
+ * Copy: Brandy draft, then Paul's locked edits.
+ * Present tense: Enterprise is written as shipped.
+ * Talk to Coriolis, Ask for a demo, and Scope it with us all go to /contact.
+ * No in-page form. Not in the main nav: there is no products or services menu.
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FaqBlock from "../components/FaqBlock.astro";
+import { LINKS, btnPlan, btnSecondary, linkClass } from "../lib/links";
+import { withBase } from "../lib/base";
+import { GOOGLE_REVIEWS_HREF, GOOGLE_REVIEW_COUNT } from "../lib/google-reviews";
+import { FAQ_FFL_MESSENGER_ENTERPRISE } from "../lib/faq";
+
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+const h2 = "text-xl font-semibold text-white";
+const para = "mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400";
+
+/** Paul's approved line, used once, in the encryption section. */
+const e2ee =
+  "Every message, document, and ticket is end-to-end encrypted. We can’t read them and neither can the ATF.";
+
+const forWhom = [
+  "Multi-location FFLs",
+  "Dealer groups",
+  "Businesses that work alongside distributors and the shops they sell to",
+] as const;
+
+const steps = [
+  {
+    title: "Talk to Coriolis.",
+    body: "Tell us how many locations and licenses you run, and who on your team talks to other shops.",
+  },
+  {
+    title: "Scope it.",
+    body: "We map the API, the MCP server, SSO, custom integrations, Tickets, Workflows and Pro seats to how your shops work. You review the DPAs.",
+  },
+  {
+    title: "Get on FFL Messenger.",
+    body: "Each license signs up with its FFL number and goes through verification.",
+  },
+  {
+    title: "Run it.",
+    body: "Your team uses Enterprise on FFL Messenger, including Pro seats for employees and sales and inventory reps.",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="FFL Messenger for Dealer Groups and Larger FFLs | Coriolis"
+  description="Private, end-to-end encrypted messaging for verified FFLs. Enterprise includes an API, MCP server, SSO, Tickets, Workflows and Pro seats. DPAs available to review."
+  ogTitle="FFL Messenger for Larger FFL Businesses"
+  ogDescription="Private messaging for verified FFLs, end-to-end encrypted. Enterprise includes the API, an MCP server, SSO, Tickets, Workflows and Pro seats."
+  path="/ffl-messenger-enterprise"
+  faq={FAQ_FFL_MESSENGER_ENTERPRISE}
+  extraJsonLd={[
+    {
+      "@type": "Service",
+      name: "FFL Messenger for larger FFL businesses",
+      serviceType: "Private messaging for verified FFLs",
+      provider: { "@id": `${LINKS.home}/#organization` },
+      areaServed: { "@type": "Country", name: "United States" },
+    },
+  ]}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">
+        Secure Private Messaging for FFLs
+      </p>
+      <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]">
+        FFL Messenger for Larger FFL Businesses
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
+        More locations. More licenses. More people trying to reach the right shop. FFL Messenger keeps that traffic private and encrypted. Enterprise adds the API, an MCP server, SSO, custom integrations, Tickets, Workflows and Pro seats.
+      </p>
+      <div class="mt-8 flex w-full min-w-0 flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+        <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
+        <a href={withBase("contact")} class={btnSecondary}>Ask for a demo</a>
+      </div>
+      <p class="mt-4 text-sm text-zinc-400">
+        Verified FFL holders only. No brands, no consumers, no public feed.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="who">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Built for operations and IT leads at bigger FFLs</h2>
+      <p class={para}>
+        You run more than one counter. Maybe more than one license. Your people talk to other shops all day about transfers, inventory and service work.
+      </p>
+      <p class={para}>
+        If that runs through personal cell phones and texts, you can’t see it. You can’t control it either.
+      </p>
+      <p class={para}>This page is for:</p>
+      <ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
+        {forWhom.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class={para}>If your team spends the day chasing other FFLs, talk to us.</p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="encrypted">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>End-to-end encryption</h2>
+      <p class={para}>
+        FFL Messenger is a private, opt-in network for verified FFL holders. Sign-up starts with your FFL number, then we verify it. No brands. No consumers. No public feed.
+      </p>
+      <p class={para}>{e2ee}</p>
+      <p class={para}>
+        Your people set a status: Available, Busy, Away, Do Not Disturb and Closed. Each account picks which kinds of first messages it takes: transfers, referrals or service work. Everything else stays out.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="api">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>API</h2>
+      <p class={para}>
+        The API connects your own systems to FFL Messenger.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="mcp">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>MCP server</h2>
+      <p class={para}>
+        The MCP server lets your own AI tools read and act on FFL Messenger with the permissions you set. You decide what they can see and what they can do.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="sso">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>SSO</h2>
+      <p class={para}>
+        SSO lets your people sign in through your company’s identity system.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="custom">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Custom integrations</h2>
+      <p class={para}>
+        Custom integrations connect FFL Messenger to the systems you already run. Custom work by Coriolis covers the rest of what your operation needs.
+      </p>
+      <p class={para}>
+        If you have a system you want connected, tell us. Scoping maps it to how your shops work.
+      </p>
+      <div class="mt-8">
+        <a href={withBase("contact")} class={btnSecondary}>Scope it with us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="tickets">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Tickets</h2>
+      <p class={para}>
+        Some conversations turn into a job. A transfer that needs fixing. A service question that needs an answer. Tickets track that work in FFL Messenger instead of losing it in a thread.
+      </p>
+      <p class={para}>Tell us how your team handles these today.</p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="workflows">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Workflows</h2>
+      <p class={para}>
+        Workflows are rules that route, auto-assign and escalate tickets. Larger shops repeat the same steps every day. Your team sets those rules up once inside FFL Messenger.
+      </p>
+      <p class={para}>Bring us the steps you repeat.</p>
+      <div class="mt-8">
+        <a href={withBase("contact")} class={btnSecondary}>Scope it with us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="pro">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Pro</h2>
+      <p class={para}>
+        Pro is multi-user seats for employees and sales and inventory reps. You invite them into your FFL’s account, and they work on the same private line.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="dpas">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Data processing agreements</h2>
+      <p class={para}>
+        Your legal team asks about data before anything else.
+      </p>
+      <p class={para}>
+        Data processing agreements (DPAs) are ready for you to review during scoping, before you commit to anything.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="security">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>SOC 2 readiness planning</h2>
+      <p class={para}>
+        SOC 2 readiness planning is part of scoping. We walk your IT lead through where we are.
+      </p>
+      <p class={para}>
+        What’s true today: verified FFLs only, and every message and document is end-to-end encrypted.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12" id="how">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>How it works with us</h2>
+      <ol class="mt-4 max-w-3xl list-decimal space-y-3 pl-5 text-sm leading-relaxed text-zinc-400">
+        {
+          steps.map((step) => (
+            <li>
+              <strong class="text-white">{step.title}</strong> {step.body}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <FaqBlock heading="Questions larger FFLs ask" items={FAQ_FFL_MESSENGER_ENTERPRISE} />
+
+  <section class="border-t border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">
+        Secure Private Messaging for FFLs
+      </p>
+      <h2 class="mt-3 max-w-3xl text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+        Tell us what your shops need
+      </h2>
+      <p class="mt-4 max-w-3xl text-base leading-relaxed text-zinc-300">
+        We scope Enterprise to your shops. Paul answers.
+      </p>
+      <div class="mt-8 flex w-full min-w-0 flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+        <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
+        <a href={withBase("contact")} class={btnSecondary}>Ask for a demo</a>
+      </div>
+      <p class="mt-8 text-sm text-zinc-400" data-proof-line>
+        100+ clients · <a href={GOOGLE_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating from {GOOGLE_REVIEW_COUNT} reviews</a> · Proud member of NSSF, Firearms Policy Coalition and Gun Owners of America.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

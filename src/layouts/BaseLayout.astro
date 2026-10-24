@@ -11,6 +11,10 @@ import type { FaqItem } from "../lib/faq";
 interface Props {
   title?: string;
   description?: string;
+  /** Social card title. Defaults to `title`, which is the site convention. */
+  ogTitle?: string;
+  /** Social card description. Defaults to `description`. */
+  ogDescription?: string;
   path?: string;
   ogImagePath?: string;
   canonicalUrl?: string;
@@ -27,6 +31,8 @@ interface Props {
 const {
   title = SITE.titleDefault,
   description = SITE.description,
+  ogTitle,
+  ogDescription,
   path = "/",
   ogImagePath = CANON_PATHS.ogDefault,
   canonicalUrl,
@@ -43,6 +49,8 @@ const siteOrigin = Astro.site ?? new URL(SITE_ORIGIN);
 const pagePath = path === "/" ? withBase("/") : withBase(path);
 const canonical = canonicalUrl ?? new URL(pagePath, siteOrigin).href;
 const ogAbs = new URL(withBase(ogImagePath), siteOrigin).href;
+const socialTitle = ogTitle ?? title;
+const socialDescription = ogDescription ?? description;
 
 const graph: Record<string, unknown>[] = [
   {
@@ -162,14 +170,14 @@ const jsonLd = {
         <meta property="article:published_time" content={publishedTime} />
       ) : null
     }
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={socialTitle} />
+    <meta property="og:description" content={socialDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogAbs} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@CoriolisAgency" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={socialTitle} />
+    <meta name="twitter:description" content={socialDescription} />
     <meta name="twitter:image" content={ogAbs} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <UtmCapture />

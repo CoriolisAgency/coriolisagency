@@ -619,3 +619,31 @@ export const FAQ_HOSTING: FaqItem[] = [
     a: "No. Payments run through a merchant account approved for firearms, connected to checkout through a payment gateway. Coriolis installs the gateway at setup, and the merchant account and its fees are yours.",
   },
 ];
+
+/** /ffl-messenger-enterprise. Present tense. Enterprise is written as shipped. */
+export const FAQ_FFL_MESSENGER_ENTERPRISE: FaqItem[] = [
+  {
+    q: "What does Enterprise include?",
+    a: "The API, an MCP server, SSO, custom integrations and custom work by Coriolis, Tickets, Workflows and Pro multi-user seats. Workflows are rules that route, auto-assign and escalate tickets. Pro seats are for employees and sales and inventory reps. Data processing agreements are available to review, and SOC 2 readiness planning is part of scoping.",
+  },
+  {
+    q: "Can you read our messages?",
+    a: "No. Every message, document, and ticket is end-to-end encrypted.",
+  },
+  {
+    q: "What about SOC 2?",
+    a: "SOC 2 readiness planning. We show you where we are during scoping.",
+  },
+  {
+    q: "Can we see the DPA before we sign anything?",
+    a: "Yes. You can review the data processing agreements during scoping.",
+  },
+  {
+    q: "Who can get on FFL Messenger?",
+    a: "Verified FFL holders only. Sign-up starts with your FFL number. No brands, no consumers, no public feed.",
+  },
+  {
+    q: "What’s an MCP server?",
+    a: "It lets your own AI tools read and act on FFL Messenger with the permissions you set.",
+  },
+];
