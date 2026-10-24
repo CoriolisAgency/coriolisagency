@@ -22,19 +22,20 @@ const e2ee =
   "Every message, document, and ticket is end-to-end encrypted. We can’t read them and neither can the ATF.";
 
 const forWhom = [
-  "Multi-location FFLs",
-  "Dealer groups",
+  "Any verified FFL that wants these features",
+  "Shops with one counter",
+  "Multi-location FFLs and dealer groups",
   "Businesses that work alongside distributors and the shops they sell to",
 ] as const;
 
 const steps = [
   {
     title: "Talk to Coriolis.",
-    body: "Tell us how many locations and licenses you run, and who on your team talks to other shops.",
+    body: "Tell us how your shop runs, and who on your team talks to other shops.",
   },
   {
     title: "Scope it.",
-    body: "We map the API, the MCP server, SSO, custom integrations, Tickets, Workflows and Pro seats to how your shops work. You review the DPAs.",
+    body: "We map the API, the MCP server, SSO, custom integrations, Tickets, Workflows and Pro seats to how you work. You review the DPAs.",
   },
   {
     title: "Get on FFL Messenger.",
@@ -48,16 +49,16 @@ const steps = [
 ---
 
 <BaseLayout
-  title="FFL Messenger for Dealer Groups and Larger FFLs | Coriolis"
-  description="Private, end-to-end encrypted messaging for verified FFLs. Enterprise includes an API, MCP server, SSO, Tickets, Workflows and Pro seats. DPAs available to review."
-  ogTitle="FFL Messenger for Larger FFL Businesses"
-  ogDescription="Private messaging for verified FFLs, end-to-end encrypted. Enterprise includes the API, an MCP server, SSO, Tickets, Workflows and Pro seats."
+  title="FFL Messenger Enterprise | Coriolis"
+  description="Private, end-to-end encrypted messaging for verified FFLs. Enterprise includes an API, MCP server, SSO, Tickets, a Workflow builder and Pro seats. DPAs available to review."
+  ogTitle="FFL Messenger Enterprise"
+  ogDescription="Private messaging for verified FFLs, end-to-end encrypted. Enterprise is for any FFL that wants the API, an MCP server, SSO, Tickets, a Workflow builder and Pro seats."
   path="/ffl-messenger-enterprise"
   faq={FAQ_FFL_MESSENGER_ENTERPRISE}
   extraJsonLd={[
     {
       "@type": "Service",
-      name: "FFL Messenger for larger FFL businesses",
+      name: "FFL Messenger Enterprise",
       serviceType: "Private messaging for verified FFLs",
       provider: { "@id": `${LINKS.home}/#organization` },
       areaServed: { "@type": "Country", name: "United States" },
@@ -70,10 +71,10 @@ const steps = [
         Secure Private Messaging for FFLs
       </p>
       <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]">
-        FFL Messenger for Larger FFL Businesses
+        FFL Messenger Enterprise
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        More locations. More licenses. More people trying to reach the right shop. FFL Messenger keeps that traffic private and encrypted. Enterprise adds the API, an MCP server, SSO, custom integrations, Tickets, Workflows and Pro seats.
+        People at other shops need to reach yours. FFL Messenger keeps that traffic private and encrypted. Enterprise is for any FFL that wants the API, an MCP server, SSO, custom integrations, Tickets, Workflows and Pro seats.
       </p>
       <div class="mt-8 flex w-full min-w-0 flex-col gap-2.5 sm:flex-row sm:flex-wrap">
         <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>
@@ -87,9 +88,9 @@ const steps = [
 
   <section class="border-b border-zinc-800/80 py-12" id="who">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class={h2}>Built for operations and IT leads at bigger FFLs</h2>
+      <h2 class={h2}>Built for operations and IT leads</h2>
       <p class={para}>
-        You run more than one counter. Maybe more than one license. Your people talk to other shops all day about transfers, inventory and service work.
+        Enterprise is for any FFL that wants these features. One counter or many. One license or several. Your people talk to other shops about transfers, inventory and service work.
       </p>
       <p class={para}>
         If that runs through personal cell phones and texts, you can’t see it. You can’t control it either.
@@ -149,7 +150,7 @@ const steps = [
         Custom integrations connect FFL Messenger to the systems you already run. Custom work by Coriolis covers the rest of what your operation needs.
       </p>
       <p class={para}>
-        If you have a system you want connected, tell us. Scoping maps it to how your shops work.
+        If you have a system you want connected, tell us. Scoping maps it to how you work.
       </p>
       <div class="mt-8">
         <a href={withBase("contact")} class={btnSecondary}>Scope it with us</a>
@@ -171,7 +172,10 @@ const steps = [
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
       <h2 class={h2}>Workflows</h2>
       <p class={para}>
-        Workflows are rules that route, auto-assign and escalate tickets. Larger shops repeat the same steps every day. Your team sets those rules up once inside FFL Messenger.
+        <strong class="text-white">Pro.</strong> In Pro, Workflows are fixed ticket rules that route, auto-assign and escalate tickets.
+      </p>
+      <p class={para}>
+        <strong class="text-white">Enterprise.</strong> Enterprise adds a Workflow builder so you can build your own custom workflows.
       </p>
       <p class={para}>Bring us the steps you repeat.</p>
       <div class="mt-8">
@@ -228,7 +232,7 @@ const steps = [
     </div>
   </section>
 
-  <FaqBlock heading="Questions larger FFLs ask" items={FAQ_FFL_MESSENGER_ENTERPRISE} />
+  <FaqBlock heading="Questions FFLs ask" items={FAQ_FFL_MESSENGER_ENTERPRISE} />
 
   <section class="border-t border-zinc-800/80 py-12 sm:py-16">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
@@ -236,10 +240,10 @@ const steps = [
         Secure Private Messaging for FFLs
       </p>
       <h2 class="mt-3 max-w-3xl text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-        Tell us what your shops need
+        Tell us what you need
       </h2>
       <p class="mt-4 max-w-3xl text-base leading-relaxed text-zinc-300">
-        We scope Enterprise to your shops. Paul answers.
+        We scope Enterprise to how you work. Paul answers.
       </p>
       <div class="mt-8 flex w-full min-w-0 flex-col gap-2.5 sm:flex-row sm:flex-wrap">
         <a href={withBase("contact")} class={btnPlan}>Talk to Coriolis</a>

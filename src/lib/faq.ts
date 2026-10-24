@@ -624,7 +624,7 @@ export const FAQ_HOSTING: FaqItem[] = [
 export const FAQ_FFL_MESSENGER_ENTERPRISE: FaqItem[] = [
   {
     q: "What does Enterprise include?",
-    a: "The API, an MCP server, SSO, custom integrations and custom work by Coriolis, Tickets, Workflows and Pro multi-user seats. Workflows are rules that route, auto-assign and escalate tickets. Pro seats are for employees and sales and inventory reps. Data processing agreements are available to review, and SOC 2 readiness planning is part of scoping.",
+    a: "The API, an MCP server, SSO, custom integrations and custom work by Coriolis, Tickets, Workflows and Pro multi-user seats. In Pro, Workflows are fixed ticket rules that route, auto-assign and escalate tickets. Enterprise adds a Workflow builder so you can build your own custom workflows. Pro seats are for employees and sales and inventory reps. Enterprise is for any FFL that wants these features. Data processing agreements are available to review, and SOC 2 readiness planning is part of scoping.",
   },
   {
     q: "Can you read our messages?",
