@@ -128,7 +128,7 @@ export const POS_PAGES: PosPage[] = [
       linkLead: "Read the ",
       linkLabel: "Naples Gun Shop case study",
       status: "live",
-      placeholder: "Full case study coming soon.",
+      placeholder: "Full case study to follow.",
       // TODO(Paul): case-study body
       body: null,
     },
@@ -317,7 +317,7 @@ export const POS_PAGES: PosPage[] = [
       linkLead: "See the ",
       linkLabel: "Target Shotguns case study",
       status: "live",
-      placeholder: "Full case study coming soon.",
+      placeholder: "Full case study to follow.",
       // TODO(Paul): case-study body
       body: null,
     },
@@ -420,7 +420,7 @@ export const POS_PAGES: PosPage[] = [
     caseStudy: {
       shop: "Wisconsin Firearms Training Center",
       status: "soon",
-      placeholder: "Full case study coming soon.",
+      placeholder: "Full case study to follow.",
       // TODO(Paul): case-study body
       body: null,
     },
