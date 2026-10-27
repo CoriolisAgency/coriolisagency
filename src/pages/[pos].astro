@@ -1,11 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
-import { FAQ_POS, POS_PAGES, posBySlug } from "../lib/pos";
-import { linkClass } from "../lib/links";
-import { CANON_PATHS } from "../lib/site";
+import PosHero from "../components/PosHero.astro";
+import TalkSection from "../components/TalkSection.astro";
+import {
+  POS_PAGES,
+  posBreadcrumbList,
+  posBySlug,
+  type PosInline,
+} from "../lib/pos";
+import { LINKS, linkClass } from "../lib/links";
 import { withBase } from "../lib/base";
 
 export function getStaticPaths() {
@@ -18,37 +23,97 @@ if (!page) {
 }
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
-import TalkSection from "../components/TalkSection.astro";
+const siblings = POS_PAGES.filter((p) => p.slug !== page.slug);
+
+function inlineHref(part: Exclude<PosInline, string>) {
+  if (part.href.startsWith("http")) return part.href;
+  return withBase(part.href);
+}
+
+function isExternal(part: Exclude<PosInline, string>) {
+  return Boolean(part.external) || part.href.startsWith("http");
+}
 ---
 
 <BaseLayout
   title={page.title}
   description={page.description}
   path={page.path}
-  ogImagePath={CANON_PATHS.storefront}
-  faq={[...FAQ_POS]}
+  ogImagePath={page.heroImage.src}
+  faq={page.faq}
+  extraJsonLd={[posBreadcrumbList(LINKS.home, page)]}
 >
-  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <p
-        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
-      >
-        Gun Store POS
+  <PosHero
+    eyebrow="Gun Store POS"
+    h1={page.h1}
+    lede={page.lede}
+    jumpLabel={page.jumpLabel}
+    image={page.heroImage}
+  />
+
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+    <EcommerceCluster current="ecommerce" />
+  </div>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">{page.featuresTitle}</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        {page.featuresIntro}
       </p>
-      <h1
-        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
-      >
-        {page.name} + WooCommerce
-      </h1>
-      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        {page.lede}
-      </p>
-      <div class="mt-8">
-        <CtaRow talk primary="ecommerce" showGsa={false} showAccelerator showContact />
+      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+        {
+          page.features.map((card) => (
+            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+              <h3 class="text-base font-semibold text-white">{card.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-zinc-400">{card.body}</p>
+            </article>
+          ))
+        }
       </div>
-      <EcommerceCluster current="ecommerce" />
+      {
+        page.docsHref && page.docsLabel && (
+          <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400">
+            {page.docsLead}
+            <a href={page.docsHref} class={linkClass} {...ext}>
+              {page.docsLabel}
+            </a>
+          </p>
+        )
+      }
     </div>
   </section>
+
+  {
+    page.featuresMore && page.featuresMoreTitle && (
+      <section class="border-b border-zinc-800/80 py-12">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+          <h2 class="text-xl font-semibold text-white">{page.featuresMoreTitle}</h2>
+          <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+            {page.featuresMore.map((card) => (
+              <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+                <h3 class="text-base font-semibold text-white">{card.title}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-zinc-400">{card.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    page.onlineRange && (
+      <section class="border-b border-zinc-800/80 py-12">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+          <h2 class="text-xl font-semibold text-white">{page.onlineRange.title}</h2>
+          <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+            {page.onlineRange.body}
+          </p>
+        </div>
+      </section>
+    )
+  }
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
@@ -56,9 +121,25 @@ import TalkSection from "../components/TalkSection.astro";
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
         {page.keepRegister}
       </p>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        {page.extra}
-      </p>
+      {
+        page.extra && (
+          <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+            {page.extra.map((part) =>
+              typeof part === "string" ? (
+                part
+              ) : (
+                <a
+                  href={inlineHref(part)}
+                  class={linkClass}
+                  {...(isExternal(part) ? ext : {})}
+                >
+                  {part.text}
+                </a>
+              ),
+            )}
+          </p>
+        )
+      }
       {
         page.vendorHref ? (
           <p class="mt-4 text-sm text-zinc-500">
@@ -69,9 +150,26 @@ import TalkSection from "../components/TalkSection.astro";
             . Marks of their owners.
           </p>
         ) : (
-          <p class="mt-4 text-sm text-zinc-500">
-            {page.name} marks belong to their owners. Coriolis builds the
-            website.
+          <p class="mt-4 text-sm text-zinc-500">{page.vendorNote}</p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">{page.caseStudy.shop}</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        {page.caseStudy.placeholder}
+      </p>
+      {
+        page.caseStudy.href && page.caseStudy.linkLabel && (
+          <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+            {page.caseStudy.linkLead}
+            <a href={withBase(page.caseStudy.href)} class={linkClass}>
+              {page.caseStudy.linkLabel}
+            </a>
+            .
           </p>
         )
       }
@@ -82,19 +180,24 @@ import TalkSection from "../components/TalkSection.astro";
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">The other registers</h2>
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Same keep-your-register message. Warlord and FFL Accelerator connect
-        any POS that works with WooCommerce. AIM, GunBiz, Rapid Gun Systems and Trident 1 are four examples. The two we promote, GunBiz and AIM, are on{" "}
-        <a href={withBase("gun-store-pos")} class={linkClass}>Gun Store POS</a>.
+        {
+          page.siblingsIntro.map((part) =>
+            typeof part === "string" ? (
+              part
+            ) : (
+              <a href={withBase(part.href)} class={linkClass}>
+                {part.text}
+              </a>
+            ),
+          )
+        }
       </p>
       <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
-        <li>
-          <a href={withBase("gun-store-pos")} class={linkClass}>Gun Store POS</a>
-        </li>
         {
-          POS_PAGES.filter((p) => p.slug !== page.slug).map((p) => (
+          siblings.map((p) => (
             <li>
               <a href={withBase(p.slug)} class={linkClass}>
-                {p.name}
+                {p.navLabel}
               </a>
             </li>
           ))
@@ -104,22 +207,24 @@ import TalkSection from "../components/TalkSection.astro";
   </section>
 
   <section class="py-12">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <p class="max-w-3xl text-sm text-zinc-400">
-        Plans and setup live on{" "}
-        <a href={withBase("ecommerce")} class={linkClass}>FFL ecommerce</a>.
-        Leaving a closed storefront?{" "}
-        <a href={withBase("ammoready-alternative")} class={linkClass}
-          >AmmoReady</a
-        >
-        {" · "}
-        <a href={withBase("gearfire-alternative")} class={linkClass}>Gearfire</a>.
+        {
+          page.linksLead.map((part) =>
+            typeof part === "string" ? (
+              part
+            ) : (
+              <a href={withBase(part.href)} class={linkClass}>
+                {part.text}
+              </a>
+            ),
+          )
+        }
       </p>
-      <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
     </div>
   </section>
 
-  <FaqBlock items={[...FAQ_POS]} />
+  <FaqBlock items={page.faq} />
 
   <TalkSection />
 </BaseLayout>

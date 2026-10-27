@@ -126,7 +126,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     cta: [
       "Run AIM at the counter? See ",
-      { text: "AIM POS + WooCommerce", href: "/aim-pos" },
+      { text: "WooCommerce for AIM", href: "/aim-pos" },
       ", or what ",
       { text: "FFL Accelerator", href: "/ecommerce#ffl-accelerator" },
       " includes.",
@@ -264,7 +264,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     cta: [
       "Run GunBiz or MicroBiz at the counter? See ",
-      { text: "GunBiz POS + WooCommerce", href: "/gunbiz-pos" },
+      { text: "WooCommerce for GunBiz", href: "/gunbiz-pos" },
       ", or how ",
       { text: "FFL dropshipping", href: "/firearms-dropshipping" },
       " works.",
@@ -333,7 +333,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Run a range with a pro shop? See ",
       { text: "websites for ranges, gunsmiths and instructors", href: "/websites-for-ranges-gunsmiths-instructors" },
       ", or ",
-      { text: "AIM POS + WooCommerce", href: "/aim-pos" },
+      { text: "WooCommerce for AIM", href: "/aim-pos" },
       ".",
     ],
     talkHeading: "Tell us about your range",

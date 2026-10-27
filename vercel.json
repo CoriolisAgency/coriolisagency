@@ -470,13 +470,23 @@
     },
     {
       "source": "/pos-integration-for-gun-store-ecommerce",
-      "destination": "/ecommerce",
+      "destination": "/gun-store-pos",
       "permanent": true
     },
     {
       "source": "/gun-store-pos-for-ffls",
-      "destination": "/ecommerce",
+      "destination": "/gun-store-pos",
       "permanent": true
+    },
+    {
+      "source": "/wisconsin-firearms-training-center-selects-coriolis-agency-for-ffl-website-design-trident-1-pos-integration-and-email-marketing",
+      "destination": "/trident-1-pos",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/aim-pos-woocommerce",
+      "destination": "/aim-pos",
+      "statusCode": 301
     },
     {
       "source": "/axis-pos-woocommerce-integration-now-available-real-time-sync-for-ffl-dealers",

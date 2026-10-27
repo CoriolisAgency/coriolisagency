@@ -189,8 +189,10 @@ Sum of clones with clicks is ~50, split thin. Do not keep 20 near-duplicate page
 | `/coriolis-agency-announces-support-for-corestore-pos-…/` | `/gun-store-pos` (OPS-29; was `/corestore-pos`) | 6 |
 | `/rapid-gun-systems-pos-integration-…/` | `/rapid-gun-systems-pos` | 3 |
 | `/axis-pos-woocommerce-a-powerful-integration-…/` | `/ecommerce` | 3 |
-| `/pos-integration-for-gun-store-ecommerce/` | `/ecommerce` | 2 |
-| `/gun-store-pos-for-ffls/` | `/ecommerce` | 0 (646 impr) |
+| `/pos-integration-for-gun-store-ecommerce/` | `/gun-store-pos` (SEO-U38; was `/ecommerce`) | 2 |
+| `/gun-store-pos-for-ffls/` | `/gun-store-pos` (SEO-U38; was `/ecommerce`) | 0 (646 impr) |
+| `/wisconsin-firearms-training-center-selects-coriolis-agency-for-ffl-website-design-trident-1-pos-integration-and-email-marketing/` | `/trident-1-pos` (SEO-U38; was 404) | 0 (22 impr) |
+| `/category/aim-pos-woocommerce/` | `/aim-pos` (SEO-U38; was 404 after 308) | 1 |
 
 ### Email (was “let die”) → Accelerator page
 

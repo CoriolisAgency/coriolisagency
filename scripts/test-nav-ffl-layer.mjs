@@ -13,6 +13,10 @@ const hrefs = [...navSrc.matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]);
 assert.deepEqual(labels, [
   "FFL Ecommerce",
   "Gun Store POS",
+  "WooCommerce for AIM",
+  "WooCommerce for Rapid",
+  "WooCommerce for GunBiz",
+  "WooCommerce for Trident 1",
   "GunSearchEngine.com",
   "AI Studio",
   "Press Room",
@@ -20,6 +24,10 @@ assert.deepEqual(labels, [
 assert.deepEqual(hrefs, [
   "ecommerce",
   "gun-store-pos",
+  "aim-pos",
+  "rapid-gun-systems-pos",
+  "gunbiz-pos",
+  "trident-1-pos",
   "https://gunsearchengine.com/for-dealers",
   "ai-studio",
   "press",
@@ -238,4 +246,19 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
   assert.doesNotMatch(fx, /Core is free forever/);
   assert.match(read("src/lib/links.ts"), /demandIntel: "\/demand-intelligence",\s*demandDemo: "\/demand-intelligence#demo",/);
 }
+{
+  const v = JSON.parse(read("vercel.json"));
+  const bySrc = Object.fromEntries((v.redirects || []).map((r) => [r.source, r]));
+  assert.equal(bySrc["/gun-store-pos-for-ffls"].destination, "/gun-store-pos");
+  assert.equal(bySrc["/pos-integration-for-gun-store-ecommerce"].destination, "/gun-store-pos");
+  assert.equal(
+    bySrc["/wisconsin-firearms-training-center-selects-coriolis-agency-for-ffl-website-design-trident-1-pos-integration-and-email-marketing"].destination,
+    "/trident-1-pos",
+  );
+  assert.equal(bySrc["/category/aim-pos-woocommerce"].destination, "/aim-pos");
+  assert.match(chrome, /id="pos-menu"/);
+  assert.match(chrome, /aria-controls="pos-menu"/);
+  assert.match(chrome, /aria-label="Gun Store POS pages"/);
+}
+
 console.log("test-nav-ffl-layer: ok");
