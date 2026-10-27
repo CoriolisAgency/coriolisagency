@@ -7,8 +7,6 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const kit = path.join(root, "popup-kit");
 const DASH = /[\u2013\u2014]/;
-const BANNED = /GunBroker|MasterFFL/i;
-const FFLM_BANNED = /parser|vendor platform|\bPOS\b/i;
 
 function sha256(buf) {
   return createHash("sha256").update(buf).digest("hex");
@@ -56,7 +54,7 @@ assert.deepEqual(read("public/popup/coriolis-popup.v1.js"), jsKit);
 assert.deepEqual(read("public/popup/coriolis-popup.v1.css"), cssKit);
 assert.equal(fs.readFileSync(path.join(kit, "VERSION"), "utf8").trim(), "1");
 
-// Copy: no em/en dash, no competitor names; kit has none of the FFLM embargo words.
+// Copy: no em/en dash. Banned terms are checked by scripts/popup-copy-ban.mjs from a CI secret.
 const copyTargets = [
   path.join(root, "src/lib/popup-config.ts"),
   ...walkFiles(kit).filter((f) => path.basename(f) !== "SHA256SUMS"),
@@ -64,7 +62,6 @@ const copyTargets = [
 for (const file of copyTargets) {
   const text = fs.readFileSync(file, "utf8");
   assert.doesNotMatch(text, DASH, `em/en dash in ${path.relative(root, file)}`);
-  assert.doesNotMatch(text, BANNED, `banned competitor in ${path.relative(root, file)}`);
 }
 
 // Config: agency lane.
@@ -75,14 +72,10 @@ assert.equal(AGENCY_POPUP_CONFIG.endpoint, "/api/popup");
 assert.deepEqual(AGENCY_POPUP_CONFIG.denyPaths, [
   "/contact",
   "/msa",
-  "/gun-store-pos-comparison",
   "/betsy-ai",
 ]);
 assert.equal(AGENCY_POPUP_CONFIG.copy.headline, "Need a gun store website that sells?");
 assert.ok(!JSON.stringify(AGENCY_POPUP_CONFIG).includes("ffl-messenger-enterprise"));
-assert.doesNotMatch(JSON.stringify(AGENCY_POPUP_CONFIG.copy), FFLM_BANNED);
-assert.doesNotMatch(fs.readFileSync(path.join(kit, "README.md"), "utf8"), FFLM_BANNED);
-assert.doesNotMatch(jsKit.toString("utf8"), FFLM_BANNED);
 
 const core = await import("../popup-kit/server/subscribe-core.ts");
 const {

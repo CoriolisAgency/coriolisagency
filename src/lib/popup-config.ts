@@ -5,7 +5,7 @@ export const AGENCY_POPUP_CONFIG = {
   lane: "agency-web",
   endpoint: "/api/popup",
   privacyUrl: "/privacy",
-  denyPaths: ["/contact", "/msa", "/gun-store-pos-comparison", "/betsy-ai"],
+  denyPaths: ["/contact", "/msa", "/betsy-ai"],
   copy: {
     eyebrow: "Coriolis, LLC",
     headline: "Need a gun store website that sells?",
