@@ -71,15 +71,86 @@ const family = [
       {
         MAIN_NAV.map((item) => {
           const external = "external" in item && item.external;
+          const children = "children" in item ? item.children : undefined;
+          const pillActive = !external && active(item.href);
+          const pillClass = [
+            "rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors sm:text-sm",
+            pillActive
+              ? "border-gold/50 bg-gold/10 text-gold"
+              : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
+          ];
+          if (children) {
+            return (
+              <div class="pos-nav relative" data-pos-nav>
+                <div
+                  class:list={[
+                    "flex items-stretch overflow-hidden rounded-sm border",
+                    pillActive
+                      ? "border-gold/50 bg-gold/10 text-gold"
+                      : "border-zinc-700 text-zinc-200",
+                  ]}
+                >
+                  <a
+                    href={withBase(item.href)}
+                    class="px-2.5 py-1.5 text-xs font-medium sm:text-sm"
+                  >
+                    {item.label}
+                  </a>
+                  <button
+                    type="button"
+                    class:list={[
+                      "pos-nav-toggle inline-flex items-center border-l px-1.5",
+                      pillActive ? "border-gold/40" : "border-zinc-700",
+                    ]}
+                    aria-expanded="false"
+                    aria-controls="pos-menu"
+                    aria-label="Gun Store POS pages"
+                  >
+                    <svg
+                      viewBox="0 0 20 20"
+                      class="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 7.5l5 5 5-5"></path>
+                    </svg>
+                  </button>
+                </div>
+                <ul
+                  id="pos-menu"
+                  class="pos-menu absolute right-0 top-full z-50 mt-1 min-w-56 border border-zinc-700 bg-zinc-950 py-1"
+                >
+                  {
+                    children.map((child) => (
+                      <li>
+                        <a
+                          href={withBase(child.href)}
+                          class:list={[
+                            "block px-3 py-2 text-sm hover:bg-zinc-800",
+                            path === `/${child.href}`
+                              ? "text-gold"
+                              : "text-zinc-200",
+                          ]}
+                          aria-current={
+                            path === `/${child.href}` ? "page" : undefined
+                          }
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            );
+          }
           return (
             <a
               href={external ? item.href : withBase(item.href)}
-              class:list={[
-                "rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors sm:text-sm",
-                !external && active(item.href)
-                  ? "border-gold/50 bg-gold/10 text-gold"
-                  : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
-              ]}
+              class:list={pillClass}
               target={external ? "_blank" : undefined}
               rel={external ? "noopener noreferrer" : undefined}
             >
@@ -150,20 +221,47 @@ const family = [
     {
       MAIN_NAV.map((item) => {
         const external = "external" in item && item.external;
+        const children = "children" in item ? item.children : undefined;
         return (
-          <a
-            href={external ? item.href : withBase(item.href)}
-            class:list={[
-              "rounded-sm border px-3 py-2 text-sm font-medium transition-colors",
-              !external && active(item.href)
-                ? "border-gold/50 bg-gold/10 text-gold"
-                : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
-            ]}
-            target={external ? "_blank" : undefined}
-            rel={external ? "noopener noreferrer" : undefined}
-          >
-            {item.label}
-          </a>
+          <>
+            <a
+              href={external ? item.href : withBase(item.href)}
+              class:list={[
+                "rounded-sm border px-3 py-2 text-sm font-medium transition-colors",
+                !external && active(item.href)
+                  ? "border-gold/50 bg-gold/10 text-gold"
+                  : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
+              ]}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noopener noreferrer" : undefined}
+            >
+              {item.label}
+            </a>
+            {
+              children && (
+                <ul class="ml-4 flex flex-col gap-1">
+                  {children.map((child) => (
+                    <li>
+                      <a
+                        href={withBase(child.href)}
+                        class:list={[
+                          "flex min-h-11 items-center rounded-sm border px-3 py-2 text-sm font-medium transition-colors",
+                          path === `/${child.href}`
+                            ? "border-gold/50 bg-gold/10 text-gold"
+                            : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
+                        ]}
+                        aria-current={
+                          path === `/${child.href}` ? "page" : undefined
+                        }
+                      >
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
+          </>
         );
       })
     }
@@ -215,7 +313,40 @@ const family = [
       if (event.matches && !drawer.hidden) shut({ restoreFocus: false });
     });
   }
+
+  const posNav = document.querySelector("[data-pos-nav]");
+  const posToggle = posNav?.querySelector(".pos-nav-toggle");
+  if (posNav instanceof HTMLElement && posToggle instanceof HTMLButtonElement) {
+    const setOpen = (open) => {
+      posNav.classList.toggle("is-open", open);
+      posToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    posToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      setOpen(posToggle.getAttribute("aria-expanded") !== "true");
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (posToggle.getAttribute("aria-expanded") !== "true") return;
+      setOpen(false);
+      posToggle.focus();
+    });
+    document.addEventListener("click", (event) => {
+      if (!posNav.contains(event.target)) setOpen(false);
+    });
+  }
 </script>
+
+<style>
+  .pos-menu {
+    display: none;
+  }
+  .pos-nav:hover .pos-menu,
+  .pos-nav:focus-within .pos-menu,
+  .pos-nav.is-open .pos-menu {
+    display: block;
+  }
+</style>
 
 <main class="flex min-w-0 flex-1 flex-col">
   <slot />

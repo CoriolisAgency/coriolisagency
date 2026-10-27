@@ -37,9 +37,8 @@
 | Email for FFL ecommerce | **This site** `/email-marketing-for-ffl-ecommerce` |
 | WooCommerce vs Shopify (gun stores) | **This site** `/woocommerce-vs-shopify-for-gun-stores` |
 | Can you use WooCommerce to sell guns | **This site** `/can-you-use-woocommerce-to-sell-guns` |
-| Gun Store POS pillar: "gun store pos", "gun store pos software", "gun store pos system", "gun store point of sale", "ffl pos (software)", "point of sale software for gun shop", "pos system that integrates with ecommerce for gun store" | **This site** `/gun-store-pos` (promotes GunBiz and AIM + WooCommerce). Never targets plan-price terms (`/ecommerce` owns them), "how the stack fits" (`/stack` owns it), "woocommerce firearms/guns" (`/can-you-use-woocommerce-to-sell-guns`), FastBound review or alternatives terms (bound-book evaluation, out of lane), or Axis terms. Keyword targets and GSC actuals: [`docs/gun-store-pos-keywords.md`](gun-store-pos-keywords.md) |
-| Supporting (promoted): "aim pos", "aim point of sale"; "gunbiz pos" | **This site** `/aim-pos`, `/gunbiz-pos` (`/microbiz-pos` 301s here) |
-| Siblings: "trident 1 pos", "trident1", "trident one"; "rapid gun systems pos" | **This site** `/trident-1-pos`, `/rapid-gun-systems-pos` |
+| Gun Store POS pillar: "gun store pos", "gun store pos software", "gun store pos system", "gun store point of sale", "ffl pos (software)", "point of sale software for gun shop", "pos system that integrates with ecommerce for gun store" | **This site** `/gun-store-pos` (AIM, Rapid, GunBiz and Trident 1 equally, each with a WooCommerce page). Never targets plan-price terms (`/ecommerce` owns them), "how the stack fits" (`/stack` owns it), "woocommerce firearms/guns" (`/can-you-use-woocommerce-to-sell-guns`), FastBound review or alternatives terms (bound-book evaluation, out of lane), or Axis terms. Keyword targets and GSC actuals: [`docs/gun-store-pos-keywords.md`](gun-store-pos-keywords.md) |
+| Supporting: "aim pos", "aim point of sale"; "rapid gun systems pos"; "gunbiz pos"; "trident 1 pos", "trident1", "trident one" | **This site** `/aim-pos`, `/rapid-gun-systems-pos`, `/gunbiz-pos` (`/microbiz-pos` 301s here), `/trident-1-pos` |
 | Gun store POS comparison | None. `/gun-store-pos-comparison` is an orphan, noindex page: owns no keywords, linked from no page, out of the sitemap. |
 | FFL Accelerator $569 program story / offer name ("FFL Accelerator", "ffl accelerator", "fflaccelerator") | **fflaccelerator.com** `/` (owns the offer name; only ads destination `/lp/`). No agency page targets the offer name in a title or H1. Ads never land on coriolisagency.com |
 | AI Studio / Coriolis products as capability | **This site** `/ai-studio` (`/ai-factory` → 301) |
@@ -76,7 +75,7 @@
 - Home → four pillars (FFL Ecommerce, Gun Store POS, AI Studio, Demand Intelligence)
 - Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / Gearfire / best-store / email / POS cluster (Gun Store POS `/gun-store-pos`, AIM POS, GunBiz POS, Trident 1 POS, Rapid Gun Systems) + `/stack`
 - Support pages (OPS-3, one per owned intent) → their owner: `/leave-ammoready` → `/ammoready-alternative`, `/leave-gearfire` → `/gearfire-alternative`, `/ffl-website-cost` → `/ecommerce`. They also link each other and `/ecommerce`. FFLA gets no comparison posts.
-- Gun Store POS `/gun-store-pos` → `/gunbiz-pos`, `/aim-pos` (main cards), `/trident-1-pos`, `/rapid-gun-systems-pos` ("Also works with WooCommerce"), `/contact`
+- Gun Store POS `/gun-store-pos` → `/aim-pos`, `/rapid-gun-systems-pos`, `/gunbiz-pos`, `/trident-1-pos` (equal cards, "WooCommerce for ..." anchors), `/contact`
 - AI Studio → live product URLs (proof, not a catalog)
 - Demand Intelligence lives on this site at `/demand-intelligence` (D-N16). Accounts, the portal and the API stay on GunSearchEngine.
 - About → family lattice
