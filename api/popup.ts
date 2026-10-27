@@ -2,7 +2,7 @@ import {
   handlePopupSubscribe,
   popupStatus,
   type PopupSubscribeBody,
-} from "../popup-kit/server/subscribe-core";
+} from "../popup-kit/server/subscribe-core.js";
 
 const SITE = "agency" as const;
 const LANE = "agency-web";

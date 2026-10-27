@@ -187,6 +187,7 @@ assert.equal(lgFflm.backend, "none");
 const none = popupStatus({}, "agency");
 assert.equal(none.backend, "none");
 assert.equal(none.enabled, false);
+// GET /api/popup returns this enabled flag. No backend means 503 on POST.
 
 const both = popupStatus(secretEnv, "agency");
 assert.equal(both.backend, "mailchimp");
@@ -272,10 +273,26 @@ globalThis.fetch = async (url, init) => {
   return new Response("{}", { status: 200 });
 };
 
+// Mailchimp wins when both backends are configured: only the Mailchimp API
+// host is called, never the Ops URL. GET enabled follows popupStatus.
+fetchCalls = [];
+const bothPost = await handlePopupSubscribe(secretEnv, "agency", {
+  email: "dealer@shop.example",
+  t: 2500,
+});
+assert.equal(bothPost.ok, true);
+assert.ok(fetchCalls.length >= 1, "Mailchimp path must call fetch");
+for (const call of fetchCalls) {
+  assert.match(call.url, /^https:\/\/us6\.api\.mailchimp\.com\//);
+  assert.equal(call.url.includes("ops.example.invalid"), false);
+  assert.equal(call.url.includes("/api/forms/subscribe"), false);
+}
+
 const mcEnv = {
   MAILCHIMP_API_KEY: "test-key-us6",
   MAILCHIMP_AUDIENCE_ID: "aud-123",
 };
+fetchCalls = [];
 const mcPost = await handlePopupSubscribe(mcEnv, "agency", {
   email: "Owner@Example.com",
   t: 2500,
