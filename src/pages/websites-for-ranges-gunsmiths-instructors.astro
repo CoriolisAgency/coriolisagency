@@ -5,6 +5,7 @@
  * Other client names are pulled (Chief 8:57 and 8:59 AM ET). Check handoff/SEO-U31/FINAL.md before adding any name.
  */
 import BaseLayout from "../layouts/BaseLayout.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import TalkSection from "../components/TalkSection.astro";
 import { LINKS, linkClass } from "../lib/links";
@@ -45,6 +46,7 @@ const para = "mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400";
         <a href="#instructors" class={linkClass}>Instructors</a><span aria-hidden="true">·</span>
         <a href="#talk" class={linkClass}>Tell us about your business</a>
       </p>
+      <EcommerceCluster current="websites-for-ranges-gunsmiths-instructors" />
     </div>
   </section>
 

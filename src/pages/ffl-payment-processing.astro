@@ -5,6 +5,7 @@
  * No payments brand name, no fee figures, no approval promises, no timelines.
  */
 import BaseLayout from "../layouts/BaseLayout.astro";
+import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import TalkSection from "../components/TalkSection.astro";
 import { LINKS, btnPlan, linkClass } from "../lib/links";
@@ -44,6 +45,7 @@ const para = "mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400";
       <div class="mt-8">
         <a href="#talk" class={btnPlan}>Tell us how you take payments today</a>
       </div>
+      <EcommerceCluster current="ffl-payment-processing" />
     </div>
   </section>
 
