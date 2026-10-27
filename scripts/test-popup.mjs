@@ -3,12 +3,13 @@ import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { embargoHits, selfTest as embargoSelfTest } from "./embargo-guard.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const kit = path.join(root, "popup-kit");
 const DASH = /[\u2013\u2014]/;
 const BANNED = /GunBroker|MasterFFL/i;
-const FFLM_BANNED = /parser|vendor platform|\bPOS\b/i;
+const FFLM_BANNED = /vendor platform|\bPOS\b/i;
 
 function sha256(buf) {
   return createHash("sha256").update(buf).digest("hex");
@@ -83,6 +84,24 @@ assert.ok(!JSON.stringify(AGENCY_POPUP_CONFIG).includes("ffl-messenger-enterpris
 assert.doesNotMatch(JSON.stringify(AGENCY_POPUP_CONFIG.copy), FFLM_BANNED);
 assert.doesNotMatch(fs.readFileSync(path.join(kit, "README.md"), "utf8"), FFLM_BANNED);
 assert.doesNotMatch(jsKit.toString("utf8"), FFLM_BANNED);
+
+// Embargoed terms: hashed check only (see scripts/embargo-guard.mjs).
+embargoSelfTest(assert);
+assert.equal(embargoHits(JSON.stringify(AGENCY_POPUP_CONFIG)), 0, "embargoed term in agency popup config");
+{
+  const guarded = [
+    ...fs.readdirSync(kit, { recursive: true }).map((p) => path.join(kit, String(p))),
+    path.join(root, "public", "popup", "coriolis-popup.v1.js"),
+    path.join(root, "public", "popup", "coriolis-popup.v1.css"),
+    path.join(root, "api", "popup.ts"),
+    path.join(root, "src", "lib", "popup-config.ts"),
+    path.join(root, "scripts", "test-popup.mjs"),
+    path.join(root, "scripts", "verify-popup.mjs"),
+  ].filter((p) => fs.statSync(p).isFile());
+  for (const p of guarded) {
+    assert.equal(embargoHits(fs.readFileSync(p, "utf8")), 0, `embargoed term in ${path.relative(root, p)}`);
+  }
+}
 
 const core = await import("../popup-kit/server/subscribe-core.ts");
 const {
