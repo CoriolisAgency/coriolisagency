@@ -84,7 +84,7 @@ const family = [
               <div class="pos-nav relative" data-pos-nav>
                 <div
                   class:list={[
-                    "flex items-stretch overflow-hidden rounded-sm border",
+                    "pos-nav-trigger flex items-stretch overflow-hidden rounded-sm border",
                     pillActive
                       ? "border-gold/50 bg-gold/10 text-gold"
                       : "border-zinc-700 text-zinc-200",
@@ -119,31 +119,33 @@ const family = [
                     </svg>
                   </button>
                 </div>
-                <ul
-                  id="pos-menu"
-                  class="pos-menu absolute right-0 top-full z-50 mt-1 min-w-56 border border-zinc-700 bg-zinc-950 py-1"
-                >
-                  {
-                    children.map((child) => (
-                      <li>
-                        <a
-                          href={withBase(child.href)}
-                          class:list={[
-                            "block px-3 py-2 text-sm hover:bg-zinc-800",
-                            path === `/${child.href}`
-                              ? "text-gold"
-                              : "text-zinc-200",
-                          ]}
-                          aria-current={
-                            path === `/${child.href}` ? "page" : undefined
-                          }
-                        >
-                          {child.label}
-                        </a>
-                      </li>
-                    ))
-                  }
-                </ul>
+                <div class="pos-menu-panel absolute right-0 top-full z-50 pt-1">
+                  <ul
+                    id="pos-menu"
+                    class="pos-menu min-w-56 border border-zinc-700 bg-zinc-950 py-1"
+                  >
+                    {
+                      children.map((child) => (
+                        <li>
+                          <a
+                            href={withBase(child.href)}
+                            class:list={[
+                              "block px-3 py-2 text-sm hover:bg-zinc-800",
+                              path === `/${child.href}`
+                                ? "text-gold"
+                                : "text-zinc-200",
+                            ]}
+                            aria-current={
+                              path === `/${child.href}` ? "page" : undefined
+                            }
+                          >
+                            {child.label}
+                          </a>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </div>
               </div>
             );
           }
@@ -317,34 +319,86 @@ const family = [
   const posNav = document.querySelector("[data-pos-nav]");
   const posToggle = posNav?.querySelector(".pos-nav-toggle");
   if (posNav instanceof HTMLElement && posToggle instanceof HTMLButtonElement) {
+    const CLOSE_MS = 200;
+    let closeTimer = 0;
+    let skipFocusOpen = false;
+    let openedByPointer = false;
+
     const setOpen = (open) => {
       posNav.classList.toggle("is-open", open);
       posToggle.setAttribute("aria-expanded", open ? "true" : "false");
     };
+    const openNow = () => {
+      if (skipFocusOpen) return;
+      window.clearTimeout(closeTimer);
+      posNav.classList.remove("is-dismissed");
+      setOpen(true);
+    };
+    const closeSoon = () => {
+      window.clearTimeout(closeTimer);
+      closeTimer = window.setTimeout(() => {
+        openedByPointer = false;
+        setOpen(false);
+        posNav.classList.remove("is-dismissed");
+      }, CLOSE_MS);
+    };
+    const dismiss = () => {
+      window.clearTimeout(closeTimer);
+      openedByPointer = false;
+      setOpen(false);
+      posNav.classList.add("is-dismissed");
+    };
+
+    posNav.addEventListener("mouseenter", () => {
+      openedByPointer = true;
+      openNow();
+    });
+    posNav.addEventListener("mouseleave", () => {
+      openedByPointer = false;
+      closeSoon();
+    });
+    posNav.addEventListener("focusin", openNow);
+    posNav.addEventListener("focusout", (event) => {
+      const next = event.relatedTarget;
+      if (next instanceof Node && posNav.contains(next)) return;
+      closeSoon();
+    });
     posToggle.addEventListener("click", (event) => {
       event.stopPropagation();
-      setOpen(posToggle.getAttribute("aria-expanded") !== "true");
+      const expanded = posToggle.getAttribute("aria-expanded") === "true";
+      if (expanded && openedByPointer) {
+        openedByPointer = false;
+        return;
+      }
+      if (expanded) dismiss();
+      else openNow();
     });
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
       if (posToggle.getAttribute("aria-expanded") !== "true") return;
-      setOpen(false);
+      skipFocusOpen = true;
+      dismiss();
       posToggle.focus();
+      skipFocusOpen = false;
     });
     document.addEventListener("click", (event) => {
-      if (!posNav.contains(event.target)) setOpen(false);
+      if (!posNav.contains(event.target)) dismiss();
     });
   }
 </script>
 
 <style>
-  .pos-menu {
+  /* Padding on the panel wrapper keeps the visual gap inside the hover target. */
+  .pos-menu-panel {
     display: none;
   }
-  .pos-nav:hover .pos-menu,
-  .pos-nav:focus-within .pos-menu,
-  .pos-nav.is-open .pos-menu {
+  .pos-nav:hover .pos-menu-panel,
+  .pos-nav:focus-within .pos-menu-panel,
+  .pos-nav.is-open .pos-menu-panel {
     display: block;
+  }
+  .pos-nav.is-dismissed .pos-menu-panel {
+    display: none;
   }
 </style>
 

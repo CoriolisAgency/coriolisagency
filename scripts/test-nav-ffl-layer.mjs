@@ -259,6 +259,12 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
   assert.match(chrome, /id="pos-menu"/);
   assert.match(chrome, /aria-controls="pos-menu"/);
   assert.match(chrome, /aria-label="Gun Store POS pages"/);
+  assert.match(chrome, /pos-menu-panel absolute right-0 top-full z-50 pt-1/);
+  assert.doesNotMatch(chrome, /class="pos-menu[^"]*\bmt-1\b/);
+  assert.match(chrome, /const CLOSE_MS = 200/);
+  assert.match(chrome, /addEventListener\("mouseenter"/);
+  assert.match(chrome, /addEventListener\("mouseleave"/);
+  assert.match(chrome, /<ul class="ml-4 flex flex-col gap-1">/);
 }
 
 console.log("test-nav-ffl-layer: ok");
