@@ -2,7 +2,7 @@
 /**
  * /ffl-messenger-enterprise
  * Brandy's approved mock. Live header and footer come from BaseLayout.
- * The only CTA is Talk to Coriolis, to /contact. No Pro CTA.
+ * The only CTA is Talk to Coriolis, to /contact?topic=ffl-messenger. No Pro CTA.
  * Not linked from nav, footer, or other pages.
  */
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -12,7 +12,7 @@ import { GOOGLE_REVIEWS_HREF, GOOGLE_REVIEW_COUNT } from "../lib/google-reviews"
 import { FAQ_FFL_MESSENGER_ENTERPRISE } from "../lib/faq";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
-const contact = withBase("contact");
+const contact = `${withBase("contact")}?topic=ffl-messenger`;
 ---
 
 <BaseLayout
