@@ -18,7 +18,6 @@ assert.deepEqual(labels, [
   "WooCommerce for GunBiz",
   "WooCommerce for Trident 1",
   "GunSearchEngine.com",
-  "AI Studio",
   "Press Room",
 ]);
 assert.deepEqual(hrefs, [
@@ -29,7 +28,6 @@ assert.deepEqual(hrefs, [
   "gunbiz-pos",
   "trident-1-pos",
   "https://gunsearchengine.com/for-dealers",
-  "ai-studio",
   "press",
 ]);
 assert.doesNotMatch(navSrc, /Gun Search Engine/);
