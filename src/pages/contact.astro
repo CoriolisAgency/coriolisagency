@@ -40,16 +40,6 @@ import { withBase } from "../lib/base";
       </div>
 
       <LeadForm site="coriolisagency" />
-      <script is:inline>
-        (function () {
-          var select = document.querySelector('form[data-lf-form] select[name="pillar"]');
-          if (!select || select.querySelector('option[value="FFL Messenger"]')) return;
-          var option = document.createElement("option");
-          option.value = "FFL Messenger";
-          option.textContent = "FFL Messenger";
-          select.appendChild(option);
-        })();
-      </script>
     </div>
   </section>
 </BaseLayout>

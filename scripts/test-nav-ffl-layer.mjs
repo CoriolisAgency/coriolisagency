@@ -267,4 +267,22 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
   assert.match(chrome, /<ul class="ml-4 flex flex-col gap-1">/);
 }
 
+{
+  const contactPage = read("src/pages/contact.astro");
+  assert.match(contactPage, /<LeadForm site="coriolisagency" \/>/);
+  assert.doesNotMatch(contactPage, /FFL Messenger/);
+  assert.doesNotMatch(contactPage, /select\[name="pillar"\]/);
+  const fflm = read("src/pages/ffl-messenger-enterprise.astro");
+  assert.match(
+    fflm,
+    /const contact = `\$\{withBase\("contact"\)\}\?topic=ffl-messenger`;/,
+  );
+  assert.ok([...fflm.matchAll(/href=\{contact\}/g)].length >= 3);
+  assert.doesNotMatch(navSrc, /ffl-messenger/);
+  assert.doesNotMatch(chrome, /ffl-messenger/);
+  assert.match(home, /<LeadForm site="coriolisagency" defaultPillar="Ecommerce" \/>/);
+  const talk = read("src/components/TalkSection.astro");
+  assert.match(talk, /<LeadForm site="coriolisagency" defaultPillar=\{pillar\} \/>/);
+}
+
 console.log("test-nav-ffl-layer: ok");
