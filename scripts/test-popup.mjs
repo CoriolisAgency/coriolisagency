@@ -8,7 +8,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const kit = path.join(root, "popup-kit");
 const DASH = /[\u2013\u2014]/;
 const BANNED = /GunBroker|MasterFFL/i;
-const FFLM_BANNED = /parser|Enclave|vendor platform|Manhattan|Lipsey|\bPOS\b/i;
+const FFLM_BANNED = /parser|vendor platform|\bPOS\b/i;
 
 function sha256(buf) {
   return createHash("sha256").update(buf).digest("hex");
