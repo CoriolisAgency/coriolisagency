@@ -1,9 +1,9 @@
 ---
 import "../styles/global.css";
 import SiteChrome from "../components/SiteChrome.astro";
-import CoriolisEmailCapture from "../components/CoriolisEmailCapture.astro";
 import UtmCapture from "@coriolis/lead-form/UtmCapture.astro";
 import { SITE, SITE_ORIGIN, CANON_PATHS } from "../lib/site";
+import { AGENCY_POPUP_CONFIG } from "../lib/popup-config";
 import { LINKS, SAME_AS } from "../lib/links";
 import { withBase } from "../lib/base";
 import type { FaqItem } from "../lib/faq";
@@ -112,6 +112,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": graph,
 };
+
+const popupConfigJs = `window.CORIOLIS_POPUP=${JSON.stringify(AGENCY_POPUP_CONFIG)}`;
 ---
 
 <!doctype html>
@@ -186,6 +188,15 @@ const jsonLd = {
     <SiteChrome>
       <slot />
     </SiteChrome>
-    {emailCapture ? <CoriolisEmailCapture /> : null}
+    {
+      emailCapture ? (
+        <script is:inline set:html={popupConfigJs}></script>
+      ) : null
+    }
+    {
+      emailCapture ? (
+        <script is:inline src={withBase("popup/coriolis-popup.v1.js")} defer></script>
+      ) : null
+    }
   </body>
 </html>
