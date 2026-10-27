@@ -222,7 +222,7 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
     );
   };
   anchor("src/pages/best-ffl-ecommerce-website.astro", "See our", "ecommerce", "FFL website design and plans", ", from a branded storefront to a full custom build.");
-  anchor("src/pages/ffl-cockpit.astro", "It all runs on your", "ecommerce", "FFL website", ", so your catalog and your orders stay in one place.");
+  anchor("src/pages/ffl-cockpit.astro", "It all runs on your", "ecommerce", "FFL website design", ", so your catalog and your orders stay in one place.");
   anchor("src/pages/ffl-cockpit.astro", "Want more guns online without more on the shelf? Add", "firearms-dropshipping", "FFL dropshipping", "from your distributors.");
   anchor("src/pages/ecommerce.astro", "Use", "firearms-dropshipping", "FFL dropshipping", "to list distributor stock you don't keep on hand.");
   anchor("src/pages/ecommerce.astro", "Then bring buyers back with", "email-marketing-for-ffl-ecommerce", "FFL email marketing", "built for gun stores.");
