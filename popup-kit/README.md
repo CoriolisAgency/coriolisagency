@@ -1,73 +1,47 @@
-# popup-kit v1
+# popup-kit v2 (FFL claim pop-up)
 
-Framework-free email capture module. Copy these files byte-identical into each site repo. Do not publish an npm package. The checksum test is the contract.
+Framework-free pop-up copied byte-identical into coriolisagency, gunsearchengine
+and ffl-messenger. fflaccelerator stays pinned to v1.
+
+Decision: Paul 2026-11-03 6:56 AM ET via Chief. Board: FFL-CLAIM-POPUP.
 
 ## Files
 
-- `VERSION` : kit version (`1`)
-- `client/coriolis-popup.js` : browser module (ES2019, no imports)
-- `client/coriolis-popup.css` : styles, every selector prefixed `.cpop`
-- `server/subscribe-core.ts` : `popupStatus`, `handlePopupSubscribe`, `buildMailchimpPayload`
-- `SHA256SUMS` : sha256 of VERSION, the two client files, subscribe-core.ts, and this README
+- `VERSION` is `2`.
+- `client/coriolis-popup.js`, served as `/popup/coriolis-popup.v2.js`.
+- `client/coriolis-popup.css`, served as `/popup/coriolis-popup.v2.css`.
+- `server/subscribe-core.ts`, imported by each site's `/api/popup` endpoint.
+- `SHA256SUMS` over VERSION, README.md, the two client files and the core.
 
-Serve the client files as static copies at `/popup/coriolis-popup.v1.js` and `/popup/coriolis-popup.v1.css`. A test must assert those served bytes match `client/`.
+## Flow
 
-## Mount
+1. Email is required. FFL number is required unless "I don't have an FFL" is
+   checked, which hides the field and switches to a plain "Get updates" form.
+2. A valid FFL triggers `GET /api/popup?ffl=` (rate-limited). GSE reads its
+   `ffl_licenses` index; other sites proxy server-side to GSE. Only
+   `found, name, city, state, listed` ever leave the lookup. A miss is silent.
+3. `POST /api/popup` validates, then:
+   - Mailchimp, create-only: GET the member first. Any existing member (any
+     status) is left untouched. New members are POSTed as `pending` with tags
+     and merge fields. Missing merge fields are created, never edited.
+   - Ops: server-to-server POST to `CORIOLIS_OS_URL/api/forms/claim` with
+     Bearer `FORM_INTAKE_SECRET`. Off when either name is missing.
+4. Not an account claim. No codes. No sends beyond Mailchimp's own double
+   opt-in confirm for new members.
 
-Render this before the script, only on pages that should offer the pop-up:
+## Mailchimp names
 
-```html
-<script>window.CORIOLIS_POPUP={"site":"agency","lane":"agency-web","endpoint":"/api/popup","privacyUrl":"/privacy","copy":{},"fields":[],"denyPaths":[]}</script>
-<script src="/popup/coriolis-popup.v1.js" defer></script>
-```
+- Tags: `src:popup-claim`, `site:<agency|gse|fflm>`, `has_ffl` or `no_ffl`.
+- Merge fields (text): `SITE`, `FFL_PATH` (`claimed_ffl` or `no_ffl`),
+  `FFL_NUM` (canonical X-XX-XXX-XX-XX-XXXXX, only when given).
 
-Config fields:
+## Config (window.CORIOLIS_POPUP)
 
-- `site` : agency | gse | ffla | fflm
-- `lane` : agency-web | gse-consumer | ffla-managed | fflm-early-access
-- `endpoint` : same-origin GET/POST path (example `/api/popup`)
-- `privacyUrl` : href for the Privacy policy words in `copy.consent`
-- `copy` : `eyebrow`, `headline`, `body`, `button`, `consent`, `success.headline`, `success.body`
-- `fields` : optional `[{name, label, type}]` (agency and ffla use `company`)
-- `ctas` : optional `[{label, href, kind}]` (ffla)
-- `denyPaths` : extra path prefixes. Always denied: `/privacy`, `/terms`, `/unsubscribe`, `/confirmed`, `/api`
+`site, endpoint, privacyUrl, denyPaths, theme {band, bandFg, accent, accentFg,
+ink, font}, logos [{src, alt, h}] (lead first), peek {src, caption},
+copy {headline, badge, body, button, noFfl*, unlocks, listed, next, success}`.
 
-The script waits for idle (or 2s), then arms triggers. Nothing is painted and CSS is not fetched until a trigger fires. A GET to `endpoint` must return `{ok:true, enabled:true}` or the dialog stays closed and no cap is written.
-
-Preview: `?popup=1` forces open, ignores caps, does not write the seen cap.
-
-## Env names (server)
-
-Read by name only. Never log values.
-
-- `MAILCHIMP_API_KEY` (ends with `-usNN`; data center is derived from the suffix)
-- `MAILCHIMP_AUDIENCE_ID`
-- `MAILCHIMP_DOUBLE_OPT_IN` optional, default `1` (pending / Mailchimp confirm). `0` means subscribed.
-
-Legacy fallback, agency and ffla only, and only when the Mailchimp pair is unset:
-
-- `CORIOLIS_OS_URL`
-- `FORM_INTAKE_SECRET`
-
-`popupStatus` returns `{enabled, backend}` where backend is mailchimp, legacy, or none. It never echoes env values. Backend none fails closed (`enabled: false`; POST 503).
-
-Until Mailchimp vars are set, agency uses the legacy Ops path that works today.
-
-## Events
-
-On view, successful submit, close, and CTA click:
-
-- `window.dataLayer.push({event, popup_site, popup_lane, popup_trigger})` when `dataLayer` exists
-- `window.gtag("event", name, {...})` when `gtag` exists
-- always `window.dispatchEvent(new CustomEvent("coriolis:popup", {detail:{name, site, lane, trigger}}))`
-
-Event names: `popup_view`, `popup_submit`, `popup_close`, `popup_cta`. Never send the email address to analytics.
-
-## Checksum rule
-
-`SHA256SUMS` is the source of truth. Each consuming repo copies this folder as-is and asserts:
-
-1. Hashes in `SHA256SUMS` match the files in this folder.
-2. The served `/popup/coriolis-popup.v1.js` and `.css` copies are byte-identical to `client/`.
-
-Do not edit a copy in one repo only. Change the canonical kit, update `SHA256SUMS`, then copy the folder.
+Triggers: desktop exit intent after 5s, mobile 20s or 50% scroll, `?popup=1`
+forces. Any click on a `[data-claim-ffl]` element opens it (caps do not apply;
+if the endpoint is off the link navigates normally). Seen cap 14 days, done
+cap 365 days. Env is read by name only.
