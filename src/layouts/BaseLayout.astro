@@ -190,12 +190,13 @@ const popupConfigJs = `window.CORIOLIS_POPUP=${JSON.stringify(AGENCY_POPUP_CONFI
     </SiteChrome>
     {
       emailCapture ? (
+        <link rel="stylesheet" href={withBase("popup/coriolis-popup.v2.css")} />
         <script is:inline set:html={popupConfigJs}></script>
       ) : null
     }
     {
       emailCapture ? (
-        <script is:inline src={withBase("popup/coriolis-popup.v1.js")} defer></script>
+        <script is:inline src={withBase("popup/coriolis-popup.v2.js")} defer></script>
       ) : null
     }
   </body>

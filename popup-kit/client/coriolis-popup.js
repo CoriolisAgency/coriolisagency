@@ -1,248 +1,240 @@
+/* popup-kit v2: FFL claim pop-up. Framework-free. Config: window.CORIOLIS_POPUP. */
 (function () {
-"use strict";
-var C = window.CORIOLIS_POPUP;
-if (!C || !C.site) return;
-var DENY = ["/privacy", "/terms", "/unsubscribe", "/confirmed", "/api"];
-var DAY14 = 12096e5;
-var t0 = Date.now(), trig = "unknown", opened = 0, busy = 0, force = 0, tOpen = 0;
-var root = null, prevOv = "", prevPad = "", prevF = null, cssOk = 0;
-try { force = /(?:^|[?&])popup=1(?:&|$)/.test(location.search || "") ? 1 : 0; } catch (e) {}
-var SITE = String(C.site), LANE = String(C.lane || ""), EP = String(C.endpoint || "/api/popup");
-function copy() { return C.copy && typeof C.copy === "object" ? C.copy : {}; }
-function esc(s) {
-return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-}
-function cssHref() {
-var n = document.querySelector('script[src*="coriolis-popup.v"]');
-return n && n.src ? n.src.replace(/\.js(\?.*)?$/, ".css$1") : "/popup/coriolis-popup.v1.css";
-}
-function desktop() {
-return typeof matchMedia === "function" && matchMedia("(pointer: fine)").matches && innerWidth >= 1024;
-}
-function path() { var p = (location.pathname || "/").replace(/\/$/, ""); return p || "/"; }
-function denied() {
-var list = DENY.concat(C.denyPaths || []), p = path(), i, d;
-for (i = 0; i < list.length; i++) {
-d = String(list[i] || "");
-if (d && (p === d || p.indexOf(d + "/") === 0)) return 1;
-}
-return 0;
-}
-function typing() {
-var el = document.activeElement;
-if (!el || !el.tagName) return 0;
-if (el.tagName === "TEXTAREA") return 1;
-if (el.tagName === "INPUT") {
-return ["button", "submit", "checkbox", "radio", "file", "hidden"].indexOf((el.type || "text").toLowerCase()) < 0 ? 1 : 0;
-}
-return el.isContentEditable ? 1 : 0;
-}
-function depth() {
-var max = document.documentElement.scrollHeight - innerHeight;
-return max <= 0 ? 0 : Math.min(1, Math.max(0, scrollY / max));
-}
-function sg(st, k) { try { return { ok: 1, v: st.getItem(k) }; } catch (e) { return { ok: 0, v: null }; } }
-function ss(st, k, v) { try { st.setItem(k, v); return 1; } catch (e) { return 0; } }
-function capBlocks() {
-var s = SITE, done = sg(localStorage, "cpop:" + s + ":done");
-if (done.ok) {
-if (done.v === "1") return 1;
-var seen = sg(localStorage, "cpop:" + s + ":seen");
-if (seen.ok && seen.v) { var n = parseInt(seen.v, 10); if (n && Date.now() - n < DAY14) return 1; }
-return 0;
-}
-var sess = sg(sessionStorage, "cpop:" + s + ":sess");
-return sess.ok ? (sess.v === "1" ? 1 : 0) : 1;
-}
-function writeCap(kind, val) {
-if (!ss(localStorage, "cpop:" + SITE + ":" + kind, val)) ss(sessionStorage, "cpop:" + SITE + ":sess", "1");
-}
-function captureLand() {
-if (sg(sessionStorage, "cpop:land").v) return;
-ss(sessionStorage, "cpop:land", JSON.stringify({ path: path(), search: location.search || "", ref: document.referrer || "" }));
-}
-function land() {
-try { var raw = sg(sessionStorage, "cpop:land").v; if (raw) return JSON.parse(raw); } catch (e) {}
-return { path: path(), search: location.search || "", ref: document.referrer || "" };
-}
-function parseSearch(search) {
-var utm = {}, gclid = "";
-try {
-var sp = new URLSearchParams(search || "");
-gclid = sp.get("gclid") || "";
-["source", "medium", "campaign", "term", "content"].forEach(function (k) {
-var v = sp.get("utm_" + k); if (v) utm[k] = v;
-});
-} catch (e) {}
-return { utm: utm, gclid: gclid };
-}
-function refHost(ref) { if (!ref) return ""; try { return new URL(ref).host; } catch (e) { return ""; } }
-function track(name) {
-var s = SITE, ln = LANE;
-try { if (window.dataLayer && typeof window.dataLayer.push === "function") window.dataLayer.push({ event: name, popup_site: s, popup_lane: ln, popup_trigger: trig }); } catch (e) {}
-try { if (typeof window.gtag === "function") window.gtag("event", name, { popup_site: s, popup_lane: ln, popup_trigger: trig }); } catch (e) {}
-try { window.dispatchEvent(new CustomEvent("coriolis:popup", { detail: { name: name, site: s, lane: ln, trigger: trig } })); } catch (e) {}
-}
-function loadCss(done) {
-if (cssOk || document.querySelector("link[data-cpop]")) { cssOk = 1; done(); return; }
-var link = document.createElement("link"), once = 0;
-link.rel = "stylesheet";
-link.href = cssHref();
-link.setAttribute("data-cpop", "1");
-function fin() { if (once) return; once = 1; cssOk = 1; done(); }
-link.addEventListener("load", fin);
-link.addEventListener("error", fin);
-setTimeout(fin, 1500);
-document.head.appendChild(link);
-}
-function jfetch(url, opts, cb) {
-fetch(url, opts)
-.then(function (res) { return res.json().then(function (j) { cb({ ok: res.ok, j: j }); }); })
-.catch(function () { cb(null); });
-}
-function tabs(el) {
-return Array.prototype.slice.call(el.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), textarea, select, [tabindex]:not([tabindex="-1"])')).filter(function (n) {
-return !n.hasAttribute("aria-hidden") && String(n.className || "").indexOf("cpop-hp") < 0 && (n.offsetParent !== null || n === document.activeElement);
-});
-}
-function onKey(e) {
-if (e.key === "Escape") { close(); return; }
-if (e.key !== "Tab" || !root) return;
-var nodes = tabs(root);
-if (!nodes.length) return;
-var first = nodes[0], last = nodes[nodes.length - 1];
-if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-}
-function close() {
-if (!root) return;
-track("popup_close");
-if (root.parentNode) root.parentNode.removeChild(root);
-root = null;
-document.body.style.overflow = prevOv;
-document.body.style.paddingRight = prevPad;
-removeEventListener("keydown", onKey);
-if (prevF && prevF.focus) { try { prevF.focus(); } catch (e) {} }
-prevF = null;
-}
-function consentHtml(text, url) {
-return esc(text || "").replace(/Privacy policy/g, '<a class="cpop-privacy" href="' + esc(url || "/privacy") + '">Privacy policy</a>');
-}
-function extraHtml() {
-var fields = C.fields && C.fields.length ? C.fields : [], html = "", i, f, name, id, label;
-for (i = 0; i < fields.length; i++) {
-f = fields[i] || {};
-name = String(f.name || "");
-if (!name) continue;
-id = "cpop-f-" + name;
-label = String(f.label || name);
-html += '<label class="cpop-sr" for="' + esc(id) + '">' + esc(label) + '</label><input class="cpop-input" id="' + esc(id) + '" placeholder="' + esc(label) + '" data-cpop-field="' + esc(name) + '"/>';
-}
-var ctas = C.ctas && C.ctas.length ? C.ctas : [], chtml = "";
-for (i = 0; i < ctas.length; i++) {
-f = ctas[i] || {};
-chtml += '<a class="cpop-cta-link" data-cpop-cta href="' + esc(f.href || "#") + '">' + esc(f.label || "") + "</a>";
-}
-return { fields: html, ctas: chtml ? '<div class="cpop-ctas">' + chtml + "</div>" : "" };
-}
-var ERR = "Could not sign you up. Try again.";
-function showOk() {
-if (!root) return;
-var suc = copy().success, ok = suc && typeof suc === "object" ? suc : {};
-var h = root.querySelector(".cpop-headline"), b = root.querySelector(".cpop-lede");
-var form = root.querySelector(".cpop-form"), cons = root.querySelector(".cpop-consent"), ctas = root.querySelector(".cpop-ctas");
-if (h) h.textContent = ok.headline || "You're in.";
-if (b) b.textContent = ok.body || "Check your inbox.";
-if (form && form.parentNode) form.parentNode.removeChild(form);
-if (cons && cons.parentNode) cons.parentNode.removeChild(cons);
-if (ctas && ctas.parentNode) ctas.parentNode.removeChild(ctas);
-var x = root.querySelector(".cpop-x");
-if (x && x.focus) x.focus();
-}
-function openDialog() {
-if (opened) return;
-opened = 1;
-busy = 0;
-if (!force) writeCap("seen", String(Date.now()));
-prevF = document.activeElement;
-tOpen = Date.now();
-var c = copy(), extra = extraHtml(), el = document.createElement("div");
-el.className = "cpop";
-el.setAttribute("role", "dialog");
-el.setAttribute("aria-modal", "true");
-el.setAttribute("aria-labelledby", "cpop-title");
-el.innerHTML = '<button type="button" class="cpop-scrim" aria-label="Close" data-cpop-close></button><div class="cpop-stage"><article class="cpop-card"><button type="button" class="cpop-x" aria-label="Close" data-cpop-close>&times;</button><div class="cpop-copy"><p class="cpop-eyebrow">' + esc(c.eyebrow || "") + '</p><h2 id="cpop-title" class="cpop-headline">' + esc(c.headline || "") + '</h2><p class="cpop-lede">' + esc(c.body || "") + '</p><form class="cpop-form" data-cpop-form><label class="cpop-sr" for="cpop-email">Email</label><input class="cpop-input" id="cpop-email" type="email" name="email" autocomplete="email" required placeholder="you@store.com"/>' + extra.fields + '<input class="cpop-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"/><button type="submit" class="cpop-cta" data-cpop-submit>' + esc(c.button || "Sign up") + '</button><p class="cpop-error" role="alert" data-cpop-error hidden></p></form><p class="cpop-consent">' + consentHtml(c.consent || "", C.privacyUrl || "/privacy") + "</p>" + extra.ctas + "</div></article></div>";
-document.body.appendChild(el);
-root = el;
-prevOv = document.body.style.overflow;
-prevPad = document.body.style.paddingRight;
-var sb = innerWidth - document.documentElement.clientWidth;
-document.body.style.overflow = "hidden";
-if (sb > 0) document.body.style.paddingRight = sb + "px";
-requestAnimationFrame(function () { el.className = "cpop cpop-in"; });
-var i, closes = el.querySelectorAll("[data-cpop-close]"), links = el.querySelectorAll("[data-cpop-cta]");
-for (i = 0; i < closes.length; i++) closes[i].addEventListener("click", close);
-addEventListener("keydown", onKey);
-for (i = 0; i < links.length; i++) links[i].addEventListener("click", function () { track("popup_cta"); });
-var form = el.querySelector("[data-cpop-form]");
-var emailIn = el.querySelector("#cpop-email");
-var btn = el.querySelector("[data-cpop-submit]");
-var err = el.querySelector("[data-cpop-error]");
-if (emailIn && emailIn.focus) setTimeout(function () { emailIn.focus(); }, 40);
-form.addEventListener("submit", function (ev) {
-ev.preventDefault();
-var extraF = {}, fs = el.querySelectorAll("[data-cpop-field]"), fi, hp = el.querySelector('input[name="website"]'), L = land(), parsed = parseSearch(L.search);
-for (fi = 0; fi < fs.length; fi++) extraF[fs[fi].getAttribute("data-cpop-field")] = (fs[fi].value || "").trim();
-if (err) { err.hidden = true; err.textContent = ""; }
-if (btn) { btn.disabled = true; btn.textContent = "Sending"; }
-function fail(msg) {
-if (err) { err.hidden = false; err.textContent = msg; }
-if (btn) { btn.disabled = false; btn.textContent = c.button || "Sign up"; }
-}
-jfetch(EP, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
-email: (emailIn && emailIn.value ? emailIn.value : "").trim(),
-fields: extraF,
-website: hp && hp.value ? hp.value : "",
-t: Date.now() - tOpen,
-page: path(),
-landing: L.path || path(),
-referrer: refHost(L.ref),
-utm: parsed.utm,
-gclid: parsed.gclid || ""
-}) }, function (x) {
-if (!x || !x.ok || !x.j || x.j.ok !== true) { fail((x && x.j && x.j.error) || ERR); return; }
-writeCap("done", "1");
-track("popup_submit");
-showOk();
-});
-});
-track("popup_view");
-}
-function fire(kind) {
-if (opened || busy) return;
-if (!force && (denied() || capBlocks())) return;
-if (typing()) return;
-busy = 1;
-trig = kind;
-jfetch(EP, { method: "GET" }, function (x) {
-if (!(x && x.ok && x.j && x.j.ok === true && x.j.enabled === true)) { busy = 0; return; }
-loadCss(openDialog);
-});
-}
-captureLand();
-function boot() {
-if (force) { fire("force"); return; }
-if (denied() || capBlocks()) return;
-if (desktop()) {
-document.addEventListener("mouseout", function (e) {
-if (Date.now() - t0 < 5000 || e.clientY > 0 || e.relatedTarget) return;
-fire("exit");
-});
-return;
-}
-setTimeout(function () { fire("timer"); }, 20000);
-addEventListener("scroll", function () { if (depth() >= 0.5) fire("scroll"); }, { passive: true });
-}
-if (typeof requestIdleCallback === "function") requestIdleCallback(boot, { timeout: 2000 });
-else setTimeout(boot, 2000);
+  "use strict";
+  var C = window.CORIOLIS_POPUP;
+  if (!C || !C.site || !C.endpoint || window.__cpop2) return;
+  window.__cpop2 = 1;
+  var D = document, W = window, L = W.location;
+  var K = "cpop:" + C.site + ":", DAY = 864e5, CAP = 14 * DAY;
+  var copy = C.copy || {}, th = C.theme || {};
+  var force = /[?&]popup=1\b/.test(L.search);
+  var deny = ["/privacy", "/terms", "/unsubscribe", "/confirmed", "/api"].concat(C.denyPaths || []);
+  function denied(p) {
+    for (var i = 0; i < deny.length; i++) if (p === deny[i] || p.indexOf(deny[i] + "/") === 0) return true;
+    return false;
+  }
+  function get(k) { try { return +localStorage.getItem(K + k) || 0; } catch (e) { return 0; } }
+  function set(k) { try { localStorage.setItem(K + k, String(Date.now())); } catch (e) {} }
+  var capped = !force && (denied(L.pathname) || Date.now() - get("done") < 365 * DAY || Date.now() - get("seen") < CAP);
+  function ev(name, extra) {
+    var d = { event: "cpop_" + name, cpop_site: C.site, cpop_v: "2" };
+    for (var k in extra || {}) d[k] = extra[k];
+    try { (W.dataLayer = W.dataLayer || []).push(d); } catch (e) {}
+    try { if (W.plausible) W.plausible("cpop_" + name, { props: { site: C.site } }); } catch (e) {}
+  }
+  function el(tag, attrs, kids) {
+    var n = D.createElement(tag);
+    for (var a in attrs || {}) {
+      if (a === "text") n.textContent = attrs[a];
+      else if (a === "html") n.innerHTML = attrs[a];
+      else n.setAttribute(a, attrs[a]);
+    }
+    (kids || []).forEach(function (c) { if (c) n.appendChild(c); });
+    return n;
+  }
+  function ffl15(v) {
+    var s = String(v || "").toUpperCase().trim();
+    if (/-/.test(s)) { var p = s.split(/-+/); return p.length === 6 && p[5].length > 0; }
+    return s.replace(/[^0-9A-Z]/g, "").length === 15;
+  }
+  var t0 = Date.now(), open = false, last = null, root, form, fEmail, fFfl, fNo, wrap, welcome, err, btn, hd, lede, badge, peek;
+  var unlockItems = copy.unlocks || ["Your GunSearchEngine.com seller listing", "FFL Messenger for your shop team", "Transfer status between shops"];
+
+  function build() {
+    var vars = "";
+    var map = { band: "--cp-band", bandFg: "--cp-band-fg", accent: "--cp-accent", accentFg: "--cp-accent-fg", font: "--cp-font", ink: "--cp-ink" };
+    for (var k in map) if (th[k]) vars += map[k] + ":" + th[k] + ";";
+    root = el("div", { class: "cpop", "data-site": C.site, style: vars, hidden: "" });
+    var scrim = el("div", { class: "cpop-scrim", "data-close": "1" });
+    var logos = el("div", { class: "cpop-logos" });
+    (C.logos || []).forEach(function (lg, i) {
+      logos.appendChild(el("img", { src: lg.src, alt: lg.alt || "", class: i ? "cpop-logo cpop-logo-2" : "cpop-logo", height: String(lg.h || 36), decoding: "async" }));
+    });
+    var close = el("button", { type: "button", class: "cpop-x", "aria-label": "Close", "data-close": "1", html: "&times;" });
+    var band = el("div", { class: "cpop-band" }, [logos, close]);
+    badge = el("p", { class: "cpop-badge", text: copy.badge || "Free for every licensed FFL" });
+    hd = el("h2", { id: "cpop-title", class: "cpop-h", text: copy.headline || "Licensed dealers only. Claim your FFL." });
+    lede = el("p", { id: "cpop-lede", class: "cpop-lede", text: copy.body || "" });
+    fFfl = el("input", { id: "cpop-ffl", name: "ffl", type: "text", inputmode: "text", autocomplete: "off", spellcheck: "false", placeholder: "1-23-456-78-9A-12345", "aria-describedby": "cpop-ffl-hint", required: "" });
+    var lFfl = el("label", { for: "cpop-ffl", class: "cpop-l", text: copy.fflLabel || "FFL number" });
+    var hint = el("p", { id: "cpop-ffl-hint", class: "cpop-hint", text: copy.fflHint || "From your license. Dashes optional." });
+    welcome = el("div", { class: "cpop-welcome", "aria-live": "polite", hidden: "" });
+    wrap = el("div", { class: "cpop-fflwrap" }, [lFfl, fFfl, hint, welcome]);
+    fEmail = el("input", { id: "cpop-email", name: "email", type: "email", autocomplete: "email", required: "", placeholder: "you@yourshop.com" });
+    var lEmail = el("label", { for: "cpop-email", class: "cpop-l", text: copy.emailLabel || "Email" });
+    fNo = el("input", { id: "cpop-noffl", name: "no_ffl", type: "checkbox" });
+    var lNo = el("label", { for: "cpop-noffl", class: "cpop-check" }, [fNo, el("span", { text: copy.noFflLabel || "I don't have an FFL" })]);
+    var hp = el("input", { name: "website", type: "text", tabindex: "-1", autocomplete: "off", class: "cpop-hp", "aria-hidden": "true" });
+    btn = el("button", { type: "submit", class: "cpop-btn", text: copy.button || "Claim my FFL" });
+    err = el("p", { class: "cpop-err", role: "alert" });
+    var consent = el("p", { class: "cpop-consent" });
+    consent.appendChild(D.createTextNode((copy.consent || "By submitting you agree to get email from Coriolis sites. Unsubscribe anytime.") + " "));
+    consent.appendChild(el("a", { href: C.privacyUrl || "/privacy", text: "Privacy policy" }));
+    form = el("form", { class: "cpop-form", novalidate: "" }, [wrap, el("div", { class: "cpop-f" }, [lEmail, fEmail]), lNo, hp, btn, err, consent]);
+    var main = el("div", { class: "cpop-main" }, [badge, hd, lede, form]);
+    var side = null;
+    if (C.peek && C.peek.src) {
+      side = el("div", { class: "cpop-peek", "aria-hidden": "true" }, [
+        el("img", { src: C.peek.src, alt: "", decoding: "async", loading: "lazy" }),
+        el("span", { class: "cpop-peek-lock", text: C.peek.caption || "Shop-floor chat, inside FFL Messenger" })
+      ]);
+    }
+    peek = side;
+    var body = el("div", { class: "cpop-body" }, [main, side]);
+    var card = el("div", { class: "cpop-card", role: "dialog", "aria-modal": "true", "aria-labelledby": "cpop-title", "aria-describedby": "cpop-lede", tabindex: "-1" }, [band, body]);
+    root.appendChild(scrim);
+    root.appendChild(card);
+    D.body.appendChild(root);
+    root.addEventListener("click", function (e) { if (e.target && e.target.getAttribute && e.target.getAttribute("data-close")) hide("close"); });
+    root.addEventListener("keydown", onKey);
+    fNo.addEventListener("change", mode);
+    fFfl.addEventListener("input", onFfl);
+    form.addEventListener("submit", submit);
+  }
+
+  function mode() {
+    var no = fNo.checked;
+    wrap.hidden = no;
+    fFfl.required = !no;
+    badge.hidden = no;
+    if (peek) peek.hidden = no;
+    root.classList.toggle("cpop-plain", no);
+    hd.textContent = no ? copy.noFflHeadline || "Get updates" : copy.headline || "Licensed dealers only. Claim your FFL.";
+    lede.textContent = no ? copy.noFflBody || "News and updates from GunSearchEngine.com and FFL Messenger. No spam." : copy.body || "";
+    btn.textContent = no ? copy.noFflButton || "Get updates" : copy.button || "Claim my FFL";
+    err.textContent = "";
+    ev(no ? "no_ffl" : "has_ffl");
+  }
+
+  var lookT = 0, lookV = "";
+  function onFfl() {
+    clearTimeout(lookT);
+    var v = fFfl.value;
+    if (!ffl15(v)) { showWelcome(null); return; }
+    lookT = setTimeout(function () {
+      if (v === lookV) return;
+      lookV = v;
+      fetch(C.endpoint + "?ffl=" + encodeURIComponent(v), { headers: { accept: "application/json" } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { if (fFfl.value === v) showWelcome(j && j.found ? j : null); })
+        .catch(function () {});
+    }, 450);
+  }
+
+  function place(j) { return j.city ? j.city + (j.state ? " " + j.state : "") : j.state || ""; }
+
+  function showWelcome(j) {
+    welcome.textContent = "";
+    if (!j || !j.name) { welcome.hidden = true; return; }
+    var p = place(j);
+    welcome.appendChild(el("p", { class: "cpop-hi", text: "Welcome, " + j.name + (p ? ", " + p : "") }));
+    var ul = el("ul", { class: "cpop-unlocks" });
+    unlockItems.forEach(function (u) { ul.appendChild(el("li", { text: u })); });
+    welcome.appendChild(el("p", { class: "cpop-ul-h", text: copy.unlockHead || "Your claim opens up:" }));
+    welcome.appendChild(ul);
+    if (j.listed) welcome.appendChild(el("p", { class: "cpop-listed", text: copy.listed || "Your shop is already listed on GunSearchEngine.com" }));
+    welcome.hidden = false;
+    ev("ffl_found");
+  }
+
+  function utm() {
+    var q = new URLSearchParams(L.search), o = {};
+    ["source", "medium", "campaign", "term", "content"].forEach(function (k) { var v = q.get("utm_" + k); if (v) o[k] = v.slice(0, 120); });
+    return o;
+  }
+
+  function submit(e) {
+    e.preventDefault();
+    err.textContent = "";
+    var no = fNo.checked, email = fEmail.value.trim();
+    if (!no && !ffl15(fFfl.value)) { err.textContent = copy.fflError || "Enter your FFL number, or check I don't have an FFL."; fFfl.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.textContent = "Enter a valid email address."; fEmail.focus(); return; }
+    btn.disabled = true;
+    var q = new URLSearchParams(L.search);
+    var body = { email: email, ffl: no ? "" : fFfl.value, no_ffl: no, website: form.website.value, t: Date.now() - t0, page: L.pathname, landing: (sessionStorage.getItem("cpop:landing") || L.pathname), referrer: D.referrer.slice(0, 300), utm: utm(), gclid: q.get("gclid") || "" };
+    fetch(C.endpoint, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+      .then(function (j) {
+        btn.disabled = false;
+        if (!j || !j.ok) { err.textContent = (j && j.error) || "Could not sign you up. Try again."; ev("error"); return; }
+        set("done");
+        ev("submit", { cpop_path: no ? "no_ffl" : "claimed_ffl" });
+        done(j, no);
+      })
+      .catch(function () { btn.disabled = false; err.textContent = "Could not sign you up. Try again."; });
+  }
+
+  function done(j, no) {
+    var s = copy.success || {};
+    hd.textContent = no ? s.noFflHeadline || "You're on the list." : j.welcome && j.welcome.name ? "Claim received, " + j.welcome.name + "." : s.headline || "Claim received.";
+    lede.textContent = s.body || "Check your inbox. If you're new here, confirm your email from the link we send.";
+    badge.hidden = true;
+    form.hidden = true;
+    var main = form.parentNode;
+    if (!no) {
+      var ul = el("ul", { class: "cpop-unlocks cpop-next" });
+      (copy.next || []).forEach(function (n) { ul.appendChild(el("li", {}, [el("a", { href: n.href, text: n.label })])); });
+      if (ul.children.length) main.appendChild(ul);
+    }
+    main.appendChild(el("button", { type: "button", class: "cpop-btn cpop-btn-2", "data-close": "1", text: s.close || "Close" }));
+  }
+
+  function focusables() {
+    return [].slice.call(root.querySelectorAll("a[href],button:not([disabled]),input:not([type=hidden]):not(.cpop-hp)")).filter(function (n) { return n.offsetParent !== null; });
+  }
+  function onKey(e) {
+    if (e.key === "Escape") { e.preventDefault(); hide("esc"); return; }
+    if (e.key !== "Tab") return;
+    var f = focusables(); if (!f.length) return;
+    var a = f[0], z = f[f.length - 1];
+    if (e.shiftKey && D.activeElement === a) { e.preventDefault(); z.focus(); }
+    else if (!e.shiftKey && D.activeElement === z) { e.preventDefault(); a.focus(); }
+  }
+
+  function show(why) {
+    if (open) return;
+    if (!root) build();
+    open = true; last = D.activeElement;
+    root.hidden = false;
+    D.documentElement.classList.add("cpop-lock");
+    set("seen");
+    ev("open", { cpop_trigger: why });
+    setTimeout(function () { (fNo.checked ? fEmail : fFfl).focus(); }, 30);
+    detach();
+  }
+  function hide(why) {
+    if (!open) return;
+    open = false; root.hidden = true;
+    D.documentElement.classList.remove("cpop-lock");
+    ev("close", { cpop_how: why });
+    try { if (last && last.focus) last.focus(); } catch (e) {}
+  }
+
+  var mobile = W.matchMedia && W.matchMedia("(max-width: 640px), (pointer: coarse)").matches, timer = 0;
+  function onOut(e) { if (Date.now() - t0 > 5000 && !e.relatedTarget && e.clientY <= 0) show("exit"); }
+  function onScroll() { var h = D.documentElement; if ((h.scrollTop + W.innerHeight) / h.scrollHeight >= 0.5) show("scroll"); }
+  function detach() { D.removeEventListener("mouseout", onOut); W.removeEventListener("scroll", onScroll); clearTimeout(timer); }
+
+  var enabled = false;
+  D.addEventListener("click", function (e) {
+    var t = e.target && e.target.closest ? e.target.closest("[data-claim-ffl]") : null;
+    if (!t || !enabled) return;
+    e.preventDefault();
+    show("cta");
+  });
+
+  function arm() {
+    enabled = true;
+    if (capped) return;
+    try { if (!sessionStorage.getItem("cpop:landing")) sessionStorage.setItem("cpop:landing", L.pathname); } catch (e) {}
+    if (force) { show("force"); return; }
+    if (mobile) { timer = setTimeout(function () { show("timer"); }, 20000); W.addEventListener("scroll", onScroll, { passive: true }); }
+    else D.addEventListener("mouseout", onOut);
+  }
+
+  fetch(C.endpoint, { headers: { accept: "application/json" } })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { if (j && j.ok && j.enabled) arm(); })
+    .catch(function () {});
+  W.CoriolisPopup = { open: function () { show("api"); }, close: function () { hide("api"); } };
 })();
