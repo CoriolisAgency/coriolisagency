@@ -74,7 +74,9 @@ export default defineConfig({
         !page.includes("/unsubscribe") &&
         // SEO-U8v2 draft case studies (Chief 9:06): committed routes, noindex,nofollow, off the sitemap.
         !page.includes("/case-studies/the-gun-range") &&
-        !page.includes("/case-studies/acme"),
+        !page.includes("/case-studies/acme") &&
+        // UNUM-RETAILER-WELCOME (Paul 2026-11-04 9:39 AM ET): unlinked, noindex, off the sitemap.
+        !page.includes("/unum"),
       serialize(item) {
         item.lastmod = pageLastmod(item.url);
         return item;
