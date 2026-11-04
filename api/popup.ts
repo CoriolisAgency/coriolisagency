@@ -10,6 +10,9 @@ import {
 // GET            -> status (names only)
 // GET ?ffl=      -> FFL lookup, proxied server-side to GSE (name, city, state, listed only)
 // POST           -> create-only Mailchimp + signed Ops forward (agency signups mint Ops Leads)
+// POPUP-PARK (Paul 2026-11-04 5:21/5:23 PM ET via Chief): status reports disabled so the
+// parked client never arms. Lookup and POST stay in place.
+const POPUPS_ENABLED = false;
 const SITE = "agency" as const;
 const LANE = "agency-web";
 const WINDOW_MS = 10 * 60 * 1000;
@@ -60,7 +63,7 @@ export async function GET(request: Request): Promise<Response> {
   const status = popupStatus(process.env, SITE);
   return json(200, {
     ok: true,
-    enabled: status.enabled,
+    enabled: POPUPS_ENABLED && status.enabled,
     backend: status.backend,
     lane: LANE,
     site: SITE,
