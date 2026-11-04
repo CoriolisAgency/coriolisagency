@@ -41,7 +41,7 @@ export const PRESS_POSTS: PressPost[] = [
     dateLabel: "November 4, 2026",
     location: "Greenville, S.C.",
     ogImagePath: CANON_PATHS.unumPressHero,
-    imageAlt: "Example ammo storefront built and run by Coriolis Agency, with a list of managed services.",
+    imageAlt: "Coriolis and UNUM partnership: UNUM catalog, your store run by Coriolis, orders shipped by UNUM.",
     hidden: true,
   },
 ];
