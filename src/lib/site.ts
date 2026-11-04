@@ -28,7 +28,7 @@ export const CANON_PATHS = {
   unmet: "betsy/images/empty-search.jpg",
   storefront: "brand/storefront.jpg",
   rangeMckinney: "brand/the-range-mckinney.png",
-  unumPressHero: "brand/unum-coriolis-press-hero.png",
+  unumPressHero: "brand/unum-coriolis-press-hero-v2.png",
   gsgHero: "brand/gun-store-game-hero.png",
   contactHero: "brand/contact-hero.jpg",
   grokBot: "brand/grok-bot-official.png",
