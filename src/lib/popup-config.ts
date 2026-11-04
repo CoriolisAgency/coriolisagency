@@ -1,5 +1,11 @@
 /** Inline window.CORIOLIS_POPUP for the agency site. popup-kit v2 (FFL-CLAIM-POPUP). */
 
+/**
+ * POPUP-PARK: pop-ups are parked (code kept, not mounted). Flip to true to bring the
+ * agency claim pop-up back. Decision POPUP-PARK, Paul 2026-11-04 5:21/5:23 PM ET via Chief.
+ */
+export const POPUPS_ENABLED: boolean = false;
+
 export const AGENCY_POPUP_CONFIG = {
   site: "agency",
   lane: "agency-web",

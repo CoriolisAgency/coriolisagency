@@ -3,7 +3,7 @@ import "../styles/global.css";
 import SiteChrome from "../components/SiteChrome.astro";
 import UtmCapture from "@coriolis/lead-form/UtmCapture.astro";
 import { SITE, SITE_ORIGIN, CANON_PATHS } from "../lib/site";
-import { AGENCY_POPUP_CONFIG } from "../lib/popup-config";
+import { AGENCY_POPUP_CONFIG, POPUPS_ENABLED } from "../lib/popup-config";
 import { LINKS, SAME_AS } from "../lib/links";
 import { withBase } from "../lib/base";
 import type { FaqItem } from "../lib/faq";
@@ -114,6 +114,8 @@ const jsonLd = {
 };
 
 const popupConfigJs = `window.CORIOLIS_POPUP=${JSON.stringify(AGENCY_POPUP_CONFIG)}`;
+// POPUP-PARK: the pop-up mounts only when POPUPS_ENABLED (false) and the page allows it.
+const showPopup = POPUPS_ENABLED && emailCapture;
 ---
 
 <!doctype html>
@@ -189,13 +191,13 @@ const popupConfigJs = `window.CORIOLIS_POPUP=${JSON.stringify(AGENCY_POPUP_CONFI
       <slot />
     </SiteChrome>
     {
-      emailCapture ? (
+      showPopup ? (
         <link rel="stylesheet" href={withBase("popup/coriolis-popup.v2.css")} />
         <script is:inline set:html={popupConfigJs}></script>
       ) : null
     }
     {
-      emailCapture ? (
+      showPopup ? (
         <script is:inline src={withBase("popup/coriolis-popup.v2.js")} defer></script>
       ) : null
     }
