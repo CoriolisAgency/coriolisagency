@@ -1,0 +1,72 @@
+---
+/**
+ * /unum: UNUM retailer welcome page (Brandy mock, Paul go 2026-11-04 9:39 AM ET via Chief).
+ * noindex, off the sitemap (astro.config.mjs filter + gen-lastmod SKIP), and linked from nowhere on the site.
+ * CTAs go to /contact.
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/base";
+
+const contact = withBase("contact");
+---
+
+<BaseLayout
+  title="Welcome UNUM Retailers | Coriolis"
+  description="An exclusive offer for UNUM retailers: fully managed WooCommerce ecommerce from Coriolis Agency, a UNUM partner."
+  path="/unum"
+  noindex
+>
+<div class="unum">
+<div class="hero"><div class="w"><div class="tag">An exclusive offer for UNUM retailers</div>
+<h1>Welcome UNUM Retailers</h1>
+<p class="lead">Coriolis Agency is a UNUM partner, so we&#39;ve put together a VIP package just for you. We build your WooCommerce store on your own domain, then we run it for you. You own it. We manage it. You focus on moving ammo.</p>
+<p><a class="btn" href={contact}>Contact us to get started</a></p></div></div>
+<section><div class="w"><h2>Your exclusive UNUM offer</h2><div class="grid">
+<div class="card"><div class="big">$500 off</div><h3>Retail Setup</h3><p><s>$2,500</s> <b style="color:#fff">$2,000</b> one time. Our full custom website and email build.</p></div>
+<div class="card"><div class="big">Free for 1 year</div><h3>GunSearchEngine.com Pro</h3><p>A $1,200/year value. See what shoppers search for, including the searches that found nothing.</p></div>
+<div class="card"><div class="big">Expedited</div><h3>Onboarding</h3><p>UNUM retailers move to the front of our build queue.</p></div>
+</div></div></section>
+<section style="padding-top:0"><div class="w"><div class="card"><h3>Fully managed ecommerce: what we run for you</h3><ul>
+<li>Your store run for you, with VIP support included</li><li>Premium hosting on WP Engine</li><li>WordPress and plugin updates, plus backups</li>
+<li>Managed email marketing: welcome, back in stock, browse abandonment, thank you, abandoned cart</li>
+<li>Analytics monitoring across Google Analytics, Google Search Console, GunSearchEngine.com, and email and SMS</li><li>Minor site updates as needed</li></ul></div></div></section>
+<section style="padding-top:0"><div class="w two">
+<div class="card"><h3>What Retail Setup gets you</h3><ul><li>Everything in Basic Setup: WooCommerce install, custom theme and homepage, FFL Cockpit and FFL Checkout licenses, payment gateway, DNS</li><li>Advanced theme customization and content</li><li>Up to ten custom pages, unlimited revisions</li><li>Complete email marketing setup: brand kit, template, welcome series, abandoned cart, back in stock</li><li>Email deliverability and Google Analytics tuning</li></ul></div>
+<div class="card"><h3>What GunSearchEngine.com Pro gets you</h3><ul><li>Monthly Demand Intelligence reports</li><li>What shoppers typed, including the searches that came up empty</li><li>Know which calibers to list next before you guess</li></ul></div>
+</div></section>
+<section style="padding-top:0"><div class="w"><h2>How it works</h2><div class="grid">
+<div><span class="n">1</span><h3 style="color:#fff">Tell us you&#39;re with UNUM</h3><p>Contact us and mention UNUM to get the exclusive offer.</p></div>
+<div><span class="n">2</span><h3 style="color:#fff">We build it</h3><p>Retail Setup at $500 off, on your own domain, with expedited onboarding.</p></div>
+<div><span class="n">3</span><h3 style="color:#fff">We run it, you move ammo</h3><p>We handle hosting, updates, email and analytics. GunSearchEngine.com Pro is free for your first year.</p></div>
+</div></div></section>
+<section class="cta"><div class="w"><h2>We build it, we run it, you move ammo.</h2><p><a class="btn" href={contact}>Contact us to get started</a></p><p>Questions? <a href="mailto:support@coriolisagency.com">support@coriolisagency.com</a></p></div></section>
+<div class="foot"><div class="w"><p class="fine">[Offer terms placeholder: eligibility, dates and conditions to be supplied by Paul.]</p><p>Coriolis Agency is a UNUM partner.</p></div></div>
+</div>
+</BaseLayout>
+
+<style is:global>
+.unum a{color:inherit}
+.unum .w{max-width:1120px;margin:0 auto;padding:0 24px}
+.unum .btn{display:inline-block;background:#e0b15a;color:#0c0d10;font-weight:700;padding:14px 26px;border-radius:2px;text-decoration:none}
+.unum .hero{padding:88px 0 64px;background:radial-gradient(circle at 80% 0,#1a2540,#05080f 60%)}
+.unum .tag{color:#e0b15a;font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.unum h1{color:#fff;font-size:clamp(36px,6vw,60px);line-height:1.05;margin:12px 0 18px}
+.unum h2{color:#fff;font-size:30px;margin:0 0 24px}
+.unum .lead{font-size:19px;max-width:680px;color:#c4c4cc}
+.unum section{padding:56px 0}
+.unum .grid{display:grid;gap:20px;grid-template-columns:repeat(3,1fr)}
+.unum .card{border:1px solid #27272a;background:#0a1220;border-radius:12px;padding:28px}
+.unum .card .big{font-size:34px;font-weight:800;color:#e0b15a;line-height:1.1}
+.unum .card h3{color:#fff;margin:10px 0 6px}
+.unum s{color:#71717a}
+.unum .two{display:grid;gap:20px;grid-template-columns:1fr 1fr}
+.unum ul{padding-left:20px;margin:0;list-style:disc}
+.unum p{margin:0 0 1em}
+.unum li{margin:4px 0}
+.unum .n{display:inline-block;width:34px;height:34px;border-radius:50%;background:#e0b15a;color:#0c0d10;font-weight:800;text-align:center;line-height:34px}
+.unum .cta{text-align:center;border-top:1px solid #27272a;border-bottom:1px solid #27272a;background:#0a1220}
+.unum .fine{font-size:13px;color:#71717a}
+.unum .foot{padding:32px 0;font-size:14px;color:#71717a}
+@media(max-width:760px){.unum .grid,.unum .two{grid-template-columns:1fr}.unum .hero{padding:56px 0 40px}}
+.unum{background:#05080f;color:#d4d4d8;font-size:16px;line-height:1.6}
+</style>
