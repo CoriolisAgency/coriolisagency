@@ -4,7 +4,7 @@ import { PRESS_POSTS } from "../../lib/press";
 import { CANON_PATHS } from "../../lib/site";
 import { withBase } from "../../lib/base";
 
-const posts = [...PRESS_POSTS].sort((a, b) => b.date.localeCompare(a.date));
+const posts = PRESS_POSTS.filter((p) => !p.hidden).sort((a, b) => b.date.localeCompare(a.date));
 ---
 
 <BaseLayout

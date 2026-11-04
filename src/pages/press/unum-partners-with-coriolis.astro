@@ -1,0 +1,158 @@
+---
+/**
+ * /press/unum-partners-with-coriolis
+ * UNUM x Coriolis release (Brandy draft; Paul 2026-11-04 9:49 AM ET via Chief).
+ * Hidden: `hidden: true` in PRESS_POSTS keeps it off /press; off the sitemap
+ * (astro.config.mjs filter + gen-lastmod SKIP). Indexable, like the existing release.
+ * Same layout and hero placement as press/[slug].astro.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaRow from "../../components/CtaRow.astro";
+import { LINKS, linkClass } from "../../lib/links";
+import { pressBySlug } from "../../lib/press";
+import { SITE, SITE_ORIGIN } from "../../lib/site";
+import { withBase } from "../../lib/base";
+
+const post = pressBySlug("unum-partners-with-coriolis")!;
+const siteOrigin = Astro.site ?? new URL(SITE_ORIGIN);
+const pageUrl = new URL(withBase(post.path), siteOrigin).href;
+const imageUrl = new URL(withBase(post.ogImagePath), siteOrigin).href;
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+---
+
+<BaseLayout
+  title={`${post.title} | Coriolis Agency`}
+  description={post.dek}
+  path={post.path}
+  ogImagePath={post.ogImagePath}
+  ogType="article"
+  publishedTime={post.date}
+  extraJsonLd={[
+    {
+      "@type": "NewsArticle",
+      "@id": `${pageUrl}#article`,
+      headline: post.title,
+      description: post.dek,
+      datePublished: post.date,
+      dateModified: post.date,
+      url: pageUrl,
+      image: imageUrl,
+      inLanguage: "en-US",
+      author: { "@type": "Organization", name: SITE.legalName, url: LINKS.home },
+      publisher: { "@id": `${LINKS.home}/#organization` },
+      isPartOf: { "@id": `${pageUrl}#webpage` },
+    },
+  ]}
+>
+  <article class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class="text-xs text-zinc-500">
+        <a href={withBase("press")} class="hover:text-sky-300">Press</a>
+        <span class="px-1.5">/</span>
+        Release
+      </p>
+      <p class="mt-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">
+        For immediate release
+      </p>
+      <h1 class="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl text-balance">
+        {post.title}
+      </h1>
+      <p class="mt-4 text-sm text-zinc-500">
+        {post.location}, {post.dateLabel}
+      </p>
+
+      <figure class="mt-8 overflow-hidden rounded-2xl ring-1 ring-white/10">
+        <img
+          src={withBase(post.ogImagePath)}
+          alt={post.imageAlt}
+          width="1283"
+          height="965"
+          class="w-full bg-[#111] object-contain"
+        />
+      </figure>
+
+      <div class="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-zinc-300">
+        <p>
+          UNUM, the ammunition distribution platform that connects independent
+          ammunition sellers and online retailers through a centralized catalog
+          and fulfillment model, today announced a partnership with Coriolis
+          Agency, the firearms industry's managed WooCommerce provider. UNUM
+          retailers can now get a fully managed online store from{" "}
+          <a href={withBase("unum")} class={linkClass}>Coriolis</a>: built on
+          the retailer's own domain, run by Coriolis, and owned by the retailer.
+        </p>
+        <p>
+          UNUM chose Coriolis for four reasons: experience, technology, included
+          services, and a record of shipping fast.
+        </p>
+        <p>
+          <strong class="text-white">Experience.</strong> Coriolis is led by
+          Paul Angell, Founder and CEO, the former Founder and CEO of
+          AmmoReady.com, and Joel Hobgood, Director of Operations at Coriolis and
+          former Director of Operations at AmmoReady. Between them they have
+          spent years building and running online stores for ammunition and
+          firearms retailers.
+        </p>
+        <p>
+          <strong class="text-white">Technology.</strong> Coriolis stores run on
+          WooCommerce, with FFL Cockpit distributor catalogs and automated
+          dropshipping, FFL Checkout, and GunSearchEngine.com demand data built in.
+        </p>
+        <p>
+          <strong class="text-white">Included services.</strong> Coriolis handles
+          site maintenance, including WordPress and plugin updates and backups;
+          uptime monitoring; security with Cloudflare protection; and
+          availability on WP Engine premium hosting with a 99.95% uptime SLA.
+          Analytics monitoring and managed email automation, including welcome,
+          back in stock, browse abandonment and abandoned cart flows, are part of
+          the service.
+        </p>
+        <p>
+          <strong class="text-white">Speed.</strong> Coriolis ships its own
+          products. Its AI Studio has launched Botopticon.com,
+          GunSearchEngine.com and GunStoreGame.com.
+        </p>
+
+        <blockquote class="border-l-2 border-gold/60 pl-4 text-zinc-200">
+          <p>
+            "Ammo retailers should spend their day moving ammo, not fixing
+            plugins," said Paul Angell, Founder and CEO of Coriolis Agency.
+            "UNUM gives them the catalog. We build the store, we run it, and we
+            answer when something breaks. They own it."
+          </p>
+        </blockquote>
+
+        <p>
+          Online ammunition retailers who want a fully managed store can learn
+          more at{" "}
+          <a href={LINKS.home} class={linkClass}>CoriolisAgency.com</a>.
+        </p>
+
+        <h2 class="pt-4 text-lg font-semibold text-white">About Coriolis Agency</h2>
+        <p>
+          Coriolis Agency (Coriolis, LLC) builds, hosts, and supports WooCommerce
+          websites for FFLs, gun stores, shooting ranges, and firearms brands.
+          Founded by Paul Angell, who built and ran AmmoReady.com for nine years,
+          the company delivers managed hosting, automated firearms dropshipping
+          through FFL Cockpit, and demand tools including GunSearchEngine.com.
+          Merchants own their sites. There is no long-term contract. Visit{" "}
+          <a href={LINKS.home} class={linkClass}>CoriolisAgency.com</a>.
+        </p>
+
+        <h2 class="pt-4 text-lg font-semibold text-white">About UNUM</h2>
+        <p>
+          UNUM connects independent ammunition sellers and online retailers
+          through a centralized catalog and fulfillment model. Sellers invest.
+          UNUM fulfills. Retailers sell. Learn more at{" "}
+          <a href="https://unumnow.com" class={linkClass} {...ext}>unumnow.com</a>.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <CtaRow primary="contact" />
+    </div>
+  </section>
+</BaseLayout>

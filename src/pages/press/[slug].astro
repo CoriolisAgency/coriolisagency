@@ -7,7 +7,7 @@ import { SITE, SITE_ORIGIN } from "../../lib/site";
 import { withBase } from "../../lib/base";
 
 export function getStaticPaths() {
-  return PRESS_POSTS.map((post) => ({ params: { slug: post.slug } }));
+  return PRESS_POSTS.filter((post) => !post.hidden).map((post) => ({ params: { slug: post.slug } }));
 }
 
 const { slug } = Astro.params;
