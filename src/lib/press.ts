@@ -11,6 +11,8 @@ export type PressPost = {
   location: string;
   ogImagePath: string;
   imageAlt: string;
+  /** Hidden: off the /press list and the sitemap; route is its own page file. */
+  hidden?: boolean;
 };
 
 export const PRESS_POSTS: PressPost[] = [
@@ -27,6 +29,20 @@ export const PRESS_POSTS: PressPost[] = [
     ogImagePath: CANON_PATHS.rangeMckinney,
     imageAlt:
       "The Range in McKinney: a Coriolis-built WooCommerce storefront for an indoor range and online gun store.",
+  },
+  {
+    slug: "unum-partners-with-coriolis",
+    path: "/press/unum-partners-with-coriolis",
+    kicker: "Press release",
+    title:
+      "UNUM Partners With Coriolis To Deliver Fully Managed Ecommerce as a Service For Online Ammunition Retailers",
+    dek: "UNUM retailers can now get a fully managed online store from Coriolis Agency: built on their own domain, run by Coriolis, and owned by the retailer.",
+    date: "2026-11-04",
+    dateLabel: "November 4, 2026",
+    location: "Greenville, S.C.",
+    ogImagePath: CANON_PATHS.unumPressHero,
+    imageAlt: "Example ammo storefront built and run by Coriolis Agency, with a list of managed services.",
+    hidden: true,
   },
 ];
 

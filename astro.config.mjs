@@ -76,7 +76,8 @@ export default defineConfig({
         !page.includes("/case-studies/the-gun-range") &&
         !page.includes("/case-studies/acme") &&
         // UNUM-RETAILER-WELCOME (Paul 2026-11-04 9:39 AM ET): unlinked, noindex, off the sitemap.
-        !page.includes("/unum"),
+        !page.includes("/unum") &&
+        !page.includes("/press/unum-partners-with-coriolis"),
       serialize(item) {
         item.lastmod = pageLastmod(item.url);
         return item;

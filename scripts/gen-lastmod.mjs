@@ -21,6 +21,7 @@ const SKIP = new Set([
   "/case-studies/the-gun-range",
   "/case-studies/acme",
   "/unum",
+  "/press/unum-partners-with-coriolis",
 ]);
 
 // Dynamic routes: the data file that holds their slugs and content.
