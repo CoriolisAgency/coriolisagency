@@ -7,7 +7,6 @@ import FaqBlock from "../components/FaqBlock.astro";
 import LeadForm from "@coriolis/lead-form/LeadForm.astro";
 import { FAQ_HOME } from "../lib/faq";
 import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
-import { CLIENTS } from "../lib/plans";
 import { CANON_PATHS } from "../lib/site";
 import { LINKS, linkClass } from "../lib/links";
 import { withBase } from "../lib/base";
@@ -17,6 +16,10 @@ type Pillar = {
   kicker: string;
   title: string;
   body: string;
+  /** External absolute href; open in a new tab and skip withBase. */
+  external?: boolean;
+  /** CTA after "See "; defaults to title. */
+  cta?: string;
   /** Inline external links inside `body`, in order (rendered above the card's stretched link). */
   links?: readonly { text: string; href: string }[];
 };
@@ -35,21 +38,18 @@ const pillars: readonly Pillar[] = [
     body: "GunBiz or AIM at the counter, connected to the WooCommerce store you own.",
   },
   {
-    href: "ai-studio",
-    kicker: "AI-powered solutions we've already shipped",
-    title: "AI Studio",
-    body: "Botopticon.com, GunSearchEngine.com, and GunStoreGame.com. Bring the idea and the budget.",
-    links: [
-      { text: "Botopticon.com", href: "https://botopticon.com" },
-      { text: "GunSearchEngine.com", href: "https://www.gunsearchengine.com/" },
-      { text: "GunStoreGame.com", href: "https://www.gunstoregame.com/" },
-    ],
+    href: "email-marketing-for-ffl-ecommerce",
+    kicker: "On FFL Accelerator",
+    title: "Email Marketing",
+    body: "Capture, list management, and campaigns: welcome, abandoned cart, back in stock, thank you.",
   },
   {
-    href: "demand-intelligence",
-    kicker: "For OEMs, distributors, and brands",
-    title: "Demand Intelligence",
-    body: "What shoppers typed, including the searches that found nothing.",
+    href: "https://gunsearchengine.com/for-dealers",
+    external: true,
+    kicker: "GunSearchEngine.com Dealer Program",
+    title: "Consumer Search",
+    cta: "the Dealer Program",
+    body: "List inventory for shopper search on GunSearchEngine.com. Free GSE Basic includes FFL Analytics: what they typed on your site, including empty searches.",
   },
 ];
 
@@ -440,8 +440,10 @@ const heroSlides = [
                 </p>
                 <h2 class="mt-2 text-xl font-semibold text-white group-hover:text-gold">
                   <a
-                    href={withBase(p.href)}
+                    href={p.external ? p.href : withBase(p.href)}
                     class="focus-visible:outline-none after:absolute after:inset-0 after:rounded-2xl after:content-[''] focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-gold"
+                    target={p.external ? "_blank" : undefined}
+                    rel={p.external ? "noopener noreferrer" : undefined}
                   >
                     {p.title}
                   </a>
@@ -450,77 +452,12 @@ const heroSlides = [
                   {parts.map((part) => part.href ? (<a href={part.href} target="_blank" rel="noopener noreferrer" class={cardLinkClass}>{part.text}</a>) : (<Fragment set:html={plainCardText(part.text)} />))}
                 </p>
                 <p class="mt-5 text-sm font-medium text-sky-400" aria-hidden="true">
-                  See {p.title} →
+                  See {p.cta ?? p.title} →
                 </p>
               </div>
             );
           })
         }
-      </div>
-    </div>
-  </section>
-
-  <section class="border-b border-zinc-800/80">
-    <div class="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
-      <p
-        class="text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-500"
-      >
-        Recent clients
-      </p>
-      <ul
-        class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-400"
-      >
-        {
-          CLIENTS.map((client) => (
-            <li>
-              <a
-                href={client.href}
-                class="hover:text-sky-300"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {client.name}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <section class="border-b border-sky-500/25 bg-sky-950/25 py-10 sm:py-12">
-    <div
-      class="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,16rem)_1fr]"
-      data-grok-bot-plate
-    >
-      <img
-        src={withBase(CANON_PATHS.grokBotBannerHome)}
-        alt="Sample Grok Bot setup UI on a gun store counter."
-        width="1536"
-        height="1024"
-        class="w-full min-w-0 max-w-[16rem]"
-      />
-      <div class="min-w-0">
-        <p
-          class="text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-300"
-        >
-          AI Studio
-        </p>
-        <h2 class="mt-2 text-2xl font-semibold tracking-tight text-white">
-          <a
-            href={withBase("grok-bot-setup")}
-            class="hover:text-sky-200 focus-visible:outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:rounded-sm focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-sky-300"
-            >Grok Bot setup, $995.</a
-          >
-        </h2>
-        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
-          Use Grok Bot to help run your gun store. We will help you design your
-          AI strategy then create, configure, train, and test your bots. One time
-          fee. Live the same day.
-        </p>
-        <p class={`${linkClass} mt-5 inline-flex text-sm`} aria-hidden="true">
-          Grok Bot setup, $995. →
-        </p>
       </div>
     </div>
   </section>
