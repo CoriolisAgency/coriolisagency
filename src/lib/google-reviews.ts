@@ -1,17 +1,19 @@
 /**
  * Homepage Google reviews strip.
- * Quotes and count are from the Google listing (Trustindex Google source).
+ * Quotes are from the Google listing (Trustindex Google source).
  * Place ID from the g.page short link. Places API still returns five reviews.
- * Update rating/count when the listing moves.
+ * Public rating CTA links Trustindex so we do not hardcode a review count.
  */
 import { LINKS } from "./links";
 
 export const GOOGLE_PLACE_ID = "ChIJmcphFpSqPYYRr4PGs-CWxdw";
+/** "Read on Google" widget link (g.page short URL). */
 export const GOOGLE_REVIEWS_HREF = LINKS.googleReviews;
+/** Homepage / proof-line rating CTA. */
+export const TRUSTINDEX_REVIEWS_HREF =
+  "https://www.trustindex.io/reviews/coriolisagency.com";
 
-/** Google listing as of 2026-08-24 (17 Google reviews, all 5★). */
 export const GOOGLE_REVIEW_RATING = 5;
-export const GOOGLE_REVIEW_COUNT = 17;
 
 export const GOOGLE_REVIEW_QUOTES = [
   {

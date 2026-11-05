@@ -13,7 +13,7 @@ import { FAQ_HOSTING } from "../lib/faq";
 import { LINKS, linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
-import { GOOGLE_REVIEWS_HREF, GOOGLE_REVIEW_COUNT } from "../lib/google-reviews";
+import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
 const h2 = "text-xl font-semibold text-white";
@@ -122,7 +122,7 @@ const list = "mt-4 max-w-3xl list-disc space-y-1 pl-5 text-sm leading-relaxed te
         Leaving a specific platform? <a href={withBase("leave-ammoready")} class={linkClass}>Leave AmmoReady</a>{" · "}<a href={withBase("leave-gearfire")} class={linkClass}>Leave Gearfire</a>. Setup is $500 (Basic Setup) or $2,500 (Retail Setup), and DNS configuration at launch is included in both. Setup and monthly side by side: <a href={withBase("ffl-website-cost")} class={linkClass}>what an FFL website costs</a>.
       </p>
       <p class="mt-8 text-sm text-zinc-400">
-        100+ clients. <a href={GOOGLE_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating from {GOOGLE_REVIEW_COUNT} reviews</a>. Member of NSSF, FPC and GOA.
+        100+ clients. <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating</a>. Member of NSSF, FPC and GOA.
       </p>
     </div>
   </section>

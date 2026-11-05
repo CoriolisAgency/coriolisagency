@@ -1,4 +1,3 @@
-import { GOOGLE_REVIEW_COUNT } from "./google-reviews";
 
 export interface FaqItem {
   q: string;
@@ -335,7 +334,7 @@ export const FAQ_COST: FaqItem[] = [
   },
   {
     q: "Who is Coriolis?",
-    a: `Coriolis builds and hosts WooCommerce websites for gun shops, online-only FFLs, ranges, gunsmiths and firearms instructors. We have 100+ clients and a 5-star Google rating from ${GOOGLE_REVIEW_COUNT} reviews, and we're members of NSSF, Firearms Policy Coalition and Gun Owners of America. Our founder ran AmmoReady for nine years. Call (279) 258-6771.`,
+    a: "Coriolis builds and hosts WooCommerce websites for gun shops, online-only FFLs, ranges, gunsmiths and firearms instructors. We have 100+ clients and a 5-star Google rating, and we're members of NSSF, Firearms Policy Coalition and Gun Owners of America. Our founder ran AmmoReady for nine years. Call (279) 258-6771.",
   },
 ];
 

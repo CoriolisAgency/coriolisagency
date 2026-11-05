@@ -6,7 +6,7 @@ import PartnerLogos from "../components/PartnerLogos.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import LeadForm from "@coriolis/lead-form/LeadForm.astro";
 import { FAQ_HOME } from "../lib/faq";
-import { GOOGLE_REVIEWS_HREF, GOOGLE_REVIEW_COUNT } from "../lib/google-reviews";
+import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
 import { CLIENTS } from "../lib/plans";
 import { CANON_PATHS } from "../lib/site";
 import { LINKS, linkClass } from "../lib/links";
@@ -98,16 +98,15 @@ const heroSlides = [
     label: "Parapet Outfitters & Supply",
   },
   {
-    href: "https://naplesgunshop.net/",
-    src: CANON_PATHS.naplesGunShop,
-    alt: "A live Coriolis FFL ecommerce site. Naples Gun Shop. Opens in a new tab.",
-    label: "Naples Gun Shop",
+    src: CANON_PATHS.guardianGuns,
+    webp: CANON_PATHS.guardianGunsWebp,
+    alt: "A Coriolis FFL ecommerce site in progress. Guardian Guns.",
+    label: "Guardian Guns",
   },
   {
-    href: "https://wifirearms.com/",
-    src: CANON_PATHS.wftc,
-    alt: "A live Coriolis FFL ecommerce site. Wisconsin Firearms Training Center. Opens in a new tab.",
-    label: "Wisconsin Firearms Training Center",
+    src: CANON_PATHS.naplesGunShop,
+    alt: "A live Coriolis FFL ecommerce site. Naples Gun Shop.",
+    label: "Naples Gun Shop",
   },
   {
     src: CANON_PATHS.highlineFirearms,
@@ -177,7 +176,7 @@ const heroSlides = [
           />
         </div>
         <p class="mt-4 text-sm text-zinc-400" data-proof-line>
-          100+ clients · <a href={GOOGLE_REVIEWS_HREF} class={linkClass} target="_blank" rel="noopener noreferrer">5-star Google rating from {GOOGLE_REVIEW_COUNT} reviews</a>
+          100+ clients · <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} target="_blank" rel="noopener">5-star Google rating</a>
         </p>
         <p class="mt-1 text-sm text-zinc-400" data-membership-line>
           Proud member of NSSF, Firearms Policy Coalition and Gun Owners of America.
@@ -193,7 +192,6 @@ const heroSlides = [
         <div class="grid w-full min-w-0">
           {
             heroSlides.map((slide, i) => {
-              const linked = "href" in slide;
               const slideSizes = "(min-width: 1280px) 55vw, 100vw";
               const img = (
                 <picture>
@@ -216,25 +214,12 @@ const heroSlides = [
                   />
                 </picture>
               );
-              const cls = [
-                "hero-slider__slide col-start-1 row-start-1 block w-full min-w-0",
-                i === 0 && "is-active",
-              ];
-              return linked ? (
-                <a
-                  href={slide.href}
-                  class:list={cls}
-                  data-slide={i}
-                  aria-hidden={i === 0 ? "false" : "true"}
-                  tabindex={i === 0 ? 0 : -1}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {img}
-                </a>
-              ) : (
+              return (
                 <div
-                  class:list={cls}
+                  class:list={[
+                    "hero-slider__slide col-start-1 row-start-1 block w-full min-w-0",
+                    i === 0 && "is-active",
+                  ]}
                   data-slide={i}
                   aria-hidden={i === 0 ? "false" : "true"}
                 >

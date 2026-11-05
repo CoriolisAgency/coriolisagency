@@ -36,11 +36,12 @@ export const CANON_PATHS = {
   grokBotBanner: "brand/banner-ai-studio-grok-bot-setup.png",
   grokBotBannerHome: "brand/banner-grok-bot-setup-home.png",
   naplesGunShop: "brand/naples-gun-shop.jpg",
-  wftc: "brand/wftc.jpg",
   parapet: "brand/parapet.jpg",
   parapetWebp: "brand/parapet.webp",
   jkOutdoors: "brand/jk-outdoors.jpg",
   jkOutdoorsWebp: "brand/jk-outdoors.webp",
+  guardianGuns: "brand/guardian-guns.jpg",
+  guardianGunsWebp: "brand/guardian-guns.webp",
   highlineFirearms: "brand/highline-firearms.jpg",
   theGunRange: "brand/the-gun-range.jpg",
   /** /gun-store-pos hero (1499x1059, one file for desktop and mobile, like the homepage slides). */
