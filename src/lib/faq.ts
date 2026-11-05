@@ -116,19 +116,31 @@ export const FAQ_COCKPIT: FaqItem[] = [
 export const FAQ_AMMOREADY: FaqItem[] = [
   {
     q: "Is Coriolis a hosted AmmoReady clone?",
-    a: "No. Coriolis is the opposite model: open WooCommerce you own, FFL Cockpit for catalogs, and no vendor lock-in on the storefront.",
+    a: "No. Coriolis is the opposite model: open WooCommerce you own, FFL Cockpit for catalogs, and no vendor lock-in on the storefront. Coriolis was founded by the person who ran AmmoReady for nine years.",
   },
   {
     q: "What about Gearfire?",
     a: "Leaving Gearfire? See the Gearfire alternative page. Same owned-Woo model. We are not affiliated with Gearfire or RetailBI.",
   },
   {
+    q: "What about FirearmCart?",
+    a: "Dealers compare that storefront too. We do not republish their fee card or invent catalog internals. Ask them for their contract terms. Compare those to WooCommerce you own on your domain.",
+  },
+  {
     q: "How do you migrate a live AmmoReady store?",
-    a: "Keep your domain. We stand up Woo on it before you give notice. Map the catalog and redirect the URLs that already rank. Wire FFL Checkout, payments, and taxes, then test a mixed cart. Connect the register only if you want the floor and the site in sync. Cut DNS. You leave with the site. Coriolis was founded by the person who ran AmmoReady for nine years.",
+    a: "Keep your domain. We stand up Woo on it before you give notice. Map the catalog and redirect the URLs that already rank. Wire FFL Checkout, payments, and taxes, then test a mixed cart. Connect the register only if you want the floor and the site in sync. Cut DNS. You leave with the site.",
   },
   {
     q: "What does setup cost?",
     a: "Setup is $500 or $2,500. Monthly hosting starts after we talk. FFL Accelerator is $569 a month.",
+  },
+  {
+    q: "Do I own it?",
+    a: "Yes. It is WordPress. Cancel and the site goes with you.",
+  },
+  {
+    q: "Do you run my 4473?",
+    a: "No. Coriolis is not 4473, NICS, or bound-book software. This is not legal advice.",
   },
 ];
 
@@ -146,12 +158,24 @@ export const FAQ_GEARFIRE: FaqItem[] = [
     a: "We do not republish Gearfire’s fee card. It is theirs and it changes. Compare their invoice to the published Coriolis ladder: Minute Man $169, Militia $269, Gun Runner $369, Warlord $469, FFL Accelerator $569. Setup $500 or $2,500.",
   },
   {
-    q: "What about FirearmCart and Gunpowdr?",
-    a: "Dealers compare those storefronts too. We do not republish their fee cards or invent their catalog internals. The Coriolis column is the one we publish: WooCommerce you own, 21 distributors via FFL Cockpit, the register you already run.",
+    q: "What about FirearmCart?",
+    a: "Dealers compare that storefront too. We do not republish their fee card or invent catalog internals. Ask them for their contract terms. The Coriolis column is the one we publish: WooCommerce you own, 21 distributors via FFL Cockpit, the register you already run.",
   },
   {
     q: "Does switching off Gearfire kill RetailBI?",
     a: "No. Demand Intelligence is not a RetailBI replacement. Keep the Index for what sold. Add search intent if you want what people typed. See Demand Intelligence vs RetailBI.",
+  },
+  {
+    q: "Is Coriolis another closed FFL network?",
+    a: "No. It is open WooCommerce on your domain. Cancel and the site goes with you.",
+  },
+  {
+    q: "Do you run my 4473?",
+    a: "No. Coriolis is not 4473, NICS, or bound-book software. This is not legal advice.",
+  },
+  {
+    q: "What about AmmoReady?",
+    a: "Same owned-Woo model. See the AmmoReady alternative. Founder context lives there and on the best FFL ecommerce hub.",
   },
 ];
 
@@ -223,7 +247,7 @@ export const FAQ_SHOPIFY: FaqItem[] = [
 export const FAQ_BEST: FaqItem[] = [
   {
     q: "What is the best FFL ecommerce website?",
-    a: "The one you own. AmmoReady and Gearfire are template platforms: ads you can't strip, shared HTML, pages you don't write. Coriolis builds WooCommerce on your domain (inventory, dropshipping, or both), and you can take it with you.",
+    a: "The one you own. AmmoReady and Gearfire are template platforms: ads you cannot strip, shared HTML, pages you do not write. FirearmCart is another hosted storefront to score the same way. Coriolis builds WooCommerce on your domain (inventory, dropshipping, or both), and you can take it with you.",
   },
   {
     q: "Does WooCommerce handle FFL checkout and dropshipping?",
@@ -231,11 +255,19 @@ export const FAQ_BEST: FaqItem[] = [
   },
   {
     q: "What about POS and the bound book?",
-    a: "Bring the register you already run. Warlord and Accelerator connect any POS that works with WooCommerce, such as AIM, GunBiz, Rapid or Trident 1. Coriolis is not 4473, NICS, or bound-book software. Those stay with the systems licensed for them. This is not legal advice.",
+    a: "Bring the register you already run. Warlord and Accelerator connect any POS that works with WooCommerce, such as AIM, GunBiz, Rapid, or Trident 1. Coriolis is not 4473, NICS, or bound-book software. Those stay with the systems licensed for them. This is not legal advice.",
   },
   {
     q: "Why can’t an AmmoReady or Gearfire site rank like a shop you own?",
-    a: "Because Google sees one template repeated across the network. Your inventory is unique. The HTML is not. You do not control titles, slugs, or page copy beyond what the platform allows.",
+    a: "Because shops share chrome, nav, footer, and page patterns across the network. Your inventory is unique. The HTML shell is not. You do not control titles, slugs, or page copy beyond what the platform allows the way you do on owned Woo.",
+  },
+  {
+    q: "Is hosted ever the right call?",
+    a: "Yes. Speed to launch and an all-in POS-plus-web vendor can fit. Trade that against SEO control and exit. Score both with the checklist above.",
+  },
+  {
+    q: "What about FirearmCart?",
+    a: "Dealers compare it. We do not republish their fee card or invent catalog internals. Ask them. Then compare ownership, SEO control, and exit to WooCommerce you own.",
   },
 ];
 
