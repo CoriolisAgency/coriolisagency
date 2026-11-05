@@ -6,7 +6,7 @@ import TalkSection from "../components/TalkSection.astro";
 import { LINKS, linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
-import { GOOGLE_REVIEWS_HREF, GOOGLE_REVIEW_COUNT } from "../lib/google-reviews";
+import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
 import {
   FAQ_POS_PILLAR,
   POS_PILLAR_CARDS,
@@ -143,7 +143,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
         {POS_PILLAR_FASTBOUND}
       </p>
       <p class="mt-8 text-sm text-zinc-400">
-        100+ clients. <a href={GOOGLE_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating from {GOOGLE_REVIEW_COUNT} reviews</a>. Member of NSSF, FPC and GOA.
+        100+ clients. <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating</a>. Member of NSSF, FPC and GOA.
       </p>
     </div>
   </section>

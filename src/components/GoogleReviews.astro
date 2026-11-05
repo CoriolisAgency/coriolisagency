@@ -1,14 +1,13 @@
 ---
 import { linkClass } from "../lib/links";
 import {
-  GOOGLE_REVIEW_COUNT,
   GOOGLE_REVIEW_QUOTES,
   GOOGLE_REVIEW_RATING,
   GOOGLE_REVIEWS_HREF,
 } from "../lib/google-reviews";
 
 const starIndexes = [0, 1, 2, 3, 4] as const;
-const ratingLabel = `${GOOGLE_REVIEW_RATING.toFixed(1)} out of 5 stars from ${GOOGLE_REVIEW_COUNT} Google reviews`;
+const ratingLabel = `${GOOGLE_REVIEW_RATING.toFixed(1)} out of 5 stars on Google`;
 ---
 
 <section class="border-b border-zinc-800/80 bg-zinc-950/40">
@@ -66,9 +65,6 @@ const ratingLabel = `${GOOGLE_REVIEW_RATING.toFixed(1)} out of 5 stars from ${GO
               }
             </span>
             <span class="sr-only">{ratingLabel}</span>
-            <span class="text-sm text-zinc-400">
-              {GOOGLE_REVIEW_COUNT} reviews on Google
-            </span>
           </p>
         </div>
       </div>

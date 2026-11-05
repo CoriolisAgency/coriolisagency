@@ -10,7 +10,7 @@ import FaqBlock from "../components/FaqBlock.astro";
 import TalkSection from "../components/TalkSection.astro";
 import { LINKS, btnPlan, linkClass } from "../lib/links";
 import { withBase } from "../lib/base";
-import { GOOGLE_REVIEWS_HREF, GOOGLE_REVIEW_COUNT } from "../lib/google-reviews";
+import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
 import { FAQ_PAYMENTS } from "../lib/faq";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
@@ -126,7 +126,7 @@ const para = "mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400";
         <a href={withBase("ffl-cockpit")} class={linkClass}>FFL Checkout</a>
       </p>
       <p class="mt-8 text-sm text-zinc-400">
-        100+ clients. <a href={GOOGLE_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating from {GOOGLE_REVIEW_COUNT} reviews</a>. Member of NSSF, FPC and GOA.
+        100+ clients. <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating</a>. Member of NSSF, FPC and GOA.
       </p>
     </div>
   </section>

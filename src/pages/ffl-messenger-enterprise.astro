@@ -8,7 +8,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { LINKS } from "../lib/links";
 import { withBase } from "../lib/base";
-import { GOOGLE_REVIEWS_HREF, GOOGLE_REVIEW_COUNT } from "../lib/google-reviews";
+import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
 import { FAQ_FFL_MESSENGER_ENTERPRISE } from "../lib/faq";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
@@ -204,8 +204,8 @@ const contact = `${withBase("contact")}?topic=ffl-messenger`;
       <div class="proof">
         <span>100+ clients</span>
         <i class="dot"></i>
-        <a href={GOOGLE_REVIEWS_HREF} {...ext}>
-          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5-star Google rating from {GOOGLE_REVIEW_COUNT} reviews
+        <a href={TRUSTINDEX_REVIEWS_HREF} {...ext}>
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5-star Google rating
         </a>
         <i class="dot"></i>
         <span>Member of NSSF, FPC and GOA</span>
