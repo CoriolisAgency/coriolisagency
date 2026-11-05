@@ -98,10 +98,10 @@ const heroSlides = [
     label: "Wisconsin Firearms Training Center",
   },
   {
-    href: "https://alleghenyarms.com/",
-    src: CANON_PATHS.alleghenyArms,
-    alt: "A live Coriolis FFL ecommerce site. Allegheny Arms. Opens in a new tab.",
-    label: "Allegheny Arms",
+    src: CANON_PATHS.parapet,
+    webp: CANON_PATHS.parapetWebp,
+    alt: "A Coriolis FFL ecommerce site in progress. Parapet Outfitters & Supply.",
+    label: "Parapet Outfitters & Supply",
   },
   {
     src: CANON_PATHS.highlineFirearms,
@@ -112,6 +112,12 @@ const heroSlides = [
     src: CANON_PATHS.theGunRange,
     alt: "A Coriolis FFL ecommerce site in progress. The Gun Range.",
     label: "The Gun Range",
+  },
+  {
+    src: CANON_PATHS.jkOutdoors,
+    webp: CANON_PATHS.jkOutdoorsWebp,
+    alt: "A Coriolis FFL ecommerce site in progress. JK Outdoors.",
+    label: "JK Outdoors",
   },
 ] as const;
 ---
@@ -188,16 +194,27 @@ const heroSlides = [
           {
             heroSlides.map((slide, i) => {
               const linked = "href" in slide;
+              const slideSizes = "(min-width: 1280px) 55vw, 100vw";
               const img = (
-                <img
-                  src={withBase(slide.src)}
-                  alt={slide.alt}
-                  width="1499"
-                  height="1059"
-                  class="h-auto w-full object-cover object-center"
-                  loading={i === 0 ? "eager" : "lazy"}
-                  fetchpriority={i === 0 ? "high" : "low"}
-                />
+                <picture>
+                  {"webp" in slide ? (
+                    <source
+                      type="image/webp"
+                      srcset={withBase(slide.webp)}
+                      sizes={slideSizes}
+                    />
+                  ) : null}
+                  <img
+                    src={withBase(slide.src)}
+                    alt={slide.alt}
+                    width="1499"
+                    height="1059"
+                    sizes={slideSizes}
+                    class="h-auto w-full object-cover object-center"
+                    loading={i === 0 ? "eager" : "lazy"}
+                    fetchpriority={i === 0 ? "high" : "low"}
+                  />
+                </picture>
               );
               const cls = [
                 "hero-slider__slide col-start-1 row-start-1 block w-full min-w-0",
