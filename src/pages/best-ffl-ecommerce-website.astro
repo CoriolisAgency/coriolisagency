@@ -12,22 +12,22 @@ import TalkSection from "../components/TalkSection.astro";
 const ext = { target: "_blank", rel: "noopener noreferrer" };
 
 const rows = [
-  ["You own the website", "No", "No", "Their storefront (their contract)", "Yes, open WooCommerce on your domain"],
-  ["Monthly (dropshipping rung)", "Usage-priced (we do not republish their card)", "Network-priced (we do not republish their 2026 card)", "Not published here. Ask them.", "Militia \$269/mo"],
-  ["Own inventory + dropship", "Varies", "Yes", "Ask them", "Yes, or either one"],
-  ["Distributor catalogs", "Limited set", "Their set", "Their terms, not republished here", "21 via FFL Cockpit"],
-  ["FFL dealer checkout", "Built-in", "Built-in", "Ask them", "FFL Checkout"],
-  ["POS", "Their register partner", "The register they already run", "Their pairing, not republished here", "Any POS that works with WooCommerce, such as AIM or GunBiz (Warlord+)"],
-  ["AmmoSeek / GunBroker", "Add-on or no", "Limited", "Ask them", "Included on Militia+"],
-  ["SEO control", "Theirs", "Theirs", "Their chrome, not republished here", "Yours"],
-  ["4473 / bound book", "Sometimes bundled", "Third-party", "Ask them", "Your POS / bound-book system, not us"],
-  ["Exit", "Export what they allow", "Export what they allow", "Their export rules, not republished here", "Take the site"],
+  ["You own the website", "No", "No", "Yes, open WooCommerce on your domain"],
+  ["Monthly (dropshipping rung)", "Usage-priced (we do not republish their card)", "Network-priced (we do not republish their 2026 card)", "Militia \\$269/mo"],
+  ["Own inventory + dropship", "Varies", "Yes", "Yes, or either one"],
+  ["Distributor catalogs", "Limited set", "Their set", "21 via FFL Cockpit"],
+  ["FFL dealer checkout", "Built-in", "Built-in", "FFL Checkout"],
+  ["POS", "Their register partner", "The register they already run", "Any POS that works with WooCommerce, such as AIM or GunBiz (Warlord+)"],
+  ["AmmoSeek / GunBroker", "Add-on or no", "Limited", "Included on Militia+"],
+  ["SEO control", "Theirs", "Theirs", "Yours"],
+  ["4473 / bound book", "Sometimes bundled", "Third-party", "Your POS / bound-book system, not us"],
+  ["Exit", "Export what they allow", "Export what they allow", "Take the site"],
 ] as const;
 ---
 
 <BaseLayout
   title="Best FFL ecommerce website: gun-friendly WooCommerce | Coriolis"
-  description="The best FFL ecommerce website is the one you own. Compare AmmoReady, Gearfire, FirearmCart, and Coriolis Woo on ownership, SEO, catalogs, POS, and exit."
+  description="The best FFL ecommerce website is the one you own. Compare AmmoReady, Gearfire, and Coriolis Woo on ownership, SEO, catalogs, POS, and exit."
   path="/best-ffl-ecommerce-website"
   ogImagePath={CANON_PATHS.storefront}
   faq={FAQ_BEST}
@@ -44,7 +44,7 @@ const rows = [
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
         The best FFL ecommerce website is the one the dealer owns. AmmoReady and Gearfire
         are hosted template platforms: shared HTML, ads you cannot strip, pages you do not
-        write. FirearmCart is another hosted storefront dealers compare. Coriolis builds a
+        write. Coriolis builds a
         gun-friendly WooCommerce store on your domain. You control SEO. You sell what you
         stock, dropship from distributor catalogs, or do both.{" "}
         <a href={LINKS.fflCockpit} class={linkClass} {...ext}>FFL Cockpit</a>
@@ -85,7 +85,7 @@ const rows = [
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">
-        AmmoReady vs Gearfire vs FirearmCart vs Coriolis Woo
+        AmmoReady vs Gearfire vs Coriolis Woo
       </h2>
       <p class="mt-2 max-w-2xl text-sm text-zinc-400">
         Fair model table. Coriolis column uses published facts. Competitor fee cards stay
@@ -98,18 +98,16 @@ const rows = [
               <th class="py-3 pr-3 font-medium"> </th>
               <th class="py-3 pr-3 font-medium">AmmoReady</th>
               <th class="py-3 pr-3 font-medium">Gearfire</th>
-              <th class="py-3 pr-3 font-medium">FirearmCart</th>
               <th class="py-3 font-medium text-zinc-200">Coriolis Woo</th>
             </tr>
           </thead>
           <tbody class="text-zinc-400">
             {
-              rows.map(([k, a, g, f, c]) => (
+              rows.map(([k, a, g, c]) => (
                 <tr class="border-b border-zinc-800/80">
                   <th class="py-3 pr-3 font-medium text-zinc-300">{k}</th>
                   <td class="py-3 pr-3">{a}</td>
                   <td class="py-3 pr-3">{g}</td>
-                  <td class="py-3 pr-3">{f}</td>
                   <td class="py-3 text-zinc-200">{c}</td>
                 </tr>
               ))
@@ -220,7 +218,7 @@ const rows = [
         <a href={withBase("ammoready-alternative")} class={linkClass}>AmmoReady alternative</a>
         {" · "}
         <a href={withBase("gearfire-alternative")} class={linkClass}>Gearfire alternative</a>
-        {" "}(FirearmCart sits on those comparison tables).
+
       </p>
     </div>
   </section>
