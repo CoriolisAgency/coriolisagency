@@ -123,10 +123,6 @@ export const FAQ_AMMOREADY: FaqItem[] = [
     a: "Leaving Gearfire? See the Gearfire alternative page. Same owned-Woo model. We are not affiliated with Gearfire or RetailBI.",
   },
   {
-    q: "What about FirearmCart?",
-    a: "Dealers compare that storefront too. We do not republish their fee card or invent catalog internals. Ask them for their contract terms. Compare those to WooCommerce you own on your domain.",
-  },
-  {
     q: "How do you migrate a live AmmoReady store?",
     a: "Keep your domain. We stand up Woo on it before you give notice. Map the catalog and redirect the URLs that already rank. Wire FFL Checkout, payments, and taxes, then test a mixed cart. Connect the register only if you want the floor and the site in sync. Cut DNS. You leave with the site.",
   },
@@ -156,10 +152,6 @@ export const FAQ_GEARFIRE: FaqItem[] = [
   {
     q: "What is Gearfire’s 2026 price?",
     a: "We do not republish Gearfire’s fee card. It is theirs and it changes. Compare their invoice to the published Coriolis ladder: Minute Man $169, Militia $269, Gun Runner $369, Warlord $469, FFL Accelerator $569. Setup $500 or $2,500.",
-  },
-  {
-    q: "What about FirearmCart?",
-    a: "Dealers compare that storefront too. We do not republish their fee card or invent catalog internals. Ask them for their contract terms. The Coriolis column is the one we publish: WooCommerce you own, 21 distributors via FFL Cockpit, the register you already run.",
   },
   {
     q: "Does switching off Gearfire kill RetailBI?",
@@ -247,7 +239,7 @@ export const FAQ_SHOPIFY: FaqItem[] = [
 export const FAQ_BEST: FaqItem[] = [
   {
     q: "What is the best FFL ecommerce website?",
-    a: "The one you own. AmmoReady and Gearfire are template platforms: ads you cannot strip, shared HTML, pages you do not write. FirearmCart is another hosted storefront to score the same way. Coriolis builds WooCommerce on your domain (inventory, dropshipping, or both), and you can take it with you.",
+    a: "The one you own. AmmoReady and Gearfire are template platforms: ads you cannot strip, shared HTML, pages you do not write. Coriolis builds WooCommerce on your domain (inventory, dropshipping, or both), and you can take it with you.",
   },
   {
     q: "Does WooCommerce handle FFL checkout and dropshipping?",
@@ -264,10 +256,6 @@ export const FAQ_BEST: FaqItem[] = [
   {
     q: "Is hosted ever the right call?",
     a: "Yes. Speed to launch and an all-in POS-plus-web vendor can fit. Trade that against SEO control and exit. Score both with the checklist above.",
-  },
-  {
-    q: "What about FirearmCart?",
-    a: "Dealers compare it. We do not republish their fee card or invent catalog internals. Ask them. Then compare ownership, SEO control, and exit to WooCommerce you own.",
   },
 ];
 
