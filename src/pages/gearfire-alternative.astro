@@ -15,34 +15,33 @@ import TalkSection from "../components/TalkSection.astro";
 
 <BaseLayout
   title="Gearfire alternative: WooCommerce you own | Coriolis"
-  description="Coriolis is the Gearfire alternative: WooCommerce on your domain, FFL Cockpit catalogs, and a five-step switch that does not take you dark. We do not republish Gearfire’s 2026 fee card."
+  description="Leave Gearfire for WooCommerce on your domain. Keep your POS. Run 21 distributor catalogs through FFL Cockpit. Compare Gearfire, AmmoReady, FirearmCart, and Coriolis."
   path="/gearfire-alternative"
   ogImagePath={CANON_PATHS.rangeMckinney}
   faq={FAQ_GEARFIRE}
   extraJsonLd={[HOWTO_SWITCH]}
+  publishedTime="2026-11-05"
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <p
-        class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
-      >
+      <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">
         Ecommerce · Gearfire
       </p>
-      <h1
-        class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
-      >
+      <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl">
         Gearfire alternative
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        Gearfire is a closed network. The shops share chrome, nav, and a
-        “member of GEARFIRE” footer. You do not write the titles or the slugs.
-        Coriolis is the Gearfire alternative: WooCommerce on your domain, 21
-        distributor catalogs through FFL Cockpit, and the register you already
-        run. We are not affiliated with Gearfire or RetailBI. Leaving AmmoReady?
-        That’s a{" "}
-        <a href={withBase("ammoready-alternative")} class={linkClass}
-          >different page</a
-        >.
+        Gearfire is a closed FFL network storefront. Shops share chrome, nav, and a
+        “member of GEARFIRE” footer. You do not write the titles or the slugs. Coriolis
+        is the Gearfire alternative: WooCommerce on your domain, 21 distributor catalogs
+        through FFL Cockpit, and the register you already run. We are not affiliated with
+        Gearfire or RetailBI.
+      </p>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Leaving AmmoReady? See the{" "}
+        <a href={withBase("ammoready-alternative")} class={linkClass}>AmmoReady alternative</a>.
+        Choosing across platforms? Start at{" "}
+        <a href={withBase("best-ffl-ecommerce-website")} class={linkClass}>best FFL ecommerce website</a>.
       </p>
       <div class="mt-8">
         <CtaRow talk primary="ecommerce" showGsa={false} showAccelerator showContact />
@@ -51,55 +50,117 @@ import TalkSection from "../components/TalkSection.astro";
     </div>
   </section>
 
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Who this fits</h2>
+      <ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
+        <li>You are on Gearfire and want titles, slugs, and page copy you control.</li>
+        <li>You want to keep AIM, GunBiz, Rapid, Trident 1, or another Woo-compatible register.</li>
+        <li>You sell own stock, dropship, or both, and want 21 catalogs through FFL Cockpit.</li>
+        <li>You want to leave with the site if you cancel. No annual contract.</li>
+      </ul>
+      <h2 class="mt-10 text-xl font-semibold text-white">Who this does not fit</h2>
+      <ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
+        <li>You only want the cheapest turnkey login and will never touch local pages.</li>
+        <li>
+          You need one vendor for POS, bound book, 4473, and the website. Coriolis is not
+          4473, NICS, or bound-book software. This is not legal advice.
+        </li>
+        <li>You want us to republish Gearfire’s fee card. We will not. Bring their invoice.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Decision checklist</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Score any FFL platform the same way before you switch.
+      </p>
+      <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
+        <li><strong class="text-zinc-300">Ownership.</strong> Do you get a login, or a site on your domain that leaves with you?</li>
+        <li><strong class="text-zinc-300">SEO control.</strong> Who writes titles, slugs, schema, about, and transfer pages?</li>
+        <li><strong class="text-zinc-300">Total cost.</strong> Monthly plan, setup, payments fees, add-ons, support. Compare invoices, not brochure claims.</li>
+        <li><strong class="text-zinc-300">Catalogs.</strong> Own stock, distributor feeds, or both. How many distributors, and who routes orders?</li>
+        <li><strong class="text-zinc-300">POS.</strong> Keep the register you run, or buy deeper into one vendor’s stack?</li>
+        <li><strong class="text-zinc-300">Exit.</strong> Export rules, redirects, and whether the storefront comes with you.</li>
+        <li><strong class="text-zinc-300">Support.</strong> Who answers when checkout breaks on a Friday?</li>
+      </ol>
+    </div>
+  </section>
+
   <section class="border-b border-zinc-800/80 py-12" id="vs-woocommerce">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">
-        Gearfire vs WooCommerce
+        Gearfire vs AmmoReady vs FirearmCart vs Coriolis
       </h2>
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Gearfire Classic shops we opened share the same nav (Home, Store
-        Policies, Firearms News), the same footer, and the same financing FAQ.
-        Inventory changes. The page does not. On owned WooCommerce the page
-        lives on your domain. You write the H1, the about page, the transfer
-        page, and the schema. FirearmCart and Gunpowdr sit in the table because
-        dealers compare those storefronts too. We do not republish their fee
-        cards.
+        FirearmCart sits here because dealers compare that storefront too. We do not
+        republish their fee card or invent catalog internals. AmmoReady and Gearfire cells
+        restate facts already published on this site.
       </p>
       <PlatformTable />
     </div>
   </section>
 
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">What shared Gearfire chrome looks like</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Gearfire Classic shops we opened share the same nav (Home, Store Policies, Firearms
+        News), the same footer, and the same financing FAQ. Inventory changes. The page does
+        not.
+      </p>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        On owned WooCommerce the page lives on your domain. You write the H1, the about page,
+        the transfer page, and the schema. That is what “SEO control: yours” means. Shared
+        chrome across shops. Titles and slugs the dealer does not control the way owned Woo
+        does.
+      </p>
+    </div>
+  </section>
+
   <section class="border-b border-zinc-800/80 py-12" id="pricing-2026">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">
-        Gearfire pricing 2026
-      </h2>
+      <h2 class="text-xl font-semibold text-white">Gearfire pricing 2026</h2>
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        We do not republish Gearfire’s fee card. It is theirs and it changes.
-        This site already calls that model “network-priced.” Bring their
-        invoice if you want it mapped to the published Coriolis ladder: Minute
-        Man $169, Militia $269, Gun Runner $369, Warlord $469, FFL Accelerator
-        $569. Setup is $500 or $2,500. No annual contract. If you walk, you
-        take the website.
+        We do not republish Gearfire’s fee card. It is theirs and it changes. This site
+        already calls that model “network-priced.” Bring their invoice if you want it mapped
+        to the published Coriolis ladder: Minute Man $169, Militia $269, Gun Runner $369,
+        Warlord $469, FFL Accelerator $569. Setup is $500 or $2,500. No annual contract. If
+        you walk, you take the website.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Keep your register. Replace the website.</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        You do not have to buy Gearfire’s POS path to get a real site. You do not have to rip
+        out AIM or GunBiz. Warlord and FFL Accelerator connect any POS that works with
+        WooCommerce, such as AIM, GunBiz, Rapid, or Trident 1. Compliance stays with the
+        systems licensed for it. Coriolis is not 4473, NICS, or bound-book software. This is
+        not legal advice.
       </p>
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12" id="no-downtime">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">
-        Leave Gearfire without going dark
-      </h2>
+      <h2 class="text-xl font-semibold text-white">Leave Gearfire without going dark</h2>
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Keep the live Gearfire shop until the new store is ready. Do not give
-        notice first. Same five steps we publish for leaving AmmoReady.
+        Keep the live Gearfire shop until the new store is ready. Do not give notice first.
       </p>
       <SwitchChecklist />
       <p class="mt-4 max-w-3xl text-sm text-zinc-400">
-        The full checklist:{" "}
-        <a href={withBase("leave-gearfire")} class={linkClass}
-          >how to leave Gearfire</a
-        >.
+        Full checklist:{" "}
+        <a href={withBase("leave-gearfire")} class={linkClass}>how to leave Gearfire</a>.
+      </p>
+      <p class="mt-4 max-w-3xl text-sm text-zinc-400">
+        Plans and setup on{" "}
+        <a href={withBase("ecommerce")} class={linkClass}>FFL Ecommerce</a>. The plan we put
+        dealers on is FFL Accelerator at $569.
       </p>
     </div>
   </section>
@@ -107,20 +168,18 @@ import TalkSection from "../components/TalkSection.astro";
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
       <p class="max-w-3xl text-sm text-zinc-400">
-        Plans live on{" "}
-        <a href={`${withBase("ecommerce")}#ffl-accelerator`} class={linkClass}
-          >FFL ecommerce / Accelerator ($569)</a
-        >. Demand Intelligence is{" "}
-        <a href={withBase("demand-intelligence-vs-retailbi")} class={linkClass}
-          >not a RetailBI replacement</a
-        >. Vendor site:{" "}
-        <a href={LINKS.fflaccelerator} class={linkClass} target="_blank" rel="noopener noreferrer"
-          >fflaccelerator.com</a
-        >.
-      </p>
-      <p class="max-w-3xl text-sm text-zinc-400">
-        Want an FFL website you own, built and run by people who know the trade?{" "}
-        <a href={withBase("ecommerce")} class={linkClass}>Start here</a>.
+        Related:{" "}
+        <a href={withBase("best-ffl-ecommerce-website")} class={linkClass}>best FFL ecommerce website</a>
+        {" · "}
+        <a href={withBase("ammoready-alternative")} class={linkClass}>AmmoReady alternative</a>
+        {" · "}
+        <a href={withBase("leave-gearfire")} class={linkClass}>how to leave Gearfire</a>
+        {" · "}
+        <a href={withBase("ecommerce")} class={linkClass}>FFL Ecommerce</a>
+        {" · "}
+        <a href={withBase("demand-intelligence-vs-retailbi")} class={linkClass}>Demand Intelligence vs RetailBI</a>
+        {" · "}
+        <a href={LINKS.fflaccelerator} class={linkClass} target="_blank" rel="noopener noreferrer">fflaccelerator.com</a>.
       </p>
       <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
     </div>
