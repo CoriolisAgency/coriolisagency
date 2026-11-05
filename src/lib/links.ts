@@ -18,7 +18,6 @@ export const LINKS = {
   tridentPosPage: "/trident-1-pos",
   rapidPosPage: "/rapid-gun-systems-pos",
   aiStudio: "/ai-studio",
-  grokBotSetup: "/grok-bot-setup",
   demandIntelPage: "/demand-intelligence",
   diVsRetailbi: "/demand-intelligence-vs-retailbi",
   stack: "/stack",

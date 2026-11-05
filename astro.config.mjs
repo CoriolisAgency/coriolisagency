@@ -77,7 +77,9 @@ export default defineConfig({
         !page.includes("/case-studies/acme") &&
         // UNUM-RETAILER-WELCOME (Paul 2026-11-04 9:39 AM ET): unlinked, noindex, off the sitemap.
         !page.includes("/unum") &&
-        !page.includes("/press/unum-partners-with-coriolis"),
+        !page.includes("/press/unum-partners-with-coriolis") &&
+        // AGENCY-GROKBOT-NOINDEX (Paul via Chief 2026-11-05 6:02 PM ET): keep page, unlinked, noindex.
+        !page.includes("/grok-bot-setup"),
       serialize(item) {
         item.lastmod = pageLastmod(item.url);
         return item;
