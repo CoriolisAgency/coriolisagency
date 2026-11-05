@@ -224,7 +224,13 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
   for (const rel of ["src/pages/ammoready-alternative.astro", "src/pages/gearfire-alternative.astro"]) {
     anchor(rel, "Want an FFL website you own, built and run by people who know the trade?", "ecommerce", "Start here", ".");
   }
-  anchor("src/pages/ai-studio.astro", "Want an AI assistant that works for your shop? Start with", "grok-bot-setup", "Grok Bot setup for gun stores", ".");
+  // AGENCY-GROKBOT-NOINDEX: /grok-bot-setup unlinked; CTA goes to /contact.
+  {
+    const ai = flat("src/pages/ai-studio.astro");
+    assert.doesNotMatch(ai, /withBase\("grok-bot-setup"\)/);
+    assert.match(ai, /Want an AI assistant that works for your shop\? Start with Grok Bot setup for gun stores\./);
+    assert.match(ai, /href=\{withBase\("contact"\)\}[\s\S]*?Talk to Coriolis/);
+  }
   // Proof cards.
   const fx = read("src/lib/factory.ts");
   assert.match(fx, /urlLabel: "coriolisagency\.com\/demand-intelligence"/);
