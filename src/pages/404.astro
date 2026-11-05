@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { withBase } from "../lib/base";
-import { LINKS, linkClass } from "../lib/links";
+import { linkClass } from "../lib/links";
 ---
 
 <BaseLayout
@@ -21,9 +21,9 @@ import { LINKS, linkClass } from "../lib/links";
     <ul class="mt-6 space-y-2 text-sm">
       <li><a href={withBase("/")} class={linkClass}>Home</a></li>
       <li><a href={withBase("ecommerce")} class={linkClass}>Ecommerce</a></li>
-      <li><a href={withBase("ai-studio")} class={linkClass}>AI Studio</a></li>
+      <li><a href={withBase("gun-store-pos")} class={linkClass}>Gun Store POS</a></li>
       <li>
-        <a href={withBase(LINKS.demandIntel)} class={linkClass}>Demand Intelligence</a>
+        <a href={withBase("email-marketing-for-ffl-ecommerce")} class={linkClass}>Email Marketing</a>
       </li>
       <li><a href={withBase("contact")} class={linkClass}>Contact</a></li>
     </ul>
