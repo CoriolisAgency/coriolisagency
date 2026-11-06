@@ -133,7 +133,7 @@ export const POS_PILLAR_FASTBOUND =
 export const POS_PILLAR_FORM_HEADING = "Tell us which POS you run";
 
 export const POS_PILLAR_FORM_LINE =
-  "Tell us which POS you run, or plan to run, and what the website needs to do. No contract, and you can cancel any time. Paul answers.";
+  "We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.";
 
 /** FAQ 1-6 from FINAL, in order. FAQ 6 approved by Paul 10/21. */
 export const FAQ_POS_PILLAR: FaqItem[] = [
