@@ -145,7 +145,7 @@ function isExternal(part: Exclude<PosInline, string>) {
           <p class="mt-4 text-sm text-zinc-500">
             Vendor site:{" "}
             <a href={page.vendorHref} class={linkClass} {...ext}>
-              {page.vendorHref.replace("https://", "")}
+              {page.vendorLabel ?? page.vendorHref.replace("https://", "")}
             </a>
             . Marks of their owners.
           </p>
