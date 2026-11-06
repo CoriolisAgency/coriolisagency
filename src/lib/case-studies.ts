@@ -60,7 +60,7 @@ export const CASE_STUDIES_HUB = {
   eyebrow: "Ecommerce · Case studies",
   h1: "Case studies: gun store websites we built",
   intro:
-    "Every gun shop sells a little differently, so every store we build is set up for the shop that owns it. Naples Gun Shop keeps AIM POS on the counter. Allegheny Arms sells through its own online store. Target Shotguns is a shotgun specialist on GunBiz POS. Here is what we built for each one. Every store runs WooCommerce on the shop's own domain, hosted on WP Engine.",
+    "Every gun shop sells a little differently, so every store we build is set up for the shop that owns it. Naples Gun Shop keeps AIM POS on the counter. Allegheny Arms sells through its own online store. Target Shotguns is a shotgun specialist on MicroBiz POS. Here is what we built for each one. Every store runs WooCommerce on the shop's own domain, hosted on WP Engine.",
 } as const;
 
 export const CASE_STUDIES: CaseStudy[] = [
@@ -211,16 +211,16 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "target-shotguns",
     name: "Target Shotguns",
-    kicker: "Shotgun specialist · GunBiz POS",
-    cardLine: "A shotgun specialist's store, connected to GunBiz POS, with drop ship items kept apart from in-store stock.",
+    kicker: "Shotgun specialist · MicroBiz POS",
+    cardLine: "A shotgun specialist's store, connected to MicroBiz POS, with drop ship items kept apart from in-store stock.",
     cardLink: "Read the Target Shotguns story",
-    title: "Target Shotguns Case Study: GunBiz POS Website | Coriolis",
-    meta: "Target Shotguns runs a Coriolis-built WooCommerce store connected to GunBiz POS, formerly MicroBiz, with FFL checkout and drop ship items kept apart.",
-    h1: "Target Shotguns: a shotgun specialist's store, connected to GunBiz POS",
+    title: "Target Shotguns Case Study: MicroBiz POS Website | Coriolis",
+    meta: "Target Shotguns runs a Coriolis-built WooCommerce store connected to MicroBiz POS, with FFL checkout and drop ship items kept apart.",
+    h1: "Target Shotguns: a shotgun specialist's store, connected to MicroBiz POS",
     facts: [
       { label: "Store", value: "Target Shotguns" },
       { label: "Type", value: "Shotgun specialist" },
-      { label: "Register", value: "GunBiz POS (formerly MicroBiz)" },
+      { label: "Register", value: "MicroBiz POS" },
       { label: "Site", value: "targetshotguns.com", href: "https://targetshotguns.com/" },
     ],
     sections: [
@@ -228,7 +228,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         heading: "The shop",
         paragraphs: [
           [
-            "Target Shotguns is a shotgun specialist. It sells in-store competition and field shotguns, used and new, plus shotgun parts, choke tubes, precision fit stocks and clay target gear like voice release systems and clay machines. It also does custom stock fitting, so a shooter can get a gun that fits. Many of its in-store shotguns are used, so each one is its own listing. The register is GunBiz POS, formerly MicroBiz.",
+            "Target Shotguns is a shotgun specialist. It sells in-store competition and field shotguns, used and new, plus shotgun parts, choke tubes, precision fit stocks and clay target gear like voice release systems and clay machines. It also does custom stock fitting, so a shooter can get a gun that fits. Many of its in-store shotguns are used, so each one is its own listing. The register is MicroBiz POS.",
           ],
         ],
       },
@@ -236,7 +236,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         heading: "What we built",
         paragraphs: [
           [
-            "Coriolis built Target Shotguns a WooCommerce store on its own domain, targetshotguns.com, hosted on WP Engine. We connected the store to GunBiz POS, the register the shop already runs, so the counter and the website work from the same system.",
+            "Coriolis built Target Shotguns a WooCommerce store on its own domain, targetshotguns.com, hosted on WP Engine. We connected the store to MicroBiz POS, the register the shop already runs, so the counter and the website work from the same system.",
           ],
           [
             "We also connected distributor catalogs, so the site sells shells, optics, magazines and other gear beyond what's in the building. The menu keeps those drop ship items in their own clearly marked area, so nobody drives in expecting one on the shelf. At checkout, a buyer picks the FFL dealer that will receive the firearm.",
@@ -257,19 +257,19 @@ export const CASE_STUDIES: CaseStudy[] = [
         heading: "If your shop runs like this",
         paragraphs: [
           [
-            "Specialty shops sell to buyers who know exactly what they're after. A clear menu, a marked area for drop ship items and an FFL checkout keep those buyers moving. If you run GunBiz or MicroBiz, you keep it. Coriolis builds the WooCommerce store on your domain and connects it to the register you already use. You own the site, and it runs on WP Engine.",
+            "Specialty shops sell to buyers who know exactly what they're after. A clear menu, a marked area for drop ship items and an FFL checkout keep those buyers moving. If you run MicroBiz, you keep it. Coriolis builds the WooCommerce store on your domain and connects it to the register you already use. You own the site, and it runs on WP Engine.",
           ],
         ],
       },
     ],
     cta: [
-      "Run GunBiz or MicroBiz at the counter? See ",
-      { text: "WooCommerce for GunBiz", href: "/gunbiz-pos" },
+      "Run MicroBiz at the counter? See ",
+      { text: "WooCommerce for MicroBiz", href: "/gunbiz-pos" },
       ", or how ",
       { text: "FFL dropshipping", href: "/firearms-dropshipping" },
       " works.",
     ],
-    pos: "GunBiz POS",
+    pos: "MicroBiz POS",
     posHref: "/gunbiz-pos",
     siteUrl: "https://targetshotguns.com/",
     hero: "/case-studies/target-shotguns-hero.webp",

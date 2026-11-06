@@ -15,7 +15,7 @@ assert.deepEqual(labels, [
   "Gun Store POS",
   "WooCommerce for AIM",
   "WooCommerce for Rapid",
-  "WooCommerce for GunBiz",
+  "WooCommerce for MicroBiz",
   "WooCommerce for Trident 1",
   "GunSearchEngine.com",
   "Press Room",

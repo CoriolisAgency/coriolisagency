@@ -269,35 +269,35 @@ export const POS_PAGES: PosPage[] = [
   {
     slug: "gunbiz-pos",
     path: "/gunbiz-pos",
-    name: "GunBiz POS",
-    navLabel: "WooCommerce for GunBiz",
-    title: "WooCommerce for GunBiz POS (MicroBiz) | Coriolis",
+    name: "MicroBiz POS",
+    navLabel: "WooCommerce for MicroBiz",
+    title: "WooCommerce for MicroBiz POS | Coriolis",
     description:
-      "WooCommerce for GunBiz POS, formerly MicroBiz: publish products, sync prices and stock, and pull web orders and customers back into GunBiz.",
-    h1: "WooCommerce for GunBiz POS",
-    lede: "GunBiz POS, formerly MicroBiz, has a WooCommerce integration. Keep GunBiz at the counter. Coriolis builds the store on your domain, and GunBiz publishes products and prices to it and pulls web orders back in.",
-    jumpLabel: "Tell us about your GunBiz store",
+      "WooCommerce for MicroBiz POS: publish products, sync prices and stock, and pull web orders and customers back into MicroBiz.",
+    h1: "WooCommerce for MicroBiz POS",
+    lede: "MicroBiz POS has a WooCommerce integration. Keep MicroBiz at the counter. Coriolis builds the store on your domain, and MicroBiz publishes products and prices to it and pulls web orders back in.",
+    jumpLabel: "Tell us about your MicroBiz store",
     heroImage: {
       src: "brand/gunbiz-pos-hero.jpg",
-      alt: "Target Shotguns website, a WooCommerce store connected to GunBiz POS",
+      alt: "Target Shotguns website, a WooCommerce store connected to MicroBiz POS",
       width: 1440,
       height: 900,
     },
-    featuresTitle: "What GunBiz does on your website",
+    featuresTitle: "What MicroBiz does on your website",
     featuresIntro:
-      "The GunBiz POS WooCommerce integration runs both directions. Products and prices go out to the site. Orders and customers come back in.",
+      "The MicroBiz POS WooCommerce integration runs both directions. Products and prices go out to the site. Orders and customers come back in.",
     features: [
       {
         title: "Publish from the POS",
-        body: "New products and price changes go from GunBiz to your WooCommerce store. Nobody rebuilds listings by hand.",
+        body: "New products and price changes go from MicroBiz to your WooCommerce store. Nobody rebuilds listings by hand.",
       },
       {
         title: "Sell it out once",
-        body: "When an item sells out in the store, GunBiz updates WooCommerce right away. Other stock changes go up in a daily batch. When an item sells online, GunBiz adjusts its own count.",
+        body: "When an item sells out in the store, MicroBiz updates WooCommerce right away. Other stock changes go up in a daily batch. When an item sells online, MicroBiz adjusts its own count.",
       },
       {
-        title: "Web orders and customers in GunBiz",
-        body: "Online orders land in GunBiz Order Management with the items, taxes and payment. A first-time online buyer gets a new GunBiz customer record. A repeat buyer gets matched to the one you have.",
+        title: "Web orders and customers in MicroBiz",
+        body: "Online orders land in MicroBiz Order Management with the items, taxes and payment. A first-time online buyer gets a new MicroBiz customer record. A repeat buyer gets matched to the one you have.",
       },
       {
         title: "Store stock plus distributor items",
@@ -305,11 +305,11 @@ export const POS_PAGES: PosPage[] = [
       },
       {
         title: "FastBound stays in the loop",
-        body: "GunBiz connects to FastBound for A&D and the 4473. Coriolis builds the website. We don't file a 4473, run NICS, or replace the bound book.",
+        body: "MicroBiz connects to FastBound for A&D and the 4473. Coriolis builds the website. We don't file a 4473, run NICS, or replace the bound book.",
       },
     ],
     keepRegister:
-      "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based GunBiz POS (formerly MicroBiz) integration, with unlimited API requests and webhooks. GunBiz stays on the counter, and WooCommerce goes on your domain. Coriolis does not file a 4473, run NICS, or replace the bound book.",
+      "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based MicroBiz POS integration, with unlimited API requests and webhooks. MicroBiz stays on the counter, and WooCommerce goes on your domain. Coriolis does not file a 4473, run NICS, or replace the bound book.",
     vendorHref: LINKS.gunbizPos,
     caseStudy: {
       shop: "Target Shotguns",
@@ -322,7 +322,7 @@ export const POS_PAGES: PosPage[] = [
       body: null,
     },
     siblingsIntro: [
-      "GunBiz isn't the only register we connect. Warlord and FFL Accelerator work with any POS that works with WooCommerce. Start at ",
+      "MicroBiz isn't the only register we connect. Warlord and FFL Accelerator work with any POS that works with WooCommerce. Start at ",
       { text: "gun store POS integration", href: "gun-store-pos" },
       ", or go straight to one:",
     ],
@@ -339,28 +339,25 @@ export const POS_PAGES: PosPage[] = [
     ],
     faq: [
       {
-        q: "Does GunBiz POS work with WooCommerce?",
-        a: "Yes. GunBiz has a WooCommerce integration. Coriolis builds the WooCommerce store on your domain and connects it to GunBiz on the Warlord and FFL Accelerator plans.",
+        q: "Does MicroBiz POS work with WooCommerce?",
+        a: "Yes. MicroBiz has a WooCommerce integration. Coriolis builds the WooCommerce store on your domain and connects it to MicroBiz on the Warlord and FFL Accelerator plans.",
+      },
+
+      {
+        q: "What syncs between MicroBiz and my website, and how fast?",
+        a: "New products, price updates and stock. When an item sells out in the store, MicroBiz updates WooCommerce right away. Other stock changes go up in a daily batch.",
       },
       {
-        q: "Is GunBiz the same as MicroBiz?",
-        a: "Yes. GunBiz POS was formerly MicroBiz. If you run MicroBiz in your gun store, this is your page.",
+        q: "Do web orders and customers come back into MicroBiz?",
+        a: "Yes. Online orders land in MicroBiz Order Management with items, taxes and payment. A new online buyer gets a MicroBiz customer record, and a repeat buyer is matched to the existing one.",
       },
       {
-        q: "What syncs between GunBiz and my website, and how fast?",
-        a: "New products, price updates and stock. When an item sells out in the store, GunBiz updates WooCommerce right away. Other stock changes go up in a daily batch.",
-      },
-      {
-        q: "Do web orders and customers come back into GunBiz?",
-        a: "Yes. Online orders land in GunBiz Order Management with items, taxes and payment. A new online buyer gets a GunBiz customer record, and a repeat buyer is matched to the existing one.",
-      },
-      {
-        q: "Can I sell distributor items next to my GunBiz inventory?",
+        q: "Can I sell distributor items next to my MicroBiz inventory?",
         a: "Yes. Your in-stock inventory publishes next to items from distributor feeds managed in the FFL Cockpit plugin. Militia and above include FFL Cockpit distributor catalogs.",
       },
       {
-        q: "Which plan includes GunBiz integration?",
-        a: "Warlord ($469/mo) and FFL Accelerator ($569/mo). Both include API-based GunBiz POS integration with unlimited API requests and webhooks.",
+        q: "Which plan includes MicroBiz integration?",
+        a: "Warlord ($469/mo) and FFL Accelerator ($569/mo). Both include API-based MicroBiz POS integration with unlimited API requests and webhooks.",
       },
     ],
   },
