@@ -267,8 +267,8 @@ export const POS_PAGES: PosPage[] = [
     ],
   },
   {
-    slug: "gunbiz-pos",
-    path: "/gunbiz-pos",
+    slug: "microbiz-pos",
+    path: "/microbiz-pos",
     name: "MicroBiz POS",
     navLabel: "WooCommerce for MicroBiz",
     title: "WooCommerce for MicroBiz POS | Coriolis",
@@ -278,7 +278,7 @@ export const POS_PAGES: PosPage[] = [
     lede: "MicroBiz POS has a WooCommerce integration. Keep MicroBiz at the counter. Coriolis builds the store on your domain, and MicroBiz publishes products and prices to it and pulls web orders back in.",
     jumpLabel: "Tell us about your MicroBiz store",
     heroImage: {
-      src: "brand/gunbiz-pos-hero.jpg",
+      src: "brand/microbiz-pos-hero.jpg",
       alt: "Target Shotguns website, a WooCommerce store connected to MicroBiz POS",
       width: 1440,
       height: 900,
@@ -310,7 +310,7 @@ export const POS_PAGES: PosPage[] = [
     ],
     keepRegister:
       "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based MicroBiz POS integration, with unlimited API requests and webhooks. MicroBiz stays on the counter, and WooCommerce goes on your domain. Coriolis does not file a 4473, run NICS, or replace the bound book.",
-    vendorHref: LINKS.gunbizPos,
+    vendorHref: LINKS.microbizPos,
     caseStudy: {
       shop: "Target Shotguns",
       href: "case-studies/target-shotguns",
