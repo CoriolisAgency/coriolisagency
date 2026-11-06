@@ -52,6 +52,7 @@ export type PosPage = {
   keepRegister: string;
   extra?: PosInline[];
   vendorHref?: string;
+  vendorLabel?: string;
   vendorNote?: string;
   caseStudy: PosCaseStudy;
   siblingsIntro: PosInline[];
@@ -311,6 +312,7 @@ export const POS_PAGES: PosPage[] = [
     keepRegister:
       "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based MicroBiz POS integration, with unlimited API requests and webhooks. MicroBiz stays on the counter, and WooCommerce goes on your domain. Coriolis does not file a 4473, run NICS, or replace the bound book.",
     vendorHref: LINKS.microbizPos,
+    vendorLabel: "MicroBiz",
     caseStudy: {
       shop: "Target Shotguns",
       href: "case-studies/target-shotguns",
