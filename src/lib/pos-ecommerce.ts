@@ -67,9 +67,9 @@ export const POS_PILLAR_CARDS: PosPillarCard[] = [
   },
   {
     name: "MicroBiz POS",
-    slug: "gunbiz-pos",
+    slug: "microbiz-pos",
     linkLabel: "WooCommerce for MicroBiz",
-    vendorHref: LINKS.gunbizPos,
+    vendorHref: LINKS.microbizPos,
     vendorLabel: "MicroBiz",
     body: "A gun store POS with a fully developed, tested and supported WooCommerce integration. MicroBiz uses FastBound.",
   },

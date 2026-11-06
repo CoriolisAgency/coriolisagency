@@ -33,6 +33,16 @@
   ],
   "redirects": [
     {
+      "source": "/brand/gunbiz-pos-hero.jpg",
+      "destination": "/brand/microbiz-pos-hero.jpg",
+      "statusCode": 301
+    },
+    {
+      "source": "/gunbiz-pos",
+      "destination": "/microbiz-pos",
+      "statusCode": 301
+    },
+    {
       "source": "/:path*",
       "has": [
         {
@@ -42,11 +52,6 @@
       ],
       "destination": "https://www.coriolisagency.com/:path*",
       "permanent": true
-    },
-    {
-      "source": "/microbiz-pos",
-      "destination": "/gunbiz-pos",
-      "statusCode": 301
     },
     {
       "source": "/corestore-pos",
@@ -465,7 +470,7 @@
     },
     {
       "source": "/coriolis-agency-and-microbiz-partner-to-deliver-seamless-ffl-compliant-pos-ecommerce-and-dropshipping-for-firearms-retailers",
-      "destination": "/gunbiz-pos",
+      "destination": "/microbiz-pos",
       "permanent": true
     },
     {

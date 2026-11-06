@@ -25,7 +25,7 @@ assert.deepEqual(hrefs, [
   "gun-store-pos",
   "aim-pos",
   "rapid-gun-systems-pos",
-  "gunbiz-pos",
+  "microbiz-pos",
   "trident-1-pos",
   "https://gunsearchengine.com/for-dealers",
   "press",
