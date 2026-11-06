@@ -18,7 +18,7 @@ export const MAIN_NAV: readonly NavItem[] = [
     children: [
       { href: "aim-pos", label: "WooCommerce for AIM" },
       { href: "rapid-gun-systems-pos", label: "WooCommerce for Rapid" },
-      { href: "gunbiz-pos", label: "WooCommerce for GunBiz" },
+      { href: "gunbiz-pos", label: "WooCommerce for MicroBiz" },
       { href: "trident-1-pos", label: "WooCommerce for Trident 1" },
     ],
   },

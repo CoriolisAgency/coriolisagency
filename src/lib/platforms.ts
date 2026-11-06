@@ -32,7 +32,7 @@ export const CLOSED_PLATFORM_ROWS = [
     "POS",
     "Their register partner",
     "The register they already run",
-    "Any POS that works with WooCommerce, such as AIM or GunBiz (Warlord+)",
+    "Any POS that works with WooCommerce, such as AIM or MicroBiz (Warlord+)",
   ],
   [
     "SEO",

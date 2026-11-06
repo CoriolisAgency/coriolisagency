@@ -29,7 +29,7 @@ GunSearchAgent is retired. FFLIntel is our journal on gun demand numbers (fflint
 - /case-studies: case studies, gun store websites we built
 - /case-studies/naples-gun-shop: Naples Gun Shop, a WooCommerce store connected to AIM POS
 - /case-studies/allegheny-arms: Allegheny Arms, a WooCommerce store on its own domain
-- /case-studies/target-shotguns: Target Shotguns, a shotgun specialist's store connected to GunBiz POS
+- /case-studies/target-shotguns: Target Shotguns, a shotgun specialist's store connected to MicroBiz POS
 - /contact: talk
 - /ai-studio: live software, not a catalog
 - /ammoready-alternative: AmmoReady alternative
@@ -43,7 +43,7 @@ GunSearchAgent is retired. FFLIntel is our journal on gun demand numbers (fflint
 - /demand-intelligence-vs-retailbi: what shoppers typed vs what sold. Not a RetailBI replacement.
 - /ffl-analytics: how we read a gun store's site search. Our take, not a separate FFL Analytics product.
 - /ffl-search-console: how site search sits next to Google Search Console. Our take, not a separate FFL Search Console product.
-- /gun-store-pos (Gun Store POS pillar: WooCommerce for AIM, Rapid, GunBiz and Trident 1), /aim-pos, /rapid-gun-systems-pos, /gunbiz-pos, /trident-1-pos
+- /gun-store-pos (Gun Store POS pillar: WooCommerce for AIM, Rapid, MicroBiz and Trident 1), /aim-pos, /rapid-gun-systems-pos, /gunbiz-pos, /trident-1-pos
 - /privacy, /msa, /confirmed, /unsubscribe: legal and list
 
 Old /ai-factory links go to /ai-studio. /plans goes to /ecommerce.

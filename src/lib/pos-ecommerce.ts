@@ -19,7 +19,7 @@ export const POS_PILLAR_H1 =
 
 /** Opening: first <p> after the H1. */
 export const POS_PILLAR_LEDE =
-  "Gun store POS integration means the register you already run and your WooCommerce website share one inventory. On the Warlord plan, $469 a month, Coriolis builds the store on your domain and connects your POS through an API-based integration, so the floor and the site stay in sync. Warlord connects any POS that works with WooCommerce, including AIM, GunBiz, Rapid Gun Systems and Trident 1. The POS company runs the register, and you own the website.";
+  "Gun store POS integration means the register you already run and your WooCommerce website share one inventory. On the Warlord plan, $469 a month, Coriolis builds the store on your domain and connects your POS through an API-based integration, so the floor and the site stay in sync. Warlord connects any POS that works with WooCommerce, including AIM, MicroBiz, Rapid Gun Systems and Trident 1. The POS company runs the register, and you own the website.";
 
 export const POS_PILLAR_JUMP = "Tell us which POS you run";
 
@@ -66,12 +66,12 @@ export const POS_PILLAR_CARDS: PosPillarCard[] = [
     body: "A gun store POS with a tested, supported WooCommerce integration. Rapid syncs products, prices and stock to the site, and web orders flow back for picking.",
   },
   {
-    name: "GunBiz POS",
+    name: "MicroBiz POS",
     slug: "gunbiz-pos",
-    linkLabel: "WooCommerce for GunBiz",
+    linkLabel: "WooCommerce for MicroBiz",
     vendorHref: LINKS.gunbizPos,
-    vendorLabel: "GunBizPOS.com",
-    body: "A gun store POS with a fully developed, tested and supported WooCommerce integration. GunBiz uses FastBound.",
+    vendorLabel: "MicroBiz",
+    body: "A gun store POS with a fully developed, tested and supported WooCommerce integration. MicroBiz uses FastBound.",
   },
   {
     name: "Trident 1 POS",
@@ -128,7 +128,7 @@ export const POS_PILLAR_WHY =
 export const POS_PILLAR_FASTBOUND_TITLE = "FastBound and compliance";
 
 export const POS_PILLAR_FASTBOUND =
-  "FastBound runs the bound book and the 4473 for the POS systems that use it, including GunBiz, AIM and Trident 1. Coriolis doesn\u2019t file the 4473, run NICS or keep the bound book. Those stay with the systems licensed for them. This is not legal advice.";
+  "FastBound runs the bound book and the 4473 for the POS systems that use it, including MicroBiz, AIM and Trident 1. Coriolis doesn\u2019t file the 4473, run NICS or keep the bound book. Those stay with the systems licensed for them. This is not legal advice.";
 
 export const POS_PILLAR_FORM_HEADING = "Tell us which POS you run";
 
@@ -143,7 +143,7 @@ export const FAQ_POS_PILLAR: FaqItem[] = [
   },
   {
     q: "Which POS systems integrate with my website?",
-    a: "On the Warlord plan, Coriolis connects any POS that works with WooCommerce. AIM, Rapid Gun Systems, GunBiz and Trident 1 each have a WooCommerce page. All four sit on Gun Store POS.",
+    a: "On the Warlord plan, Coriolis connects any POS that works with WooCommerce. AIM, Rapid Gun Systems, MicroBiz and Trident 1 each have a WooCommerce page. All four sit on Gun Store POS.",
   },
   {
     q: "Which plan includes POS integration, and what does it cost?",
@@ -155,7 +155,7 @@ export const FAQ_POS_PILLAR: FaqItem[] = [
   },
   {
     q: "Does Coriolis handle the 4473, NICS or the bound book?",
-    a: "No. FastBound runs the bound book and the 4473 for the POS systems that use it, including GunBiz, AIM and Trident 1. Coriolis doesn\u2019t file the 4473, run NICS or keep the bound book. This is not legal advice.",
+    a: "No. FastBound runs the bound book and the 4473 for the POS systems that use it, including MicroBiz, AIM and Trident 1. Coriolis doesn\u2019t file the 4473, run NICS or keep the bound book. This is not legal advice.",
   },
   {
     q: "Does inventory sync both ways?",
