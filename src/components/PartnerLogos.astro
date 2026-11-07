@@ -9,6 +9,8 @@
  * icon only, no wordmark, no link) immediately right of GunSearchEngine, then
  * MicroBiz POS and OtterText. Full-width slow horizontal scroll. Existing order
  * and FFL Cockpit mark unchanged. Logos stay unlinked.
+ * HOMEPAGE-PARTNERS-LOGOS (Paul 2026-11-07 11:42 AM ET): greyscale the FFLM
+ * tile (desaturate only). Crop MicroBiz POS to the mark so it reads at row height.
  */
 import { withBase } from "../lib/base";
 
@@ -26,7 +28,7 @@ const PARTNERS: {
   { name: "GOAT Payments", src: "partners/goat-payments.png", width: 72, height: 40 },
   { name: "GunSearchEngine.com", src: "partners/gunsearchengine.png", width: 204, height: 40 },
   { name: "FFL Messenger", src: "fflm/fflm-tile-white.webp", width: 40, height: 40, tile: true },
-  { name: "MicroBiz POS", src: "partners/microbiz-pos.png", width: 90, height: 40 },
+  { name: "MicroBiz POS", src: "partners/microbiz-pos.png", width: 142, height: 40 },
   { name: "OtterText", src: "partners/ottertext.svg", width: 210, height: 40 },
 ];
 ---
@@ -57,7 +59,7 @@ const PARTNERS: {
                 decoding="async"
                 class={
                   p.tile
-                    ? "h-10 w-10 rounded-[22%] object-cover"
+                    ? "h-10 w-10 rounded-[22%] object-cover grayscale"
                     : "h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
                 }
               />
@@ -78,7 +80,7 @@ const PARTNERS: {
                 decoding="async"
                 class={
                   p.tile
-                    ? "h-10 w-10 rounded-[22%] object-cover"
+                    ? "h-10 w-10 rounded-[22%] object-cover grayscale"
                     : "h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
                 }
               />
