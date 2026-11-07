@@ -4,49 +4,128 @@
  * Official logos from each partner's own site, shown as one light-gray
  * silhouette style. Not links. No captions or stats.
  * width/height are the intrinsic aspect ratio at 40px tall, so the row has no layout shift.
+ *
+ * HOMEPAGE-PARTNERS-BAR (Paul 2026-11-07 4:57 AM ET): FFLM iOS tile (PTT/walkie
+ * icon only, no wordmark, no link) immediately right of GunSearchEngine, then
+ * MicroBiz POS and OtterText. Full-width slow horizontal scroll. Existing order
+ * and FFL Cockpit mark unchanged. Logos stay unlinked.
  */
 import { withBase } from "../lib/base";
 
-const PARTNERS = [
+const PARTNERS: {
+  name: string;
+  src: string;
+  width: number;
+  height: number;
+  tile?: boolean;
+}[] = [
   { name: "WP Engine", src: "partners/wp-engine.svg", width: 205, height: 40 },
   { name: "FFL Cockpit", src: "partners/ffl-cockpit.svg", width: 130, height: 40 },
   { name: "AIM POS", src: "partners/aim-pos.svg", width: 99, height: 40 },
   { name: "FastBound", src: "partners/fastbound.svg", width: 169, height: 40 },
   { name: "GOAT Payments", src: "partners/goat-payments.png", width: 72, height: 40 },
   { name: "GunSearchEngine.com", src: "partners/gunsearchengine.png", width: 204, height: 40 },
-] as const;
+  { name: "FFL Messenger", src: "fflm/fflm-tile-white.webp", width: 40, height: 40, tile: true },
+  { name: "MicroBiz POS", src: "partners/microbiz-pos.png", width: 90, height: 40 },
+  { name: "OtterText", src: "partners/ottertext.svg", width: 210, height: 40 },
+];
 ---
 
 <section
-  class="border-b border-zinc-800/80 bg-zinc-950/40"
+  class="overflow-hidden border-b border-zinc-800/80 bg-zinc-950/40"
   aria-labelledby="partners-heading"
   data-partner-logos
 >
-  <div class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
+  <div class="w-full py-8 sm:py-10">
     <h2
       id="partners-heading"
       class="text-center text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-500"
     >
       Partners
     </h2>
-    <ul
-      class="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-14"
-    >
-      {
-        PARTNERS.map((p) => (
-          <li class="flex items-center">
-            <img
-              src={withBase(p.src)}
-              alt={`${p.name} logo`}
-              width={p.width}
-              height={p.height}
-              loading="lazy"
-              decoding="async"
-              class="h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
-            />
-          </li>
-        ))
-      }
-    </ul>
+    <div class="partner-marquee mt-6">
+      <ul class="partner-track">
+        {
+          PARTNERS.map((p) => (
+            <li class="flex items-center">
+              <img
+                src={withBase(p.src)}
+                alt={`${p.name} logo`}
+                width={p.width}
+                height={p.height}
+                loading="lazy"
+                decoding="async"
+                class={
+                  p.tile
+                    ? "h-10 w-10 rounded-[22%] object-cover"
+                    : "h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
+                }
+              />
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="partner-track" aria-hidden="true">
+        {
+          PARTNERS.map((p) => (
+            <li class="flex items-center">
+              <img
+                src={withBase(p.src)}
+                alt=""
+                width={p.width}
+                height={p.height}
+                loading="lazy"
+                decoding="async"
+                class={
+                  p.tile
+                    ? "h-10 w-10 rounded-[22%] object-cover"
+                    : "h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
+                }
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </section>
+
+<style>
+  .partner-marquee {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .partner-track {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 5.5rem;
+    padding-right: 5.5rem;
+    animation: partner-scroll 70s linear infinite;
+  }
+
+  @keyframes partner-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .partner-marquee {
+      overflow-x: auto;
+    }
+
+    .partner-track {
+      animation: none;
+    }
+
+    .partner-marquee > .partner-track[aria-hidden="true"] {
+      display: none;
+    }
+  }
+</style>
