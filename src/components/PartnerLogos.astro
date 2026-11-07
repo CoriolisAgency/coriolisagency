@@ -2,7 +2,7 @@
 /**
  * Homepage partner logo row (OPS-30, decision 2026-10-08-gun-store-pos-pillar).
  * Official logos from each partner's own site, shown as one light-gray
- * silhouette style. Not links. No captions or stats.
+ * silhouette style. Not links, except UNUM. No captions or stats.
  * width/height are the intrinsic aspect ratio at 40px tall, so the row has no layout shift.
  *
  * HOMEPAGE-PARTNERS-BAR (Paul 2026-11-07 4:57 AM ET): FFLM iOS tile (PTT/walkie
@@ -15,6 +15,8 @@
  * silhouette like the other logos (tile background punched out), slightly larger.
  * HOMEPAGE-PARTNERS-FFLM-REMOVE (Paul 2026-11-07 11:55 AM ET): remove the FFLM
  * walkie from the partners bar for now. Remaining logos and scroll unchanged.
+ * HOMEPAGE-PARTNERS-UNUM (Paul 2026-11-07 12:03 PM ET): add UNUM after OtterText
+ * with the shared silhouette class, linked to https://unumnow.com in a new tab.
  */
 import { withBase } from "../lib/base";
 
@@ -23,6 +25,7 @@ const PARTNERS: {
   src: string;
   width: number;
   height: number;
+  href?: string;
 }[] = [
   { name: "WP Engine", src: "partners/wp-engine.svg", width: 205, height: 40 },
   { name: "FFL Cockpit", src: "partners/ffl-cockpit.svg", width: 130, height: 40 },
@@ -32,6 +35,7 @@ const PARTNERS: {
   { name: "GunSearchEngine.com", src: "partners/gunsearchengine.png", width: 204, height: 40 },
   { name: "MicroBiz POS", src: "partners/microbiz-pos.png", width: 142, height: 40 },
   { name: "OtterText", src: "partners/ottertext.svg", width: 210, height: 40 },
+  { name: "UNUM", src: "partners/unum.png", width: 41, height: 40, href: "https://unumnow.com" },
 ];
 ---
 
@@ -52,15 +56,29 @@ const PARTNERS: {
         {
           PARTNERS.map((p) => (
             <li class="flex items-center">
-              <img
-                src={withBase(p.src)}
-                alt={`${p.name} logo`}
-                width={p.width}
-                height={p.height}
-                loading="lazy"
-                decoding="async"
-                class="h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
-              />
+              {p.href ? (
+                <a href={p.href} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={withBase(p.src)}
+                    alt={`${p.name} logo`}
+                    width={p.width}
+                    height={p.height}
+                    loading="lazy"
+                    decoding="async"
+                    class="h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
+                  />
+                </a>
+              ) : (
+                <img
+                  src={withBase(p.src)}
+                  alt={`${p.name} logo`}
+                  width={p.width}
+                  height={p.height}
+                  loading="lazy"
+                  decoding="async"
+                  class="h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
+                />
+              )}
             </li>
           ))
         }
@@ -69,15 +87,29 @@ const PARTNERS: {
         {
           PARTNERS.map((p) => (
             <li class="flex items-center">
-              <img
-                src={withBase(p.src)}
-                alt=""
-                width={p.width}
-                height={p.height}
-                loading="lazy"
-                decoding="async"
-                class="h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
-              />
+              {p.href ? (
+                <a href={p.href} target="_blank" rel="noopener noreferrer" tabindex="-1">
+                  <img
+                    src={withBase(p.src)}
+                    alt=""
+                    width={p.width}
+                    height={p.height}
+                    loading="lazy"
+                    decoding="async"
+                    class="h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
+                  />
+                </a>
+              ) : (
+                <img
+                  src={withBase(p.src)}
+                  alt=""
+                  width={p.width}
+                  height={p.height}
+                  loading="lazy"
+                  decoding="async"
+                  class="h-7 w-auto opacity-70 brightness-0 invert sm:h-10"
+                />
+              )}
             </li>
           ))
         }
