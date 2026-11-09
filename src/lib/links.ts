@@ -71,7 +71,7 @@ export const SAME_AS = [
 ] as const;
 
 export const linkClass =
-  "font-medium text-sky-400 hover:underline underline-offset-2";
+  "font-medium !text-sky-400 hover:!underline underline-offset-2";
 
 export const btnPlan =
   "inline-flex w-full sm:w-auto items-center justify-center rounded-sm border border-[#8a6a0a] bg-[#c8960c] px-5 py-3 text-sm font-semibold !text-[#05080f] transition hover:bg-[#e0a910]";
