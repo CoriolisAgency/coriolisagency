@@ -29,6 +29,7 @@ export const CANON_PATHS = {
   storefront: "brand/storefront.jpg",
   rangeMckinney: "brand/the-range-mckinney.png",
   unumPressHero: "brand/unum-coriolis-press-hero-v2.png",
+  tier1Kinetics: "brand/tier-1-kinetics.png",
   gsgHero: "brand/gun-store-game-hero.png",
   contactHero: "brand/contact-hero.jpg",
   grokBot: "brand/grok-bot-official.png",

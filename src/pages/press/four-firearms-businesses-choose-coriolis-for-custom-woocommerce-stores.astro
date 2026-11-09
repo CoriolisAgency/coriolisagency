@@ -1,0 +1,125 @@
+---
+/**
+ * /press/four-firearms-businesses-choose-coriolis-for-custom-woocommerce-stores
+ * PRESS-FOUR-CLIENTS (Brandy copy 2026-11-09; Chief 4:06 PM ET, Paul unlock 3:55 PM ET).
+ * Own page file (like the UNUM release) because press/[slug].astro carries the
+ * five-FFLs body. Same layout, metadata, hero figure and link classes as that post.
+ * Listed on /press and in the sitemap via PRESS_POSTS (standalone: true).
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaRow from "../../components/CtaRow.astro";
+import { LINKS, linkClass } from "../../lib/links";
+import { pressBySlug } from "../../lib/press";
+import { SITE, SITE_ORIGIN } from "../../lib/site";
+import { withBase } from "../../lib/base";
+
+const post = pressBySlug("four-firearms-businesses-choose-coriolis-for-custom-woocommerce-stores")!;
+const siteOrigin = Astro.site ?? new URL(SITE_ORIGIN);
+const pageUrl = new URL(withBase(post.path), siteOrigin).href;
+const imageUrl = new URL(withBase(post.ogImagePath), siteOrigin).href;
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+---
+
+<BaseLayout
+  title={`${post.title} | Coriolis Agency`}
+  description={post.dek}
+  path={post.path}
+  ogImagePath={post.ogImagePath}
+  ogType="article"
+  publishedTime={post.date}
+  extraJsonLd={[
+    {
+      "@type": "NewsArticle",
+      "@id": `${pageUrl}#article`,
+      headline: post.title,
+      description: post.dek,
+      datePublished: post.date,
+      dateModified: post.date,
+      url: pageUrl,
+      image: imageUrl,
+      inLanguage: "en-US",
+      author: {
+        "@type": "Organization",
+        name: SITE.legalName,
+        url: LINKS.home,
+      },
+      publisher: { "@id": `${LINKS.home}/#organization` },
+      isPartOf: { "@id": `${pageUrl}#webpage` },
+    },
+  ]}
+>
+  <article class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class="text-xs text-zinc-500">
+        <a href={withBase("press")} class="hover:text-sky-300">Press</a>
+        <span class="px-1.5">/</span>
+        Release
+      </p>
+      <p
+        class="mt-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        For immediate release
+      </p>
+      <h1
+        class="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl text-balance"
+      >
+        {post.title}
+      </h1>
+      <p class="mt-4 text-sm text-zinc-500">
+        {post.location}, {post.dateLabel}
+      </p>
+
+      <figure class="mt-8 overflow-hidden rounded-2xl ring-1 ring-white/10">
+        <a href="https://tier1kinetics.com/" {...ext}>
+          <img
+            src={withBase(post.ogImagePath)}
+            alt={post.imageAlt}
+            width="1283"
+            height="965"
+            class="w-full bg-[#111] object-contain"
+          />
+        </a>
+        <figcaption class="px-4 py-2 text-[11px] text-zinc-500">
+          Tier 1 Kinetics: Coriolis WooCommerce store.
+        </figcaption>
+      </figure>
+
+      <div class="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-zinc-300">
+        <p>Coriolis Agency, the firearms industry's managed WooCommerce provider, today announced four new client stores: Tier 1 Kinetics, Jim's Armory, Green Mountain Sporting Goods, and Guardian Guns &amp; Ammo. A rifle maker, a GunTuber, a family outfitter in Vermont, and a New York retailer and training center. Four different businesses. Four different builds.</p>
+
+        <p>None of them got a template. Each store was built around how that business actually sells: house rifles, YouTube videos, in-store services, or class seats. Every one runs WooCommerce on the owner's own domain, as a <a href={withBase("ecommerce")} class={linkClass}>gun store website you own</a>.</p>
+
+        <p>All four stores carry FFL Cockpit distributor catalogs and FFL Checkout. That's <a href={withBase("firearms-dropshipping")} class={linkClass}>FFL dropshipping</a> from Coriolis. Each site runs on <a href={withBase("gun-friendly-hosting")} class={linkClass}>gun-friendly hosting</a> on WP Engine and is wired to <a href="https://www.gunsearchengine.com/for-dealers/feed" {...ext} class={linkClass}>GunSearchEngine.com</a>. There's no annual contract. If a client leaves, the website goes with them.</p>
+
+        <p>The four span manufacturing, video, retail, range, and training:</p>
+
+        <ul class="list-disc space-y-3 pl-5">
+        <li><strong class="text-white">Tier 1 Kinetics</strong> (Daytona Beach, Fla.): veteran-owned manufacturer of short AR platforms and premium personal defense weapons, building since 2019. Coriolis built a store that puts the company's own hardware first: the CQB, DMR, Utility, and MAX-8 builds and the T1000 Micro rifle-mounted thermal sight. Behind the house builds sits a full retail catalog of more than 24,000 products, sorted by brand, with a warranty page and an NFA section. <a href="https://tier1kinetics.com/" class={linkClass} {...ext}>tier1kinetics.com</a></li>
+        <li><strong class="text-white">Jim's Armory</strong>: the online store behind Jim Grill's <a href="https://www.youtube.com/@JimsArmory" class={linkClass} {...ext}>Jim's Armory YouTube channel</a>, where he covers gunsmithing, reloading, training, and gear reviews. Coriolis built the store to work with the channel. Each video gets a blog post on the site, and viewers can shop the categories Jim talks about: 2011 pistols, red dots, reloading, and the Jim's Armory Custom Shop. The catalog runs past 41,000 products, with back-in-stock alerts and <a href={withBase("email-marketing-for-ffl-ecommerce")} class={linkClass}>gun store email marketing</a> through Mailchimp. <a href="https://jimsarmory.com/" class={linkClass} {...ext}>jimsarmory.com</a></li>
+        <li><strong class="text-white">Green Mountain Sporting Goods</strong> (Irasburg, Vt.): family-owned since 1990, with nearly 10,000 square feet of hunting, fishing, archery, and firearms on US Route 5 in the Northeast Kingdom. Coriolis built the site for that ground. It has Hunt Vermont and Fish Vermont pages and a page for each in-house service: gunsmithing, Cerakote, laser engraving, custom builds, suppressor services, LiveScan fingerprinting, and FFL transfers. The store carries more than 49,000 products. <a href="https://gmsgvt.com/" class={linkClass} {...ext}>gmsgvt.com</a></li>
+        <li><strong class="text-white">Guardian Guns &amp; Ammo</strong> (Deer Park, N.Y.): high-volume retailer, indoor range, and training center from Guardian Security, a veteran-owned company in business since 2007. Coriolis built two connected WooCommerce sites. The store at gstny.com carries more than 39,000 products. The training site runs online class registration on FooEvents: a class calendar, class search, and "Book ticket" checkout with live seat counts for New York CCW, armed and unarmed security guard, NRA, and handgun classes. Ranges and instructors shopping for <a href={withBase("websites-for-ranges-gunsmiths-instructors")} class={linkClass}>firearms training websites</a> can see it working live. <a href="https://gstny.com/" class={linkClass} {...ext}>gstny.com</a>. Classes: <a href="https://training.gstny.com/training/" class={linkClass} {...ext}>training.gstny.com</a>.</li>
+        </ul>
+
+        <p>Manufacturers, creators, outfitters, ranges, and instructors who want a WooCommerce store built around how they sell can learn more at <a href={LINKS.home} class={linkClass}>CoriolisAgency.com</a>.</p>
+
+        <h2 class="pt-4 text-lg font-semibold text-white">About Coriolis Agency</h2>
+
+        <p>Coriolis Agency (Coriolis, LLC) builds, hosts, and supports WooCommerce websites for FFLs, gun stores, shooting ranges, and firearms brands. Founded by Paul Angell, who built and ran AmmoReady.com for nine years, the company delivers managed hosting, AIM POS and other register integrations, automated firearms dropshipping through FFL Cockpit, and demand tools including <a href="https://gunsearchengine.com" {...ext} class={linkClass}>GunSearchEngine.com</a>. Merchants own their sites. There is no long-term contract. Visit <a href={LINKS.home} class={linkClass}>CoriolisAgency.com</a>.</p>
+
+        <h2 class="pt-4 text-lg font-semibold text-white">Media Contact</h2>
+
+        <p>Paul Angell<br />Founder and CEO, Coriolis Agency<br /><a href={LINKS.contactEmail} class={linkClass}>{LINKS.contactEmailAddress}</a><br />Greenville, S.C.</p>
+      </div>
+
+      <p class="mt-10 text-xs leading-relaxed text-zinc-600">
+        Coriolis does not file a 4473, run NICS, or replace the bound book. We build the website.
+      </p>
+    </div>
+  </article>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <CtaRow primary="contact" />
+    </div>
+  </section>
+</BaseLayout>

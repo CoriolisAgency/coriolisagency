@@ -13,6 +13,8 @@ export type PressPost = {
   imageAlt: string;
   /** Hidden: off the /press list and the sitemap; route is its own page file. */
   hidden?: boolean;
+  /** Listed on /press and in the sitemap, but rendered by its own page file, not press/[slug].astro. */
+  standalone?: boolean;
 };
 
 export const PRESS_POSTS: PressPost[] = [
@@ -43,6 +45,21 @@ export const PRESS_POSTS: PressPost[] = [
     ogImagePath: CANON_PATHS.unumPressHero,
     imageAlt: "Coriolis and UNUM partnership: UNUM catalog, your store run by Coriolis, orders shipped by UNUM.",
     hidden: true,
+  },
+  {
+    slug: "four-firearms-businesses-choose-coriolis-for-custom-woocommerce-stores",
+    path: "/press/four-firearms-businesses-choose-coriolis-for-custom-woocommerce-stores",
+    kicker: "Press release",
+    title:
+      "Tier 1 Kinetics, Jim's Armory, Green Mountain Sporting Goods, and Guardian Guns & Ammo Choose Coriolis Agency for Custom WooCommerce Stores",
+    dek: "A rifle maker, a GunTuber, a Vermont outfitter and a New York training center chose Coriolis Agency for custom WooCommerce stores they own.",
+    date: "2026-11-09",
+    dateLabel: "November 9, 2026",
+    location: "Greenville, S.C.",
+    ogImagePath: CANON_PATHS.tier1Kinetics,
+    imageAlt:
+      "Tier 1 Kinetics: a Coriolis-built WooCommerce store for a veteran-owned firearms manufacturer.",
+    standalone: true,
   },
 ];
 
