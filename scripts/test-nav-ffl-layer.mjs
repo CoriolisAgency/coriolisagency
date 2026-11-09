@@ -132,7 +132,7 @@ for (const f of walkSrc(path.join(root, "src"))) {
 const { transformHtml } = await import("../src/integrations/gse-links.mjs");
 assert.equal(
   transformHtml("<p>Try GunSearchEngine.com today</p>"),
-  '<p>Try <a href="https://gunsearchengine.com" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-sky-300">GunSearchEngine.com</a> today</p>',
+  '<p>Try <a href="https://gunsearchengine.com" target="_blank" rel="noopener noreferrer" class="font-medium !text-sky-400 hover:!underline underline-offset-2">GunSearchEngine.com</a> today</p>',
 );
 assert.equal(transformHtml('<a href="/x">GunSearchEngine.com</a>'), '<a href="/x">GunSearchEngine.com</a>');
 assert.equal(transformHtml("<button><span>GunSearchEngine.com</span></button>"), "<button><span>GunSearchEngine.com</span></button>");
