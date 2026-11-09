@@ -276,6 +276,12 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
   assert.match(home, /<LeadForm site="coriolisagency" defaultPillar="Ecommerce" \/>/);
   const talk = read("src/components/TalkSection.astro");
   assert.match(talk, /<LeadForm site="coriolisagency" defaultPillar=\{pillar\} \/>/);
+  // HOMEPAGE-TALK-PLATES: TalkSection pillars match WHAT WE DO plates only.
+  assert.doesNotMatch(talk, /AI Studio|Grok Bot Setup|Demand Intelligence/);
+  assert.match(
+    talk,
+    /pillar\?: "Ecommerce" \| "Gun Store POS" \| "Email Marketing" \| "Consumer Search";/,
+  );
 }
 
 console.log("test-nav-ffl-layer: ok");
