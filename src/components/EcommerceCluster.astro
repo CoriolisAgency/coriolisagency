@@ -40,7 +40,7 @@ const { current } = Astro.props;
       ) : (
         <a
           href={external ? item.href : `${withBase(item.href)}${hash}`}
-          class="text-sky-400 hover:underline underline-offset-2"
+          class="!text-sky-400 hover:!underline underline-offset-2"
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
         >

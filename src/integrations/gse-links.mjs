@@ -12,7 +12,8 @@ import { fileURLToPath } from "node:url";
 
 export const GSE_ROOT = "https://gunsearchengine.com";
 const LABEL = "GunSearchEngine.com";
-const LINK = `<a href="${GSE_ROOT}" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-sky-300">${LABEL}</a>`;
+// Same classes as linkClass (src/lib/links.ts); ! beats the unlayered global a{} rule.
+const LINK = `<a href="${GSE_ROOT}" target="_blank" rel="noopener noreferrer" class="font-medium !text-sky-400 hover:!underline underline-offset-2">${LABEL}</a>`;
 const SKIP = new Set(["a", "button", "summary", "label", "option", "select", "textarea", "title", "script", "style", "svg", "head", "noscript", "template"]);
 const NEW_TAB_HREF = /^https?:\/\/(?:www\.)?(?:gunsearchengine|gunstoregame|fflintel|fflanalytics|fflsearchconsole)\.com(?:[/?#:]|$)/i;
 const SAME_TAB_HREF = /^(?:\/[^"?#]*)?\/ffl-(?:analytics|search-console)(?:[?#]|$)/i;

@@ -4,6 +4,7 @@ import FaqBlock from "../components/FaqBlock.astro";
 import LeadForm from "@coriolis/lead-form/LeadForm.astro";
 import { FAQ_DEMAND_INTELLIGENCE } from "../lib/faq";
 import { CANON_PATHS } from "../lib/site";
+import { linkClass } from "../lib/links";
 
 // SEO-U24 (D-N16): Demand Intelligence moves here from GunSearchEngine.
 // Copy is ported word for word from GSE src/app/(site)/demand-intelligence/page.tsx
@@ -116,7 +117,7 @@ const btnPrimary =
   "inline-flex items-center justify-center rounded-sm border border-[#8a6a0a] bg-[#c8960c] px-5 py-3 text-sm font-semibold !text-[#05080f] transition hover:bg-[#e0a910]";
 const btnGhost =
   "inline-flex items-center justify-center rounded-sm border border-zinc-700 px-5 py-3 text-sm font-medium text-zinc-200 transition hover:bg-zinc-800";
-const textLink = "font-medium text-sky-400 hover:underline underline-offset-2";
+const textLink = linkClass;
 const h2Class = "text-xl font-semibold tracking-tight text-white sm:text-2xl";
 ---
 
