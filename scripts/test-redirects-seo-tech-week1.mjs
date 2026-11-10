@@ -1,4 +1,5 @@
-// SEO-TECH-WEEK1: /gunbiz-pos and six legacy 404s 301 once to canonical targets.
+// SEO-TECH-WEEK1 / WEEK1B: /gunbiz-pos and six legacy 404s 301 once to canonical targets.
+// /category/firearms-seo/page/:n (including /page/2) 301s to /ffl-seo.
 // Trailing-slash variants are listed so Vercel trailingSlash:false does not add a 308 hop.
 import assert from "node:assert/strict";
 import fs from "node:fs";
@@ -18,6 +19,7 @@ const CASES = [
   ["/seo-for-firearms-retailers-get-found-sell-more-guns-online/", "/ffl-seo"],
   ["/category/firearms-seo", "/ffl-seo"],
   ["/category/firearms-seo/", "/ffl-seo"],
+  ["/category/firearms-seo/page/:n", "/ffl-seo"],
   ["/firearms-digital-marketing-agency", "/"],
   ["/firearms-digital-marketing-agency/", "/"],
   ["/ammoseek-automation-for-gun-stores", "/ecommerce"],

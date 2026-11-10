@@ -38,7 +38,7 @@ Same path, new voice, still answer the old query in the first 80 words. **Do not
 | `/ammoready-alternative` | 19 | 1,780 | Query pos 6.1, 9 clicks. **AmmoReady pillar.** |
 | `/best-ffl-ecommerce-website` | 17 | 3,047 | Comparison intent still sells ecommerce. |
 
-Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/gun-store-pos` (Gun Store POS pillar), `/aim-pos`, `/gunbiz-pos`, `/trident-1-pos`, `/rapid-gun-systems-pos`. `/microbiz-pos` 301s to `/gunbiz-pos` and `/corestore-pos` 301s to `/gun-store-pos` (OPS-29).
+Also live (do not redirect): `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/msa`, `/stack`, **`/gearfire-alternative`** (Gearfire pillar), `/email-marketing-for-ffl-ecommerce`, `/woocommerce-vs-shopify-for-gun-stores`, `/can-you-use-woocommerce-to-sell-guns`, `/gun-store-pos` (Gun Store POS pillar), `/aim-pos`, `/microbiz-pos`, `/trident-1-pos`, `/rapid-gun-systems-pos`. `/gunbiz-pos` 301s to `/microbiz-pos` (MicroBiz is canonical) and `/corestore-pos` 301s to `/gun-store-pos`.
 
 `/demand-intelligence` is a page on this host (SEO-U24, D-N16; moved from GunSearchEngine). The old 301 to GunSearchEngine is removed from `vercel.json`.
 
@@ -184,7 +184,7 @@ Sum of clones with clicks is ~50, split thin. Do not keep 20 near-duplicate page
 |-----|-----|-------:|
 | `/coriolis-agency-partners-with-aim-pos-…/` | `/aim-pos` | 10 |
 | `/aim-pos-integration-for-woocommerce/` | `/aim-pos` | 3 |
-| `/coriolis-agency-and-microbiz-partner-…/` | `/gunbiz-pos` (OPS-29; was `/microbiz-pos`) | 3 |
+| `/coriolis-agency-and-microbiz-partner-…/` | `/microbiz-pos` (MicroBiz canonical; `/gunbiz-pos` 301s here) | 3 |
 | `/ecommerce-for-trident-1-pos/` | `/trident-1-pos` | 5 |
 | `/coriolis-agency-announces-support-for-corestore-pos-…/` | `/gun-store-pos` (OPS-29; was `/corestore-pos`) | 6 |
 | `/rapid-gun-systems-pos-integration-…/` | `/rapid-gun-systems-pos` | 3 |
@@ -193,6 +193,24 @@ Sum of clones with clicks is ~50, split thin. Do not keep 20 near-duplicate page
 | `/gun-store-pos-for-ffls/` | `/gun-store-pos` (SEO-U38; was `/ecommerce`) | 0 (646 impr) |
 | `/wisconsin-firearms-training-center-selects-coriolis-agency-for-ffl-website-design-trident-1-pos-integration-and-email-marketing/` | `/trident-1-pos` (SEO-U38; was 404) | 0 (22 impr) |
 | `/category/aim-pos-woocommerce/` | `/aim-pos` (SEO-U38; was 404 after 308) | 1 |
+
+
+### SEO-TECH-WEEK1 / SEO-TECH-WEEK1B — MicroBiz canonical and six legacy 404s
+
+Paul 2026-11-10 7:32 AM ET; Chief follow-up 7:41 AM ET. Implemented in `vercel.json` (`statusCode` 301). Targets return 200 with no trailing slash. Trailing-slash sources still 308 to the no-slash form (Vercel `trailingSlash: false`), then the 301.
+
+| Old | New |
+|-----|-----|
+| `/gunbiz-pos` | `/microbiz-pos` (MicroBiz is canonical) |
+| `/custom-gun-store-websites-branding-matters-firearms-ecommerce` | `/ecommerce` |
+| `/seo-for-firearms-retailers-get-found-sell-more-guns-online` | `/ffl-seo` |
+| `/category/firearms-seo` | `/ffl-seo` |
+| `/category/firearms-seo/page/:n` (including `/page/2`) | `/ffl-seo` |
+| `/firearms-digital-marketing-agency` | `/` |
+| `/ammoseek-automation-for-gun-stores` | `/ecommerce` |
+| `/wekickbrass-com-switches-to-coriolis-for-firearms-dropshipping` | `/press` |
+
+The `/brand/gunbiz-pos-hero.jpg` asset 301s to `/brand/microbiz-pos-hero.jpg`.
 
 ### Email (was “let die”) → Accelerator page
 
@@ -220,7 +238,7 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 **Off-strategy with impressions, almost no clicks**
 
 - Email ROI headline only: the **42-to-1** claim is not republished. The slug 301s to `/email-marketing-for-ffl-ecommerce` (Accelerator facts only).
-- Agency/SEO vanity: `/firearms-digital-marketing-agency/` (15 clicks — only if you still want that door; else die), `/gun-industry-seo-company-…/` (10 c / 10,184 i), `/firearms-seo-marketing/` (7 c / 10,201 i). Query cluster: **6 clicks / 20k impr**.
+- Agency/SEO vanity: `/firearms-digital-marketing-agency` 301s to `/` (SEO-TECH-WEEK1). `/gun-industry-seo-company-…/` (10 c / 10,184 i) and `/firearms-seo-marketing/` (7 c / 10,201 i) still have no 301. Query cluster: **6 clicks / 20k impr**.
 - Compliance software: `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` (28 c / 16,821 i) — 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4).
 - `/ammoready-login/` (2 clicks) — not your product.
 - `/types-of-ffls/` (0 / 898) — still a soft 404.
@@ -228,7 +246,7 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 **Zero-click infrastructure**
 
-- `/category/*`, `/tag/*`, `/author/*/page/*`
+- `/category/*`, `/tag/*`, `/author/*/page/*` — exceptions already in `vercel.json`: `/category/firearms-seo` and `/category/firearms-seo/page/:n` 301 to `/ffl-seo`; `/category/aim-pos-woocommerce` 301s to `/aim-pos`; `/category/grow-your-ffl/page/2` 301s to `/`
 - Avada / Fusion / portfolio / slide-page sitemaps
 - `/nothing-to-see-here/`, `/email-campaign-request-form/`, `/site-watcher️/`
 - `t1.coriolisagency.com` product URLs (0 clicks, demo leakage)
@@ -243,4 +261,4 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 
 1. Edit **`vercel.json`** `redirects` (paths only, `permanent: true`). Skip keep-slugs and trailing-slash duplicates. Retired named-vendor slugs go in `rewrites` → `/api/gone` (410), not `redirects`.
 2. Optionally mirror path changes in `scripts/cloudflare-bulk-redirects.csv` for reference — it is not the runtime.
-3. Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, plus `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/stack`, the five POS slugs, `/woocommerce-vs-shopify-for-gun-stores`, `/demand-intelligence`). Do not 301 those.
+3. Keep-slugs already exist on this Astro site (`/`, `/firearms-dropshipping`, `/ffl-cockpit`, `/ammoready-alternative`, `/gearfire-alternative`, `/best-ffl-ecommerce-website`, `/email-marketing-for-ffl-ecommerce`, plus `/about`, `/ai-studio`, `/contact`, `/ecommerce`, `/privacy`, `/stack`, the five live POS slugs (`/gun-store-pos`, `/aim-pos`, `/microbiz-pos`, `/rapid-gun-systems-pos`, `/trident-1-pos`; `/gunbiz-pos` is not a keep-slug — it 301s to `/microbiz-pos`), `/woocommerce-vs-shopify-for-gun-stores`, `/demand-intelligence`). Do not 301 those.
