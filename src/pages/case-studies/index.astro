@@ -12,6 +12,7 @@ import { CASE_STUDIES_HUB, LIVE_CASE_STUDIES, casePath } from "../../lib/case-st
 import { LINKS } from "../../lib/links";
 import { SITE_ORIGIN } from "../../lib/site";
 import { withBase } from "../../lib/base";
+import { md } from "../../lib/md";
 
 const siteOrigin = Astro.site ?? new URL(SITE_ORIGIN);
 const abs = (p: string) => new URL(withBase(p), siteOrigin).href;
@@ -73,13 +74,11 @@ const hubUrl = abs(CASE_STUDIES_HUB.path);
               <div class="flex flex-1 flex-col p-6">
                 <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">{c.kicker}</p>
                 <h2 class="mt-2 text-lg font-semibold tracking-tight text-white">{c.name}</h2>
-                <p class="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">{c.cardLine}</p>
-                <a
-                  href={withBase(casePath(c.slug))}
-                  class="mt-4 text-sm font-medium !text-sky-400 underline-offset-2 hover:underline after:absolute after:inset-0"
-                >
-                  {c.cardLink}
-                </a>
+                {c.cardMd ? (
+                  <p class="mt-2 flex-1 text-sm leading-relaxed text-zinc-400" set:html={md(c.cardMd)} />
+                ) : (
+                  <p class="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">{c.cardLine}</p>
+                )}
               </div>
             </li>
           ))
@@ -91,5 +90,5 @@ const hubUrl = abs(CASE_STUDIES_HUB.path);
     </div>
   </section>
 
-  <TalkSection heading="Tell us about the website you want and we'll make it happen." />
+  <TalkSection heading="Tell us about the website you want and we'll make it happen." subline={CASE_STUDIES_HUB.talkSubline} />
 </BaseLayout>
