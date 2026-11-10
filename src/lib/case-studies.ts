@@ -228,7 +228,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         heading: "The shop",
         paragraphs: [
           [
-            "Target Shotguns is a shotgun specialist. It sells in-store competition and field shotguns, used and new, plus shotgun parts, choke tubes, precision fit stocks and clay target gear like voice release systems and clay machines. It also does custom stock fitting, so a shooter can get a gun that fits. Many of its in-store shotguns are used, so each one is its own listing. The register is MicroBiz POS.",
+            "Target Shotguns is a shotgun specialist. It sells in-store competition and field shotguns, used and new, plus shotgun parts, choke tubes, precision fit stocks and clay target gear like voice release systems and clay machines, and it also does custom stock fitting, so a shooter can get a gun that fits. Many of its in-store shotguns are used, so each one is its own listing. The register is MicroBiz POS.",
           ],
         ],
       },
@@ -236,10 +236,8 @@ export const CASE_STUDIES: CaseStudy[] = [
         heading: "What we built",
         paragraphs: [
           [
-            "Coriolis built Target Shotguns a WooCommerce store on its own domain, targetshotguns.com, hosted on WP Engine. We connected the store to MicroBiz POS, the register the shop already runs, so the counter and the website work from the same system.",
-          ],
-          [
-            "We also connected distributor catalogs, so the site sells shells, optics, magazines and other gear beyond what's in the building. The menu keeps those drop ship items in their own clearly marked area, so nobody drives in expecting one on the shelf. At checkout, a buyer picks the FFL dealer that will receive the firearm.",
+            { text: "targetshotguns.com", href: "https://targetshotguns.com/" },
+            " is a WooCommerce store on the shop's own domain, hosted on WP Engine, and connected to that MicroBiz register so the counter and the website work from the same system. Distributor catalogs are connected too, so the site sells shells, optics, magazines and other gear beyond what's in the building. The menu keeps those drop ship items in their own clearly marked area, so nobody drives in expecting one on the shelf. At checkout, a buyer picks the FFL dealer that will receive the firearm.",
           ],
         ],
       },
@@ -247,9 +245,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         heading: "Where it stands",
         paragraphs: [
           [
-            "The store is live at ",
-            { text: "targetshotguns.com", href: "https://targetshotguns.com/" },
-            ", with the in-store shotguns up front and the drop ship catalog marked apart. Shoppers can browse in-store guns, parts and accessories, or go straight to the drop ship menu.",
+            "The store is live, with the in-store shotguns up front and the drop ship catalog marked apart. Shoppers can browse in-store guns, parts and accessories, or go straight to the drop ship menu.",
           ],
         ],
       },
@@ -263,11 +259,11 @@ export const CASE_STUDIES: CaseStudy[] = [
       },
     ],
     cta: [
-      "Run MicroBiz at the counter? See ",
-      { text: "WooCommerce for MicroBiz", href: "/microbiz-pos" },
-      ", or how ",
-      { text: "FFL dropshipping", href: "/firearms-dropshipping" },
-      " works.",
+      "If you run MicroBiz at the counter, see ",
+      { text: "connecting WooCommerce to MicroBiz POS", href: "/microbiz-pos" },
+      ", or ",
+      { text: "listing distributor catalogs on a store you own", href: "/firearms-dropshipping" },
+      ".",
     ],
     pos: "MicroBiz POS",
     posHref: "/microbiz-pos",
