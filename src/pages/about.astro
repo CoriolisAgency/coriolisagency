@@ -1,12 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaRow from "../components/CtaRow.astro";
-import { FROZEN } from "../lib/frozen";
+import { md } from "../lib/md";
 import { LINKS, linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
+
+// CA-VOICE-P1 batch 3 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-3/about.md, shipped as drafted.
+const company = ["[GunStoreGame.com](https://www.gunstoregame.com) (the game)","[GunSearchEngine.com](https://www.gunsearchengine.com/for-dealers?utm_source=coriolisagency&utm_medium=referral&utm_campaign=about&utm_content=dealer-program) (on the dealer's site)","[GunSearchEngine.com](https://www.gunsearchengine.com/?utm_source=coriolisagency&utm_medium=referral&utm_campaign=about&utm_content=shoppers-and-demand-intelligence) (shoppers and Demand Intelligence)","[Botopticon.com](https://botopticon.com) (the control room for your AI agents)","[FFL Accelerator](https://fflaccelerator.com) ($569 program)","[FFLIntel](https://fflintel.com) (NICS, sell-through, and search intent)","[FFL Messenger seats, the API and SSO](/ffl-messenger-enterprise) (private, encrypted messaging between verified FFLs)","[Press](/press) (releases)"];
 ---
 
 <BaseLayout
@@ -30,12 +33,8 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
         >
           Coriolis, LLC
         </h1>
-        <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300">
-          Three lines of work. Ecommerce for licensed dealers. An AI Studio
-          that builds on what we already shipped. Demand Intelligence for the
-          brands that need to know what the market asked for, including what
-          it could not find.
-        </p>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300" set:html={md("Coriolis, LLC is in Greenville, SC, and the work falls into three lines: ecommerce websites for licensed dealers, an AI Studio that builds on what we already shipped, and Demand Intelligence for the brands that need to know what the market asked for, including what it could not find.")} />
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300" set:html={md("We have consulted 5,000+ FFLs, nearly 2,000 of them got online, the company is at $1M+ ARR, and we have audited thousands of sites. The people at Coriolis are Paul and Joel, and you can write us at [support@coriolisagency.com](mailto:support@coriolisagency.com).")} />
       </div>
       <img
         src={withBase(CANON_PATHS.unmet)}
@@ -49,62 +48,14 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-          <h2 class="text-sm font-semibold text-sky-300">What we are</h2>
-          <p class="mt-3 text-sm leading-relaxed text-zinc-400">
-            We build the store you own and sell anonymized category demand to
-            brands. WooCommerce you own. Full-market demand for brands.
-          </p>
-        </article>
-        <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-          <h2 class="text-sm font-semibold text-sky-300">What we are not</h2>
-          <p class="mt-3 text-sm leading-relaxed text-zinc-400">
-            Not 4473 software. Not a NICS system. Not a bound-book replacement.
-            Not affiliated with Gearfire or RetailBI.
-          </p>
-        </article>
-        <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-          <h2 class="text-sm font-semibold text-sky-300">The rest of the company</h2>
-          <ul class="mt-3 space-y-1.5 text-sm text-zinc-400">
-            <li>
-              <a href={LINKS.gunStoreGame} class={linkClass} {...ext}
-                >GunStoreGame.com</a
-              >
-              (the game)
-            </li>
-            <li>
-              <a href={LINKS.gsa} class={linkClass} {...ext}>GunSearchEngine.com</a>
-              (on the dealer’s site)
-            </li>
-            <li>
-              <a href={LINKS.gse} class={linkClass} {...ext}>GunSearchEngine.com</a>
-              (shoppers and Demand Intelligence)
-            </li>
-            <li>
-              <a href={LINKS.botopticon} class={linkClass} {...ext}>Botopticon.com</a>
-              (the control room for your AI agents)
-            </li>
-            <li>
-              <a href={LINKS.fflaccelerator} class={linkClass} {...ext}
-                >FFL Accelerator</a
-              >
-              ($569 program)
-            </li>
-            <li>
-              <a href={LINKS.fflintel} class={linkClass} {...ext}>FFLIntel</a>
-              (NICS, sell-through, and search intent)
-            </li>
-            <li>
-              <a href={withBase("press")} class={linkClass}>Press</a>
-              (releases)
-            </li>
-          </ul>
-        </article>
-      </div>
-      <p class="mt-8 max-w-3xl text-sm text-zinc-500">
-        {FROZEN.fflintel}
-      </p>
+      <h2 class="text-xl font-semibold text-white">{"What we build for dealers, and what we sell to brands"}</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md("We build the store you own, and we sell anonymized category demand to brands. The dealer gets WooCommerce on a domain they own. The brand gets a full-market read of demand, including searches that came back empty.")} />
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md("Coriolis is not 4473 software, a NICS system, or a bound-book replacement, and we are not affiliated with Gearfire or RetailBI.")} />
+      <h2 class="mt-10 text-xl font-semibold text-white">{"The rest of the company, including the sites we already run"}</h2>
+      <ul class="mt-4 space-y-1.5 text-sm text-zinc-400">
+        {company.map((item) => <li set:html={md(item)} />)}
+      </ul>
+      <p class="mt-8 max-w-3xl text-sm text-zinc-500" set:html={md("FFLIntel is the industry desk that keeps three numbers from becoming one: background checks (NICS), register sell-through (including the RetailBI Firearm Sales Index), and search intent. It is published by Coriolis, LLC, and is not affiliated with Gearfire.")} />
     </div>
   </section>
 
