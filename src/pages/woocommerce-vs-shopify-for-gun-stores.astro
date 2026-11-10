@@ -7,6 +7,10 @@ import { FAQ_SHOPIFY } from "../lib/faq";
 import { LINKS, linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
+import { md } from "../lib/md";
+
+// CA-VOICE-P1 batch 5 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-5/woocommerce-vs-shopify-for-gun-stores.md, shipped as drafted.
+const rules = [["Topic","Coriolis WooCommerce","Shopify, as published (read November 10, 2026)"],["Who keeps the store if you cancel","You leave with the WooCommerce site. No annual contract.","Shopify's Terms of Service, last updated October 20, 2026, say that on termination, \"your Shopify Store will be taken offline.\" ([Terms of Service](https://www.shopify.com/legal/terms), §14.4)"],["Firearms on the platform Acceptable Use Policy","A licensed FFL can sell firearms on WooCommerce when checkout is built for dealer transfer. This is not legal advice.","Not listed* ([Acceptable Use Policy](https://www.shopify.com/legal/aup))"],["Shopify Payments","Coriolis installs a firearms-approved payment gateway at setup. See [FFL payment processing](/ffl-payment-processing).","Shopify Payments eligibility lists \"firearms, holsters, ammunition, or weapons\" among prohibited products and services. The same page says the list is not exhaustive and varies by region, and that a merchant who is not eligible for Shopify Payments can add a third-party payment provider. ([Shopify Payments eligibility](https://help.shopify.com/en/manual/payments/shopify-payments/onboarding/eligibility))"],["Shop sales channel","Not a Shopify sales channel.","The Shop channel's prohibited-products list includes \"Weapons, ammunition, explosives, or related accessories and combat equipment.\" ([Prohibited products on Shop](https://help.shopify.com/en/manual/online-sales-channels/shop/eligibility/prohibited-products))"],["FFL catalog and checkout plugins","FFL Cockpit and FFL Checkout are WooCommerce plugins.","Not listed*"],["Subscription and transaction fees","Minute Man $169 through FFL Accelerator $569 a month. Setup $500 or $2,500.","We do not republish Shopify's fee card."]];
 ---
 
 <BaseLayout
@@ -28,49 +32,49 @@ import { withBase } from "../lib/base";
       >
         WooCommerce vs Shopify for gun stores
       </h1>
-      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        Coriolis builds WooCommerce you own. We do not sell a Shopify gun-store
-        product. FFL Cockpit and FFL Checkout are WooCommerce plugins. Shopify
-        is a hosted platform with its own acceptable-use rules. We do not
-        republish their fee card or write their policy. If the question is “can
-        WooCommerce sell guns,” the answer is here:{" "}
-        <a href={withBase(LINKS.wooSellGuns)} class={linkClass}
-          >Can you use WooCommerce to sell guns?</a
-        >{" "}
-        Yes, when a licensed FFL owns the store and checkout is built for dealer
-        transfer. This is not legal advice.
-      </p>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300" set:html={md("Coriolis builds WooCommerce you own. We do not sell a Shopify gun-store product. FFL Cockpit and FFL Checkout are WooCommerce plugins. Shopify publishes its own acceptable-use rules, payment-eligibility rules and Terms of Service, and we do not write those policies or republish their fee card. The table below is what those Shopify pages said when we read them on November 10, 2026, next to the WooCommerce offer Coriolis actually sells.")} />
+      <p class="mt-4 max-w-3xl text-base leading-relaxed text-zinc-300" set:html={md("If the question is whether a licensed FFL can sell firearms on WooCommerce, the short answer is yes, when a licensed FFL owns the store and checkout is built for dealer transfer. Serialized firearms ship FFL-to-FFL. This is not legal advice. The longer walkthrough is [whether self-hosted WooCommerce can sell firearms](/can-you-use-woocommerce-to-sell-guns).")} />
       <div class="mt-8">
         <CtaRow primary="ecommerce" showGsa={false} showAccelerator showContact />
       </div>
-      <EcommerceCluster current="woocommerce-vs-shopify-for-gun-stores" />
+      <EcommerceCluster current="woocommerce-vs-shopify-for-gun-stores" dropshipLabel="listing distributor catalogs on a store you own" />
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">What we publish</h2>
-      <ul class="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
-        <li>You leave with the WooCommerce site. No annual contract.</li>
-        <li>
-          Minute Man $169 through FFL Accelerator $569. Setup $500 or $2,500.
-        </li>
-        <li>
-          Militia+ includes FFL Cockpit (21 distributors) and FFL Checkout.
-        </li>
-        <li>
-          Warlord+ connects any POS that works with WooCommerce, such as AIM, MicroBiz,
-          Rapid Gun Systems or Trident 1.
-        </li>
-      </ul>
+      <h2 class="text-xl font-semibold text-white">{"What Coriolis publishes for an owned WooCommerce store"}</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md("You leave with the WooCommerce site. No annual contract. Plans run from Minute Man at $169 a month through FFL Accelerator at $569 a month, with setup at $500 or $2,500. Militia and above include FFL Cockpit (21 distributors) and FFL Checkout. Warlord and above connect any POS that works with WooCommerce, such as AIM, MicroBiz, Rapid Gun Systems and Trident 1.")} />
+      <div class="mt-6">
+        <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
+      </div>
     </div>
   </section>
 
-  <section class="py-12">
+  <section class="py-12" id="shopify-rules">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
+      <h2 class="text-xl font-semibold text-white">{"Shopify's published rules, read November 10, 2026"}</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md("We are not writing Shopify's policy. These cells quote or summarize the Shopify pages cited, as they stood on the day we read them.")} />
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[48rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              {rules[0].map((h) => <th class="py-3 pr-3 font-medium">{h}</th>)}
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {rules.slice(1).map((r) => (
+              <tr class="border-b border-zinc-800/80">
+                {r.map((c, i) => i === 0 ? <th class="py-3 pr-3 align-top font-medium text-zinc-300" set:html={md(c)} /> : <td class="py-3 pr-3 align-top" set:html={md(c)} />)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 max-w-3xl text-xs leading-relaxed text-zinc-500">{"*Not listed on the source page we read November 10, 2026."}</p>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md("Read Shopify's current pages for the products you sell, firearms, ammo or both, before you build on that platform. Policies change, and this is not legal advice.")} />
     </div>
   </section>
 
-  <FaqBlock items={FAQ_SHOPIFY} />
+  <FaqBlock items={FAQ_SHOPIFY} heading={"Questions we get"} />
 </BaseLayout>

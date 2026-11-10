@@ -117,18 +117,9 @@ export const FAQ_WOO_SELL_GUNS: FaqItem[] = [
 ];
 
 export const FAQ_SHOPIFY: FaqItem[] = [
-  {
-    q: "Does Coriolis build Shopify gun stores?",
-    a: "No. Coriolis builds WooCommerce you own. FFL Cockpit and FFL Checkout are WooCommerce plugins.",
-  },
-  {
-    q: "Why WooCommerce instead of Shopify for an FFL?",
-    a: "You leave with the site. Shopify is a hosted platform with its own acceptable-use rules. We do not republish Shopify’s fee card or write their policy. The published Coriolis offer is owned WooCommerce, FFL Cockpit, and the register you already run.",
-  },
-  {
-    q: "Can WooCommerce sell guns?",
-    a: "Yes, when a licensed FFL owns the store and checkout is built for dealer transfer. Serialized firearms ship FFL-to-FFL. This is not legal advice.",
-  },
+  faqMd("Does Coriolis build Shopify gun stores?", "No. Coriolis builds WooCommerce you own. FFL Cockpit and FFL Checkout are WooCommerce plugins."),
+  faqMd("Why WooCommerce instead of Shopify for an FFL?", "You leave with the site. Shopify hosts stores under its own Terms of Service, Acceptable Use Policy and payment rules, which we do not write and do not republish as a fee card. The published Coriolis offer is owned WooCommerce, FFL Cockpit, and the register you already run."),
+  faqMd("Can WooCommerce sell guns?", "Yes, when a licensed FFL owns the store and checkout is built for dealer transfer. Serialized firearms ship FFL-to-FFL. This is not legal advice."),
 ];
 
 export const FAQ_BEST: FaqItem[] = [
@@ -302,74 +293,30 @@ export const FAQ_GROK_BOT: FaqItem[] = [
 
 /** SEO-U5 PR B (Brandy FINAL, 10/21): /ffl-analytics. */
 export const FAQ_FFL_ANALYTICS: FaqItem[] = [
-  {
-    q: "What is FFL Analytics?",
-    a: "FFL Analytics is a free report of what shoppers typed into your website's search, including what they couldn't find. It also shows which sites sent the visitors who searched. You get it in your GSE dealer dashboard and in a morning email.",
-  },
-  {
-    q: "Is FFL Analytics free?",
-    a: "Yes. It's free with any GSE dealer account, including free GSE Basic, and GSE Basic is free forever. Pro is optional. Pro is normally $99/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026.",
-  },
-  {
-    q: "How is FFL Analytics different from Google Analytics?",
-    a: "Google Analytics shows how many people visited, and FFL Analytics shows what they were looking for. It doesn't replace Google's traffic reports, so run them side by side. FFL Analytics isn't affiliated with Google.",
-  },
-  {
-    q: "What's in the FFL Analytics morning email?",
-    a: "A summary of the last 24 hours of searches on your website, in your inbox around 6:30 AM Eastern. It covers sessions, searches, and the top calibers, brands and types shoppers looked for. Turn it on in your dealer settings once the script is running.",
-  },
-  {
-    q: "What do I have to install?",
-    a: "Just the GSE script on your website. You don't have to list any inventory on GunSearchEngine.com to use it. Once the script is running, you get the dashboard and the morning email.",
-  },
+  faqMd("What is FFL Analytics?", "A free report of what shoppers typed into your website's search, including what they couldn't find, and which sites sent the visitors who searched. You get it in your GSE dealer dashboard and in a morning email."),
+  faqMd("Is FFL Analytics free?", "Yes. It's free with any GSE dealer account, including free GSE Basic, and GSE Basic is free forever. Pro is optional. The Coriolis quote and the Pro window are in the section above."),
+  faqMd("How is FFL Analytics different from Google Analytics?", "Google Analytics counts the visits. FFL Analytics names what those visitors typed into site search, including the queries that found nothing. It doesn't replace Google's traffic reports, so run them side by side. FFL Analytics isn't affiliated with Google."),
+  faqMd("What's in the FFL Analytics morning email?", "A summary of the last 24 hours of searches on your website, in your inbox around 6:30 AM Eastern: sessions, searches, and the top calibers, brands and types shoppers looked for. Turn it on in your dealer settings once the script is running."),
+  faqMd("What do I have to install?", "Just the GSE script on your website. You don't have to list any inventory on GunSearchEngine.com to use it. Once the script is running, you get the dashboard and the morning email."),
 ];
 
 /** SEO-U32 /ffl-seo FAQ (Brandy FINAL plus PAUL-0901: not a paid service). */
 export const FAQ_FFL_SEO: FaqItem[] = [
-  {
-    q: "What is FFL SEO?",
-    a: "FFL SEO is search engine optimization for gun stores and FFL dealers: getting your own website found on Google when shoppers search for what you sell. FFL Search Console, free with any GSE dealer account, shows what to fix and the Google searches that find you.",
-  },
-  {
-    q: "Is there free SEO help for gun stores?",
-    a: "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic, with no Pro required. It gives you a weekly fix list and shows the Google searches that find you. GSE Basic also includes premium SEO backlinks and a dedicated Seller page on GunSearchEngine.com.",
-  },
-  {
-    q: "What does FFL Search Console show?",
-    a: "Four tabs: Fix this week, Google searches that find you, What shoppers ask for, and How your GSE listing shows on Google. Fix this week is a short list from a light check run at most once a week. The shopper tab covers the last 7 days, and the listing tab covers the last 28 days.",
-  },
-  {
-    q: "Do I have to connect my Google account?",
-    a: "No. Two tabs work without it: what shoppers ask for, and how your GSE listing shows on Google. Connect Google Search Console to see the searches that find your own website.",
-  },
-  {
-    q: "Can it change my website or my Google account?",
-    a: "No. It\u2019s read-only. It reads and shows, and you decide what to fix.",
-  },
-  {
-    q: "Can I do SEO on a template FFL website?",
-    a: "Only a little, because on template platforms you don\u2019t control the title tag, the slugs or the markup. A WooCommerce site on your own domain gives you your slugs, your content and your schema.",
-  },
+  faqMd("What is FFL SEO?", "Search engine optimization for gun stores and FFL dealers: getting your own website found on Google when shoppers search for what you sell. FFL Search Console, free with any GSE dealer account, shows what to fix and the Google searches that find you."),
+  faqMd("Is there free SEO help for gun stores?", "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic, with no Pro required. It gives you a weekly fix list and shows the Google searches that find you. GSE Basic also includes the backlinks and Seller page named above."),
+  faqMd("What does FFL Search Console show?", "Four tabs: a weekly fix list, the Google searches that find you, what shoppers asked for over the last 7 days, and how your GSE listing showed on Google over the last 28 days. The full list is on [the FFL Search Console page](/ffl-search-console)."),
+  faqMd("Do I have to connect my Google account?", "No. Two tabs work without it: what shoppers ask for, and how your GSE listing shows on Google. Connect Google Search Console to see the searches that find your own website."),
+  faqMd("Can it change my website or my Google account?", "No. It's read-only, and you decide what to fix."),
+  faqMd("Can I do SEO on a template FFL website?", "Only a little, because on template platforms you don't control the title tag, the slugs or the markup. A WooCommerce site on your own domain gives you your slugs, your content and your schema."),
+  faqMd("Which terms should I start with, and what should I not buy?", "Start with your company name, your differentiators, and local terms you can actually win. Leave \"Glock 19\" and \"AR-15\" alone until you have a reason and a way to measure the work, and do not buy a packaged list of instant backlinks."),
 ];
 
 /** SEO-U32 /ffl-search-console FAQ (Brandy FINAL). */
 export const FAQ_FFL_SEARCH_CONSOLE: FaqItem[] = [
-  {
-    q: "Is FFL Search Console free?",
-    a: "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic. No Pro required.",
-  },
-  {
-    q: "Do I have to connect Google?",
-    a: "No. Two tabs work without it: what shoppers ask for, and how your GSE listing shows on Google. Connect Google Search Console to see the searches that find your own website.",
-  },
-  {
-    q: "Can it change my site or my Google account?",
-    a: "No. It\u2019s read-only. It reads and shows, and you decide what to fix.",
-  },
-  {
-    q: "Is FFL Search Console real-time?",
-    a: "No. It pulls your Google data on a schedule: a starting baseline, then regular snapshots and updates. The fix list comes from a check run at most once a week.",
-  },
+  faqMd("Is FFL Search Console free?", "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic. No Pro required."),
+  faqMd("Do I have to connect Google?", "No. Two tabs work without it: what shoppers ask for, and how your GSE listing shows on Google. Connect Google Search Console to see the searches that find your own website."),
+  faqMd("Can it change my site or my Google account?", "No. It's read-only. It reads and shows, and you decide what to fix."),
+  faqMd("Is FFL Search Console real-time?", "No. It pulls your Google data on a schedule: a starting baseline, then regular snapshots and updates. The weekly fix list is capped at one check per week."),
 ];
 
 /** SEO-U30 /ffl-payment-processing FAQ (Brandy FINAL plus PAUL-0901: slots filled from Paul's 10/21 answers). */
@@ -430,28 +377,10 @@ export const FAQ_HOSTING: FaqItem[] = [
 
 /** /ffl-messenger-enterprise. Brandy mock, Paul approved. First item opens in the accordion. */
 export const FAQ_FFL_MESSENGER_ENTERPRISE: FaqItem[] = [
-  {
-    q: "What's the difference between Pro and Enterprise?",
-    a: "Pro adds employee and rep seats, Tickets and fixed ticket rules. Enterprise adds the API, an MCP server, SSO, the Workflow builder and custom work by Coriolis.",
-  },
-  {
-    q: "Who can get Enterprise?",
-    a: "Any verified FFL that wants Enterprise features. One counter or many.",
-  },
-  {
-    q: "Can you read our messages?",
-    a: "No. Messages, documents and tickets are end-to-end encrypted. Custom integrations run on your side as your own connected FFL.",
-  },
-  {
-    q: "Can we see the DPA before we sign?",
-    a: "Yes. The DPAs are pre-planned, and you review them during scoping.",
-  },
-  {
-    q: "Where are you on SOC 2?",
-    a: "SOC 2 readiness planning is part of scoping. We walk your IT lead through it.",
-  },
-  {
-    q: "Why do you need our FFL number?",
-    a: "Everyone on FFL Messenger holds a license. Your FFL license is a public document, so we match the number to the ATF record and check that you run the shop.",
-  },
+  faqMd("What's the difference between Pro and Enterprise?", "Pro adds employee and rep seats, Tickets and fixed ticket rules. Enterprise adds the API, an MCP server, SSO, the Workflow builder and custom work by Coriolis."),
+  faqMd("Who can get Enterprise?", "Any verified FFL that wants Enterprise features, one counter or many."),
+  faqMd("Can you read our messages?", "No. Messages, documents and tickets are end-to-end encrypted. Custom integrations run on your side as your own connected FFL."),
+  faqMd("Can we see the DPA before we sign?", "Yes. The DPAs are pre-planned, and you review them during scoping."),
+  faqMd("Where are you on SOC 2?", "SOC 2 readiness planning is part of scoping. We walk your IT lead through it."),
+  faqMd("Why do you need our FFL number?", "Everyone on FFL Messenger holds a license. Your FFL license is a public document, so we match the number to the ATF record and check that you run the shop."),
 ];
