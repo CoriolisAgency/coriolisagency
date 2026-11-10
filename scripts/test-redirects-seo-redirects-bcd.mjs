@@ -1,4 +1,4 @@
-// SEO-REDIRECTS-BCD: four SEO vanity slugs 301 once to /ffl-seo;
+// SEO-REDIRECTS-BCD + FOLLOWUP: SEO vanity slugs 301 once to /ffl-seo;
 // /is-woocommerce-good-for-firearms retargeted from 308 /ecommerce to 301 /can-you-use-woocommerce-to-sell-guns.
 // Trailing-slash variants are listed so Vercel trailingSlash:false does not add a 308 hop.
 import assert from "node:assert/strict";
@@ -19,6 +19,8 @@ const CASES = [
   ["/mastering-firearms-seo-boost-your-gun-stores-online-visibility/", "/ffl-seo"],
   ["/firearms-seo", "/ffl-seo"],
   ["/firearms-seo/", "/ffl-seo"],
+  ["/firearms-seo-marketing", "/ffl-seo"],
+  ["/firearms-seo-marketing/", "/ffl-seo"],
   ["/is-woocommerce-good-for-firearms", "/can-you-use-woocommerce-to-sell-guns"],
   ["/is-woocommerce-good-for-firearms/", "/can-you-use-woocommerce-to-sell-guns"],
 ];

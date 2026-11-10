@@ -123,6 +123,16 @@
       "statusCode": 301
     },
     {
+      "source": "/firearms-seo-marketing",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/firearms-seo-marketing/",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
       "source": "/firearms-digital-marketing-agency",
       "destination": "/",
       "statusCode": 301
