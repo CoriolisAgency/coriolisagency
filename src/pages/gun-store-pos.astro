@@ -32,8 +32,17 @@ import {
   POS_PILLAR_TITLE,
   POS_PILLAR_WHY,
   POS_PILLAR_WHY_TITLE,
+  POS_PILLAR_TABLE_TITLE,
+  POS_PILLAR_TABLE_HEAD,
+  POS_PILLAR_TABLE_ROWS,
+  POS_PILLAR_TABLE_NOTE,
+  POS_PILLAR_PROOF_TITLE,
+  POS_PILLAR_PROOF,
+  POS_PILLAR_PLAN_DROPSHIP,
+  POS_PILLAR_CLOSING,
   posPillarItemList,
 } from "../lib/pos-ecommerce";
+import { md } from "../lib/md";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
 ---
@@ -57,7 +66,39 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
       width: 1499,
       height: 1059,
     }}
-  />
+  >
+    <p class="mt-4 text-sm text-zinc-400">
+      100+ clients · <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating</a> · Member of NSSF, FPC and GOA
+    </p>
+  </PosHero>
+
+  <section class="border-b border-zinc-800/80 py-12" id="which-pos">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">{POS_PILLAR_TABLE_TITLE}</h2>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[48rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              {POS_PILLAR_TABLE_HEAD.map((h) => <th class="py-3 pr-3 font-medium">{h}</th>)}
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              POS_PILLAR_TABLE_ROWS.map(([pos, out, back, plan]) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class="py-3 pr-3 align-top font-medium text-zinc-300" set:html={md(pos)} />
+                  <td class="py-3 pr-3 align-top">{out}</td>
+                  <td class="py-3 pr-3 align-top">{back}</td>
+                  <td class="py-3 pr-3 align-top">{plan}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-sm text-zinc-500">{POS_PILLAR_TABLE_NOTE}</p>
+    </div>
+  </section>
 
   <section class="border-b border-zinc-800/80 py-12" id="connect">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
@@ -99,6 +140,17 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
     </div>
   </section>
 
+  <section class="border-b border-zinc-800/80 py-12" id="shops">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">{POS_PILLAR_PROOF_TITLE}</h2>
+      {
+        POS_PILLAR_PROOF.map((para) => (
+          <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md(para)} />
+        ))
+      }
+    </div>
+  </section>
+
   <section class="border-b border-zinc-800/80 py-12" id="how">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">{POS_PILLAR_HOW_TITLE}</h2>
@@ -124,6 +176,7 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
         <a href={withBase("ecommerce#pos")} class={linkClass}>FFL ecommerce plans</a>
         <a href={withBase("ffl-website-cost")} class={linkClass}>what an FFL website costs</a>
       </p>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md(POS_PILLAR_PLAN_DROPSHIP)} />
     </div>
   </section>
 
@@ -142,13 +195,17 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
         {POS_PILLAR_FASTBOUND}
       </p>
-      <p class="mt-8 text-sm text-zinc-400">
-        100+ clients. <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating</a>. Member of NSSF, FPC and GOA.
-      </p>
     </div>
   </section>
 
   <FaqBlock items={FAQ_POS_PILLAR} />
 
-  <TalkSection pillar="Ecommerce" heading={POS_PILLAR_FORM_HEADING} subline={POS_PILLAR_FORM_LINE} />
+  <TalkSection
+    pillar="Ecommerce"
+    heading={POS_PILLAR_FORM_HEADING}
+    subline={POS_PILLAR_FORM_LINE}
+    phone="(279) 258-6771"
+    email="support@coriolisagency.com"
+    note={POS_PILLAR_CLOSING}
+  />
 </BaseLayout>

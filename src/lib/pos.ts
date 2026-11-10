@@ -38,6 +38,8 @@ export type PosPage = {
   description: string;
   h1: string;
   lede: string;
+  /** Optional second paragraph under the lede. */
+  ledeMore?: string;
   jumpLabel: string;
   heroImage: PosHeroImage;
   featuresTitle: string;
@@ -277,6 +279,8 @@ export const POS_PAGES: PosPage[] = [
       "WooCommerce for MicroBiz POS: publish products, sync prices and stock, and pull web orders and customers back into MicroBiz.",
     h1: "WooCommerce for MicroBiz POS",
     lede: "MicroBiz POS has a WooCommerce integration. Keep MicroBiz at the counter. Coriolis builds the store on your domain, and MicroBiz publishes products and prices to it and pulls web orders back in.",
+    // SEO-REFRESH-P1 (Brandy 2026-11-10, Paul 8:06 AM ET). Source: gunbizpos.com, read 2026-11-10.
+    ledeMore: "GunBiz POS is MicroBiz's gun-store product. If you run GunBiz POS at the counter, this is your page, and the integration below is the one you get.",
     jumpLabel: "Tell us about your MicroBiz store",
     heroImage: {
       src: "brand/microbiz-pos-hero.jpg",

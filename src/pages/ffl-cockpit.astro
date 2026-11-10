@@ -3,24 +3,67 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
+import TalkSection from "../components/TalkSection.astro";
 import { FAQ_COCKPIT } from "../lib/faq";
-import { LINKS, linkClass } from "../lib/links";
+import { md } from "../lib/md";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
 
-const ext = { target: "_blank", rel: "noopener noreferrer" };
-
+// SEO-REFRESH-P1: Brandy's 2026-11-10 7:50 AM ET body, approved by Paul 8:06 AM ET Nov 10.
+// Title and meta are on HOLD until the Nov 24 read and stay as live.
+// The PENDING $100 sign-up fee cell is blank.
 const split = [
   {
     title: "FFL Cockpit",
-    body: "Distributor catalogs, lowest-cost routing, MAP, FFL Checkout. The operations layer. Licensed at fflcockpit.com.",
+    body: "Distributor catalogs, lowest-cost routing, MAP and FFL Checkout. It's the part that runs behind your store. Licensed at [fflcockpit.com](https://www.fflcockpit.com/).",
   },
   {
-    title: "Coriolis WooCommerce",
-    body: "The public store. Your domain, your theme, your pages. We build, host, and support it so Cockpit has somewhere to sell.",
+    title: "Coriolis",
+    body: "The public store your customers see. Your domain, your theme, your pages. We build it, host it on WP Engine and support it, so the plugin has somewhere to sell.",
   },
 ] as const;
-import TalkSection from "../components/TalkSection.astro";
+
+const pluginDoes = [
+  "**20+ distributor catalogs** synced to your store, with images, UPCs, stock and cost.",
+  "**13+ marketplaces.** It pushes your products to the price-comparison sites and marketplaces buyers shop.",
+  "**4 POS systems.** The homepage names AIM, AXIS and CoreStore. Premium merges your in-store stock with distributor products in one catalog.",
+  "**2 platforms.** It runs on WooCommerce or BigCommerce.",
+  "**20-minute inventory sync** on Premium.",
+  "**FFL Checkout.** Serialized firearms route to the buyer's chosen transfer dealer, with state limits enforced.",
+  "**Pricing rules.** You set margins and choose what gets listed.",
+] as const;
+
+const setupSteps = [
+  "**Keep your domain.** We build WooCommerce on it. If you're coming off another platform, we build first and you give notice after.",
+  "**Licenses.** On Militia and above, FFL Cockpit and FFL Checkout are included. Already have licenses? Bring them.",
+  "**Connect your distributors.** Link the houses you hold dealer accounts with. We turn on the catalogs at setup.",
+  "**Set pricing rules.** Your margins, what lists, and what stays off.",
+  "**Turn on FFL Checkout.** The buyer picks the receiving dealer. State limits show at checkout.",
+  "**Turn on marketplaces.** Militia lists your catalog on GunBroker.com, AmmoSeek.com and the other marketplaces on the plan.",
+  "**Test a mixed cart.** Buy a firearm and an accessory in one order and make sure it clears.",
+  "**Point the domain.** The store goes live on WP Engine.",
+] as const;
+
+const compare = [
+  [
+    "Monthly price",
+    "$84.99/mo ([fflcockpit.com/pricing](https://fflcockpit.com/pricing/))",
+    "$269/mo ([FFL ecommerce plans](/ecommerce))",
+  ],
+  ["Sign-up or setup fee", "", "Setup is $500 or $2,500"],
+  ["FFL Cockpit and FFL Checkout licenses", "Included in Premium", "Included"],
+  ["Distributor catalogs", "20+", "21"],
+  ["Marketplaces", "Included in Premium", "13 listed on the plan, including GunBroker.com and AmmoSeek.com"],
+  ["Website build", "Yours to build or hire", "We build it on your domain"],
+  ["Hosting", "Yours to buy and run", "Included, on WP Engine, backed by a 99.95% uptime SLA"],
+  ["Who configures the plugin", "You", "We do, at setup"],
+  ["Support", "FFL Cockpit for the plugin. You for the site.", "Coriolis email support, 24-hour response"],
+  ["Contract", "Month to month, no contracts", "No contract. Cancel and the site goes with you."],
+] as const;
+
+const p = "mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400";
+const th = "py-3 pr-3 font-medium";
+const td = "py-3 pr-3 align-top";
 ---
 
 <BaseLayout
@@ -46,11 +89,7 @@ import TalkSection from "../components/TalkSection.astro";
           FFL Cockpit websites and WooCommerce hosting
         </h1>
         <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-          FFL Cockpit is the firearms operations plugin for distributor
-          catalogs, FFL Checkout, and automated dropshipping. It is not a
-          customer-facing store. Coriolis does not own that brand. We build and
-          host the WooCommerce website that sits in front of it. It's on your
-          domain, designed for an FFL, ready to sell stock, dropship, or both.
+          FFL Cockpit is the firearms plugin for distributor catalogs, FFL Checkout and automated dropshipping. Coriolis is a WooCommerce hosting partner. We do the FFL Cockpit setup, build the WooCommerce store it runs on, and host it. The store is on your domain and you own it. FFL Cockpit licenses live on fflcockpit.com. On Militia and every plan above it, the licenses are included and we configure them for you.
         </p>
         <div class="mt-8">
           <CtaRow talk />
@@ -69,52 +108,120 @@ import TalkSection from "../components/TalkSection.astro";
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">FFL Cockpit setup and hosting</h2>
+      <p class={p}>
+        You have two ways to run FFL Cockpit. License the plugin yourself and bring your own WooCommerce site and hosting. Or have Coriolis build the store, set up the plugin, and host it all. Either way, the store is yours.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">Who does what</h2>
       <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
         {
           split.map((s) => (
             <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
               <h3 class="text-sm font-semibold text-sky-300">{s.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-zinc-400">{s.body}</p>
+              <p class="mt-2 text-sm leading-relaxed text-zinc-400" set:html={md(s.body)} />
             </article>
           ))
         }
       </div>
-      <p class="mt-6 text-sm text-zinc-500">
-        Licenses live on{" "}
-        <a href={LINKS.fflCockpit} class={linkClass} {...ext}>fflcockpit.com</a>.
-        Militia ($269/mo) and every plan above it include FFL Cockpit and FFL
-        Checkout. We configure them at setup. Every Coriolis store runs on WP Engine, backed by WP Engine's 99.95% uptime
-        SLA. FFL Accelerator ($569/mo) adds the tuning and monitoring on top. How
-        hosting works on every plan:{" "}
-        <a href={withBase("gun-friendly-hosting")} class={linkClass}>FFL website hosting</a>.
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">What the FFL Cockpit plugin does</h2>
+      <p class={p}>Per fflcockpit.com, read November 10, 2026:</p>
+      <ul class="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
+        {pluginDoes.map((item) => <li set:html={md(item)} />)}
+      </ul>
+      <p class={p} set:html={md("That's the plugin maker's list. For the full feature set, read [fflcockpit.com](https://www.fflcockpit.com/).")} />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">FFL Cockpit setup steps</h2>
+      <p class={p}>On a Coriolis build, we do this, in order.</p>
+      <ol class="mt-4 max-w-3xl list-decimal space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
+        {setupSteps.map((s) => <li set:html={md(s)} />)}
+      </ol>
+      <p class={p}>
+        Doing it yourself? Buy FFL Cockpit Premium on fflcockpit.com and install it on your own WooCommerce site. If you'd rather not run the hosting, we can take it over.
       </p>
     </div>
   </section>
 
-  <section class="py-12">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
-      <p class="max-w-3xl text-sm text-zinc-400">
-        Already on Cockpit and shopping for a better store? That is the usual
-        brief.{" "}
-        <a href={withBase("ecommerce")} class={linkClass}>Plans and setup</a>
-        {" · "}
-        <a href={withBase("firearms-dropshipping")} class={linkClass}
-          >How dropshipping runs on it</a
-        >.
-      </p>
-      <p class="max-w-3xl text-sm text-zinc-400">
-        It all runs on your{" "}
-        <a href={withBase("ecommerce")} class={linkClass}>FFL website design</a>, so your catalog and your orders stay in one place.
-        Want more guns online without more on the shelf? Add{" "}
-        <a href={withBase("firearms-dropshipping")} class={linkClass}>FFL dropshipping</a>{" "}
-        from your distributors.
-      </p>
-      <CtaRow primary="ecommerce" />
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">DIY plugin vs Coriolis bundled</h2>
+      <p class={p}>List prices read November 10, 2026.</p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[44rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              <th class={th}><span class="sr-only">Item</span></th>
+              <th class={th}>FFL Cockpit Premium on your own WooCommerce</th>
+              <th class={`${th} text-zinc-200`}>Coriolis Militia</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              compare.map(([k, diy, coriolis]) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class={`${td} font-medium text-zinc-300`}>{k}</th>
+                  <td class={td} set:html={md(diy)} />
+                  <td class={`${td} text-zinc-200`} set:html={md(coriolis)} />
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class={p} set:html={md("Which plans include FFL Cockpit? Minute Man ($169/mo) is own-inventory WooCommerce without the Cockpit licenses. Militia ($269/mo), Gun Runner ($369/mo), Warlord ($469/mo) and FFL Accelerator ($569/mo) all include them. Want us to run more of it? FFL Accelerator adds WordPress and plugin updates, backups, managed email and analytics monitoring. See [FFL ecommerce plans](/ecommerce).")} />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">POS and marketplaces</h2>
+      <p class={p}>Two different jobs. Keep them straight.</p>
+      <p class={p} set:html={md("**FFL Cockpit's POS integration.** FFL Cockpit Premium lists 4 POS systems it pulls in-store stock from, so your shelf and distributor products show in one catalog. Its homepage names AIM, AXIS and CoreStore. That's the plugin's feature. Check fflcockpit.com for the current list.")} />
+      <p class={p} set:html={md("**Coriolis POS integration.** On Warlord and FFL Accelerator, we connect the register you already run to your WooCommerce store through an API, so the counter and the site share one inventory. That covers AIM, MicroBiz, Rapid Gun Systems, Trident 1 and any POS that works with WooCommerce. See [gun store POS integration](/gun-store-pos).")} />
+      <p class={p} set:html={md("**Marketplaces.** Militia and above list your catalog on 13 marketplaces: GunBroker.com, AmmoSeek.com, Gun.Deals, WikiArms.com, AmmoBuy.com, ArmsAgora.com, GunAmmo.deals, AmmoBrowser.com, GunMade.com, CaliberKing.com, BulletScout.com, Guns.com and BulletBlaster.com.")} />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Already on FFL Cockpit?</h2>
+      <p class={p} set:html={md("That's the usual job. You have the plugin and want a better store in front of it. We build custom WooCommerce on your domain, configure Cockpit, and host and support it. Want more guns online without more on the shelf? Add [FFL dropshipping](/firearms-dropshipping). It all runs on your [FFL website design](/ecommerce), so your catalog and orders stay in one place.")} />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Hosting</h2>
+      <p class={p} set:html={md("Every Coriolis store runs on WP Engine, backed by WP Engine's 99.95% uptime SLA, with unlimited hosting on every plan. Coriolis is a WP Engine agency partner. How hosting works on every plan: [gun-friendly hosting](/gun-friendly-hosting).")} />
+      <div class="mt-6">
+        <CtaRow primary="ecommerce" />
+      </div>
     </div>
   </section>
 
   <FaqBlock items={FAQ_COCKPIT} />
 
-  <TalkSection />
+  <section class="border-t border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">About the brand</h2>
+      <p class={p}>
+        Coriolis doesn't own FFL Cockpit. FFL Cockpit is a separate company, and its marks belong to it. We build and host the WooCommerce stores it runs on.
+      </p>
+    </div>
+  </section>
+
+  <TalkSection phone="(279) 258-6771" email="support@coriolisagency.com" />
 </BaseLayout>

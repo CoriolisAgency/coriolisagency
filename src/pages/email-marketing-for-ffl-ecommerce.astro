@@ -3,15 +3,62 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
+import TalkSection from "../components/TalkSection.astro";
 import { FAQ_EMAIL } from "../lib/faq";
-import { LINKS, linkClass } from "../lib/links";
+import { linkClass } from "../lib/links";
+import { md } from "../lib/md";
 import { CANON_PATHS } from "../lib/site";
-import { withBase } from "../lib/base";
+import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
+
+// SEO-REFRESH-P1: Brandy's 2026-11-10 7:50 AM ET copy, approved by Paul 8:06 AM ET Nov 10.
+// PENDING policy cells are blank; the all-PENDING "Others" row is dropped.
+const flows = [
+  {
+    title: "Welcome",
+    body: "Someone signs up on your site. They get a hello, your store's story, and what you carry. This is the email most people open, so it's where you tell them what makes your shop different.",
+  },
+  {
+    title: "Abandoned cart",
+    body: "A buyer adds a gun or a box of ammo and doesn't check out. The flow reminds them what's in the cart and links them straight back to it. For serialized guns, it's a good place to remind them how the transfer works.",
+  },
+  {
+    title: "Back in stock",
+    body: "A buyer wants something you're out of. They sign up for an alert on the product page. When it comes back, they get the email. For hard-to-find guns and ammo, this is the flow that sells.",
+  },
+  {
+    title: "Browse abandonment",
+    body: "A shopper looks at a product and leaves without adding it to the cart. The flow follows up with that product.",
+  },
+  {
+    title: "Post-purchase",
+    body: "The order ships. The buyer gets a thank you, what happens next, and a reason to come back. For a firearm, that includes the transfer step at their dealer.",
+  },
+] as const;
+
+const plans = [
+  "**FFL Accelerator, $569 a month.** We run your email for you: capture, list management, and the welcome, back in stock, browse abandonment, thank you for purchase and abandoned cart flows. We also watch the numbers across Google Analytics, Google Search Console, GunSearchEngine.com, and email and SMS.",
+  "**Retail Setup, $2,500 one time.** The full email build at launch: complete email marketing setup, email and CRM platform integration, a custom email brand kit and template, the welcome series, the abandoned cart series, back-in-stock notifications, and deliverability work.",
+  "**Basic Setup, $500 one time.** Email capture on your site. You run the rest.",
+  "All plans: Minute Man $169, Militia $269, Gun Runner $369, Warlord $469 and FFL Accelerator $569 a month. Managed email is on FFL Accelerator. See every plan on [FFL ecommerce](/ecommerce).",
+] as const;
+
+const policies = [
+  ["Mailchimp", "", "[mailchimp.com/legal/acceptable_use](https://mailchimp.com/legal/acceptable_use/)"],
+  [
+    "Klaviyo",
+    "Its Acceptable Use Policy bars SMS and MMS content about firearms on US and Canadian short code and toll-free numbers.",
+    "[klaviyo.com/legal/acceptable-use-policy](https://www.klaviyo.com/legal/acceptable-use-policy)",
+  ],
+] as const;
+
+const p = "mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400";
+const th = "py-3 pr-3 font-medium";
+const td = "py-3 pr-3 align-top";
 ---
 
 <BaseLayout
-  title="Email Marketing for FFL Ecommerce | Coriolis"
-  description="FFL Accelerator ($569/mo) includes email capture, list management, and welcome / abandoned-cart / back-in-stock / thank-you campaigns. Retail Setup ($2,500) is the full email build. No invented LTV."
+  title="Email Marketing for Gun Stores and FFLs | Coriolis"
+  description="Gun store email marketing on the WooCommerce store you own: welcome, abandoned cart, back in stock and post-purchase flows, set up by Coriolis."
   path="/email-marketing-for-ffl-ecommerce"
   ogImagePath={CANON_PATHS.storefront}
   faq={FAQ_EMAIL}
@@ -26,17 +73,13 @@ import { withBase } from "../lib/base";
       <h1
         class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
       >
-        Email marketing for FFL ecommerce
+        Email marketing for gun stores
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        Email on a gun store site is part of{" "}
-        <a href={`${withBase("ecommerce")}#ffl-accelerator`} class={linkClass}
-          >FFL Accelerator</a
-        >
-        {" "}at $569 a month: capture, list management, and campaign management
-        (welcome, abandoned cart, back in stock, thank you). We do not publish
-        an LTV multiple and we do not repeat old “42-to-1” headlines. The site
-        is yours.
+        Gun store email marketing brings buyers back to your website after they leave. Someone looks at a rifle, adds a box of ammo, and closes the tab. A good email gets them back. Coriolis sets up the capture, the list and the automated flows on the WooCommerce store you own. On FFL Accelerator, we run them for you.
+      </p>
+      <p class="mt-4 text-sm text-zinc-400">
+        100+ clients · <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} target="_blank" rel="noopener noreferrer">5-star Google rating</a> · Member of NSSF, FPC and GOA
       </p>
       <div class="mt-8">
         <CtaRow primary="ecommerce" showGsa={false} showAccelerator showContact />
@@ -47,44 +90,86 @@ import { withBase } from "../lib/base";
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">What is on which plan</h2>
-      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-        <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-          <h3 class="text-sm font-semibold text-sky-300">
-            FFL Accelerator · $569/mo
-          </h3>
-          <p class="mt-2 text-sm leading-relaxed text-zinc-400">
-            Email capture, list management, and campaign management: welcome,
-            abandoned cart, back in stock, thank you. Plus GunSearchEngine.com,
-            on-site search basics, and hosting on WP Engine.
-          </p>
-        </article>
-        <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-          <h3 class="text-sm font-semibold text-sky-300">
-            Retail Setup · $2,500 one-time
-          </h3>
-          <p class="mt-2 text-sm leading-relaxed text-zinc-400">
-            Complete email marketing setup, CRM integration, custom brand kit
-            and template, the welcome / abandoned-cart / back-in-stock series,
-            and deliverability work. Basic Setup ($500) includes email capture
-            implementation only.
-          </p>
-        </article>
+      <h2 class="text-xl font-semibold text-white">The flows every gun store should run</h2>
+      <p class={p}>
+        These go out on their own once they're set up. You write the offer. The store sends the email.
+      </p>
+      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {
+          flows.map((f) => (
+            <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+              <h3 class="text-sm font-semibold text-sky-300">{f.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-zinc-400">{f.body}</p>
+            </article>
+          ))
+        }
       </div>
-      <p class="mt-6 max-w-3xl text-sm text-zinc-500">
-        Details and signup live on{" "}
-        <a href={LINKS.fflaccelerator} class={linkClass} target="_blank" rel="noopener noreferrer"
-          >fflaccelerator.com</a
-        >. We do not publish an LTV multiple.
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">What's on which plan</h2>
+      {plans.map((para) => <p class={p} set:html={md(para)} />)}
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Which email platforms take firearms businesses</h2>
+      <p class={p}>
+        Ask before you import a list. Some email and SMS tools limit firearms content. A store that gets shut off loses its list and its flows in one day.
+      </p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[40rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              <th class={th}>Platform</th>
+              <th class={th}>What its policy says about firearms</th>
+              <th class={th}>Source</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              policies.map(([name, policy, src]) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class={`${td} font-medium text-zinc-300`}>{name}</th>
+                  <td class={td}>{policy}</td>
+                  <td class={td} set:html={md(src)} />
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class={p} set:html={md("Read the policy for what you sell, firearms, ammo or both. Then get your account approved in writing before launch. Same rule as [FFL payment processing](/ffl-payment-processing).")} />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">A store that runs it: Jim's Armory</h2>
+      <p class={p} set:html={md("Jim's Armory is the online store behind Jim Grill's [Jim's Armory YouTube channel](https://www.youtube.com/@JimsArmory). Coriolis built it on WooCommerce. The catalog runs past 41,000 products. It sends back-in-stock alerts and gun store email marketing through Mailchimp. See the [store](https://jimsarmory.com/) and the [release](/press/four-firearms-businesses-choose-coriolis-for-custom-woocommerce-stores).")} />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Your list stays yours</h2>
+      <p class={p}>
+        The site is yours. Cancel and the website goes with you. Email platform accounts you own stay yours, and so does the list in them.
       </p>
     </div>
   </section>
 
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
+      <h2 class="text-xl font-semibold text-white">How email fits the rest of the store</h2>
+      <p class={p} set:html={md("Email works best with something to say. Back-in-stock alerts need stock to come back, so a store with [FFL dropshipping](/firearms-dropshipping) across 21 distributor catalogs has more to announce. Abandoned cart emails need a cart that works, so the store runs on [FFL website design](/ecommerce) built for dealer transfer. And the list grows with traffic from [GunSearchEngine.com](https://gunsearchengine.com/for-dealers).")} />
     </div>
   </section>
 
   <FaqBlock items={FAQ_EMAIL} />
+
+  <TalkSection pillar="Email Marketing" phone="(279) 258-6771" email="support@coriolisagency.com" />
 </BaseLayout>

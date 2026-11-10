@@ -10,6 +10,32 @@ import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
 import { CANON_PATHS } from "../lib/site";
 import { LINKS, linkClass } from "../lib/links";
 import { withBase } from "../lib/base";
+import { md } from "../lib/md";
+
+// SEO-REFRESH-P1: "Who we build for" row, Brandy's 2026-11-10 7:50 AM ET copy, approved by Paul 8:06 AM ET Nov 10.
+// The brand tile links the Nov 9 release until the Tier 1 Kinetics case study ships.
+const audiences = [
+  {
+    title: "Gun shops",
+    body: "Your store online, on your domain, connected to the register you already run.",
+    link: "[See FFL website design](/ecommerce)",
+  },
+  {
+    title: "Online-only FFLs",
+    body: "No shelf needed. List 21 distributor catalogs and dropship to your buyers.",
+    link: "[See FFL dropshipping](/firearms-dropshipping)",
+  },
+  {
+    title: "Ranges, gunsmiths and instructors",
+    body: "Lane time, classes and memberships online, next to the store.",
+    link: "[See range and instructor websites](/websites-for-ranges-gunsmiths-instructors)",
+  },
+  {
+    title: "Firearms brands",
+    body: "Your own builds up front, with a full catalog behind them.",
+    link: "[See what we built for Tier 1 Kinetics](/press/four-firearms-businesses-choose-coriolis-for-custom-woocommerce-stores)",
+  },
+] as const;
 
 type Pillar = {
   href: string;
@@ -123,7 +149,7 @@ const heroSlides = [
 
 <BaseLayout
   title="FFL Ecommerce Websites for Gun Stores | Coriolis, LLC"
-  description="Coriolis builds WooCommerce gun store websites you own. Switch off AmmoReady or Gearfire without going dark. FFL Cockpit, dropshipping, and the register you already run."
+  description="Coriolis builds WooCommerce gun store websites you own. FFL Cockpit dropshipping, the register you already run, and a switch without going dark."
   path="/"
   ogImagePath={CANON_PATHS.storefront}
   faq={FAQ_HOME}
@@ -459,6 +485,29 @@ const heroSlides = [
           })
         }
       </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80" data-who-we-build-for>
+    <div class="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold"
+      >
+        Who we build for
+      </p>
+      <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          audiences.map((a) => (
+            <div class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6">
+              <h2 class="text-xl font-semibold text-white">{a.title}</h2>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-zinc-400">{a.body}</p>
+              <p class="mt-5 text-sm" set:html={md(a.link)} />
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md("Plans run from Minute Man at $169 a month to FFL Accelerator at $569. Setup is $500 or $2,500. See [FFL ecommerce plans](/ecommerce).")} />
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md("Comparing options? Read our guide to the [best FFL ecommerce platforms](/best-ffl-ecommerce-website). Need a merchant account that allows guns? See [FFL payment processing](/ffl-payment-processing). Need a host that allows a gun store? See [gun-friendly hosting](/gun-friendly-hosting).")} />
     </div>
   </section>
 
