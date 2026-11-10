@@ -123,34 +123,13 @@ export const FAQ_SHOPIFY: FaqItem[] = [
 ];
 
 export const FAQ_BEST: FaqItem[] = [
-  faqMd(
-    "What is the best FFL ecommerce platform?",
-    "The best FFL ecommerce platform depends on what you want to own. Pick a hosted storefront, a POS-first suite, plugins on a WooCommerce site you already run, or a managed WooCommerce build you own. Score ownership, catalogs, POS, listed price and exit, then pick the type that matches how you sell.",
-  ),
-  faqMd(
-    "What is the best ecommerce platform for a gun store?",
-    "Start with your register. If you like it, keep it and ask how it connects. AIM, MicroBiz, Rapid and Trident 1 all connect to WooCommerce. See [gun store POS integration](/gun-store-pos). If you want a new register and website together, look at the POS-first suites.",
-  ),
-  faqMd(
-    "Should I pick a hosted platform or WooCommerce I own?",
-    "Hosted is faster to launch, and you usually don't take a full website with you when you leave. Owned WooCommerce means you write the pages and keep the site. You still need firearms checkout and catalogs, through plugins or a builder.",
-  ),
-  faqMd(
-    "How do the listed starting prices compare?",
-    "See the table. Plugins list lowest because they don't include a site or hosting. Hosted platforms and POS suites include the site. Read the source links for what each price covers.",
-  ),
-  faqMd(
-    "Can I keep my POS and still change websites?",
-    "Often, yes. If your POS connects to WooCommerce, you can change the website and keep the counter. Coriolis connects AIM, MicroBiz, Rapid, Trident 1 and other WooCommerce-ready registers on Warlord.",
-  ),
-  faqMd(
-    "What happens if I leave?",
-    "Ask before you sign. On a hosted platform, you export what they allow and rebuild. On WooCommerce you own, the site goes with you. With Coriolis, there's no contract and you take the website.",
-  ),
-  faqMd(
-    "Can I use WooCommerce to sell guns?",
-    "Yes, when a licensed FFL owns the store and checkout is built for dealer transfer. See [Can you use WooCommerce to sell guns?](/can-you-use-woocommerce-to-sell-guns) This is not legal advice.",
-  ),
+  faqMd("What is the best FFL ecommerce platform?", "It depends on what you want to own. Pick a hosted storefront, a POS-first suite, plugins on a WooCommerce site you already run, or a managed WooCommerce build you own, then score ownership, catalogs, POS, listed price and exit, and pick the type that matches how you sell."),
+  faqMd("What is the best ecommerce platform for a gun store?", "Start with your register. If you like it, keep it and ask how it connects. AIM, MicroBiz, Rapid and Trident 1 all connect to WooCommerce; see [how we connect the register you already run](/gun-store-pos). If you want a new register and website together, look at the POS-first suites."),
+  faqMd("Should I pick a hosted platform or WooCommerce I own?", "Hosted is faster to launch, and you usually don't take a full website with you when you leave. Owned WooCommerce means you write the pages and keep the site, and you still need firearms checkout and catalogs, through plugins or a builder."),
+  faqMd("How do the listed starting prices compare?", "See the table. Plugins list lowest because they cover only the plugin, not a site or hosting. Hosted platforms and POS suites include the site. Read the source links for what each price covers."),
+  faqMd("Can I keep my POS and still change websites?", "If your POS connects to WooCommerce, you can change the website and keep the counter. Coriolis connects AIM, MicroBiz, Rapid, Trident 1 and other WooCommerce-ready registers on Warlord."),
+  faqMd("What happens if I leave?", "Ask before you sign. On a hosted platform, you export what they allow and rebuild. On WooCommerce you own, the site goes with you. With Coriolis, there's no contract and you take the website."),
+  faqMd("Can I use WooCommerce to sell guns?", "Yes, when a licensed FFL owns the store and checkout is built for dealer transfer. See [Can you use WooCommerce to sell guns?](/can-you-use-woocommerce-to-sell-guns)."),
 ];
 
 export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
