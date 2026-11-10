@@ -10,6 +10,7 @@
  * No LeadForm schema change, no Ops DB change. Off by default, so other pages render unchanged.
  */
 import LeadForm from "@coriolis/lead-form/LeadForm.astro";
+import { md } from "../lib/md";
 
 interface Props {
   /** One of the shared pillar options. Defaults to Ecommerce. */
@@ -28,6 +29,8 @@ interface Props {
   email?: string;
   /** Optional closing line under the contact line. */
   note?: string;
+  /** CA-VOICE-P1: contact line as inline markdown (tel:/mailto: links); replaces the phone/email line. */
+  contact?: string;
 }
 
 const {
@@ -39,6 +42,7 @@ const {
   phone,
   email,
   note,
+  contact,
 } = Astro.props;
 
 const SEGMENTS = [
@@ -55,9 +59,10 @@ const tel = phone ? `tel:+1${phone.replace(/\D/g, "")}` : "";
   <div class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-2">
     <div>
       <h2 class="text-2xl font-semibold tracking-tight text-white">{heading}</h2>
-      <p class="mt-3 text-sm leading-relaxed text-zinc-400">{subline}</p>
-      {phone && !email && <p class="mt-3 text-sm text-zinc-300"><a href={tel} class="hover:text-white">{phone}</a></p>}
-      {phone && email && (
+      {subline && <p class="mt-3 text-sm leading-relaxed text-zinc-400">{subline}</p>}
+      {contact && <p class="mt-3 text-sm text-zinc-300" set:html={md(contact)} />}
+      {!contact && phone && !email && <p class="mt-3 text-sm text-zinc-300"><a href={tel} class="hover:text-white">{phone}</a></p>}
+      {!contact && phone && email && (
         <p class="mt-3 text-sm text-zinc-300">
           Call <a href={tel} class="hover:text-white">{phone}</a> or email <a href={`mailto:${email}`} class="hover:text-white">{email}</a>.
         </p>

@@ -6,6 +6,11 @@ import {
   GOOGLE_REVIEWS_HREF,
 } from "../lib/google-reviews";
 
+interface Props {
+  /** CA-VOICE-P1: optional line above the quotes. */
+  intro?: string;
+}
+const { intro } = Astro.props;
 const starIndexes = [0, 1, 2, 3, 4] as const;
 const ratingLabel = `${GOOGLE_REVIEW_RATING.toFixed(1)} out of 5 stars on Google`;
 ---
@@ -77,6 +82,7 @@ const ratingLabel = `${GOOGLE_REVIEW_RATING.toFixed(1)} out of 5 stars on Google
         Read on Google →
       </a>
     </div>
+    {intro && <p class="mt-6 text-sm leading-relaxed text-zinc-400">{intro}</p>}
     <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
       {
         GOOGLE_REVIEW_QUOTES.map((q) => (

@@ -10,11 +10,17 @@ import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
 import {
   FAQ_POS_PILLAR,
   POS_PILLAR_CARDS,
+  POS_PILLAR_CARD_COPY,
+  POS_PILLAR_PROOF_LINE,
+  POS_PILLAR_TABLE_INTRO,
+  POS_PILLAR_TABLE_FOOTNOTE,
+  POS_PILLAR_PLAN_LINKS,
+  POS_PILLAR_PLAN_BOOKS,
+  POS_PILLAR_FAQ_TITLE,
+  POS_PILLAR_FORM_CONTACT,
   POS_PILLAR_CONNECT_INTRO,
   POS_PILLAR_CONNECT_TITLE,
   POS_PILLAR_EYEBROW,
-  POS_PILLAR_FASTBOUND,
-  POS_PILLAR_FASTBOUND_TITLE,
   POS_PILLAR_FORM_HEADING,
   POS_PILLAR_FORM_LINE,
   POS_PILLAR_H1,
@@ -25,26 +31,27 @@ import {
   POS_PILLAR_LEDE,
   POS_PILLAR_MARKS,
   POS_PILLAR_META,
-  POS_PILLAR_OPENING,
-  POS_PILLAR_OPENING_TITLE,
   POS_PILLAR_PLAN,
   POS_PILLAR_PLAN_TITLE,
   POS_PILLAR_TITLE,
-  POS_PILLAR_WHY,
-  POS_PILLAR_WHY_TITLE,
-  POS_PILLAR_TABLE_TITLE,
   POS_PILLAR_TABLE_HEAD,
   POS_PILLAR_TABLE_ROWS,
   POS_PILLAR_TABLE_NOTE,
   POS_PILLAR_PROOF_TITLE,
   POS_PILLAR_PROOF,
-  POS_PILLAR_PLAN_DROPSHIP,
   POS_PILLAR_CLOSING,
   posPillarItemList,
 } from "../lib/pos-ecommerce";
 import { md } from "../lib/md";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
+// CA-VOICE-P1: POS cards as drafted. Name and slug stay on POS_PILLAR_CARDS (ItemList JSON-LD).
+const CARD = /^\*\*\[([^\]]+)\]\(([^)\s]+)\)\.\*\*\s+(.*?)\s+(\[[^\]]+\]\([^)\s]+\) · \[[^\]]+\]\([^)\s]+\))$/;
+const cards = POS_PILLAR_CARD_COPY.map((s) => {
+  const m = s.match(CARD);
+  if (!m) throw new Error("gun-store-pos card: " + s);
+  return { name: m[1], href: m[2], body: m[3], links: m[4] };
+});
 ---
 
 <BaseLayout
@@ -67,14 +74,12 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
       height: 1059,
     }}
   >
-    <p class="mt-4 text-sm text-zinc-400">
-      100+ clients · <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating</a> · Member of NSSF, FPC and GOA
-    </p>
+    <p class="mt-4 text-sm text-zinc-400" set:html={md(POS_PILLAR_PROOF_LINE)} />
   </PosHero>
 
   <section class="border-b border-zinc-800/80 py-12" id="which-pos">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">{POS_PILLAR_TABLE_TITLE}</h2>
+      <p class="max-w-3xl text-sm leading-relaxed text-zinc-300">{POS_PILLAR_TABLE_INTRO}</p>
       <div class="mt-6 overflow-x-auto">
         <table class="w-full min-w-[48rem] text-left text-sm">
           <thead>
@@ -96,7 +101,8 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
           </tbody>
         </table>
       </div>
-      <p class="mt-4 text-sm text-zinc-500">{POS_PILLAR_TABLE_NOTE}</p>
+      <p class="mt-4 text-xs text-zinc-500">{POS_PILLAR_TABLE_FOOTNOTE}</p>
+      <p class="mt-2 text-sm text-zinc-500">{POS_PILLAR_TABLE_NOTE}</p>
     </div>
   </section>
 
@@ -108,30 +114,11 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
       </p>
       <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
         {
-          POS_PILLAR_CARDS.map((card) => (
+          cards.map((card) => (
             <article class="flex flex-col rounded-2xl border border-gold/40 bg-gold/5 p-6">
-              <h3 class="text-2xl font-semibold text-white">{card.name}</h3>
-              <p class="mt-3 text-sm leading-relaxed text-zinc-300">
-                {card.body}
-              </p>
-              {card.note && (
-                <p class="mt-3 text-sm leading-relaxed text-zinc-400">
-                  {card.note}{" "}
-                  {card.noteLink && (
-                    <a href={withBase(card.noteLink.href)} class={linkClass}>
-                      {card.noteLink.label}
-                    </a>
-                  )}
-                </p>
-              )}
-              <p class="mt-auto flex flex-wrap gap-x-5 gap-y-2 pt-5 text-sm">
-                <a href={withBase(card.slug)} class={linkClass}>
-                  {card.linkLabel}
-                </a>
-                <a href={card.vendorHref} class={linkClass} {...ext}>
-                  {card.vendorLabel}
-                </a>
-              </p>
+              <h3 class="text-2xl font-semibold text-white"><a href={withBase(card.href)} class="hover:text-gold">{card.name}</a></h3>
+              <p class="mt-3 text-sm leading-relaxed text-zinc-300" set:html={md(card.body)} />
+              <p class="mt-auto pt-5 text-sm" set:html={md(card.links)} />
             </article>
           ))
         }
@@ -159,10 +146,6 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
           <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">{para}</p>
         ))
       }
-      <article class="mt-6 max-w-3xl rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-        <h3 class="text-base font-semibold text-white">{POS_PILLAR_OPENING_TITLE}</h3>
-        <p class="mt-3 text-sm leading-relaxed text-zinc-400">{POS_PILLAR_OPENING}</p>
-      </article>
     </div>
   </section>
 
@@ -172,40 +155,23 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
         {POS_PILLAR_PLAN}
       </p>
-      <p class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-        <a href={withBase("ecommerce#pos")} class={linkClass}>FFL ecommerce plans</a>
-        <a href={withBase("ffl-website-cost")} class={linkClass}>what an FFL website costs</a>
-      </p>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md(POS_PILLAR_PLAN_DROPSHIP)} />
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md(POS_PILLAR_PLAN_LINKS)} />
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">{POS_PILLAR_PLAN_BOOKS}</p>
     </div>
   </section>
 
-  <section class="border-b border-zinc-800/80 py-12" id="each-piece">
+  <FaqBlock items={FAQ_POS_PILLAR} heading={POS_PILLAR_FAQ_TITLE} />
+
+  <section class="py-8">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">{POS_PILLAR_WHY_TITLE}</h2>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        {POS_PILLAR_WHY}
-      </p>
+      <p class="max-w-3xl text-sm leading-relaxed text-zinc-400">{POS_PILLAR_CLOSING}</p>
     </div>
   </section>
-
-  <section class="py-12" id="fastbound">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">{POS_PILLAR_FASTBOUND_TITLE}</h2>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        {POS_PILLAR_FASTBOUND}
-      </p>
-    </div>
-  </section>
-
-  <FaqBlock items={FAQ_POS_PILLAR} />
 
   <TalkSection
     pillar="Ecommerce"
     heading={POS_PILLAR_FORM_HEADING}
     subline={POS_PILLAR_FORM_LINE}
-    phone="(279) 258-6771"
-    email="support@coriolisagency.com"
-    note={POS_PILLAR_CLOSING}
+    contact={POS_PILLAR_FORM_CONTACT}
   />
 </BaseLayout>
