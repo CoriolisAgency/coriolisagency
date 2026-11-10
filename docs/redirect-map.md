@@ -152,7 +152,7 @@ Accepted (Chief, 2026-10-08): Vercel's trailing-slash 308s stay; no site-wide ro
 | `/distributor-program/` | `/ecommerce` | 7 | |
 | `/can-you-use-woocommerce-to-sell-guns-…/` | `/can-you-use-woocommerce-to-sell-guns` | 4 | Old long-slug article → new SEO page. |
 | `/woocommerce-for-guns` | `/can-you-use-woocommerce-to-sell-guns` | 0 | 203 impressions, was 404. |
-| `/is-woocommerce-good-for-firearms/` | `/ecommerce` | 1 | 1,267 impr, 1 click. Not worth a slug. |
+| `/is-woocommerce-good-for-firearms/` | `/can-you-use-woocommerce-to-sell-guns` | 1 | 1,267 impr, 1 click. Retargeted from `/ecommerce` (SEO-REDIRECTS-BCD). |
 | `/coriolis-agency-launches-betsy-ai-gun-search-engine-and-gun-search-agent/` | `/ai-studio` | 1 | Only Betsy URL with a click. (`/ai-factory` 301s to `/ai-studio`.) |
 
 ### Distributor clones → `/firearms-dropshipping`
@@ -212,6 +212,18 @@ Paul 2026-11-10 7:32 AM ET; Chief follow-up 7:41 AM ET. Implemented in `vercel.j
 
 The `/brand/gunbiz-pos-hero.jpg` asset 301s to `/brand/microbiz-pos-hero.jpg`.
 
+### SEO-REDIRECTS-BCD — four SEO vanity slugs to `/ffl-seo`; retarget `/is-woocommerce-good-for-firearms`
+
+Paul 2026-11-10 7:32 AM ET SEO-plan go; Chief assign 10:22 AM ET. Implemented in `vercel.json` (`statusCode` 301). Both slash and no-slash sources are listed so `trailingSlash: false` does not add a 308 hop. `/ffl-seo` and `/can-you-use-woocommerce-to-sell-guns` return 200 live. The long why-ffls-suck slug is not added.
+
+| Old | New |
+|-----|-----|
+| `/seo-is-deal-long-live-seo` | `/ffl-seo` |
+| `/gun-industry-seo-company-boosting-online-visibility-for-firearms-businesses` | `/ffl-seo` |
+| `/mastering-firearms-seo-boost-your-gun-stores-online-visibility` | `/ffl-seo` |
+| `/firearms-seo` | `/ffl-seo` |
+| `/is-woocommerce-good-for-firearms` | `/can-you-use-woocommerce-to-sell-guns` (was 308 → `/ecommerce`) |
+
 ### Email (was “let die”) → Accelerator page
 
 | Old | New |
@@ -227,7 +239,7 @@ The `/brand/gunbiz-pos-hero.jpg` asset 301s to `/brand/microbiz-pos-hero.jpg`.
 | AmmoReady alternative | `/ammoready-alternative` | `/ammoready-alternative-why-…`, `/switch`, `/switch-n-save` |
 | Gearfire alternative | `/gearfire-alternative` | `/gearfire-alternative-why-…` |
 | Best / beats both | `/best-ffl-ecommerce-website` | `/why-woocommerce-…-beats-gearfire-and-ammoready-…`, `/gun-store-ecommerce-platforms` (OPS-2) |
-| FFL ecommerce / builder / Woo sell guns | `/ecommerce` (plans) and `/can-you-use-woocommerce-to-sell-guns` (Woo sell guns) | Plans: `/ffl-website-plans`, `/gun-store-website-builder-for-ffls`, `/is-woocommerce-good-for-firearms`, `/woocommerce-for-firearms`. Woo sell guns: `/can-you-use-woocommerce-to-sell-guns-…`, `/woocommerce-for-guns` |
+| FFL ecommerce / builder / Woo sell guns | `/ecommerce` (plans) and `/can-you-use-woocommerce-to-sell-guns` (Woo sell guns) | Plans: `/ffl-website-plans`, `/gun-store-website-builder-for-ffls`, `/woocommerce-for-firearms`. Woo sell guns: `/can-you-use-woocommerce-to-sell-guns-…`, `/woocommerce-for-guns`, `/is-woocommerce-good-for-firearms` (SEO-REDIRECTS-BCD; was `/ecommerce`) |
 | FFL Cockpit website / hosting | `/ffl-cockpit` | hosting announcement slugs |
 | Dropshipping / home-based FFL | `/firearms-dropshipping` | home-based + distributor clones (unchanged) |
 
@@ -238,7 +250,7 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 **Off-strategy with impressions, almost no clicks**
 
 - Email ROI headline only: the **42-to-1** claim is not republished. The slug 301s to `/email-marketing-for-ffl-ecommerce` (Accelerator facts only).
-- Agency/SEO vanity: `/firearms-digital-marketing-agency` 301s to `/` (SEO-TECH-WEEK1). `/gun-industry-seo-company-…/` (10 c / 10,184 i) and `/firearms-seo-marketing/` (7 c / 10,201 i) still have no 301. Query cluster: **6 clicks / 20k impr**.
+- Agency/SEO vanity: `/firearms-digital-marketing-agency` 301s to `/` (SEO-TECH-WEEK1). `/gun-industry-seo-company-…` 301s to `/ffl-seo` (SEO-REDIRECTS-BCD; 10 c / 10,184 i). `/firearms-seo-marketing/` (7 c / 10,201 i) still has no 301. Query cluster: **6 clicks / 20k impr**.
 - Compliance software: `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` (28 c / 16,821 i) — 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4).
 - `/ammoready-login/` (2 clicks) — not your product.
 - `/types-of-ffls/` (0 / 898) — still a soft 404.
