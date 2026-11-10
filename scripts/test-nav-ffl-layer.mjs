@@ -12,7 +12,7 @@ const hrefs = [...navSrc.matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]);
 
 assert.deepEqual(labels, [
   "FFL Ecommerce",
-  "Dropshipping",
+  "FFL Dropshipping",
   "Gun Store POS",
   "WooCommerce for AIM",
   "WooCommerce for Rapid",
