@@ -11,6 +11,8 @@ import { LINKS, linkClass, btnPlan } from "../lib/links";
 import { PLANS, SETUP, type PlanId } from "../lib/plans";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
+import { md } from "../lib/md";
+import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
 
 const PLAN_TAGLINE_EMOJI: Record<PlanId, string> = {
   "minute-man": "📦",
@@ -19,6 +21,31 @@ const PLAN_TAGLINE_EMOJI: Record<PlanId, string> = {
   warlord: "🏪",
   "ffl-accelerator": "🔥",
 };
+
+// SEO-REFRESH-P1: Brandy's 2026-11-10 7:50 AM ET copy, approved by Paul 8:06 AM ET Nov 10.
+// Cut as pending Paul's confirmation: the "transfer page" and "training" bullets.
+const buildIncludes = [
+  "**Your domain.** The store lives on your domain, and it stays yours if you leave.",
+  "**FFL Checkout.** The buyer picks the receiving dealer at checkout, and serialized guns route to that FFL. We configure it at setup. The license is included on Militia and above.",
+  "**Distributor catalogs.** FFL Cockpit puts 21 distributor catalogs on your store, with inventory updates every 20 minutes. Included on Militia and above. See [FFL dropshipping](/firearms-dropshipping).",
+  "**Firearm-friendly payments.** We install and test a payment gateway tied to a merchant account approved for firearms. We work with GOAT Payments and Payroc, or bring your own. See [FFL payment processing](/ffl-payment-processing).",
+  "**Migration with redirects.** Coming off another platform? We build on your domain before you give notice, move the catalog you care about, and redirect the pages that already rank.",
+  "**Gun-friendly hosting.** Every store runs on WP Engine, backed by a 99.95% uptime SLA. See [gun-friendly hosting](/gun-friendly-hosting).",
+  "**GunSearchEngine.com.** Your inventory goes on GunSearchEngine.com on the free plan.",
+] as const;
+
+const caseStudies = [
+  "[Naples Gun Shop](/case-studies/naples-gun-shop). Full-line gun shop, store connected to AIM POS.",
+  "[Allegheny Arms](/case-studies/allegheny-arms). Online store with a big catalog shoppers filter by category, brand, price and stock.",
+  "[Target Shotguns](/case-studies/target-shotguns). Shotgun specialist on MicroBiz POS, drop ship items kept apart from in-store stock.",
+] as const;
+
+const newClients = [
+  "[Tier 1 Kinetics](https://tier1kinetics.com/). Rifle maker. House builds up front, full retail catalog behind them.",
+  "[Jim's Armory](https://jimsarmory.com/). The store behind the [Jim's Armory YouTube channel](https://www.youtube.com/@JimsArmory). A blog post for each video.",
+  "[Green Mountain Sporting Goods](https://gmsgvt.com/). Family outfitter in Vermont, with a page for each in-house service.",
+  "[Guardian Guns & Ammo](https://gstny.com/). New York retailer and training center, with online class registration.",
+] as const;
 
 const switchSteps = [
   "Keep your domain. We build the new WooCommerce store on it before you give notice.",
@@ -51,19 +78,10 @@ import TalkSection from "../components/TalkSection.astro";
         <h1
           class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl"
         >
-          FFL Ecommerce Website Builder and Hosting Plans
+          FFL Website Design and Ecommerce for Gun Stores
         </h1>
         <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-          Most gun store “websites” are template platforms you don’t control.
-          AmmoReady and Gearfire put your inventory on pages
-          you don’t own: same templates, ads you can’t strip, titles and slugs
-          you don’t write. Coriolis replaces that with WooCommerce on your
-          domain: sell what’s on the shelf, dropship from twenty-one
-          distributors, or both. Warlord and FFL Accelerator connect any POS that works with
-          WooCommerce, such as AIM, MicroBiz, Trident 1 or Rapid Gun Systems. Monthly plans start at Minute Man $169.
-          FFL Accelerator is $569. Setup is $500 or $2,500. Every plan includes{" "}
-          <a href={withBase("gun-friendly-hosting")} class={linkClass}>gun-friendly hosting</a>{" "}
-          and <a href={LINKS.gsa} class={linkClass} target="_blank" rel="noopener noreferrer">GunSearchEngine.com</a>.
+          FFL website design and FFL ecommerce for independent gun shops, online-only FFLs, ranges and firearms brands. Coriolis builds your WooCommerce store on your own domain, hosts it and supports it. You own it. Sell what's on the shelf, dropship from 21 distributor catalogs, or both. Keep the register you already run. Plans run from Minute Man at $169 a month to FFL Accelerator at $569. Setup is $500 or $2,500. No contract.
         </p>
         <div class="mt-8">
           <CtaRow talk showGsa={false} />
@@ -89,6 +107,9 @@ import TalkSection from "../components/TalkSection.astro";
 
   <section class="border-b border-zinc-800/80 py-12" id="plans">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="mb-6 text-sm text-zinc-400">
+        100+ clients · <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} target="_blank" rel="noopener noreferrer">5-star Google rating</a> · Member of NSSF, FPC and GOA
+      </p>
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-5">
         {
           PLANS.map((plan) => (
@@ -149,6 +170,40 @@ import TalkSection from "../components/TalkSection.astro";
     subline="Tell us how you sell today and we’ll point you to the right one."
   />
 
+  <section class="border-b border-zinc-800/80 py-12" id="every-build">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">What every build includes</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
+        Every gun store website we build ships with the pieces an FFL needs to sell online.
+      </p>
+      <ul class="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
+        {buildIncludes.map((item) => <li set:html={md(item)} />)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12" id="stores-we-built">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Stores we built</h2>
+      <div class="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div>
+          <h3 class="text-base font-semibold text-white">Case studies</h3>
+          <ul class="mt-3 space-y-2 text-sm leading-relaxed text-zinc-400">
+            {caseStudies.map((item) => <li set:html={md(item)} />)}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-base font-semibold text-white">New client stores, November 2026</h3>
+          <ul class="mt-3 space-y-2 text-sm leading-relaxed text-zinc-400">
+            {newClients.map((item) => <li set:html={md(item)} />)}
+          </ul>
+        </div>
+      </div>
+      <p class="mt-6 text-sm text-zinc-400" set:html={md("[Read the release](/press/four-firearms-businesses-choose-coriolis-for-custom-woocommerce-stores) · [All case studies](/case-studies)")} />
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md("Comparing other options first? Read our guide to the [best FFL ecommerce platforms](/best-ffl-ecommerce-website). Already run the plugin? See [FFL Cockpit setup](/ffl-cockpit).")} />
+    </div>
+  </section>
+
   <section class="border-b border-zinc-800/80 py-12" id="setup">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">
@@ -204,6 +259,18 @@ import TalkSection from "../components/TalkSection.astro";
         Replace a template website with one that works
       </h2>
       <div class="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-zinc-400">
+          <p>
+            Most gun store “websites” are template platforms you don’t control.
+            AmmoReady and Gearfire put your inventory on pages
+            you don’t own: same templates, ads you can’t strip, titles and slugs
+            you don’t write. Coriolis replaces that with WooCommerce on your
+            domain: sell what’s on the shelf, dropship from twenty-one
+            distributors, or both. Warlord and FFL Accelerator connect any POS that works with
+            WooCommerce, such as AIM, MicroBiz, Trident 1 or Rapid Gun Systems. Monthly plans start at Minute Man $169.
+            FFL Accelerator is $569. Setup is $500 or $2,500. Every plan includes{" "}
+            <a href={withBase("gun-friendly-hosting")} class={linkClass}>gun-friendly hosting</a>{" "}
+            and <a href={LINKS.gsa} class={linkClass} target="_blank" rel="noopener noreferrer">GunSearchEngine.com</a>.
+          </p>
         <p>
           If your website is covered in ads you can’t remove, it’s not your
           website. AmmoReady and Gearfire run template storefronts: inventory
@@ -274,6 +341,21 @@ import TalkSection from "../components/TalkSection.astro";
     </div>
   </section>
 
+  <section class="border-b border-zinc-800/80 py-12" id="online-only">
+    <div class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 lg:grid-cols-2">
+      <div>
+        <h2 class="text-xl font-semibold text-white">Online-only FFLs</h2>
+        <p class="mt-3 text-sm leading-relaxed text-zinc-400" set:html={md("No shelf? No problem. You need a valid FFL and a store. Militia ($269/mo) adds 21 distributor catalogs, and firearm orders ship to a receiving FFL. Start with [FFL dropshipping](/firearms-dropshipping). This is not legal advice.")} />
+      </div>
+      <div>
+        <h2 class="text-xl font-semibold text-white">GunBroker and marketplaces</h2>
+        <p class="mt-3 text-sm leading-relaxed text-zinc-400">
+          Militia and above list your catalog on 13 marketplaces, including GunBroker.com, AmmoSeek.com, Gun.Deals and WikiArms.com.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <FaqBlock items={FAQ_ECOMMERCE} />
 
   <section class="border-b border-zinc-800/80 py-8">
@@ -304,5 +386,5 @@ import TalkSection from "../components/TalkSection.astro";
     </div>
   </section>
 
-  <TalkSection />
+  <TalkSection phone="(279) 258-6771" email="support@coriolisagency.com" />
 </BaseLayout>

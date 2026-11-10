@@ -49,15 +49,15 @@ export const HOWTO_DROPSHIP = howToJsonLd({
   steps: [
     {
       name: "List the catalog",
-      text: "FFL Cockpit streams distributor inventory and pricing onto your WooCommerce store. MAP holds. Availability updates on a short cycle.",
+      text: "FFL Cockpit streams distributor inventory and pricing onto your WooCommerce store. MAP holds. Inventory updates every 20 minutes on Militia and above.",
     },
     {
       name: "The customer checks out",
-      text: "Serialized firearms go through FFL Checkout. The buyer picks a receiving dealer. Accessories and ammo follow destination rules.",
+      text: "Serialized firearms go through FFL Checkout. The buyer picks a receiving dealer. Accessories and ammo follow the rules for where they're going.",
     },
     {
       name: "The distributor ships",
-      text: "Orders route to the lowest-cost or fastest vendor. You never have to stock that SKU. You can still sell what you keep on the shelf.",
+      text: "Orders route to the lowest-cost or fastest vendor. You never stock that SKU. The gun goes FFL to FFL.",
     },
   ],
 });

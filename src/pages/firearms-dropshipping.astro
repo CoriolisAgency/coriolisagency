@@ -3,34 +3,77 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
 import FaqBlock from "../components/FaqBlock.astro";
+import TalkSection from "../components/TalkSection.astro";
 import { FAQ_DROPSHIP } from "../lib/faq";
 import { HOWTO_DROPSHIP } from "../lib/howto";
-import { LINKS, linkClass } from "../lib/links";
+import { linkClass } from "../lib/links";
+import { md } from "../lib/md";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
+import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
+
+// SEO-REFRESH-P1: Brandy's 2026-11-10 7:50 AM ET copy, approved by Paul 8:06 AM ET Nov 10.
+const intro =
+  "FFL dropshipping lets a licensed dealer sell guns, parts, ammo and accessories without stocking every SKU. You list a wholesale distributor's catalog on your own website. The customer orders from you. The distributor ships it. Serialized firearms go to the receiving FFL for transfer. Accessories and ammo can ship to the buyer where the destination allows it. It's how gun stores sell past the glass case, and how online-only FFLs sell guns online without inventory. Coriolis builds the WooCommerce store on your domain, sets up [FFL Cockpit](/ffl-cockpit) and FFL Checkout, and hosts it.";
 
 const steps = [
   {
     title: "You list the catalog",
-    body: "FFL Cockpit streams distributor inventory and pricing onto your WooCommerce store. MAP holds. Availability updates on a short cycle.",
+    body: "FFL Cockpit streams distributor inventory and pricing onto your WooCommerce store. MAP holds. Inventory updates every 20 minutes on Militia and above.",
   },
   {
     title: "The customer checks out",
-    body: "Serialized firearms go through FFL Checkout. The buyer picks a receiving dealer. Accessories and ammo follow destination rules.",
+    body: "Serialized firearms go through FFL Checkout. The buyer picks a receiving dealer. Accessories and ammo follow the rules for where they're going.",
   },
   {
     title: "The distributor ships",
-    body: "Orders route to the lowest-cost or fastest vendor. You never have to stock that SKU. You can still sell what you keep on the shelf.",
+    body: "Orders route to the lowest-cost or fastest vendor. You never stock that SKU. The gun goes FFL to FFL.",
   },
 ] as const;
-import TalkSection from "../components/TalkSection.astro";
+
+const distributors = ["Sports South", "RSR", "Zanders"] as const;
+
+const costs = [
+  [
+    "Gearfire eCommerce Pro",
+    "$249/mo",
+    "Gearfire's hosted ecommerce platform. Firearm dropshipping is on Pro, not Essentials.",
+    "[gogearfire.com/solutions/ecommerce](https://gogearfire.com/solutions/ecommerce/), Nov 10, 2026",
+  ],
+  [
+    "FFL Cockpit Premium for WooCommerce",
+    "$84.99/mo",
+    "The plugin, with FFL Checkout included. Your own hosting and website build cost extra.",
+    "[fflcockpit.com/pricing](https://www.fflcockpit.com/pricing/), Nov 10, 2026",
+  ],
+  [
+    "Coriolis Militia",
+    "$269/mo",
+    "FFL Cockpit and FFL Checkout licenses, 21 distributor catalogs, and hosting on WP Engine. Setup is $500 or $2,500.",
+    "[FFL ecommerce plans](/ecommerce), Nov 10, 2026",
+  ],
+] as const;
+
+const startSteps = [
+  "Get your FFL and your premises squared away with the ATF and your attorney. We don't give legal advice.",
+  "Open dealer accounts with the distributors you want to sell from.",
+  "Get a merchant account approved for firearms. See [FFL payment processing](/ffl-payment-processing).",
+  "We build WooCommerce on your domain and turn on the catalogs.",
+  "Set your margins. MAP holds where the feed carries it.",
+  "Buy a mixed cart yourself and make sure it clears.",
+  "Go live.",
+] as const;
+
+const p = "mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400";
+const th = "py-3 pr-3 font-medium";
+const td = "py-3 pr-3 align-top";
 ---
 
 <BaseLayout
-  title="Firearms dropshipping for FFLs: 21 wholesale distributors | Coriolis"
-  description="Firearms dropshipping lets a licensed FFL sell guns without stocking every SKU: 21 wholesale distributors ship for you. Coriolis builds the WooCommerce store, wires FFL Cockpit, and hosts it. Militia is the dropship rung. The plan is FFL Accelerator."
+  title="FFL Dropshipping and Wholesale for Gun Stores | Coriolis"
+  description="FFL dropshipping for licensed gun stores. List wholesale catalogs, sell without stocking every SKU, and ship firearms FFL to FFL."
   path="/firearms-dropshipping"
   ogImagePath={CANON_PATHS.rangeMckinney}
   faq={FAQ_DROPSHIP}
@@ -51,14 +94,9 @@ import TalkSection from "../components/TalkSection.astro";
         >
           FFL Dropshipping: firearms dropshipping for gun stores
         </h1>
-        <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-          Firearms dropshipping lets a licensed FFL sell guns, parts, and
-          accessories without stocking every SKU. The customer orders on your
-          site. The wholesale distributor ships to the receiving FFL for transfer. Coriolis
-          builds the WooCommerce store, wires{" "}
-          <a href={LINKS.fflCockpit} class={linkClass} {...ext}>FFL Cockpit</a>,
-          and hosts it. You can sell what you keep on the shelf, dropship, or do
-          both.
+        <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300" set:html={md(intro)} />
+        <p class="mt-4 text-sm text-zinc-400">
+          100+ clients · <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating</a> · Member of NSSF, FPC and GOA
         </p>
         <div class="mt-8">
           <CtaRow talk showGsa={false} showAccelerator />
@@ -77,7 +115,10 @@ import TalkSection from "../components/TalkSection.astro";
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">How it works</h2>
+      <h2 class="text-xl font-semibold text-white">How firearms dropshipping works</h2>
+      <p class={p}>
+        Firearms dropshipping runs in three steps. You can still sell what you keep on the shelf.
+      </p>
       <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
         {
           steps.map((s) => (
@@ -93,75 +134,121 @@ import TalkSection from "../components/TalkSection.astro";
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">
-        Distributor catalogs (August 2026)
-      </h2>
-      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Militia and above include an FFL Cockpit license and 21 distributor
-        catalogs. We add houses at setup. Typical starting points: Sports South,
-        RSR, Zanders. Firearms and accessories each. Availability and
-        MAP come from the feed. Updates run on a short cycle (about 20 minutes
-        on Militia+). This is not a complete 21-row list.
+      <h2 class="text-xl font-semibold text-white">Accessories and ammo dropship to the customer</h2>
+      <p class={p}>
+        Not everything needs a transfer. Optics, magazines, holsters, parts and most gun accessories can dropship from the wholesale distributor to the buyer's door. Ammo can too, where the destination allows it.
+      </p>
+      <p class={p}>
+        FFL Checkout takes a mixed cart in one order. The firearm routes to the dealer the buyer picks. State shipping limits show at checkout with your own message, so a buyer sees them before they pay. Rules change by state and city, and the store follows them at checkout. This is not legal advice.
       </p>
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12">
-    <div class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 lg:grid-cols-2">
-      <div>
-        <h2 class="text-xl font-semibold text-white">Is it legal?</h2>
-        <p class="mt-3 text-sm leading-relaxed text-zinc-400">
-          Yes, when you hold a valid FFL and follow federal, state, and local
-          rules. Serialized firearms ship FFL-to-FFL. You log the transaction
-          in the bound book you already use. Coriolis is not 4473 software, not
-          a NICS system, and not a bound-book replacement. This is not legal
-          advice.
-        </p>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Distributor catalogs (November 2026)</h2>
+      <p class={p}>
+        Militia and above include an FFL Cockpit license and 21 distributor catalogs. We add them at setup. Typical starting points are Sports South, RSR and Zanders.
+      </p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[40rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              <th class={th}>Distributor</th>
+              <th class={th}>Dealer account</th>
+              <th class={th}>Firearms ship to</th>
+              <th class={th}>Accessories and ammo ship to</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              distributors.map((d) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class={`${td} font-medium text-zinc-300`}>{d}</th>
+                  <td class={td}>You open your own dealer account</td>
+                  <td class={td}>The receiving FFL</td>
+                  <td class={td}>The distributor's rule, confirmed at setup</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
-      <div>
-        <h2 class="text-xl font-semibold text-white">Who it is for</h2>
-        <p class="mt-3 text-sm leading-relaxed text-zinc-400">
-          Gun stores and ranges that want to sell past the glass case. Militia
-          ($269/mo) is the dropshipping plan: 21 distributors, AmmoSeek feed,
-          GunBroker listings. The plan we put dealers on is FFL Accelerator
-          ($569/mo).
-        </p>
+      <p class={p}>
+        You need an account with each house you sell from. What ships where is each distributor's rule, and we confirm it with you at setup. Availability and MAP come from each feed.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">What dropshipping costs</h2>
+      <p class={p}>
+        List prices from each company's own page, read November 10, 2026. Prices change. Card processing is separate on all three.
+      </p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[48rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-800 text-zinc-500">
+              <th class={th}>Option</th>
+              <th class={th}>Listed price</th>
+              <th class={th}>What the price covers</th>
+              <th class={th}>Source</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            {
+              costs.map(([o, price, covers, src]) => (
+                <tr class="border-b border-zinc-800/80">
+                  <th class={`${td} font-medium text-zinc-300`}>{o}</th>
+                  <td class={td}>{price}</td>
+                  <td class={td}>{covers}</td>
+                  <td class={td} set:html={md(src)} />
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
+      <p class={p} set:html={md("Comparing more options? See the [FFL ecommerce platform guide](/best-ffl-ecommerce-website).")} />
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12" id="home-based-ffl">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">Home-based FFLs</h2>
-      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Dropshipping can run without a retail floor. You still need a valid FFL.
-        We do not publish a zoning or HOA checklist, a first-90-days timeline,
-        or margin math. Those are not facts on this site, and we do not give
-        legal advice. Talk to your attorney and the ATF about premises rules.
+      <h2 class="text-xl font-semibold text-white">Start an online-only or home-based FFL store</h2>
+      <p class={p}>
+        You don't need a retail floor to sell online. You need a valid FFL. We work in this order.
+      </p>
+      <ol class="mt-4 max-w-3xl list-decimal space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
+        {startSteps.map((s) => <li set:html={md(s)} />)}
+      </ol>
+      <h3 class="mt-8 text-base font-semibold text-white">Home-based FFLs</h3>
+      <p class={p}>
+        Dropshipping can run without a storefront. You still need a valid FFL and you still follow the rules for your premises. We don't publish a zoning or HOA checklist, a first-90-days timeline, or margin math. Talk to your attorney and the ATF about premises rules. This is not legal advice.
       </p>
     </div>
   </section>
 
   <section class="py-12">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-6">
-      <p class="max-w-3xl text-sm text-zinc-400">
-        Switching off a closed catalog? Start at the{" "}
-        <a href={withBase("ammoready-alternative")} class={linkClass}
-          >AmmoReady alternative</a
-        >
-        {" "}
-        or{" "}
-        <a href={withBase("gearfire-alternative")} class={linkClass}
-          >Gearfire alternative</a
-        >
-        {" "}
-        page, then talk to us.
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white">Is it legal?</h2>
+      <p class={p}>
+        Yes, when you hold a valid FFL and follow federal, state and local rules. Serialized firearms ship FFL to FFL. You log the transaction in the bound book you already use. Coriolis doesn't run 4473s, NICS or your bound book. This is not legal advice.
       </p>
-      <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
+      <p
+        class={p}
+        set:html={md(
+          "Want the whole store? See [FFL website design](/ecommerce). Need hosting that allows a gun store? See [gun-friendly hosting](/gun-friendly-hosting). Leaving a closed catalog? Start with the [AmmoReady alternative](/ammoready-alternative) or the [Gearfire alternative](/gearfire-alternative).",
+        )}
+      />
+      <div class="mt-6">
+        <CtaRow primary="ecommerce" showGsa={false} showAccelerator />
+      </div>
     </div>
   </section>
 
   <FaqBlock items={FAQ_DROPSHIP} />
 
-  <TalkSection />
+  <TalkSection phone="(279) 258-6771" email="support@coriolisagency.com" />
 </BaseLayout>

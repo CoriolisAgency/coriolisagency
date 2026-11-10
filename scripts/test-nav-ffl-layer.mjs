@@ -12,21 +12,25 @@ const hrefs = [...navSrc.matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]);
 
 assert.deepEqual(labels, [
   "FFL Ecommerce",
+  "Dropshipping",
   "Gun Store POS",
   "WooCommerce for AIM",
   "WooCommerce for Rapid",
   "WooCommerce for MicroBiz",
   "WooCommerce for Trident 1",
+  "Case Studies",
   "GunSearchEngine.com",
   "Press Room",
 ]);
 assert.deepEqual(hrefs, [
   "ecommerce",
+  "firearms-dropshipping",
   "gun-store-pos",
   "aim-pos",
   "rapid-gun-systems-pos",
   "microbiz-pos",
   "trident-1-pos",
+  "case-studies",
   "https://gunsearchengine.com/for-dealers",
   "press",
 ]);
@@ -216,9 +220,11 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
       `${rel} missing owner-term link "${label}"`,
     );
   };
-  anchor("src/pages/best-ffl-ecommerce-website.astro", "See our", "ecommerce", "FFL website design and plans", ", from a branded storefront to a full custom build.");
-  anchor("src/pages/ffl-cockpit.astro", "It all runs on your", "ecommerce", "FFL website design", ", so your catalog and your orders stay in one place.");
-  anchor("src/pages/ffl-cockpit.astro", "Want more guns online without more on the shelf? Add", "firearms-dropshipping", "FFL dropshipping", "from your distributors.");
+  // SEO-REFRESH-P1 (Paul 8:06 AM ET Nov 10): these pages render Brandy's copy through md(); check the source strings.
+  const mdAnchor = (rel, text) => assert.ok(read(rel).includes(text), `${rel} missing owner-term link: ${text}`);
+  mdAnchor("src/pages/best-ffl-ecommerce-website.astro", "See [FFL website design](/ecommerce).");
+  mdAnchor("src/pages/ffl-cockpit.astro", "It all runs on your [FFL website design](/ecommerce), so your catalog and orders stay in one place.");
+  mdAnchor("src/pages/ffl-cockpit.astro", "Want more guns online without more on the shelf? Add [FFL dropshipping](/firearms-dropshipping).");
   anchor("src/pages/ecommerce.astro", "Use", "firearms-dropshipping", "FFL dropshipping", "to list distributor stock you don't keep on hand.");
   anchor("src/pages/ecommerce.astro", "Then bring buyers back with", "email-marketing-for-ffl-ecommerce", "FFL email marketing", "built for gun stores.");
   for (const rel of ["src/pages/ammoready-alternative.astro", "src/pages/gearfire-alternative.astro"]) {

@@ -24,6 +24,10 @@ interface Props {
   segmentField?: boolean;
   /** Optional phone line under the heading, e.g. "(279) 258-6771". */
   phone?: string;
+  /** Optional email; with `phone`, renders "Call {phone} or email {email}." (SEO-REFRESH-P1). */
+  email?: string;
+  /** Optional closing line under the contact line. */
+  note?: string;
 }
 
 const {
@@ -33,6 +37,8 @@ const {
   subline = "We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.",
   segmentField = false,
   phone,
+  email,
+  note,
 } = Astro.props;
 
 const SEGMENTS = [
@@ -50,7 +56,13 @@ const tel = phone ? `tel:+1${phone.replace(/\D/g, "")}` : "";
     <div>
       <h2 class="text-2xl font-semibold tracking-tight text-white">{heading}</h2>
       <p class="mt-3 text-sm leading-relaxed text-zinc-400">{subline}</p>
-      {phone && <p class="mt-3 text-sm text-zinc-300"><a href={tel} class="hover:text-white">{phone}</a></p>}
+      {phone && !email && <p class="mt-3 text-sm text-zinc-300"><a href={tel} class="hover:text-white">{phone}</a></p>}
+      {phone && email && (
+        <p class="mt-3 text-sm text-zinc-300">
+          Call <a href={tel} class="hover:text-white">{phone}</a> or email <a href={`mailto:${email}`} class="hover:text-white">{email}</a>.
+        </p>
+      )}
+      {note && <p class="mt-3 text-sm leading-relaxed text-zinc-400">{note}</p>}
     </div>
     {
       segmentField ? (

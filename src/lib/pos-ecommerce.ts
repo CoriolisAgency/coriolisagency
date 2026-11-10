@@ -5,6 +5,7 @@
  */
 import type { FaqItem } from "./faq";
 import { LINKS } from "./links";
+import { faqMd } from "./md";
 
 export const POS_PILLAR_TITLE =
   "Gun Store POS Integration for WooCommerce | Coriolis";
@@ -19,7 +20,61 @@ export const POS_PILLAR_H1 =
 
 /** Opening: first <p> after the H1. */
 export const POS_PILLAR_LEDE =
-  "Gun store POS integration means the register you already run and your WooCommerce website share one inventory. On the Warlord plan, $469 a month, Coriolis builds the store on your domain and connects your POS through an API-based integration, so the floor and the site stay in sync. Warlord connects any POS that works with WooCommerce, including AIM, MicroBiz, Rapid Gun Systems and Trident 1. The POS company runs the register, and you own the website.";
+  "Gun store POS integration means the register you already run and your WooCommerce website share one inventory. Coriolis builds the store on your domain and connects your POS through an API-based integration, so the floor and the site stay in sync. It's on the Warlord plan, $469 a month. Warlord connects any POS that works with WooCommerce, including AIM, MicroBiz, Rapid Gun Systems and Trident 1. The POS company runs the register. You own the website.";
+
+/**
+ * SEO-REFRESH-P1 (Brandy 2026-11-10, Paul 8:06 AM ET): "Which POS do you run?" table.
+ * Cells are inline markdown. AIM and Trident 1 "comes back" cells were PENDING and are blank.
+ */
+export const POS_PILLAR_TABLE_TITLE = "Which POS do you run?";
+export const POS_PILLAR_TABLE_HEAD = [
+  "Your POS",
+  "What goes to the website",
+  "What comes back to the POS",
+  "Plan",
+] as const;
+export const POS_PILLAR_TABLE_ROWS: readonly (readonly [string, string, string, string])[] = [
+  ["[AIM POS](/aim-pos)", "Inventory syncs from AIM automatically", "", "Warlord or FFL Accelerator"],
+  [
+    "[MicroBiz POS](/microbiz-pos) (includes GunBiz POS)",
+    "New products and price changes. Sold-out items update right away. Other stock changes go up in a daily batch.",
+    "Web orders land in MicroBiz Order Management with items, taxes and payment. New buyers get a customer record.",
+    "Warlord or FFL Accelerator",
+  ],
+  [
+    "[Rapid Gun Systems](/rapid-gun-systems-pos)",
+    "Product details, retail price and available stock",
+    "Web orders come back to Rapid for picking",
+    "Warlord or FFL Accelerator",
+  ],
+  [
+    "[Trident 1 POS](/trident-1-pos)",
+    "Products, stock and the price field you set as the eCommerce price. Lane bookings, memberships and classes go on the site.",
+    "",
+    "Warlord or FFL Accelerator",
+  ],
+  [
+    "Another POS that works with WooCommerce",
+    "Depends on the POS. Tell us which one you run.",
+    "Depends on the POS",
+    "Warlord or FFL Accelerator",
+  ],
+];
+export const POS_PILLAR_TABLE_NOTE =
+  "Every row comes from that POS's page on this site. Marks belong to their owners.";
+
+export const POS_PILLAR_PROOF_TITLE = "Shops already running it";
+export const POS_PILLAR_PROOF: readonly string[] = [
+  "**Naples Gun Shop, on AIM POS.** A full-line gun shop in Southwest Florida. Coriolis built its WooCommerce store on naplesgunshop.net and connected it to the AIM POS on the counter, so the website and the counter work from the same system. [Read the Naples Gun Shop case study](/case-studies/naples-gun-shop).",
+  "**Target Shotguns, on MicroBiz POS.** A shotgun specialist. Coriolis built its store on targetshotguns.com and connected it to MicroBiz POS. Drop ship items sit in their own marked area, apart from in-store stock. [Read the Target Shotguns case study](/case-studies/target-shotguns).",
+  "**Five FFLs on AIM.** In September 2026, Naples Gun Shop, Down Range Chico, Lawful Defense, 2A Firearms and The Range in McKinney announced they run AIM POS with a WooCommerce store they own, built by Coriolis. [Read the release](/press/five-ffls-choose-coriolis-for-aim-pos-integration).",
+];
+
+export const POS_PILLAR_PLAN_DROPSHIP =
+  "Want distributor stock next to your shelf stock? Add [FFL dropshipping](/firearms-dropshipping).";
+
+export const POS_PILLAR_CLOSING =
+  "Coriolis doesn't sell a POS. We connect the one you already run.";
 
 export const POS_PILLAR_JUMP = "Tell us which POS you run";
 
@@ -161,4 +216,9 @@ export const FAQ_POS_PILLAR: FaqItem[] = [
     q: "Does inventory sync both ways?",
     a: "Yes. The register and the website sync both ways, for any POS that works with WooCommerce. The counter and the website share one inventory, and Warlord includes unlimited API requests and webhooks.",
   },
+  // SEO-REFRESH-P1 (Brandy 2026-11-10, Paul 8:06 AM ET).
+  faqMd(
+    "Does GunBiz POS work with my website?",
+    "Yes. GunBiz POS is MicroBiz's gun-store product, so it connects the same way. See [WooCommerce for MicroBiz](/microbiz-pos).",
+  ),
 ];
