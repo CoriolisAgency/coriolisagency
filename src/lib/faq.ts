@@ -74,26 +74,11 @@ export const FAQ_GEARFIRE: FaqItem[] = [
 ];
 
 export const FAQ_EMAIL: FaqItem[] = [
-  faqMd(
-    "What email is included with FFL Accelerator?",
-    "Capture, list management, and the welcome, back in stock, browse abandonment, thank you for purchase and abandoned cart flows. We run them for you.",
-  ),
-  faqMd(
-    "What if I want the full email build at setup?",
-    "Retail Setup ($2,500) includes the complete email marketing setup, platform integration, a custom brand kit and template, the welcome and abandoned cart series, back-in-stock notifications and deliverability work. Basic Setup ($500) includes email capture only.",
-  ),
-  faqMd(
-    "Can a gun store use Mailchimp?",
-    "Jim's Armory sends its email through Mailchimp. Check the current policy for what you sell before you import a list. This is not legal advice.",
-  ),
-  faqMd(
-    "Can I send SMS about guns?",
-    "Be careful. Klaviyo's policy bars firearms content in SMS and MMS on US and Canadian short code and toll-free numbers. Check your platform's policy before you text a list.",
-  ),
-  faqMd(
-    "Do I have to stay on Coriolis to keep the list?",
-    "No. The site is yours. Cancel and the website goes with you. Email platform accounts you own stay yours.",
-  ),
+  faqMd("What email is included with FFL Accelerator?", "Capture, list management, and the welcome, back in stock, browse abandonment, thank you for purchase and abandoned cart flows, and we run them for you."),
+  faqMd("What if I want the full email build at setup?", "Retail Setup ($2,500) includes the complete email marketing setup, platform integration, a custom brand kit and template, the welcome and abandoned cart series, back-in-stock notifications and deliverability work. Basic Setup ($500) includes email capture only."),
+  faqMd("Can a gun store use Mailchimp?", "Jim's Armory sends its email through Mailchimp. Check the current policy for what you sell before you import a list, and this is not legal advice."),
+  faqMd("Can I send SMS about guns?", "Be careful. Klaviyo's policy bars firearms content in SMS and MMS on US and Canadian short code and toll-free numbers, so check your platform's policy before you text a list."),
+  faqMd("Do I have to stay on Coriolis to keep the list?", "No. The site is yours. Cancel and the website goes with you, and email platform accounts you own stay yours."),
 ];
 
 export const FAQ_WOO_SELL_GUNS: FaqItem[] = [
@@ -389,34 +374,13 @@ export const FAQ_FFL_SEARCH_CONSOLE: FaqItem[] = [
 
 /** SEO-U30 /ffl-payment-processing FAQ (Brandy FINAL plus PAUL-0901: slots filled from Paul's 10/21 answers). */
 export const FAQ_PAYMENTS: FaqItem[] = [
-  {
-    q: "What is FFL payment processing?",
-    a: "It\u2019s how a gun store takes payments online: a merchant account that allows firearm sales, connected to your website through a payment gateway. The gateway moves the card data. The merchant account is the part that gets approved for your business.",
-  },
-  {
-    q: "Why do payment processors turn down gun stores?",
-    a: "Many mainstream processors and store payment add-ons list firearms and ammunition as prohibited, and the card industry generally treats firearms as high-risk. Dealers use a merchant account underwritten for firearms by a bank or processor that accepts FFLs.",
-  },
-  {
-    q: "What does Coriolis set up for payments?",
-    a: "Coriolis works with GOAT Payments and Payroc, so we can provide the gateway, help you set it up, or put your own firearms-approved gateway on checkout. Installation is part of setup, on Basic Setup ($500) or Retail Setup ($2,500). We enable it, run a small live authorization and void it. Then you test a non-firearm order, and a firearm order once ship-to-FFL is on.",
-  },
-  {
-    q: "Who owns the merchant account, and who pays the fees?",
-    a: "You do. The merchant account is in your store\u2019s legal name, and its fees are yours.",
-  },
-  {
-    q: "What payments can my store take?",
-    a: "Cards, through your merchant account and the gateway on your checkout. It isn\u2019t cards-only: Coriolis can set up other payment options during setup. Tell us what you want to take.",
-  },
-  {
-    q: "Can Coriolis get my store approved?",
-    a: "No one can promise approval, because the processor decides. Make sure the account is approved for what you sell (firearms, ammunition or both), and get that approval in writing before you launch.",
-  },
-  {
-    q: "Does the payment step handle the 4473 or the transfer?",
-    a: "No. The gateway charges the card. It doesn\u2019t check a 4473, run a background check or pick the receiving dealer. FFL Checkout handles dealer selection on Militia and above. This is not legal advice.",
-  },
+  faqMd("What is FFL payment processing?", "A merchant account that allows firearm sales, connected to your website through a payment gateway. The gateway moves the card data, and the merchant account is the part that gets approved for your business."),
+  faqMd("Why do payment processors turn down gun stores?", "Many mainstream processors and store payment add-ons list firearms and ammunition as prohibited, and the card industry generally treats firearms as high-risk. Dealers use a merchant account underwritten for firearms by a bank or processor that accepts FFLs."),
+  faqMd("What does Coriolis set up for payments?", "We work with GOAT Payments and Payroc, so we can provide the gateway, help you set it up, or put your own firearms-approved gateway on checkout. Installation is part of setup, on Basic Setup ($500) or Retail Setup ($2,500). We enable it, run a small live authorization and void it, then you test a non-firearm order, and a firearm order once ship-to-FFL is on."),
+  faqMd("Who owns the merchant account, and who pays the fees?", "You do. The merchant account is in your store's legal name, and its fees are yours, as in the opening."),
+  faqMd("What payments can my store take?", "Cards, through your merchant account and the gateway on your checkout, and it isn't cards-only, as in the setup section above."),
+  faqMd("Can Coriolis get my store approved?", "No one can promise approval, because the processor decides. Make sure the account is approved for what you sell, and get that approval in writing before you launch."),
+  faqMd("Does the payment step handle the 4473 or the transfer?", "No. The 4473 sentence is in the section above."),
 ];
 
 /** SEO-U31 /websites-for-ranges-gunsmiths-instructors FAQ (Brandy FINAL, Chief 8:57 AM ET). One FAQPage from all three. */
