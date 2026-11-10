@@ -35,34 +35,13 @@ export const FAQ_HOME: FaqItem[] = [
 ];
 
 export const FAQ_DROPSHIP: FaqItem[] = [
-  faqMd(
-    "What is firearms dropshipping for an FFL?",
-    "Firearms dropshipping lets a licensed FFL list a wholesale distributor's catalog, take the order on their own site, and have the distributor ship it. Serialized firearms go to a receiving FFL for transfer. Accessories or ammo go to the customer where the destination allows it.",
-  ),
-  faqMd(
-    "Is firearms dropshipping legal?",
-    "It can be, when you hold a valid FFL and follow federal, state and local rules. Serialized firearms ship FFL to FFL. Coriolis isn't 4473 software, a NICS system or a bound-book replacement. This is not legal advice.",
-  ),
-  faqMd(
-    "Do I need an FFL to dropship firearms?",
-    "Yes. Only a licensed dealer can sell firearms this way. Serialized firearms ship to another FFL for transfer, not to the buyer's door. This is not legal advice.",
-  ),
-  faqMd(
-    "Can I dropship ammunition and accessories to the customer?",
-    "Yes, where the destination allows it. Non-serialized goods often ship to the customer. What ships where is the distributor's rule, and state and local rules still apply at checkout.",
-  ),
-  faqMd(
-    "What does FFL dropshipping cost on a store I own?",
-    "Coriolis Militia is $269 a month. It includes the FFL Cockpit and FFL Checkout licenses, 21 distributor catalogs and hosting. Setup is $500 or $2,500. There is no contract and you can cancel at any time.",
-  ),
-  faqMd(
-    "I'm a home-based FFL. Can I dropship without a storefront?",
-    "Yes. You still need a valid FFL and you still follow the rules for your premises. Coriolis doesn't advise on zoning, HOA or ATF premises questions. Talk to your attorney and the ATF. This is not legal advice.",
-  ),
-  faqMd(
-    "What if I also stock my own inventory?",
-    "Run both. Minute Man ($169/mo) is own-inventory WooCommerce. Militia ($269/mo) adds dropshipping on top. Brick-and-mortar stores usually want Warlord, so the register and the site stay in sync. See [gun store POS integration](/gun-store-pos).",
-  ),
+  faqMd("What is firearms dropshipping for an FFL?", "It lets a licensed FFL list a wholesale distributor's catalog, take the order on their own site, and have the distributor ship it. Serialized firearms go to a receiving FFL for transfer, and accessories or ammo go to the customer where the destination allows it."),
+  faqMd("Is firearms dropshipping legal?", "It can be, when you hold a valid FFL and follow federal, state and local rules, and serialized firearms ship FFL to FFL. The legal sentence on 4473, NICS and the bound book is in the section above."),
+  faqMd("Do I need an FFL to dropship firearms?", "Yes. Only a licensed dealer can sell firearms this way, and serialized firearms ship to another FFL for transfer, not to the buyer's door."),
+  faqMd("Can I dropship ammunition and accessories to the customer?", "Yes, where the destination allows it. Non-serialized goods often ship to the customer. What ships where is the distributor's rule, and state and local rules still apply at checkout."),
+  faqMd("What does FFL dropshipping cost on a store I own?", "Coriolis Militia is $269 a month. It includes the FFL Cockpit and FFL Checkout licenses, 21 distributor catalogs and hosting, and setup is $500 or $2,500. There is no contract and you can cancel at any time."),
+  faqMd("I'm a home-based FFL. Can I dropship without a storefront?", "Yes. You still need a valid FFL and you still follow the rules for your premises. Coriolis doesn't advise on zoning, HOA or ATF premises questions, so talk to your attorney and the ATF."),
+  faqMd("What if I also stock my own inventory?", "Run both. Minute Man ($169/mo) is own-inventory WooCommerce, and Militia ($269/mo) adds dropshipping on top. Brick-and-mortar stores usually want Warlord, so the register and the site stay in sync. See [connecting the register you already run](/gun-store-pos)."),
 ];
 
 export const FAQ_COCKPIT: FaqItem[] = [
@@ -292,30 +271,12 @@ export const FAQ_DEMAND_INTELLIGENCE: FaqItem[] = [
 
 /** SEO-U5 PR B (Brandy FINAL, 10/21): /ffl-website-cost. */
 export const FAQ_COST: FaqItem[] = [
-  {
-    q: "How much does an FFL website cost?",
-    a: "An FFL website at Coriolis is a one-time setup of $500 or $2,500, plus a monthly plan from $169 to $569. Plans start with Minute Man at $169 for the website on your own domain and go up to FFL Accelerator at $569, which includes a webmaster. There's no annual contract.",
-  },
-  {
-    q: "What's the difference between the $500 and $2,500 setup?",
-    a: "Basic Setup is $500 for a clean launch, and extra custom pages are $125 each. Retail Setup is $2,500 for the full custom site and email, with up to ten custom pages.",
-  },
-  {
-    q: "Is there a contract?",
-    a: "No. There's no annual contract, and you can cancel any time. If you walk, you take the website.",
-  },
-  {
-    q: "What does it cost to connect my register to the website?",
-    a: "Connecting your register is the Warlord plan at $469 a month. It syncs the site both ways with any POS that works with WooCommerce, such as AIM, MicroBiz, Rapid Gun Systems or Trident 1. FFL Accelerator at $569 includes it too, and your register subscription stays with the company you buy it from.",
-  },
-  {
-    q: "What isn't included in the monthly price?",
-    a: "Three things aren't in the plan price: card processing, your register subscription and compliance software. We install the payment gateway at setup, or you bring your own, and the merchant account and its fees are yours. We don't run your 4473, NICS or bound book. Support on Minute Man is $125 per incident, and Militia and up include email support.",
-  },
-  {
-    q: "Who is Coriolis?",
-    a: "Coriolis builds and hosts WooCommerce websites for gun shops, online-only FFLs, ranges, gunsmiths and firearms instructors. We have 100+ clients and a 5-star Google rating, and we're members of NSSF, Firearms Policy Coalition and Gun Owners of America. Our founder ran AmmoReady for nine years. Call (279) 258-6771.",
-  },
+  faqMd("How much does an FFL website cost?", "An FFL website at Coriolis is a one-time setup of $500 or $2,500, plus a monthly plan from $169 to $569. Plans start with Minute Man at $169 for the website on your own domain and go up to FFL Accelerator at $569, which includes a webmaster, and there's no annual contract."),
+  faqMd("What's the difference between the $500 and $2,500 setup?", "Basic Setup is $500 for a clean launch, and extra custom pages are $125 each. Retail Setup is $2,500 for the full custom site and email, with up to ten custom pages."),
+  faqMd("Is there a contract?", "No. There's no annual contract, and you can cancel any time, and if you walk, you take the website."),
+  faqMd("What does it cost to connect my register to the website?", "Connecting your register is the Warlord plan at $469 a month. It syncs the site both ways with any POS that works with WooCommerce, such as AIM, MicroBiz, Rapid Gun Systems or Trident 1. FFL Accelerator at $569 includes it too, and your register subscription stays with the company you buy it from."),
+  faqMd("What isn't included in the monthly price?", "Three things aren't in the plan price: card processing, your register subscription, and the 4473, NICS, and bound-book tools you already use. We install the payment gateway at setup, or you bring your own, and the merchant account and its fees are yours. Support on Minute Man is $125 per incident, and Militia and up include email support."),
+  faqMd("Who is Coriolis?", "Coriolis builds and hosts WooCommerce websites for gun shops, online-only FFLs, ranges, gunsmiths and firearms instructors. We have 100+ clients and a 5-star Google rating, and we're members of NSSF, Firearms Policy Coalition and Gun Owners of America. Our founder ran AmmoReady for nine years. Call (279) 258-6771."),
 ];
 
 /** SEO-U5 PR B (Brandy FINAL, 10/21): /leave-ammoready. */
@@ -376,26 +337,11 @@ export const FAQ_LEAVE_GEARFIRE: FaqItem[] = [
 
 /** SEO-U5 PR B (Brandy FINAL, 10/21): /ai-studio. */
 export const FAQ_AI_STUDIO: FaqItem[] = [
-  {
-    q: "What can AI do for a gun store?",
-    a: "AI can do the daily jobs you'd rather not do by hand. That means a morning count of last night's orders and what's on the shelf, sales and accounting answers from QuickBooks, and read-only answers about what your FastBound book says. It can also schedule policy-safe Facebook posts and report site problems to support for you.",
-  },
-  {
-    q: "Will AI touch my 4473s or my bound book?",
-    a: "It never touches a 4473, and it only reads your bound book. FastBound is read only, so it can tell you what the book says but never writes a disposition. It doesn't change your hosting, DNS or billing either.",
-  },
-  {
-    q: "What does it cost to get started with AI?",
-    a: "Grok Bot setup isn't a monthly bill from us. You buy your own Cursor or xAI seat, at prices they set.",
-  },
-  {
-    q: "Can you build a custom app or AI agent for my business?",
-    a: "Yes. Bring the brief and the budget. Botopticon.com, GunSearchEngine.com, Demand Intelligence and Gun Store Game are live work we already shipped.",
-  },
-  {
-    q: "Do I have to host my website with you to use it?",
-    a: "No. You don't have to host with us to get Grok Bot setup. If you want a dealer website, start on our FFL ecommerce page.",
-  },
+  faqMd("What can AI do for a gun store?", "It can do the daily jobs you'd rather not do by hand: a morning count of last night's orders and what's on the shelf, sales and accounting answers from QuickBooks, and read-only answers about what your FastBound book says. It can also schedule policy-safe Facebook posts and report site problems to support for you."),
+  faqMd("Will AI touch my 4473s or my bound book?", "It never touches a 4473, and it only reads your bound book. FastBound is read only, so it can tell you what the book says but never writes a disposition, and it doesn't change your hosting, DNS or billing either."),
+  faqMd("What does it cost to get started with AI?", "You buy your own Cursor or xAI seat, at prices they set, and we don't add a monthly bill from us for the starting work. For a bigger custom build, bring the brief and the budget."),
+  faqMd("Can you build a custom app or AI agent for my business?", "Yes. Bring the brief and the budget. Botopticon.com, GunSearchEngine.com, Demand Intelligence and Gun Store Game are live work we already shipped."),
+  faqMd("Do I have to host my website with you to use it?", "No. You don't have to host with us to start this work. If you want a dealer website, start on our [FFL ecommerce](/ecommerce) page."),
 ];
 
 /** SEO-U5 PR B (Brandy FINAL, 10/21): /grok-bot-setup. */
@@ -565,38 +511,14 @@ export const FAQ_INSTRUCTORS: FaqItem[] = [
 ];
 
 export const FAQ_HOSTING: FaqItem[] = [
-  {
-    q: "What is gun-friendly hosting?",
-    a: "Web hosting whose terms allow a firearms business. A gun store needs it, because some hosted platforms, including WordPress.com, prohibit selling firearms, parts, accessories and ammunition.",
-  },
-  {
-    q: "Can a gun store use any web host?",
-    a: "No. Check the host\u2019s terms before you build. WordPress.com prohibits selling firearms on its hosted sites, but it doesn\u2019t stop firearms merchants from running WooCommerce on another host. Coriolis runs every dealer store on WP Engine.",
-  },
-  {
-    q: "Where does Coriolis host dealer websites?",
-    a: "On WP Engine, every one of them. Coriolis is a WP Engine agency partner, and we manage the hosting for you, with security updates, uptime monitoring and support.",
-  },
-  {
-    q: "What does FFL website hosting cost?",
-    a: "Hosting is part of every plan, from $169 to $569 a month. Setup is $500 (Basic Setup) or $2,500 (Retail Setup). There\u2019s no annual contract.",
-  },
-  {
-    q: "Is there an uptime SLA?",
-    a: "Every store runs on WP Engine, so every plan is backed by WP Engine\u2019s 99.95% uptime SLA, with 24\u00d77 uptime monitoring on top.",
-  },
-  {
-    q: "Do I own the website?",
-    a: "Yes. When setup is done, you own the WooCommerce site files and database, exportable at any time. Cancel and the site goes with you.",
-  },
-  {
-    q: "Can you move my site without going dark?",
-    a: "Yes. We build WooCommerce on your domain first, move what ranks, test a live cart, then switch DNS. Don\u2019t give notice until the new store is ready.",
-  },
-  {
-    q: "Does hosting cover card payments?",
-    a: "No. Payments run through a merchant account approved for firearms, connected to checkout through a payment gateway. Coriolis installs the gateway at setup, and the merchant account and its fees are yours.",
-  },
+  faqMd("What is gun-friendly hosting?", "Web hosting whose terms allow a firearms business. A gun store needs it, because some hosted platforms, including WordPress.com, prohibit selling firearms, parts, accessories and ammunition."),
+  faqMd("Can a gun store use any web host?", "No. Check the host's terms before you build. WordPress.com prohibits selling firearms on its hosted sites, but it doesn't stop firearms merchants from running WooCommerce on another host, and Coriolis runs every dealer store on WP Engine."),
+  faqMd("Where does Coriolis host dealer websites?", "On WP Engine, every one of them. Coriolis is a WP Engine agency partner, and we manage the hosting for you, with security updates, uptime monitoring and support."),
+  faqMd("What does FFL website hosting cost?", "Hosting is part of every plan, from $169 to $569 a month. Setup is $500 (Basic Setup) or $2,500 (Retail Setup), and there's no annual contract."),
+  faqMd("Is there an uptime SLA?", "Every store runs on WP Engine, so every plan is backed by WP Engine's 99.95% uptime SLA, with 24×7 uptime monitoring on top."),
+  faqMd("Do I own the website?", "Yes. When setup is done, you own the WooCommerce site files and database, exportable at any time, and if you cancel, the site goes with you."),
+  faqMd("Can you move my site without going dark?", "Yes. We build WooCommerce on your domain first, move what ranks, test a live cart, then switch DNS, and you shouldn't give notice until the new store is ready."),
+  faqMd("Does hosting cover card payments?", "No. Payments run through a merchant account approved for firearms, connected to checkout through a payment gateway. Coriolis installs the gateway at setup, and the merchant account and its fees are yours."),
 ];
 
 /** /ffl-messenger-enterprise. Brandy mock, Paul approved. First item opens in the accordion. */

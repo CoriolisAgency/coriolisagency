@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { STUDIO_PROOF } from "../lib/factory";
+import { md } from "../lib/md";
 import { CANON_PATHS } from "../lib/site";
 import { LINKS, linkClass, btnPlan, btnSecondary } from "../lib/links";
 import { withBase } from "../lib/base";
@@ -11,12 +11,20 @@ const ext = { target: "_blank", rel: "noopener noreferrer" };
 import TalkSection from "../components/TalkSection.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import { FAQ_AI_STUDIO } from "../lib/faq";
+
+// CA-VOICE-P1 batch 2 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-2/ai-studio.md, shipped as drafted.
+const card = (s: string) => {
+  const m = s.match(/^\*\*(.+?)\*\*\s+([\s\S]*)$/);
+  if (!m) throw new Error("card: " + s);
+  return { title: m[1].replace(/\.$/, ""), body: m[2] };
+};
+const proof = (["**[Botopticon](https://botopticon.com).** The control room for your AI agents: see what every bot is doing and step in when it matters. [Visit Botopticon.com](https://botopticon.com).","**[GunSearchEngine.com](https://www.gunsearchengine.com/for-dealers?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ai-studio&utm_content=dealer-program).** A Google Analytics replacement for FFL websites, with on-site demand plus optional inventory sync. GSE Basic is free forever, and FFL Analytics and FFL Search Console are included, with no Pro required. Pro ships with FFL Accelerator. [For dealers](https://www.gunsearchengine.com/for-dealers?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ai-studio&utm_content=dealer-program).","**[Demand Intelligence](/demand-intelligence).** Full-market search intent for OEMs, distributors, and brands: what shoppers searched for, including what they couldn't find. [Book a demo](/demand-intelligence#demo). The dashboard and API run on [GunSearchEngine.com](https://www.gunsearchengine.com/?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ai-studio&utm_content=demand-intelligence-dashboard).","**FFL Messenger.** Private, encrypted messaging between verified FFLs. The Enterprise plan adds an MCP server, so your own AI tools can work with FFL Messenger under the permissions you set. [See the API, MCP server and SSO on Enterprise](/ffl-messenger-enterprise).","**[Gun Store Game](https://www.gunstoregame.com).** A browser game that sends players to real FFL inventory. Play it, then find a shop that actually has the gun. [Play the shop](https://www.gunstoregame.com)."] as string[]).map(card);
 ---
 
 <BaseLayout
   faq={FAQ_AI_STUDIO}
   title="AI Studio: AI Tools for Gun Stores and FFLs | Coriolis"
-  description="Coriolis AI Studio: bring the idea and the budget. Botopticon.com, GunSearchEngine.com, Demand Intelligence, and Gun Store Game are live proof we can ship your app, platform, or agent."
+  description="AI tools for gun stores: morning summaries, QuickBooks answers, a support bot, plus Botopticon, GunSearchEngine, Demand Intelligence, and Gun Store Game."
   path="/ai-studio"
   ogImagePath={CANON_PATHS.gsgHero}
 >
@@ -35,25 +43,8 @@ import { FAQ_AI_STUDIO } from "../lib/faq";
         >
           AI Studio: AI tools for gun stores and FFLs
         </h1>
-        <p class="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300">
-          You have the idea. We already shipped the proof.
-        </p>
-        <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300">
-          AI can do the daily jobs in a gun store: a morning summary of last night's orders and what's on the shelf, sales answers from QuickBooks, and a bot that reports site problems to support for you. Grok Bot setup gets you started. In a one-hour consult we pick the jobs, then we build it and show you how to run it, live the same day. For a bigger custom build, bring the brief and the budget.
-        </p>
-        <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300">
-          <a href={LINKS.botopticon} class={linkClass} {...ext}>Botopticon.com</a>,{" "}
-          <a href={LINKS.gsa} class={linkClass} {...ext}>GunSearchEngine.com</a>,{" "}
-          <a href={withBase(LINKS.demandIntel)} class={linkClass}
-            >Demand Intelligence</a
-          >, and{" "}
-          <a href={LINKS.gunStoreGame} class={linkClass} {...ext}
-            >Gun Store Game</a
-          >{" "}
-          are live. Bring the brief and the budget. Dealer websites start on{" "}
-          <a href={withBase("ecommerce")} class={linkClass}>FFL ecommerce</a>,
-          not here. Grok Bot setup is below.
-        </p>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-zinc-300" set:html={md("AI tools for gun stores can do the daily jobs: a morning summary of last night's orders and what's on the shelf, sales answers from QuickBooks, and a bot that reports site problems to support for you. In a one-hour consult we pick the jobs, then we build it, test it, and show you how to run it, live the same day, in two meetings. You buy your own Cursor or xAI seat, at prices they set, and we don't add a monthly bill from us for that starting work. For a bigger custom build, bring the brief and the budget.")} />
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300" set:html={md("[Botopticon.com](https://botopticon.com), [GunSearchEngine.com](https://www.gunsearchengine.com/for-dealers?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ai-studio&utm_content=dealer-program), [Demand Intelligence](/demand-intelligence), and [Gun Store Game](https://www.gunstoregame.com) are already live, and dealer websites start on [FFL ecommerce](/ecommerce), not here.")} />
         <div class="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
           <a href="#talk" class={btnPlan} data-cta="talk">Talk to Coriolis</a>
           <a href={LINKS.gunStoreGame} class={btnSecondary} {...ext}
@@ -73,107 +64,24 @@ import { FAQ_AI_STUDIO } from "../lib/faq";
     </div>
   </section>
 
-  <section class="border-b border-sky-500/25 bg-sky-950/25 py-10 sm:py-12">
-    <div
-      class="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,16rem)_1fr]"
-    >
-      <img
-        src={withBase(CANON_PATHS.grokBotBanner)}
-        alt="Sample Grok Bot setup UI on a gun store counter."
-        width="1536"
-        height="1024"
-        class="w-full min-w-0 max-w-[16rem]"
-      />
-      <div class="min-w-0">
-        <p
-          class="text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-300"
-        >
-          Setup
-        </p>
-        <h2 class="mt-2 text-2xl font-semibold tracking-tight text-white">
-          Grok Bot setup.
-        </h2>
-        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
-          You do not need another chatbot. In one hour we pick what to automate.
-          Then we build it, test it, and show you how to run it. Two meetings.
-          Live the same day.
-        </p>
-        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
-          Want an AI assistant that works for your shop? Start with Grok Bot
-          setup for gun stores.
-        </p>
-        <a
-          href={withBase("contact")}
-          class={`${linkClass} mt-5 inline-flex text-sm`}
-        >
-          Talk to Coriolis
-        </a>
-      </div>
-    </div>
-  </section>
-
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <p
-        class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold"
-      >
-        Proof we already shipped
-      </p>
-      <p class="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
-      </p>
+      <h2 class="text-2xl font-semibold tracking-tight text-white">{"Work we already shipped for dealers, shoppers, and brands"}</h2>
       <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
         {
-          STUDIO_PROOF.map((plate) => (
+          proof.map((c) => (
             <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-              <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
-                {plate.urlLabel}
-              </p>
-              <h2 class="mt-2 text-xl font-semibold text-white">{plate.name}</h2>
-              <p class="mt-3 text-sm leading-relaxed text-zinc-300">
-                {plate.job}
-              </p>
-              {plate.proof ? (
-                <p class="mt-3 flex-1 text-sm leading-relaxed text-zinc-500">
-                  {typeof plate.proof === "string"
-                    ? plate.proof
-                    : plate.proof.map((part) =>
-                        typeof part === "string" ? (
-                          part
-                        ) : (
-                          <a href={withBase(part.href)} class={linkClass}>{part.label}</a>
-                        ),
-                      )}
-                </p>
-              ) : (
-                <div class="flex-1" />
-              )}
-              {plate.href ? (
-                <a
-                  href={plate.href.startsWith("/") ? withBase(plate.href) : plate.href}
-                  class={`${linkClass} mt-5 text-sm`}
-                  {...(plate.href.startsWith("/") ? {} : ext)}
-                >
-                  {plate.cta} →
-                </a>
-              ) : (
-                <p class="mt-5 text-xs uppercase tracking-[0.12em] text-zinc-600">
-                  {plate.cta}
-                </p>
-              )}
+              <h3 class="text-xl font-semibold text-white" set:html={md(c.title)} />
+              <p class="mt-3 text-sm leading-relaxed text-zinc-300" set:html={md(c.body)} />
             </article>
           ))
         }
       </div>
-      <p class="mt-10 max-w-3xl text-sm text-zinc-500">
-        Dealers start on{" "}
-        <a href={LINKS.gsa} class={linkClass} {...ext}>GunSearchEngine.com</a>.
-        Shoppers and brands start on{" "}
-        <a href={LINKS.gse} class={linkClass} {...ext}>GunSearchEngine.com</a>.
-      </p>
+      <p class="mt-10 max-w-3xl text-sm text-zinc-500" set:html={md("Dealers start on [GunSearchEngine.com](https://www.gunsearchengine.com/?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ai-studio&utm_content=dealer-start), and shoppers and brands start on the same site.")} />
     </div>
   </section>
 
-  <FaqBlock items={FAQ_AI_STUDIO} />
+  <FaqBlock items={FAQ_AI_STUDIO} heading={"The questions shops ask about AI work for a gun store"} />
 
-  <TalkSection />
+  <TalkSection heading={"Tell us about the website you want and we'll make it happen."} subline={"We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time."} />
 </BaseLayout>
