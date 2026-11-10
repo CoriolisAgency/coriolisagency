@@ -18,6 +18,9 @@ export function md(src: string): string {
   return escapeHtml(src)
     .replace(BOLD, '<strong class="text-zinc-300">$1</strong>')
     .replace(LINK, (_m, text: string, href: string) => {
+      if (/^(tel:|mailto:)/.test(href)) {
+        return `<a href="${href}" class="${linkClass}">${text}</a>`;
+      }
       if (/^https?:\/\//.test(href)) {
         return `<a href="${href}" class="${linkClass}" target="_blank" rel="noopener noreferrer">${text}</a>`;
       }

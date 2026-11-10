@@ -10,82 +10,28 @@ export interface FaqItem {
 }
 
 export const FAQ_ECOMMERCE: FaqItem[] = [
-  faqMd(
-    "What is FFL website design?",
-    "FFL website design is a WooCommerce store a licensed dealer owns, on their own domain. It has the catalog, FFL checkout, and the option to dropship or connect the register you already run. Coriolis builds it, hosts it and supports it.",
-  ),
-  faqMd(
-    "How long does an FFL website take?",
-    "It depends on your catalog and where you're coming from. We'll give you a timeline after we see your current site.",
-  ),
-  faqMd(
-    "Can I sell on GunBroker from the site?",
-    "Yes. Militia and above include marketplace integrations, with GunBroker.com and AmmoSeek.com on the list.",
-  ),
-  faqMd(
-    "I'm an online-only FFL. Can you build the store?",
-    "Yes. You need a valid FFL. We build WooCommerce on your domain, and [FFL dropshipping](/firearms-dropshipping) fills the catalog. This is not legal advice.",
-  ),
-  {
-    q: "What is FFL Accelerator?",
-    a: "It is the Coriolis plan for a gun store that wants a real website. $569 a month. We build WooCommerce on your domain and connect catalogs and checkout. The site is yours.",
-  },
-  {
-    q: "What do I pay to start?",
-    a: "Setup is $500 for a clean launch or $2,500 for the full custom site and email. Monthly plans: Minute Man $169, Militia $269, Gun Runner $369, Warlord $469, Accelerator $569. No annual contract. If you walk, you take the website.",
-  },
-  {
-    q: "Can you use WooCommerce to sell guns?",
-    a: "Yes, when a licensed FFL owns the store and checkout is built for dealer transfer. Coriolis builds that WooCommerce store on your domain, with FFL Cockpit catalogs and FFL Checkout. Serialized firearms ship to a receiving FFL. This is not legal advice. We do not run 4473, NICS, or the bound book.",
-  },
-  {
-    q: "Is WooCommerce good for firearms?",
-    a: "It is the stack we use because you own the site. Template platforms (AmmoReady, Gearfire) put your inventory on pages you do not write. WooCommerce on your domain lets you write the titles and the page copy. Militia ($269/mo) adds dropshipping. The plan we put dealers on is FFL Accelerator ($569/mo).",
-  },
-  {
-    q: "Can I sell guns I do not stock?",
-    a: "Yes. FFL Cockpit streams twenty-one distributor catalogs. A serialized firearm ships to a receiving FFL. You can still sell what is in the safe. This is not legal advice. We do not run your 4473, NICS, or bound book.",
-  },
-  {
-    q: "I already have a register. Do I throw it out?",
-    a: "No. Bring the register you already run. Warlord and Accelerator connect any POS that works with WooCommerce, such as AIM, MicroBiz, Rapid Gun Systems or Trident 1.",
-  },
-  {
-    q: "I'm on AmmoReady or Gearfire. Can you replace the site without going dark?",
-    a: "Yes. We build WooCommerce on your domain first, move what ranks, test a live cart, then cut DNS. Do not give notice until the new store is ready.",
-  },
-  {
-    q: "Do I own it?",
-    a: "Yes. It is WooCommerce on your domain. Cancel and the site goes with you.",
-  },
-  {
-    q: "What about Shopify?",
-    a: "Coriolis builds WooCommerce you own. We do not sell a Shopify gun-store product. FFL Cockpit and FFL Checkout are WooCommerce plugins. See the WooCommerce vs Shopify page for the ownership difference.",
-  },
+  faqMd("What is FFL website design?", "FFL website design is a WooCommerce store a licensed dealer owns, on their own domain, with the catalog, FFL checkout, and the option to dropship or connect the register you already run. Coriolis builds it, hosts it and supports it."),
+  faqMd("How long does an FFL website take?", "It depends on your catalog and where you're coming from. We'll give you a timeline after we see your current site."),
+  faqMd("Can I sell on GunBroker from the site?", "Yes. Militia and above include marketplace integrations, with GunBroker.com and AmmoSeek.com on the list."),
+  faqMd("I'm an online-only FFL. Can you build the store?", "Yes, if you have a valid FFL. We build WooCommerce on your domain, and FFL dropshipping fills the catalog."),
+  faqMd("What is FFL Accelerator?", "It is the $569 a month Coriolis plan for a gun store that wants the site built, hosted, and run for you on a domain you own, with catalogs and checkout connected."),
+  faqMd("What do I pay to start?", "Setup is $500 for a clean launch or $2,500 for the full custom site and email. Monthly plans are Minute Man $169, Militia $269, Gun Runner $369, Warlord $469, and Accelerator $569, with no annual contract, and if you walk, you take the website."),
+  faqMd("Can you use WooCommerce to sell guns?", "Yes, when a licensed FFL owns the store and checkout is built for dealer transfer. Coriolis builds that WooCommerce store on your domain, with FFL Cockpit catalogs and FFL Checkout, and serialized firearms ship to a receiving FFL. This is not legal advice. We do not run 4473, NICS, or the bound book."),
+  faqMd("Is WooCommerce good for firearms?", "It is the stack we use because you own the site. Template platforms (AmmoReady, Gearfire) put your inventory on pages you do not write. WooCommerce on your domain lets you write the titles and the page copy. Militia ($269/mo) adds dropshipping. The plan we put dealers on is FFL Accelerator ($569/mo)."),
+  faqMd("Can I sell guns I do not stock?", "Yes. FFL Cockpit streams twenty-one distributor catalogs, a serialized firearm ships to a receiving FFL, and you can still sell what is in the safe."),
+  faqMd("I already have a register. Do I throw it out?", "No. Bring the register you already run. Warlord and Accelerator connect any POS that works with WooCommerce, such as AIM, MicroBiz, Rapid Gun Systems or Trident 1."),
+  faqMd("I'm on AmmoReady or Gearfire. Can you replace the site without going dark?", "Yes. We build WooCommerce on your domain first, move what ranks, test a live cart, then cut DNS. Do not give notice until the new store is ready."),
+  faqMd("Do I own it?", "Yes. It is WooCommerce on your domain, and if you cancel, the site goes with you."),
+  faqMd("What about Shopify?", "Coriolis builds WooCommerce you own. We do not sell a Shopify gun-store product. FFL Cockpit and FFL Checkout are WooCommerce plugins. See the [WooCommerce vs Shopify](/woocommerce-vs-shopify-for-gun-stores) page for the ownership difference."),
 ];
 
 /** Agency home (SEO-U4). Facts and prices as FAQ_ECOMMERCE states them. */
 export const FAQ_HOME: FaqItem[] = [
-  {
-    q: "What does Coriolis do?",
-    a: "We build and host WooCommerce websites for FFL dealers: gun shops, online-only FFLs, ranges and gunsmiths. The store is on your domain and you own it.",
-  },
-  {
-    q: "What does an FFL website cost?",
-    a: "Setup is $500 for a clean launch or $2,500 for the full custom site and email. Monthly plans run from Minute Man at $169 to FFL Accelerator at $569. No annual contract.",
-  },
-  {
-    q: "Can I leave AmmoReady or Gearfire without my site going dark?",
-    a: "Yes. Our switch guides for AmmoReady and Gearfire walk through it step by step. And if you ever leave us, you take the website with you.",
-  },
-  {
-    q: "Does it work with my register?",
-    a: "Yes. We connect the WooCommerce store to the register you already run, such as MicroBiz or AIM.",
-  },
-  {
-    q: "Do you file 4473s or run NICS?",
-    a: "No. We don't file a 4473, run NICS or keep your bound book. Your register stays with your POS company, and we connect your website to it. Serialized guns ship to a receiving FFL.",
-  },
+  faqMd("What does Coriolis do?", "We build and host WooCommerce websites for FFL dealers, including gun shops, online-only FFLs, ranges, and gunsmiths. The store lives on your domain, and you own it."),
+  faqMd("What does an FFL website cost?", "A clean launch is $500; the full custom site and email is $2,500. Monthly plans run from Minute Man at $169 to FFL Accelerator at $569, with no annual contract."),
+  faqMd("Can I leave AmmoReady or Gearfire without my site going dark?", "Yes. The switch guides for [AmmoReady](/leave-ammoready) and [Gearfire](/leave-gearfire) walk through it in order, and if you ever leave us, you take the website with you."),
+  faqMd("Does it work with my register?", "Yes. We connect the WooCommerce store to the register you already run, including AIM, MicroBiz, Rapid Gun Systems, Trident 1, or another POS that works with WooCommerce."),
+  faqMd("Do you file 4473s or run NICS?", "No. We don't file a 4473, run NICS, or keep your bound book; your register stays with your POS company, we connect the website to it, and serialized guns ship to a receiving FFL."),
 ];
 
 export const FAQ_DROPSHIP: FaqItem[] = [
@@ -120,61 +66,22 @@ export const FAQ_DROPSHIP: FaqItem[] = [
 ];
 
 export const FAQ_COCKPIT: FaqItem[] = [
-  faqMd(
-    "What is FFL Cockpit?",
-    "FFL Cockpit is a firearms plugin for distributor catalogs, FFL Checkout and dropshipping automation. It runs on WooCommerce or BigCommerce. Licenses live on fflcockpit.com.",
-  ),
-  faqMd(
-    "Is FFL Cockpit a website?",
-    "No. It's the plugin behind the store. You still need a WooCommerce storefront. Coriolis builds and hosts that storefront.",
-  ),
-  faqMd(
-    "Do I buy FFL Cockpit from Coriolis?",
-    "Licenses live on fflcockpit.com. Militia ($269/mo) and every plan above it include the FFL Cockpit and FFL Checkout licenses. We configure them at setup.",
-  ),
-  faqMd(
-    "What is FFL Cockpit setup?",
-    "It's connecting the plugin to your WooCommerce store: licenses, distributor catalogs, pricing rules, FFL Checkout and marketplaces, then a test order. On a Coriolis build, we do it at setup.",
-  ),
-  faqMd(
-    "Who hosts FFL Cockpit on WooCommerce?",
-    "You pick the host. FFL Cockpit plugs into your site and doesn't host it. Coriolis hosts every store we build on WP Engine, backed by a 99.95% uptime SLA.",
-  ),
-  faqMd(
-    "What does FFL Cockpit hosting cost, DIY vs with Coriolis?",
-    "DIY, FFL Cockpit Premium lists at $84.99 a month on WooCommerce, plus your own hosting and build. With Coriolis, Militia is $269 a month with the licenses, 21 catalogs and hosting included. Setup is $500 or $2,500.",
-  ),
-  faqMd(
-    "I already have FFL Cockpit. Can you just build the site?",
-    "Yes. That's the usual job: custom WooCommerce on your domain, Cockpit configured, hosting and support from Coriolis.",
-  ),
+  faqMd("What is FFL Cockpit?", "FFL Cockpit is a firearms plugin for distributor catalogs, FFL Checkout and dropshipping automation. It runs on WooCommerce or BigCommerce. Licenses live on [fflcockpit.com](https://www.fflcockpit.com/)."),
+  faqMd("Is FFL Cockpit a website?", "No. It's the plugin behind the store, so you still need a WooCommerce storefront, and Coriolis builds and hosts that storefront."),
+  faqMd("Do I buy FFL Cockpit from Coriolis?", "Licenses live on fflcockpit.com. Militia ($269/mo) and every plan above it include the FFL Cockpit and FFL Checkout licenses, and we configure them at setup."),
+  faqMd("What is FFL Cockpit setup?", "It's connecting the plugin to your WooCommerce store: licenses, distributor catalogs, pricing rules, FFL Checkout and marketplaces, then a test order. On a Coriolis build, we do it at setup."),
+  faqMd("Who hosts FFL Cockpit on WooCommerce?", "You pick the host. FFL Cockpit plugs into your site and doesn't host it. Coriolis hosts every store we build on WP Engine, backed by a 99.95% uptime SLA."),
+  faqMd("What does FFL Cockpit hosting cost, DIY vs with Coriolis?", "DIY, FFL Cockpit Premium lists at $84.99 a month on WooCommerce, plus your own hosting and build. With Coriolis, Militia is $269 a month with the licenses, 21 catalogs and hosting included, and setup is $500 or $2,500."),
+  faqMd("I already have FFL Cockpit. Can you just build the site?", "Yes. That's the usual job: custom WooCommerce on your domain, Cockpit configured, and hosting and support from Coriolis."),
 ];
 
 export const FAQ_AMMOREADY: FaqItem[] = [
-  {
-    q: "Is Coriolis a hosted AmmoReady clone?",
-    a: "No. Coriolis is the opposite model: open WooCommerce you own, FFL Cockpit for catalogs, and no vendor lock-in on the storefront. Coriolis was founded by the person who ran AmmoReady for nine years.",
-  },
-  {
-    q: "What about Gearfire?",
-    a: "Leaving Gearfire? See the Gearfire alternative page. Same owned-Woo model. We are not affiliated with Gearfire or RetailBI.",
-  },
-  {
-    q: "How do you migrate a live AmmoReady store?",
-    a: "Keep your domain. We stand up Woo on it before you give notice. Map the catalog and redirect the URLs that already rank. Wire FFL Checkout, payments, and taxes, then test a mixed cart. Connect the register only if you want the floor and the site in sync. Cut DNS. You leave with the site.",
-  },
-  {
-    q: "What does setup cost?",
-    a: "Setup is $500 or $2,500. Monthly hosting starts after we talk. FFL Accelerator is $569 a month.",
-  },
-  {
-    q: "Do I own it?",
-    a: "Yes. It is WordPress. Cancel and the site goes with you.",
-  },
-  {
-    q: "Do you run my 4473?",
-    a: "No. Coriolis is not 4473, NICS, or bound-book software. This is not legal advice.",
-  },
+  faqMd("Is Coriolis a hosted AmmoReady clone?", "No. Coriolis builds open WooCommerce you own, with FFL Cockpit for catalogs, and the storefront leaves with you if you cancel."),
+  faqMd("What about Gearfire?", "If you're leaving Gearfire, see the [Gearfire alternative](/gearfire-alternative) page, which uses the same owned-WooCommerce model."),
+  faqMd("How do you migrate a live AmmoReady store?", "Keep your domain, stand up Woo on it before you give notice, map the catalog and redirect the URLs that already rank, wire FFL Checkout, payments, and taxes, then test a mixed cart, connect the register only if you want the floor and the site in sync, and cut DNS. You leave with the site. The ordered list is above, and the full checklist is on [how to leave AmmoReady](/leave-ammoready)."),
+  faqMd("What does setup cost?", "Setup is $500 or $2,500. Monthly hosting starts after we talk, and FFL Accelerator is $569 a month."),
+  faqMd("Do I own it?", "Yes. It is WordPress, and if you cancel, the site goes with you."),
+  faqMd("Do you run my 4473?", "No. That work stays with the register and the systems licensed for it."),
 ];
 
 export const FAQ_GEARFIRE: FaqItem[] = [

@@ -1,5 +1,14 @@
 ---
 import { CLOSED_PLATFORM_ROWS, PLATFORM_HEADERS } from "../lib/platforms";
+import { md } from "../lib/md";
+
+interface Props {
+  /** CA-VOICE-P1: per-page header, rows (inline markdown cells) and note. Defaults keep the shared table. */
+  head?: readonly string[];
+  rows?: readonly (readonly string[])[];
+  note?: string;
+}
+const { head = PLATFORM_HEADERS, rows = CLOSED_PLATFORM_ROWS, note } = Astro.props;
 ---
 
 <div class="mt-6 overflow-x-auto">
@@ -7,11 +16,11 @@ import { CLOSED_PLATFORM_ROWS, PLATFORM_HEADERS } from "../lib/platforms";
     <thead>
       <tr class="border-b border-zinc-800 text-zinc-500">
         {
-          PLATFORM_HEADERS.map((h, i) => (
+          head.map((h, i) => (
             <th
               class:list={[
                 "py-3 pr-3 font-medium",
-                i === PLATFORM_HEADERS.length - 1 && "text-zinc-200",
+                i === head.length - 1 && "text-zinc-200",
               ]}
             >
               {h}
@@ -22,20 +31,19 @@ import { CLOSED_PLATFORM_ROWS, PLATFORM_HEADERS } from "../lib/platforms";
     </thead>
     <tbody class="text-zinc-400">
       {
-        CLOSED_PLATFORM_ROWS.map((row) => (
+        rows.map((row) => (
           <tr class="border-b border-zinc-800/80">
             {row.map((cell, i) =>
               i === 0 ? (
-                <th class="py-3 pr-3 font-medium text-zinc-300">{cell}</th>
+                <th class="py-3 pr-3 font-medium text-zinc-300" set:html={md(cell)} />
               ) : (
                 <td
                   class:list={[
                     "py-3 pr-3",
                     i === row.length - 1 && "text-zinc-200",
                   ]}
-                >
-                  {cell}
-                </td>
+                  set:html={md(cell)}
+                />
               ),
             )}
           </tr>
@@ -44,7 +52,11 @@ import { CLOSED_PLATFORM_ROWS, PLATFORM_HEADERS } from "../lib/platforms";
     </tbody>
   </table>
 </div>
-<p class="mt-3 max-w-3xl text-xs leading-relaxed text-zinc-500">
-  AmmoReady and Gearfire cells restate facts already published on this site.
-  Coriolis is not affiliated with Gearfire or RetailBI.
-</p>
+{note ? (
+  <p class="mt-3 max-w-3xl text-xs leading-relaxed text-zinc-500" set:html={md(note)} />
+) : (
+  <p class="mt-3 max-w-3xl text-xs leading-relaxed text-zinc-500">
+    AmmoReady and Gearfire cells restate facts already published on this site.
+    Coriolis is not affiliated with Gearfire or RetailBI.
+  </p>
+)}

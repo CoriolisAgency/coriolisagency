@@ -12,30 +12,15 @@ import { LINKS, linkClass } from "../lib/links";
 import { withBase } from "../lib/base";
 import { md } from "../lib/md";
 
-// SEO-REFRESH-P1: "Who we build for" row, Brandy's 2026-11-10 7:50 AM ET copy, approved by Paul 8:06 AM ET Nov 10.
-// The brand tile links the Nov 9 release until the Tier 1 Kinetics case study ships.
-const audiences = [
-  {
-    title: "Gun shops",
-    body: "Your store online, on your domain, connected to the register you already run.",
-    link: "[See FFL website design](/ecommerce)",
-  },
-  {
-    title: "Online-only FFLs",
-    body: "No shelf needed. List 21 distributor catalogs and dropship to your buyers.",
-    link: "[See FFL dropshipping](/firearms-dropshipping)",
-  },
-  {
-    title: "Ranges, gunsmiths and instructors",
-    body: "Lane time, classes and memberships online, next to the store.",
-    link: "[See range and instructor websites](/websites-for-ranges-gunsmiths-instructors)",
-  },
-  {
-    title: "Firearms brands",
-    body: "Your own builds up front, with a full catalog behind them.",
-    link: "[See what we built for Tier 1 Kinetics](/press/four-firearms-businesses-choose-coriolis-for-custom-woocommerce-stores)",
-  },
-] as const;
+// CA-VOICE-P1 batch 1 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-1/home.md, shipped as drafted.
+// Cards are "**Title.** body [See X](href)"; the title, body and link are split out below.
+const CARD = /^\*\*(.+?)\.\*\*\s+(.*?)\s+(\[See [^\]]+\]\([^)\s]+\))$/;
+const splitCard = (s: string) => {
+  const m = s.match(CARD);
+  if (!m) throw new Error("home card: " + s);
+  return { title: m[1], body: m[2], link: m[3] };
+};
+const audiences = (["**Gun shops.** Your store goes online on your domain, connected to the register you already run. [See FFL website design](/ecommerce)","**Online-only FFLs.** You can list 21 distributor catalogs and dropship to your buyers without keeping a shelf of your own. [See FFL dropshipping](/firearms-dropshipping)","**Ranges, gunsmiths and instructors.** Lane time, classes, and memberships sit on the same site as the store. [See range and instructor websites](/websites-for-ranges-gunsmiths-instructors)","**Firearms brands.** Your own builds go up front, with a full catalog behind them. [See what we built for Tier 1 Kinetics](/press/four-firearms-businesses-choose-coriolis-for-custom-woocommerce-stores)"] as const).map(splitCard);
 
 type Pillar = {
   href: string;
@@ -50,34 +35,23 @@ type Pillar = {
   links?: readonly { text: string; href: string }[];
 };
 
-const pillars: readonly Pillar[] = [
-  {
-    href: "ecommerce",
-    kicker: "For FFLs, ranges, and brands",
-    title: "Ecommerce",
-    body: "Managed WooCommerce you own: inventory, dropship, and POS integration.",
-  },
-  {
-    href: "gun-store-pos",
-    kicker: "Website integration",
-    title: "Gun Store POS",
-    body: "Works with AIM, MicroBiz, Rapid, or any POS that works with WooCommerce.",
-  },
-  {
-    href: "email-marketing-for-ffl-ecommerce",
-    kicker: "On FFL Accelerator",
-    title: "Email Marketing",
-    body: "Capture, list management, and campaigns: welcome, abandoned cart, back in stock, thank you.",
-  },
-  {
-    href: "https://gunsearchengine.com/for-dealers",
-    external: true,
-    kicker: "GunSearchEngine.com",
-    title: "Consumer Search",
-    cta: "the Dealer Program",
-    body: "List inventory for shopper search on GunSearchEngine.com. Free GSE Basic includes FFL Analytics: what they typed on your site, including empty searches.",
-  },
-];
+const PILLAR_KICKERS = ["For FFLs, ranges, and brands", "Website integration", "On FFL Accelerator", "GunSearchEngine.com"] as const;
+const MDLINK = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+const pillars: readonly Pillar[] = (["**Ecommerce.** We build a managed WooCommerce store you own, so you can sell your inventory, dropship, and connect the register you already run. [See Ecommerce](/ecommerce)","**Gun Store POS.** Website integration on Warlord and FFL Accelerator works with AIM, MicroBiz, Rapid Gun Systems, Trident 1, or any other POS that works with WooCommerce. [See Gun Store POS](/gun-store-pos)","**Email Marketing.** On FFL Accelerator we handle capture, list management, and the automated campaigns: welcome, abandoned cart, back in stock, and thank you. [See Email Marketing](/email-marketing-for-ffl-ecommerce)","**Consumer Search.** List inventory for shopper search on [GunSearchEngine.com](https://www.gunsearchengine.com/?utm_source=coriolisagency&utm_medium=referral&utm_campaign=home&utm_content=consumer-search). Free GSE Basic includes FFL Analytics, which shows what people typed on your site, including the searches that came back empty. [See the Dealer Program](https://www.gunsearchengine.com/for-dealers?utm_source=coriolisagency&utm_medium=referral&utm_campaign=home&utm_content=dealer-program)"] as const).map((item, i) => {
+  const c = splitCard(item);
+  const [, cta, href] = c.link.match(/^\[See ([^\]]+)\]\(([^)\s]+)\)$/)!;
+  const links = [...c.body.matchAll(MDLINK)].map((m) => ({ text: m[1], href: m[2] }));
+  const external = /^https?:/.test(href);
+  return {
+    href: external ? href : href.replace(/^\//, ""),
+    external: external || undefined,
+    kicker: PILLAR_KICKERS[i],
+    title: c.title,
+    cta: cta === c.title ? undefined : cta,
+    body: c.body.replace(MDLINK, "$1"),
+    links: links.length ? links : undefined,
+  };
+});
 
 // gse-links (src/integrations/gse-links.mjs) links plain-text "GunSearchEngine.com" that is
 // not inside an <a>. The pillar cards used to be one <a>, so the card text stayed plain.
@@ -149,7 +123,7 @@ const heroSlides = [
 
 <BaseLayout
   title="FFL Ecommerce Websites for Gun Stores | Coriolis, LLC"
-  description="Coriolis builds WooCommerce gun store websites you own. FFL Cockpit dropshipping, the register you already run, and a switch without going dark."
+  description="Coriolis builds WooCommerce websites for gun stores on a domain you own, with FFL Cockpit dropshipping and the register you already run connected."
   path="/"
   ogImagePath={CANON_PATHS.storefront}
   faq={FAQ_HOME}
@@ -174,25 +148,7 @@ const heroSlides = [
         >
           Coriolis Builds Ecommerce Websites for FFLs, Retailers, and Brands
         </h1>
-        <p class="mt-5 text-base leading-relaxed text-zinc-300 sm:text-lg">
-          Gun shops, online FFLs,{" "}
-          <a href={withBase(LINKS.rangesPage)} class={linkClass}
-            >ranges and gunsmiths</a
-          >: we build the WooCommerce
-          store on your own domain, and you own it. Most gun store websites are rented templates you don’t control.
-          Coriolis builds WooCommerce on your domain with{" "}
-          <a
-            href={LINKS.fflCockpit}
-            class={linkClass}
-            target="_blank"
-            rel="noopener noreferrer">FFL Cockpit</a
-          >
-          {" "}catalogs,{" "}
-          <a href={withBase(LINKS.cockpitPage)} class={linkClass}
-            >FFL Cockpit hosting</a
-          >, FFL Checkout, and the register you already run. Switch
-          without going dark.
-        </p>
+        <p class="mt-5 text-base leading-relaxed text-zinc-300 sm:text-lg" set:html={md("Coriolis builds WooCommerce websites for gun shops, online-only FFLs, ranges, and gunsmiths, on a domain you own. You can sell what's on the shelf, dropship through FFL Cockpit and FFL Checkout, or do both, and we can connect the register you already run. If you're leaving a template platform, we build the new store on your domain first so the switch doesn't take you offline.")} />
         <div class="mt-5 w-full min-w-0">
           <CtaRow
             primary="ecommerce"
@@ -201,12 +157,7 @@ const heroSlides = [
             class="sm:!flex-nowrap"
           />
         </div>
-        <p class="mt-4 text-sm text-zinc-400" data-proof-line>
-          100+ clients · <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} target="_blank" rel="noopener">5-star Google rating</a>
-        </p>
-        <p class="mt-1 text-sm text-zinc-400" data-membership-line>
-          Proud member of NSSF, Firearms Policy Coalition and Gun Owners of America.
-        </p>
+        <p class="mt-4 text-sm text-zinc-400" data-proof-line data-membership-line set:html={md("Coriolis has 100+ clients and a [5-star Google rating](https://www.trustindex.io/reviews/coriolisagency.com) (5.0 out of 5 stars on [Google](https://g.page/r/Ca-DxrPglsXcEAI)), and is a proud member of NSSF, Firearms Policy Coalition and Gun Owners of America.")} />
       </div>
       <div
         class="hero-slider relative order-first w-full min-w-0 overflow-hidden xl:order-none rounded-2xl ring-1 ring-white/10 transition hover:ring-gold/50 focus-within:ring-gold/50"
@@ -446,15 +397,11 @@ const heroSlides = [
 
   <PartnerLogos />
 
-  <GoogleReviews />
+  <GoogleReviews intro={"These are Google reviews from shops we built, in the owners' own words:"} />
 
   <section class="border-b border-zinc-800/80 bg-zinc-950/40">
     <div class="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6">
-      <p
-        class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold"
-      >
-        What we do
-      </p>
+      <h2 class="text-2xl font-semibold tracking-tight text-white">{"What Coriolis builds and hosts for FFLs, ranges, and brands"}</h2>
       <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {
           pillars.map((p) => {
@@ -464,7 +411,7 @@ const heroSlides = [
                 <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
                   {p.kicker}
                 </p>
-                <h2 class="mt-2 text-xl font-semibold text-white group-hover:text-gold">
+                <h3 class="mt-2 text-xl font-semibold text-white group-hover:text-gold">
                   <a
                     href={p.external ? p.href : withBase(p.href)}
                     class="focus-visible:outline-none after:absolute after:inset-0 after:rounded-2xl after:content-[''] focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-gold"
@@ -473,7 +420,7 @@ const heroSlides = [
                   >
                     {p.title}
                   </a>
-                </h2>
+                </h3>
                 <p class="mt-3 flex-1 text-sm leading-relaxed text-zinc-400">
                   {parts.map((part) => part.href ? (<a href={part.href} target="_blank" rel="noopener noreferrer" class={cardLinkClass}>{part.text}</a>) : (<Fragment set:html={plainCardText(part.text)} />))}
                 </p>
@@ -490,34 +437,29 @@ const heroSlides = [
 
   <section class="border-b border-zinc-800/80" data-who-we-build-for>
     <div class="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6">
-      <p
-        class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold"
-      >
-        Who we build for
-      </p>
+      <h2 class="text-2xl font-semibold tracking-tight text-white">{"The gun shops, online FFLs, ranges, and brands we build for"}</h2>
       <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {
           audiences.map((a) => (
             <div class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6">
-              <h2 class="text-xl font-semibold text-white">{a.title}</h2>
+              <h3 class="text-xl font-semibold text-white">{a.title}</h3>
               <p class="mt-3 flex-1 text-sm leading-relaxed text-zinc-400">{a.body}</p>
               <p class="mt-5 text-sm" set:html={md(a.link)} />
             </div>
           ))
         }
       </div>
-      <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md("Plans run from Minute Man at $169 a month to FFL Accelerator at $569. Setup is $500 or $2,500. See [FFL ecommerce plans](/ecommerce).")} />
-      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md("Comparing options? Read our guide to the [best FFL ecommerce platforms](/best-ffl-ecommerce-website). Need a merchant account that allows guns? See [FFL payment processing](/ffl-payment-processing). Need a host that allows a gun store? See [gun-friendly hosting](/gun-friendly-hosting).")} />
+      <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md("Plans run from Minute Man at $169 a month to FFL Accelerator at $569, and setup is $500 or $2,500. See [FFL ecommerce plans](/ecommerce) for the full ladder. If you're comparing platforms, read [a side-by-side of nine FFL store platforms](/best-ffl-ecommerce-website). If you need a merchant account that allows guns, see [FFL payment processing](/ffl-payment-processing). If you need a host that allows a gun store, see [gun-friendly hosting](/gun-friendly-hosting).")} />
     </div>
   </section>
 
-  <FaqBlock items={FAQ_HOME} />
+  <FaqBlock items={FAQ_HOME} heading={"The questions gun dealers ask us before they start"} />
 
   <section id="talk" class="border-t border-zinc-800/80 py-12">
     <div class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-2">
       <div>
-        <h2 class="text-2xl font-semibold tracking-tight text-white">Tell us about the website you want and we'll make it happen.</h2>
-        <p class="mt-3 text-sm leading-relaxed text-zinc-400">We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.</p>
+        <h2 class="text-2xl font-semibold tracking-tight text-white">{"Tell us about the website you want and we'll make it happen."}</h2>
+        <p class="mt-3 text-sm leading-relaxed text-zinc-400">{"We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time."}</p>
       </div>
       <LeadForm site="coriolisagency" defaultPillar="Ecommerce" />
     </div>
