@@ -12,7 +12,7 @@ export type NavItem = {
 
 export const MAIN_NAV: readonly NavItem[] = [
   { href: "ecommerce", label: "FFL Ecommerce" },
-  { href: "firearms-dropshipping", label: "Dropshipping" },
+  { href: "firearms-dropshipping", label: "FFL Dropshipping" },
   {
     href: "gun-store-pos",
     label: "Gun Store POS",
