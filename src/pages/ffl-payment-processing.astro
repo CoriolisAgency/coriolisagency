@@ -12,6 +12,10 @@ import { LINKS, btnPlan, linkClass } from "../lib/links";
 import { withBase } from "../lib/base";
 import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
 import { FAQ_PAYMENTS } from "../lib/faq";
+import { md } from "../lib/md";
+
+// CA-VOICE-P1 batch 4 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-4/ffl-payment-processing.md, shipped as drafted.
+// Chief ruling (c): the locked Contact heading is on the plate; "Tell us how you take payments today" stays the button label up top.
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
 const h2 = "text-xl font-semibold text-white";
@@ -39,103 +43,48 @@ const para = "mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400";
       <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]">
         FFL payment processing for your gun store website
       </h1>
-      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        To take cards for guns and ammo online, an FFL needs a merchant account that allows firearm sales, connected to the website through a payment gateway. Many mainstream processors don’t allow firearm sales. Coriolis works with GOAT Payments and Payroc, and installs and tests the payment gateway as part of setup, on Basic Setup ($500) or Retail Setup ($2,500). The merchant account stays in your store’s legal name, and its fees are yours.
-      </p>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300" set:html={md("FFL payment processing is how a licensed dealer takes cards for guns and ammo online: a merchant account that allows firearm sales, connected to the website through a payment gateway. Many mainstream processors don't allow firearm sales. Coriolis works with GOAT Payments and Payroc, and installs and tests the payment gateway as part of setup, on Basic Setup ($500) or Retail Setup ($2,500). The merchant account stays in your store's legal name, and its fees are yours.")} />
       <div class="mt-8">
         <a href="#talk" class={btnPlan}>Tell us how you take payments today</a>
       </div>
-      <EcommerceCluster current="ffl-payment-processing" />
+      <EcommerceCluster current="ffl-payment-processing" dropshipLabel="listing distributor catalogs on a store you own" />
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12" id="turned-down">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class={h2}>Why gun stores get turned down</h2>
-      <p class={para}>
-        Many mainstream processors and store payment add-ons list firearms and ammunition as prohibited. Across the card industry, firearms are generally treated as a high-risk category.
-      </p>
-      <p class={para}>
-        What dealers use instead is a merchant account underwritten for firearms by a bank or processor that accepts FFLs. It connects to your store through a payment gateway. The gateway moves the card data. The merchant account is the part that gets approved for your business.
-      </p>
+      <h2 class={h2}>{"Why gun stores get turned down, and what dealers use instead"}</h2>
+      <p class={para} set:html={md("Many mainstream processors and store payment add-ons list firearms and ammunition as prohibited, and across the card industry, firearms are generally treated as a high-risk category.")} />
+      <p class={para} set:html={md("What dealers use instead is a merchant account underwritten for firearms by a bank or processor that accepts FFLs. It connects to your store through a payment gateway: the gateway moves the card data, and the merchant account is the part that gets approved for your business.")} />
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12" id="setup">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class={h2}>What Coriolis sets up</h2>
-      <p class={para}>
-        Coriolis works with GOAT Payments and Payroc. We can provide the gateway, help you set it up, and set up other payment options during setup. Gateway installation is part of setup, on Basic Setup ($500) and Retail Setup ($2,500).
-      </p>
-      <p class={para}>
-        Already have a gateway approved for firearms? You can bring your own, and Coriolis puts it on checkout.
-      </p>
-      <p class={para}>
-        Once your merchant account is approved, Coriolis enables the gateway, runs a small live authorization and voids it. Then you place a test order for a non-firearm product with a real card. The second test, with a firearm in the cart, comes only after ship-to-FFL is on.
-      </p>
-      <p class={para}>
-        Checkout runs one card plugin, because two gateways side by side drop orders.
-      </p>
+      <h2 class={h2}>{"What Coriolis sets up at launch, including the two test charges"}</h2>
+      <p class={para} set:html={md("Coriolis works with GOAT Payments and Payroc, so we can provide the gateway, help you set it up, and set up other payment options during setup. Gateway installation is part of Basic Setup ($500) and Retail Setup ($2,500). If you already have a gateway approved for firearms, you can bring your own, and Coriolis puts it on checkout.")} />
+      <p class={para} set:html={md("Once your merchant account is approved, Coriolis enables the gateway, runs a small live authorization and voids it. Then you place a test order for a non-firearm product with a real card, and the second test, with a firearm in the cart, comes only after ship-to-FFL is on.")} />
+      <p class={para} set:html={md("Checkout runs one card plugin, because two gateways side by side drop orders.")} />
+      <p class={para} set:html={md("You can take cards through your merchant account and the gateway on your checkout, and it isn't cards-only, so tell us what you want to take when we talk.")} />
+      <p class={para} set:html={md("Make sure the account is approved for what you sell (firearms, ammunition or both), and get that approval in writing before you launch. No one can promise approval, because the processor decides.")} />
     </div>
   </section>
 
-  <section class="border-b border-zinc-800/80 py-12" id="take">
+  <section class="py-12" id="ffl-checkout">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class={h2}>What you can take</h2>
-      <p class={para}>
-        Cards, through your merchant account and the gateway on your checkout. Payments aren’t limited to cards: Coriolis can set up other payment options during setup. Tell us what you want to take when we talk.
-      </p>
+      <h2 class={h2}>{"How the gateway and FFL Checkout split the work at checkout"}</h2>
+      <p class={para} set:html={md("The gateway charges the card. It doesn't check a 4473, run a background check or pick the receiving dealer; those are checkout and transfer steps. FFL Checkout adds the dealer selector, and Coriolis includes it on Militia ($269 a month) and above. A gun bought online from out of state ships to a licensed dealer in the buyer's home state, and this is not legal advice.")} />
+      <p class={para} set:html={md("If you sell only online, you get the same payment setup. Coriolis builds WooCommerce on your domain and installs the payment gateway at setup. Militia ($269 a month) adds 21 distributor catalogs for dropshipping, and firearm orders ship to a receiving FFL.")} />
+      <p class={para} set:html={md("See [the setup and monthly plan prices](/ffl-website-cost), the [FFL website plans](/ecommerce), or [whether self-hosted WooCommerce can sell firearms](/can-you-use-woocommerce-to-sell-guns).")} />
+      <p class="mt-8 text-sm text-zinc-400" set:html={md("Coriolis has 100+ clients and a [5-star Google rating](https://www.trustindex.io/reviews/coriolisagency.com), and is a member of NSSF, FPC and GOA.")} />
     </div>
   </section>
 
-  <section class="border-b border-zinc-800/80 py-12" id="yours">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class={h2}>What stays yours</h2>
-      <p class={para}>The merchant account is in your store’s legal name, and its fees are yours.</p>
-      <p class={para}>
-        Make sure the account is approved for what you sell (firearms, ammunition or both), and get that approval in writing before you launch.
-      </p>
-    </div>
-  </section>
-
-  <section class="border-b border-zinc-800/80 py-12" id="ffl-checkout">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class={h2}>How payments fit FFL checkout</h2>
-      <p class={para}>
-        The gateway charges the card. It doesn’t check a 4473, run a background check or pick the receiving dealer. Those are checkout and transfer steps.
-      </p>
-      <p class={para}>
-        FFL Checkout adds the dealer selector, and Coriolis includes it on Militia ($269 a month) and above.
-      </p>
-      <p class={para}>
-        A gun bought online from out of state ships to a licensed dealer in the buyer’s home state. This is not legal advice.
-      </p>
-    </div>
-  </section>
-
-  <section class="py-12" id="online-only">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class={h2}>Online-only FFLs</h2>
-      <p class={para}>
-        Sell only online? You get the same setup. Coriolis builds WooCommerce on your domain and installs the payment gateway at setup. Militia ($269 a month) adds 21 distributor catalogs for dropshipping, and firearm orders ship to a receiving FFL.
-      </p>
-      <p class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-        <a href={withBase("ecommerce")} class={linkClass}>FFL website plans</a>
-        <a href={withBase("ffl-website-cost")} class={linkClass}>what an FFL website costs</a>
-        <a href={withBase("can-you-use-woocommerce-to-sell-guns")} class={linkClass}>selling guns online with WooCommerce</a>
-        <a href={withBase("ffl-cockpit")} class={linkClass}>FFL Checkout</a>
-      </p>
-      <p class="mt-8 text-sm text-zinc-400">
-        100+ clients. <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} {...ext}>5-star Google rating</a>. Member of NSSF, FPC and GOA.
-      </p>
-    </div>
-  </section>
-
-  <FaqBlock items={FAQ_PAYMENTS} />
+  <FaqBlock items={FAQ_PAYMENTS} heading={"The questions dealers ask about taking cards for guns and ammo online"} />
 
   <TalkSection
     pillar="Ecommerce"
-    heading="Tell us how you take payments today"
-    subline="We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time."
+    heading={"Tell us about the website you want and we'll make it happen."}
+    subline={"We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time."}
   />
 </BaseLayout>

@@ -62,6 +62,34 @@ function isExternal(part: Exclude<PosInline, string>) {
     <EcommerceCluster current="ecommerce" dropshipLabel={page.voice?.dropshipLabel} />
   </div>
 
+  {page.voice ? (
+    page.voice.sections.map((s) => (
+      <section class="border-b border-zinc-800/80 py-12">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
+          <h2 class="text-xl font-semibold text-white">{s.title}</h2>
+          {s.blocks.map((b) =>
+            "p" in b ? (
+              <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md(b.p)} />
+            ) : "cards" in b ? (
+              <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                {b.cards.map((card) => (
+                  <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+                    <h3 class="text-base font-semibold text-white">{card.title}</h3>
+                    <p class="mt-3 text-sm leading-relaxed text-zinc-400" set:html={md(card.body)} />
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+                {b.links.map((t) => <li set:html={md(t)} />)}
+              </ul>
+            ),
+          )}
+        </div>
+      </section>
+    ))
+  ) : (
+  <Fragment>
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">{page.featuresTitle}</h2>
@@ -104,9 +132,6 @@ function isExternal(part: Exclude<PosInline, string>) {
               </article>
             ))}
           </div>
-          {page.voice?.featuresMoreOutro && (
-            <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md(page.voice.featuresMoreOutro)} />
-          )}
         </div>
       </section>
     )
@@ -125,21 +150,6 @@ function isExternal(part: Exclude<PosInline, string>) {
     )
   }
 
-  {page.voice ? (
-  <section class="border-b border-zinc-800/80 py-12">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">{page.voice.keepTitle}</h2>
-      {page.voice.keepParas.map((t) => (
-        <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md(t)} />
-      ))}
-      <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
-        {page.voice.siblingLinks.map((t) => <li set:html={md(t)} />)}
-      </ul>
-      <p class="mt-6 max-w-3xl text-sm text-zinc-400" set:html={md(page.voice.linksPara)} />
-    </div>
-  </section>
-  ) : (
-  <Fragment>
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">Keep the register</h2>
