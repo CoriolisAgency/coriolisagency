@@ -154,74 +154,26 @@ export const FAQ_BEST: FaqItem[] = [
 ];
 
 export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
-  {
-    q: "How is Demand Intelligence different from RetailBI?",
-    a: "RetailBI tells you what sold - guns that rang at the register or checked out online, including their monthly Index of new guns sold at the same stores as last year. Demand Intelligence tells you what people typed when they searched, including empty searches. One is what sold. The other is what they asked for.",
-  },
-  {
-    q: "Is Demand Intelligence a RetailBI replacement?",
-    a: "No. Keep the Index for what sold at the register. Add the ask for typed intent and empty searches. We do not sell Gearfire's sales data.",
-  },
-  {
-    q: "I searched retailbi alternative. Do I rip out sell-through?",
-    a: "No. Searching \"alternative\" often means you want a second number, not to rip out what sold. Add Demand Intelligence beside what sold.",
-  },
-  {
-    q: "Is Coriolis affiliated with Gearfire or RetailBI?",
-    a: "No. We are not affiliated with Gearfire or RetailBI. We do not sell their sales data.",
-  },
-  {
-    q: "Do you sell Gearfire's sales data?",
-    a: "No. RetailBI sales data is theirs. Demand Intelligence is anonymized searches from GunSearchEngine.com, including on dealer sites, and related search tools.",
-  },
-  {
-    q: "Is this ATF / 4473 software?",
-    a: "No. Not 4473 software. Not NICS. Not your bound book. Those stay with the systems licensed for them.",
-  },
-  {
-    q: "How do I see guns and ammo people searched for but could not find?",
-    a: "That is empty-search demand - they looked, nothing matched. Request a Demand Intelligence demo, or see Unmet Demand on the Demand Intelligence page. Dealer sites can also write empty searches down with GunSearchEngine.com.",
-  },
-  {
-    q: "What should brands use instead of only NICS or what sold?",
-    a: "Use three numbers and do not mix them up: NICS is checks, not sales. RetailBI Index is sold units at the same stores. Search intent is what people typed - including empties. Keep what sold. Add the ask.",
-  },
+  faqMd("How is Demand Intelligence different from RetailBI?", "RetailBI tells you what sold, guns that rang at the register or checked out online, including a monthly Index of same-store new firearm sales. Demand Intelligence tells you what people typed when they searched, including empty searches."),
+  faqMd("Is Demand Intelligence a RetailBI replacement?", "No. Keep the Index for what sold at the register, and add what people typed, including empty searches. We do not sell Gearfire's sales data."),
+  faqMd("I searched retailbi alternative. Do I rip out sell-through?", "No. Searching \"alternative\" often means you want a second number, not to take out what sold. Add Demand Intelligence beside what sold."),
+  faqMd("Is Coriolis affiliated with Gearfire or RetailBI?", "No, and we do not sell their sales data."),
+  faqMd("Do you sell Gearfire's sales data?", "No. RetailBI sales data is theirs. Demand Intelligence is anonymized searches from GunSearchEngine.com, including on dealer sites, and related search tools."),
+  faqMd("Is this ATF / 4473 software?", "No. The 4473 sentence is in the section above."),
+  faqMd("How do I see guns and ammo people searched for but could not find?", "That is empty-search demand: they looked, and nothing matched. [Request a Demand Intelligence demo](/contact), or [see Unmet Demand](https://www.gunsearchengine.com/oem-firearms-demand-analytics?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence-vs-retailbi&utm_content=unmet-demand-faq#unmet). Dealer sites can also write empty searches down with [GunSearchEngine.com](https://www.gunsearchengine.com/for-dealers?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence-vs-retailbi&utm_content=dealer-program)."),
+  faqMd("What should brands use instead of only NICS or what sold?", "Use the three numbers without mixing them: NICS is background-check counts, not sales; the RetailBI Index is sold units at the same stores; search intent is what people typed, including empties. Keep what sold, and add the ask."),
 ];
 
 /** /demand-intelligence (SEO-U24, D-N16). Ported word for word from the GSE page's FAQS. */
 export const FAQ_DEMAND_INTELLIGENCE: FaqItem[] = [
-  {
-    q: "Do I only see my brand and three competitors?",
-    a: "No. Every plan includes full-market anonymized demand - the whole category, not a tiny competitor-only view. Optional brand pins help dashboards and digests highlight your labels; they do not hide the rest of the market.",
-  },
-  {
-    q: "How do the three plans differ?",
-    a: "Insight: full market demand for brand managers who don't have a data team (what's rising for up to 30 Eastern Time days - no session list or export). Growth: same market view, plus privacy-safe sessions and CSV when you need to dig (longer lookback). Platform: full feed for analysts - export, inventory search when linked, and an assistant hook if you want it. (Dealer market pulse is a separate 7-day view.)",
-  },
-  {
-    q: "How do team seats work?",
-    a: "Every plan includes 1 free Client Admin seat. Seat headcount is enforced in the portal Team page; purchase additional seats through Coriolis during onboarding or expansion.",
-  },
-  {
-    q: "What are rising totals vs sessions vs export?",
-    a: "Rising totals are aggregates (calibers/brands/loads going up). Sessions are privacy-safe journey rows (no emails or session ids). Export packages those rows as CSV and/or JSON for data teams. Full-market rising totals are available on every plan; depth and portability increase with Growth and Platform.",
-  },
-  {
-    q: "How fresh is the data?",
-    a: "Sessions are captured as shoppers search (including dealer embeds). Dashboard and API windows use Eastern Time calendar ranges. Short windows use a live sample; multi-day windows use saved daily totals where available.",
-  },
-  {
-    q: "What do I get via API?",
-    a: "REST with secure keys. All plans: demand endpoints within your max lookback. Growth+: sessions list. Growth: CSV export. Platform: JSON and CSV export with optional search-event detail. Docs: gunsearchengine.com/docs/enterprise-api.",
-  },
-  {
-    q: "How do I request a demo?",
-    a: "Request a demo on any plan. We capture company, contact, phone, and email, then follow up to schedule a demo. Portal and API keys open after review.",
-  },
-  {
-    q: "Is this a RetailBI replacement?",
-    a: "No. RetailBI reports what sold. This reports what people asked for. We are not affiliated with Gearfire or RetailBI.",
-  },
+  faqMd("Do I only see my brand and three competitors?", "No. Every plan includes full-market anonymized demand, the whole category, not a tiny competitor-only view. Optional brand pins help dashboards and digests highlight your labels; they do not hide the rest of the market."),
+  faqMd("How do the three plans differ?", "Insight is full-market demand for brand managers who don't have a data team, with up to 30 Eastern Time days of what's rising, and no session list or export. Growth adds privacy-safe sessions, CSV, and a longer lookback. Platform is the full feed for analysts: export, inventory search when linked, and an assistant hook if you want it. Dealer market pulse is a separate 7-day view."),
+  faqMd("How do team seats work?", "Every plan includes one free Client Admin seat. Additional named users, Client Users or extra admins, are purchased through Coriolis during onboarding or expansion. Seat headcount is enforced in the portal Team page."),
+  faqMd("What are rising totals vs sessions vs export?", "Rising totals are aggregates, calibers, brands and loads going up. Sessions are privacy-safe journey rows, with no emails or session ids. Export packages those rows as CSV and, on Platform, JSON for data teams. Full-market rising totals are on every plan; depth and portability increase with Growth and Platform."),
+  faqMd("How fresh is the data?", "Sessions are captured as shoppers search, including dealer embeds. Dashboard and API windows use Eastern Time calendar ranges. Short windows use a live sample; multi-day windows use saved daily totals where available."),
+  faqMd("What do I get via API?", "REST with secure keys. All plans get demand endpoints within your max lookback. Growth and Platform add the sessions list. Growth includes CSV export. Platform includes JSON and CSV export with optional search-event detail. Docs: [gunsearchengine.com/docs/enterprise-api](https://www.gunsearchengine.com/docs/enterprise-api?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence&utm_content=api-docs-faq)."),
+  faqMd("How do I request a demo?", "Request a demo on any plan. We capture company, contact, phone, and email, then follow up to schedule a demo. Portal and API keys open after review."),
+  faqMd("Is this a RetailBI replacement?", "No. RetailBI reports what sold. This reports what people asked for. We are not affiliated with Gearfire or RetailBI."),
 ];
 
 /** SEO-U5 PR B (Brandy FINAL, 10/21): /ffl-website-cost. */

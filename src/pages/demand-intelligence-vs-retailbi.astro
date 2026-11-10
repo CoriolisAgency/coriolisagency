@@ -5,6 +5,16 @@ import { FAQ_DI_VS_RETAILBI } from "../lib/faq";
 import { LINKS, linkClass, btnPlan, btnSecondary } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
+import { md } from "../lib/md";
+
+// CA-VOICE-P1 batch 6 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-6/demand-intelligence-vs-retailbi.md, shipped as drafted.
+const LINKS_RE = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+const links = (s: string) => [...s.matchAll(LINKS_RE)].map((m) => ({ text: m[1], href: m[2] }));
+const heroCtas = links("[Request a Demand Intelligence demo](/contact) · [See Unmet Demand](https://www.gunsearchengine.com/oem-firearms-demand-analytics?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence-vs-retailbi&utm_content=unmet-demand#unmet)");
+const closeCtas = links("[Request a Demand Intelligence demo](/contact) · [See Unmet Demand](https://www.gunsearchengine.com/oem-firearms-demand-analytics?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence-vs-retailbi&utm_content=unmet-demand-footer#unmet) · [Demand Intelligence plans](/demand-intelligence)");
+const vsTable = [["Topic","RetailBI (Gearfire), as published (read November 10, 2026)","Demand Intelligence (Coriolis)"],["Where the numbers come from","Point-of-sale and ecommerce transactions; the Index isolates new firearm sales from a selected subset of retailers. ([RetailBI](https://gogearfire.com/solutions/retailbi/))","What people typed and clicked, including empty searches, from GunSearchEngine.com, including dealer sites, and related search tools."],["When you see it","After the sale. Gearfire says RetailBI sales data is updated daily, and the Index is a monthly benchmark. ([RetailBI](https://gogearfire.com/solutions/retailbi/))","While they search, in the portal and API."],["What \"demand\" means here","Units sold, including the monthly same-store new-firearm Index.","What they typed, including empties."],["Published dealer-network size","2,000+, as stated on Gearfire's RetailBI page, read November 10, 2026.","Not listed*"],["Affiliation","A Gearfire product.","Coriolis is not affiliated with Gearfire or RetailBI and does not sell Gearfire's sales data."]];
+const ext = { target: "_blank", rel: "noopener noreferrer" };
+const isExt = (h: string) => /^https?:/.test(h);
 
 const three = [
   ["NICS", "FBI background-check counts", "Gun sales"],
@@ -64,272 +74,73 @@ const monday = [
       <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl">
         What shoppers typed vs what sold
       </h1>
-      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        RetailBI tells you what sold at the register. Demand Intelligence tells
-        you what shoppers typed - including the searches that came back empty.
-        Keep the Index. Add the ask. Demand Intelligence is not a RetailBI
-        replacement.
-      </p>
-      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Coriolis is not affiliated with Gearfire or RetailBI.
-      </p>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300" set:html={md("RetailBI, from Gearfire, reports what sold at the register or checked out online. Demand Intelligence, from Coriolis, reports what shoppers typed, including searches that came back empty. The two numbers answer different questions, and Demand Intelligence is not a RetailBI replacement. Coriolis is not affiliated with Gearfire or RetailBI, and we do not sell Gearfire's sales data.")} />
       <div class="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
-        <a href={withBase("contact")} class={btnPlan}>Request a Demand Intelligence demo</a>
-        <a href={LINKS.unmetDemand} class={btnSecondary} target="_blank" rel="noopener noreferrer"
-          >See Unmet Demand</a
-        >
+        {heroCtas.map((c, i) => <a href={c.href} class={i === 0 ? btnPlan : btnSecondary} {...(isExt(c.href) ? ext : {})}>{c.text}</a>)}
       </div>
-      <p class="mt-6 max-w-3xl rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5 text-sm leading-relaxed text-zinc-300">
-        <strong class="font-semibold text-zinc-100">How is Demand Intelligence different from RetailBI?</strong>{" "}
-        RetailBI (Gearfire) tells you what sold - guns that rang at the register
-        or checked out online. Their monthly Index tracks new guns sold at the
-        same stores as last year. Demand Intelligence (Coriolis) tells
-        you what people typed when they searched - including searches that came
-        back empty. One is what sold. The other is what they asked for. Demand
-        Intelligence is <strong class="text-zinc-100">not</strong> a RetailBI
-        replacement. We do not sell Gearfire's sales data. NICS background-check
-        counts are not gun sales. If you only watch NICS or what sold, you still
-        cannot see what people typed before anyone bought - so you guess on
-        stock, production, sales calls, ads, and forecasts. Not 4473 software.
-        Not NICS. Not your bound book.
-      </p>
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white sm:text-2xl">
-        Three numbers. Stop mixing them up.
-      </h2>
-      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
-        Same three numbers as on{" "}
-        <a href={LINKS.fflintel} class={linkClass} target="_blank" rel="noopener noreferrer"
-          >FFLintel</a
-        >. Checks are not sales. Sold is not "asked for." An empty search is
-        real demand that never rang the register.
-      </p>
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">{"What RetailBI measures, from pages we read November 10, 2026"}</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300" set:html={md("Gearfire's [RetailBI page](https://gogearfire.com/solutions/retailbi/) describes RetailBI as a sales and inventory platform built from point-of-sale and ecommerce transactions. On that page, read November 10, 2026, Gearfire says NICS is an unreliable stand-in for new firearm interest because it mixes permit applications, transfers, used sales, denials, and multi-gun transactions, and it presents the RetailBI Firearm Sales Index as a same-store measure of new firearm sales: point-of-sale and ecommerce transactions from a selected subset of retailers, isolated to new firearms, compared with the same period a year earlier and reported as a percentage.")} />
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300" set:html={md("The same page says RetailBI sales data is updated daily, and that the Index is a monthly benchmark. Gearfire publishes a dealer-network figure of 2,000+; we are restating that published figure, not adding a count of our own. Their earlier Index explainer, [RetailBI Firearm Sales Index](https://gogearfire.com/blog/retailbi-firearm-sales-index/) (dated August 9, 2025, read November 10, 2026), describes the same same-store method and says the Index is published monthly.")} />
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300" set:html={md("RetailBI remains a tool for what sold at the register and for same-store new-gun performance. We do not write their policy, and this is not a review of their product.")} />
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300" set:html={md("A short version of the same three numbers also sits on [FFLintel](https://fflintel.com). For more on checks versus sales, see [NICS vs firearm sales](https://www.gunsearchengine.com/nics-vs-firearm-sales?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence-vs-retailbi&utm_content=nics-vs-sales) and [the RetailBI Firearm Sales Index note](https://www.gunsearchengine.com/retailbi-firearm-sales-index?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence-vs-retailbi&utm_content=retailbi-index) on GunSearchEngine.com.")} />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">{"What Demand Intelligence measures"}</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300" set:html={md("Demand is what people typed. Demand Intelligence pulls anonymized searches from GunSearchEngine.com, including searches on dealer sites, and related search tools, and it includes the searches that came back empty. It is not a register, not a same-store sales Index, and not 4473 software, NICS, or a bound book; those stay with the systems licensed for them.")} />
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300" set:html={md("Coriolis builds Demand Intelligence for brands and distributors. Plans are public on [the Demand Intelligence page](/demand-intelligence) as Insight, Growth, and Platform. Every plan includes one free Client Admin; additional seats are purchased through Coriolis during onboarding. Elsewhere we describe related AI work on [the AI Studio page](/ai-studio).")} />
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300" set:html={md("Demand Intelligence turns what people typed, including empty searches, into moves you can make: add a SKU, run another lot, call accounts, or move ad spend. We do not invent usage stats.")} />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">{"Demand Intelligence vs RetailBI"}</h2>
+      <p class="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-300" set:html={md("Use both when you need what sold and what people typed. A longer write-up also sits on [GunSearchEngine.com](https://www.gunsearchengine.com/betsy-vs-retailbi?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence-vs-retailbi&utm_content=betsy-vs-retailbi).")} />
       <div class="mt-6 overflow-x-auto">
-        <table class="w-full min-w-[36rem] text-left text-sm">
+        <table class="w-full min-w-[48rem] text-left text-sm">
           <thead>
             <tr class="border-b border-zinc-800 text-zinc-500">
-              <th class="py-3 pr-4 font-medium">Number</th>
-              <th class="py-3 pr-4 font-medium">What it is</th>
-              <th class="py-3 font-medium">What it is not</th>
+              {vsTable[0].map((h, i) => <th class={i === 2 ? "py-3 font-medium text-zinc-200" : "py-3 pr-4 font-medium"}>{h}</th>)}
             </tr>
           </thead>
           <tbody class="text-zinc-400">
-            {
-              three.map(([n, is, not]) => (
-                <tr class="border-b border-zinc-800/80">
-                  <th class="py-3 pr-4 font-medium text-zinc-200">{n}</th>
-                  <td class="py-3 pr-4">{is}</td>
-                  <td class="py-3">{not}</td>
-                </tr>
-              ))
-            }
+            {vsTable.slice(1).map(([k, a, b]) => (
+              <tr class="border-b border-zinc-800/80">
+                <th class="py-3 pr-4 align-top font-medium text-zinc-300" set:html={md(k)} />
+                <td class="py-3 pr-4 align-top" set:html={md(a)} />
+                <td class="py-3 align-top text-zinc-200" set:html={md(b)} />
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
-      <p class="mt-4 max-w-2xl text-sm text-zinc-400">
-        More detail:{" "}
-        <a href={`${LINKS.gse}/nics-vs-firearm-sales`} class={linkClass} target="_blank" rel="noopener noreferrer"
-          >NICS vs firearm sales</a
-        >
-        {" · "}
-        <a href={`${LINKS.gse}/retailbi-firearm-sales-index`} class={linkClass} target="_blank" rel="noopener noreferrer"
-          >RetailBI Firearm Sales Index</a
-        >.
-      </p>
+      <p class="mt-3 max-w-3xl text-xs leading-relaxed text-zinc-500">{"*Not listed on the source page we read November 10, 2026."}</p>
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white sm:text-2xl">
-        What RetailBI measures
-      </h2>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Fair, from their public pages: NICS mixes permits, used guns, transfers,
-        multi-gun checks, and denials. So their Index - new guns sold at the same
-        stores as last year - is a better read on sales than raw NICS. RetailBI
-        rolls up what sold across their dealer network for brands. Useful for
-        share, category, and inventory planning from real sales. We do not invent
-        how many stores report to them. Read their public Index and RetailBI
-        pages.
-      </p>
-      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        RetailBI remains the right tool for what sold at the register and
-        same-store new-gun performance. Demand Intelligence is not a RetailBI
-        replacement.
-      </p>
+      <h2 class="text-xl font-semibold text-white sm:text-2xl">{"What a sold number cannot show you on Monday"}</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300" set:html={md("Empty searches and rising terms can show up before a monthly Index prints. For inventory, production, sales calls, ads, and forecasts, a sold number tells you what moved at stores in a network last period. The typed number tells you what people are searching now, including the queries that found nothing in live stock, and the words product pages and ads should use. The same jobs are spelled out on the [OEM demand page](https://www.gunsearchengine.com/oem-firearms-demand-analytics?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence-vs-retailbi&utm_content=oem-demand).")} />
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300" set:html={md("An empty search is unmet demand: they looked, and nothing in stock matched. An Index cannot see a gun that was not on the shelf. Those searches also happen on the dealer site, and GunSearchEngine.com writes them down.")} />
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300" set:html={md("This page is for brands and distributors who already watch what sold and still need to see what people typed, including empties. It is not for someone who only wants a monthly sales Index and will never change a SKU or an ad based on searches. RetailBI remains the right tool for what sold at the register. We are not asking you to drop it.")} />
     </div>
   </section>
 
-  <section class="border-b border-zinc-800/80 py-12">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white sm:text-2xl">
-        What Demand Intelligence measures
-      </h2>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Demand is what people typed. Demand Intelligence pulls anonymized
-        searches from GunSearchEngine.com, including on dealer sites, and
-        related search tools - <strong class="text-zinc-100">including empty searches</strong>. Not a
-        register. Not a same-store sales Index. Not 4473, NICS, or bound book.
-      </p>
-      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Plans are public on{" "}
-        <a href={withBase(LINKS.demandIntelPage)} class={linkClass}>Demand Intelligence</a>
-        {" "}
-        (Insight / Growth / Platform - 1 Client Admin free).
-        Coriolis builds Demand Intelligence for brands and distributors. Elsewhere
-        we call the AI work{" "}
-        <a href={withBase(LINKS.aiStudio)} class={linkClass}>AI Studio</a>.
-      </p>
-
-      <p class="mt-10 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Demand Intelligence turns what people typed (and empty
-        searches) into moves you can make - add a SKU, run another lot, call
-        accounts, move ad spend. Coriolis builds that. We do not invent usage
-        stats.
-      </p>
-    </div>
-  </section>
-
-  <section class="border-b border-zinc-800/80 py-12">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white sm:text-2xl">
-        Demand Intelligence vs RetailBI
-      </h2>
-      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
-        Side by side. Use both when you need what sold and what people typed.
-      </p>
-      <div class="mt-6 overflow-x-auto">
-        <table class="w-full min-w-[40rem] text-left text-sm">
-          <thead>
-            <tr class="border-b border-zinc-800 text-zinc-500">
-              <th class="py-3 pr-4 font-medium"> </th>
-              <th class="py-3 pr-4 font-medium">RetailBI (Gearfire)</th>
-              <th class="py-3 font-medium text-zinc-200">Demand Intelligence (Coriolis)</th>
-            </tr>
-          </thead>
-          <tbody class="text-zinc-400">
-            {
-              vsRows.map(([k, a, b]) => (
-                <tr class="border-b border-zinc-800/80">
-                  <th class="py-3 pr-4 font-medium text-zinc-300">{k}</th>
-                  <td class="py-3 pr-4">{a}</td>
-                  <td class="py-3 text-zinc-200">{b}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
-      <p class="mt-4 max-w-2xl text-sm text-zinc-400">
-        Longer write-up:{" "}
-        <a href={LINKS.betsyVsRetailBi} class={linkClass} target="_blank" rel="noopener noreferrer"
-          >RetailBI vs Demand Intelligence on GunSearchEngine.com</a
-        >.
-      </p>
-    </div>
-  </section>
-
-  <section class="border-b border-zinc-800/80 py-12">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white sm:text-2xl">
-        What "what sold" misses on Monday
-      </h2>
-      <p class="mt-2 max-w-2xl text-sm text-zinc-400">
-        Same jobs as on our{" "}
-        <a href={LINKS.oemDemand} class={linkClass} target="_blank" rel="noopener noreferrer"
-          >OEM demand page</a
-        >. Empty searches and rising terms can show up before the monthly Index
-        prints.
-      </p>
-      <div class="mt-6 overflow-x-auto">
-        <table class="w-full min-w-[40rem] text-left text-sm">
-          <thead>
-            <tr class="border-b border-zinc-800 text-zinc-500">
-              <th class="py-3 pr-4 font-medium">Job</th>
-              <th class="py-3 pr-4 font-medium">What sold asks</th>
-              <th class="py-3 font-medium text-zinc-200">What they typed asks</th>
-            </tr>
-          </thead>
-          <tbody class="text-zinc-400">
-            {
-              monday.map(([job, sold, ask]) => (
-                <tr class="border-b border-zinc-800/80">
-                  <th class="py-3 pr-4 font-medium text-zinc-300">{job}</th>
-                  <td class="py-3 pr-4">{sold}</td>
-                  <td class="py-3 text-zinc-200">{ask}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <section class="border-b border-zinc-800/80 py-12">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white sm:text-2xl">
-        Unmet demand: the empty search
-      </h2>
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-300">
-        Unmet = they searched, and nothing in stock matched. The Index cannot see
-        a gun that was not on the shelf. Those searches also happen on the dealer
-        site -{" "}
-        <a href={LINKS.gsa} class={linkClass} target="_blank" rel="noopener noreferrer"
-          >GunSearchEngine.com</a
-        >{" "}
-        writes them down. Brands who want the full market use Demand Intelligence.
-      </p>
-    </div>
-  </section>
-
-  <section class="border-b border-zinc-800/80 py-12">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white sm:text-2xl">
-        Who this is for / not for
-      </h2>
-      <ul class="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300">
-        <li>
-          <strong class="text-zinc-100">For:</strong> brands and distributors who already watch what sold and
-          still need to see what people typed - including empties.
-        </li>
-        <li>
-          <strong class="text-zinc-100">Not for:</strong> someone who only wants a monthly sales Index and will
-          never change a SKU or an ad based on searches.
-        </li>
-        <li>
-          <strong class="text-zinc-100">Fair:</strong> RetailBI remains the right tool for what sold at the
-          register. We are not asking you to drop it.
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <FaqBlock items={FAQ_DI_VS_RETAILBI} />
+  <FaqBlock items={FAQ_DI_VS_RETAILBI} heading={"Questions we get"} />
 
   <section class="border-t border-zinc-800/80 py-12 sm:py-16">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white sm:text-2xl">
-        Keep the Index. Add the ask.
-      </h2>
-      <p class="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
-        Request a Demand Intelligence demo on the Coriolis form. See Unmet Demand
-        on the product page. More on the three numbers:{" "}
-        <a href={LINKS.fflintel} class={linkClass} target="_blank" rel="noopener noreferrer"
-          >fflintel.com</a
-        >.
-      </p>
-      <div class="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
-        <a href={withBase("contact")} class={btnPlan}>Request a Demand Intelligence demo</a>
-        <a href={LINKS.unmetDemand} class={btnSecondary} target="_blank" rel="noopener noreferrer"
-          >See Unmet Demand</a
-        >
-        <a href={withBase(LINKS.demandIntelPage)} class={btnSecondary}>Demand Intelligence plans</a>
+      <div class="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+        {closeCtas.map((c, i) => <a href={c.href} class={i === 0 ? btnPlan : btnSecondary} {...(isExt(c.href) ? ext : {})}>{c.text}</a>)}
       </div>
     </div>
   </section>

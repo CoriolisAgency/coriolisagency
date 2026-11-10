@@ -5,6 +5,7 @@ import LeadForm from "@coriolis/lead-form/LeadForm.astro";
 import { FAQ_DEMAND_INTELLIGENCE } from "../lib/faq";
 import { CANON_PATHS } from "../lib/site";
 import { linkClass } from "../lib/links";
+import { md } from "../lib/md";
 
 // SEO-U24 (D-N16): Demand Intelligence moves here from GunSearchEngine.
 // Copy is ported word for word from GSE src/app/(site)/demand-intelligence/page.tsx
@@ -118,6 +119,24 @@ const btnGhost =
   "inline-flex items-center justify-center rounded-sm border border-zinc-700 px-5 py-3 text-sm font-medium text-zinc-200 transition hover:bg-zinc-800";
 const textLink = linkClass;
 const h2Class = "text-xl font-semibold tracking-tight text-white sm:text-2xl";
+
+// CA-VOICE-P1 batch 6 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-6/demand-intelligence.md, shipped as drafted.
+const LINKS_RE = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+const links = (s: string) => [...s.matchAll(LINKS_RE)].map((m) => ({ text: m[1], href: m[2] }));
+const heroCtas = links("[See Unmet Demand](https://www.gunsearchengine.com/oem-firearms-demand-analytics?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence&utm_content=unmet-demand#unmet) · [Request a demo](#demo) · [Ask in Grok](https://www.gunsearchengine.com/betsy/enterprise-copilot?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence&utm_content=enterprise-copilot) · [API](https://www.gunsearchengine.com/docs/enterprise-api?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence&utm_content=enterprise-api) · [Active Defense](https://www.gunsearchengine.com/betsy/active-defense?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence&utm_content=active-defense)");
+const demoLink = links("[Tell us what you want to see, and we'll book your demo.](#demo)")[0];
+const planCopy = [
+  ["**Insight.** Full-market demand for brand managers who don't have a data team: what's rising, unmet demand, UPCs, and where traffic came from, with a lookback of up to 30 Eastern Time days, a portal dashboard and API, and one free Client Admin seat. There is no session list or bulk export. Optional brand pins can highlight labels in the UI.", "[Request demo - Insight](#demo)"],
+  ["**Growth.** The same market view, plus privacy-safe sessions and a row-capped CSV export when you need to dig, with a lookback of up to 60 Eastern Time days, and one free Client Admin seat.", "[Request demo - Growth](#demo)"],
+  ["**Platform.** The full feed for analysts: everything in Growth, plus unlimited lookback (saved daily totals), JSON and CSV export, inventory search when feeds are linked, a connection to Sellers who opt in, and an assistant hook for Grok, Claude, or Cursor. One free Client Admin seat is included. Setup steps for the assistant hook live in the portal after you're on Platform.", "[Request demo - Platform](#demo)"],
+] as const;
+const plans = PLANS.map((p, i) => {
+  const m = (planCopy[i][0] as string).match(/^\*\*([^*]+?)\.\*\*\s+([\s\S]+)$/);
+  if (!m || m[1] !== p.name) throw new Error("plan copy " + p.name);
+  return { ...p, body: m[2], ctaLabel: links(planCopy[i][1])[0].text };
+});
+const depth = [["Capability","Insight","Growth","Platform"],["Market scope","Full","Full","Full"],["What's rising","Yes","Yes","Yes"],["Max lookback","30 days","60 days","Unlimited"],["Sessions list","Not included","Yes","Yes"],["Export","Not included","CSV","JSON + CSV"],["Search-event detail on export","Not included","Not included","Yes"],["Assistant hook (Platform)","Not included","Not included","Yes"],["Inventory search (linked feeds)","Not included","Not included","Yes"],["Free Client Admin","1","1","1"]];
+const pilotCtas = links("[See Unmet Demand](https://www.gunsearchengine.com/oem-firearms-demand-analytics?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence&utm_content=unmet-demand-pilot#unmet) · [Request a demo](#demo)");
 ---
 
 <BaseLayout
@@ -135,16 +154,15 @@ const h2Class = "text-xl font-semibold tracking-tight text-white sm:text-2xl";
       <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl">
         Demand Intelligence for Guns & Ammo
       </h1>
-      <p class="mt-4 max-w-3xl text-lg text-zinc-300">
-        See what the market asked for this week - including what it could not find. Not what sold last quarter.
-      </p>
+      <p class="mt-4 max-w-3xl text-lg text-zinc-300" set:html={md("Demand Intelligence shows what the firearms and ammo market asked for, including searches that came back empty. Coriolis builds it, and Betsy matches what people typed to inventory that exists (and, on Platform, to stock you have linked), so a brand can add a SKU, run another lot, call accounts, or move ad spend. Onboarding is invite-only, through Coriolis.")} />
       <div class="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
-        <a href={UNMET_HREF} class={btnGhost} data-cta="unmet" {...ext}>See Unmet Demand</a>
-        <a href="#demo" data-cta="subscribe" data-plan="growth" class={btnPrimary}>Request a demo</a>
-        <a href={`${GSE}/betsy/enterprise-copilot`} class={btnGhost} {...ext}>Ask in Grok</a>
-        <a href={`${GSE}/docs/enterprise-api`} class={btnGhost} {...ext}>API</a>
-        <a href={`${GSE}/betsy/active-defense`} class={btnGhost} {...ext}>Active Defense</a>
+        {heroCtas.map((c) => c.href === "#demo" ? (
+          <a href="#demo" data-cta="subscribe" data-plan="growth" class={btnPrimary}>{c.text}</a>
+        ) : (
+          <a href={c.href} class={btnGhost} {...ext}>{c.text}</a>
+        ))}
       </div>
+      <p class="mt-4 text-sm"><a href={demoLink.href} class={textLink} data-cta="subscribe">{demoLink.text}</a></p>
       <ul class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] text-zinc-400">
         <li class="inline-flex items-center gap-1.5">
           <span class="h-1.5 w-1.5 rounded-full bg-sky-400"></span>
@@ -159,25 +177,15 @@ const h2Class = "text-xl font-semibold tracking-tight text-white sm:text-2xl";
           <span>Betsy - decisions</span>
         </li>
       </ul>
-      <p class="mt-6 max-w-3xl text-base leading-relaxed text-zinc-300">
-        Demand is what people typed. Inventory is what exists (and, on
-        Platform, what you hold). Betsy matches the two so you can act -
-        add a SKU, run another lot, call accounts, move ad spend. Not a
-        second dashboard. Not sell-through. Not what sold. What they asked
-        for.
-      </p>
-      <p class="mt-6 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        Search and stock meet in Betsy. Betsy turns every search into clean, structured demand data.
-      </p>
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12" aria-labelledby="plans-heading" id="plans">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 id="plans-heading" class={`${h2Class} mb-6 sm:text-center`}>Choose your plan</h2>
+      <h2 id="plans-heading" class={`${h2Class} mb-6 sm:text-center`}>{"Choose your plan"}</h2>
       <div class="grid gap-6 sm:gap-8 lg:grid-cols-3 lg:items-stretch">
         {
-          PLANS.map((plan) => (
+          plans.map((plan) => (
             <div
               class:list={[
                 "relative flex flex-col rounded-2xl bg-zinc-950/60 p-6 sm:p-7",
@@ -194,17 +202,8 @@ const h2Class = "text-xl font-semibold tracking-tight text-white sm:text-2xl";
                   {plan.id === "platform" ? "Full access" : "Full market"}
                 </p>
                 <h3 class="text-xl font-semibold tracking-tight text-white sm:text-2xl">{plan.name}</h3>
-                <p class="mt-1.5 text-sm font-medium text-zinc-300">{plan.tagline}</p>
               </div>
-              <p class="mb-5 text-sm leading-relaxed text-zinc-400">{plan.bestFor}</p>
-              <ul class="mb-7 flex-1 space-y-2.5 text-sm text-zinc-300">
-                {plan.features.map((f) => (
-                  <li class="flex gap-2.5">
-                    <span class="mt-0.5 shrink-0 text-gold" aria-hidden="true">✓</span>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
+              <p class="mb-7 flex-1 text-sm leading-relaxed text-zinc-400" set:html={md(plan.body)} />
               <a
                 href="#demo"
                 class={`mt-auto w-full ${plan.highlight ? btnPrimary : btnGhost}`}
@@ -217,31 +216,23 @@ const h2Class = "text-xl font-semibold tracking-tight text-white sm:text-2xl";
           ))
         }
       </div>
-      <p class="mt-4 text-center text-xs text-zinc-500">
-        Request a demo - Portal after review
-      </p>
-      <p class="mt-2 text-center text-xs text-zinc-500">
-        <strong class="font-medium text-zinc-300">1 Client Admin free</strong> on every plan
-      </p>
+      <p class="mt-4 text-center text-xs text-zinc-500" set:html={md("Request a demo on any plan. Access to the portal, and to the API keys, comes after that review.")} />
     </div>
   </section>
 
   <section class="py-12">
     <div class="mx-auto w-full max-w-2xl space-y-10 px-4 sm:px-6">
       <div class="overflow-x-auto" aria-labelledby="depth-matrix">
-        <h2 id="depth-matrix" class={`${h2Class} mb-3`}>Depth matrix</h2>
+        <h2 id="depth-matrix" class={`${h2Class} mb-3`}>{"Depth matrix"}</h2>
         <table class="w-full border-collapse text-left text-sm text-zinc-300">
           <thead>
             <tr class="border-b border-zinc-700 text-xs uppercase tracking-wide text-zinc-500">
-              <th class="py-2 pr-3 font-semibold">Capability</th>
-              <th class="px-2 py-2 font-semibold">Insight</th>
-              <th class="px-2 py-2 font-semibold">Growth</th>
-              <th class="py-2 pl-2 font-semibold">Platform</th>
+              {depth[0].map((h, i) => <th class={i === 0 ? "py-2 pr-3 font-semibold" : i === 3 ? "py-2 pl-2 font-semibold" : "px-2 py-2 font-semibold"}>{h}</th>)}
             </tr>
           </thead>
           <tbody class="text-xs sm:text-sm">
             {
-              DEPTH.map(([cap, a, b, c]) => (
+              depth.slice(1).map(([cap, a, b, c]) => (
                 <tr class="border-b border-zinc-800">
                   <td class="py-2.5 pr-3 font-medium text-white">{cap}</td>
                   <td class="px-2 py-2.5">{a}</td>
@@ -255,69 +246,43 @@ const h2Class = "text-xl font-semibold tracking-tight text-white sm:text-2xl";
       </div>
 
       <div aria-labelledby="both-include">
-        <h2 id="both-include" class={`${h2Class} mb-3`}>All plans include</h2>
-        <ul class="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          {SHARED_INCLUDES.map((item) => <li>{item}</li>)}
-        </ul>
+        <h2 id="both-include" class={`${h2Class} mb-3`}>{"All plans include"}</h2>
+        <p class="text-sm leading-relaxed text-zinc-400" set:html={md("Every plan includes full-market anonymized demand, not limited to your brand; a branded portal dashboard; a REST API with secure keys; one free Client Admin seat, with additional named seats purchased through Coriolis during onboarding or expansion; no shopper emails or session ids in what we send partners; SKU heat, unmet demand, a US map, and top referrers; an optional weekly insights email (opt-in); and invite-only onboarding through Coriolis.")} />
       </div>
 
       <div class="space-y-3" aria-labelledby="use-cases">
-        <h2 id="use-cases" class={h2Class}>Use cases brands care about</h2>
-        <ul class="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          {USE_CASES.map((item) => <li>{item}</li>)}
-        </ul>
-      </div>
-
-      <div class="space-y-3 rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5 sm:p-6" aria-labelledby="mcp-explainer">
-        <p class="text-[10px] font-semibold uppercase tracking-[0.14em] text-gold">Platform - AI assistants</p>
-        <h2 id="mcp-explainer" class="text-base font-semibold tracking-tight text-white sm:text-lg">Work where you already work</h2>
-        <p class="text-sm leading-relaxed text-zinc-400">
-          Already work in Grok, Claude, or Cursor? Platform can answer
-          "what's hot" and "what can't they find" inside those tools. Setup
-          steps live in the portal after you're on Platform.
-        </p>
-        <p class="flex flex-wrap gap-x-4 gap-y-1 pt-1 text-sm">
-          <a href={`${GSE}/betsy/enterprise-copilot`} class={textLink} {...ext}>Portal setup guide -&gt;</a>
-          <a href={`${GSE}/docs/enterprise-api`} class={textLink} {...ext}>REST API docs</a>
-        </p>
+        <h2 id="use-cases" class={h2Class}>{"What brands use it for"}</h2>
+        <p class="text-sm leading-relaxed text-zinc-400" set:html={md("Brands use it to decide what to build next from real searches, to price and stock what people are actually typing, to write ads and product pages in shopper language, to check whether a new load or caliber is getting asked for yet, and to catch stockouts and rising calibers early.")} />
+        <p class="text-sm leading-relaxed text-zinc-400" set:html={md("Already work in Grok, Claude, or Cursor? On Platform, you can ask what's hot and what shoppers couldn't find inside those tools. The [portal setup guide](https://www.gunsearchengine.com/betsy/enterprise-copilot?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence&utm_content=portal-setup) and [REST API docs](https://www.gunsearchengine.com/docs/enterprise-api?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence&utm_content=api-docs) are on GunSearchEngine.com.")} />
       </div>
 
       <div class="space-y-3 rounded-2xl border border-amber-500/30 bg-amber-500/10 p-5">
-        <h2 class="text-base font-semibold text-amber-300">Limited pilot opportunity</h2>
-        <p class="text-sm leading-relaxed text-zinc-300">
-          Closed pilot with one major enterprise partner. <strong class="text-white">Early OEM seats open</strong>.
-          First 30 days are <strong class="text-white">free</strong> during the pilot window. Pricing is shared during onboarding.
-        </p>
+        <h2 class="text-base font-semibold text-amber-300">{"Limited pilot opportunity"}</h2>
+        <p class="text-sm leading-relaxed text-zinc-300" set:html={md("This is a closed pilot with one major enterprise partner. Early OEM seats are open. First 30 days are free during the pilot window. Pricing is shared during onboarding.")} />
         <div class="flex flex-wrap items-center gap-3">
-          <a href={UNMET_HREF} class={btnGhost} data-cta="unmet" {...ext}>See Unmet Demand</a>
-          <a href="#demo" data-cta="subscribe" data-plan="growth" class={`${textLink} inline-flex text-sm`}>Request a demo -&gt;</a>
+          {pilotCtas.map((c) => c.href === "#demo" ? (
+            <a href="#demo" data-cta="subscribe" data-plan="growth" class={`${textLink} inline-flex text-sm`}>{c.text}</a>
+          ) : (
+            <a href={c.href} class={btnGhost} data-cta="unmet" {...ext}>{c.text}</a>
+          ))}
         </div>
       </div>
 
-      <aside class="space-y-1.5 rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4" aria-label="Search vs sell-through">
-        <h2 class="text-sm font-semibold text-white">Search vs sell-through</h2>
-        <p class="text-sm leading-relaxed text-zinc-400">
-          RetailBI reports what sold. This reports what people asked for. We are not affiliated with Gearfire or RetailBI.
-        </p>
-        <p class="text-sm"><a href={`${GSE}/betsy-vs-retailbi`} class={textLink} {...ext}>Search vs sell-through</a></p>
-        <p class="text-sm"><a href="#plans" class={textLink}>Demand Intelligence for brands &rarr;</a></p>
+      <aside class="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4" aria-label="Search vs sell-through">
+        <p class="text-sm leading-relaxed text-zinc-400" set:html={md("RetailBI reports what sold. Demand Intelligence reports what people asked for. Coriolis is not affiliated with Gearfire or RetailBI. The longer comparison is [what shoppers typed vs what sold](/demand-intelligence-vs-retailbi), and there is also a write-up on [GunSearchEngine.com](https://www.gunsearchengine.com/betsy-vs-retailbi?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence&utm_content=betsy-vs-retailbi).")} />
       </aside>
     </div>
   </section>
 
-  <FaqBlock items={FAQ_DEMAND_INTELLIGENCE} />
+  <FaqBlock items={FAQ_DEMAND_INTELLIGENCE} heading={"Questions we get"} />
 
   <section id="demo" class="border-t border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-2xl px-4 sm:px-6">
-      <p class="mb-6 text-sm leading-relaxed text-zinc-300">Tell us what you want to see, and we'll book your demo.</p>
+      <h2 class={`${h2Class} mb-3`}>{"Tell us about the website you want and we'll make it happen."}</h2>
+      <p class="mb-6 text-sm leading-relaxed text-zinc-300" set:html={md("Request a demo on any plan. We capture company, contact, phone, and email, then follow up to schedule a demo, and the portal opens after we review the request.")} />
       <LeadForm site="coriolisagency" defaultPillar="Demand Intelligence" />
-      <p class="mt-6 text-sm text-zinc-400">
-        Ready to apply now? <a href={APPLY_HREF} class={textLink} data-cta="apply" {...ext}>Start on GunSearchEngine.com</a>.
-      </p>
+      <p class="mt-6 text-sm text-zinc-400" set:html={md("[Request a demo](#demo) · [Start on GunSearchEngine.com](https://www.gunsearchengine.com/betsy/enterprise-copilot?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence&utm_content=gse-demo#demo)")} />
     </div>
   </section>
 
-  <p class="mx-auto mb-10 mt-2 max-w-2xl px-4 text-xs leading-relaxed text-zinc-500 sm:px-6">
-    Built by <a href={`${GSE}/investors`} class={textLink} {...ext}>Coriolis Agency</a> - Powered by <a href={`${GSE}/betsy-ai`} class={textLink} {...ext}>Betsy AI</a>. How what people typed differs from what sold (<a href={`${GSE}/betsy-vs-retailbi`} class={textLink} {...ext}>RetailBI</a>). Built for this market. We don&apos;t lecture your customers. <a href={`${GSE}/betsy/affiliate`} class={textLink} {...ext}>Affiliate program</a>.
-  </p>
 </BaseLayout>
