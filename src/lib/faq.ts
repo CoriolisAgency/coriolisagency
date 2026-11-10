@@ -117,18 +117,9 @@ export const FAQ_WOO_SELL_GUNS: FaqItem[] = [
 ];
 
 export const FAQ_SHOPIFY: FaqItem[] = [
-  {
-    q: "Does Coriolis build Shopify gun stores?",
-    a: "No. Coriolis builds WooCommerce you own. FFL Cockpit and FFL Checkout are WooCommerce plugins.",
-  },
-  {
-    q: "Why WooCommerce instead of Shopify for an FFL?",
-    a: "You leave with the site. Shopify is a hosted platform with its own acceptable-use rules. We do not republish Shopify’s fee card or write their policy. The published Coriolis offer is owned WooCommerce, FFL Cockpit, and the register you already run.",
-  },
-  {
-    q: "Can WooCommerce sell guns?",
-    a: "Yes, when a licensed FFL owns the store and checkout is built for dealer transfer. Serialized firearms ship FFL-to-FFL. This is not legal advice.",
-  },
+  faqMd("Does Coriolis build Shopify gun stores?", "No. Coriolis builds WooCommerce you own. FFL Cockpit and FFL Checkout are WooCommerce plugins."),
+  faqMd("Why WooCommerce instead of Shopify for an FFL?", "You leave with the site. Shopify hosts stores under its own Terms of Service, Acceptable Use Policy and payment rules, which we do not write and do not republish as a fee card. The published Coriolis offer is owned WooCommerce, FFL Cockpit, and the register you already run."),
+  faqMd("Can WooCommerce sell guns?", "Yes, when a licensed FFL owns the store and checkout is built for dealer transfer. Serialized firearms ship FFL-to-FFL. This is not legal advice."),
 ];
 
 export const FAQ_BEST: FaqItem[] = [
@@ -163,74 +154,26 @@ export const FAQ_BEST: FaqItem[] = [
 ];
 
 export const FAQ_DI_VS_RETAILBI: FaqItem[] = [
-  {
-    q: "How is Demand Intelligence different from RetailBI?",
-    a: "RetailBI tells you what sold - guns that rang at the register or checked out online, including their monthly Index of new guns sold at the same stores as last year. Demand Intelligence tells you what people typed when they searched, including empty searches. One is what sold. The other is what they asked for.",
-  },
-  {
-    q: "Is Demand Intelligence a RetailBI replacement?",
-    a: "No. Keep the Index for what sold at the register. Add the ask for typed intent and empty searches. We do not sell Gearfire's sales data.",
-  },
-  {
-    q: "I searched retailbi alternative. Do I rip out sell-through?",
-    a: "No. Searching \"alternative\" often means you want a second number, not to rip out what sold. Add Demand Intelligence beside what sold.",
-  },
-  {
-    q: "Is Coriolis affiliated with Gearfire or RetailBI?",
-    a: "No. We are not affiliated with Gearfire or RetailBI. We do not sell their sales data.",
-  },
-  {
-    q: "Do you sell Gearfire's sales data?",
-    a: "No. RetailBI sales data is theirs. Demand Intelligence is anonymized searches from GunSearchEngine.com, including on dealer sites, and related search tools.",
-  },
-  {
-    q: "Is this ATF / 4473 software?",
-    a: "No. Not 4473 software. Not NICS. Not your bound book. Those stay with the systems licensed for them.",
-  },
-  {
-    q: "How do I see guns and ammo people searched for but could not find?",
-    a: "That is empty-search demand - they looked, nothing matched. Request a Demand Intelligence demo, or see Unmet Demand on the Demand Intelligence page. Dealer sites can also write empty searches down with GunSearchEngine.com.",
-  },
-  {
-    q: "What should brands use instead of only NICS or what sold?",
-    a: "Use three numbers and do not mix them up: NICS is checks, not sales. RetailBI Index is sold units at the same stores. Search intent is what people typed - including empties. Keep what sold. Add the ask.",
-  },
+  faqMd("How is Demand Intelligence different from RetailBI?", "RetailBI tells you what sold, guns that rang at the register or checked out online, including a monthly Index of same-store new firearm sales. Demand Intelligence tells you what people typed when they searched, including empty searches."),
+  faqMd("Is Demand Intelligence a RetailBI replacement?", "No. Keep the Index for what sold at the register, and add what people typed, including empty searches. We do not sell Gearfire's sales data."),
+  faqMd("I searched retailbi alternative. Do I rip out sell-through?", "No. Searching \"alternative\" often means you want a second number, not to take out what sold. Add Demand Intelligence beside what sold."),
+  faqMd("Is Coriolis affiliated with Gearfire or RetailBI?", "No, and we do not sell their sales data."),
+  faqMd("Do you sell Gearfire's sales data?", "No. RetailBI sales data is theirs. Demand Intelligence is anonymized searches from GunSearchEngine.com, including on dealer sites, and related search tools."),
+  faqMd("Is this ATF / 4473 software?", "No. The 4473 sentence is in the section above."),
+  faqMd("How do I see guns and ammo people searched for but could not find?", "That is empty-search demand: they looked, and nothing matched. [Request a Demand Intelligence demo](/contact), or [see Unmet Demand](https://www.gunsearchengine.com/oem-firearms-demand-analytics?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence-vs-retailbi&utm_content=unmet-demand-faq#unmet). Dealer sites can also write empty searches down with [GunSearchEngine.com](https://www.gunsearchengine.com/for-dealers?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence-vs-retailbi&utm_content=dealer-program)."),
+  faqMd("What should brands use instead of only NICS or what sold?", "Use the three numbers without mixing them: NICS is background-check counts, not sales; the RetailBI Index is sold units at the same stores; search intent is what people typed, including empties. Keep what sold, and add the ask."),
 ];
 
 /** /demand-intelligence (SEO-U24, D-N16). Ported word for word from the GSE page's FAQS. */
 export const FAQ_DEMAND_INTELLIGENCE: FaqItem[] = [
-  {
-    q: "Do I only see my brand and three competitors?",
-    a: "No. Every plan includes full-market anonymized demand - the whole category, not a tiny competitor-only view. Optional brand pins help dashboards and digests highlight your labels; they do not hide the rest of the market.",
-  },
-  {
-    q: "How do the three plans differ?",
-    a: "Insight: full market demand for brand managers who don't have a data team (what's rising for up to 30 Eastern Time days - no session list or export). Growth: same market view, plus privacy-safe sessions and CSV when you need to dig (longer lookback). Platform: full feed for analysts - export, inventory search when linked, and an assistant hook if you want it. (Dealer market pulse is a separate 7-day view.)",
-  },
-  {
-    q: "How do team seats work?",
-    a: "Every plan includes 1 free Client Admin seat. Seat headcount is enforced in the portal Team page; purchase additional seats through Coriolis during onboarding or expansion.",
-  },
-  {
-    q: "What are rising totals vs sessions vs export?",
-    a: "Rising totals are aggregates (calibers/brands/loads going up). Sessions are privacy-safe journey rows (no emails or session ids). Export packages those rows as CSV and/or JSON for data teams. Full-market rising totals are available on every plan; depth and portability increase with Growth and Platform.",
-  },
-  {
-    q: "How fresh is the data?",
-    a: "Sessions are captured as shoppers search (including dealer embeds). Dashboard and API windows use Eastern Time calendar ranges. Short windows use a live sample; multi-day windows use saved daily totals where available.",
-  },
-  {
-    q: "What do I get via API?",
-    a: "REST with secure keys. All plans: demand endpoints within your max lookback. Growth+: sessions list. Growth: CSV export. Platform: JSON and CSV export with optional search-event detail. Docs: gunsearchengine.com/docs/enterprise-api.",
-  },
-  {
-    q: "How do I request a demo?",
-    a: "Request a demo on any plan. We capture company, contact, phone, and email, then follow up to schedule a demo. Portal and API keys open after review.",
-  },
-  {
-    q: "Is this a RetailBI replacement?",
-    a: "No. RetailBI reports what sold. This reports what people asked for. We are not affiliated with Gearfire or RetailBI.",
-  },
+  faqMd("Do I only see my brand and three competitors?", "No. Every plan includes full-market anonymized demand, the whole category, not a tiny competitor-only view. Optional brand pins help dashboards and digests highlight your labels; they do not hide the rest of the market."),
+  faqMd("How do the three plans differ?", "Insight is full-market demand for brand managers who don't have a data team, with up to 30 Eastern Time days of what's rising, and no session list or export. Growth adds privacy-safe sessions, CSV, and a longer lookback. Platform is the full feed for analysts: export, inventory search when linked, and an assistant hook if you want it. Dealer market pulse is a separate 7-day view."),
+  faqMd("How do team seats work?", "Every plan includes one free Client Admin seat. Additional named users, Client Users or extra admins, are purchased through Coriolis during onboarding or expansion. Seat headcount is enforced in the portal Team page."),
+  faqMd("What are rising totals vs sessions vs export?", "Rising totals are aggregates, calibers, brands and loads going up. Sessions are privacy-safe journey rows, with no emails or session ids. Export packages those rows as CSV and, on Platform, JSON for data teams. Full-market rising totals are on every plan; depth and portability increase with Growth and Platform."),
+  faqMd("How fresh is the data?", "Sessions are captured as shoppers search, including dealer embeds. Dashboard and API windows use Eastern Time calendar ranges. Short windows use a live sample; multi-day windows use saved daily totals where available."),
+  faqMd("What do I get via API?", "REST with secure keys. All plans get demand endpoints within your max lookback. Growth and Platform add the sessions list. Growth includes CSV export. Platform includes JSON and CSV export with optional search-event detail. Docs: [gunsearchengine.com/docs/enterprise-api](https://www.gunsearchengine.com/docs/enterprise-api?utm_source=coriolisagency&utm_medium=referral&utm_campaign=demand-intelligence&utm_content=api-docs-faq)."),
+  faqMd("How do I request a demo?", "Request a demo on any plan. We capture company, contact, phone, and email, then follow up to schedule a demo. Portal and API keys open after review."),
+  faqMd("Is this a RetailBI replacement?", "No. RetailBI reports what sold. This reports what people asked for. We are not affiliated with Gearfire or RetailBI."),
 ];
 
 /** SEO-U5 PR B (Brandy FINAL, 10/21): /ffl-website-cost. */
@@ -302,74 +245,30 @@ export const FAQ_GROK_BOT: FaqItem[] = [
 
 /** SEO-U5 PR B (Brandy FINAL, 10/21): /ffl-analytics. */
 export const FAQ_FFL_ANALYTICS: FaqItem[] = [
-  {
-    q: "What is FFL Analytics?",
-    a: "FFL Analytics is a free report of what shoppers typed into your website's search, including what they couldn't find. It also shows which sites sent the visitors who searched. You get it in your GSE dealer dashboard and in a morning email.",
-  },
-  {
-    q: "Is FFL Analytics free?",
-    a: "Yes. It's free with any GSE dealer account, including free GSE Basic, and GSE Basic is free forever. Pro is optional. Pro is normally $99/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026.",
-  },
-  {
-    q: "How is FFL Analytics different from Google Analytics?",
-    a: "Google Analytics shows how many people visited, and FFL Analytics shows what they were looking for. It doesn't replace Google's traffic reports, so run them side by side. FFL Analytics isn't affiliated with Google.",
-  },
-  {
-    q: "What's in the FFL Analytics morning email?",
-    a: "A summary of the last 24 hours of searches on your website, in your inbox around 6:30 AM Eastern. It covers sessions, searches, and the top calibers, brands and types shoppers looked for. Turn it on in your dealer settings once the script is running.",
-  },
-  {
-    q: "What do I have to install?",
-    a: "Just the GSE script on your website. You don't have to list any inventory on GunSearchEngine.com to use it. Once the script is running, you get the dashboard and the morning email.",
-  },
+  faqMd("What is FFL Analytics?", "A free report of what shoppers typed into your website's search, including what they couldn't find, and which sites sent the visitors who searched. You get it in your GSE dealer dashboard and in a morning email."),
+  faqMd("Is FFL Analytics free?", "Yes. It's free with any GSE dealer account, including free GSE Basic, and GSE Basic is free forever. Pro is optional. The Coriolis quote and the Pro window are in the section above."),
+  faqMd("How is FFL Analytics different from Google Analytics?", "Google Analytics counts the visits. FFL Analytics names what those visitors typed into site search, including the queries that found nothing. It doesn't replace Google's traffic reports, so run them side by side. FFL Analytics isn't affiliated with Google."),
+  faqMd("What's in the FFL Analytics morning email?", "A summary of the last 24 hours of searches on your website, in your inbox around 6:30 AM Eastern: sessions, searches, and the top calibers, brands and types shoppers looked for. Turn it on in your dealer settings once the script is running."),
+  faqMd("What do I have to install?", "Just the GSE script on your website. You don't have to list any inventory on GunSearchEngine.com to use it. Once the script is running, you get the dashboard and the morning email."),
 ];
 
 /** SEO-U32 /ffl-seo FAQ (Brandy FINAL plus PAUL-0901: not a paid service). */
 export const FAQ_FFL_SEO: FaqItem[] = [
-  {
-    q: "What is FFL SEO?",
-    a: "FFL SEO is search engine optimization for gun stores and FFL dealers: getting your own website found on Google when shoppers search for what you sell. FFL Search Console, free with any GSE dealer account, shows what to fix and the Google searches that find you.",
-  },
-  {
-    q: "Is there free SEO help for gun stores?",
-    a: "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic, with no Pro required. It gives you a weekly fix list and shows the Google searches that find you. GSE Basic also includes premium SEO backlinks and a dedicated Seller page on GunSearchEngine.com.",
-  },
-  {
-    q: "What does FFL Search Console show?",
-    a: "Four tabs: Fix this week, Google searches that find you, What shoppers ask for, and How your GSE listing shows on Google. Fix this week is a short list from a light check run at most once a week. The shopper tab covers the last 7 days, and the listing tab covers the last 28 days.",
-  },
-  {
-    q: "Do I have to connect my Google account?",
-    a: "No. Two tabs work without it: what shoppers ask for, and how your GSE listing shows on Google. Connect Google Search Console to see the searches that find your own website.",
-  },
-  {
-    q: "Can it change my website or my Google account?",
-    a: "No. It\u2019s read-only. It reads and shows, and you decide what to fix.",
-  },
-  {
-    q: "Can I do SEO on a template FFL website?",
-    a: "Only a little, because on template platforms you don\u2019t control the title tag, the slugs or the markup. A WooCommerce site on your own domain gives you your slugs, your content and your schema.",
-  },
+  faqMd("What is FFL SEO?", "Search engine optimization for gun stores and FFL dealers: getting your own website found on Google when shoppers search for what you sell. FFL Search Console, free with any GSE dealer account, shows what to fix and the Google searches that find you."),
+  faqMd("Is there free SEO help for gun stores?", "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic, with no Pro required. It gives you a weekly fix list and shows the Google searches that find you. GSE Basic also includes the backlinks and Seller page named above."),
+  faqMd("What does FFL Search Console show?", "Four tabs: a weekly fix list, the Google searches that find you, what shoppers asked for over the last 7 days, and how your GSE listing showed on Google over the last 28 days. The full list is on [the FFL Search Console page](/ffl-search-console)."),
+  faqMd("Do I have to connect my Google account?", "No. Two tabs work without it: what shoppers ask for, and how your GSE listing shows on Google. Connect Google Search Console to see the searches that find your own website."),
+  faqMd("Can it change my website or my Google account?", "No. It's read-only, and you decide what to fix."),
+  faqMd("Can I do SEO on a template FFL website?", "Only a little, because on template platforms you don't control the title tag, the slugs or the markup. A WooCommerce site on your own domain gives you your slugs, your content and your schema."),
+  faqMd("Which terms should I start with, and what should I not buy?", "Start with your company name, your differentiators, and local terms you can actually win. Leave \"Glock 19\" and \"AR-15\" alone until you have a reason and a way to measure the work, and do not buy a packaged list of instant backlinks."),
 ];
 
 /** SEO-U32 /ffl-search-console FAQ (Brandy FINAL). */
 export const FAQ_FFL_SEARCH_CONSOLE: FaqItem[] = [
-  {
-    q: "Is FFL Search Console free?",
-    a: "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic. No Pro required.",
-  },
-  {
-    q: "Do I have to connect Google?",
-    a: "No. Two tabs work without it: what shoppers ask for, and how your GSE listing shows on Google. Connect Google Search Console to see the searches that find your own website.",
-  },
-  {
-    q: "Can it change my site or my Google account?",
-    a: "No. It\u2019s read-only. It reads and shows, and you decide what to fix.",
-  },
-  {
-    q: "Is FFL Search Console real-time?",
-    a: "No. It pulls your Google data on a schedule: a starting baseline, then regular snapshots and updates. The fix list comes from a check run at most once a week.",
-  },
+  faqMd("Is FFL Search Console free?", "Yes. FFL Search Console is free with any GSE dealer account, including free GSE Basic. No Pro required."),
+  faqMd("Do I have to connect Google?", "No. Two tabs work without it: what shoppers ask for, and how your GSE listing shows on Google. Connect Google Search Console to see the searches that find your own website."),
+  faqMd("Can it change my site or my Google account?", "No. It's read-only. It reads and shows, and you decide what to fix."),
+  faqMd("Is FFL Search Console real-time?", "No. It pulls your Google data on a schedule: a starting baseline, then regular snapshots and updates. The weekly fix list is capped at one check per week."),
 ];
 
 /** SEO-U30 /ffl-payment-processing FAQ (Brandy FINAL plus PAUL-0901: slots filled from Paul's 10/21 answers). */
@@ -430,28 +329,10 @@ export const FAQ_HOSTING: FaqItem[] = [
 
 /** /ffl-messenger-enterprise. Brandy mock, Paul approved. First item opens in the accordion. */
 export const FAQ_FFL_MESSENGER_ENTERPRISE: FaqItem[] = [
-  {
-    q: "What's the difference between Pro and Enterprise?",
-    a: "Pro adds employee and rep seats, Tickets and fixed ticket rules. Enterprise adds the API, an MCP server, SSO, the Workflow builder and custom work by Coriolis.",
-  },
-  {
-    q: "Who can get Enterprise?",
-    a: "Any verified FFL that wants Enterprise features. One counter or many.",
-  },
-  {
-    q: "Can you read our messages?",
-    a: "No. Messages, documents and tickets are end-to-end encrypted. Custom integrations run on your side as your own connected FFL.",
-  },
-  {
-    q: "Can we see the DPA before we sign?",
-    a: "Yes. The DPAs are pre-planned, and you review them during scoping.",
-  },
-  {
-    q: "Where are you on SOC 2?",
-    a: "SOC 2 readiness planning is part of scoping. We walk your IT lead through it.",
-  },
-  {
-    q: "Why do you need our FFL number?",
-    a: "Everyone on FFL Messenger holds a license. Your FFL license is a public document, so we match the number to the ATF record and check that you run the shop.",
-  },
+  faqMd("What's the difference between Pro and Enterprise?", "Pro adds employee and rep seats, Tickets and fixed ticket rules. Enterprise adds the API, an MCP server, SSO, the Workflow builder and custom work by Coriolis."),
+  faqMd("Who can get Enterprise?", "Any verified FFL that wants Enterprise features, one counter or many."),
+  faqMd("Can you read our messages?", "No. Messages, documents and tickets are end-to-end encrypted. Custom integrations run on your side as your own connected FFL."),
+  faqMd("Can we see the DPA before we sign?", "Yes. The DPAs are pre-planned, and you review them during scoping."),
+  faqMd("Where are you on SOC 2?", "SOC 2 readiness planning is part of scoping. We walk your IT lead through it."),
+  faqMd("Why do you need our FFL number?", "Everyone on FFL Messenger holds a license. Your FFL license is a public document, so we match the number to the ATF record and check that you run the shop."),
 ];

@@ -4,6 +4,15 @@ import { btnPlan } from "../lib/links";
 import TalkSection from "../components/TalkSection.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import { FAQ_FFL_ANALYTICS } from "../lib/faq";
+import { md } from "../lib/md";
+
+// CA-VOICE-P1 batch 5 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-5/ffl-analytics.md, shipped as drafted.
+const mdLink = (s: string) => {
+  const m = s.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/);
+  if (!m) throw new Error("not a single link: " + s);
+  return { text: m[1], href: m[2] };
+};
+const signup = mdLink("[Create a free dealer account](https://www.gunsearchengine.com/dealers/register?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-analytics&utm_content=dealer-register-footer)");
 ---
 
 <BaseLayout
@@ -19,40 +28,19 @@ import { FAQ_FFL_ANALYTICS } from "../lib/faq";
       >
         Understand your gun store's website
       </h1>
-      <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300">
-        FFL Analytics shows what shoppers searched for on your gun store's website, including the searches that found nothing. It's free with any GunSearchEngine.com (GSE) dealer account, including free GSE Basic, no Pro required. Google Analytics tells you how many people visited, and FFL Analytics tells you what they were looking for.
-      </p>
-      <a
-        href="https://gunsearchengine.com/dealers/register?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-analytics&ref=coriolis-ffl-analytics"
-        class={`${btnPlan} mt-8`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Create a free dealer account
-      </a>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300" set:html={md("FFL Analytics shows what shoppers searched for on your gun store's website, including the searches that found nothing. It's free with any [GunSearchEngine.com](https://www.gunsearchengine.com/?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-analytics&utm_content=consumer-search) (GSE) dealer account, including free GSE Basic, with no Pro required. [Create a free dealer account](https://www.gunsearchengine.com/dealers/register?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-analytics&utm_content=dealer-register)")} />
     </div>
   </section>
 
   <section class="py-12">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold tracking-tight text-white">Free with any GSE dealer account</h2>
-      <ul
-        class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-300"
-      >
-        <li>What shoppers typed into your site search</li>
-        <li>What they searched for but couldn't find (searches with no results)</li>
-        <li>The 6:30 AM morning email summarizing yesterday's searches</li>
-        <li>Referrers: which sites sent the visitors who searched</li>
-      </ul>
+      <h2 class="text-xl font-semibold tracking-tight text-white">{"What the report covers"}</h2>
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400" set:html={md("Once the GSE script is on your website, the dashboard shows what shoppers typed into your site search, the searches that returned no results, and which sites sent the visitors who searched. You don't have to list any inventory on GunSearchEngine.com to use it.")} />
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400" set:html={md("A morning email, around 6:30 AM Eastern, summarizes the last 24 hours: sessions, searches, and the top calibers, brands and types shoppers looked for. Turn it on in your dealer settings once the script is running.")} />
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400" set:html={md("Google Analytics stays the traffic count, so run both side by side. FFL Analytics isn't affiliated with Google. Google Analytics is a trademark of Google LLC.")} />
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400" set:html={md("The same free GSE Basic account also includes premium SEO backlinks and a dedicated Seller page on GunSearchEngine.com. The weekly fix list and the Google searches that find you are in [FFL Search Console](/ffl-search-console).")} />
 
-      <p class="mt-4 text-sm leading-relaxed text-zinc-400">
-        GSE Basic also includes premium SEO backlinks and a dedicated Seller page on GunSearchEngine.com.
-      </p>
-
-      <p class="mt-8 text-sm leading-relaxed text-zinc-400">
-        Works alongside Google Analytics. Google Analytics shows how many people
-        visited. FFL Analytics shows what they were looking for.
-      </p>
+      <h2 class="mt-10 text-xl font-semibold tracking-tight text-white">{"GSE Pro, which is optional"}</h2>
 
       <div
         class="relative mt-8 overflow-hidden rounded-2xl border border-gold/60 bg-black p-6 shadow-[0_18px_48px_-20px_rgba(200,150,12,0.55)] sm:p-8"
@@ -62,61 +50,20 @@ import { FAQ_FFL_ANALYTICS } from "../lib/faq";
           aria-hidden="true"
           class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-gold to-transparent"
         ></div>
-        <h2
+        <p
           class="inline-flex items-center rounded-sm bg-gold px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-black"
         >
           Pro
-        </h2>
-        <p class="mt-4 text-base font-semibold leading-relaxed text-white">
-          Pro is normally $99/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026.
         </p>
-        <ul class="mt-5 space-y-3 text-sm leading-relaxed text-zinc-200">
-          <li class="flex gap-3">
-            <span aria-hidden="true" class="mt-px shrink-0 font-semibold text-gold">✓</span>
-            <span
-              >Monthly Demand Intelligence reports{" "}
-              <a
-                href="/images/ffl-demand-intelligence-sample-august-2026.png"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="font-medium text-gold underline decoration-gold/60 underline-offset-2 hover:text-[#e0a910]"
-                >(see sample)</a
-              ></span
-            >
-          </li>
-          <li class="flex gap-3">
-            <span aria-hidden="true" class="mt-px shrink-0 font-semibold text-gold">✓</span>
-            <span>Sightline embed with custom styling{" "}
-              <span class="text-zinc-400">(the Free plan gets the standard Sightline embed)</span></span>
-          </li>
-          <li class="flex gap-3">
-            <span aria-hidden="true" class="mt-px shrink-0 font-semibold text-gold">✓</span>
-            <span>OtterText integration for Sightline alerts{" "}
-              <span class="text-zinc-400">(uses your own OtterText account)</span></span>
-          </li>
-          <li class="flex gap-3">
-            <span aria-hidden="true" class="mt-px shrink-0 font-semibold text-gold">✓</span>
-            <span>Pro (Verified) status on GunSearchEngine.com</span>
-          </li>
-        </ul>
+        <p class="mt-4 text-base font-semibold leading-relaxed text-white" set:html={md("GSE Pro is optional. Coriolis quotes Pro at $99 a month. [GSE Pro](https://www.gunsearchengine.com/pro?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-analytics&utm_content=gse-pro), read November 10, 2026, says: \"Activate by Dec 31, 2026 and get Pro free through Dec 31, 2027.\"")} />
+        <p class="mt-4 text-sm leading-relaxed text-zinc-200" set:html={md("Pro adds monthly Demand Intelligence reports ([see sample](/images/ffl-demand-intelligence-sample-august-2026.png)), a Sightline embed with custom styling (the Free plan gets the standard Sightline embed), OtterText integration for Sightline alerts (uses your own OtterText account), and Pro (Verified) status on GunSearchEngine.com.")} />
       </div>
 
-      <a
-        href="https://gunsearchengine.com/dealers/register?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-analytics&ref=coriolis-ffl-analytics"
-        class={`${btnPlan} mt-8`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Create a free dealer account
-      </a>
-
-      <p class="mt-8 text-xs leading-relaxed text-zinc-500">
-        Not affiliated with Google. Google Analytics is a trademark of Google LLC.
-      </p>
+      <a href={signup.href} class={`${btnPlan} mt-8`} target="_blank" rel="noopener noreferrer">{signup.text}</a>
     </div>
   </section>
 
-  <FaqBlock items={FAQ_FFL_ANALYTICS} />
+  <FaqBlock items={FAQ_FFL_ANALYTICS} heading={"Questions we get"} />
 
-  <TalkSection />
+  <TalkSection heading={"Tell us about the website you want and we'll make it happen."} subline={"We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time."} />
 </BaseLayout>

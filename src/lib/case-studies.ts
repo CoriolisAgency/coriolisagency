@@ -40,6 +40,11 @@ export interface CaseStudy {
   sections: CaseSection[];
   cta: Paragraph;
   talkHeading?: string;
+  talkSubline?: string;
+  /** Hub card sentence as drafted (markdown links). */
+  cardMd?: string;
+  /** dateModified for Article JSON-LD. */
+  modified?: string;
   pos: string | null;
   posHref: string | null;
   /** Live shop domain. Null for drafts. */
@@ -52,6 +57,7 @@ export interface CaseStudy {
 
 /** Build date Coriolis ships these pages. JSON-LD metadata only, never shown in copy. */
 export const CASE_STUDIES_PUBLISHED = "2026-10-22";
+// CA-VOICE-P1 batch 6 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-6/case-studies*.md, shipped as drafted.
 
 export const CASE_STUDIES_HUB = {
   path: "/case-studies",
@@ -59,8 +65,9 @@ export const CASE_STUDIES_HUB = {
   meta: "See the WooCommerce stores Coriolis built for Naples Gun Shop, Allegheny Arms and Target Shotguns, each on the shop's own domain and hosted on WP Engine.",
   eyebrow: "Ecommerce · Case studies",
   h1: "Case studies: gun store websites we built",
+  talkSubline: "We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.",
   intro:
-    "Every gun shop sells a little differently, so every store we build is set up for the shop that owns it. Naples Gun Shop keeps AIM POS on the counter. Allegheny Arms sells through its own online store. Target Shotguns is a shotgun specialist on MicroBiz POS. Here is what we built for each one. Every store runs WooCommerce on the shop's own domain, hosted on WP Engine.",
+    "Every gun shop sells a little differently, so every store we build is set up for the shop that owns it. Naples Gun Shop keeps AIM POS on the counter, Allegheny Arms sells through its own online store, and Target Shotguns is a shotgun specialist on MicroBiz POS, each running WooCommerce on the shop's own domain, hosted on WP Engine.",
 } as const;
 
 export const CASE_STUDIES: CaseStudy[] = [
@@ -70,6 +77,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     kicker: "Gun shop · AIM POS",
     cardLine: "A full gun shop online, with its store connected to the AIM POS on the counter.",
     cardLink: "Read the Naples Gun Shop story",
+    cardMd: "[Naples Gun Shop](/case-studies/naples-gun-shop) is a full gun shop online, with its store connected to the AIM POS on the counter.",
     title: "Naples Gun Shop Case Study: AIM POS Website | Coriolis",
     meta: "Naples Gun Shop runs a Coriolis-built WooCommerce store on its own domain, connected to its AIM POS, with FFL checkout and in-store pickup.",
     h1: "Naples Gun Shop: one store online and on the counter, connected to AIM POS",
@@ -82,56 +90,64 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     sections: [
       {
-        heading: "The shop",
-        paragraphs: [
+        "heading": "The shop",
+        "paragraphs": [
           [
-            "Naples Gun Shop is a full-line gun shop in Southwest Florida. It sells handguns, rifles, shotguns and suppressors, NFA items, ammo, less-lethal gear and body armor. It also teaches Basic Pistol and concealed carry classes and handles FFL transfers. That's a big catalog, and the counter already runs on AIM POS.",
-          ],
-        ],
+            "Naples Gun Shop is a full-line gun shop in Southwest Florida. It sells handguns, rifles, shotguns and suppressors, NFA items, ammo, less-lethal gear and body armor, and it also teaches Basic Pistol and concealed carry classes and handles FFL transfers. That's a big catalog, and the counter already runs on AIM POS."
+          ]
+        ]
       },
       {
-        heading: "What we built",
-        paragraphs: [
+        "heading": "What we built",
+        "paragraphs": [
           [
-            "Coriolis built Naples Gun Shop a WooCommerce store on its own domain, naplesgunshop.net, hosted on WP Engine. We connected the store to AIM POS, the register the shop already runs, so the website and the counter work from the same system.",
-          ],
-          [
-            "Online, shoppers narrow a big catalog with filters for category, brand, price and stock, and the filters fold into a drawer on a phone. At checkout, a buyer picks the FFL dealer that will receive the firearm, or picks up at Naples Gun Shop. We also connected distributor catalogs, so the site can sell more than what's on the shelf.",
-          ],
-          [
-            "Naples Gun Shop is on FFL Accelerator, our plan for shops that want us to tune and watch the site for them.",
-          ],
-        ],
+            "The live store is ",
+            {
+              "text": "naplesgunshop.net",
+              "href": "https://naplesgunshop.net/"
+            },
+            ", a WooCommerce site on the shop's own domain, hosted on WP Engine, and connected to that AIM register so the website and the counter work from the same system. Online, shoppers narrow the catalog with filters for category, brand, price and stock, and the filters fold into a drawer on a phone. At checkout, a buyer picks the FFL dealer that will receive the firearm, or picks up at Naples Gun Shop. Distributor catalogs are connected too, so the site can sell more than what's on the shelf."
+          ]
+        ]
       },
       {
-        heading: "Where it stands",
-        paragraphs: [
+        "heading": "Where it stands",
+        "paragraphs": [
           [
-            "The store is live at ",
-            { text: "naplesgunshop.net", href: "https://naplesgunshop.net/" },
-            ", and the AIM POS on the counter stays the register. Naples Gun Shop is also one of the FFLs named in our ",
-            { text: "AIM POS integration press release", href: "/press/five-ffls-choose-coriolis-for-aim-pos-integration" },
-            ".",
-          ],
-        ],
+            "Naples Gun Shop is on FFL Accelerator, the plan for shops that want us to tune and watch the site for them. The AIM POS on the counter stays the register, and Naples Gun Shop is one of the FFLs named in our ",
+            {
+              "text": "AIM POS integration press release",
+              "href": "/press/five-ffls-choose-coriolis-for-aim-pos-integration"
+            },
+            "."
+          ]
+        ]
       },
       {
-        heading: "If your shop runs like this",
-        paragraphs: [
+        "heading": "If your shop runs like this",
+        "paragraphs": [
           [
-            "If you run AIM POS, you keep it. Coriolis builds the WooCommerce store on your domain and connects it to the register you already use, so your staff keeps ringing sales the way they do today. You own the site, and it runs on WP Engine. A big catalog is where shop filters and distributor catalogs matter most, because shoppers can get to the right gun without scrolling page after page, and you can list more than you stock.",
-          ],
-        ],
-      },
+            "If you run AIM POS, you keep it. Coriolis builds the WooCommerce store on your domain and connects it to the register you already use, so your staff keeps ringing sales the way they do today. You own the site, and it runs on WP Engine. A big catalog is where shop filters and distributor catalogs matter most, because shoppers can get to the right gun without scrolling page after page, and you can list more than you stock."
+          ]
+        ]
+      }
     ],
     cta: [
-      "Run AIM at the counter? See ",
-      { text: "WooCommerce for AIM", href: "/aim-pos" },
-      ", or what ",
-      { text: "FFL Accelerator", href: "/ecommerce#ffl-accelerator" },
-      " includes.",
+      "If you run AIM at the counter, see ",
+      {
+        "text": "connecting WooCommerce to AIM POS",
+        "href": "/aim-pos"
+      },
+      ", or ",
+      {
+        "text": "what FFL Accelerator includes",
+        "href": "/ecommerce#ffl-accelerator"
+      },
+      "."
     ],
     talkHeading: "Tell us about the website you want and we'll make it happen.",
+    talkSubline: "We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.",
+    modified: "2026-11-10",
     pos: "AIM POS",
     posHref: "/aim-pos",
     siteUrl: "https://naplesgunshop.net/",
@@ -146,6 +162,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     kicker: "Online store",
     cardLine: "A WooCommerce store on its own domain, with a big catalog shoppers can filter by category, brand, price and stock.",
     cardLink: "Read the Allegheny Arms story",
+    cardMd: "[Allegheny Arms](/case-studies/allegheny-arms) is a WooCommerce store on its own domain, with a big catalog shoppers can filter by category, brand, price and stock.",
     title: "Allegheny Arms Case Study: WooCommerce Store | Coriolis",
     meta: "Allegheny Arms sells online through a Coriolis-built WooCommerce store on its own domain, hosted on WP Engine, with shop filters that work on a phone.",
     h1: "Allegheny Arms: a WooCommerce store on its own domain",
@@ -156,50 +173,63 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     sections: [
       {
-        heading: "The store",
-        paragraphs: [
+        "heading": "The store",
+        "paragraphs": [
           [
-            "Allegheny Arms sells firearms, ammo and accessories online at alleghenyarms.com, along with its own AGW products and used guns. That's a lot of brands and a lot of products in one catalog. The website is the storefront, so it has to make a big catalog easy to get through on a laptop or a phone, and it has to belong to Allegheny, not to a platform that rents it out.",
-          ],
-        ],
+            "Allegheny Arms sells firearms, ammo and accessories online at ",
+            {
+              "text": "alleghenyarms.com",
+              "href": "https://alleghenyarms.com/"
+            },
+            ", along with its own AGW products and used guns. That's a lot of brands and a lot of products in one catalog. The website is the storefront, so it has to make that catalog easy to get through on a laptop or a phone, and it has to belong to Allegheny."
+          ]
+        ]
       },
       {
-        heading: "What we built",
-        paragraphs: [
+        "heading": "What we built",
+        "paragraphs": [
           [
-            "Coriolis built Allegheny Arms a WooCommerce store on its own domain, alleghenyarms.com, hosted on WP Engine. Allegheny owns the site.",
-          ],
-          [
-            "Shoppers narrow the catalog with filters for category, brand, price and stock, and the filters fold into a drawer on a phone, so nobody has to scroll page after page to find one product. A product search box sits in the header next to the cart and the account link, and the menu breaks the catalog into clear sections, with a Shop All menu for browsing. Every product page, the cart and the checkout run on Allegheny's own domain, so a sale never leaves the site.",
-          ],
-        ],
+            {
+              "text": "alleghenyarms.com",
+              "href": "https://alleghenyarms.com/"
+            },
+            " is theirs: a WooCommerce store on their domain, hosted on WP Engine. Shoppers narrow the catalog with filters for category, brand, price and stock, and the filters fold into a drawer on a phone, so nobody has to scroll page after page to find one product. A product search box sits in the header next to the cart and the account link, and the menu breaks the catalog into clear sections, with a Shop All menu for browsing. Every product page, the cart and the checkout run on Allegheny's own domain, so a sale never leaves the site."
+          ]
+        ]
       },
       {
-        heading: "Where it stands",
-        paragraphs: [
+        "heading": "Where it stands",
+        "paragraphs": [
           [
-            "The store is live at ",
-            { text: "alleghenyarms.com", href: "https://alleghenyarms.com/" },
-            ", and Allegheny Arms is on our homepage list of recent clients.",
-          ],
-        ],
+            "The store is live at alleghenyarms.com."
+          ]
+        ]
       },
       {
-        heading: "If you want a store like this",
-        paragraphs: [
+        "heading": "If you want a store like this",
+        "paragraphs": [
           [
-            "A WooCommerce store on your own domain is the simplest way to sell online. You own the site, it runs on WP Engine, and the catalog, the checkout and the customer accounts all live on it. Good filters matter more as the catalog grows, because a shopper on a phone won't page through hundreds of products to find one.",
-          ],
-        ],
-      },
+            "A WooCommerce store on your own domain is a straightforward way to sell online. You own the site, it runs on WP Engine, and the catalog, the checkout and the customer accounts all live on it. Good filters matter more as the catalog grows, because a shopper on a phone will not page through a long list to find one product."
+          ]
+        ]
+      }
     ],
     cta: [
-      "Want your own online store? See ",
-      { text: "FFL website plans", href: "/ecommerce" },
-      ", or what ",
-      { text: "gun-friendly hosting", href: "/gun-friendly-hosting" },
-      " includes.",
+      "For your own store, see ",
+      {
+        "text": "FFL website plans",
+        "href": "/ecommerce"
+      },
+      ", or ",
+      {
+        "text": "what gun-friendly hosting includes",
+        "href": "/gun-friendly-hosting"
+      },
+      "."
     ],
+    talkHeading: "Tell us about the website you want and we'll make it happen.",
+    talkSubline: "We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.",
+    modified: "2026-11-10",
     pos: null,
     posHref: null,
     siteUrl: "https://alleghenyarms.com/",
@@ -214,6 +244,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     kicker: "Shotgun specialist · MicroBiz POS",
     cardLine: "A shotgun specialist's store, connected to MicroBiz POS, with drop ship items kept apart from in-store stock.",
     cardLink: "Read the Target Shotguns story",
+    cardMd: "[Target Shotguns](/case-studies/target-shotguns) is a shotgun specialist's store, connected to MicroBiz POS, with drop ship items kept apart from in-store stock.",
     title: "Target Shotguns Case Study: MicroBiz POS Website | Coriolis",
     meta: "Target Shotguns runs a Coriolis-built WooCommerce store connected to MicroBiz POS, with FFL checkout and drop ship items kept apart.",
     h1: "Target Shotguns: a shotgun specialist's store, connected to MicroBiz POS",

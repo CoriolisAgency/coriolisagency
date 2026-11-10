@@ -3,7 +3,7 @@
  * /ffl-messenger-enterprise
  * Brandy's approved mock. Live header and footer come from BaseLayout.
  * The only CTA is Talk to Coriolis, to /contact?topic=ffl-messenger. No Pro CTA.
- * Not linked from nav, footer, or other pages.
+ * CA-VOICE-P1 batch 5: linked from the site footer, /about and /ai-studio (FFLM-LINKS.md). Indexable.
  */
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { LINKS } from "../lib/links";
@@ -13,6 +13,18 @@ import { FAQ_FFL_MESSENGER_ENTERPRISE } from "../lib/faq";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" };
 const contact = `${withBase("contact")}?topic=ffl-messenger`;
+import { md } from "../lib/md";
+
+// CA-VOICE-P1 batch 5 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-5/ffl-messenger-enterprise.md, shipped as drafted.
+const LINKS_RE = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+const links = (s: string) => [...s.matchAll(LINKS_RE)].map((m) => ({ text: m[1], href: m[2] }));
+const heroCtas = links("[Talk to Coriolis](/contact?topic=ffl-messenger) · [Tell us how your shops run](/contact?topic=ffl-messenger)");
+const entCta = links("[Talk to Coriolis](/contact?topic=ffl-messenger)")[0];
+const closeCta = links("[Talk to Coriolis](/contact?topic=ffl-messenger)")[0];
+const encMatch = ("\"We can't read them, so we have no plaintext to hand anyone.\" That protection covers messages, documents and tickets. Your integrations run on your side. A connector calls the API directly and counts as your own connected FFL. The Coriolis cloud integration handles metadata only." as string).match(/^"([^"]+)"\s+([\s\S]*)$/);
+if (!encMatch) throw new Error("encryption quote");
+const [, encQuote, encUnder] = encMatch;
+const steps = ("1. Talk to Coriolis, and tell us how your shops run. 2. We scope seats, integrations and the DPA. 3. Every license signs up with its FFL number. 4. Your team goes live on the private line." as string).split(/\s*\d+\.\s+/).filter(Boolean);
 ---
 
 <BaseLayout
@@ -35,14 +47,9 @@ const contact = `${withBase("contact")}?topic=ffl-messenger`;
       <div class="copy">
         <span class="kicker"><i></i>Secure Private Messaging for FFLs</span>
         <h1>FFL Messenger Pro and Enterprise</h1>
-        <p class="sub">Put your staff, your reps and your systems on one private, encrypted line.</p>
+        <p class="sub" set:html={md("FFL Messenger is a private, end-to-end encrypted line for verified FFLs. Shop-to-shop messaging is the same on Pro and Enterprise. There is no consumer or brand feed, and no public timeline. Each tier then adds what a bigger team asks for: seats and tickets on Pro, and connections to the systems you already run on Enterprise.")} />
         <div class="ctas">
-          <a class="btn btn-primary" href={contact}>Talk to Coriolis</a>
-        </div>
-        <div class="trust">
-          <span>Verified FFLs only</span>
-          <span>No brands, consumers or public feed</span>
-          <span>End-to-end encrypted</span>
+          {heroCtas.map((c) => <a class="btn btn-primary" href={c.href}>{c.text}</a>)}
         </div>
       </div>
       <div class="stage" aria-hidden="true">
@@ -58,74 +65,19 @@ const contact = `${withBase("contact")}?topic=ffl-messenger`;
       <div class="s-head">
         <div>
           <span class="eyebrow">Pro and Enterprise</span>
-          <h2>Pick the line your shop needs</h2>
         </div>
-        <p>Shop to shop messaging stays the same on both. Each tier adds what a bigger team asks for.</p>
       </div>
       <div class="tiers">
         <div class="tier">
-          <div class="top"><h3>Pro</h3><span class="tag">For your team</span></div>
-          <p class="lead">Bring your employees and your reps onto your shop's private line.</p>
-          <ul>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8960c" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>
-              <div><b>Employee and rep seats</b><small>You invite them. Your business assigns each seat.</small></div>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8960c" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>
-              <div><b>Tickets</b><small>Turn a thread into a job your team tracks to done.</small></div>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8960c" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>
-              <div><b>Ticket rules</b><small>Fixed routing, auto-assign and escalation.</small></div>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8960c" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>
-              <div><b>Staff statuses</b><small>Each person sets available, busy or do not disturb.</small></div>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8960c" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>
-              <div><b>Encrypted like every message</b><small>Team threads and tickets are end-to-end encrypted.</small></div>
-            </li>
-          </ul>
-          <div class="foot note">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8960c" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
-            <span>Seats, Tickets and rules on your FFL's account.</span>
-          </div>
+          <div class="top"><h2 class="tier-h">{"Pro, for your team"}</h2></div>
+          <p class="lead" set:html={md("Pro brings your employees and your reps onto your shop's private line. You invite them, and your business assigns each seat. A thread can become a ticket your team tracks to done, with fixed routing, auto-assign and escalation, and each person can set a status of available, busy or do not disturb. Team threads and tickets use the same end-to-end encryption as every other message on the line.")} />
         </div>
         <div class="tier ent">
-          <div class="top"><h3>Enterprise</h3><span class="tag">Any FFL that wants it</span></div>
-          <p class="lead">Connect FFL Messenger to the systems and tools you already run.</p>
-          <p class="plus">Everything in Pro, plus</p>
-          <ul>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB000" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>
-              <div><b>API</b><small>Your systems send and read on your line.</small></div>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB000" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>
-              <div><b>MCP server</b><small>Your own AI tools work with FFL Messenger under the permissions you set.</small></div>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB000" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>
-              <div><b>SSO</b><small>Your people sign in with your company login.</small></div>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB000" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>
-              <div><b>Workflow builder</b><small>Build your own rules past the fixed ones.</small></div>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB000" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>
-              <div><b>Custom work by Coriolis</b><small>We build what your operation needs.</small></div>
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB000" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"></path></svg>
-              <div><b>DPAs and SOC 2 readiness</b><small>Pre-planned DPAs and SOC 2 readiness planning, reviewed in scoping.</small></div>
-            </li>
-          </ul>
+          <div class="top"><h2 class="tier-h">{"Enterprise, for any FFL that wants it"}</h2></div>
+          <p class="lead" set:html={md("Enterprise is available to any verified FFL that wants it, one counter or many. It includes everything in Pro, then connects FFL Messenger to the systems and tools you already run: an API so your systems can send and read on your line, an MCP server so your own AI tools can work with FFL Messenger under the permissions you set, SSO so your people sign in with your company login, a workflow builder for rules past the fixed ones, and custom work by Coriolis for what your operation needs.")} />
+          <p class="lead" set:html={md("DPAs are pre-planned, and you review them during scoping. SOC 2 readiness planning is also part of scoping, and we walk your IT lead through it.")} />
           <div class="foot">
-            <span>Scoped to how your shops run.</span>
-            <a class="btn btn-primary" href={contact}>Talk to Coriolis</a>
+            <a class="btn btn-primary" href={entCta.href}>{entCta.text}</a>
           </div>
         </div>
       </div>
@@ -135,9 +87,9 @@ const contact = `${withBase("contact")}?topic=ffl-messenger`;
   <section class="field band" id="encryption">
     <div class="wrap">
       <div>
-        <span class="eyebrow amber">End-to-end encryption</span>
-        <p class="quote"><span class="qm">&ldquo;</span>We can't read them and neither can the ATF.<span class="qm">&rdquo;</span></p>
-        <p class="under">Your integrations run on your side. A connector calls the API directly and counts as your own connected FFL. The Coriolis cloud integration handles metadata only.</p>
+        <h2 class="eyebrow amber">{"End-to-end encryption"}</h2>
+        <p class="quote"><span class="qm">&ldquo;</span>{encQuote}<span class="qm">&rdquo;</span></p>
+        <p class="under" set:html={md(encUnder)} />
       </div>
       <div class="enc">
         <div class="row">
@@ -160,15 +112,11 @@ const contact = `${withBase("contact")}?topic=ffl-messenger`;
     <div class="wrap">
       <div class="s-head">
         <div>
-          <span class="eyebrow">How it works</span>
-          <h2>Four steps to your own line</h2>
+          <h2>{"How it works"}</h2>
         </div>
       </div>
       <div class="steps">
-        <div class="step"><div class="n">1</div><b>Talk to Coriolis</b><span>Tell us how your shops run.</span></div>
-        <div class="step"><div class="n">2</div><b>Scope it</b><span>We map seats, integrations and the DPA.</span></div>
-        <div class="step"><div class="n">3</div><b>Verify each license</b><span>Every license signs up with its FFL number.</span></div>
-        <div class="step"><div class="n">4</div><b>Go live</b><span>Your team works the private line.</span></div>
+        {steps.map((t, i) => <div class="step"><div class="n">{i + 1}</div><span>{t}</span></div>)}
       </div>
     </div>
   </section>
@@ -177,15 +125,15 @@ const contact = `${withBase("contact")}?topic=ffl-messenger`;
     <div class="wrap">
       <div class="side">
         <span class="eyebrow">Questions</span>
-        <h2>Questions FFLs ask</h2>
-        <p>Something else? <a href={contact}>Ask Paul</a>.</p>
+        <h2>{"Questions FFLs ask"}</h2>
+        <p set:html={md("Something else? [Ask Paul](/contact?topic=ffl-messenger).")} />
       </div>
       <div>
         {
           FAQ_FFL_MESSENGER_ENTERPRISE.map((item, i) => (
             <details open={i === 0 ? true : undefined}>
               <summary>{item.q}</summary>
-              <p>{item.a}</p>
+              {item.html ? <p set:html={item.html} /> : <p>{item.a}</p>}
             </details>
           ))
         }
@@ -196,20 +144,12 @@ const contact = `${withBase("contact")}?topic=ffl-messenger`;
   <section class="field close" id="contact-cta">
     <div class="wrap">
       <span class="kicker"><i></i>Secure Private Messaging for FFLs</span>
-      <h2>Tell us how your shops run</h2>
-      <p class="sub">We scope Pro or Enterprise to fit. Paul answers.</p>
+      <h2>{"Tell us about the website you want and we'll make it happen."}</h2>
+      <p class="sub" set:html={md("We scope Pro or Enterprise to fit. Paul answers.")} />
       <div class="ctas">
-        <a class="btn btn-primary" href={contact}>Talk to Coriolis</a>
+        <a class="btn btn-primary" href={closeCta.href}>{closeCta.text}</a>
       </div>
-      <div class="proof">
-        <span>100+ clients</span>
-        <i class="dot"></i>
-        <a href={TRUSTINDEX_REVIEWS_HREF} {...ext}>
-          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5-star Google rating
-        </a>
-        <i class="dot"></i>
-        <span>Member of NSSF, FPC and GOA</span>
-      </div>
+      <p class="proof" set:html={md("Coriolis has 100+ clients and a [5-star Google rating](https://www.trustindex.io/reviews/coriolisagency.com), and is a member of NSSF, FPC and GOA.")} />
     </div>
   </section>
 </BaseLayout>
@@ -381,7 +321,10 @@ const contact = `${withBase("contact")}?topic=ffl-messenger`;
     box-shadow: 0 0 0 1px rgba(255, 176, 0, 0.12), 0 30px 60px rgba(0, 0, 0, 0.35);
   }
   .tier .top { display: flex; justify-content: space-between; align-items: center; }
-  .tier h3 { font-size: 26px; font-weight: 600; color: #fff; }
+  .tier h3, .tier .tier-h { font-size: 26px; font-weight: 600; color: #fff; }
+  .tier .lead + .lead { margin-top: 0; }
+  .band h2.eyebrow { margin: 0; }
+  .proof a { text-decoration: underline; text-underline-offset: 2px; }
   .tag {
     font-size: 11px;
     font-weight: 600;

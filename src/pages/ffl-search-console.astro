@@ -9,7 +9,16 @@ import FaqBlock from "../components/FaqBlock.astro";
 import { btnPlan, linkClass } from "../lib/links";
 import { withBase } from "../lib/base";
 import { FAQ_FFL_SEARCH_CONSOLE } from "../lib/faq";
-import { FSC_TABS } from "../lib/fsc-tabs";
+import { md } from "../lib/md";
+
+// CA-VOICE-P1 batch 5 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-5/ffl-search-console.md, shipped as drafted.
+const mdLink = (s: string) => {
+  const m = s.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/);
+  if (!m) throw new Error("not a single link: " + s);
+  return { text: m[1], href: m[2] };
+};
+const tabs = ["**Fix this week.** A short list of things to fix on your website, from a light check run at most once a week. You can turn the check off in Settings.", "**Google searches that find you.** Connect your own Google Search Console and see the searches and pages that bring people to your site.", "**What shoppers ask for.** The calibers, brands and types shoppers searched for on your store over the last 7 days. No Google connection needed.", "**How your GSE listing shows on Google.** Clicks, impressions and position for your GSE listing over the last 28 days. This one works before you connect anything."] as const;
+const [signup, open] = ("[Create your free dealer account](https://www.gunsearchengine.com/dealers/register?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-search-console&utm_content=dealer-register) · [Already a dealer? Open FFL Search Console](https://www.gunsearchengine.com/dealers/ffl-search-console?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-search-console&utm_content=open-console)" as string).split(" · ").map(mdLink);
 ---
 
 <BaseLayout
@@ -25,66 +34,36 @@ import { FSC_TABS } from "../lib/fsc-tabs";
       >
         FFL Search Console: see how Google finds your gun store
       </h1>
-      <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300">
-        FFL Search Console is in your GunSearchEngine.com (GSE) dealer dashboard. It works with Google Search Console, it’s read-only, and it’s free with any GSE dealer account, no Pro required. Google Search Console shows how people find you on Google. FFL Search Console adds what shoppers searched for on your store and a short list of what to fix this week.
-      </p>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300" set:html={md("FFL Search Console is in your [GunSearchEngine.com](https://www.gunsearchengine.com/?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-search-console&utm_content=consumer-search) (GSE) dealer dashboard. It works with Google Search Console, it's read-only, and it's free with any GSE dealer account, with no Pro required. Google Search Console shows how people find you on Google. FFL Search Console adds what shoppers searched for on your store and a short list of what to fix this week.")} />
     </div>
   </section>
 
   <section class="py-12">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold tracking-tight text-white">Four tabs</h2>
+      <h2 class="text-xl font-semibold tracking-tight text-white">{"Four tabs"}</h2>
       <ul class="mt-4 space-y-3 text-sm leading-relaxed text-zinc-300">
-        {FSC_TABS.map((t) => (
-          <li><strong class="text-white">{t.name}</strong> {t.body}</li>
-        ))}
+        {tabs.map((t) => <li set:html={md(t)} />)}
       </ul>
 
-      <h2 class="mt-10 text-xl font-semibold tracking-tight text-white">How often it updates</h2>
-      <p class="mt-4 text-sm leading-relaxed text-zinc-400">
-        FFL Search Console pulls your Google data on a schedule: a starting baseline, then regular snapshots and updates. It isn’t a live, minute-by-minute view.
-      </p>
-
-      <h2 class="mt-10 text-xl font-semibold tracking-tight text-white">What it isn’t</h2>
-      <p class="mt-4 text-sm leading-relaxed text-zinc-400">
-        It doesn’t change anything in your Google account or on your website. It reads and shows, and you decide what to fix. It works alongside Google Search Console, not in place of it.
-      </p>
-
-      <p class="mt-8 text-sm leading-relaxed text-zinc-400">
-        More on SEO for gun stores: <a href={withBase("ffl-seo")} class={linkClass}>FFL SEO</a>.
-      </p>
-
-      <p class="mt-4 text-sm leading-relaxed text-zinc-400">
-        <a href="https://www.gunsearchengine.com/pro" class={linkClass}>Want more? Pro is normally $99/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026.</a>
-      </p>
+      <h2 class="mt-10 text-xl font-semibold tracking-tight text-white">{"How often it updates, and what it leaves alone"}</h2>
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400" set:html={md("FFL Search Console pulls your Google data on a schedule: a starting baseline, then regular snapshots and updates. It isn't a live, minute-by-minute view. The fix list is built from that weekly check.")} />
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400" set:html={md("It doesn't change anything in your Google account or on your website. It reads and shows, and you decide what to fix. It works alongside Google Search Console, not in place of it.")} />
+      <p class="mt-8 text-sm leading-relaxed text-zinc-400" set:html={md("More on [SEO tools for gun stores](/ffl-seo). The on-site search report, including queries that found nothing, is [FFL Analytics](/ffl-analytics).")} />
+      <p class="mt-4 text-sm leading-relaxed text-zinc-400" set:html={md("GSE Pro is optional. Coriolis quotes Pro at $99 a month. [GSE Pro](https://www.gunsearchengine.com/pro?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-search-console&utm_content=gse-pro), read November 10, 2026, says: \"Activate by Dec 31, 2026 and get Pro free through Dec 31, 2027.\"")} />
 
       <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <a
-          href="https://gunsearchengine.com/dealers/register?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-search-console&ref=coriolis-ffl-search-console"
-          class={btnPlan}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Create your free dealer account
-        </a>
-        <a
-          href="https://www.gunsearchengine.com/dealers/ffl-search-console"
-          class={linkClass}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Already a dealer? Open FFL Search Console
-        </a>
+        <a href={signup.href} class={btnPlan} target="_blank" rel="noopener noreferrer">{signup.text}</a>
+        <a href={open.href} class={linkClass} target="_blank" rel="noopener noreferrer">{open.text}</a>
       </div>
     </div>
   </section>
 
-  <FaqBlock items={FAQ_FFL_SEARCH_CONSOLE} />
+  <FaqBlock items={FAQ_FFL_SEARCH_CONSOLE} heading={"Questions we get"} />
 
   <section class="pb-12">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
       <p class="text-xs leading-relaxed text-zinc-500">
-        Not affiliated with Google. Google Search Console is a trademark of Google LLC.
+        {"Not affiliated with Google. Google Search Console is a trademark of Google LLC."}
       </p>
     </div>
   </section>

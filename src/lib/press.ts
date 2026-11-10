@@ -8,6 +8,8 @@ export type PressPost = {
   dek: string;
   date: string;
   dateLabel: string;
+  /** dateModified for NewsArticle JSON-LD. */
+  modified?: string;
   location: string;
   ogImagePath: string;
   imageAlt: string;
@@ -26,6 +28,7 @@ export const PRESS_POSTS: PressPost[] = [
       "Naples Gun Shop, Down Range Chico, Lawful Defense, 2A Firearms, and The Range in McKinney Choose Coriolis Agency for AIM POS Integration",
     dek: "Five FFL retailers and shooting ranges selected Coriolis Agency to integrate AIM POS with WooCommerce storefronts they own.",
     date: "2026-09-02",
+    modified: "2026-11-10",
     dateLabel: "September 2, 2026",
     location: "Greenville, S.C.",
     ogImagePath: CANON_PATHS.rangeMckinney,
@@ -54,6 +57,7 @@ export const PRESS_POSTS: PressPost[] = [
       "Tier 1 Kinetics, Jim's Armory, Green Mountain Sporting Goods, and Guardian Guns & Ammo Choose Coriolis Agency for Custom WooCommerce Stores",
     dek: "A rifle maker, a GunTuber, a Vermont outfitter and a New York training center chose Coriolis Agency for custom WooCommerce stores they own.",
     date: "2026-11-09",
+    modified: "2026-11-10",
     dateLabel: "November 9, 2026",
     location: "Greenville, S.C.",
     ogImagePath: CANON_PATHS.tier1Kinetics,
