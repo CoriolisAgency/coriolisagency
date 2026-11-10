@@ -1,0 +1,97 @@
+---
+/**
+ * REUSE-P1 01: /why-ffls-suck-at-ecommerce (Paul yes via Chief, 2026-11-10 12:49 PM ET).
+ * Copy from copy-desk/reuse-p1/01-why-ffls-suck-at-ecommerce.md, shipped as drafted.
+ * Hero and OG are the generated REUSE-P1 chart (reuse-p1/heroes, sources in SOURCES.md), not the archive image.
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/base";
+import { md } from "../lib/md";
+
+const intro = [
+  "Paul Angell has audited thousands of firearms ecommerce sites, and the stores that stall almost always share the same five problems. The dealer rented a firearms-specific template, never actually owned the store, launched with no plan to earn traffic, burned hours on social platforms that throttle firearms content, and put the same catalog online at the same prices as everyone else."
+];
+const sections = [
+  {
+    "h": "The Wrong Platform",
+    "ps": [
+      "The easy demo is a firearms-specific template that looks finished on day one. What you get is a store with ads you cannot take down, a layout you can barely change, and almost no control over the titles, slugs, and schema that decide whether Google can even describe the shop correctly. Integrations tend to be thin, dropshipping is often less automated than the sales call made it sound, and the basics you assumed were included show up later as paid add-ons.",
+      "You spend more time fighting the platform than running the store, and every extra fee comes out of a margin that was already tight. If you want to compare the platforms themselves, that walkthrough lives on our [comparison of FFL store platforms](https://www.coriolisagency.com/best-ffl-ecommerce-website)."
+    ]
+  },
+  {
+    "h": "Renting the Store Instead of Owning It",
+    "ps": [
+      "The other thing those template vendors rarely put on the homepage is what happens when you leave. The platform is theirs. Walk away, and you leave the design, the product data, and the customer list behind with it.",
+      "That is renting a store.",
+      "Coriolis builds [WooCommerce stores on your domain](https://www.coriolisagency.com/ecommerce), hosts them, and supports them, and you own the site. If you leave, the site goes with you, and there is no annual contract."
+    ]
+  },
+  {
+    "h": "Launching Is Not a Traffic Plan",
+    "ps": [
+      "A lot of dealers spend real money getting the store live, flip the switch, and then wait for customers to show up on their own. A finished catalog is not a marketing plan, and a launch day is not the same thing as a way to get found.",
+      "The work that actually produces customers is getting the site found and having a way to talk to people who already bought. [How a gun store gets found in search](https://www.coriolisagency.com/ffl-seo) is one half of that, and [email that brings buyers back](https://www.coriolisagency.com/email-marketing-for-ffl-ecommerce) is the other. This page is the diagnosis; those two pages are where the traffic and repeat-order work lives."
+    ]
+  },
+  {
+    "h": "Social Time vs. a Site You Own",
+    "ps": [
+      "Facebook and Instagram will take as many hours as you will give them, and firearms content is the first thing those platforms throttle. The time feels productive because you can see the activity, but very little of it turns into traffic or orders you keep, because you do not own the audience and the rules can change overnight.",
+      "The same hours go further when they build something you keep: pages that can rank, a giveaway or a lead offer that collects an address, and an email list that still reaches the customer when a social platform decides it has had enough of guns."
+    ]
+  },
+  {
+    "h": "No Brand, Product, or Price Differentiation",
+    "ps": [
+      "When every FFL puts the same distributor catalog online at the same prices, the only move left is to undercut the next shop, and that race has a predictable finish. A store like that is the retail version of a cover band: people can hear the songs anywhere, so they pick the cheapest ticket.",
+      "What actually sets a shop apart is content only you would write, inventory other shops do not have, bundles you put together yourself, and a brand that belongs to you instead of to the template. That requires a site you can actually change, and a reason for a buyer to pick your tab over the one next to it."
+    ]
+  },
+  {
+    "h": "What To Do Instead",
+    "ps": [
+      "Start with a website you own, on your domain, with a plan for search and email, and keep the register you already run. Coriolis builds those WooCommerce stores, and the [FFL ecommerce plans](https://www.coriolisagency.com/ecommerce) are on that page, not here. If dropshipping is part of how you want to fill the catalog, [how to fill the catalog from distributors](https://www.coriolisagency.com/firearms-dropshipping) is the next read. If you already have a counter system, [the POS integrations page](https://www.coriolisagency.com/gun-store-pos) covers third-party registers that work with WooCommerce, including AIM, MicroBiz, Rapid Gun Systems, and Trident 1, on Warlord and FFL Accelerator.",
+      "Paul Angell, the founder of Coriolis and an AmmoReady veteran, has consulted 5,000+ FFLs and got nearly 2,000 of them online. The pattern above is what that work keeps turning up.",
+      "If you want to talk about a store you would actually own, [get in touch](https://www.coriolisagency.com/contact)."
+    ]
+  }
+];
+const heroAlt = "Bar chart of Paul Angell's work with FFLs: 5,000+ consulted and nearly 2,000 brought online, beside the five problems stalled stores almost always share.";
+---
+
+<BaseLayout
+  title="Why FFLs Suck at Ecommerce | Coriolis"
+  description="Why so many FFL online stores stall: a rented template, no traffic plan, and nothing that sets the shop apart. What actually has to change, from Coriolis."
+  path="/why-ffls-suck-at-ecommerce"
+  ogImagePath="brand/why-ffls-suck-at-ecommerce-og-1200x630.jpg"
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h1 class="max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]">
+        {"Why FFLs Suck at Ecommerce"}
+      </h1>
+      {intro.map((p) => <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300" set:html={md(p)} />)}
+      <picture>
+        <source srcset={withBase("brand/why-ffls-suck-at-ecommerce-hero-1600x900.webp")} type="image/webp" />
+        <img
+          src={withBase("brand/why-ffls-suck-at-ecommerce-hero-1600x900.jpg")}
+          alt={heroAlt}
+          width="1600"
+          height="900"
+          fetchpriority="high"
+          class="mt-10 w-full min-w-0 rounded-2xl ring-1 ring-white/10"
+        />
+      </picture>
+    </div>
+  </section>
+
+  {sections.map((s, i) => (
+    <section class:list={["py-12", i < sections.length - 1 && "border-b border-zinc-800/80"]}>
+      <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+        <h2 class="text-xl font-semibold text-white">{s.h}</h2>
+        {s.ps.map((p) => <p class="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-400" set:html={md(p)} />)}
+      </div>
+    </section>
+  ))}
+</BaseLayout>
