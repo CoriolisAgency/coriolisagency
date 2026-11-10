@@ -83,6 +83,46 @@
       "statusCode": 301
     },
     {
+      "source": "/seo-is-deal-long-live-seo",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/seo-is-deal-long-live-seo/",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/gun-industry-seo-company-boosting-online-visibility-for-firearms-businesses",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/gun-industry-seo-company-boosting-online-visibility-for-firearms-businesses/",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/mastering-firearms-seo-boost-your-gun-stores-online-visibility",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/mastering-firearms-seo-boost-your-gun-stores-online-visibility/",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/firearms-seo",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/firearms-seo/",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
       "source": "/firearms-digital-marketing-agency",
       "destination": "/",
       "statusCode": 301
@@ -225,8 +265,13 @@
     },
     {
       "source": "/is-woocommerce-good-for-firearms",
-      "destination": "/ecommerce",
-      "permanent": true
+      "destination": "/can-you-use-woocommerce-to-sell-guns",
+      "statusCode": 301
+    },
+    {
+      "source": "/is-woocommerce-good-for-firearms/",
+      "destination": "/can-you-use-woocommerce-to-sell-guns",
+      "statusCode": 301
     },
     {
       "source": "/can-you-use-woocommerce-to-sell-guns-the-complete-compliance-first-guide-for-ffl-holders-gun-stores-2a-brands-in-2026",
