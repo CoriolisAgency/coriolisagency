@@ -3,6 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import LeadForm from "@coriolis/lead-form/LeadForm.astro";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
+import { md } from "../lib/md";
+// CA-VOICE-P1 batch 3 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-3/contact.md, shipped as drafted.
 ---
 
 <BaseLayout
@@ -32,11 +34,9 @@ import { withBase } from "../lib/base";
           height="900"
           class="mt-6 w-full min-w-0 rounded-2xl object-cover ring-1 ring-white/10"
         />
-        <p class="mt-4 max-w-xl text-sm leading-relaxed text-zinc-400">
-          Tell us about the website you want and we'll make it happen. We
-          build, host, and support your open source WooCommerce website. There
-          is no contract and you can cancel at any time.
-        </p>
+        <h2 class="mt-6 text-xl font-semibold tracking-tight text-white">{"Tell us about the website you want and we'll make it happen."}</h2>
+        <p class="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400" set:html={md("We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.")} />
+        <p class="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400" set:html={md("Write to us about the store you want, a product you want built, or demand work you want to see. The people at Coriolis are Paul and Joel, in Greenville, SC, and mail goes to [support@coriolisagency.com](mailto:support@coriolisagency.com). We will get back to you.")} />
       </div>
 
       <LeadForm site="coriolisagency" />

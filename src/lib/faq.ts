@@ -64,34 +64,13 @@ export const FAQ_AMMOREADY: FaqItem[] = [
 ];
 
 export const FAQ_GEARFIRE: FaqItem[] = [
-  {
-    q: "Is Coriolis affiliated with Gearfire or RetailBI?",
-    a: "No. Marks belong to their owners. We do not sell Gearfire’s sales data.",
-  },
-  {
-    q: "Can I leave Gearfire without going dark?",
-    a: "Yes. Keep your domain. We stand up WooCommerce before you give notice, map the catalog, redirect the URLs that already rank, test a mixed cart, then cut DNS. Do not give notice until the new store is ready.",
-  },
-  {
-    q: "What is Gearfire’s 2026 price?",
-    a: "We do not republish Gearfire’s fee card. It is theirs and it changes. Compare their invoice to the published Coriolis ladder: Minute Man $169, Militia $269, Gun Runner $369, Warlord $469, FFL Accelerator $569. Setup $500 or $2,500.",
-  },
-  {
-    q: "Does switching off Gearfire kill RetailBI?",
-    a: "No. Demand Intelligence is not a RetailBI replacement. Keep the Index for what sold. Add search intent if you want what people typed. See Demand Intelligence vs RetailBI.",
-  },
-  {
-    q: "Is Coriolis another closed FFL network?",
-    a: "No. It is open WooCommerce on your domain. Cancel and the site goes with you.",
-  },
-  {
-    q: "Do you run my 4473?",
-    a: "No. Coriolis is not 4473, NICS, or bound-book software. This is not legal advice.",
-  },
-  {
-    q: "What about AmmoReady?",
-    a: "Same owned-Woo model. See the AmmoReady alternative. Founder context lives there and on the best FFL ecommerce hub.",
-  },
+  faqMd("Is Coriolis affiliated with Gearfire or RetailBI?", "No. Marks belong to their owners, and we do not sell Gearfire's sales data."),
+  faqMd("Can I leave Gearfire without going dark?", "Yes. Keep your domain. We stand up WooCommerce before you give notice, map the catalog, redirect the URLs that already rank, test a mixed cart, then cut DNS, and you should not give notice until the new store is ready."),
+  faqMd("What is Gearfire's 2026 price?", "We do not republish Gearfire's fee card, because it is theirs and it changes. Compare their invoice to the published Coriolis ladder: Minute Man $169, Militia $269, Gun Runner $369, Warlord $469, FFL Accelerator $569. Setup $500 or $2,500."),
+  faqMd("Does switching off Gearfire kill RetailBI?", "No. Demand Intelligence is not a RetailBI replacement. Keep the Index for what sold, and add search intent if you want what people typed. See [how Demand Intelligence sits next to RetailBI](/demand-intelligence-vs-retailbi)."),
+  faqMd("Is Coriolis another closed FFL network?", "No. It is open WooCommerce on your domain, and if you cancel, the site goes with you."),
+  faqMd("Do you run my 4473?", "No. The 4473 sentence is in the section above, and this is not legal advice."),
+  faqMd("What about AmmoReady?", "The same owned-Woo model. See [how Coriolis compares with AmmoReady](/ammoready-alternative). Founder context lives there and on the best FFL ecommerce hub."),
 ];
 
 export const FAQ_EMAIL: FaqItem[] = [
@@ -281,58 +260,22 @@ export const FAQ_COST: FaqItem[] = [
 
 /** SEO-U5 PR B (Brandy FINAL, 10/21): /leave-ammoready. */
 export const FAQ_LEAVE_AMMOREADY: FaqItem[] = [
-  {
-    q: "Can I leave AmmoReady without my site going offline?",
-    a: "Yes, if you go in order. Get the domain in your name, build the new store on it, redirect the pages that rank, then switch DNS.",
-  },
-  {
-    q: "When should I give AmmoReady notice?",
-    a: "Not until the new store is ready. We build it on your domain first, so you give notice with the new site already standing.",
-  },
-  {
-    q: "Do I keep my domain?",
-    a: "Yes, once the registrar account is in your name. Find out who holds it and fix that first, because everything else depends on it. Then we build the new WooCommerce store on your domain before you give notice.",
-  },
-  {
-    q: "Will I lose my Google rankings?",
-    a: "Nobody can promise rankings, but you protect them by redirecting the pages that bring you traffic. Google Search Console shows which product, category and info pages those are. Each one gets redirected to its page on the new store.",
-  },
-  {
-    q: "Can I keep selling distributor products after I leave AmmoReady?",
-    a: "Yes. Distributor catalogs run through FFL Cockpit, starting with the Militia plan at $269 a month, which includes 21 distributor catalogs. If you only sell your own stock, Minute Man at $169 covers it.",
-  },
-  {
-    q: "What does it cost to switch from AmmoReady?",
-    a: "Setup is $500 or $2,500, then $169 to $569 a month, with no annual contract. We don't publish AmmoReady's prices, so put your current invoice next to our plan ladder.",
-  },
+  faqMd("Can I leave AmmoReady without my site going offline?", "Yes, if you go in order. Get the domain in your name, build the new store on it, redirect the pages that rank, then switch DNS."),
+  faqMd("When should I give AmmoReady notice?", "Not until the new store is ready. We build it on your domain first, so you give notice with the new site already standing."),
+  faqMd("Do I keep my domain?", "Yes, once the registrar account is in your name. Find out who holds it and fix that first, because everything else depends on it, and then we build the new WooCommerce store on your domain before you give notice."),
+  faqMd("Will I lose my Google rankings?", "Nobody can promise rankings, but you protect them by redirecting the pages that bring you traffic. Google Search Console shows which product, category and info pages those are, and each one gets redirected to its page on the new store."),
+  faqMd("Can I keep selling distributor products after I leave AmmoReady?", "Yes. Distributor catalogs run through FFL Cockpit, starting with the Militia plan at $269 a month, which includes 21 distributor catalogs. If you only sell your own stock, Minute Man at $169 covers it."),
+  faqMd("What does it cost to switch from AmmoReady?", "Setup is $500 or $2,500, then $169 to $569 a month, with no annual contract. We don't publish AmmoReady's prices, so put your current invoice next to our plan ladder."),
 ];
 
 /** SEO-U5 PR B (Brandy FINAL, 10/21): /leave-gearfire. */
 export const FAQ_LEAVE_GEARFIRE: FaqItem[] = [
-  {
-    q: "Can I leave Gearfire without going offline?",
-    a: "Yes, if you do it in order. Get your domain in your name, build WooCommerce on it, redirect the pages that rank, test a mixed cart, then switch DNS.",
-  },
-  {
-    q: "Do I keep my domain if I leave Gearfire?",
-    a: "Yes, once the registrar account is in your name. Find out who holds it and fix that first, because everything else depends on it. Then we build WooCommerce on your domain before you give notice.",
-  },
-  {
-    q: "When should I tell Gearfire I'm leaving?",
-    a: "Not until the new store is ready. We build it on your domain first, then you give notice.",
-  },
-  {
-    q: "What happens to the pages that rank on Google now?",
-    a: "You redirect each one to its new page, so the links Google already has still land somewhere. Google Search Console shows which product, category and info pages bring you traffic. Nobody can promise rankings after a move.",
-  },
-  {
-    q: "Can I connect my register to the new site?",
-    a: "Yes, if you want the floor and the site in sync. That's the Warlord plan at $469 a month or FFL Accelerator at $569.",
-  },
-  {
-    q: "How does the cost compare with Gearfire?",
-    a: "Put your current Gearfire invoice next to our numbers: setup of $500 or $2,500, then $169 to $569 a month. We don't republish Gearfire's fee card, because it's theirs and it changes.",
-  },
+  faqMd("Can I leave Gearfire without going offline?", "Yes, if you do it in order. Get your domain in your name, build WooCommerce on it, redirect the pages that rank, test a mixed cart, then switch DNS."),
+  faqMd("Do I keep my domain if I leave Gearfire?", "Yes, once the registrar account is in your name. Find out who holds it and fix that first, because everything else depends on it, and then we build WooCommerce on your domain before you give notice."),
+  faqMd("When should I tell Gearfire I'm leaving?", "Not until the new store is ready. We build it on your domain first, then you give notice."),
+  faqMd("What happens to the pages that rank on Google now?", "You redirect each one to its new page, so the links Google already has still land somewhere. Google Search Console shows which product, category and info pages bring you traffic, and nobody can promise rankings after a move."),
+  faqMd("Can I connect my register to the new site?", "Yes, if you want the floor and the site in sync. That's the Warlord plan at $469 a month or FFL Accelerator at $569."),
+  faqMd("How does the cost compare with Gearfire?", "Put your current Gearfire invoice next to our numbers: setup of $500 or $2,500, then $169 to $569 a month. We don't republish Gearfire's fee card, because it's theirs and it changes."),
 ];
 
 /** SEO-U5 PR B (Brandy FINAL, 10/21): /ai-studio. */

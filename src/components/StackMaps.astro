@@ -4,10 +4,13 @@ import {
   STACK_GRAPH_A_CAPTION,
   STACK_GRAPH_B_CAPTION,
   STACK_JOIN,
+  STACK_MAPS_TITLE,
   STACK_NEIGHBORS,
   STACK_NODES,
+  plainMd,
   type StackNodeId,
 } from "../lib/stack";
+import { md } from "../lib/md";
 
 const fieldA = STACK_NODES.filter((n) => n.field === "a");
 const fieldB = STACK_NODES.filter((n) => n.field === "b");
@@ -42,13 +45,14 @@ function nodeById(id: StackNodeId) {
 
 <section class="border-b border-zinc-800/80 py-12" data-stack-maps>
   <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <h2 class="mb-6 text-xl font-semibold text-white">{STACK_MAPS_TITLE}</h2>
     <div class="stack-maps">
       <figure class="stack-field">
         <div
           class="stack-canvas"
           data-field="a"
           role="group"
-          aria-label={STACK_GRAPH_A_CAPTION}
+          aria-label={plainMd(STACK_GRAPH_A_CAPTION)}
         >
           <div class="stack-orbits" aria-hidden="true">
             <span class="stack-orbit stack-orbit--a"></span>
@@ -132,12 +136,10 @@ function nodeById(id: StackNodeId) {
             ))
           }
         </div>
-        <figcaption class="stack-caption">
-          {STACK_GRAPH_A_CAPTION}
-        </figcaption>
+        <figcaption class="stack-caption" set:html={md(STACK_GRAPH_A_CAPTION)} />
       </figure>
 
-      <div class="stack-gutter" aria-label={STACK_JOIN}>
+      <div class="stack-gutter" aria-label={plainMd(STACK_JOIN)}>
         <svg
           class="stack-gutter-lines"
           viewBox="0 0 100 100"
@@ -194,7 +196,7 @@ function nodeById(id: StackNodeId) {
           class="stack-canvas"
           data-field="b"
           role="group"
-          aria-label={STACK_GRAPH_B_CAPTION}
+          aria-label={plainMd(STACK_GRAPH_B_CAPTION)}
         >
           <div class="stack-orbits" aria-hidden="true">
             <span class="stack-orbit stack-orbit--a"></span>
@@ -277,15 +279,11 @@ function nodeById(id: StackNodeId) {
             ))
           }
         </div>
-        <figcaption class="stack-caption">
-          {STACK_GRAPH_B_CAPTION}
-        </figcaption>
+        <figcaption class="stack-caption" set:html={md(STACK_GRAPH_B_CAPTION)} />
       </figure>
     </div>
 
-    <p class="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-zinc-300">
-      {STACK_JOIN}
-    </p>
+    <p class="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-zinc-300" set:html={md(STACK_JOIN)} />
 
     <aside
       class="stack-drawer"
