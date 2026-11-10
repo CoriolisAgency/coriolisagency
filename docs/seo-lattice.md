@@ -22,8 +22,8 @@
 
 | Intent | Ranking owner |
 |--------|----------------|
-| Coriolis / Coriolis Agency / Coriolis LLC | **This site** `/` |
-| FFL website plans / WooCommerce hosting ladder / plan prices (Minute Man $169 → FFL Accelerator $569), "ffl website pricing", "gun store website plans" | **This site** `/ecommerce` — owns the ladder. The `#ffl-accelerator` card links once to `https://fflaccelerator.com/` (S3.1) |
+| Coriolis / Coriolis Agency / Coriolis LLC | **This site** `/`. Legacy 301 (SEO-TECH-WEEK1): `/firearms-digital-marketing-agency` 301s here |
+| FFL website plans / WooCommerce hosting ladder / plan prices (Minute Man $169 → FFL Accelerator $569), "ffl website pricing", "gun store website plans" | **This site** `/ecommerce` — owns the ladder. The `#ffl-accelerator` card links once to `https://fflaccelerator.com/` (S3.1). Legacy 301s (SEO-TECH-WEEK1): `/custom-gun-store-websites-branding-matters-firearms-ecommerce` and `/ammoseek-automation-for-gun-stores` 301 here |
 | Support (OPS-3): "ffl website cost", "how much does an ffl website cost" | **This site** `/ffl-website-cost`. Support page, not an owner: links to `/ecommerce`, never takes the `/ecommerce` H1 or "plans / pricing" terms in a title or H1. Prices render from `src/lib/plans.ts`. No AmmoReady or Gearfire prices. No FAQ or HowTo JSON-LD |
 | Firearms dropshipping / FFL dropshipping | **This site** `/firearms-dropshipping` |
 | FFL Cockpit + “what website do I use” | **This site** `/ffl-cockpit` |
@@ -38,7 +38,7 @@
 | WooCommerce vs Shopify (gun stores) | **This site** `/woocommerce-vs-shopify-for-gun-stores` |
 | Can you use WooCommerce to sell guns | **This site** `/can-you-use-woocommerce-to-sell-guns` |
 | Gun Store POS pillar: "gun store pos", "gun store pos software", "gun store pos system", "gun store point of sale", "ffl pos (software)", "point of sale software for gun shop", "pos system that integrates with ecommerce for gun store" | **This site** `/gun-store-pos` (AIM, Rapid, GunBiz and Trident 1 equally, each with a WooCommerce page). Never targets plan-price terms (`/ecommerce` owns them), "how the stack fits" (`/stack` owns it), "woocommerce firearms/guns" (`/can-you-use-woocommerce-to-sell-guns`), FastBound review or alternatives terms (bound-book evaluation, out of lane), or Axis terms. Keyword targets and GSC actuals: [`docs/gun-store-pos-keywords.md`](gun-store-pos-keywords.md) |
-| Supporting: "aim pos", "aim point of sale"; "rapid gun systems pos"; "gunbiz pos"; "trident 1 pos", "trident1", "trident one" | **This site** `/aim-pos`, `/rapid-gun-systems-pos`, `/gunbiz-pos` (`/microbiz-pos` 301s here), `/trident-1-pos` |
+| Supporting: "aim pos", "aim point of sale"; "rapid gun systems pos"; "gunbiz pos", "microbiz pos"; "trident 1 pos", "trident1", "trident one" | **This site** `/aim-pos`, `/rapid-gun-systems-pos`, `/microbiz-pos` (`/gunbiz-pos` 301s here; MicroBiz is canonical), `/trident-1-pos` |
 | Gun store POS comparison | None. `/gun-store-pos-comparison` is an orphan, noindex page: owns no keywords, linked from no page, out of the sitemap. |
 | FFL Accelerator $569 program story / offer name ("FFL Accelerator", "ffl accelerator", "fflaccelerator") | **fflaccelerator.com** `/` (owns the offer name; only ads destination `/lp/`). No agency page targets the offer name in a title or H1. Ads never land on coriolisagency.com |
 | AI Studio / Coriolis products as capability | **This site** `/ai-studio` (`/ai-factory` → 301) |
@@ -49,13 +49,13 @@
 | FFL analytics, agency side (how Coriolis reads a dealer's site search) | **This site** `/ffl-analytics` — agency page only. The FFL Analytics product intent is not owned here; that name is a reserved satellite. FFL Analytics is the product name of the Analytics page in the GunSearchEngine.com Dealer Dashboard (a GSE feature); copy may name it as a GSE feature. The fflanalytics.com satellite still owns no intent, and nothing links there |
 | Search Console for FFLs, agency side (how Coriolis puts site search next to Google Search Console) | **This site** `/ffl-search-console` — agency page only. The FFL Search Console product intent is not owned here; that name is a reserved satellite |
 | Grok Bot setup ($995 session) | **This site** `/grok-bot-setup` |
-| FFL SEO: "ffl dealer seo", "gun industry seo company", "gun store seo", "ffl seo", "firearms seo", "gun store marketing", "firearms marketing agency", "seo automation for gun stores" | **This site** `/ffl-seo` (new owner page, D-N15; SEO-U32). Coriolis SEO plus SEO automation through GSE's FFL Search Console features (free with a GSE Basic account). `/ffl-search-console` links here |
+| FFL SEO: "ffl dealer seo", "gun industry seo company", "gun store seo", "ffl seo", "firearms seo", "gun store marketing", "firearms marketing agency", "seo automation for gun stores" | **This site** `/ffl-seo` (new owner page, D-N15; SEO-U32). Coriolis SEO plus SEO automation through GSE's FFL Search Console features (free with a GSE Basic account). `/ffl-search-console` links here. Legacy 301s (SEO-TECH-WEEK1 / WEEK1B): `/seo-for-firearms-retailers-get-found-sell-more-guns-online`, `/category/firearms-seo`, and `/category/firearms-seo/page/:n` (including `/page/2`) 301 here |
 | FFL payment processing ("Coriolis Payments"): "ffl payment processing", "firearms payment processor", "firearm credit card processing", "gun store merchant account", "high-risk payment processing for firearms", "woocommerce payment gateway for ffl", "ecommerce firearms merchant" | **This site** `/ffl-payment-processing` (new owner page; SEO-U30). Generic Coriolis Payments copy only: no processor names, rates or approval claims unless verified. POS references name third-party systems only. `/payments` and `/ffl-payments` 308 to `/ecommerce` today |
 | Websites for ranges, gunsmiths and instructors: "gun range website", "shooting range website design", "range booking website", "gunsmith website (design)", "firearms instructor website", "ccw instructor website", "firearms training website" | **This site** `/websites-for-ranges-gunsmiths-instructors` (new owner page; SEO-U31). One page with three sections (range, gunsmith, instructor), each with its own H2 and FAQ. Confirm what Coriolis builds for each segment before any claim |
 | GA for FFLs / free agent | **None** — GunSearchAgent retired |
 | Three numbers desk | **None** — FFLIntel reserved |
 | Checkout / MSA | Stripe checkout + **this site** `/msa` |
-| Press / newsroom | **This site** `/press` |
+| Press / newsroom | **This site** `/press`. Legacy 301 (SEO-TECH-WEEK1): `/wekickbrass-com-switches-to-coriolis-for-firearms-dropshipping` 301s here |
 | Customer login / account | **This host** `/login` `/account` — OS portal rewrite, **noindex** |
 | Operator Admin | Coriolis OS on a separate host. Never this marketing chrome. |
 
@@ -73,9 +73,9 @@
 ## Internal links
 
 - Home → four pillars (FFL Ecommerce, Gun Store POS, AI Studio, Demand Intelligence)
-- Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / Gearfire / best-store / email / POS cluster (Gun Store POS `/gun-store-pos`, AIM POS, GunBiz POS, Trident 1 POS, Rapid Gun Systems) + `/stack`
+- Ecommerce → Accelerator (external) + contact + setup checkout + dropshipping / Cockpit / AmmoReady / Gearfire / best-store / email / POS cluster (Gun Store POS `/gun-store-pos`, AIM POS, MicroBiz POS `/microbiz-pos`, Trident 1 POS, Rapid Gun Systems) + `/stack`
 - Support pages (OPS-3, one per owned intent) → their owner: `/leave-ammoready` → `/ammoready-alternative`, `/leave-gearfire` → `/gearfire-alternative`, `/ffl-website-cost` → `/ecommerce`. They also link each other and `/ecommerce`. FFLA gets no comparison posts.
-- Gun Store POS `/gun-store-pos` → `/aim-pos`, `/rapid-gun-systems-pos`, `/gunbiz-pos`, `/trident-1-pos` (equal cards, "WooCommerce for ..." anchors), `/contact`
+- Gun Store POS `/gun-store-pos` → `/aim-pos`, `/rapid-gun-systems-pos`, `/microbiz-pos` (`/gunbiz-pos` 301s here), `/trident-1-pos` (equal cards, "WooCommerce for ..." anchors), `/contact`
 - AI Studio → live product URLs (proof, not a catalog)
 - Demand Intelligence lives on this site at `/demand-intelligence` (D-N16). Accounts, the portal and the API stay on GunSearchEngine.
 - About → family lattice
