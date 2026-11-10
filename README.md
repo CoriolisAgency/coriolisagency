@@ -72,6 +72,17 @@ Vercel `api/` functions 500 if they import **local** modules. Importing `@coriol
 | Betsy character | [2abetsy.com](https://2abetsy.com) |
 | Company OS (internal) | `CoriolisAgency/coriolis` — not this repo |
 
+
+## IndexNow
+
+After a public page goes live, ping Bing and IndexNow partners:
+
+```bash
+npm run indexnow:submit -- https://www.coriolisagency.com/<path>
+```
+
+The key is public by design at `/indexnow-key.txt` (`public/indexnow-key.txt`). The script POSTs to `https://api.indexnow.org/indexnow` with host `www.coriolisagency.com`. It prints the HTTP status (200 or 202 = accepted) and never prints the key. Google ignores IndexNow; sitemap lastmod is the Google signal.
+
 ## Docs
 
 - [SEO lattice](docs/seo-lattice.md)
