@@ -162,12 +162,16 @@ function isExternal(part: Exclude<PosInline, string>) {
     </div>
   </section>
 
+  {
+    (page.caseStudy.placeholder || page.caseStudy.href) && (
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <h2 class="text-xl font-semibold text-white">{page.caseStudy.shop}</h2>
+      {page.caseStudy.placeholder && (
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
         {page.caseStudy.placeholder}
       </p>
+      )}
       {
         page.caseStudy.href && page.caseStudy.linkLabel && (
           <p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
@@ -181,6 +185,8 @@ function isExternal(part: Exclude<PosInline, string>) {
       }
     </div>
   </section>
+    )
+  }
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">

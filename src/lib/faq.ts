@@ -359,7 +359,7 @@ export const FAQ_DEMAND_INTELLIGENCE: FaqItem[] = [
   },
   {
     q: "How do team seats work?",
-    a: "Every plan includes 1 free Client Admin seat. Additional named users (Client Users or extra admins) are $49/user/month. Seat headcount is enforced in the portal Team page; purchase additional seats through Coriolis during onboarding or expansion.",
+    a: "Every plan includes 1 free Client Admin seat. Seat headcount is enforced in the portal Team page; purchase additional seats through Coriolis during onboarding or expansion.",
   },
   {
     q: "What are rising totals vs sessions vs export?",
@@ -479,7 +479,7 @@ export const FAQ_AI_STUDIO: FaqItem[] = [
   },
   {
     q: "What does it cost to get started with AI?",
-    a: "Grok Bot setup is $995, one time, and it isn't a monthly bill from us. You buy your own Cursor or xAI seat, at prices they set.",
+    a: "Grok Bot setup isn't a monthly bill from us. You buy your own Cursor or xAI seat, at prices they set.",
   },
   {
     q: "Can you build a custom app or AI agent for my business?",
@@ -499,7 +499,7 @@ export const FAQ_GROK_BOT: FaqItem[] = [
   },
   {
     q: "What does Grok Bot setup cost?",
-    a: "$995, one time. It isn't a monthly bill from us. That covers a one-hour consult, then a second meeting where we build it, test it and sit with you until you can run it.",
+    a: "It isn't a monthly bill from us. That covers a one-hour consult, then a second meeting where we build it, test it and sit with you until you can run it.",
   },
   {
     q: "What else do I have to pay for?",

@@ -219,11 +219,10 @@ export const POS_PAGES: PosPage[] = [
     vendorNote:
       "Rapid Gun Systems marks belong to their owners. Coriolis builds the website.",
     caseStudy: {
-      shop: "ACME",
+      shop: "",
       status: "soon",
-      placeholder:
-        "ACME's WooCommerce store will go live with Rapid Gun Systems at the counter. It isn't live yet. This story gets told once it is.",
-      // TODO(Paul): case-study body
+      placeholder: "",
+      // ACME go-live teaser removed (CA-GUARDRAIL-FIX). Case study stays off the page until it is live.
       body: null,
     },
     siblingsIntro: [
