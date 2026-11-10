@@ -43,6 +43,71 @@
       "statusCode": 301
     },
     {
+      "source": "/gunbiz-pos/",
+      "destination": "/microbiz-pos",
+      "statusCode": 301
+    },
+    {
+      "source": "/custom-gun-store-websites-branding-matters-firearms-ecommerce",
+      "destination": "/ecommerce",
+      "statusCode": 301
+    },
+    {
+      "source": "/custom-gun-store-websites-branding-matters-firearms-ecommerce/",
+      "destination": "/ecommerce",
+      "statusCode": 301
+    },
+    {
+      "source": "/seo-for-firearms-retailers-get-found-sell-more-guns-online",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/seo-for-firearms-retailers-get-found-sell-more-guns-online/",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/firearms-seo",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/firearms-seo/",
+      "destination": "/ffl-seo",
+      "statusCode": 301
+    },
+    {
+      "source": "/firearms-digital-marketing-agency",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/firearms-digital-marketing-agency/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ammoseek-automation-for-gun-stores",
+      "destination": "/ecommerce",
+      "statusCode": 301
+    },
+    {
+      "source": "/ammoseek-automation-for-gun-stores/",
+      "destination": "/ecommerce",
+      "statusCode": 301
+    },
+    {
+      "source": "/wekickbrass-com-switches-to-coriolis-for-firearms-dropshipping",
+      "destination": "/press",
+      "statusCode": 301
+    },
+    {
+      "source": "/wekickbrass-com-switches-to-coriolis-for-firearms-dropshipping/",
+      "destination": "/press",
+      "statusCode": 301
+    },
+    {
       "source": "/:path*",
       "has": [
         {
