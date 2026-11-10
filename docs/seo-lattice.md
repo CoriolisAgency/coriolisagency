@@ -12,11 +12,12 @@
 |------|------|
 | **coriolisagency.com** | The company, the plan ladder (`/ecommerce`), the comparisons (this site) |
 | **fflaccelerator.com** | Owns the **FFL Accelerator** offer name ($569). The **only** ads destination: `fflaccelerator.com/lp/`. |
-| **gunsearchengine.com** | Soak. Demand Intelligence lives here. No new consumer pages this cycle. |
+| **gunsearchengine.com** | Consumer traffic: shopper money pages, the blog and daily news posts, plus the Dealer Program at `/for-dealers/feed`. New posts resume under GSE-POSTS-P1 (Paul 2026-11-10 8:13 AM ET; goal "drive consumer traffic", 8:25 AM ET; started Paul 2026-11-10 8:36 AM ET (via Chief)). Demand Intelligence moved to this site (D-N16); accounts and the portal stay on GSE. |
+| **fflintel.com** | Industry data desk: dated, sourced FFL numbers people cite (FFLI-OVERHAUL-P1, Paul 2026-11-10 8:13 AM ET; started Paul 2026-11-10 8:36 AM ET (via Chief)). Owns the industry-data intents in the table below. |
 
 - Ownership split: **coriolisagency.com `/ecommerce` owns the plan ladder** (Minute Man through Accelerator). **fflaccelerator.com owns the "FFL Accelerator" offer name.** Ads go only to `fflaccelerator.com/lp/`.
-- Satellites are **reserved**, not doors: FFLIntel, FFLAnalytics, FFLSearchConsole. None of them owns an intent.
-- GunSearchEngine consumer pages do not own an intent in this lattice.
+- FFLIntel continues (D-N3b) and owns the industry-data intents below. FFLAnalytics and FFLSearchConsole stay parked (D-N9).
+- GunSearchEngine owns shopper intents in its own lattice (`gunsearchengine/docs/seo-lattice.md`); no page on this site targets them.
 - **2abetsy.com** stays up. It is **not** a door.
 - **GunSearchAgent** (gunsearchagent.com) is **retired**. It owns nothing. Do not link it.
 
@@ -53,7 +54,7 @@
 | FFL payment processing ("Coriolis Payments"): "ffl payment processing", "firearms payment processor", "firearm credit card processing", "gun store merchant account", "high-risk payment processing for firearms", "woocommerce payment gateway for ffl", "ecommerce firearms merchant" | **This site** `/ffl-payment-processing` (new owner page; SEO-U30). Generic Coriolis Payments copy only: no processor names, rates or approval claims unless verified. POS references name third-party systems only. `/payments` and `/ffl-payments` 308 to `/ecommerce` today |
 | Websites for ranges, gunsmiths and instructors: "gun range website", "shooting range website design", "range booking website", "gunsmith website (design)", "firearms instructor website", "ccw instructor website", "firearms training website" | **This site** `/websites-for-ranges-gunsmiths-instructors` (new owner page; SEO-U31). One page with three sections (range, gunsmith, instructor), each with its own H2 and FAQ. Confirm what Coriolis builds for each segment before any claim |
 | GA for FFLs / free agent | **None** — GunSearchAgent retired |
-| Three numbers desk | **None** — FFLIntel reserved |
+| FFL industry numbers: NICS and NSSF-adjusted NICS monthly, licensee counts, excise collections, ATF manufacturing report, RetailBI print log | **fflintel.com** (`/brief/*` trackers, `/nics-is-not-sales/`, `/retailbi-firearm-sales-index/`). No page on this site targets them |
 | Checkout / MSA | Stripe checkout + **this site** `/msa` |
 | Press / newsroom | **This site** `/press`. Legacy 301 (SEO-TECH-WEEK1): `/wekickbrass-com-switches-to-coriolis-for-firearms-dropshipping` 301s here |
 | Customer login / account | **This host** `/login` `/account` — OS portal rewrite, **noindex** |
@@ -69,6 +70,13 @@
 6. Frozen strings from `src/lib/frozen.ts`.
 7. Pricing honesty: Minute Man $169, Militia $269, Gun Runner $369, Warlord $469, Accelerator $569. Setup $500 / $2,500. Do not invent DI plan dollars.
 8. Cross-links: agency `/ecommerce` → `fflaccelerator.com/` (one link on the plan card). `fflaccelerator.com/` → `coriolisagency.com/about` (one link, homepage only, Paul override 2026-10-07). No other new cross-links between the two sites (the existing agency mentions of fflaccelerator.com on `/about`, `/gearfire-alternative`, `/email-marketing-for-ffl-ecommerce` and press posts predate this rule and stay). All are organic only: no UTMs, no `nofollow`. docs.coriolisagency.com is exempt: it may link to fflaccelerator.com per DOCS-2 (decision `2026-10-08-docs-ecosystem-links`: offer-name anchors only, to `/` and `/plan/`, never `/lp/`); this rule governs www.coriolisagency.com only.
+9. Inbound links from family sites (Paul 2026-11-10 8:13 AM ET; Chief rules 8:09 AM ET; rulings Paul 2026-11-10 8:36 AM ET (via Chief)):
+   - Each site has its own audience and stands on its own. Links to this site sit in body text where they fit the reader's next question.
+   - The existing footer links to this site from GSE (D-N4) and FFLIntel (D-N3) stay. No new sitewide links beyond them.
+   - No exact-match head-term anchors from other sites ("FFL website design", "FFL dropshipping", "gun store POS integration", "FFL Cockpit setup" stay internal anchors here). Descriptive, varied anchors.
+   - No thin pages built to carry links.
+   - Accepted in-body paths: GSE dealer posts → `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/case-studies/*` (one per post), and `/gun-store-pos` on dealer post D2 only (Paul 2026-11-10 8:36 AM ET (via Chief)); GSE industry or dealer news posts → `/ecommerce`, `/firearms-dropshipping`, `/ffl-cockpit`, `/case-studies/*` (one per post), never `/gun-store-pos`; GSE shopper posts → none; GSE political news posts → none unless it genuinely fits; FFLIntel notes → one soft line at the end only, to `/ecommerce`, `/firearms-dropshipping` or `/demand-intelligence` (never `/gun-store-pos`). Never `/ffl-messenger-enterprise`.
+   - Outside links matter most: partner, press, roundup and association links stay the main authority plan (LINK-PLAN §5).
 
 ## Internal links
 
@@ -94,3 +102,5 @@ Decision `2026-10-16-ffla-lattice-l1-l4` (coriolis repo). The full FFLA target t
 | Plans / pricing, ffl ecommerce, dropshipping, register integrations, email, WooCommerce explainers, FFL Cockpit, competitor names | **This site** (unchanged). FFLA may bid on some of them on `/lp/` (noindex), which does not compete with these rankings |
 
 - **Gun-word SEO = agency only.** fflaccelerator.com's ad-copy gate bans gun, firearm and ammo words in visible copy, so every gun-word SEO target stays on this site.
+
+
