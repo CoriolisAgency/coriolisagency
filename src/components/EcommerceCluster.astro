@@ -21,9 +21,11 @@ const items = [
 
 interface Props {
   current?: (typeof items)[number]["href"];
+  /** CA-VOICE-P1: rail label for /firearms-dropshipping, as drafted per page. */
+  dropshipLabel?: string;
 }
 
-const { current } = Astro.props;
+const { current, dropshipLabel } = Astro.props;
 ---
 
 <nav
@@ -44,7 +46,7 @@ const { current } = Astro.props;
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
         >
-          {item.label}
+          {item.href === "firearms-dropshipping" && dropshipLabel ? dropshipLabel : item.label}
         </a>
       );
     })

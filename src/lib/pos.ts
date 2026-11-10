@@ -1,6 +1,7 @@
 import { LINKS } from "./links";
 import type { FaqItem } from "./faq";
 import { CANON_PATHS } from "./site";
+import { faqMd } from "./md";
 
 export type PosInline =
   | string
@@ -57,6 +58,22 @@ export type PosPage = {
   vendorLabel?: string;
   vendorNote?: string;
   caseStudy: PosCaseStudy;
+  /**
+   * CA-VOICE-P1: page copy shipped as drafted. When set, the page renders the drafted
+   * register section (paragraphs, sibling links, links line) in place of the old
+   * keep-register, case-study, other-registers and links-lead sections.
+   */
+  voice?: {
+    featuresMoreOutro?: string;
+    keepTitle: string;
+    keepParas: string[];
+    siblingLinks: string[];
+    linksPara: string;
+    faqHeading: string;
+    talkHeading: string;
+    talkSubline: string;
+    dropshipLabel?: string;
+  };
   siblingsIntro: PosInline[];
   linksLead: PosInline[];
   faq: FaqItem[];
@@ -71,6 +88,13 @@ const HUB_HERO: PosHeroImage = {
 
 export const AIM_DOCS_HREF =
   "https://docs.coriolisagency.com/pos/aim-sync?utm_source=coriolisagency&utm_medium=referral&utm_campaign=aim-pos";
+
+/** CA-VOICE-P1: "**Title.** body" draft list item to a feature card. */
+function posCard(s: string): PosFeature {
+  const m = s.match(/^\*\*(.+?)\*\*\s+([\s\S]*)$/);
+  if (!m) throw new Error("pos card: " + s);
+  return { title: m[1].replace(/\.$/, ""), body: m[2] };
+}
 
 export const POS_PAGES: PosPage[] = [
   {
@@ -375,7 +399,8 @@ export const POS_PAGES: PosPage[] = [
     description:
       "WooCommerce for Trident 1 POS. Put lane reservations, memberships and classes on a site you own, and publish products and stock from Trident 1 to it.",
     h1: "WooCommerce for Trident 1 POS",
-    lede: "For ranges, training centers and gun stores on Trident 1. Keep Trident 1 at the counter. Coriolis builds a WooCommerce site you own where shooters book lanes, buy memberships and sign up for classes.",
+    // CA-VOICE-P1 batch 2 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-2/trident-1-pos.md, shipped as drafted.
+    lede: "WooCommerce for Trident 1 POS is for ranges, training centers and gun stores already on Trident 1: keep Trident 1 at the counter, and Coriolis builds a WooCommerce site you own where shooters book lanes, buy memberships and sign up for classes.",
     jumpLabel: "Tell us about your range",
     heroImage: {
       src: "brand/trident-1-pos-hero.jpg",
@@ -383,38 +408,22 @@ export const POS_PAGES: PosPage[] = [
       width: 1440,
       height: 900,
     },
-    featuresTitle: "Your range business, online",
-    featuresIntro:
-      "Trident 1 runs the range side as well as the register. The Trident 1 POS WooCommerce integration carries that range business to your website.",
-    features: [
-      {
-        title: "Book lane time online",
-        body: "Lane settings you set up in Trident 1 carry over to your website. Shooters reserve a lane online instead of calling the counter.",
-      },
-      {
-        title: "Sell memberships online",
-        body: "Put your membership plans on the site, with recurring billing. People join without coming in.",
-      },
-      {
-        title: "Fill classes online",
-        body: "Your course catalog goes on the site with online registration. Students sign up and pay before they show up.",
-      },
-    ],
-    featuresMoreTitle: "What Trident 1 does for your products",
-    featuresMore: [
-      {
-        title: "Publish products from Trident 1",
-        body: "Add a part to WooCommerce straight from Trident 1 and pick its WooCommerce category as you go.",
-      },
-      {
-        title: "Stock and price from the POS",
-        body: "Your WooCommerce stock count moves up and down as inventory changes in Trident 1. The online price comes from the Trident 1 field you assign as the eCommerce price.",
-      },
-      {
-        title: "Your bound book stays with Trident 1",
-        body: "Trident 1 uses FastBound for the eBound Book and E4473. Coriolis builds the website. We don't file a 4473, run NICS, or replace the bound book.",
-      },
-    ],
+    featuresTitle: "How Trident 1 range work, including lanes, memberships and classes, shows up on the site",
+    featuresIntro: "Trident 1 already runs the range side as well as the register, and the Trident 1 POS WooCommerce integration carries that range business to your website.",
+    features: (["**Book lane time online.** Lane settings you set up in Trident 1 carry over to your website, so shooters reserve a lane online instead of calling the counter.","**Sell memberships online.** Put your membership plans on the site, with recurring billing, and people can join without coming in.","**Fill classes online.** Your course catalog goes on the site with online registration, and students sign up and pay before they show up."] as string[]).map(posCard),
+    featuresMoreTitle: "What Trident 1 does for products, stock and price on the website",
+    featuresMore: (["**Publish products from Trident 1.** Add a part to WooCommerce straight from Trident 1 and pick its WooCommerce category as you go.","**Stock and price from the POS.** Your WooCommerce stock count moves up and down as inventory changes in Trident 1, and the online price comes from the Trident 1 field you assign as the eCommerce price."] as string[]).map(posCard),
+    voice: {
+      featuresMoreOutro: "The bound book stays with Trident 1, which uses FastBound for the eBound Book and E4473, and Coriolis builds the website. Coriolis does not file a 4473, run NICS, or replace the bound book.",
+      keepTitle: "Keep the Trident 1 register, on Warlord or FFL Accelerator",
+      keepParas: ["Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based Trident 1 POS integration, with unlimited API requests and webhooks. Trident 1 keeps running the counter and the range, and you own the website.", "Trident 1 marks belong to their owners, and Coriolis builds the website. Wisconsin Firearms Training Center is one shop already on this stack.", "If you're running a register that isn't Trident 1, Warlord and FFL Accelerator connect any POS that works with WooCommerce, and the full list lives on [connecting the register you already run](/gun-store-pos)."],
+      siblingLinks: ["[WooCommerce for AIM](/aim-pos)","[WooCommerce for Rapid](/rapid-gun-systems-pos)","[WooCommerce for MicroBiz](/microbiz-pos)"],
+      linksPara: "Compare the [FFL ecommerce plans](/ecommerce#pos), or see where your site runs on [the WooCommerce hosting we build for FFL Cockpit](/ffl-cockpit). If you're leaving a closed storefront, start with [AmmoReady](/ammoready-alternative) or [Gearfire](/gearfire-alternative).",
+      faqHeading: "The questions ranges and shops ask about WooCommerce for Trident 1",
+      talkHeading: "Tell us about the website you want and we'll make it happen.",
+      talkSubline: "We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.",
+      dropshipLabel: "listing distributor catalogs on a store you own",
+    },
     keepRegister:
       "Warlord ($469/mo) and FFL Accelerator ($569/mo) include API-based Trident 1 POS integration, with unlimited API requests and webhooks. Trident 1 keeps running the counter and the range. You own the website. Coriolis does not file a 4473, run NICS, or replace the bound book.",
     vendorNote:
@@ -443,31 +452,13 @@ export const POS_PAGES: PosPage[] = [
       ".",
     ],
     faq: [
-      {
-        q: "Does Trident 1 POS work with WooCommerce?",
-        a: "Yes. Trident 1 integrates with WooCommerce. Coriolis builds the WooCommerce site on your domain and connects it to Trident 1 on the Warlord and FFL Accelerator plans.",
-      },
-      {
-        q: "Can customers book range time online with Trident 1?",
-        a: "Yes. The lane settings you set up in Trident 1 carry over to your website, so shooters can reserve a lane online.",
-      },
-      {
-        q: "Can I sell memberships and classes on my website?",
-        a: "Yes. Trident 1 supports memberships with recurring billing and a course catalog with online registration, and both go on your website.",
-      },
-      {
-        q: "How do products and stock get from Trident 1 to the site?",
-        a: "You publish a product to WooCommerce from Trident 1 and pick its category. After that, the WooCommerce stock count updates as inventory goes up or down in Trident 1, and the price comes from the field you assign as the eCommerce price.",
-      },
-      {
-        q: "Do I have to replace Trident 1?",
-        a: "No. Keep Trident 1 for the counter and the range. FastBound handles the eBound Book and E4473 on the Trident 1 side. Coriolis builds the website and does not file a 4473, run NICS, or replace the bound book.",
-      },
-      {
-        q: "Which plan includes Trident 1 integration?",
-        a: "Warlord ($469/mo) and FFL Accelerator ($569/mo). Both include API-based Trident 1 POS integration with unlimited API requests and webhooks.",
-      },
-    ],
+  faqMd("Does Trident 1 POS work with WooCommerce?", "Yes. Trident 1 integrates with WooCommerce, and Coriolis builds the WooCommerce site on your domain and connects it to Trident 1 on the Warlord and FFL Accelerator plans."),
+  faqMd("Can customers book range time online with Trident 1?", "Yes. The lane settings you set up in Trident 1 carry over to your website, so shooters can reserve a lane online."),
+  faqMd("Can I sell memberships and classes on my website?", "Yes. Trident 1 supports memberships with recurring billing and a course catalog with online registration, and both go on your website."),
+  faqMd("How do products and stock get from Trident 1 to the site?", "You publish a product to WooCommerce from Trident 1 and pick its category. After that, the WooCommerce stock count updates as inventory goes up or down in Trident 1, and the price comes from the field you assign as the eCommerce price."),
+  faqMd("Do I have to replace Trident 1?", "No. Keep Trident 1 for the counter and the range, and FastBound handles the eBound Book and E4473 on the Trident 1 side. The 4473 sentence is in the section above."),
+  faqMd("Which plan includes Trident 1 integration?", "Warlord ($469/mo) and FFL Accelerator ($569/mo). Both include API-based Trident 1 POS integration with unlimited API requests and webhooks."),
+],
   },
 ];
 
