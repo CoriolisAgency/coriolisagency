@@ -250,7 +250,7 @@ Soft 404. Not worth a rule unless the Links export later shows real backlinks.
 **Off-strategy with impressions, almost no clicks**
 
 - Email ROI headline only: the **42-to-1** claim is not republished. The slug 301s to `/email-marketing-for-ffl-ecommerce` (Accelerator facts only).
-- Agency/SEO vanity: `/firearms-digital-marketing-agency` 301s to `/` (SEO-TECH-WEEK1). `/gun-industry-seo-company-…` 301s to `/ffl-seo` (SEO-REDIRECTS-BCD; 10 c / 10,184 i). `/firearms-seo-marketing/` (7 c / 10,201 i) still has no 301. Query cluster: **6 clicks / 20k impr**.
+- Agency/SEO vanity: `/firearms-digital-marketing-agency` 301s to `/` (SEO-TECH-WEEK1). `/gun-industry-seo-company-…` 301s to `/ffl-seo` (SEO-REDIRECTS-BCD; 10 c / 10,184 i). `/firearms-seo-marketing` now does a single 301 to `/ffl-seo` (#158 f736685); slash forms take two hops (308 then 301). Query cluster: **6 clicks / 20k impr**.
 - Compliance software: `/fastbound-vs-orchid-ebound-a-comprehensive-comparison-of-ffl-software-solutions` (28 c / 16,821 i) — 301 to /ecommerce (ORCHID-RM, Paul 2026-10-21; was /orchid-alternative under S4).
 - `/ammoready-login/` (2 clicks) — not your product.
 - `/types-of-ffls/` (0 / 898) — still a soft 404.
