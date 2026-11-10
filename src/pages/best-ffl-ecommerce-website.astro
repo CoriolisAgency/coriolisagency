@@ -10,170 +10,12 @@ import { md } from "../lib/md";
 import { CANON_PATHS } from "../lib/site";
 import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
 
-// SEO-REFRESH-P1: Brandy's 2026-11-10 7:50 AM ET copy, approved by Paul 8:06 AM ET Nov 10.
-// Cells marked PENDING in the draft are blank, including the four price cells that wait on
-// Paul's ruling (Gearfire setup fee, Orchid, Celerant, FFL Cockpit sign-up fee).
-// /orchid-alternative redirects to /ecommerce, so it is not linked.
-const questions = [
-  "**Who owns the site?** A login on their platform, or a site on your domain that leaves with you?",
-  "**Who runs FFL checkout?** How does the buyer pick the receiving dealer?",
-  "**What do payments cost?** Card processing sits outside plan prices. Ask what it costs and who underwrites it.",
-  "**Who eats fraud and chargebacks?** Ask each vendor how they handle it.",
-  "**Who writes your pages?** Titles, URLs, the about page, the transfer page.",
-  "**How many distributors, and who routes the order?**",
-  "**Who answers when a cart breaks on a Friday night?**",
-  "**What happens when you leave?** What exports, what redirects, and does the website come with you?",
-] as const;
-
-const head = [
-  "Platform",
-  "Type",
-  "You own the site?",
-  "Distributors",
-  "POS",
-  "Listed starting price (Nov 10, 2026)",
-  "Exit terms",
-] as const;
-
-const rows: readonly (readonly [string, string, string, string, string, string, string])[] = [
-  [
-    "Gearfire",
-    "Hosted ecommerce platform, with its own POS",
-    "The store runs on Gearfire's platform",
-    "Essentials: up to 2. Pro: all partnering distributors.",
-    "Gearfire Point of Sale and AXIS Point of Sale ([Gearfire site nav](https://gogearfire.com/solutions/ecommerce/), captured Nov 10, 2026)",
-    "eCommerce Essentials $149/mo. Pro $249/mo. [Source](https://gogearfire.com/solutions/ecommerce/)",
-    "",
-  ],
-  [
-    "AmmoReady",
-    "Hosted ecommerce platform",
-    "The store runs on AmmoReady's platform, on your custom domain",
-    "Live catalog sync with named distributors",
-    "POS integration",
-    "Starter $179/mo (up to 75 orders). Setup from $500. [Source](https://www.ammoready.com/pricing-2/)",
-    "\"No contracts\" and \"cancel any time\"",
-  ],
-  [
-    "Orchid",
-    "Cloud POS with ecommerce, bound book and 4473",
-    "The store runs on Orchid's system",
-    "Live vendor feed and dropshipping",
-    "Orchid's own POS",
-    "",
-    "",
-  ],
-  [
-    "Coreware",
-    "Software suite: POS, ecommerce, inventory, payments, CRM",
-    "The store runs on Coreware",
-    "Distributor feed add-ons",
-    "Coreware's own POS",
-    "BASIC $149/mo per location. Feed add-ons from $50/mo. Setup not published. [Source](https://www.coreware.com/pricing)",
-    "",
-  ],
-  [
-    "Celerant",
-    "Retail management software: POS, ecommerce, inventory, CRM",
-    "",
-    "",
-    "Celerant's own POS",
-    "",
-    "",
-  ],
-  [
-    "2AData Trinity",
-    "FFL ecommerce platform: dealer websites, POS, fulfillment, marketplaces",
-    "",
-    "5 distributors on Starter. 22 distributor connectors in all.",
-    "2AData's firearms POS",
-    "Starter $199/mo plus $995 one-time setup and custom website design. [Source](https://www.2adata.com/pricing)",
-    "Month to month, 30 days' notice",
-  ],
-  [
-    "FFL Monkey plugins",
-    "Data Feed and FFL Checkout plugins for a site you already run",
-    "Yes. WooCommerce, BigCommerce or Magento",
-    "Every distributor they connect, updated hourly. You need your own dealer account with each.",
-    "",
-    "Data Feed $17.99/mo plus FFL Checkout $4.99/mo. No setup fee. Your site and hosting are extra. [Source](https://fflmonkey.com/products)",
-    "",
-  ],
-  [
-    "FFL Cockpit plugin on your own WooCommerce",
-    "Plugin for WooCommerce or BigCommerce",
-    "Yes. Your domain, your hosting, your design.",
-    "20+ distributor catalogs",
-    "AIM ([fflcockpit.com](https://www.fflcockpit.com/), captured Nov 10, 2026)",
-    "Premium $84.99/mo on WooCommerce, FFL Checkout included. Your site and hosting are extra. [Source](https://fflcockpit.com/pricing/)",
-    "Month to month, no contracts",
-  ],
-  [
-    "Coriolis managed WooCommerce",
-    "WooCommerce built, hosted and supported for you",
-    "Yes. Your domain. Cancel and the site goes with you.",
-    "21 catalogs through FFL Cockpit, on Militia and above",
-    "Connects the register you already run: AIM, MicroBiz, Rapid, Trident 1, or any POS that works with WooCommerce (Warlord and above)",
-    "Minute Man $169/mo. Militia $269/mo is the dropshipping plan. Setup $500 or $2,500. [Source](/ecommerce)",
-    "No contract. You take the website.",
-  ],
-];
-
-const nine = [
-  {
-    h: "Gearfire",
-    body: "A hosted ecommerce platform with its own point of sale. Gearfire lists two: Gearfire Point of Sale and AXIS Point of Sale. Essentials ($149/mo) connects up to 2 distributors and dropships accessories. Pro ($249/mo) connects all of Gearfire's partnering distributors and adds firearm dropshipping to FFL dealers. Your store runs on Gearfire. Leaving Gearfire? See the [Gearfire alternative](/gearfire-alternative).",
-  },
-  {
-    h: "AmmoReady",
-    body: "A hosted ecommerce platform with distributor feeds, marketplace integrations and POS integration. Plans are priced by order volume, starting at $179/mo for up to 75 orders. Setup starts at $500. AmmoReady says there are no contracts and you can cancel any time. Leaving AmmoReady? See the [AmmoReady alternative](/ammoready-alternative).",
-  },
-  {
-    h: "Orchid",
-    body: "Orchid Advisors sells cloud POS with ecommerce, and also runs the bound book and 4473. If you want compliance software and the register from one company, Orchid is built for that.",
-  },
-  {
-    h: "Coreware",
-    body: "A business software suite for ranges, retailers, manufacturers and gunsmiths: POS, ecommerce, inventory, payments and CRM. Priced per location, with distributor feeds as add-ons.",
-  },
-  {
-    h: "Celerant",
-    body: "General retail management software with a sportsman line. It's made to grow from one store to many locations. A good look for a large retailer with a lot of non-gun product.",
-  },
-  {
-    h: "2AData Trinity",
-    body: "An FFL ecommerce platform with dealer websites, POS, fulfillment and marketplace tools. Plans set the number of distributors, starting at 5 on Starter. Setup and custom website design are a one-time fee, $995 on Starter. Month to month with 30 days' notice.",
-  },
-  {
-    h: "FFL Monkey plugins",
-    body: "Two plugins for a site you already run: Data Feed for distributor catalogs, and FFL Checkout for dealer selection. They work on WooCommerce, BigCommerce or Magento. The lowest listed price here, because it covers only the plugins. You bring the site and the hosting.",
-  },
-  {
-    h: "FFL Cockpit on your own WooCommerce",
-    body: "A plugin for WooCommerce or BigCommerce. Premium includes FFL Checkout, 20+ distributor catalogs, marketplace listings and POS integration. FFL Cockpit says shelf stock syncs from AIM. Month to month. You bring the site and the hosting, or have someone build it. See [FFL Cockpit setup](/ffl-cockpit).",
-  },
-  {
-    h: "Coriolis managed WooCommerce",
-    body: "We build WooCommerce on your domain, host it on WP Engine and support it. Plans run from Minute Man ($169/mo, your own inventory) to FFL Accelerator ($569/mo). Militia ($269/mo) includes the FFL Cockpit and FFL Checkout licenses and 21 catalogs. Warlord and FFL Accelerator connect the register you already run. You own the site. See [FFL website design](/ecommerce).",
-  },
-] as const;
-
-const picks = [
-  "**You want a hosted store up fast and won't write your own pages.** Look at Gearfire or AmmoReady. The platform runs the site. If you leave, plan on an export and a rebuild.",
-  "**You want the register and the website from one vendor.** Look at Orchid, Coreware or Celerant. You get one bill and one support line. You also accept their bundle. Orchid adds the bound book and 4473.",
-  "**You want a hosted FFL platform with its own POS and set distributor tiers.** Look at 2AData Trinity.",
-  "**You already have a WooCommerce site and someone to run it.** Look at FFL Monkey's plugins or the FFL Cockpit plugin. You keep your site and add catalogs and FFL checkout. Hosting, updates and fixes stay on you.",
-  "**You want to own the site, keep the register you already run, and not run WordPress yourself.** That's Coriolis. We build it, host it and support it. See [FFL website design](/ecommerce).",
-  "Hosted still fits if you need speed and won't write your own pages. Say that out loud before you buy. Hosted trades control and exit for speed and bundling.",
-] as const;
-
-const leaveSteps = [
-  "Keep your domain. We build WooCommerce on it before you give notice.",
-  "Map the catalog and redirect the URLs that already rank.",
-  "Wire FFL Checkout, payments and taxes. Test a mixed cart.",
-  "Connect the register only if you want the floor and the site in sync.",
-  "Cut DNS. You leave with the site.",
-] as const;
+// CA-VOICE-P1 batch 1 re-draft (Paul yes via Chief 2026-11-10 12:49 PM ET; Chief 1:51 PM ET): copy from batch-1/best-ffl-ecommerce-website.md, shipped as drafted. No removed prices.
+const questions = ["Who owns the site? A login on their platform, or a site on your domain that leaves with you?","Who runs FFL checkout? How does the buyer pick the receiving dealer?","What do payments cost? Card processing sits outside plan prices. Ask what it costs and who underwrites it.","Who eats fraud and chargebacks? Ask each vendor how they handle it.","Who writes your pages? Titles, URLs, the about page, the transfer page.","How many distributors, and who routes the order?","Who answers when a cart breaks on a Friday night?","What happens when you leave? What exports, what redirects, and does the website come with you?"];
+const table = [["Platform","Type","You own the site?","Distributors","POS","Listed starting price (Nov 10, 2026)","Exit terms"],["Gearfire","Hosted ecommerce platform, with its own POS","The store runs on Gearfire's platform","Essentials: up to 2. Pro: all partnering distributors.","Gearfire Point of Sale, plus a second POS product listed on its [site nav](https://gogearfire.com/solutions/ecommerce/) (captured Nov 10, 2026)","eCommerce Essentials $149/mo. Pro $249/mo. [Source](https://gogearfire.com/solutions/ecommerce/)","Not listed*"],["AmmoReady","Hosted ecommerce platform","The store runs on AmmoReady's platform, on your custom domain","Live catalog sync with named distributors","POS integration","Starter $179/mo (up to 75 orders). Setup from $500. [Source](https://www.ammoready.com/pricing-2/)","\"No contracts\" and \"cancel any time\""],["Orchid","Cloud POS with ecommerce, bound book and 4473","The store runs on Orchid's system","Live vendor feed and dropshipping","Orchid's own POS","Not listed*","Not listed*"],["Coreware","Software suite: POS, ecommerce, inventory, payments, CRM","The store runs on Coreware","Distributor feed add-ons","Coreware's own POS","BASIC $149/mo per location. Feed add-ons from $50/mo. Setup not published. [Source](https://www.coreware.com/pricing)","Not listed*"],["Celerant","Retail management software: POS, ecommerce, inventory, CRM","Not listed*","Not listed*","Celerant's own POS","Not listed*","Not listed*"],["2AData Trinity","FFL ecommerce platform: dealer websites, POS, fulfillment, marketplaces","Not listed*","5 distributors on Starter. 22 distributor connectors in all.","2AData's firearms POS","Starter $199/mo plus a one-time setup and custom website design fee. [Source](https://www.2adata.com/pricing)","Month to month, 30 days' notice"],["FFL Monkey plugins","Data Feed and FFL Checkout plugins for a site you already run","Yes. WooCommerce, BigCommerce or Magento","Every distributor they connect, updated hourly. You need your own dealer account with each.","Not listed*","Data Feed $17.99/mo plus FFL Checkout $4.99/mo. No setup fee. Your site and hosting are extra. [Source](https://fflmonkey.com/products)","Not listed*"],["FFL Cockpit plugin on your own WooCommerce","Plugin for WooCommerce or BigCommerce","Yes. Your domain, your hosting, your design.","See [fflcockpit.com](https://www.fflcockpit.com/) (read Nov 10, 2026)","The plugin maker lists POS systems on [fflcockpit.com](https://www.fflcockpit.com/) (read Nov 10, 2026)","Premium $84.99/mo on WooCommerce, FFL Checkout included. Your site and hosting are extra. [Source](https://fflcockpit.com/pricing/)","Month to month, no contracts"],["Coriolis managed WooCommerce","WooCommerce built, hosted and supported for you","Yes. Your domain. Cancel and the site goes with you.","21 catalogs through FFL Cockpit, on Militia and above","Connects the register you already run: AIM, MicroBiz, Rapid, Trident 1, or any POS that works with WooCommerce (Warlord and above)","Minute Man $169/mo. Militia $269/mo is the dropshipping plan. Setup $500 or $2,500. [Source](/ecommerce)","No contract. You take the website."]];
+const nine = ["**Gearfire** is a hosted ecommerce platform with its own point of sale. Gearfire lists Gearfire Point of Sale and a second POS product on its site nav. Essentials ($149/mo) connects up to 2 distributors and dropships accessories, and Pro ($249/mo) connects all of Gearfire's partnering distributors and adds firearm dropshipping to FFL dealers. Your store runs on Gearfire, and if you're leaving, see the [Gearfire alternative](/gearfire-alternative).", "**AmmoReady** is a hosted ecommerce platform with distributor feeds, marketplace integrations and POS integration. Plans are priced by order volume, starting at $179/mo for up to 75 orders, and setup starts at $500. AmmoReady says there are no contracts and you can cancel any time, and if you're leaving, see the [AmmoReady alternative](/ammoready-alternative).", "**Orchid Advisors** sells cloud POS with ecommerce, and also runs the bound book and 4473. If you want the bound book, the 4473, and the register from one company, Orchid is built for that.", "**Coreware** is a business software suite for ranges, retailers, manufacturers and gunsmiths: POS, ecommerce, inventory, payments and CRM, priced per location, with distributor feeds as add-ons.", "**Celerant** is general retail management software with a sportsman line, made to grow from one store to many locations, and a good look for a large retailer with a lot of non-gun product.", "**2AData Trinity** is an FFL ecommerce platform with dealer websites, POS, fulfillment and marketplace tools. Plans set the number of distributors, starting at 5 on Starter. Setup and custom website design are a one-time fee on top of the monthly plan, and the terms are month to month with 30 days' notice.", "**FFL Monkey** sells two plugins for a site you already run: Data Feed for distributor catalogs, and FFL Checkout for dealer selection, working on WooCommerce, BigCommerce or Magento. It is the lowest listed price here, because it covers only the plugins, and you bring the site and the hosting.", "**FFL Cockpit on your own WooCommerce** is a plugin for WooCommerce or BigCommerce. Premium includes FFL Checkout, marketplace listings, and the POS integration the plugin maker documents on fflcockpit.com, month to month, and you bring the site and the hosting, or have someone build it; see [FFL Cockpit setup](/ffl-cockpit).", "**Coriolis managed WooCommerce** is the store we build on your domain, host on WP Engine and support. Plans run from Minute Man ($169/mo, your own inventory) to FFL Accelerator ($569/mo). Militia ($269/mo) includes the FFL Cockpit and FFL Checkout licenses and 21 catalogs. Warlord and FFL Accelerator connect the register you already run, you own the site, and the plans are on [FFL website design](/ecommerce)."];
+const picks = ["If you want a hosted store up fast and won't write your own pages, look at Gearfire or AmmoReady. The platform runs the site, and if you leave, plan on an export and a rebuild.", "If you want the register and the website from one vendor, look at Orchid, Coreware or Celerant. You get one bill and one support line, and you also accept their bundle; Orchid adds the bound book and 4473.", "If you want a hosted FFL platform with its own POS and set distributor tiers, look at 2AData Trinity.", "If you already have a WooCommerce site and someone to run it, look at FFL Monkey's plugins or the FFL Cockpit plugin. You keep your site and add catalogs and FFL checkout, and hosting, updates and fixes stay on you.", "If you want to own the site, keep the register you already run, and not run WordPress yourself, that's Coriolis, and we build it, host it and support it; see [FFL website design](/ecommerce).", "A hosted platform can still be the right call if you need speed and will not write your own pages, and you should say that out loud before you buy, because hosted trades control and exit for speed and bundling."];
+const leaveSteps = ["Keep your domain. We build WooCommerce on it before you give notice.","Map the catalog and redirect the URLs that already rank.","Wire FFL Checkout, payments and taxes. Test a mixed cart.","Connect the register only if you want the floor and the site in sync.","Cut DNS. You leave with the site."];
 
 const p = "mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400";
 ---
@@ -194,12 +36,7 @@ const p = "mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400";
       <h1 class="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl">
         Best FFL ecommerce platforms (2026): 9 compared
       </h1>
-      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300">
-        The best FFL ecommerce platform is the one that fits how you sell. This guide compares nine options side by side: hosted platforms, POS-first suites, plugins for a WooCommerce site you already run, and managed WooCommerce you own. Every fact and price comes from the company's own website, with the date we read it and a link.
-      </p>
-      <p class="mt-4 max-w-3xl text-base leading-relaxed text-zinc-300">
-        We're one of the nine. Coriolis sells managed WooCommerce, and our founder built and ran AmmoReady.com for 9 years. Read our row with that in mind. Where another option fits your shop better, this page says so.
-      </p>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-300" set:html={md("This guide compares nine FFL ecommerce options side by side: hosted platforms, POS-first suites, plugins for a WooCommerce site you already run, and managed WooCommerce you own. Every fact and price comes from the company's own website, with the date we read it and a link. We're one of the nine, and Coriolis sells managed WooCommerce; our founder built and ran AmmoReady.com for 9 years, so read our row with that in mind, and where another option fits your shop better, this page says so.")} />
       <div class="mt-8">
         <CtaRow talk showGsa={false} showAccelerator />
       </div>
@@ -209,37 +46,31 @@ const p = "mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400";
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">How to score an FFL ecommerce platform</h2>
-      <p class={p}>
-        Hosted and owned stores can both sell guns when the dealer is a licensed FFL and checkout is built for transfer. Ask every vendor these eight questions.
-      </p>
-      <ol class="mt-4 max-w-3xl list-decimal space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
+      <h2 class="text-xl font-semibold text-white">{"How to score an FFL ecommerce platform before you buy"}</h2>
+      <p class={p} set:html={md("Hosted and owned stores can both sell guns when the dealer is a licensed FFL and checkout is built for transfer, and you should ask every vendor these eight questions.")} />
+      <ul class="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
         {questions.map((q) => <li set:html={md(q)} />)}
-      </ol>
-      <p class={p}>
-        This is not legal advice. Coriolis doesn't run 4473s, NICS or bound books.
-      </p>
+      </ul>
+      <p class={p} set:html={md("This is not legal advice, and Coriolis doesn't run 4473s, NICS or bound books.")} />
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12" id="compared">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">9 FFL ecommerce platforms compared</h2>
-      <p class={p}>
-        Read November 10, 2026 on each company's own site. Prices change, so check the source link before you buy.
-      </p>
+      <h2 class="text-xl font-semibold text-white">{"Nine FFL ecommerce platforms compared, with prices read November 10, 2026"}</h2>
+      <p class={p} set:html={md("We read each company's own site on November 10, 2026. Prices change, so check the source link before you buy. Where a cell was blank on the live page, it is marked as not listed on the source we read that day.")} />
       <div class="mt-6 overflow-x-auto">
         <table class="w-full min-w-[72rem] text-left text-sm">
           <thead>
             <tr class="border-b border-zinc-800 text-zinc-500">
-              {head.map((h) => <th class="py-3 pr-3 align-bottom font-medium">{h}</th>)}
+              {table[0].map((h) => <th class="py-3 pr-3 align-bottom font-medium">{h}</th>)}
             </tr>
           </thead>
           <tbody class="text-zinc-400">
             {
-              rows.map(([name, ...cells]) => (
+              table.slice(1).map(([name, ...cells]) => (
                 <tr class="border-b border-zinc-800/80">
-                  <th class="py-3 pr-3 align-top font-medium text-zinc-300">{name}</th>
+                  <th class="py-3 pr-3 align-top font-medium text-zinc-300" set:html={md(name)} />
                   {cells.map((c) => <td class="py-3 pr-3 align-top" set:html={md(c)} />)}
                 </tr>
               ))
@@ -247,21 +78,19 @@ const p = "mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400";
           </tbody>
         </table>
       </div>
-      <p class={p}>
-        Plugin prices don't include your website, hosting or build. Platform and POS prices include a website on that company's system. Card processing sits outside every price here. Marks belong to their owners. Coriolis is not affiliated with Gearfire or RetailBI.
-      </p>
+      <p class="mt-3 max-w-3xl text-xs leading-relaxed text-zinc-500">{"*Not listed on the source page we read November 10, 2026."}</p>
+      <p class={p} set:html={md("A plugin price covers the plugin, and the website, the hosting, and the build are separate, while a hosted platform or POS suite price covers a storefront on that company's system. Card processing sits outside every price here, marks belong to their owners, and Coriolis is not affiliated with Gearfire or RetailBI.")} />
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">The nine, one at a time</h2>
+      <h2 class="text-xl font-semibold text-white">{"The nine platforms, one at a time, with who each one is for"}</h2>
       <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
         {
           nine.map((n) => (
             <article class="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-              <h3 class="text-base font-semibold text-white">{n.h}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-zinc-400" set:html={md(n.body)} />
+              <p class="text-sm leading-relaxed text-zinc-400" set:html={md(n)} />
             </article>
           ))
         }
@@ -271,24 +100,21 @@ const p = "mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400";
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">Who should pick which</h2>
+      <h2 class="text-xl font-semibold text-white">{"Who should pick which kind of FFL ecommerce platform, depending on how you sell"}</h2>
       {picks.map((para) => <p class={p} set:html={md(para)} />)}
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">What it costs</h2>
-      <p class={p}>
-        The table has every listed starting price we could confirm, with the date and a link.
-      </p>
-      <p class={p} set:html={md("Compare like with like. Plugin prices (FFL Monkey, FFL Cockpit) don't include a website or hosting. Platform and POS prices do. A managed build like ours includes the site, hosting, licenses and support. Our own plans are Minute Man $169, Militia $269, Gun Runner $369, Warlord $469 and FFL Accelerator $569 a month. Setup is $500 or $2,500. For setup and monthly side by side, see [what an FFL website costs](/ffl-website-cost).")} />
+      <h2 class="text-xl font-semibold text-white">{"What the listed starting prices cover, and what they leave out"}</h2>
+      <p class={p} set:html={md("The table has every listed starting price we could confirm, with the date and a link. Compare like with like: a plugin price (FFL Monkey, FFL Cockpit) does not include a website or hosting, while a hosted platform or POS suite price includes the site, and a managed build like ours includes the site, hosting, licenses and support. Our own plans are Minute Man $169, Militia $269, Gun Runner $369, Warlord $469 and FFL Accelerator $569 a month, and setup is $500 or $2,500. For setup and monthly side by side, see [what an FFL website costs](/ffl-website-cost).")} />
     </div>
   </section>
 
   <section class="border-b border-zinc-800/80 py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">Leave a closed platform without going dark</h2>
+      <h2 class="text-xl font-semibold text-white">{"Leave a closed platform without going dark, in this order"}</h2>
       <ol class="mt-4 max-w-3xl list-decimal space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">
         {leaveSteps.map((s) => <li>{s}</li>)}
       </ol>
@@ -299,15 +125,13 @@ const p = "mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400";
     </div>
   </section>
 
-  <FaqBlock items={FAQ_BEST} />
+  <FaqBlock items={FAQ_BEST} heading={"The questions dealers ask when they compare FFL ecommerce platforms"} />
 
-  <TalkSection phone="(279) 258-6771" email="support@coriolisagency.com" />
+  <TalkSection heading={"Tell us about the website you want and we'll make it happen."} subline={"We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time."} contact={"You can also reach us at [(279) 258-6771](tel:+12792586771) or [support@coriolisagency.com](mailto:support@coriolisagency.com)."} />
 
   <section class="pb-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <p class="text-sm text-zinc-400">
-        100+ clients · <a href={TRUSTINDEX_REVIEWS_HREF} class={linkClass} target="_blank" rel="noopener noreferrer">5-star Google rating</a> · Member of NSSF, FPC and GOA
-      </p>
+      <p class="text-sm text-zinc-400" set:html={md("Coriolis has 100+ clients and a [5-star Google rating](https://www.trustindex.io/reviews/coriolisagency.com), and is a member of NSSF, FPC and GOA.")} />
     </div>
   </section>
 </BaseLayout>
