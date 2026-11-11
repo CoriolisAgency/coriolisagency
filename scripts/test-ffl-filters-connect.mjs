@@ -294,12 +294,12 @@ try {
 
   const noConsent = await postHandoff(validHandoff({ consent: "0" }));
   assert.equal(noConsent.status, 400);
-  assert.match(await noConsent.text(), /Consent is required/);
+  assert.match(await noConsent.text(), /consent box wasn&#39;t ticked/);
   assert.equal(fetchCtl.calls.length, 0);
 
   const missingFields = await postHandoff(validHandoff({ name: "", email: "" }));
   assert.equal(missingFields.status, 400);
-  assert.match(await missingFields.text(), /required details were missing/);
+  assert.match(await missingFields.text(), /A required detail was missing/);
   assert.equal(fetchCtl.calls.length, 0);
 
   const tooLongMsg = await postHandoff(
@@ -315,7 +315,7 @@ try {
     }),
   );
   assert.equal(multipart.status, 400);
-  assert.match(await multipart.text(), /File uploads are not accepted/);
+  assert.match(await multipart.text(), /doesn&#39;t take file uploads/);
 
   const huge = await handleConnect(
     connectRequest("POST", {
@@ -394,7 +394,7 @@ try {
     }),
   );
   assert.equal(thanks.status, 200);
-  assert.match(await thanks.text(), /We received your request/);
+  assert.match(await thanks.text(), /We have your request/);
 
   // Confirm from a cross-site origin must not persist.
   const before = fetchCtl.calls.length;
@@ -428,7 +428,7 @@ try {
   assert.equal(first.status, 303);
   const limited = await postHandoff(validHandoff({ topic: "other" }));
   assert.equal(limited.status, 429);
-  assert.match(await limited.text(), /Too many requests/);
+  assert.match(await limited.text(), /a lot of requests from your connection/);
 } finally {
   fetchCtl.restore();
   restoreEnv();
