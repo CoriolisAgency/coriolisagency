@@ -62,12 +62,12 @@ export const CASE_STUDIES_PUBLISHED = "2026-10-22";
 export const CASE_STUDIES_HUB = {
   path: "/case-studies",
   title: "Case Studies: Gun Store Websites We Built | Coriolis",
-  meta: "See the WooCommerce stores Coriolis built for Naples Gun Shop, Allegheny Arms and Target Shotguns, each on the shop's own domain and hosted on WP Engine.",
+  meta: "See the WooCommerce stores Coriolis built for Naples Gun Shop, Allegheny Arms, Target Shotguns and Jim's Armory, each on its own domain, hosted on WP Engine.",
   eyebrow: "Ecommerce · Case studies",
   h1: "Case studies: gun store websites we built",
   talkSubline: "We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.",
   intro:
-    "Every gun shop sells a little differently, so every store we build is set up for the shop that owns it. Naples Gun Shop keeps AIM POS on the counter, Allegheny Arms sells through its own online store, and Target Shotguns is a shotgun specialist on MicroBiz POS, each running WooCommerce on the shop's own domain, hosted on WP Engine.",
+    "Every gun shop sells a little differently, so every store we build is set up for the shop that owns it. Naples Gun Shop keeps AIM POS on the counter, Allegheny Arms sells through its own online store, Target Shotguns is a shotgun specialist on MicroBiz POS, and Jim's Armory sells online alongside a YouTube channel, each running WooCommerce on the shop's own domain, hosted on WP Engine.",
 } as const;
 
 export const CASE_STUDIES: CaseStudy[] = [
@@ -299,9 +299,86 @@ export const CASE_STUDIES: CaseStudy[] = [
     pos: "MicroBiz POS",
     posHref: "/microbiz-pos",
     siteUrl: "https://targetshotguns.com/",
-    hero: "/case-studies/target-shotguns-hero.webp",
-    og: "/case-studies/target-shotguns-og.png",
+    hero: "/case-studies/target-shotguns-hero.webp?v=20261110-microbiz",
+    og: "/case-studies/target-shotguns-og.png?v=20261110-microbiz",
     alt: "Target Shotguns' WooCommerce website by Coriolis, shown on a desktop browser and a phone.",
+    draft: false,
+  },
+  {
+    // JIMS-ARMORY case study (Paul 2026-11-10 10:23 PM ET via Chief: "Merge it and I'll review it live"). Copy: Brandy, CASE-STUDY.md.
+    slug: "jims-armory",
+    name: "Jim's Armory",
+    kicker: "Online store · YouTube channel",
+    cardLine: "An online store that sells alongside Jim Grill's YouTube channel, with a blog post for each video and a big catalog shoppers can filter.",
+    cardLink: "Read the Jim's Armory story",
+    cardMd: "[Jim's Armory](/case-studies/jims-armory) is an online store that sells alongside Jim Grill's YouTube channel, with a blog post for each video and a big catalog shoppers can filter.",
+    title: "Jim's Armory Case Study: YouTube Channel Store | Coriolis",
+    meta: "Coriolis built Jim's Armory a WooCommerce store on its own domain, hosted on WP Engine, to sell alongside Jim Grill's YouTube channel.",
+    h1: "Jim's Armory: the online store behind a YouTube channel",
+    facts: [
+      { label: "Store", value: "Jim's Armory" },
+      { label: "Type", value: "Online store" },
+      { label: "Channel", value: "Jim's Armory on YouTube", href: "https://www.youtube.com/@JimsArmory" },
+      { label: "Site", value: "jimsarmory.com", href: "https://jimsarmory.com/" },
+    ],
+    sections: [
+      {
+        heading: "The store",
+        paragraphs: [
+          [
+            "Jim's Armory is Jim Grill's online gun store, and it runs alongside his ",
+            { text: "Jim's Armory YouTube channel", href: "https://www.youtube.com/@JimsArmory" },
+            ", where he covers gunsmithing, reloading, training and gear reviews. It's a licensed dealer with no public storefront, and it doesn't take FFL transfers, so the website is the whole store. It sells handguns, rifles, shotguns, ammo, optics, magazines, tools and blades, and the categories up front follow what Jim talks about on camera: 2011 pistols, red dots, reloading gear and the Jim's Armory Custom Shop.",
+          ],
+        ],
+      },
+      {
+        heading: "What we built",
+        paragraphs: [
+          [
+            { text: "jimsarmory.com", href: "https://jimsarmory.com/" },
+            " is a WooCommerce store on Jim's own domain, hosted on WP Engine, and Coriolis built it to work with the channel. Each video gets a blog post on the site with the video right in it, so a viewer who finds an episode of Jim's Gun Garage, like the MAC 9 DS rebuild, can read the write-up and then shop the same categories from the menu. Distributor catalogs are connected, so the catalog runs deep in every category, and shoppers narrow it with filters for category, brand, price and stock that fold into a drawer on a phone. At checkout, a buyer picks the FFL dealer that will receive the firearm.",
+          ],
+          [
+            "When something is out of stock, a shopper can sign up to hear when it's back, and the store connects to Mailchimp, so people who come over from the channel can join Jim's email list right on the site.",
+          ],
+        ],
+      },
+      {
+        heading: "Where it stands",
+        paragraphs: [
+          [
+            "The store is live, with each episode's blog post and the full catalog on Jim's own domain, and the footer links back out to YouTube, Instagram, X and Facebook. Jim's Armory is also one of the four stores named in our ",
+            { text: "press release on custom WooCommerce stores", href: "/press/four-firearms-businesses-choose-coriolis-for-custom-woocommerce-stores" },
+            ".",
+          ],
+        ],
+      },
+      {
+        heading: "If you run a channel like this",
+        paragraphs: [
+          [
+            "If you make gun videos, your viewers already want the gear you're showing them, and a store on your own domain gives them a place to buy it from you. Coriolis builds the WooCommerce store, connects the distributor catalogs and the FFL checkout, and hosts it on WP Engine. You own the site and the email list, and a blog post for each video gives search engines something to find long after the episode goes up.",
+          ],
+        ],
+      },
+    ],
+    cta: [
+      "If you want a store for your channel, see ",
+      { text: "FFL website plans", href: "/ecommerce" },
+      ", or ",
+      { text: "how email marketing works for a gun store", href: "/email-marketing-for-ffl-ecommerce" },
+      ".",
+    ],
+    talkHeading: "Tell us about the website you want and we'll make it happen.",
+    talkSubline: "We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.",
+    modified: "2026-11-10",
+    pos: null,
+    posHref: null,
+    siteUrl: "https://jimsarmory.com/",
+    hero: "/case-studies/jims-armory-hero.webp",
+    og: "/case-studies/jims-armory-og.png",
+    alt: "Jim's Armory's WooCommerce store by Coriolis, shown on a desktop browser and a phone.",
     draft: false,
   },
   {

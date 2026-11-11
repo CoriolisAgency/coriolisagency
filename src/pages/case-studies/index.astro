@@ -1,7 +1,7 @@
 ---
 /**
  * SEO-U8v2: /case-studies hub. Copy is Brandy's FINAL (Chief 9:23 AM ET).
- * Live stories only (Naples Gun Shop, Allegheny Arms, Target Shotguns). The two
+ * Live stories only (Naples Gun Shop, Allegheny Arms, Target Shotguns, Jim's Armory). The two
  * draft stories are never carded, listed in the ItemList or linked from here.
  * No proof line (no-stats rule, Chief 9:23).
  */
@@ -12,7 +12,6 @@ import { CASE_STUDIES_HUB, LIVE_CASE_STUDIES, casePath } from "../../lib/case-st
 import { LINKS } from "../../lib/links";
 import { SITE_ORIGIN } from "../../lib/site";
 import { withBase } from "../../lib/base";
-import { md } from "../../lib/md";
 
 const siteOrigin = Astro.site ?? new URL(SITE_ORIGIN);
 const abs = (p: string) => new URL(withBase(p), siteOrigin).href;
@@ -58,28 +57,29 @@ const hubUrl = abs(CASE_STUDIES_HUB.path);
 
   <section class="py-12">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
-      <ul class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <ul class="grid grid-cols-1 gap-6 md:grid-cols-2">
         {
           LIVE_CASE_STUDIES.map((c) => (
-            <li class="group relative flex flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/50 transition hover:border-gold/40">
-              <img
-                src={withBase(c.hero)}
-                alt={c.alt}
-                width="1920"
-                height="1080"
-                loading="lazy"
-                decoding="async"
-                class="aspect-video w-full bg-[#091220] object-cover"
-              />
-              <div class="flex flex-1 flex-col p-6">
-                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">{c.kicker}</p>
-                <h2 class="mt-2 text-lg font-semibold tracking-tight text-white">{c.name}</h2>
-                {c.cardMd ? (
-                  <p class="mt-2 flex-1 text-sm leading-relaxed text-zinc-400" set:html={md(c.cardMd)} />
-                ) : (
+            <li>
+              <a
+                href={withBase(casePath(c.slug))}
+                class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/50 no-underline transition hover:border-gold/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              >
+                <img
+                  src={withBase(c.hero)}
+                  alt={c.alt}
+                  width="1920"
+                  height="1080"
+                  loading="lazy"
+                  decoding="async"
+                  class="aspect-video w-full bg-[#091220] object-cover"
+                />
+                <div class="flex flex-1 flex-col p-6">
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">{c.kicker}</p>
+                  <h2 class="mt-2 text-lg font-semibold tracking-tight text-white">{c.name}</h2>
                   <p class="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">{c.cardLine}</p>
-                )}
-              </div>
+                </div>
+              </a>
             </li>
           ))
         }
