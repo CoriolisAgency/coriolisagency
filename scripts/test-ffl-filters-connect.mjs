@@ -58,6 +58,7 @@ const {
   escapeHtml,
   isHttpUrl,
   resetConnectRateLimit,
+  SLIM_CONSENT_VERSION,
 } = await import("../api/ffl-filters-connect-lib.ts");
 
 function validHandoff(over = {}) {
@@ -267,6 +268,54 @@ assert.doesNotMatch(
 const envMissing = validateHandoff(validHandoff({ include_env: "1" }));
 assert.equal(envMissing.ok, false);
 
+// --- consent_v=2 slim handoff (FFL Filters 1.1.0) ---
+assert.equal(SLIM_CONSENT_VERSION, "2");
+function slimHandoff(over = {}) {
+  return {
+    name: "Ada Lovelace",
+    email: "ada@example.com",
+    message: "Need help with the filters.",
+    consent: "1",
+    consent_v: "2",
+    ...over,
+  };
+}
+const slimOk = validateHandoff(slimHandoff());
+assert.equal(slimOk.ok, true, JSON.stringify(slimOk.errors));
+assert.equal(slimOk.fields.store_name, "");
+assert.equal(slimOk.fields.store_url, "");
+assert.equal(slimOk.fields.topic, "");
+assert.doesNotMatch(buildLeadMessage(slimOk.fields), /topic=/);
+assert.match(buildLeadMessage(slimOk.fields), /consent_v=2/);
+assert.equal(validateHandoff(slimHandoff({ message: "" })).ok, true, "message stays optional");
+for (const field of ["name", "email", "consent"]) {
+  const r = validateHandoff(slimHandoff({ [field]: "" }));
+  assert.equal(r.ok, false, `v2 still requires ${field}`);
+  assert.ok(field in r.errors, `v2 error for ${field}`);
+}
+assert.equal(validateHandoff(slimHandoff({ consent: "0" })).ok, false);
+assert.equal(validateHandoff(slimHandoff({ email: "nope" })).ok, false);
+// Optional on v2, but still checked when sent.
+assert.ok("store_url" in validateHandoff(slimHandoff({ store_url: "javascript:alert(1)" })).errors);
+assert.ok("topic" in validateHandoff(slimHandoff({ topic: "bogus" })).errors);
+assert.ok("store_name" in validateHandoff(slimHandoff({ store_name: "s".repeat(201) })).errors);
+const slimFull = validateHandoff(slimHandoff({ store_name: "Analytical Arms", store_url: "https://analytical.example", topic: "speed" }));
+assert.equal(slimFull.ok, true);
+assert.match(buildLeadMessage(slimFull.fields), /topic=speed/);
+
+// --- v1 rules unchanged ---
+for (const field of ["store_name", "store_url", "topic", "name", "email", "consent_v"]) {
+  const r = validateHandoff(validHandoff({ [field]: "" }));
+  assert.equal(r.ok, false, `v1 requires ${field}`);
+  assert.ok(field in r.errors, `v1 error for ${field}`);
+}
+for (const v of ["1", "3", "v2", "20"]) {
+  const r = validateHandoff(validHandoff({ consent_v: v, store_name: "", topic: "" }));
+  assert.equal(r.ok, false, `consent_v=${v} keeps the v1 rules`);
+  assert.ok("store_name" in r.errors && "topic" in r.errors);
+}
+assert.match(buildLeadMessage(valid.fields), /^FFL Filters handoff\ntopic=setup\nconsent=1\nconsent_v=1/);
+
 // --- HTTP ---
 let restoreEnv = saveEnv();
 resetConnectRateLimit();
@@ -419,6 +468,33 @@ try {
   );
   assert.equal(noCsrf.status, 400);
   assert.equal(fetchCtl.calls.length, before);
+
+  // Slim v2 handoff: confirm page shows only what was sent, and the lead gets a company fallback.
+  const slimBefore = fetchCtl.calls.length;
+  const slimRes = await postHandoff(slimHandoff());
+  assert.equal(slimRes.status, 303);
+  const slimGet = await handleConnect(
+    connectRequest("GET", {
+      headers: { cookie: cookieHeaderFrom(setCookieMap(slimRes), HANDOFF_COOKIE) },
+    }),
+  );
+  const slimHtml = await slimGet.text();
+  assert.match(slimHtml, /Check your details and send/);
+  assert.doesNotMatch(slimHtml, /<dt>Store name<\/dt>|<dt>Store URL<\/dt>|<dt>Topic<\/dt>/);
+  const slimConfirm = await followConfirm(await postHandoff(slimHandoff()));
+  assert.equal(slimConfirm.status, 303, await slimConfirm.text());
+  assert.equal(fetchCtl.calls.length, slimBefore + 1, "slim confirm mints exactly one lead");
+  const slimOps = JSON.parse(fetchCtl.calls[fetchCtl.calls.length - 1].init.body);
+  assert.equal(slimOps.companyName, "Not given (FFL Filters)");
+  assert.match(slimOps.notes, /consent_v=2/);
+  assert.doesNotMatch(slimOps.notes, /topic=/);
+
+  // v1 over HTTP still rejects a missing store name or topic.
+  const v1NoStore = await postHandoff(validHandoff({ store_name: "" }));
+  assert.equal(v1NoStore.status, 400);
+  const v1NoTopic = await postHandoff(validHandoff({ topic: "" }));
+  assert.equal(v1NoTopic.status, 400);
+  assert.equal(fetchCtl.calls.length, slimBefore + 1);
 
   // Rate limit
   resetConnectRateLimit();

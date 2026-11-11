@@ -48,6 +48,12 @@ export const PRODUCT_COUNT_BUCKETS = [
 export type ProductCountBucket = (typeof PRODUCT_COUNT_BUCKETS)[number];
 
 const TOPIC_SET = new Set<string>(TOPICS);
+
+// FFL Filters 1.1.0 sends a slim form (name, email, message, consent) with
+// consent_v=2. Store name, store URL and topic are optional only for that
+// version; every other consent_v keeps the v1 rules.
+export const SLIM_CONSENT_VERSION = "2";
+const COMPANY_FALLBACK = "Not given (FFL Filters)";
 const BUCKET_SET = new Set<string>(PRODUCT_COUNT_BUCKETS);
 
 const LIMITS = {
@@ -72,7 +78,8 @@ export type HandoffFields = {
   email: string;
   store_name: string;
   store_url: string;
-  topic: Topic;
+  // Empty only on a slim (consent_v=2) handoff.
+  topic: Topic | "";
   message: string;
   phone: string;
   consent: "1";
@@ -296,19 +303,24 @@ export function validateHandoff(
   else if (email.tooLong) errors.email = "Email must be 200 characters or fewer.";
   else if (!EMAIL_RE.test(email.value)) errors.email = "That email does not look valid.";
 
-  if (!storeName.value) errors.store_name = "Store name is required.";
-  else if (storeName.tooLong) {
+  const slim = consentV.value === SLIM_CONSENT_VERSION;
+
+  if (!storeName.value) {
+    if (!slim) errors.store_name = "Store name is required.";
+  } else if (storeName.tooLong) {
     errors.store_name = "Store name must be 200 characters or fewer.";
   }
 
-  if (!storeUrl.value) errors.store_url = "Store URL is required.";
-  else if (storeUrl.tooLong) errors.store_url = "Store URL must be 200 characters or fewer.";
+  if (!storeUrl.value) {
+    if (!slim) errors.store_url = "Store URL is required.";
+  } else if (storeUrl.tooLong) errors.store_url = "Store URL must be 200 characters or fewer.";
   else if (!isHttpUrl(storeUrl.value)) {
     errors.store_url = "Store URL must be an http or https address.";
   }
 
-  if (!topic.value) errors.topic = "Topic is required.";
-  else if (!TOPIC_SET.has(topic.value)) {
+  if (!topic.value) {
+    if (!slim) errors.topic = "Topic is required.";
+  } else if (!TOPIC_SET.has(topic.value)) {
     errors.topic = "Topic must be setup, speed, catalog, website, or other.";
   }
 
@@ -366,7 +378,7 @@ export function validateHandoff(
     email: email.value,
     store_name: storeName.value,
     store_url: storeUrl.value,
-    topic: topic.value as Topic,
+    topic: topic.value as Topic | "",
     message: message.value,
     phone: phone.value,
     consent: "1",
@@ -383,12 +395,9 @@ export function validateHandoff(
 }
 
 export function buildLeadMessage(fields: HandoffFields): string {
-  const lines = [
-    "FFL Filters handoff",
-    `topic=${fields.topic}`,
-    `consent=${fields.consent}`,
-    `consent_v=${fields.consent_v}`,
-  ];
+  const lines = ["FFL Filters handoff"];
+  if (fields.topic) lines.push(`topic=${fields.topic}`);
+  lines.push(`consent=${fields.consent}`, `consent_v=${fields.consent_v}`);
   if (fields.message) {
     lines.push("", fields.message);
   }
@@ -402,7 +411,7 @@ export function buildLeadMessage(fields: HandoffFields): string {
   return lines.join("\n");
 }
 
-function topicLabel(topic: Topic): string {
+function topicLabel(topic: Topic | ""): string {
   switch (topic) {
     case "setup":
       return "Help with setup";
@@ -566,10 +575,11 @@ function fieldsDl(fields: HandoffFields): string {
   const rows: Array<[string, string]> = [
     [COPY.labelName, fields.name],
     [COPY.labelEmail, fields.email],
-    [COPY.labelStoreName, fields.store_name],
-    [COPY.labelStoreUrl, fields.store_url],
-    [COPY.labelTopic, topicLabel(fields.topic)],
   ];
+  // A slim (consent_v=2) handoff may leave these out; show only what was sent.
+  if (fields.store_name) rows.push([COPY.labelStoreName, fields.store_name]);
+  if (fields.store_url) rows.push([COPY.labelStoreUrl, fields.store_url]);
+  if (fields.topic) rows.push([COPY.labelTopic, topicLabel(fields.topic)]);
   if (fields.phone) rows.push([COPY.labelPhone, fields.phone]);
   if (fields.message) rows.push([COPY.labelMessage, fields.message]);
   rows.push([COPY.labelConsent, fields.consent_v]);
@@ -717,7 +727,8 @@ async function persistLead(
   const { POST: handleLead } = await import("@coriolis/lead-form/handler");
   const body = {
     name: fields.name,
-    company: fields.store_name,
+    // The lead store needs a company; a slim handoff may not carry one.
+    company: fields.store_name || COMPANY_FALLBACK,
     email: fields.email,
     phone: fields.phone,
     website: fields.store_url,
