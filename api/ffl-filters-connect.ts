@@ -1,1 +1,1 @@
-export { handleConnect as GET, handleConnect as POST, handleConnect as HEAD } from "../src/lib/ffl-filters-connect";
+export { handleConnect as GET, handleConnect as POST, handleConnect as HEAD } from "./ffl-filters-connect-lib.js";
