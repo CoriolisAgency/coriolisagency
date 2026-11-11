@@ -20,7 +20,7 @@ import { EMAIL_RE } from "@coriolis/lead-form";
 
 export const CONNECT_PATH = "/ffl-filters/connect";
 export const CANONICAL = "https://www.coriolisagency.com/ffl-filters/connect";
-export const DELETE_MAILBOX = "paul@coriolisagency.com";
+export const DELETE_MAILBOX = "support@coriolisagency.com";
 export const DELETE_MAILTO = `mailto:${DELETE_MAILBOX}`;
 
 export const MAX_BODY_BYTES = 64 * 1024;
