@@ -417,36 +417,33 @@ function topicLabel(topic: Topic): string {
   }
 }
 
-// TODO(Brandy): all visitor-facing strings on this page.
+// Copy: Brandy, Nov 10, 2026 (PR #175).
 const COPY = {
-  titleLanding: "FFL Filters connect | Coriolis, LLC",
+  titleLanding: "FFL Filters: talk to Coriolis | Coriolis, LLC",
   titleConfirm: "Confirm your FFL Filters request | Coriolis, LLC",
-  titleThanks: "Request received | Coriolis, LLC",
-  titleError: "Could not send this request | Coriolis, LLC",
+  titleThanks: "FFL Filters request received | Coriolis, LLC",
+  titleError: "FFL Filters request not sent | Coriolis, LLC",
   kicker: "FFL Filters",
-  landingH1: "Connect with Coriolis about FFL Filters",
-  landingP:
-    "This page receives a request from the FFL Filters plugin in your WordPress admin. To send one, use the connect form there. Opening this page directly does not send a request.",
-  confirmH1: "Confirm your request",
-  confirmP:
-    "Review the details below. Sending this form stores the request with Coriolis only.",
+  landingH1: "Talk to Coriolis about FFL Filters",
+  landingP: "This page picks up the request you send from FFL Filters, using the form on the last step of the setup wizard or on the Help tab in your WordPress admin. Opening this page on its own doesn't send us anything, so if you'd like to reach us another way, email support@coriolisagency.com or use the form at https://www.coriolisagency.com/contact.",
+  confirmH1: "Check your details and send",
+  confirmP: "These are the details FFL Filters passed along from your WordPress admin, and we haven't stored any of them yet. If they look right, click Send to Coriolis and they go to Coriolis only, so we can get in touch with you about FFL Filters.",
   confirmSubmit: "Send to Coriolis",
-  thanksH1: "We received your request",
-  thanksP: "Coriolis has this request. We will get back to you.",
-  errorH1: "This request could not be sent",
-  missing: "Some required details were missing or not valid. Go back to the FFL Filters connect form in WordPress and send it again.",
-  consent: "Consent is required to send this request. Go back to the plugin, tick the consent box, and send it again.",
-  tooLarge: "That request was too large to accept. Go back to the plugin and send it again without extra attachments.",
-  multipart: "File uploads are not accepted on this page. Go back to the plugin and send the form again.",
-  rateLimited: "Too many requests. Please wait a few minutes and try again.",
-  retry: "Could not store this request. Confirm again in a moment.",
-  notConfigured: "Intake is not configured yet. Try again later.",
-  csrf: "This confirmation expired or is not valid. Go back to the FFL Filters connect form in WordPress and send it again.",
-  forbidden: "This confirmation has to be sent from this page.",
-  deleteH2: "Ask us to delete a handoff",
-  deleteP1:
-    "To ask Coriolis to delete a handoff you sent, email the address below. Include the email address you submitted with the request.",
-  deleteMailboxLabel: "Deletion requests",
+  thanksH1: "We have your request",
+  thanksP: "Thanks for reaching out. Your request is with Coriolis now, and we'll reply to the email address you gave us. If something changes in the meantime, write to support@coriolisagency.com.",
+  errorH1: "We couldn't send this request",
+  missing: "A required detail was missing or didn't look right, so we didn't receive anything. Check your name, email, store name, store URL and topic on the FFL Filters contact form, then send it once more.",
+  consent: "The consent box wasn't ticked, and without it we can't accept the request. Open the form in your WordPress admin, tick the box that lets Coriolis contact you, and click Send to Coriolis.",
+  tooLarge: "That request was bigger than this page accepts. Shorten your message in the plugin and try sending it one more time.",
+  multipart: "This page doesn't take file uploads. Remove the file and resend your request from the Help tab or the setup wizard in FFL Filters.",
+  rateLimited: "We've had a lot of requests from your connection in a short time. Give it a few minutes and try again, or email support@coriolisagency.com.",
+  retry: "We couldn't save your request just now, and it hasn't been stored. Click Send to Coriolis again in a moment, or email support@coriolisagency.com if it keeps happening.",
+  notConfigured: "Our side of this form isn't working right now, and your request hasn't been stored. Try again later, or email support@coriolisagency.com and we'll take it from there.",
+  csrf: "This confirmation has expired or couldn't be checked, so we haven't stored your request. Start over from FFL Filters in your WordPress admin and it will bring you back here.",
+  forbidden: "This confirmation only works from the Send to Coriolis button on this page. Your request hasn't been stored, so please start again from the plugin.",
+  deleteH2: "Delete a request you sent",
+  deleteP1: "If you'd like us to delete a request you sent from FFL Filters, email the address below and include the email address you used on the request. The Forget button in FFL Filters only clears the send date saved on your own site, so this email is how you remove the copy Coriolis has.",
+  deleteMailboxLabel: "Send deletion requests to",
   fieldsLegend: "Your request",
   labelName: "Name",
   labelEmail: "Email",
@@ -455,12 +452,12 @@ const COPY = {
   labelTopic: "Topic",
   labelMessage: "Message",
   labelPhone: "Phone",
-  labelConsent: "Consent version",
-  labelEnv: "Site info",
-  labelPlugin: "FFL Filters",
-  labelWp: "WordPress",
-  labelWoo: "WooCommerce",
-  labelCount: "Catalog size",
+  labelConsent: "Consent wording version",
+  labelEnv: "Site info you chose to include",
+  labelPlugin: "FFL Filters version",
+  labelWp: "WordPress version",
+  labelWoo: "WooCommerce version",
+  labelCount: "Product count range",
   home: "Home",
   privacy: "Privacy",
 } as const;
@@ -776,7 +773,7 @@ export async function handleConnect(request: Request): Promise<Response> {
   }
 
   if (method !== "POST") {
-    return html(405, renderError("Use GET to open this page, or POST from the FFL Filters plugin."));
+    return html(405, renderError("Open this page in a browser, or reach it from the form inside FFL Filters."));
   }
 
   const { max, windowMs } = rateSettings();
