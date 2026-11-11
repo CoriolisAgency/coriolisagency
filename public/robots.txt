@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /ffl-filters/
 
 Sitemap: https://www.coriolisagency.com/sitemap-index.xml
