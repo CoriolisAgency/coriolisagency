@@ -58,7 +58,7 @@ const {
   escapeHtml,
   isHttpUrl,
   resetConnectRateLimit,
-} = await import("../src/lib/ffl-filters-connect.ts");
+} = await import("../api/ffl-filters-connect-lib.ts");
 
 function validHandoff(over = {}) {
   return {
@@ -206,9 +206,19 @@ const pkg = JSON.parse(read("package.json"));
 assert.match(pkg.scripts["test:ci"], /test-ffl-filters-connect\.mjs/);
 
 assert.ok(fs.existsSync(path.join(root, "api/ffl-filters-connect.ts")));
-const connectSrc = read("api/ffl-filters-connect.ts") + read("src/lib/ffl-filters-connect.ts");
+const connectSrc = read("api/ffl-filters-connect.ts") + read("api/ffl-filters-connect-lib.ts");
 assert.doesNotMatch(connectSrc, /gtag|googletagmanager|klaviyo|mailchimp|instantly/i);
 assert.match(connectSrc, /TODO\(Brandy\)/);
+assert.match(
+  read("api/ffl-filters-connect.ts"),
+  /from \"\.\/ffl-filters-connect-lib\.js\"/,
+  "api entry must use an explicit .js import so Vercel can resolve the module",
+);
+assert.doesNotMatch(
+  read("api/ffl-filters-connect.ts"),
+  /from \"\.\.\/src\/lib\//,
+);
+
 assert.doesNotMatch(connectSrc, /console\.(log|info|error|warn)\([^)]*process\.env/);
 
 // --- helpers ---

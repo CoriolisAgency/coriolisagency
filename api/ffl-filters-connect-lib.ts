@@ -16,8 +16,7 @@
  * Copy strings are placeholders: TODO(Brandy).
  */
 import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
-import { EMAIL_RE, MIN_FILL_MS } from "@coriolis/lead-form";
-import { POST as handleLead } from "@coriolis/lead-form/handler";
+import { EMAIL_RE } from "@coriolis/lead-form";
 
 export const CONNECT_PATH = "/ffl-filters/connect";
 export const CANONICAL = "https://www.coriolisagency.com/ffl-filters/connect";
@@ -717,6 +716,8 @@ async function persistLead(
   request: Request,
   fields: HandoffFields,
 ): Promise<Response> {
+  const { MIN_FILL_MS } = await import("@coriolis/lead-form");
+  const { POST: handleLead } = await import("@coriolis/lead-form/handler");
   const body = {
     name: fields.name,
     company: fields.store_name,
@@ -811,9 +812,9 @@ export async function handleConnect(request: Request): Promise<Response> {
 
   // First-hand-off POST may be cross-site. Do not persist yet.
   const result = validateHandoff(form);
-  if (!result.ok) {
-    const consentProblem = Boolean(result.errors.consent) &&
-      Object.keys(result.errors).length === 1;
+  if (result.ok === false) {
+    const consentProblem =
+      Boolean(result.errors.consent) && Object.keys(result.errors).length === 1;
     return html(400, renderError(consentProblem ? COPY.consent : COPY.missing));
   }
 
