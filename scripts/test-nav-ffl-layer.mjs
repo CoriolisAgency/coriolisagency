@@ -20,7 +20,7 @@ assert.deepEqual(labels, [
   "WooCommerce for Trident 1",
   "Case Studies",
   "GunSearchEngine.com",
-  "Press Room",
+  "News",
 ]);
 assert.deepEqual(hrefs, [
   "ecommerce",
