@@ -12,6 +12,8 @@ export type PressPost = {
   modified?: string;
   location: string;
   ogImagePath: string;
+  /** Optional in-article hero; the figure falls back to ogImagePath. */
+  heroImagePath?: string;
   imageAlt: string;
   /** Hidden: off the /press list and the sitemap; route is its own page file. */
   hidden?: boolean;
@@ -20,6 +22,21 @@ export type PressPost = {
 };
 
 export const PRESS_POSTS: PressPost[] = [
+  {
+    slug: "radian-weapons-joins-vault-as-a-founding-member",
+    path: "/press/radian-weapons-joins-vault-as-a-founding-member",
+    kicker: "FFL Ecommerce News",
+    title: "Radian Weapons Joins VAULT as a Founding Member",
+    dek: "Radian Weapons joined NASGW's VAULT product data platform as a founding member. What VAULT does and why it matters to FFL dealers.",
+    date: "2026-11-13",
+    dateLabel: "November 13, 2026",
+    location: "",
+    ogImagePath: CANON_PATHS.radianVaultOg,
+    heroImagePath: CANON_PATHS.radianVaultHero,
+    imageAlt:
+      "Radian Weapons logo mark with the headline Radian Weapons joins VAULT as a founding member, on a black background with a yellow accent bar.",
+    standalone: true,
+  },
   {
     slug: "five-ffls-choose-coriolis-for-aim-pos-integration",
     path: "/press/five-ffls-choose-coriolis-for-aim-pos-integration",

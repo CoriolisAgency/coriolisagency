@@ -26,6 +26,7 @@ GunSearchAgent is retired. FFLIntel is our journal on gun demand numbers (fflint
 - /about: who we are
 - /press: newsroom
 - /press/five-ffls-choose-coriolis-for-aim-pos-integration: AIM POS + WooCommerce deployments
+- /press/radian-weapons-joins-vault-as-a-founding-member: Radian Weapons joins NASGW's VAULT as a founding member
 - /case-studies: case studies, gun store websites we built
 - /case-studies/naples-gun-shop: Naples Gun Shop, a WooCommerce store connected to AIM POS
 - /case-studies/allegheny-arms: Allegheny Arms, a WooCommerce store on its own domain

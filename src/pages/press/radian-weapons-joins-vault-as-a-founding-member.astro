@@ -1,0 +1,110 @@
+---
+/**
+ * /press/radian-weapons-joins-vault-as-a-founding-member
+ * CA-NEWS-RADIAN-VAULT (Brandy copy 2026-11-13; Paul via Chief: write the
+ * summary, link The Outdoor Wire release, and ship). Own page file because
+ * press/[slug].astro carries the five-FFLs body. Same layout, metadata, hero
+ * figure, NewsArticle schema and link classes as the latest standalone release.
+ * Listed on /press and in the sitemap via PRESS_POSTS (standalone: true).
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaRow from "../../components/CtaRow.astro";
+import { LINKS } from "../../lib/links";
+import { pressBySlug } from "../../lib/press";
+import { SITE, SITE_ORIGIN } from "../../lib/site";
+import { withBase } from "../../lib/base";
+import { md } from "../../lib/md";
+
+const post = pressBySlug("radian-weapons-joins-vault-as-a-founding-member")!;
+const siteOrigin = Astro.site ?? new URL(SITE_ORIGIN);
+const pageUrl = new URL(withBase(post.path), siteOrigin).href;
+const imageUrl = new URL(withBase(post.ogImagePath), siteOrigin).href;
+const heroPath = post.heroImagePath ?? post.ogImagePath;
+---
+
+<BaseLayout
+  title={`${post.title} | Coriolis Agency`}
+  description={post.dek}
+  path={post.path}
+  ogImagePath={post.ogImagePath}
+  ogType="article"
+  publishedTime={post.date}
+  extraJsonLd={[
+    {
+      "@type": "NewsArticle",
+      "@id": `${pageUrl}#article`,
+      headline: post.title,
+      description: post.dek,
+      datePublished: post.date,
+      dateModified: post.modified ?? post.date,
+      url: pageUrl,
+      image: imageUrl,
+      inLanguage: "en-US",
+      author: {
+        "@type": "Organization",
+        name: SITE.legalName,
+        url: LINKS.home,
+      },
+      publisher: { "@id": `${LINKS.home}/#organization` },
+      isPartOf: { "@id": `${pageUrl}#webpage` },
+    },
+  ]}
+>
+  <article class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class="text-xs text-zinc-500">
+        <a href={withBase("press")} class="hover:text-sky-300">Press</a>
+        <span class="px-1.5">/</span>
+        News
+      </p>
+      <p
+        class="mt-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        {post.kicker}
+      </p>
+      <h1
+        class="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl text-balance"
+      >
+        {post.title}
+      </h1>
+      <p class="mt-4 text-sm text-zinc-500">
+        {post.dateLabel}
+      </p>
+
+      <figure class="mt-8 overflow-hidden rounded-2xl ring-1 ring-white/10">
+        <img
+          src={withBase(heroPath)}
+          alt={post.imageAlt}
+          width="1600"
+          height="900"
+          class="w-full bg-[#111] object-contain"
+        />
+      </figure>
+
+      <div class="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-zinc-300">
+        <p set:html={md("If you sell Radian Weapons parts on your website, the product data behind those listings just got a new home. NASGW announced today that Radian Weapons has joined VAULT, the centralized product data platform the association developed, as a founding member, which puts Radian in VAULT's Founders Group alongside the other manufacturers already signed on.")} />
+
+        <h2 class="pt-4 text-lg font-semibold text-white">{"What VAULT Actually Does"}</h2>
+        <p set:html={md("According to the release, VAULT gives manufacturers a single place to upload product content, images, specifications and compliance data once and send it across the supply chain from one source. Distributors and retailers can then pull that data directly into their own systems through an API, and NASGW says that reduces duplicate data entry, cuts order errors and keeps product information accurate and current in every channel.")} />
+        <p set:html={md("VAULT is owned and operated by NASGW Solutions Corporation, a wholly owned subsidiary of NASGW, and the release describes it as an industry-wide Product Information Exchange for manufacturers, distributors, retailers and sales partners across the shooting sports supply chain.")} />
+
+        <h2 class="pt-4 text-lg font-semibold text-white">{"What Radian Said"}</h2>
+        <p set:html={md("The quote in the release comes from Radian's marketing manager:")} />
+        <blockquote class="border-l-2 border-gold/60 pl-4 text-zinc-200">
+          <p set:html={md("\"Radian's innovative engineering and commitment to continuous improvement is known throughout the industry so it only makes sense that the data available to our dealer and distributor partners is just as precise and up to date,\" said Ryan Johnson, Marketing Manager at Radian Weapons. \"VAULT gives us one place to control our specs, images, and compliance information, and it gives our partners confidence they are working from the right data. Joining as a founding member was an easy decision.\"")} />
+        </blockquote>
+
+        <h2 class="pt-4 text-lg font-semibold text-white">{"Why Do You Care?"}</h2>
+        <p set:html={md("You care about that because every title, spec and image on your product pages comes from somewhere, and when a manufacturer like Radian (they make AR-platform parts and accessories such as charging handles, triggers and muzzle devices, per their own site) controls that data in one place, the version that reaches your distributor and then your website should be the one the manufacturer actually approved.")} />
+        <p set:html={md("NASGW also says it's still onboarding manufacturers, and it's asking distributors and retailers to push their manufacturer partners to join. So if there's a brand you sell a lot of and you're tired of fixing its listings by hand, that's a conversation worth having with your rep, and manufacturers can learn more at [itsonvault.com](https://itsonvault.com/).")} />
+        <p set:html={md("You can read the [full announcement on The Outdoor Wire](https://www.theoutdoorwire.com/releases/2026/11/radian-weapons-joins-vault-as-a-founding-member/), and you can check out Radian's lineup at [radianweapons.com](https://radianweapons.com/).")} />
+      </div>
+    </div>
+  </article>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <CtaRow primary="contact" />
+    </div>
+  </section>
+</BaseLayout>
