@@ -25,5 +25,5 @@ export const MAIN_NAV: readonly NavItem[] = [
   },
   { href: "case-studies", label: "Case Studies" },
   { href: "https://gunsearchengine.com/for-dealers", label: "GunSearchEngine.com", external: true },
-  { href: "press", label: "Press Room" },
+  { href: "press", label: "News" },
 ];
