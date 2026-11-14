@@ -13,24 +13,24 @@ const hrefs = [...navSrc.matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]);
 assert.deepEqual(labels, [
   "FFL Ecommerce",
   "FFL Dropshipping",
+  "FFL Filters",
   "Gun Store POS",
   "WooCommerce for AIM",
   "WooCommerce for Rapid",
   "WooCommerce for MicroBiz",
   "WooCommerce for Trident 1",
-  "Case Studies",
   "GunSearchEngine.com",
   "News",
 ]);
 assert.deepEqual(hrefs, [
   "ecommerce",
   "firearms-dropshipping",
+  "ffl-filters",
   "gun-store-pos",
   "aim-pos",
   "rapid-gun-systems-pos",
   "microbiz-pos",
   "trident-1-pos",
-  "case-studies",
   "https://gunsearchengine.com/for-dealers",
   "press",
 ]);

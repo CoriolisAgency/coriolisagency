@@ -13,6 +13,7 @@ export type NavItem = {
 export const MAIN_NAV: readonly NavItem[] = [
   { href: "ecommerce", label: "FFL Ecommerce" },
   { href: "firearms-dropshipping", label: "FFL Dropshipping" },
+  { href: "ffl-filters", label: "FFL Filters" },
   {
     href: "gun-store-pos",
     label: "Gun Store POS",
@@ -23,7 +24,6 @@ export const MAIN_NAV: readonly NavItem[] = [
       { href: "trident-1-pos", label: "WooCommerce for Trident 1" },
     ],
   },
-  { href: "case-studies", label: "Case Studies" },
   { href: "https://gunsearchengine.com/for-dealers", label: "GunSearchEngine.com", external: true },
   { href: "press", label: "News" },
 ];
