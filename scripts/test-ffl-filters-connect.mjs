@@ -330,6 +330,7 @@ try {
   assert.equal(getRes.status, 200);
   assert.equal(getRes.headers.get("x-robots-tag"), "noindex, nofollow");
   assert.equal(getRes.headers.get("cache-control"), "no-store");
+  assert.equal(getRes.headers.get("referrer-policy"), "same-origin");
   const getHtml = await getRes.text();
   assert.match(getHtml, /id="delete"/);
   assert.match(getHtml, new RegExp(DELETE_MAILBOX));
@@ -469,6 +470,36 @@ try {
   assert.equal(noCsrf.status, 400);
   assert.equal(fetchCtl.calls.length, before);
 
+  // Origin gate (CA-FFLF-SETUP-FORM). Chrome sends `Origin: null` on the
+  // confirm page's own same-origin POST when the page is no-referrer; the
+  // gate must trust Sec-Fetch-Site: same-origin and nothing weaker.
+  async function confirmExact(exactHeaders) {
+    const handoff = await postHandoff(slimHandoff());
+    assert.equal(handoff.status, 303);
+    const cookie = cookieHeaderFrom(setCookieMap(handoff), HANDOFF_COOKIE);
+    const page = await handleConnect(connectRequest("GET", { headers: { cookie } }));
+    const csrf = (await page.text()).match(/name="csrf" value="([^"]+)"/)?.[1];
+    assert.ok(csrf, "csrf missing on confirmation page");
+    return handleConnect(
+      connectRequest("POST", {
+        body: encodeBody({ confirm: "1", csrf }),
+        headers: { cookie, ...exactHeaders },
+      }),
+    );
+  }
+  const gateBefore = fetchCtl.calls.length;
+  const nullSameOrigin = await confirmExact({ origin: "null", "sec-fetch-site": "same-origin" });
+  assert.equal(nullSameOrigin.status, 303, "Origin null + same-origin must pass the origin gate");
+  assert.equal(fetchCtl.calls.length, gateBefore + 1, "Origin null + same-origin mints one lead");
+  const nullCrossSite = await confirmExact({ origin: "null", "sec-fetch-site": "cross-site" });
+  assert.equal(nullCrossSite.status, 403, "Origin null + cross-site must 403");
+  const nullNoFetchSite = await confirmExact({ origin: "null" });
+  assert.equal(nullNoFetchSite.status, 403, "Origin null without Sec-Fetch-Site must 403");
+  const foreignOrigin = await confirmExact({ origin: "https://evil.example" });
+  assert.equal(foreignOrigin.status, 403, "a foreign Origin must 403");
+  const foreignSameSite = await confirmExact({ origin: "https://evil.example", "sec-fetch-site": "same-site" });
+  assert.equal(foreignSameSite.status, 403, "a foreign Origin with same-site must 403");
+  assert.equal(fetchCtl.calls.length, gateBefore + 1, "rejected confirms mint nothing");
   // Slim v2 handoff: confirm page shows only what was sent, and the lead gets a company fallback.
   const slimBefore = fetchCtl.calls.length;
   const slimRes = await postHandoff(slimHandoff());
