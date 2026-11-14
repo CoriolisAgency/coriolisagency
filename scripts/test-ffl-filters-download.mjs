@@ -7,6 +7,7 @@
  * (after `npm run build`), also checks the built sitemap, page, and that only the header links to it.
  * CA-FFLF-OG-IMAGE: also asserts the 1200x630 JPEG, page-only OG/Twitter tags with absolute URLs,
  * and Brandy's alt text verbatim (quotes escaped in the built HTML).
+ * CA-FFLF-HERO: also asserts Brandy's Glock hero <picture> (src, alt, width/height, eager loading).
  */
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
@@ -99,6 +100,55 @@ assert.match(layout, /ogImageWidth != null/);
 assert.match(layout, /ogImageHeight != null/);
 assert.match(layout, /ogImageAlt \? \(/);
 
+
+// 2c. CA-FFLF-HERO: exact files, Brandy's <picture> markup (paths via withBase), eager loading.
+const heroAlt =
+  "A browser window shows a shop page filtered to Glock and 9mm Luger, with the filter panel's chips, In Stock switch, and open Brand and Caliber groups on the left. Beside the panel are Glock pistol cards.";
+const heroFiles = [
+  { rel: "public/brand/ffl-filters/hero/ffl-filters-hero-desktop-1440x1152.webp", sha: "29f4a1c84ee05f60ed9a6c293d4ead939aff50cbe015a9fa6d98e9e0e39691c1", w: 1440, h: 1152, magic: "52494646", kind: "webp" },
+  { rel: "public/brand/ffl-filters/hero/ffl-filters-hero-desktop-1440x1152.jpg", sha: "ffb788934722ccfa76d8c99957aaed0b5331b93d2c251a6cff590db293e9978a", w: 1440, h: 1152, magic: "ffd8ff", kind: "jpeg" },
+  { rel: "public/brand/ffl-filters/hero/ffl-filters-hero-mobile-750x1200.webp", sha: "af54e8cd9791f6576f9c4a8daab9cd62d9fb38a228f29bb270bf8b246a200926", w: 750, h: 1200, magic: "52494646", kind: "webp" },
+  { rel: "public/brand/ffl-filters/hero/ffl-filters-hero-mobile-750x1200.jpg", sha: "2b32d0604c371123ecc8bf1af39fa985eb3de0ccd6c80e90a650bd22ef6bac9e", w: 750, h: 1200, magic: "ffd8ff", kind: "jpeg" },
+];
+function webpSize(buf) {
+  if (buf.toString("ascii", 0, 4) !== "RIFF" || buf.toString("ascii", 8, 12) !== "WEBP") throw new Error("not webp");
+  if (buf.toString("ascii", 12, 16) === "VP8X") return { w: 1 + buf.readUIntLE(24, 3), h: 1 + buf.readUIntLE(27, 3) };
+  if (buf.toString("ascii", 12, 16) === "VP8L") {
+    const bits = buf.readUInt32LE(21);
+    return { w: (bits & 0x3fff) + 1, h: ((bits >> 14) & 0x3fff) + 1 };
+  }
+  if (buf.toString("ascii", 12, 16) === "VP8 ") {
+    return { w: buf.readUInt16LE(26) & 0x3fff, h: buf.readUInt16LE(28) & 0x3fff };
+  }
+  throw new Error("no webp size");
+}
+for (const f of heroFiles) {
+  const buf = fs.readFileSync(path.join(root, f.rel));
+  assert.equal(crypto.createHash("sha256").update(buf).digest("hex"), f.sha, f.rel + " sha256");
+  assert.equal(buf.subarray(0, f.magic.length / 2).toString("hex"), f.magic, f.rel + " magic");
+  const dim = f.kind === "jpeg" ? jpegSize(buf) : webpSize(buf);
+  assert.equal(dim.w, f.w, f.rel + " width");
+  assert.equal(dim.h, f.h, f.rel + " height");
+}
+assert.match(page, /<picture>/);
+assert.match(page, /media="\(min-width: 640px\)" type="image\/webp" srcset=\{withBase\("brand\/ffl-filters\/hero\/ffl-filters-hero-desktop-1440x1152\.webp"\)\} width="1440" height="1152"/);
+assert.match(page, /media="\(min-width: 640px\)" srcset=\{withBase\("brand\/ffl-filters\/hero\/ffl-filters-hero-desktop-1440x1152\.jpg"\)\} width="1440" height="1152"/);
+assert.match(page, /type="image\/webp" srcset=\{withBase\("brand\/ffl-filters\/hero\/ffl-filters-hero-mobile-750x1200\.webp"\)\} width="750" height="1200"/);
+assert.match(page, /withBase\("brand\/ffl-filters\/hero\/ffl-filters-hero-mobile-750x1200\.jpg"\)/);
+assert.ok(page.includes(heroAlt), "page ships Brandy hero alt verbatim");
+assert.match(page, /width="750"/);
+assert.match(page, /height="1200"/);
+assert.match(page, /fetchpriority="high"/);
+assert.match(page, /decoding="async"/);
+assert.match(page, /loading="eager"/);
+assert.match(page, /class="mt-10 block h-auto w-full rounded-\[14px\]"/);
+// Hero sits directly after the version line; page copy is otherwise unchanged.
+assert.match(page, /Version 1\.3\.5 . Free . GPLv2 or later<\/p>\s*<picture>/);
+// OG tags stay exactly as they were.
+assert.match(page, /const ogImage = "og\/ffl-filters-og\.jpg";/);
+assert.match(page, /ogImageWidth=\{1200\}/);
+assert.match(page, /ogImageHeight=\{630\}/);
+
 // 3. Nothing else links to the page or the zip.
 // CA-NAV-FFLF: the header item in src/lib/nav.ts (rendered by SiteChrome for desktop and mobile)
 // is the one allowed internal link. Footer and the /case-studies page stay unchanged.
@@ -187,6 +237,20 @@ if (fs.existsSync(dist)) {
     "c0dff4fd6092235767ee53082925407602ce6b4e881e362a638829ce07e68da2",
     "dist og image sha256",
   );
+  const heroAltEsc = heroAlt.replaceAll('"', "&quot;").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  assert.match(html, /<picture>/);
+  assert.match(html, /<source media="\(min-width: 640px\)" type="image\/webp" srcset="\/brand\/ffl-filters\/hero\/ffl-filters-hero-desktop-1440x1152\.webp" width="1440" height="1152"/);
+  assert.match(html, /<source media="\(min-width: 640px\)" srcset="\/brand\/ffl-filters\/hero\/ffl-filters-hero-desktop-1440x1152\.jpg" width="1440" height="1152"/);
+  assert.match(html, /<source type="image\/webp" srcset="\/brand\/ffl-filters\/hero\/ffl-filters-hero-mobile-750x1200\.webp" width="750" height="1200"/);
+  assert.match(html, new RegExp(`<img[^>]*src="/brand/ffl-filters/hero/ffl-filters-hero-mobile-750x1200.jpg"[^>]*alt="${heroAltEsc}"`));
+  assert.match(html, /<img[^>]*width="750"[^>]*height="1200"/);
+  assert.match(html, /<img[^>]*fetchpriority="high"/);
+  assert.match(html, /<img[^>]*decoding="async"/);
+  assert.match(html, /<img[^>]*loading="eager"/);
+  for (const f of heroFiles) {
+    const distHeroBuf = fs.readFileSync(path.join(dist, f.rel.replace(/^public\//, "")));
+    assert.equal(crypto.createHash("sha256").update(distHeroBuf).digest("hex"), f.sha, "dist " + f.rel + " sha256");
+  }
   const fflHref = /<a\b[^>]*href="\/ffl-filters\/?"[^>]*>FFL Filters<\/a>/;
   const caseInChrome = /Case Studies/i;
   const chromeOf = (html) => {
