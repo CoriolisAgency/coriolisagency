@@ -205,7 +205,13 @@ export function clientIp(request: Request): string {
 }
 
 function isForeignOrigin(request: Request, actualHost: string): boolean {
-  if (request.headers.get("sec-fetch-site") === "cross-site") return true;
+  const fetchSite = request.headers.get("sec-fetch-site");
+  if (fetchSite === "cross-site") return true;
+  // Browsers send `Origin: null` on a same-origin form POST when the page's
+  // Referrer-Policy is no-referrer (or for other privacy reasons), while
+  // Sec-Fetch-Site still reports the true relationship. Trust same-origin;
+  // an opaque "null" origin without it stays foreign.
+  if (fetchSite === "same-origin") return false;
   const origin = request.headers.get("origin");
   if (!origin) return false;
   let originHost = "";
@@ -636,7 +642,8 @@ const HTML_HEADERS = {
   "content-type": "text/html; charset=utf-8",
   "cache-control": "no-store",
   "x-robots-tag": "noindex, nofollow",
-  "referrer-policy": "no-referrer",
+  // same-origin keeps a real Origin on the confirm POST; nothing leaks cross-site.
+  "referrer-policy": "same-origin",
 } as const;
 
 function html(
@@ -744,7 +751,10 @@ async function persistLead(
   const host = request.headers.get("host");
   if (host) headers.set("host", host);
   const origin = request.headers.get("origin");
-  if (origin) headers.set("origin", origin);
+  // handleConfirm already passed the origin gate. An opaque "null" Origin
+  // (same-origin POST from a no-referrer page) would trip the lead handler's
+  // own origin check, so only forward a real one.
+  if (origin && origin !== "null") headers.set("origin", origin);
   const fetchSite = request.headers.get("sec-fetch-site");
   if (fetchSite) headers.set("sec-fetch-site", fetchSite);
   const forwarded = request.headers.get("x-forwarded-for");
