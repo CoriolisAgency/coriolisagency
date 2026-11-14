@@ -23,6 +23,8 @@ const SKIP = new Set([
   "/unum",
   "/press/unum-partners-with-coriolis",
   "/grok-bot-setup",
+  // CA-FFLF-DOWNLOAD-PAGE: unlinked, noindex, off the sitemap.
+  "/ffl-filters",
 ]);
 
 // Dynamic routes: the data file that holds their slugs and content.

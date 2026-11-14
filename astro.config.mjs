@@ -81,7 +81,9 @@ export default defineConfig({
         // AGENCY-GROKBOT-NOINDEX (Paul via Chief 2026-11-05 6:02 PM ET): keep page, unlinked, noindex.
         !page.includes("/grok-bot-setup") &&
         // CA-FFLF-LEAD-RECEIVER: public lead-handoff page, noindex, off the sitemap.
-        !page.includes("/ffl-filters/connect"),
+        !page.includes("/ffl-filters/connect") &&
+        // CA-FFLF-DOWNLOAD-PAGE (Paul 2026-11-14 11:47 AM ET via Chief): unlinked, noindex, off the sitemap.
+        !/\/ffl-filters\/?$/.test(new URL(page).pathname),
       serialize(item) {
         item.lastmod = pageLastmod(item.url);
         return item;

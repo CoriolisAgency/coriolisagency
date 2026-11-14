@@ -1,2 +1,3 @@
 popup-kit/** text eol=lf
 public/popup/** text eol=lf
+public/downloads/** binary -filter -diff

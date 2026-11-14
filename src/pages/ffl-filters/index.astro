@@ -1,0 +1,112 @@
+---
+/**
+ * CA-FFLF-DOWNLOAD-PAGE (Paul 2026-11-14 11:47 AM ET via Chief): FFL Filters 1.3.5 download page.
+ * Copy is Brandy's final, verbatim (brand/ffl-filters/copy/ca-download-page-2026-11-14.md), with
+ * Paul's 11:49 AM ET "(beta)" on every download button.
+ * "No links to the page": nothing on the site links here; robots noindex, nofollow (meta + X-Robots-Tag
+ * in vercel.json); off the sitemap (astro.config.mjs filter + gen-lastmod SKIP); IndexNow refuses it
+ * (scripts/indexnow-submit.mjs). Guarded by scripts/test-ffl-filters-download.mjs.
+ * The zip is the exact 1.3.5 build (sha256 0f572fcc…9161, 265,406 B) at public/downloads/.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { btnPlan, btnSecondary } from "../../lib/links";
+import { withBase } from "../../lib/base";
+
+const download = withBase("downloads/ffl-filters-1.3.5.zip");
+const contact = withBase("contact");
+const logo = withBase("brand/ffl-filters/ffl-filters-lockup-on-dark.svg");
+const downloadLabel = "Download FFL Filters 1.3.5 (beta)";
+const contactLabel = "Talk to Coriolis";
+const h2 = "text-2xl font-semibold tracking-tight text-white";
+const eyebrow = "text-xs font-semibold uppercase tracking-wider text-sky-400";
+const body = "mt-4 text-base leading-relaxed text-zinc-300";
+---
+
+<BaseLayout
+  title="FFL Filters: a free WooCommerce filter plugin for gun stores | Coriolis"
+  description="FFL Filters is a free WooCommerce product filter plugin for FFL dealers, made by Coriolis. Shoppers narrow your catalog by caliber, brand, price, barrel length, capacity and what's in stock."
+  path="/ffl-filters"
+  noindex
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16" data-section="hero">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <img src={logo} alt="FFL Filters" width="257" height="80" class="h-auto w-[200px] sm:w-[257px]" />
+      <p class={`mt-8 ${eyebrow}`}>FFL Filters</p>
+      <h1 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">A free WooCommerce filter plugin built for FFL dealers</h1>
+      <p class={body}>Help shoppers find what they came for. FFL Filters lets them narrow your catalog by caliber, brand, price, barrel length, capacity and what's in stock, from a panel that sits in your shop sidebar on a computer and opens as a drawer on a phone.</p>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href={download} class={btnPlan} download data-download="hero">{downloadLabel}</a>
+        <a href={contact} class={btnSecondary}>{contactLabel}</a>
+      </div>
+      <p class="mt-3 text-xs text-zinc-500">Version 1.3.5 · Free · GPLv2 or later</p>
+    </div>
+  </section>
+
+  <section class="py-12" data-section="built-around">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>Built around how gun stores sell</p>
+      <h2 class={`mt-3 ${h2}`}>Firearm filters, set up the way gun buyers shop</h2>
+      <p class={body}><strong class="text-white">Caliber merging.</strong> A plain text attribute is how a store ends up with 9mm, 9x19 and 9mm Luger as three separate checkboxes, so FFL Filters can show them as one Caliber choice; the shopper checks one box and sees every gun in that chambering, and you review the synonym groups on the Presets tab.</p>
+      <p class={body}><strong class="text-white">Ranges.</strong> Barrel length, capacity, bullet weight and optics magnification each get a range, read from the attribute values you already have (16 in, 10+1 and the like), so a shopper can ask for a 16 to 20 inch barrel or a 3 to 9 power scope.</p>
+      <p class={body}><strong class="text-white">Firearm type.</strong> A Firearm type filter shows the type values already in your catalog; FFL Filters doesn't classify anything for you.</p>
+      <p class={body}><strong class="text-white">In store.</strong> One switch shows the products you've tagged as on the shelf, for the buyer who wants to drive over and pick it up today.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-zinc-800/80 py-12" data-section="fits">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>Fits your shop</p>
+      <h2 class={`mt-3 ${h2}`}>It sits in your theme instead of fighting it</h2>
+      <p class={body}>The panel uses your theme's font and colours instead of loading its own, and on Kadence it picks up your theme palette. It shows up on your shop and category pages on its own, or you can place it yourself with the FFL Filters block or the <code class="text-zinc-100">[ffl_filters]</code> shortcode. Long lists like Brand show the top choices first, with Show all and a search box for the rest, and active filters show as chips the shopper can clear with one tap.</p>
+      <p class={body}>On a phone you choose how it behaves: a drawer, a collapsible panel or the regular sidebar. The filters are a plain form underneath, so they still work for a shopper who has JavaScript turned off; groups are labelled for screen readers, keyboard focus is easy to see, and the result count is announced when it changes.</p>
+      <p class={body}>Filtered pages are set to noindex, follow, and a robots.txt block covers the filter URLs, so search engines spend their time on your real shop and category pages.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-zinc-800/80 py-12" data-section="settings">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>Settings you can run yourself</p>
+      <h2 class={`mt-3 ${h2}`}>Set up by the person who runs the shop</h2>
+      <p class={body}>The Welcome tab walks you through setup in three steps, with one switch per filter and an Add to my shop sidebar button (Undo takes it back out). The Filters tab is where you rename, reorder and hide filters, and the Health tab shows the filter cache and the WooCommerce lookup table status, logs slow filter queries and tells you why a product isn't showing up. An Import tab saves your settings to a backup file you can restore later.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-zinc-800/80 py-12" data-section="install">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>Install</p>
+      <h2 class={`mt-3 ${h2}`}>Install FFL Filters</h2>
+      <ol class="mt-4 list-decimal space-y-2 pl-6 text-base leading-relaxed text-zinc-300">
+        <li>Make sure WooCommerce 9.2 or newer is installed and active.</li>
+        <li>Download the FFL Filters 1.3.5 zip file from this page and keep it zipped.</li>
+        <li>In WordPress, go to Plugins &gt; Add New Plugin &gt; Upload Plugin, choose the zip file and click Install Now.</li>
+        <li>Click Activate.</li>
+        <li>Go to WooCommerce &gt; FFL Filters. The Welcome tab walks you through the three setup steps, starting with which filters to show.</li>
+      </ol>
+      <p class={body}>If another filter plugin is active, FFL Filters names it in a notice; set up FFL Filters, check your shop page, then deactivate the old one so shoppers don't get two sets of filters.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-zinc-800/80 py-12" data-section="requirements">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>Requirements</p>
+      <ul class="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed text-zinc-300">
+        <li>WordPress 6.5 or newer (tested up to 7.1)</li>
+        <li>WooCommerce 9.2 or newer (tested up to 11.2)</li>
+        <li>PHP 7.4 or newer</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-t border-zinc-800/80 py-12" data-section="download">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>Download</p>
+      <h2 class={`mt-3 ${h2}`}>Get FFL Filters 1.3.5</h2>
+      <p class={body}>FFL Filters is free for any FFL running WooCommerce. If you'd like a hand setting it up, or you want more out of your store than filters, talk to Coriolis.</p>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href={download} class={btnPlan} download data-download="footer">{downloadLabel}</a>
+        <a href={contact} class={btnSecondary}>{contactLabel}</a>
+      </div>
+      <p class="mt-4 text-sm text-zinc-400"><a href="mailto:support@coriolisagency.com" class="font-medium !text-sky-400 hover:!underline underline-offset-2">support@coriolisagency.com</a></p>
+    </div>
+  </section>
+</BaseLayout>
