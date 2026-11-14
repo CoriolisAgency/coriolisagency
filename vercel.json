@@ -1,5 +1,22 @@
 {
   "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/ffl-filters",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/downloads/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/downloads/(.*)\\.zip",
+      "headers": [
+        { "key": "Content-Type", "value": "application/zip" },
+        { "key": "Content-Disposition", "value": "attachment" }
+      ]
+    }
+  ],
   "installCommand": "if [ -n \"$LEAD_FORM_READ_TOKEN\" ]; then u=\"https://x-access-token:$LEAD_FORM_READ_TOKEN@github.com/\"; git config --global --add url.\"$u\".insteadOf https://github.com/; git config --global --add url.\"$u\".insteadOf ssh://git@github.com/; fi; npm install",
   "rewrites": [
     {

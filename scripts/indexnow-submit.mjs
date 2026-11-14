@@ -28,6 +28,14 @@ if (urls.length === 0 || bad.length > 0) {
   process.exit(2);
 }
 
+// Unlinked, noindex paths are never submitted (CA-FFLF-DOWNLOAD-PAGE: /ffl-filters and its zip under /downloads/).
+const NO_INDEXNOW = [/^\/ffl-filters(\/.*)?$/, /^\/downloads\//];
+const refused = urls.filter((u) => NO_INDEXNOW.some((re) => re.test(new URL(u).pathname)));
+if (refused.length > 0) {
+  console.error(`refusing noindex URLs (not for IndexNow): ${refused.join(", ")}`);
+  process.exit(2);
+}
+
 async function loadKey() {
   const fromEnv = (process.env.INDEXNOW_KEY || "").trim();
   if (fromEnv) return fromEnv;
