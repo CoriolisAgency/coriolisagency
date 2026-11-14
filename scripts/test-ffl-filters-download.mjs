@@ -121,6 +121,13 @@ const navRel = "src/lib/nav.ts";
 const nav = read(navRel);
 assert.match(nav, /\{\s*href:\s*"ffl-filters",\s*label:\s*"FFL Filters"\s*\}/, "header nav item is FFL Filters -> ffl-filters");
 assert.doesNotMatch(nav, /Case Studies/, "header nav has no Case Studies item");
+{
+  const drop = nav.indexOf('{ href: "firearms-dropshipping", label: "FFL Dropshipping" }');
+  const ffl = nav.indexOf('{ href: "ffl-filters", label: "FFL Filters" }');
+  const pos = nav.indexOf('href: "gun-store-pos"');
+  assert.ok(drop !== -1 && ffl !== -1 && pos !== -1, "header nav missing Dropshipping, FFL Filters, or POS");
+  assert.ok(drop < ffl && ffl < pos, "FFL Filters is between FFL Dropshipping and Gun Store POS");
+}
 assert.doesNotMatch(nav, zipRef, `${navRel} links to the 1.3.5 zip`);
 for (const f of files) {
   if (allowed.has(f) || f === "package-lock.json" || f === navRel) continue;
@@ -199,6 +206,15 @@ if (fs.existsSync(dist)) {
     assert.match(header, fflHref, `${rel} desktop header missing FFL Filters link`);
     assert.match(drawer, fflHref, `${rel} mobile nav missing FFL Filters link`);
     assert.doesNotMatch(chrome, caseInChrome, `${rel} header still has a Case Studies item`);
+    const orderIn = (chunk, where) => {
+      const drop = chunk.search(/<a\b[^>]*>FFL Dropshipping<\/a>/);
+      const ffl = chunk.search(fflHref);
+      const pos = chunk.search(/<a\b[^>]*>Gun Store POS<\/a>/);
+      assert.ok(drop !== -1 && ffl !== -1 && pos !== -1, `${rel} ${where} missing Dropshipping, FFL Filters, or POS`);
+      assert.ok(drop < ffl && ffl < pos, `${rel} ${where} FFL Filters is not between FFL Dropshipping and Gun Store POS`);
+    };
+    orderIn(header, "desktop header");
+    orderIn(drawer, "mobile nav");
     return html.replace(header, "").replace(drawer, "");
   };
   // The /ffl-filters page itself also carries the header; confirm it, then keep the existing on-page checks.
