@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 /**
- * CA-FFLF-DOWNLOAD-PAGE guard: /ffl-filters is an unlinked, noindex download page for the exact
- * FFL Filters 1.3.5 zip. Checks the zip bytes, the page's robots/buttons, that nothing else in the
- * repo links to the page or the zip, the sitemap/lastmod exclusions, the vercel.json headers and the
- * IndexNow refusal. If dist/ exists (after `npm run build`), also checks the built sitemap and page.
+ * CA-FFLF-DOWNLOAD-PAGE / CA-NAV-FFLF guard: /ffl-filters is a noindex download page for the exact
+ * FFL Filters 1.3.5 zip. The header nav (desktop and mobile) links to it as "FFL Filters"; nothing
+ * else in the repo may link to the page or the zip. Checks the zip bytes, the page's robots/buttons,
+ * the sitemap/lastmod exclusions, the vercel.json headers and the IndexNow refusal. If dist/ exists
+ * (after `npm run build`), also checks the built sitemap, page, and that only the header links to it.
  * CA-FFLF-OG-IMAGE: also asserts the 1200x630 JPEG, page-only OG/Twitter tags with absolute URLs,
  * and Brandy's alt text verbatim (quotes escaped in the built HTML).
  */
@@ -99,6 +100,8 @@ assert.match(layout, /ogImageHeight != null/);
 assert.match(layout, /ogImageAlt \? \(/);
 
 // 3. Nothing else links to the page or the zip.
+// CA-NAV-FFLF: the header item in src/lib/nav.ts (rendered by SiteChrome for desktop and mobile)
+// is the one allowed internal link. Footer and the /case-studies page stay unchanged.
 const files = execFileSync("git", ["ls-files", "-co", "--exclude-standard"], { cwd: root, encoding: "utf8" })
   .split(/\r?\n/)
   .filter((f) => f && /\.(astro|ts|tsx|js|mjs|md|mdx|json|txt|html|xml|css|yml|yaml)$/.test(f));
@@ -114,8 +117,13 @@ const allowed = new Set([
 ]);
 const pageRef = /\/ffl-filters(?!\/connect|-connect)(?=["'`)\s/?#]|$)/m;
 const zipRef = /ffl-filters-1\.3\.5\.zip|\/downloads\//;
+const navRel = "src/lib/nav.ts";
+const nav = read(navRel);
+assert.match(nav, /\{\s*href:\s*"ffl-filters",\s*label:\s*"FFL Filters"\s*\}/, "header nav item is FFL Filters -> ffl-filters");
+assert.doesNotMatch(nav, /Case Studies/, "header nav has no Case Studies item");
+assert.doesNotMatch(nav, zipRef, `${navRel} links to the 1.3.5 zip`);
 for (const f of files) {
-  if (allowed.has(f) || f === "package-lock.json") continue;
+  if (allowed.has(f) || f === "package-lock.json" || f === navRel) continue;
   const src = read(f);
   assert.doesNotMatch(src, pageRef, `${f} links to /ffl-filters`);
   assert.doesNotMatch(src, zipRef, `${f} links to the 1.3.5 zip`);
@@ -172,10 +180,37 @@ if (fs.existsSync(dist)) {
     "c0dff4fd6092235767ee53082925407602ce6b4e881e362a638829ce07e68da2",
     "dist og image sha256",
   );
+  const fflHref = /<a\b[^>]*href="\/ffl-filters\/?"[^>]*>FFL Filters<\/a>/;
+  const caseInChrome = /Case Studies/i;
+  const chromeOf = (html) => {
+    const header = html.match(/<header\b[\s\S]*?<\/header>/)?.[0] ?? "";
+    const drawerAt = html.indexOf('id="nav-drawer"');
+    const scriptAt = drawerAt === -1 ? -1 : html.indexOf("<script>", drawerAt);
+    const drawer =
+      drawerAt === -1
+        ? ""
+        : html.slice(html.lastIndexOf("<div", drawerAt), scriptAt === -1 ? html.length : scriptAt);
+    return { header, drawer, chrome: header + drawer };
+  };
+  const assertHeaderNav = (html, rel) => {
+    const { header, drawer, chrome } = chromeOf(html);
+    assert.ok(header, `${rel} missing <header>`);
+    assert.ok(drawer.includes('id="nav-drawer"'), `${rel} missing nav-drawer`);
+    assert.match(header, fflHref, `${rel} desktop header missing FFL Filters link`);
+    assert.match(drawer, fflHref, `${rel} mobile nav missing FFL Filters link`);
+    assert.doesNotMatch(chrome, caseInChrome, `${rel} header still has a Case Studies item`);
+    return html.replace(header, "").replace(drawer, "");
+  };
+  // The /ffl-filters page itself also carries the header; confirm it, then keep the existing on-page checks.
+  {
+    const pageBody = assertHeaderNav(html, "ffl-filters/index.html");
+    assert.doesNotMatch(pageBody, /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, "ffl-filters/index.html non-header link to /ffl-filters");
+  }
   for (const f of fs.readdirSync(dist, { recursive: true })) {
     if (!String(f).endsWith(".html") || path.normalize(String(f)) === path.join("ffl-filters", "index.html")) continue;
     const other = fs.readFileSync(path.join(dist, String(f)), "utf8");
-    assert.doesNotMatch(other, /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, `${f} links to /ffl-filters`);
+    const body = assertHeaderNav(other, f);
+    assert.doesNotMatch(body, /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, `${f} non-header link to /ffl-filters`);
     assert.doesNotMatch(other, /ffl-filters-1\.3\.5\.zip/, `${f} links to the zip`);
     assert.doesNotMatch(other, /\/og\/ffl-filters-og\.jpg/, `${f} uses the FFL Filters OG image`);
   }

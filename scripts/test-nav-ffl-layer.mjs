@@ -18,7 +18,7 @@ assert.deepEqual(labels, [
   "WooCommerce for Rapid",
   "WooCommerce for MicroBiz",
   "WooCommerce for Trident 1",
-  "Case Studies",
+  "FFL Filters",
   "GunSearchEngine.com",
   "News",
 ]);
@@ -30,7 +30,7 @@ assert.deepEqual(hrefs, [
   "rapid-gun-systems-pos",
   "microbiz-pos",
   "trident-1-pos",
-  "case-studies",
+  "ffl-filters",
   "https://gunsearchengine.com/for-dealers",
   "press",
 ]);

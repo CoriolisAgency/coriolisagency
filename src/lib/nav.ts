@@ -23,7 +23,7 @@ export const MAIN_NAV: readonly NavItem[] = [
       { href: "trident-1-pos", label: "WooCommerce for Trident 1" },
     ],
   },
-  { href: "case-studies", label: "Case Studies" },
+  { href: "ffl-filters", label: "FFL Filters" },
   { href: "https://gunsearchengine.com/for-dealers", label: "GunSearchEngine.com", external: true },
   { href: "press", label: "News" },
 ];
