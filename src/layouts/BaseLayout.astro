@@ -17,6 +17,10 @@ interface Props {
   ogDescription?: string;
   path?: string;
   ogImagePath?: string;
+  /** Optional; omitted on other pages so their meta stays unchanged. */
+  ogImageAlt?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   canonicalUrl?: string;
   noindex?: boolean;
   /** Exact robots meta value; overrides `noindex` (SEO-U8v2 drafts use "noindex,nofollow"). */
@@ -35,6 +39,9 @@ const {
   ogDescription,
   path = "/",
   ogImagePath = CANON_PATHS.ogDefault,
+  ogImageAlt,
+  ogImageWidth,
+  ogImageHeight,
   canonicalUrl,
   noindex = false,
   robots,
@@ -178,11 +185,31 @@ const showPopup = POPUPS_ENABLED && emailCapture;
     <meta property="og:description" content={socialDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogAbs} />
+    {
+      ogImageWidth != null ? (
+        <meta property="og:image:width" content={String(ogImageWidth)} />
+      ) : null
+    }
+    {
+      ogImageHeight != null ? (
+        <meta property="og:image:height" content={String(ogImageHeight)} />
+      ) : null
+    }
+    {
+      ogImageAlt ? (
+        <meta property="og:image:alt" content={ogImageAlt} />
+      ) : null
+    }
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@CoriolisAgency" />
     <meta name="twitter:title" content={socialTitle} />
     <meta name="twitter:description" content={socialDescription} />
     <meta name="twitter:image" content={ogAbs} />
+    {
+      ogImageAlt ? (
+        <meta name="twitter:image:alt" content={ogImageAlt} />
+      ) : null
+    }
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <UtmCapture />
   </head>

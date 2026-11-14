@@ -7,6 +7,8 @@
  * in vercel.json); off the sitemap (astro.config.mjs filter + gen-lastmod SKIP); IndexNow refuses it
  * (scripts/indexnow-submit.mjs). Guarded by scripts/test-ffl-filters-download.mjs.
  * The zip is the exact 1.3.5 build (sha256 0f572fcc…9161, 265,406 B) at public/downloads/.
+ * CA-FFLF-OG-IMAGE (Paul 2026-11-14 12:01 PM ET via Chief): page-only OG/Twitter image
+ * at public/og/ffl-filters-og.jpg (1200x630), with Brandy's alt text verbatim.
  */
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { btnPlan, btnSecondary } from "../../lib/links";
@@ -16,6 +18,9 @@ const download = withBase("downloads/ffl-filters-1.3.5.zip");
 const contact = withBase("contact");
 const logo = withBase("brand/ffl-filters/ffl-filters-lockup-on-dark.svg");
 const downloadLabel = "Download FFL Filters 1.3.5 (beta)";
+const ogImage = "og/ffl-filters-og.jpg";
+const ogImageAlt =
+  'The FFL Filters logo and the headline "A free WooCommerce filter plugin built for FFL dealers" sit on a dark navy background. Beside them, a browser window shows a shop page filtered to Glock and 9mm Luger, with the filter panel on the left and Glock G17 V, G45 V, G19 V and G26 V pistol cards.';
 const contactLabel = "Talk to Coriolis";
 const h2 = "text-2xl font-semibold tracking-tight text-white";
 const eyebrow = "text-xs font-semibold uppercase tracking-wider text-sky-400";
@@ -27,6 +32,10 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
   description="FFL Filters is a free WooCommerce product filter plugin for FFL dealers, made by Coriolis. Shoppers narrow your catalog by caliber, brand, price, barrel length, capacity and what's in stock."
   path="/ffl-filters"
   noindex
+  ogImagePath={ogImage}
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  ogImageAlt={ogImageAlt}
 >
   <section class="border-b border-zinc-800/80 py-12 sm:py-16" data-section="hero">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">

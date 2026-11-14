@@ -4,6 +4,8 @@
  * FFL Filters 1.3.5 zip. Checks the zip bytes, the page's robots/buttons, that nothing else in the
  * repo links to the page or the zip, the sitemap/lastmod exclusions, the vercel.json headers and the
  * IndexNow refusal. If dist/ exists (after `npm run build`), also checks the built sitemap and page.
+ * CA-FFLF-OG-IMAGE: also asserts the 1200x630 JPEG, page-only OG/Twitter tags with absolute URLs,
+ * and Brandy's alt text verbatim (quotes escaped in the built HTML).
  */
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
@@ -37,6 +39,64 @@ for (const label of dl) assert.equal(label, "{downloadLabel}");
 assert.doesNotMatch(page.replace(/downloadLabel = "[^"]*"/, ""), /Download FFL Filters 1\.3\.5(?! zip file)/, "no unlabelled download button text");
 assert.match(page, /withBase\("contact"\)/);
 assert.match(read("src/layouts/BaseLayout.astro"), /noindex && <meta name="robots" content="noindex, nofollow" \/>/);
+
+
+// 2b. CA-FFLF-OG-IMAGE: exact JPEG, page-only props, layout emits width/height/alt when set.
+const ogRel = "public/og/ffl-filters-og.jpg";
+const ogBuf = fs.readFileSync(path.join(root, ogRel));
+assert.equal(ogBuf.length, 114423, "og image size");
+assert.equal(
+  crypto.createHash("sha256").update(ogBuf).digest("hex"),
+  "c0dff4fd6092235767ee53082925407602ce6b4e881e362a638829ce07e68da2",
+  "og image sha256",
+);
+assert.equal(ogBuf.subarray(0, 3).toString("hex"), "ffd8ff", "jpeg magic");
+function jpegSize(buf) {
+  let i = 2;
+  while (i < buf.length - 8) {
+    if (buf[i] !== 0xff) {
+      i += 1;
+      continue;
+    }
+    const marker = buf[i + 1];
+    if (marker === 0xc0 || marker === 0xc1 || marker === 0xc2) {
+      return { w: buf.readUInt16BE(i + 7), h: buf.readUInt16BE(i + 5) };
+    }
+    if (marker === 0xd8 || marker === 0xd9 || marker === 0x01 || (marker >= 0xd0 && marker <= 0xd7)) {
+      i += 2;
+      continue;
+    }
+    i += 2 + buf.readUInt16BE(i + 2);
+  }
+  throw new Error("no JPEG SOF");
+}
+const ogDim = jpegSize(ogBuf);
+assert.equal(ogDim.w, 1200, "og image width");
+assert.equal(ogDim.h, 630, "og image height");
+
+const ogAbs = "https://www.coriolisagency.com/og/ffl-filters-og.jpg";
+const ogAlt =
+  'The FFL Filters logo and the headline "A free WooCommerce filter plugin built for FFL dealers" sit on a dark navy background. Beside them, a browser window shows a shop page filtered to Glock and 9mm Luger, with the filter panel on the left and Glock G17 V, G45 V, G19 V and G26 V pistol cards.';
+assert.match(page, /const ogImage = "og\/ffl-filters-og\.jpg";/);
+assert.match(page, /ogImagePath=\{ogImage\}/);
+assert.match(page, /ogImageWidth=\{1200\}/);
+assert.match(page, /ogImageHeight=\{630\}/);
+assert.match(page, /ogImageAlt=\{ogImageAlt\}/);
+assert.ok(page.includes(ogAlt), "page ships Brandy alt verbatim");
+
+const layout = read("src/layouts/BaseLayout.astro");
+assert.match(layout, /ogImageAlt\?: string;/);
+assert.match(layout, /ogImageWidth\?: number;/);
+assert.match(layout, /ogImageHeight\?: number;/);
+assert.match(layout, /property="og:image:width"/);
+assert.match(layout, /property="og:image:height"/);
+assert.match(layout, /property="og:image:alt"/);
+assert.match(layout, /name="twitter:card" content="summary_large_image"/);
+assert.match(layout, /name="twitter:image"/);
+assert.match(layout, /name="twitter:image:alt"/);
+assert.match(layout, /ogImageWidth != null/);
+assert.match(layout, /ogImageHeight != null/);
+assert.match(layout, /ogImageAlt \? \(/);
 
 // 3. Nothing else links to the page or the zip.
 const files = execFileSync("git", ["ls-files", "-co", "--exclude-standard"], { cwd: root, encoding: "utf8" })
@@ -97,11 +157,27 @@ if (fs.existsSync(dist)) {
   assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
   assert.equal((html.match(/href="\/downloads\/ffl-filters-1\.3\.5\.zip"/g) ?? []).length, 2);
   assert.equal((html.match(/Download FFL Filters 1\.3\.5 \(beta\)/g) ?? []).length, 2);
+  const ogAbsRe = ogAbs.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const ogAltEsc = ogAlt.replaceAll('"', "&quot;").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  assert.match(html, new RegExp(`<meta property="og:image" content="${ogAbsRe}"`));
+  assert.match(html, /<meta property="og:image:width" content="1200"/);
+  assert.match(html, /<meta property="og:image:height" content="630"/);
+  assert.match(html, new RegExp(`<meta property="og:image:alt" content="${ogAltEsc}"`));
+  assert.match(html, /<meta name="twitter:card" content="summary_large_image"/);
+  assert.match(html, new RegExp(`<meta name="twitter:image" content="${ogAbsRe}"`));
+  assert.match(html, new RegExp(`<meta name="twitter:image:alt" content="${ogAltEsc}"`));
+  const distOg = fs.readFileSync(path.join(dist, "og", "ffl-filters-og.jpg"));
+  assert.equal(
+    crypto.createHash("sha256").update(distOg).digest("hex"),
+    "c0dff4fd6092235767ee53082925407602ce6b4e881e362a638829ce07e68da2",
+    "dist og image sha256",
+  );
   for (const f of fs.readdirSync(dist, { recursive: true })) {
     if (!String(f).endsWith(".html") || path.normalize(String(f)) === path.join("ffl-filters", "index.html")) continue;
     const other = fs.readFileSync(path.join(dist, String(f)), "utf8");
     assert.doesNotMatch(other, /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, `${f} links to /ffl-filters`);
     assert.doesNotMatch(other, /ffl-filters-1\.3\.5\.zip/, `${f} links to the zip`);
+    assert.doesNotMatch(other, /\/og\/ffl-filters-og\.jpg/, `${f} uses the FFL Filters OG image`);
   }
   console.log("test-ffl-filters-download: dist checks ok");
 }
