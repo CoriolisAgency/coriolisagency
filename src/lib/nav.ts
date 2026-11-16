@@ -14,8 +14,7 @@ export const MAIN_NAV: readonly NavItem[] = [
   { href: "ecommerce", label: "FFL Ecommerce" },
   { href: "firearms-dropshipping", label: "FFL Dropshipping" },
   { href: "ffl-filters", label: "FFL Filters" },
-  // FFLFW-LANDING launch nav (Chief confirmed 2026-11-16). Remove this line to drop it from the header.
-  { href: "ffl-firewall", label: "FFL Firewall" },
+  // CA-FFLFW-NAV-REMOVE (Paul 2026-11-16 11:46 AM ET): no header item. /ffl-firewall stays live.
   {
     href: "gun-store-pos",
     label: "Gun Store POS",
