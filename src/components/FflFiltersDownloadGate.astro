@@ -1,0 +1,513 @@
+---
+/**
+ * CA-FFLF-DOWNLOAD-GATE: accessible download-gate modal for the two
+ * data-download buttons on this page. The zip href is passed in as `href`
+ * so this file does not mention the asset path or the page route.
+ */
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<div
+  hidden
+  data-fflf-dl-gate
+  data-file={href}
+  data-action="/api/lead"
+  data-min-fill-ms="3000"
+>
+  <div data-fflf-dl-backdrop class="fflf-dl-backdrop"></div>
+  <div
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="fflf-dl-title"
+    aria-describedby="fflf-dl-desc"
+    data-fflf-dl-dialog
+    class="fflf-dl-dialog"
+  >
+    <button type="button" class="fflf-dl-close" data-fflf-dl-close aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div data-fflf-dl-form-view>
+      <h2 id="fflf-dl-title" class="fflf-dl-title">Before you download</h2>
+      <p id="fflf-dl-desc" class="fflf-dl-desc">Enter your company name, website URL, and email.</p>
+      <form data-fflf-dl-form class="fflf-dl-form" novalidate>
+        <label class="fflf-dl-field">
+          Company Name
+          <input name="company" type="text" required autocomplete="organization" maxlength="200" />
+        </label>
+        <label class="fflf-dl-field">
+          URL
+          <input name="website" type="text" required autocomplete="url" inputmode="url" maxlength="300" placeholder="https://" />
+        </label>
+        <label class="fflf-dl-field">
+          Email
+          <input name="email" type="email" required autocomplete="email" maxlength="200" />
+        </label>
+        <label class="fflf-dl-hp" aria-hidden="true">
+          Company URL
+          <input name="company_url" tabindex="-1" autocomplete="off" />
+        </label>
+        <p class="fflf-dl-error" data-fflf-dl-error role="alert"></p>
+        <button type="submit" class="fflf-dl-submit" data-fflf-dl-submit>Download</button>
+      </form>
+    </div>
+    <div data-fflf-dl-thanks hidden>
+      <h2 id="fflf-dl-thanks-title" class="fflf-dl-title">Thank you</h2>
+      <p class="fflf-dl-desc">
+        Your download has started. If you need help, write to
+        <a href="mailto:support@coriolisagency.com" class="fflf-dl-mail">support@coriolisagency.com</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var KEY = "lf_touch_v1";
+  var ATTR_PARAMS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "gclid", "gbraid", "wbraid", "fbclid", "twclid"];
+  var gate = document.querySelector("[data-fflf-dl-gate]");
+  if (!gate || gate.getAttribute("data-fflf-ready") === "1") return;
+  gate.setAttribute("data-fflf-ready", "1");
+
+  var dialog = gate.querySelector("[data-fflf-dl-dialog]");
+  var formView = gate.querySelector("[data-fflf-dl-form-view]");
+  var thanksView = gate.querySelector("[data-fflf-dl-thanks]");
+  var form = gate.querySelector("[data-fflf-dl-form]");
+  var errorEl = gate.querySelector("[data-fflf-dl-error]");
+  var submitBtn = gate.querySelector("[data-fflf-dl-submit]");
+  var closeBtn = gate.querySelector("[data-fflf-dl-close]");
+  var href = gate.getAttribute("data-file") || "";
+  var action = gate.getAttribute("data-action") || "/api/lead";
+  var minFillMs = Number(gate.getAttribute("data-min-fill-ms") || "3000");
+  if (!Number.isFinite(minFillMs) || minFillMs < 0) minFillMs = 3000;
+
+  var openedAt = 0;
+  var lastTrigger = null;
+  var previousOverflow = "";
+  var sending = false;
+
+  function isOpen() {
+    return !gate.hasAttribute("hidden");
+  }
+
+  function readTouch() {
+    try {
+      var data = JSON.parse(localStorage.getItem(KEY) || "null");
+      if (!data || typeof data !== "object" || !(data.expires > Date.now())) return null;
+      return data;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  function externalRef() {
+    if (!document.referrer) return "";
+    try {
+      var host = new URL(document.referrer).host;
+      if (!host || host === location.host) return "";
+      return host.slice(0, 200);
+    } catch (err) {
+      return "";
+    }
+  }
+
+  function currentParams() {
+    var out = {};
+    var query = new URLSearchParams(location.search);
+    for (var i = 0; i < ATTR_PARAMS.length; i++) {
+      var value = query.get(ATTR_PARAMS[i]);
+      if (value) out[ATTR_PARAMS[i]] = value.trim().slice(0, 200);
+    }
+    return out;
+  }
+
+  function normalizeUrl(raw) {
+    var value = String(raw || "").trim();
+    if (!value) return "";
+    if (!/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(value)) value = "https://" + value;
+    try {
+      var url = new URL(value);
+      if (url.protocol !== "http:" && url.protocol !== "https:") return "";
+      return url.href;
+    } catch (err) {
+      return "";
+    }
+  }
+
+  function setError(message) {
+    if (!errorEl) return;
+    errorEl.textContent = message || "";
+  }
+
+  function focusables() {
+    if (!dialog) return [];
+    var nodes = dialog.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]):not([tabindex="-1"]), textarea:not([disabled]), select:not([disabled])'
+    );
+    return Array.prototype.filter.call(nodes, function (el) {
+      if (el.closest("[hidden]")) return false;
+      if (el.getAttribute("aria-hidden") === "true") return false;
+      return true;
+    });
+  }
+
+  function showForm() {
+    if (formView) formView.removeAttribute("hidden");
+    if (thanksView) thanksView.setAttribute("hidden", "");
+    if (dialog) {
+      dialog.setAttribute("aria-labelledby", "fflf-dl-title");
+      dialog.setAttribute("aria-describedby", "fflf-dl-desc");
+    }
+    setError("");
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Download";
+    }
+  }
+
+  function showThanks() {
+    if (formView) formView.setAttribute("hidden", "");
+    if (thanksView) thanksView.removeAttribute("hidden");
+    if (dialog) {
+      dialog.setAttribute("aria-labelledby", "fflf-dl-thanks-title");
+      dialog.removeAttribute("aria-describedby");
+    }
+    var mail = thanksView && thanksView.querySelector("a");
+    if (mail && typeof mail.focus === "function") mail.focus();
+    else if (closeBtn && typeof closeBtn.focus === "function") closeBtn.focus();
+  }
+
+  function openModal(trigger) {
+    if (sending) return;
+    lastTrigger = trigger || lastTrigger;
+    openedAt = Date.now();
+    showForm();
+    previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    gate.removeAttribute("hidden");
+    var company = form && form.querySelector('input[name="company"]');
+    if (company && typeof company.focus === "function") company.focus();
+  }
+
+  function closeModal() {
+    if (!isOpen()) return;
+    gate.setAttribute("hidden", "");
+    document.body.style.overflow = previousOverflow;
+    if (form && !sending) {
+      // Keep values if they closed mid-fill; reset after a completed send.
+      if (thanksView && !thanksView.hasAttribute("hidden")) {
+        form.reset();
+        showForm();
+      }
+    }
+    if (lastTrigger && typeof lastTrigger.focus === "function") lastTrigger.focus();
+  }
+
+  function startDownload() {
+    if (!href) return;
+    var link = document.createElement("a");
+    link.href = href;
+    link.setAttribute("download", "");
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
+
+  function startedAtStamp() {
+    var now = Date.now();
+    var started = openedAt || now;
+    // If the fill is under MIN_FILL_MS, stamp the way the connect
+    // handoff does so a real fill is not silently dropped (200, no lead).
+    if (now - started < minFillMs) return now - minFillMs - 1000;
+    return started;
+  }
+
+  function onClick(event) {
+    if (event.defaultPrevented) return;
+    if (event.button != null && event.button !== 0) return;
+    var target = event.target;
+    if (!target || !target.closest) return;
+    var link = target.closest("a[data-download]");
+    if (!link) return;
+    event.preventDefault();
+    event.stopPropagation();
+    openModal(link);
+  }
+
+  function onKeydown(event) {
+    if (!isOpen()) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeModal();
+      return;
+    }
+    if (event.key !== "Tab") return;
+    var items = focusables();
+    if (!items.length) return;
+    var first = items[0];
+    var last = items[items.length - 1];
+    if (event.shiftKey) {
+      if (document.activeElement === first || !dialog.contains(document.activeElement)) {
+        event.preventDefault();
+        last.focus();
+      }
+    } else if (document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function validate(company, website, email) {
+    if (!company) return "Company name is required.";
+    if (!email) return "Email is required.";
+    if (!EMAIL_RE.test(email)) return "That email does not look valid.";
+    if (!website) return "URL is required.";
+    return "";
+  }
+
+  function onSubmit(event) {
+    event.preventDefault();
+    if (sending || !form) return;
+    var data = new FormData(form);
+    var company = String(data.get("company") || "").trim();
+    var email = String(data.get("email") || "").trim();
+    var website = normalizeUrl(data.get("website"));
+    var message = validate(company, website, email);
+    if (message) {
+      setError(message);
+      if (!company) form.querySelector('input[name="company"]').focus();
+      else if (!email || !EMAIL_RE.test(email)) form.querySelector('input[name="email"]').focus();
+      else form.querySelector('input[name="website"]').focus();
+      return;
+    }
+    setError("");
+    sending = true;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending\u2026";
+    }
+
+    var touch = readTouch();
+    var params = Object.assign({}, touch || {}, currentParams());
+    var landing =
+      touch && typeof touch.landing === "string" && touch.landing.charAt(0) === "/"
+        ? touch.landing
+        : location.pathname;
+    var ref = touch && typeof touch.ref === "string" ? touch.ref : externalRef();
+    var payload = {
+      name: company,
+      company: company,
+      email: email,
+      phone: "",
+      website: website,
+      pillar: "Ecommerce",
+      message: "FFL Filters download",
+      company_url: String(data.get("company_url") || ""),
+      site: "coriolisagency",
+      page: location.pathname,
+      landing: landing,
+      ref: ref,
+      started_at: startedAtStamp(),
+    };
+    for (var i = 0; i < ATTR_PARAMS.length; i++) {
+      var key = ATTR_PARAMS[i];
+      payload[key] = params[key] || "";
+    }
+
+    var settled = false;
+    function finish(ok, status, errName) {
+      if (settled) return;
+      settled = true;
+      sending = false;
+      startDownload();
+      if (isOpen()) showThanks();
+      if (!ok) {
+        console.error("download gate: lead failed", status || 0, errName || "error");
+      }
+    }
+
+    var ctrl = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = setTimeout(function () {
+      if (ctrl) ctrl.abort();
+    }, 15000);
+
+    var opts = {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload),
+    };
+    if (ctrl) opts.signal = ctrl.signal;
+
+    fetch(action, opts)
+      .then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (json) {
+          finish(Boolean(res.ok && json && json.ok), res.status, "");
+        });
+      })
+      .catch(function (err) {
+        finish(false, 0, err && err.name ? err.name : "error");
+      })
+      .then(function () {
+        clearTimeout(timer);
+      });
+  }
+
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("keydown", onKeydown, true);
+  if (closeBtn) closeBtn.addEventListener("click", function () { closeModal(); });
+  if (form) form.addEventListener("submit", onSubmit);
+})();
+</script>
+
+<style>
+  [data-fflf-dl-gate] {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  [data-fflf-dl-gate][hidden] {
+    display: none;
+  }
+  .fflf-dl-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 8, 15, 0.72);
+  }
+  .fflf-dl-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(28rem, 100%);
+    max-height: min(90vh, 40rem);
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 1.5rem 1.5rem 1.25rem;
+    border: 1px solid #27272a;
+    border-radius: 2px;
+    background: #0a1220;
+    color: #e4e4e7;
+    color-scheme: dark;
+  }
+  .fflf-dl-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 0;
+    background: transparent;
+    color: #a1a1aa;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .fflf-dl-close:hover {
+    color: #fff;
+  }
+  .fflf-dl-close:focus-visible,
+  .fflf-dl-field input:focus-visible,
+  .fflf-dl-submit:focus-visible,
+  .fflf-dl-mail:focus-visible {
+    outline: 2px solid #c8960c;
+    outline-offset: 2px;
+  }
+  .fflf-dl-title {
+    margin: 0 2rem 0 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+  .fflf-dl-desc {
+    margin: 0.75rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #a1a1aa;
+  }
+  .fflf-dl-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 1.15rem;
+  }
+  .fflf-dl-field {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #d4d4d8;
+  }
+  .fflf-dl-field input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.25rem;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid #3f3f46;
+    border-radius: 2px;
+    background: #07080c;
+    color: #f4f4f5;
+    font: inherit;
+    font-size: 0.875rem;
+  }
+  .fflf-dl-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .fflf-dl-error {
+    min-height: 1.25rem;
+    margin: 0;
+    font-size: 0.875rem;
+    color: #fcd34d;
+  }
+  .fflf-dl-submit {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.15rem;
+    border: 1px solid #8a6a0a;
+    border-radius: 2px;
+    background: #c8960c;
+    color: #05080f;
+    padding: 0.75rem 1.25rem;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .fflf-dl-submit:hover {
+    background: #e0a910;
+  }
+  .fflf-dl-submit:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+  .fflf-dl-mail {
+    color: #38bdf8;
+    font-weight: 500;
+    text-underline-offset: 2px;
+  }
+  .fflf-dl-mail:hover {
+    text-decoration: underline;
+  }
+  @media (min-width: 640px) {
+    .fflf-dl-submit {
+      width: auto;
+      align-self: flex-start;
+    }
+  }
+</style>
