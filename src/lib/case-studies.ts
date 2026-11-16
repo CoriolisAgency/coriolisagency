@@ -1,6 +1,7 @@
 /**
- * SEO-U8v2: /case-studies hub plus five shop stories. Copy is Brandy's FINAL
+ * SEO-U8v2: /case-studies hub plus the live shop stories. Copy is Brandy's FINAL
  * (handoff/SEO-U8v2/FINAL.md, Chief 9:23 AM ET; lock Paul 9:05 AM ET via Chief 9:06).
+ * CASE-PARAPET (Paul 2026-11-16 1:29 PM ET via Chief): Parapet Outfitters added live.
  * No quotes, no stats, no result numbers, no launch dates.
  *
  * Drafts (`draft: true`) still build a route. The draft flag does four things only:
@@ -62,12 +63,12 @@ export const CASE_STUDIES_PUBLISHED = "2026-10-22";
 export const CASE_STUDIES_HUB = {
   path: "/case-studies",
   title: "Case Studies: Gun Store Websites We Built | Coriolis",
-  meta: "See the WooCommerce stores Coriolis built for Naples Gun Shop, Allegheny Arms, Target Shotguns and Jim's Armory, each on its own domain, hosted on WP Engine.",
+  meta: "See the WooCommerce stores Coriolis built for Naples Gun Shop, Allegheny Arms, Target Shotguns, Jim's Armory and Parapet Outfitters, each on its own domain, hosted on WP Engine.",
   eyebrow: "Ecommerce · Case studies",
   h1: "Case studies: gun store websites we built",
   talkSubline: "We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.",
   intro:
-    "Every gun shop sells a little differently, so every store we build is set up for the shop that owns it. Naples Gun Shop keeps AIM POS on the counter, Allegheny Arms sells through its own online store, Target Shotguns is a shotgun specialist on MicroBiz POS, and Jim's Armory sells online alongside a YouTube channel, each running WooCommerce on the shop's own domain, hosted on WP Engine.",
+    "Every gun shop sells a little differently, so every store we build is set up for the shop that owns it. Naples Gun Shop keeps AIM POS on the counter, Allegheny Arms sells through its own online store, Target Shotguns is a shotgun specialist on MicroBiz POS, Jim's Armory sells online alongside a YouTube channel, and Parapet Outfitters is a Virginia ammunition maker's online store, each running WooCommerce on the shop's own domain, hosted on WP Engine.",
 } as const;
 
 export const CASE_STUDIES: CaseStudy[] = [
@@ -379,6 +380,75 @@ export const CASE_STUDIES: CaseStudy[] = [
     hero: "/case-studies/jims-armory-hero.webp",
     og: "/case-studies/jims-armory-og.png",
     alt: "Jim's Armory's WooCommerce store by Coriolis, shown on a desktop browser and a phone.",
+    draft: false,
+  },
+  {
+    // PARAPET-OUTFITTERS case study (Paul 2026-11-16 1:29 PM ET via Chief: "Have Brandy create a Case Study for ParapetOufitters.com and get it live on main. Same homepage screenshot hero style as the others."). Copy: Brandy, CASE-STUDY.md.
+    slug: "parapet-outfitters",
+    name: "Parapet Outfitters",
+    kicker: "Online store · Ammunition brand",
+    cardLine: "An online store for a Virginia ammunition maker, with its own Parapet ammo and components plus a catalog of firearms and gear shoppers can filter.",
+    cardLink: "Read the Parapet Outfitters story",
+    cardMd: "[Parapet Outfitters](/case-studies/parapet-outfitters) is an online store for a Virginia ammunition maker, with its own Parapet ammo and components plus a catalog of firearms and gear shoppers can filter.",
+    title: "Parapet Outfitters Case Study: Ammunition Brand Store | Coriolis",
+    meta: "Coriolis built Parapet Outfitters a WooCommerce store on its own domain, hosted on WP Engine, for a Virginia ammunition maker.",
+    h1: "Parapet Outfitters: the online store for a Virginia ammunition brand",
+    facts: [
+      { label: "Store", value: "Parapet Outfitters" },
+      { label: "Type", value: "Online store" },
+      { label: "Site", value: "parapetoutfitters.com", href: "https://parapetoutfitters.com/" },
+    ],
+    sections: [
+      {
+        heading: "The store",
+        paragraphs: [
+          [
+            "Parapet Outfitters & Supply is the online store for Parapet Components, an ammunition maker in Ashland, Virginia. It sells its own Parapet ammunition and reloading components alongside firearms, magazines, optics, gun parts, hunting and outdoor gear, knives and crossbows. The homepage puts in-stock firearms up front, and a Parapet Brand section holds the company's own products. The website is the storefront, and it runs on the shop's own domain.",
+          ],
+        ],
+      },
+      {
+        heading: "What we built",
+        paragraphs: [
+          [
+            { text: "parapetoutfitters.com", href: "https://parapetoutfitters.com/" },
+            " is a WooCommerce store on Parapet's own domain, hosted on WP Engine, and Coriolis built it so the company's own products and a full catalog sit on the same site. Distributor catalogs are connected, so the store can sell more than the in-stock firearms featured on the homepage. Shoppers narrow the catalog with filters for category, brand, price and stock that fold into a drawer on a phone. A product search box sits in the header next to the cart and the account link, and at checkout, a buyer picks the FFL dealer that will receive the firearm.",
+          ],
+        ],
+      },
+      {
+        heading: "Where it stands",
+        paragraphs: [
+          [
+            "The store is live at parapetoutfitters.com, with The Parapet Brand, the firearms catalog and the FFL checkout on Parapet's own domain, and the footer links out to Instagram, X and LinkedIn.",
+          ],
+        ],
+      },
+      {
+        heading: "If you make your own ammo or gear",
+        paragraphs: [
+          [
+            "If you make your own ammunition, components or gear, a store on your own domain is a place to sell it next to firearms and gear from a broader catalog. Coriolis builds the WooCommerce store, connects the distributor catalogs and the FFL checkout, and hosts it on WP Engine. You own the site, and shoppers can move from your own products to the rest of the catalog without leaving your domain.",
+          ],
+        ],
+      },
+    ],
+    cta: [
+      "If you want a store for your own brand, see ",
+      { text: "FFL website plans", href: "/ecommerce" },
+      ", or ",
+      { text: "listing distributor catalogs on a store you own", href: "/firearms-dropshipping" },
+      ".",
+    ],
+    talkHeading: "Tell us about the website you want and we'll make it happen.",
+    talkSubline: "We build, host, and support your open source WooCommerce website. There is no contract and you can cancel at any time.",
+    modified: "2026-11-16",
+    pos: null,
+    posHref: null,
+    siteUrl: "https://parapetoutfitters.com/",
+    hero: "/case-studies/parapet-outfitters-hero.webp",
+    og: "/case-studies/parapet-outfitters-og.png",
+    alt: "Parapet Outfitters' WooCommerce store by Coriolis, shown on a desktop browser and a phone.",
     draft: false,
   },
   {

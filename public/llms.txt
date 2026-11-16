@@ -32,6 +32,7 @@ GunSearchAgent is retired. FFLIntel is our journal on gun demand numbers (fflint
 - /case-studies/allegheny-arms: Allegheny Arms, a WooCommerce store on its own domain
 - /case-studies/target-shotguns: Target Shotguns, a shotgun specialist's store connected to MicroBiz POS
 - /case-studies/jims-armory: Jim's Armory, a WooCommerce store built to work with a YouTube channel
+- /case-studies/parapet-outfitters: Parapet Outfitters, a WooCommerce store for a Virginia ammunition maker
 - /contact: talk
 - /ai-studio: live software, not a catalog
 - /ammoready-alternative: AmmoReady alternative
