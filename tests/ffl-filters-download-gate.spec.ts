@@ -150,6 +150,13 @@ test.describe("FFL Filters download gate", () => {
     expect(typeof payload.started_at).toBe("number");
   });
 
+  test("thank-you copy has a space before the mailbox link", async ({ page }) => {
+    await openHero(page);
+    const thanks = await page.locator("[data-fflf-dl-thanks]").textContent();
+    expect(thanks).toContain("write to " + MAILBOX);
+    expect(thanks).not.toContain("write to" + MAILBOX);
+  });
+
   test("a failed lead still starts the download and shows thanks", async ({ page }) => {
     await page.route("**/api/lead", async (route) => {
       await route.fulfill({
