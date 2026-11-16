@@ -201,7 +201,8 @@ const astro = read("astro.config.mjs");
 assert.match(astro, /\/ffl-filters\/connect/, "sitemap filter must exclude connect");
 
 const robots = read("public/robots.txt");
-assert.match(robots, /Disallow:\s*\/ffl-filters\//);
+assert.doesNotMatch(robots, /Disallow:\s*\/ffl-filters\/?\s*$/m, "landing page must not be disallowed");
+assert.match(robots, /^Disallow: \/ffl-firewall$/m);
 
 const pkg = JSON.parse(read("package.json"));
 assert.match(pkg.scripts["test:ci"], /test-ffl-filters-connect\.mjs/);

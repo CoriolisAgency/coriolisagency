@@ -82,8 +82,6 @@ export default defineConfig({
         !page.includes("/grok-bot-setup") &&
         // CA-FFLF-LEAD-RECEIVER: public lead-handoff page, noindex, off the sitemap.
         !page.includes("/ffl-filters/connect") &&
-        // CA-FFLF-DOWNLOAD-PAGE (Paul 2026-11-14 11:47 AM ET via Chief): unlinked, noindex, off the sitemap.
-        !/\/ffl-filters\/?$/.test(new URL(page).pathname) &&
         // FFLFW-LANDING (Paul 2026-11-16 11:03 AM ET; Chief confirmed noindex at launch): off the sitemap.
         !/\/ffl-firewall\/?$/.test(new URL(page).pathname),
       serialize(item) {
