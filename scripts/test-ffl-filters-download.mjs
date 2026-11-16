@@ -284,10 +284,12 @@ if (fs.existsSync(dist)) {
     const header = html.match(/<header\b[\s\S]*?<\/header>/)?.[0] ?? "";
     const drawerAt = html.indexOf('id="nav-drawer"');
     const scriptAt = drawerAt === -1 ? -1 : html.indexOf("<script>", drawerAt);
+    const footerAt = drawerAt === -1 ? -1 : html.indexOf("<footer", drawerAt);
+    const end = [scriptAt, footerAt].filter((i) => i !== -1);
     const drawer =
       drawerAt === -1
         ? ""
-        : html.slice(html.lastIndexOf("<div", drawerAt), scriptAt === -1 ? html.length : scriptAt);
+        : html.slice(html.lastIndexOf("<div", drawerAt), end.length ? Math.min(...end) : html.length);
     return { header, drawer, chrome: header + drawer };
   };
   const assertHeaderNav = (html, rel) => {
