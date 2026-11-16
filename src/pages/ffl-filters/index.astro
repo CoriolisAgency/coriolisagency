@@ -15,6 +15,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { btnPlan, btnSecondary } from "../../lib/links";
 import { withBase } from "../../lib/base";
+import FflFiltersDownloadGate from "../../components/FflFiltersDownloadGate.astro";
 
 const download = withBase("downloads/ffl-filters-1.3.7.zip");
 const contact = withBase("contact");
@@ -135,4 +136,5 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
       <p class="mt-4 text-sm text-zinc-400"><a href="mailto:support@coriolisagency.com" class="font-medium !text-sky-400 hover:!underline underline-offset-2">support@coriolisagency.com</a></p>
     </div>
   </section>
+  <FflFiltersDownloadGate href={download} />
 </BaseLayout>

@@ -42,6 +42,10 @@ assert.doesNotMatch(page.replace(/downloadLabel = "[^"]*"/, ""), /Download FFL F
 assert.match(page, /withBase\("contact"\)/);
 assert.match(read("src/layouts/BaseLayout.astro"), /noindex && <meta name="robots" content="noindex, nofollow" \/>/);
 
+// CA-FFLF-DOWNLOAD-GATE: the page mounts the gate and keeps the two zip links.
+assert.match(page, /import FflFiltersDownloadGate from "\.\.\/\.\.\/components\/FflFiltersDownloadGate\.astro";/);
+assert.match(page, /<FflFiltersDownloadGate href=\{download\} \/>/);
+
 
 // 2b. CA-FFLF-OG-IMAGE: exact JPEG, page-only props, layout emits width/height/alt when set.
 const ogRel = "public/og/ffl-filters-og.jpg";
@@ -187,6 +191,22 @@ for (const f of files) {
 }
 for (const f of [...allowed].filter((f) => f !== pageRel && f.startsWith("src/"))) assert.fail(`unexpected src allowance ${f}`);
 
+// CA-FFLF-DOWNLOAD-GATE: modal markup, no page/zip literals in the new component.
+const gateRel = "src/components/FflFiltersDownloadGate.astro";
+const gate = read(gateRel);
+assert.match(gate, /role="dialog"/);
+assert.match(gate, /aria-modal="true"/);
+assert.match(gate, /a\[data-download\]/);
+assert.match(gate, /name="company"/);
+assert.match(gate, /name="website"/);
+assert.match(gate, /name="email"/);
+assert.match(gate, /name="company_url"/);
+assert.match(gate, /mailto:support@coriolisagency\.com/);
+assert.match(gate, /"Escape"/);
+assert.match(gate, /\/api\/lead/);
+assert.doesNotMatch(gate, pageRef, `${gateRel} mentions the page path`);
+assert.doesNotMatch(gate, zipRef, `${gateRel} mentions the zip`);
+
 // 4. Sitemap + lastmod exclusions.
 const cfg = read("astro.config.mjs");
 assert.match(cfg, /!\/\\\/ffl-filters\\\/\?\$\/\.test\(new URL\(page\)\.pathname\)/, "sitemap filter excludes /ffl-filters");
@@ -222,6 +242,10 @@ if (fs.existsSync(dist)) {
   assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
   assert.equal((html.match(/href="\/downloads\/ffl-filters-1\.3\.7\.zip"/g) ?? []).length, 2);
   assert.equal((html.match(/Download FFL Filters 1\.3\.7 \(beta\)/g) ?? []).length, 2);
+  assert.match(html, /role="dialog"/);
+  assert.match(html, /data-fflf-dl-gate/);
+  assert.match(html, /mailto:support@coriolisagency\.com/);
+  assert.equal((html.match(/data-download="(hero|footer)"/g) ?? []).length, 2);
   const ogAbsRe = ogAbs.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const ogAltEsc = ogAlt.replaceAll('"', "&quot;").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   assert.match(html, new RegExp(`<meta property="og:image" content="${ogAbsRe}"`));
