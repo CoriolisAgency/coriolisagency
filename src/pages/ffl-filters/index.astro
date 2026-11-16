@@ -3,9 +3,10 @@
  * CA-FFLF-DOWNLOAD-PAGE (Paul 2026-11-14 11:47 AM ET via Chief): FFL Filters download page.
  * Copy is Brandy's final, verbatim (brand/ffl-filters/copy/ca-download-page-2026-11-14.md), with
  * Paul's 11:49 AM ET "(beta)" on every download button.
- * "No links to the page": nothing on the site links here; robots noindex, nofollow (meta + X-Robots-Tag
- * in vercel.json); off the sitemap (astro.config.mjs filter + gen-lastmod SKIP); IndexNow refuses it
- * (scripts/indexnow-submit.mjs). Guarded by scripts/test-ffl-filters-download.mjs.
+ * CA-FFLF-INDEX (Paul 2026-11-16 1:30 PM ET via Chief): /ffl-filters is indexable.
+ * noindex meta and X-Robots-Tag removed; robots.txt no longer disallows it; listed in the
+ * sitemap at the canonical https://www.coriolisagency.com/ffl-filters. /ffl-filters/connect and
+ * /ffl-firewall stay noindex and off the sitemap. Guarded by scripts/test-ffl-filters-download.mjs.
  * CA-FFLF-138-BETA (Paul 2026-11-16 12:01 PM ET via Chief): version label is
  * "1.3.8 (beta)". The gated download is the permanent GitHub release asset
  * https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.8/ffl-filters-1.3.8.zip
@@ -37,7 +38,6 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
   title="FFL Filters: a free WooCommerce filter plugin for gun stores | Coriolis"
   description="FFL Filters is a free WooCommerce product filter plugin for FFL dealers, made by Coriolis. Shoppers narrow your catalog by caliber, brand, price, barrel length, capacity and what's in stock."
   path="/ffl-filters"
-  noindex
   ogImagePath={ogImage}
   ogImageWidth={1200}
   ogImageHeight={630}

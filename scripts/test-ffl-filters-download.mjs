@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 /**
- * CA-FFLF-DOWNLOAD-PAGE / CA-NAV-FFLF guard: /ffl-filters is a noindex
- * download page for FFL Filters 1.3.8 (beta), served from the permanent GitHub release
+ * CA-FFLF-DOWNLOAD-PAGE / CA-NAV-FFLF / CA-FFLF-INDEX guard: /ffl-filters is the
+ * indexable download page for FFL Filters 1.3.8 (beta), served from the permanent GitHub release
  * asset (never the latest release tag). The header nav (desktop and mobile) links to the page as
  * "FFL Filters"; nothing else in the repo may link to the page or a zip. The older 1.3.7
- * zip remains in public/downloads/ and must stay unlinked. Checks the zip bytes, the page's robots/buttons,
- * the sitemap/lastmod exclusions, the vercel.json headers and the IndexNow refusal. If dist/ exists
+ * zip remains in public/downloads/ and must stay unlinked. Checks the zip bytes, the page's buttons,
+ * that the page is in the sitemap and lastmod, that vercel.json has no X-Robots-Tag on this path,
+ * and that IndexNow still refuses /ffl-filters/connect and /downloads/. If dist/ exists
  * (after `npm run build`), also checks the built sitemap, page, and that only the header links to it.
  * CA-FFLF-OG-IMAGE: also asserts the 1200x630 JPEG, page-only OG/Twitter tags with absolute URLs,
  * and Brandy's alt text verbatim (quotes escaped in the built HTML).
@@ -31,11 +32,12 @@ assert.equal(
 );
 assert.equal(zip.subarray(0, 4).toString("hex"), "504b0304", "legacy 1.3.7 zip magic (not an LFS pointer)");
 
-// 2. Page: noindex, every download button has the 1.3.8 (beta) label and the GH asset href, contact goes to /contact.
+// 2. Page: indexable (CA-FFLF-INDEX), every download button has the 1.3.8 (beta) label and the GH asset href, contact goes to /contact.
 const pageRel = "src/pages/ffl-filters/index.astro";
 const page = read(pageRel);
 const downloadUrl = "https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.8/ffl-filters-1.3.8.zip";
-assert.match(page, /^\s*noindex\s*$/m, "page passes noindex to BaseLayout");
+assert.doesNotMatch(page, /^\s*noindex\s*$/m, "page must not pass noindex to BaseLayout");
+assert.doesNotMatch(page, /\brobots\s*=/, "page must not set a robots prop");
 assert.ok(page.includes('const download = "' + downloadUrl + '";'), "page pins the permanent GH asset URL");
 assert.doesNotMatch(page, /releases\/(?:download\/)?latest/, "download must not use the latest tag");
 assert.match(page, /const downloadLabel = "Download FFL Filters 1\.3\.8 \(beta\)";/);
@@ -171,10 +173,11 @@ const allowed = new Set([
   "astro.config.mjs",
   "vercel.json",
   "scripts/gen-lastmod.mjs",
+  "lastmod.json",
   "scripts/indexnow-submit.mjs",
   "scripts/test-ffl-filters-download.mjs",
   "tests/ffl-filters-download-gate.spec.ts",
-  // Pre-existing `Disallow: /ffl-filters/` (covers /ffl-filters/connect); a crawl rule, not a link.
+  // robots.txt may mention /ffl-filters paths historically; a crawl rule, not a link.
   "public/robots.txt",
 ]);
 const pageRef = /\/ffl-filters(?!\/connect|-connect)(?=["'`)\s/?#]|$)/m;
@@ -218,22 +221,28 @@ assert.doesNotMatch(gate, /releases\/(?:download\/)?latest/, "gate must not use 
 assert.doesNotMatch(gate, pageRef, `${gateRel} mentions the page path`);
 assert.doesNotMatch(gate, zipRef, `${gateRel} mentions the zip`);
 
-// 4. Sitemap + lastmod exclusions.
+// 4. Sitemap + lastmod: /ffl-filters is included (CA-FFLF-INDEX). Connect stays out.
 const cfg = read("astro.config.mjs");
-assert.match(cfg, /!\/\\\/ffl-filters\\\/\?\$\/\.test\(new URL\(page\)\.pathname\)/, "sitemap filter excludes /ffl-filters");
-assert.match(read("scripts/gen-lastmod.mjs"), /"\/ffl-filters",/);
-assert.equal(JSON.parse(read("lastmod.json"))["/ffl-filters"], undefined, "not in lastmod.json");
+assert.doesNotMatch(cfg, /!\/\\\/ffl-filters\\\/\?\$\/\.test\(new URL\(page\)\.pathname\)/, "sitemap filter must not exclude /ffl-filters");
+assert.match(cfg, /\/ffl-filters\/connect/, "sitemap filter still excludes /ffl-filters/connect");
+assert.doesNotMatch(read("scripts/gen-lastmod.mjs"), /"\/ffl-filters",/);
+assert.ok(JSON.parse(read("lastmod.json"))["/ffl-filters"], "/ffl-filters must be in lastmod.json");
 
 // 5. vercel.json headers.
 const vercel = JSON.parse(read("vercel.json"));
 const hdr = (src) => Object.fromEntries((vercel.headers.find((h) => h.source === src)?.headers ?? []).map((h) => [h.key, h.value]));
-assert.equal(hdr("/ffl-filters")["X-Robots-Tag"], "noindex, nofollow");
+assert.equal(hdr("/ffl-filters")["X-Robots-Tag"], undefined, "no X-Robots-Tag on /ffl-filters");
+assert.equal(hdr("/ffl-firewall")["X-Robots-Tag"], "noindex, nofollow", "firewall header untouched");
 assert.equal(hdr("/downloads/(.*)")["X-Robots-Tag"], "noindex, nofollow");
+const robotsTxt = read("public/robots.txt");
+assert.doesNotMatch(robotsTxt, /Disallow:\s*\/ffl-filters\/?\s*$/m, "robots.txt must not disallow /ffl-filters");
+assert.match(robotsTxt, /^Disallow: \/ffl-firewall$/m, "robots.txt still disallows /ffl-firewall");
 assert.equal(hdr("/downloads/(.*)\\.zip")["Content-Type"], "application/zip");
 assert.ok(vercel.rewrites.some((r) => r.source === "/ffl-filters/connect" && r.destination === "/api/ffl-filters-connect"), "connect rewrite intact");
 
-// 6. IndexNow refuses the page and the zip (exits 2 before any network call).
-for (const u of ["https://www.coriolisagency.com/ffl-filters", "https://www.coriolisagency.com/ffl-filters/", "https://www.coriolisagency.com/downloads/ffl-filters-1.3.7.zip"]) {
+// 6. IndexNow may submit the canonical /ffl-filters URL (do not invoke the script here).
+// It still refuses the trailing-slash variant, /ffl-filters/connect, and the zip.
+for (const u of ["https://www.coriolisagency.com/ffl-filters/", "https://www.coriolisagency.com/ffl-filters/connect", "https://www.coriolisagency.com/downloads/ffl-filters-1.3.7.zip"]) {
   let code = 0;
   try {
     execFileSync(process.execPath, [path.join(root, "scripts/indexnow-submit.mjs"), u], { stdio: "pipe", env: { ...process.env, INDEXNOW_KEY: "test-key-not-used" } });
@@ -267,9 +276,13 @@ const dist = path.join(root, "dist");
 if (fs.existsSync(dist)) {
   const maps = fs.readdirSync(dist).filter((f) => /^sitemap-\d+\.xml$/.test(f));
   assert.ok(maps.length > 0, "built sitemap present");
-  for (const m of maps) assert.doesNotMatch(fs.readFileSync(path.join(dist, m), "utf8"), /\/ffl-filters</, `${m} lists /ffl-filters`);
+  const sitemapXml = maps.map((m) => fs.readFileSync(path.join(dist, m), "utf8")).join("\n");
+  assert.match(sitemapXml, /<loc>https:\/\/www\.coriolisagency\.com\/ffl-filters<\/loc>/, "sitemap lists canonical /ffl-filters");
+  assert.doesNotMatch(sitemapXml, /<loc>https:\/\/www\.coriolisagency\.com\/ffl-filters\/<\/loc>/, "sitemap must not list trailing-slash /ffl-filters/");
+  assert.doesNotMatch(sitemapXml, /\/ffl-filters\/connect/, "sitemap must not list connect");
+  assert.doesNotMatch(sitemapXml, /\/ffl-firewall/, "sitemap must not list /ffl-firewall");
   const html = fs.readFileSync(path.join(dist, "ffl-filters", "index.html"), "utf8");
-  assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
+  assert.doesNotMatch(html, /<meta name="robots"/, "built /ffl-filters has no robots meta");
   assert.equal((html.split(downloadUrl).length - 1), 3, "GH asset URL appears on both buttons and data-file");
   assert.equal((html.match(/href="https:\/\/github\.com\/CoriolisAgency\/ffl-filters-releases\/releases\/download\/v1\.3\.8\/ffl-filters-1\.3\.8\.zip"/g) ?? []).length, 2, "two button hrefs point at the GH asset");
   assert.match(html, /data-file="https:\/\/github\.com\/CoriolisAgency\/ffl-filters-releases\/releases\/download\/v1\.3\.8\/ffl-filters-1\.3\.8\.zip"/, "gate data-file is the GH asset");

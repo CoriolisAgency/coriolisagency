@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /ffl-filters/
 # FFLFW-LANDING: noindex at launch. Remove this line to allow crawling.
 Disallow: /ffl-firewall
 
