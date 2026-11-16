@@ -302,9 +302,12 @@ if (fs.existsSync(dist)) {
   const chromeOf = (html) => {
     const header = html.match(/<header\b[\s\S]*?<\/header>/)?.[0] ?? "";
     const drawerAt = html.indexOf('id="nav-drawer"');
-    const scriptAt = drawerAt === -1 ? -1 : html.indexOf("<script>", drawerAt);
+    // End at the first of <script (including type="module"), <main, or <footer,
+    // so page body copy cannot leak into the chrome slice.
+    const scriptAt = drawerAt === -1 ? -1 : html.indexOf("<script", drawerAt);
+    const mainAt = drawerAt === -1 ? -1 : html.indexOf("<main", drawerAt);
     const footerAt = drawerAt === -1 ? -1 : html.indexOf("<footer", drawerAt);
-    const end = [scriptAt, footerAt].filter((i) => i !== -1);
+    const end = [scriptAt, mainAt, footerAt].filter((i) => i !== -1);
     const drawer =
       drawerAt === -1
         ? ""
