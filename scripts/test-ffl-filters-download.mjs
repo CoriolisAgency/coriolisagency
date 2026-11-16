@@ -233,6 +233,25 @@ for (const u of ["https://www.coriolisagency.com/ffl-filters", "https://www.cori
   assert.equal(code, 2, `indexnow refuses ${u}`);
 }
 
+// Redirect stubs (Astro meta-refresh pages with no real body) are not full
+// chrome pages. A real page missing <header> must still fail the header check.
+function isRedirectStub(html) {
+  if (!/<meta\b[^>]*\bhttp-equiv\s*=\s*(["']?)refresh\1/i.test(html)) return false;
+  if (/<(header|main|section|nav|h1|footer)\b/i.test(html) || /id="nav-drawer"/.test(html)) return false;
+  const bodyMatch = html.match(/<body\b[^>]*>([\s\S]*)<\/body>/i);
+  const text = (bodyMatch ? bodyMatch[1] : "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  return text === "" || /^Redirecting(\s+from\s+\S+\s+to\s+\S+)?$/i.test(text);
+}
+
+{
+  const fixture = "<!doctype html><title>No header</title><body><p>A real page with no header and no refresh.</p></body>";
+  assert.equal(isRedirectStub(fixture), false, "a page with no refresh must not be treated as a redirect stub");
+  assert.throws(
+    () => assert.ok(fixture.match(/<header\b[\s\S]*?<\/header>/), "fixture-no-header missing <header>"),
+    (err) => err instanceof assert.AssertionError && /fixture-no-header missing <header>/.test(err.message),
+  );
+}
+
 // 7. Built output, when present.
 const dist = path.join(root, "dist");
 if (fs.existsSync(dist)) {
@@ -283,11 +302,16 @@ if (fs.existsSync(dist)) {
   const chromeOf = (html) => {
     const header = html.match(/<header\b[\s\S]*?<\/header>/)?.[0] ?? "";
     const drawerAt = html.indexOf('id="nav-drawer"');
-    const scriptAt = drawerAt === -1 ? -1 : html.indexOf("<script>", drawerAt);
+    // End at the first of <script (including type="module"), <main, or <footer,
+    // so page body copy cannot leak into the chrome slice.
+    const scriptAt = drawerAt === -1 ? -1 : html.indexOf("<script", drawerAt);
+    const mainAt = drawerAt === -1 ? -1 : html.indexOf("<main", drawerAt);
+    const footerAt = drawerAt === -1 ? -1 : html.indexOf("<footer", drawerAt);
+    const end = [scriptAt, mainAt, footerAt].filter((i) => i !== -1);
     const drawer =
       drawerAt === -1
         ? ""
-        : html.slice(html.lastIndexOf("<div", drawerAt), scriptAt === -1 ? html.length : scriptAt);
+        : html.slice(html.lastIndexOf("<div", drawerAt), end.length ? Math.min(...end) : html.length);
     return { header, drawer, chrome: header + drawer };
   };
   const assertHeaderNav = (html, rel) => {
@@ -309,15 +333,20 @@ if (fs.existsSync(dist)) {
     return html.replace(header, "").replace(drawer, "");
   };
   // The /ffl-filters page itself also carries the header; confirm it, then keep the existing on-page checks.
+  // Allow the page's own canonical href; still fail on any other non-header /ffl-filters link.
   {
     const pageBody = assertHeaderNav(html, "ffl-filters/index.html");
-    assert.doesNotMatch(pageBody, /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, "ffl-filters/index.html non-header link to /ffl-filters");
+    const canonicalRe = /<link\b[^>]*\brel="canonical"[^>]*\bhref="https:\/\/www\.coriolisagency\.com\/ffl-filters\/?"[^>]*>|<link\b[^>]*\bhref="https:\/\/www\.coriolisagency\.com\/ffl-filters\/?"[^>]*\brel="canonical"[^>]*>/;
+    assert.match(pageBody, canonicalRe, "ffl-filters/index.html missing canonical");
+    assert.doesNotMatch(pageBody.replace(canonicalRe, ""), /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, "ffl-filters/index.html non-header link to /ffl-filters");
   }
   for (const f of fs.readdirSync(dist, { recursive: true })) {
     if (!String(f).endsWith(".html") || path.normalize(String(f)) === path.join("ffl-filters", "index.html")) continue;
     const other = fs.readFileSync(path.join(dist, String(f)), "utf8");
-    const body = assertHeaderNav(other, f);
-    assert.doesNotMatch(body, /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, `${f} non-header link to /ffl-filters`);
+    if (!isRedirectStub(other)) {
+      const body = assertHeaderNav(other, f);
+      assert.doesNotMatch(body, /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, `${f} non-header link to /ffl-filters`);
+    }
     assert.doesNotMatch(other, /ffl-filters-1\.3\.7\.zip/, `${f} links to the zip`);
     assert.doesNotMatch(other, /\/og\/ffl-filters-og\.jpg/, `${f} uses the FFL Filters OG image`);
   }

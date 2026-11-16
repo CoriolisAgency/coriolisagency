@@ -14,6 +14,7 @@ assert.deepEqual(labels, [
   "FFL Ecommerce",
   "FFL Dropshipping",
   "FFL Filters",
+  "FFL Firewall",
   "Gun Store POS",
   "WooCommerce for AIM",
   "WooCommerce for Rapid",
@@ -26,6 +27,7 @@ assert.deepEqual(hrefs, [
   "ecommerce",
   "firearms-dropshipping",
   "ffl-filters",
+  "ffl-firewall",
   "gun-store-pos",
   "aim-pos",
   "rapid-gun-systems-pos",
@@ -51,11 +53,13 @@ function assertLandingPage(rel, { h1, campaign, notice, pro = true, gseAllowed =
   assert.match(src, /utm_source=coriolisagency/);
   assert.match(src, new RegExp(`utm_campaign=${campaign}`));
   assert.match(src, new RegExp(notice.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  // Paul's Pro sentence, verbatim (PAUL-0901, Chief 9:24 PM ET).
-  if (pro) assert.match(src, /Pro is normally \$99\/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026\./);
+  // Current Pro sentence, verbatim.
+  if (pro) {
+    assert.ok(src.includes("GSE Pro is optional. Coriolis quotes Pro at $99 a month. [GSE Pro](https://www.gunsearchengine.com/pro?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-analytics&utm_content=gse-pro), read November 10, 2026, says: \\\"Activate by Dec 31, 2026 and get Pro free through Dec 31, 2027.\\\""), `${rel} missing current Pro sentence`);
+  }
   assert.doesNotMatch(src, /Free through December 31, 2026/);
-  // The only price allowed on these pages is the $99/month in Paul's Pro sentence.
-  const priceless = src.replace("Pro is normally $99/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026.", "");
+  // The only price allowed on these pages is the $99 in the current Pro sentence.
+  const priceless = src.replace("Coriolis quotes Pro at $99 a month.", "");
   assert.doesNotMatch(priceless, /\$\d/);
   assert.doesNotMatch(priceless, /\/month/);
   assert.doesNotMatch(src, bannedCopy);
@@ -79,7 +83,7 @@ assertLandingPage("src/pages/ffl-analytics.astro", {
   h1: "Understand your gun store's website",
   campaign: "ffl-analytics",
   notice:
-    "Not affiliated with Google. Google Analytics is a trademark of Google LLC.",
+    "isn't affiliated with Google. Google Analytics is a trademark of Google LLC.",
 });
 
 // SEO-U32 (Brandy FINAL, Chief 10/21): rewritten from GSE's live copy; Pro block cut, one Pro line to GSE /pro.
@@ -95,7 +99,7 @@ assertLandingPage("src/pages/ffl-search-console.astro", {
 const consoleSrc = read("src/pages/ffl-search-console.astro");
 assert.doesNotMatch(consoleSrc, /\b(is live|now available|now live)\b/i);
 assert.doesNotMatch(consoleSrc, /data-pro-plate|Coming soon|All future Pro features|being built|More Pro features are on the way|sign up by/);
-assert.match(consoleSrc, /<a href="https:\/\/www\.gunsearchengine\.com\/pro" class=\{linkClass\}>Want more\? Pro is normally \$99\/month, and it's free through Dec 31, 2027 for anyone who activates by Dec 31, 2026\.<\/a>/);
+assert.ok(consoleSrc.includes("GSE Pro is optional. Coriolis quotes Pro at $99 a month. [GSE Pro](https://www.gunsearchengine.com/pro?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-search-console&utm_content=gse-pro), read November 10, 2026, says: \\\"Activate by Dec 31, 2026 and get Pro free through Dec 31, 2027.\\\""), "ffl-search-console missing current Pro sentence");
 assert.match(consoleSrc, /withBase\("ffl-seo"\)/);
 
 // On-site FFL pages open in the same tab (Paul, 1:38 PM ET).

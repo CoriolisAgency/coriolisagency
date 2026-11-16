@@ -1,0 +1,143 @@
+---
+/**
+ * FFLFW-LANDING (Paul 2026-11-16 11:03 AM ET via Chief): /ffl-firewall early-access
+ * landing page. Copy is Brandy's, verbatim (brand/ffl-firewall/landing/). Logo and
+ * hero/OG art used as locked. CTA is an early-access lead form (no download) that
+ * POSTs to the existing /api/lead path. Launch robots and nav: noindex, nofollow
+ * (Chief confirmed) and a header item immediately after FFL Filters. Guarded by
+ * scripts/test-ffl-firewall-landing.mjs.
+ *
+ * To index later: drop the `noindex` prop below and the matching X-Robots-Tag,
+ * sitemap filter, lastmod SKIP, robots.txt Disallow, and IndexNow refusal.
+ * To drop the nav item: remove the FFL Firewall entry in src/lib/nav.ts.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { btnPlan, btnSecondary } from "../../lib/links";
+import { withBase } from "../../lib/base";
+import FflFirewallLeadGate from "../../components/FflFirewallLeadGate.astro";
+
+const contact = withBase("contact");
+const logo = withBase("brand/ffl-firewall/ffl-firewall-lockup-on-dark.svg");
+const earlyAccessLabel = "Get early access";
+const contactLabel = "Talk to Coriolis";
+const ogImage = "og/ffl-firewall-og.jpg";
+const ogImageAlt =
+  `The FFL Firewall logo and the headline "A WooCommerce plugin that checks the cart at checkout for FFL dealers" sit on a dark navy background. Beside them, a stylized checkout in a browser window shows a cart with one item pulled out and a message that the item can't be shipped to the zip code the shopper entered.`;
+const heroAlt =
+  `A stylized checkout in a browser window, with the address yourstore.example/checkout on a dark navy background. The cart shows generic item rows with no product names, prices, or counts; one row is pulled out, and a message reads, "This item can't be shipped to the zip code you entered."`;
+const h2 = "text-2xl font-semibold tracking-tight text-white";
+const eyebrow = "text-xs font-semibold uppercase tracking-wider text-sky-400";
+const body = "mt-4 text-base leading-relaxed text-zinc-300";
+---
+
+<BaseLayout
+  title="FFL Firewall: a WooCommerce checkout plugin for FFL dealers | Coriolis"
+  description="FFL Firewall is a WooCommerce plugin for FFL dealers, made by Coriolis. At checkout it checks each product against the shopper's zip code and removes items that can't go there."
+  path="/ffl-firewall"
+  noindex
+  ogImagePath={ogImage}
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  ogImageAlt={ogImageAlt}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16" data-section="hero">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <img src={logo} alt="FFL Firewall" width="278" height="80" class="h-auto w-[216px] sm:w-[278px]" />
+      <p class={`mt-8 ${eyebrow}`}>FFL Firewall</p>
+      <h1 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">A WooCommerce plugin that checks the cart at checkout for FFL dealers</h1>
+      <p class={body}>At checkout, FFL Firewall checks each product in the cart by UPC against the zip code the shopper entered. If an item is prohibited for that zip, it's removed from the cart and the shopper sees a message explaining why.</p>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href="#early-access" class={btnPlan} data-early-access="hero">{earlyAccessLabel}</a>
+        <a href={contact} class={btnSecondary}>{contactLabel}</a>
+      </div>
+      <p class="mt-3 text-xs text-zinc-500">For FFL dealers running WooCommerce.</p>
+      <picture>
+        <source media="(min-width: 640px)" type="image/webp" srcset={withBase("brand/ffl-firewall/hero/ffl-firewall-hero-desktop-1440x1152.webp")} width="1440" height="1152" />
+        <source media="(min-width: 640px)" srcset={withBase("brand/ffl-firewall/hero/ffl-firewall-hero-desktop-1440x1152.jpg")} width="1440" height="1152" />
+        <source type="image/webp" srcset={withBase("brand/ffl-firewall/hero/ffl-firewall-hero-mobile-750x1200.webp")} width="750" height="1200" />
+        <img
+          src={withBase("brand/ffl-firewall/hero/ffl-firewall-hero-mobile-750x1200.jpg")}
+          width="750"
+          height="1200"
+          alt={heroAlt}
+          class="mt-10 block h-auto w-full rounded-[14px]"
+          fetchpriority="high"
+          decoding="async"
+          loading="eager"
+        />
+      </picture>
+    </div>
+  </section>
+
+  <section class="py-12" data-section="built-around">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>Built around how gun stores sell</p>
+      <h2 class={`mt-3 ${h2}`}>It checks each product in the cart against the shopper's zip</h2>
+      <p class={body}><strong class="text-white">The product check.</strong> The plugin runs at checkout and matches the UPC on every cart item to the zip the buyer just entered.</p>
+      <p class={body}><strong class="text-white">Items that can't go there.</strong> If that check finds a product is prohibited for the zip, the plugin takes it out of the cart.</p>
+      <p class={body}><strong class="text-white">A message for the shopper.</strong> A short note tells the shopper why the item was removed.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-zinc-800/80 py-12" data-section="fits">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>Fits your shop</p>
+      <h2 class={`mt-3 ${h2}`}>It runs at the checkout you already use</h2>
+      <p class={body}>The shopper types a zip at checkout, the way they already do on a WooCommerce store. FFL Firewall takes that zip, plus the UPC already on each cart item, and runs the product check. Anything prohibited for that zip comes out, and a message goes to the shopper with the reason.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-zinc-800/80 py-12" data-section="settings">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>What the check uses</p>
+      <h2 class={`mt-3 ${h2}`}>It uses the UPC on the product and the zip at checkout</h2>
+      <p class={body}>The check reads the UPC already on each product in the cart, and the zip the shopper typed at checkout. Those are the two things it needs.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-zinc-800/80 py-12" data-section="faq">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>The questions dealers ask</p>
+      <h2 class={`mt-3 ${h2}`}>The questions dealers ask about FFL Firewall</h2>
+      <p class={body}><strong class="text-white">What does FFL Firewall check?</strong><br />It looks at the UPC on each item in the cart and the zip the shopper entered at checkout.</p>
+      <p class={body}><strong class="text-white">What happens if an item is prohibited for that zip?</strong><br />That item comes out of the cart, and a message tells the shopper why.</p>
+      <p class={body}><strong class="text-white">Does this take the place of my own shipping judgment?</strong><br />FFL Firewall is a tool that helps you catch restricted items at checkout. You're still responsible for what you ship, and this is not legal advice.</p>
+      <p class={body}><strong class="text-white">Can I download it today?</strong><br />Not yet. Leave your company name, website, and email on this page, and we'll write when it's ready to try.</p>
+      <p class={body}><strong class="text-white">Who is it for?</strong><br />FFL dealers who run a WooCommerce store.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-zinc-800/80 py-12" data-section="install">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>Early access</p>
+      <h2 class={`mt-3 ${h2}`}>Leave your details and we'll write when it's ready</h2>
+      <p class={body}>FFL Firewall isn't available to download yet. Fill in your company name, website, and email on this page, and we'll write when you can try it. If you want a hand with your WooCommerce store in the meantime, talk to Coriolis.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-zinc-800/80 py-12" data-section="requirements">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>Requirements</p>
+      <ul class="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed text-zinc-300">
+        <li>A WooCommerce store</li>
+        <li>Products that have a UPC</li>
+        <li>A checkout where the shopper enters a zip code</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="early-access" class="border-t border-zinc-800/80 py-12" data-section="download">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class={eyebrow}>Get early access</p>
+      <h2 class={`mt-3 ${h2}`}>Get early access to FFL Firewall</h2>
+      <p class={body}>This is a Coriolis plugin for FFL dealers who already run WooCommerce. Leave your company name, website, and email, and we'll write when it's ready to try. If you'd like a hand with your store in the meantime, talk to Coriolis.</p>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href="#early-access" class={btnPlan} data-early-access="footer">{earlyAccessLabel}</a>
+        <a href={contact} class={btnSecondary}>{contactLabel}</a>
+      </div>
+      <p class={body}>FFL Firewall is a tool that helps you catch restricted items at checkout. You're still responsible for what you ship, and this is not legal advice.</p>
+      <p class="mt-4 text-sm text-zinc-400"><a href="mailto:support@coriolisagency.com" class="font-medium !text-sky-400 hover:!underline underline-offset-2">support@coriolisagency.com</a></p>
+    </div>
+  </section>
+  <FflFirewallLeadGate />
+</BaseLayout>
