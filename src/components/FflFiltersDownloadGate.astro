@@ -209,13 +209,10 @@ const { href } = Astro.props;
 
   function startDownload() {
     if (!href) return;
-    var link = document.createElement("a");
-    link.href = href;
-    link.setAttribute("download", "");
-    link.style.display = "none";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    // Cross-origin GitHub asset: the download attribute is ignored.
+    // GitHub sends Content-Disposition: attachment, so assigning the
+    // location starts the download and leaves this page in place.
+    window.location.assign(href);
   }
 
   function startedAtStamp() {

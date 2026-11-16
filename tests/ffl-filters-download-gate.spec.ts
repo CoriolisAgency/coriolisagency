@@ -4,6 +4,20 @@ test.use({ viewport: { width: 1280, height: 800 } });
 
 const PAGE_PATH = "/" + "ffl-filters";
 const MAILBOX = "support@" + "coriolisagency.com";
+const FILE_URL = "https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.8/ffl-filters-1.3.8.zip";
+
+async function stubZip(page: Page) {
+  await page.route(FILE_URL, async (route) => {
+    await route.fulfill({
+      status: 200,
+      headers: {
+        "content-type": "application/zip",
+        "content-disposition": "attachment; filename=ffl-filters-1.3.8.zip",
+      },
+      body: Buffer.from("PK\x03\x04", "binary"),
+    });
+  });
+}
 
 function gate(page: Page) {
   return page.locator("[data-fflf-dl-gate]");
@@ -22,6 +36,7 @@ function footerDownload(page: Page) {
 }
 
 async function openHero(page: Page) {
+  await stubZip(page);
   await page.goto(PAGE_PATH);
   await heroDownload(page).click();
   await expect(dialog(page)).toBeVisible();
@@ -30,10 +45,13 @@ async function openHero(page: Page) {
 test.describe("FFL Filters download gate", () => {
   test("hero click opens the modal and focuses company name", async ({ page }) => {
     await openHero(page);
+    await expect(gate(page)).toHaveAttribute("data-file", FILE_URL);
+    await expect(heroDownload(page)).toHaveAttribute("href", FILE_URL);
     await expect(page.locator('input[name="company"]')).toBeFocused();
   });
 
   test("footer click opens the same modal", async ({ page }) => {
+    await stubZip(page);
     await page.goto(PAGE_PATH);
     await footerDownload(page).click();
     await expect(dialog(page)).toBeVisible();
@@ -134,7 +152,7 @@ test.describe("FFL Filters download gate", () => {
     const downloadPromise = page.waitForEvent("download");
     await page.locator("[data-fflf-dl-submit]").click();
     const download = await downloadPromise;
-    expect(download.url()).toMatch(/\.zip(\?|$)/);
+    expect(download.url()).toBe(FILE_URL);
     await expect(page.getByRole("heading", { name: "Thank you" })).toBeVisible();
     await expect(dialog(page).getByRole("link", { name: MAILBOX })).toHaveAttribute("href", "mailto:" + MAILBOX);
     expect(posts).toHaveLength(1);
@@ -172,7 +190,7 @@ test.describe("FFL Filters download gate", () => {
     const downloadPromise = page.waitForEvent("download");
     await page.locator("[data-fflf-dl-submit]").click();
     const download = await downloadPromise;
-    expect(download.url()).toMatch(/\.zip(\?|$)/);
+    expect(download.url()).toBe(FILE_URL);
     await expect(page.getByRole("heading", { name: "Thank you" })).toBeVisible();
     await expect(dialog(page).getByRole("link", { name: MAILBOX })).toBeVisible();
     await page.keyboard.press("Escape");
