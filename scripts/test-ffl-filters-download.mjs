@@ -284,10 +284,12 @@ if (fs.existsSync(dist)) {
     const header = html.match(/<header\b[\s\S]*?<\/header>/)?.[0] ?? "";
     const drawerAt = html.indexOf('id="nav-drawer"');
     const scriptAt = drawerAt === -1 ? -1 : html.indexOf("<script>", drawerAt);
+    const footerAt = drawerAt === -1 ? -1 : html.indexOf("<footer", drawerAt);
+    const end = [scriptAt, footerAt].filter((i) => i !== -1);
     const drawer =
       drawerAt === -1
         ? ""
-        : html.slice(html.lastIndexOf("<div", drawerAt), scriptAt === -1 ? html.length : scriptAt);
+        : html.slice(html.lastIndexOf("<div", drawerAt), end.length ? Math.min(...end) : html.length);
     return { header, drawer, chrome: header + drawer };
   };
   const assertHeaderNav = (html, rel) => {
@@ -309,9 +311,12 @@ if (fs.existsSync(dist)) {
     return html.replace(header, "").replace(drawer, "");
   };
   // The /ffl-filters page itself also carries the header; confirm it, then keep the existing on-page checks.
+  // Allow the page's own canonical href; still fail on any other non-header /ffl-filters link.
   {
     const pageBody = assertHeaderNav(html, "ffl-filters/index.html");
-    assert.doesNotMatch(pageBody, /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, "ffl-filters/index.html non-header link to /ffl-filters");
+    const canonicalRe = /<link\b[^>]*\brel="canonical"[^>]*\bhref="https:\/\/www\.coriolisagency\.com\/ffl-filters\/?"[^>]*>|<link\b[^>]*\bhref="https:\/\/www\.coriolisagency\.com\/ffl-filters\/?"[^>]*\brel="canonical"[^>]*>/;
+    assert.match(pageBody, canonicalRe, "ffl-filters/index.html missing canonical");
+    assert.doesNotMatch(pageBody.replace(canonicalRe, ""), /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, "ffl-filters/index.html non-header link to /ffl-filters");
   }
   for (const f of fs.readdirSync(dist, { recursive: true })) {
     if (!String(f).endsWith(".html") || path.normalize(String(f)) === path.join("ffl-filters", "index.html")) continue;

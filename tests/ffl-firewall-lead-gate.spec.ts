@@ -162,7 +162,8 @@ test.describe("FFL Firewall early-access gate", () => {
     await page.locator('input[name="website"]').fill("https://example.com");
     await page.locator('input[name="email"]').fill("test@example.com");
     await page.locator("[data-fflfw-ea-submit]").click();
-    await expect(page.locator("[data-fflfw-ea-error]")).toHaveText("Could not send. Try again.");
+    await expect(page.locator("[data-fflfw-ea-error]")).toHaveText("We couldn't send that. Try again, or write to " + MAILBOX + ".");
+    await expect(page.locator("[data-fflfw-ea-error]").getByRole("link", { name: MAILBOX })).toHaveAttribute("href", "mailto:" + MAILBOX);
     await expect(dialog(page).getByRole("heading", { name: "Get early access", exact: true })).toBeVisible();
     await expect(page.locator("[data-fflfw-ea-thanks]")).toBeHidden();
     await expect(page.locator("[data-fflfw-ea-form-view]")).toBeVisible();

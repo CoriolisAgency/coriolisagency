@@ -136,7 +136,20 @@
 
   function setError(message) {
     if (!errorEl) return;
-    errorEl.textContent = message || "";
+    errorEl.replaceChildren();
+    if (message) errorEl.appendChild(document.createTextNode(message));
+  }
+
+  function setSendFailedError() {
+    if (!errorEl) return;
+    errorEl.replaceChildren();
+    errorEl.appendChild(document.createTextNode("We couldn't send that. Try again, or write to "));
+    var a = document.createElement("a");
+    a.href = "mailto:support@coriolisagency.com";
+    a.className = "fflfw-ea-mail";
+    a.textContent = "support@coriolisagency.com";
+    errorEl.appendChild(a);
+    errorEl.appendChild(document.createTextNode("."));
   }
 
   function focusables() {
@@ -314,7 +327,7 @@
         submitBtn.disabled = false;
         submitBtn.textContent = "Get early access";
       }
-      setError("Could not send. Try again.");
+      setSendFailedError();
       console.error("early-access gate: lead failed", status || 0, errName || "error");
     }
 
