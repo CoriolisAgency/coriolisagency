@@ -79,7 +79,7 @@ assertLandingPage("src/pages/ffl-analytics.astro", {
   h1: "Understand your gun store's website",
   campaign: "ffl-analytics",
   notice:
-    "Not affiliated with Google. Google Analytics is a trademark of Google LLC.",
+    "isn't affiliated with Google. Google Analytics is a trademark of Google LLC.",
 });
 
 // SEO-U32 (Brandy FINAL, Chief 10/21): rewritten from GSE's live copy; Pro block cut, one Pro line to GSE /pro.
