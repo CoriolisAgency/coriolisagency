@@ -207,18 +207,17 @@ assert.doesNotMatch(gate, /startDownload/);
 assert.doesNotMatch(gate, /\.zip/);
 assert.doesNotMatch(gate, /data-download/);
 
-// 5. Nav: FFL Firewall immediately after FFL Filters.
+// 5. Nav: no FFL Firewall item. Order is FFL Dropshipping, FFL Filters, Gun Store POS.
 const navRel = "src/lib/nav.ts";
 const nav = read(navRel);
-assert.match(nav, /\{\s*href:\s*"ffl-firewall",\s*label:\s*"FFL Firewall"\s*\}/, "header nav item is FFL Firewall -> ffl-firewall");
+assert.doesNotMatch(nav, /href:\s*"ffl-firewall"/, "header nav still has an FFL Firewall item");
 {
   const drop = nav.indexOf('{ href: "firearms-dropshipping", label: "FFL Dropshipping" }');
   const ffl = nav.indexOf('{ href: "ffl-filters", label: "FFL Filters" }');
-  const fw = nav.indexOf('{ href: "ffl-firewall", label: "FFL Firewall" }');
   const pos = nav.indexOf('href: "gun-store-pos"');
-  assert.ok(drop !== -1 && ffl !== -1 && fw !== -1 && pos !== -1, "header nav missing Dropshipping, Filters, Firewall, or POS");
-  assert.ok(drop < ffl && ffl < fw && fw < pos, "FFL Firewall is immediately after FFL Filters, before Gun Store POS");
-  assert.equal(nav.slice(ffl, fw).split("href:").length - 1, 1, "no nav item between FFL Filters and FFL Firewall");
+  assert.ok(drop !== -1 && ffl !== -1 && pos !== -1, "header nav missing Dropshipping, FFL Filters, or POS");
+  assert.ok(drop < ffl && ffl < pos, "nav order should be FFL Dropshipping, FFL Filters, Gun Store POS");
+  assert.equal(nav.slice(ffl, pos).split("href:").length - 1, 1, "no nav item between FFL Filters and Gun Store POS");
 }
 
 // 6. Sitemap + lastmod + robots + vercel + IndexNow.
@@ -302,12 +301,14 @@ if (fs.existsSync(dist)) {
     const { header, drawer } = chromeOf(built);
     assert.ok(header, `${rel} missing <header>`);
     assert.ok(drawer.includes('id="nav-drawer"'), `${rel} missing nav-drawer`);
+    assert.doesNotMatch(header, fwHref, `${rel} desktop header still has an FFL Firewall link`);
+    assert.doesNotMatch(drawer, fwHref, `${rel} mobile nav still has an FFL Firewall link`);
     const orderIn = (chunk, where) => {
+      const drop = chunk.search(/<a\b[^>]*>FFL Dropshipping<\/a>/);
       const filters = chunk.search(/<a\b[^>]*>FFL Filters<\/a>/);
-      const firewall = chunk.search(fwHref);
       const pos = chunk.search(/<a\b[^>]*>Gun Store POS<\/a>/);
-      assert.ok(filters !== -1 && firewall !== -1 && pos !== -1, `${rel} ${where} missing Filters, Firewall, or POS`);
-      assert.ok(filters < firewall && firewall < pos, `${rel} ${where} FFL Firewall is not immediately after FFL Filters`);
+      assert.ok(drop !== -1 && filters !== -1 && pos !== -1, `${rel} ${where} missing Dropshipping, FFL Filters, or POS`);
+      assert.ok(drop < filters && filters < pos, `${rel} ${where} order is not FFL Dropshipping, FFL Filters, Gun Store POS`);
     };
     orderIn(header, "desktop header");
     orderIn(drawer, "mobile nav");
