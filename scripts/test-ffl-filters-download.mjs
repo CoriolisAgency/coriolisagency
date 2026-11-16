@@ -202,6 +202,7 @@ assert.match(gate, /name="website"/);
 assert.match(gate, /name="email"/);
 assert.match(gate, /name="company_url"/);
 assert.match(gate, /mailto:support@coriolisagency\.com/);
+assert.match(gate, /write to\{' '\}/);
 assert.match(gate, /"Escape"/);
 assert.match(gate, /\/api\/lead/);
 assert.doesNotMatch(gate, pageRef, `${gateRel} mentions the page path`);
@@ -245,6 +246,8 @@ if (fs.existsSync(dist)) {
   assert.match(html, /role="dialog"/);
   assert.match(html, /data-fflf-dl-gate/);
   assert.match(html, /mailto:support@coriolisagency\.com/);
+  assert.match(html, /write to <a href="mailto:support@coriolisagency\.com"/);
+  assert.doesNotMatch(html, /write tosupport@/);
   assert.equal((html.match(/data-download="(hero|footer)"/g) ?? []).length, 2);
   const ogAbsRe = ogAbs.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const ogAltEsc = ogAlt.replaceAll('"', "&quot;").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
