@@ -1,0 +1,260 @@
+---
+/**
+ * CA-FFL-SOVEREIGNTY (Paul 2026-11-16 8:30 PM ET via Chief; merge go 8:35 PM ET:
+ * "Neo approved to proceed."). Copy is SERP's PILLAR-FINAL.md, verbatim.
+ * Hero/OG per Chief (Paul picked 8:21 PM ET). FAQPage schema dropped per Chief.
+ * Three essay anchors to /your-software-vendor-shouldnt-get-a-vote are plain text
+ * (essay is not in this ship).
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/base";
+import { md } from "../lib/md";
+
+const title = "FFL Sovereignty: Own Your Website, Data and Platform | Coriolis";
+const description =
+  "FFL sovereignty is Coriolis's term for an FFL owning its website, data, customers and platform, so a software vendor does not get a vote on how the store runs.";
+const ogTitle = "FFL Sovereignty: Own Your Website, Data and Platform";
+const path = "/ffl-sovereignty";
+const hero = "brand/ffl-sovereignty/ffl-sovereignty-hero-1920x1080.webp";
+const og = "brand/ffl-sovereignty/ffl-sovereignty-og-1200x630.jpg";
+const heroAlt =
+  "A floating glass screen above a black stone gun-shop counter showing online and in-store sales side by side, with rifles in lit wall niches behind.";
+const ogAlt =
+  "A glass sales screen floating over a dark gun-shop counter, with rifles displayed in lit wall niches.";
+
+const opening = [
+  "Your license says you can sell guns, and the ATF, your state and sometimes your county decide the rules that come with it. Everything else about how the store runs online should be your call, which is why we gave the idea a name.",
+  "This page is the reference version: what an FFL should own, how to check whether you own it today, and how we build stores that way. If you want the longer argument about proprietary platforms and vendor lock-in, read Your Software Vendor Shouldn't Get a Vote.",
+];
+
+const ownIntro =
+  "Four things should have your name on them, and if any one of them belongs to a vendor, that vendor has a say in your business that your license never gave them.";
+const ownItems = [
+  "**Your website and your domain.** The domain is registered to you, in an account you can log into, and the site lives on that domain rather than on a subdomain of someone else's product. If the domain is yours but the pages, theme and URLs only exist inside a proprietary platform, you own the sign out front and rent the building behind it.",
+  "**Your data and your customer list.** That means every customer record, every order, and the full product catalog with your own descriptions, photos, prices and categories. Owning it means you can download all of it yourself, whenever you want, in a file another system can read, without filing a ticket or explaining why you're asking.",
+  "**The platform code and the license to change it.** When the store runs on software released under the GNU General Public License, like [WordPress](https://wordpress.org/about/license/) and [WooCommerce](https://wordpress.org/plugins/woocommerce/), you have the right to run it, modify it and move it. On a proprietary platform the code belongs to the vendor, so the only changes you get are the ones on their roadmap.",
+  "**Your choice of integrations.** You pick the payment processor that will work with a firearms merchant account, the email program, the register at the counter, and the plugins on the site. A platform that only lets you plug in what it already sells has made those choices for you, usually before you knew they were choices.",
+];
+
+const giveAway =
+  'Nobody signs a contract that says "we own your customer list." Control slips away through an easy setup, a template that looked finished on day one, and a monthly bill small enough that nobody reads the terms behind it. The longer story is in Paul\'s essay on vendor lock-in, and the five habits that keep stores stuck are in [Why FFLs Suck at Ecommerce](/why-ffls-suck-at-ecommerce).';
+
+const selfIntro =
+  "You can run this against your current site this week, before you talk to us or anybody else. Each question should get a plain yes.";
+const selfItems = [
+  "**Domain:** Is the domain registered in your name or your company's name, in an account you can log into without your website vendor?",
+  "**Admin access:** Do you have a full administrator login to the store itself, the kind that can change settings and install software, beyond a seller dashboard?",
+  "**Customers and orders:** Could you download every customer and every order today, on your own, in a spreadsheet file?",
+  "**Catalog:** Could you export the whole product catalog, including your descriptions, images and categories, in a format another store can import?",
+  "**Integrations:** If you found a better email tool, filter plugin or payment processor tomorrow, could you add it without the platform's permission?",
+  "**Leaving:** If you walked away next month, would the design, the pages and the URLs that already rank go with you?",
+];
+const selfOutro =
+  "If you answered no to any of these, the store has a landlord. That doesn't mean you have to move tonight; it means you should know what you'd lose before you need to find out. For the questions to ask a vendor before you sign up for anything new, the buyer's guide to the [best FFL ecommerce platforms](/best-ffl-ecommerce-website) scores each option on who owns the site and what happens when you leave.";
+
+const buildIntro =
+  "We build every FFL store on WooCommerce and WordPress, on your domain, and then we host it and support it for you. You get the help of a managed service without handing over the keys, because the software is open source and the site, the domain and the data stay yours if you leave. There is no contract.";
+const buildItems = [
+  "**The store is WooCommerce you can change.** Your developer, your nephew or the next agency can open it up, because nothing about the code is locked to us. If you're wondering whether WooCommerce works for a gun store at all, we answered that in [Can you use WooCommerce to sell guns?](/can-you-use-woocommerce-to-sell-guns)",
+  "**Your register stays yours.** If you already run AIM, MicroBiz, Rapid Gun Systems or Trident 1 at the counter, we [connect the register you already run](/gun-store-pos) to the website, and the POS company keeps running the register.",
+  "**You add what you need.** A store you own can take any plugin that works with WooCommerce, including FFL Filters, our free filter plugin for FFL dealers.",
+  "**You leave with everything.** If you ever stop working with us, you take the site, the catalog, the customer list and the order history with you, and we'll help you move it.",
+];
+const buildOutro = "How we build and host that store, plus the plans, is on our [FFL website design](/ecommerce) page.";
+
+const faqs = [
+  {
+    q: "Is FFL sovereignty a law or an ATF rule?",
+    a: "No. It's our term for owning the technology your store runs on. Your license, ATF recordkeeping, the transfer process, and your state and local rules all apply exactly as they did before, and owning your website doesn't change any of them.",
+  },
+  {
+    q: "Do I have to leave my current platform to get it?",
+    a: "Not necessarily. Start with the self-check above. If your current setup passes, you already have it; if it fails on data or integrations, export what you can now, so you hold a copy whatever you decide later.",
+  },
+  {
+    q: "Can I keep my point-of-sale system?",
+    a: "Yes. Owning the website and keeping your register work together. We connect third-party registers such as AIM, MicroBiz, Rapid Gun Systems and Trident 1 to WooCommerce, and the details are on our gun store POS integration page.",
+  },
+  {
+    q: "What happens to my store if I stop working with Coriolis?",
+    a: "You keep it. The site lives on your domain and runs on open-source software, so the design, the catalog, the customers and the order history go with you, and there is no contract holding you in place.",
+  },
+];
+
+const further = [
+  { text: "Your Software Vendor Shouldn't Get a Vote, Paul Angell's essay on proprietary platforms and vendor lock-in", href: null },
+  { text: "[Why FFLs Suck at Ecommerce](/why-ffls-suck-at-ecommerce), the five problems behind stores that stall, including renting the store instead of owning it", href: "md" },
+  { text: "[Best FFL ecommerce platforms (2026)](/best-ffl-ecommerce-website), the buyer's guide, scored on ownership and what happens when you leave", href: "md" },
+  { text: "[Can you use WooCommerce to sell guns?](/can-you-use-woocommerce-to-sell-guns), the WooCommerce-for-firearms how-to", href: "md" },
+  { text: "Planned: a vendor lock-in checklist for FFLs", href: null },
+  { text: "Planned: how to export your FFL store's customers, orders and catalog", href: null },
+  { text: "Planned: why your gun store website belongs on your own domain", href: null },
+  { text: "Planned: what you take with you when you leave an FFL website platform", href: null },
+  { text: "Planned: plugins you can add to an FFL website you own", href: null },
+];
+
+const talk =
+  "Paul Angell has consulted 5,000+ FFLs and helped nearly 2,000 of them get online, and the stores that stay stuck usually have one thing in common: somebody else owns a piece they need. If you want a second set of eyes on what you own today, or you want a WooCommerce store built on your domain, [talk to Coriolis](/contact). Plans run from $169 to $569 a month, with a $500 or $2,500 setup.";
+
+const pageUrl = "https://www.coriolisagency.com/ffl-sovereignty";
+const extraJsonLd = [
+  {
+    "@type": "DefinedTermSet",
+    "@id": `${pageUrl}#termset`,
+    name: "Coriolis FFL terms",
+    url: pageUrl,
+    hasDefinedTerm: { "@id": `${pageUrl}#term` },
+  },
+  {
+    "@type": "DefinedTerm",
+    "@id": `${pageUrl}#term`,
+    name: "FFL sovereignty",
+    description:
+      "FFL sovereignty is Coriolis's term for an FFL owning its website, data, customers and platform, so a software vendor does not get a vote on how the store runs or whether the dealer can change the stack.",
+    url: pageUrl,
+    inDefinedTermSet: { "@id": `${pageUrl}#termset` },
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}#breadcrumb`,
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.coriolisagency.com/" },
+      { "@type": "ListItem", position: 2, name: "FFL Ecommerce", item: "https://www.coriolisagency.com/ecommerce" },
+      { "@type": "ListItem", position: 3, name: "FFL Sovereignty", item: pageUrl },
+    ],
+  },
+];
+
+const h2 = "text-xl font-semibold text-white";
+const para = "mt-4 max-w-3xl text-base leading-relaxed text-zinc-300";
+const list = "mt-4 max-w-3xl list-disc space-y-2 pl-5 text-base leading-relaxed text-zinc-300";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogTitle={ogTitle}
+  ogDescription={description}
+  path={path}
+  ogImagePath={og}
+  ogImageAlt={ogAlt}
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  extraJsonLd={extraJsonLd}
+>
+  <section class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <nav aria-label="Breadcrumb" class="text-xs text-zinc-500">
+        <ol class="flex flex-wrap items-center gap-x-1.5">
+          <li>
+            <a href={withBase("/")} class="hover:text-sky-300">Home</a>
+          </li>
+          <li aria-hidden="true">&gt;</li>
+          <li>
+            <a href={withBase("ecommerce")} class="hover:text-sky-300">FFL Ecommerce</a>
+          </li>
+          <li aria-hidden="true">&gt;</li>
+          <li class="text-zinc-400">
+            <span aria-current="page">FFL Sovereignty</span>
+          </li>
+        </ol>
+      </nav>
+      <h1 class="mt-4 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-5xl leading-[1.12]">
+        FFL Sovereignty
+      </h1>
+      <p class={para} set:html={md(opening[0])} />
+      <p class="mt-4 max-w-3xl text-base font-semibold leading-relaxed text-white">
+        FFL sovereignty is Coriolis's term for an FFL owning its website, data, customers and platform, so a software vendor does not get a vote on how the store runs or whether the dealer can change the stack.
+      </p>
+      <p class={para} set:html={md(opening[1])} />
+      <figure class="mt-8 overflow-hidden rounded-2xl ring-1 ring-white/10">
+        <img
+          src={withBase(hero)}
+          alt={heroAlt}
+          width="1920"
+          height="1080"
+          fetchpriority="high"
+          decoding="async"
+          class="w-full bg-[#091220]"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>What Should an FFL Own?</h2>
+      <p class={para} set:html={md(ownIntro)} />
+      <ul class={list}>
+        {ownItems.map((item) => <li set:html={md(item)} />)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Where Dealers Give It Away</h2>
+      <p class={para} set:html={md(giveAway)} />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>A Self-Check for the Store You Run Now</h2>
+      <p class={para} set:html={md(selfIntro)} />
+      <ul class={list}>
+        {selfItems.map((item) => <li set:html={md(item)} />)}
+      </ul>
+      <p class={para} set:html={md(selfOutro)} />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>How Coriolis Builds for FFL Sovereignty</h2>
+      <p class={para} set:html={md(buildIntro)} />
+      <ul class={list}>
+        {buildItems.map((item) => <li set:html={md(item)} />)}
+      </ul>
+      <p class={para} set:html={md(buildOutro)} />
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Common Questions About FFL Sovereignty</h2>
+      {
+        faqs.map((item) => (
+          <>
+            <p class={`mt-6 max-w-3xl text-base font-semibold leading-relaxed text-white`}>{item.q}</p>
+            <p class={para}>{item.a}</p>
+          </>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-800/80 py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Further Reading</h2>
+      <ul class={list}>
+        {
+          further.map((item) =>
+            item.href === "md" ? (
+              <li set:html={md(item.text)} />
+            ) : (
+              <li>{item.text}</li>
+            )
+          )
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <h2 class={h2}>Talk to Us About Owning Your Store</h2>
+      <p class={para} set:html={md(talk)} />
+    </div>
+  </section>
+</BaseLayout>

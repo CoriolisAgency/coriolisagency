@@ -37,7 +37,14 @@ const posPaths = new Set([
 
 function active(slug: string) {
   const p = `/${slug}`;
-  if (slug === "ecommerce") return ecommercePaths.has(path);
+  if (slug === "ecommerce") {
+    return (
+      ecommercePaths.has(path) ||
+      path === "/ffl-sovereignty" ||
+      path === "/case-studies" ||
+      path.startsWith("/case-studies/")
+    );
+  }
   if (slug === "gun-store-pos") return posPaths.has(path);
   return path === p || path.startsWith(p + "/");
 }
@@ -95,8 +102,13 @@ const family = [
               : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
           ];
           if (children) {
+            const menuId = item.href === "gun-store-pos" ? "pos-menu" : `${item.href}-menu`;
             return (
-              <div class="pos-nav relative" data-pos-nav>
+              <div
+                class="pos-nav relative"
+                data-nav-menu
+                data-pos-nav={item.href === "gun-store-pos" ? "" : undefined}
+              >
                 <div
                   class:list={[
                     "pos-nav-trigger flex items-stretch overflow-hidden rounded-sm border",
@@ -118,8 +130,8 @@ const family = [
                       pillActive ? "border-gold/40" : "border-zinc-700",
                     ]}
                     aria-expanded="false"
-                    aria-controls="pos-menu"
-                    aria-label="Gun Store POS pages"
+                    aria-controls={menuId}
+                    aria-label={`${item.label} pages`}
                   >
                     <svg
                       viewBox="0 0 20 20"
@@ -136,28 +148,34 @@ const family = [
                 </div>
                 <div class="pos-menu-panel absolute right-0 top-full z-50 pt-1">
                   <ul
-                    id="pos-menu"
+                    id={menuId}
                     class="pos-menu min-w-56 border border-zinc-700 bg-zinc-950 py-1"
                   >
                     {
-                      children.map((child) => (
+                      children.map((child) => {
+                        const childExternal = "external" in child && child.external;
+                        const childPath = child.href.split("#")[0];
+                        const childCurrent =
+                          !childExternal &&
+                          !child.href.includes("#") &&
+                          (path === `/${childPath}` || path.startsWith(`/${childPath}/`));
+                        return (
                         <li>
                           <a
-                            href={withBase(child.href)}
+                            href={childExternal ? child.href : withBase(child.href)}
                             class:list={[
                               "block px-3 py-2 text-sm hover:bg-zinc-800",
-                              path === `/${child.href}`
-                                ? "text-gold"
-                                : "text-zinc-200",
+                              childCurrent ? "text-gold" : "text-zinc-200",
                             ]}
-                            aria-current={
-                              path === `/${child.href}` ? "page" : undefined
-                            }
+                            target={childExternal ? "_blank" : undefined}
+                            rel={childExternal ? "noopener noreferrer" : undefined}
+                            aria-current={childCurrent ? "page" : undefined}
                           >
                             {child.label}
                           </a>
                         </li>
-                      ))
+                        );
+                      })
                     }
                   </ul>
                 </div>
@@ -257,24 +275,32 @@ const family = [
             {
               children && (
                 <ul class="ml-4 flex flex-col gap-1">
-                  {children.map((child) => (
+                  {children.map((child) => {
+                    const childExternal = "external" in child && child.external;
+                    const childPath = child.href.split("#")[0];
+                    const childCurrent =
+                      !childExternal &&
+                      !child.href.includes("#") &&
+                      (path === `/${childPath}` || path.startsWith(`/${childPath}/`));
+                    return (
                     <li>
                       <a
-                        href={withBase(child.href)}
+                        href={childExternal ? child.href : withBase(child.href)}
                         class:list={[
                           "flex min-h-11 items-center rounded-sm border px-3 py-2 text-sm font-medium transition-colors",
-                          path === `/${child.href}`
+                          childCurrent
                             ? "border-gold/50 bg-gold/10 text-gold"
                             : "border-zinc-700 text-zinc-200 hover:bg-zinc-800",
                         ]}
-                        aria-current={
-                          path === `/${child.href}` ? "page" : undefined
-                        }
+                        target={childExternal ? "_blank" : undefined}
+                        rel={childExternal ? "noopener noreferrer" : undefined}
+                        aria-current={childCurrent ? "page" : undefined}
                       >
                         {child.label}
                       </a>
                     </li>
-                  ))}
+                    );
+                  })}
                 </ul>
               )
             }
@@ -331,9 +357,10 @@ const family = [
     });
   }
 
-  const posNav = document.querySelector("[data-pos-nav]");
-  const posToggle = posNav?.querySelector(".pos-nav-toggle");
-  if (posNav instanceof HTMLElement && posToggle instanceof HTMLButtonElement) {
+  // Bind every desktop dropdown (FFL Ecommerce and Gun Store POS) the same way.
+  document.querySelectorAll("[data-nav-menu]").forEach((posNav) => {
+    const posToggle = posNav.querySelector(".pos-nav-toggle");
+    if (!(posNav instanceof HTMLElement) || !(posToggle instanceof HTMLButtonElement)) return;
     const CLOSE_MS = 200;
     let closeTimer = 0;
     let skipFocusOpen = false;
@@ -399,7 +426,7 @@ const family = [
     document.addEventListener("click", (event) => {
       if (!posNav.contains(event.target)) dismiss();
     });
-  }
+  });
 </script>
 
 <style>
