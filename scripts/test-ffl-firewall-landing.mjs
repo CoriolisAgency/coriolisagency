@@ -119,12 +119,12 @@ assert.ok(page.includes(ogAlt), "page ships Brandy OG alt verbatim");
 
 // 3. Hero art + lockup.
 const heroAlt =
-  "A stylized checkout in a browser window, with the address yourstore.example/checkout on a dark navy background. The cart shows generic item rows with no product names, prices, or counts; one row is pulled out, and a message reads, \"This item can't be shipped to the zip code you entered.\"";
+  "A stylized checkout in a browser window, with the address yourstore.example/checkout. The cart shows Glock pistols with their photos and specs; one row is pulled out, and a message reads, \"This item can't be shipped to the zip code you entered.\"";
 const heroFiles = [
-  { rel: "public/brand/ffl-firewall/hero/ffl-firewall-hero-desktop-1440x1152.webp", sha: "71a9ff7216c6a9ba20f851bec11480133f556576155af95ad2f843e621cdafce", w: 1440, h: 1152, magic: "52494646", kind: "webp" },
-  { rel: "public/brand/ffl-firewall/hero/ffl-firewall-hero-desktop-1440x1152.jpg", sha: "bd754141c6f6219a20734e68f632049ba1629ec4e379806431711a2764f19920", w: 1440, h: 1152, magic: "ffd8ff", kind: "jpeg" },
-  { rel: "public/brand/ffl-firewall/hero/ffl-firewall-hero-mobile-750x1200.webp", sha: "80c6913cf9a01d9607bba3842ff545883a25fdfe719dd250b8bc6159873888e7", w: 750, h: 1200, magic: "52494646", kind: "webp" },
-  { rel: "public/brand/ffl-firewall/hero/ffl-firewall-hero-mobile-750x1200.jpg", sha: "70e57eb790e1b28ef56e7a654e5488ad1a7d746cb0e7dac3571b5bfd1078f82e", w: 750, h: 1200, magic: "ffd8ff", kind: "jpeg" },
+  { rel: "public/brand/ffl-firewall/hero/ffl-firewall-hero-desktop-1440x1152.webp", sha: "a679ce800e5695add5f11e1fa4ded012003ab830ae160fc24940351a4cb4da0d", w: 1440, h: 1152, magic: "52494646", kind: "webp" },
+  { rel: "public/brand/ffl-firewall/hero/ffl-firewall-hero-desktop-1440x1152.jpg", sha: "5926bff3b0e77cffa36458ab6c9ff9ca60ac0e7dcc27a06dd229006e740c3d22", w: 1440, h: 1152, magic: "ffd8ff", kind: "jpeg" },
+  { rel: "public/brand/ffl-firewall/hero/ffl-firewall-hero-mobile-750x1200.webp", sha: "590ae2f6a20bd849dffbca8299d2fbfb7cefdcf732549a041a1ec5f216e04d2f", w: 750, h: 1200, magic: "52494646", kind: "webp" },
+  { rel: "public/brand/ffl-firewall/hero/ffl-firewall-hero-mobile-750x1200.jpg", sha: "d2d148f33bb7c180af825734094428dae146c217ea858c827ced8af41bb5b463", w: 750, h: 1200, magic: "ffd8ff", kind: "jpeg" },
 ];
 function webpSize(buf) {
   if (buf.toString("ascii", 0, 4) !== "RIFF" || buf.toString("ascii", 8, 12) !== "WEBP") throw new Error("not webp");
@@ -165,7 +165,7 @@ assert.match(page, /media="\(min-width: 640px\)" type="image\/webp" srcset=\{wit
 assert.match(page, /media="\(min-width: 640px\)" srcset=\{withBase\("brand\/ffl-firewall\/hero\/ffl-firewall-hero-desktop-1440x1152\.jpg"\)\} width="1440" height="1152"/);
 assert.match(page, /type="image\/webp" srcset=\{withBase\("brand\/ffl-firewall\/hero\/ffl-firewall-hero-mobile-750x1200\.webp"\)\} width="750" height="1200"/);
 assert.match(page, /withBase\("brand\/ffl-firewall\/hero\/ffl-firewall-hero-mobile-750x1200\.jpg"\)/);
-assert.ok(page.includes(heroAlt), "page ships Brandy hero alt verbatim");
+assert.ok(page.includes(heroAlt), "page ships the hero alt");
 assert.match(page, /fetchpriority="high"/);
 assert.match(page, /decoding="async"/);
 assert.match(page, /loading="eager"/);
