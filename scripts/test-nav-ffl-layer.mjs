@@ -19,6 +19,8 @@ assert.deepEqual(labels, [
   "FFL Accelerator",
   "FFL Plugins",
   "FFL Dropshipping",
+  "FFL Dropshipping",
+  "FFL Cockpit",
   "FFL Plugins",
   "FFL Filters",
   "FFL Firewall",
@@ -39,6 +41,8 @@ assert.deepEqual(hrefs, [
   "https://fflaccelerator.com",
   "ffl-filters",
   "firearms-dropshipping",
+  "firearms-dropshipping",
+  "ffl-cockpit",
   "ffl-filters",
   "ffl-filters",
   "ffl-firewall",
@@ -61,6 +65,12 @@ assert.match(
   navSrc,
   /label:\s*"FFL Ecommerce",\s*children:\s*\[[\s\S]*?\{\s*href:\s*"ffl-filters",\s*label:\s*"FFL Plugins"\s*\}/,
   "FFL Ecommerce dropdown must contain an FFL Plugins item",
+);
+// CA-NAV-DROPSHIP-DROPDOWN: FFL Dropshipping is a dropdown with FFL Cockpit.
+assert.match(
+  navSrc,
+  /label:\s*"FFL Dropshipping",\s*children:\s*\[[\s\S]*?href:\s*"firearms-dropshipping",\s*label:\s*"FFL Dropshipping"[\s\S]*?href:\s*"ffl-cockpit",\s*label:\s*"FFL Cockpit"/,
+  "FFL Dropshipping dropdown must keep the firearms-dropshipping href and include FFL Cockpit",
 );
 // FFL Filters is no longer a top-level item after FFL Dropshipping.
 assert.match(

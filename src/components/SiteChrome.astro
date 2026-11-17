@@ -46,6 +46,14 @@ function active(slug: string) {
     );
   }
   if (slug === "gun-store-pos") return posPaths.has(path);
+  if (slug === "firearms-dropshipping") {
+    return (
+      path === p ||
+      path.startsWith(p + "/") ||
+      path === "/ffl-cockpit" ||
+      path.startsWith("/ffl-cockpit/")
+    );
+  }
   if (slug === "ffl-filters") {
     return (
       path === p ||
