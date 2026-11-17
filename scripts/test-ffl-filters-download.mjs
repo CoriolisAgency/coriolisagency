@@ -368,11 +368,39 @@ if (fs.existsSync(dist)) {
     assert.match(pageBody, canonicalRe, "ffl-filters/index.html missing canonical");
     assert.doesNotMatch(pageBody.replace(canonicalRe, ""), /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, "ffl-filters/index.html non-header link to /ffl-filters");
   }
+  // CA-PARTNERS-FFLF-FFLFW (Paul 2026-11-16 8:54 PM ET): allow exactly one
+  // homepage partner-bar FFL Filters logo link, duplicated on the seamless
+  // loop track. No other new homepage /ffl-filters links. FFL Firewall stays unlinked.
+  const partnerBarFflHrefRe = /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/;
+  const partnerBarFflAnchorRe = /<a\b[^>]*href="\/ffl-filters\/?"[^>]*>\s*<img\b[^>]*>\s*<\/a>/g;
+  const allowHomepagePartnerBarFflFiltersLink = (body, rel) => {
+    if (path.normalize(String(rel)) !== "index.html") return body;
+    const sectionRe = /(<section\b[^>]*\bdata-partner-logos\b[^>]*>)([\s\S]*?)(<\/section>)/;
+    const m = body.match(sectionRe);
+    assert.ok(m, `${rel} missing data-partner-logos section for the partner-bar carve-out`);
+    const section = m[2];
+    assert.match(section, /<img\b[^>]*alt="FFL Firewall logo"/, `${rel} partner bar missing unlinked FFL Firewall logo`);
+    assert.doesNotMatch(
+      section,
+      /<a\b[^>]*>\s*<img\b[^>]*alt="FFL Firewall logo"/,
+      `${rel} FFL Firewall logo must not be wrapped in an anchor`,
+    );
+    const anchors = section.match(partnerBarFflAnchorRe) || [];
+    assert.equal(
+      anchors.length,
+      2,
+      `${rel} partner bar must wrap the FFL Filters logo in exactly two anchors (visible + loop track)`,
+    );
+    const stripped = section.replace(partnerBarFflAnchorRe, "<!--ca-partners-fflf-logo-->");
+    assert.doesNotMatch(stripped, partnerBarFflHrefRe, `${rel} extra /ffl-filters href inside the partner bar`);
+    return body.replace(sectionRe, `$1${stripped}$3`);
+  };
+
   for (const f of fs.readdirSync(dist, { recursive: true })) {
     if (!String(f).endsWith(".html") || path.normalize(String(f)) === path.join("ffl-filters", "index.html")) continue;
     const other = fs.readFileSync(path.join(dist, String(f)), "utf8");
     if (!isRedirectStub(other)) {
-      const body = assertHeaderNav(other, f);
+      const body = allowHomepagePartnerBarFflFiltersLink(assertHeaderNav(other, f), f);
       assert.doesNotMatch(body, /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, `${f} non-header link to /ffl-filters`);
     }
     assert.doesNotMatch(other, /ffl-filters-1\.3\.[0-9]+\.zip/, `${f} links to the zip`);

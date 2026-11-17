@@ -20,6 +20,11 @@
  * HOMEPAGE-PARTNERS-UNUM-SIZE (Paul 2026-11-07 12:10 PM ET): enlarge the stacked
  * UNUM lockup so it matches MicroBiz and OtterText. Own display size
  * (h-16 / sm:h-24); shared invert/opacity treatment stays.
+ * CA-PARTNERS-FFLF-FFLFW (Paul 2026-11-16 8:54 PM ET): add FFL Filters and
+ * FFL Firewall lockups after UNUM, same height, spacing, and silhouette
+ * treatment (official tile punched out so invert stays a white mark). FFL
+ * Filters is a same-tab in-site link; FFL Firewall is not linked. Both marks
+ * are in the duplicated loop track.
  */
 import { withBase } from "../lib/base";
 
@@ -40,7 +45,15 @@ const PARTNERS: {
   { name: "MicroBiz POS", src: "partners/microbiz-pos.png", width: 142, height: 40 },
   { name: "OtterText", src: "partners/ottertext.svg", width: 210, height: 40 },
   { name: "UNUM", src: "partners/unum.png", width: 97, height: 96, href: "https://unumnow.com", imgClass: "h-16 w-auto opacity-70 brightness-0 invert sm:h-24" },
+  { name: "FFL Filters", src: "partners/ffl-filters.svg", width: 129, height: 40, href: "ffl-filters" },
+  { name: "FFL Firewall", src: "partners/ffl-firewall.svg", width: 139, height: 40 },
 ];
+
+const isExternalHref = (href: string) => /^https?:\/\//.test(href);
+const partnerLinkProps = (href: string, hidden = false) =>
+  isExternalHref(href)
+    ? { href, target: "_blank", rel: "noopener noreferrer", ...(hidden ? { tabindex: "-1" as const } : {}) }
+    : { href: withBase(href), ...(hidden ? { tabindex: "-1" as const } : {}) };
 ---
 
 <section
@@ -61,7 +74,7 @@ const PARTNERS: {
           PARTNERS.map((p) => (
             <li class="flex items-center">
               {p.href ? (
-                <a href={p.href} target="_blank" rel="noopener noreferrer">
+                <a {...partnerLinkProps(p.href)}>
                   <img
                     src={withBase(p.src)}
                     alt={`${p.name} logo`}
@@ -92,7 +105,7 @@ const PARTNERS: {
           PARTNERS.map((p) => (
             <li class="flex items-center">
               {p.href ? (
-                <a href={p.href} target="_blank" rel="noopener noreferrer" tabindex="-1">
+                <a {...partnerLinkProps(p.href, true)}>
                   <img
                     src={withBase(p.src)}
                     alt=""
@@ -136,6 +149,15 @@ const PARTNERS: {
     gap: 5.5rem;
     padding-right: 5.5rem;
     animation: partner-scroll 70s linear infinite;
+  }
+
+  .partner-track a img {
+    transition: opacity 0.2s ease;
+  }
+
+  .partner-track a:hover img,
+  .partner-track a:focus-visible img {
+    opacity: 1;
   }
 
   @keyframes partner-scroll {
