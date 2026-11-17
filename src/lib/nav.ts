@@ -28,7 +28,17 @@ export const MAIN_NAV: readonly NavItem[] = [
       { href: "ffl-filters", label: "FFL Plugins" },
     ],
   },
-  { href: "firearms-dropshipping", label: "FFL Dropshipping" },
+  // CA-NAV-DROPSHIP-DROPDOWN (Paul 2026-11-17 12:52 PM ET via Chief): FFL
+  // Dropshipping is a dropdown. The first child keeps the existing
+  // firearms-dropshipping href. The second child is FFL Cockpit.
+  {
+    href: "firearms-dropshipping",
+    label: "FFL Dropshipping",
+    children: [
+      { href: "firearms-dropshipping", label: "FFL Dropshipping" },
+      { href: "ffl-cockpit", label: "FFL Cockpit" },
+    ],
+  },
   // CA-NAV-FFL-PLUGINS (Paul 2026-11-17 12:41 PM ET via Chief): FFL Plugins is a
   // dropdown. FFL Filters moves here from a top-level item. FFL Firewall returns
   // inside this dropdown (#194 had removed it). The parent and the FFL Ecommerce
