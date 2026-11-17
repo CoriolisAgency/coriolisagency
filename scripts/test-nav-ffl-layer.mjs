@@ -17,8 +17,11 @@ assert.deepEqual(labels, [
   "Case Studies",
   "Hosting Plans",
   "FFL Accelerator",
+  "FFL Plugins",
   "FFL Dropshipping",
+  "FFL Plugins",
   "FFL Filters",
+  "FFL Firewall",
   "Gun Store POS",
   "WooCommerce for AIM",
   "WooCommerce for Rapid",
@@ -34,8 +37,11 @@ assert.deepEqual(hrefs, [
   "case-studies",
   "ecommerce#plans",
   "https://fflaccelerator.com",
+  "ffl-filters",
   "firearms-dropshipping",
   "ffl-filters",
+  "ffl-filters",
+  "ffl-firewall",
   "gun-store-pos",
   "aim-pos",
   "rapid-gun-systems-pos",
@@ -44,6 +50,29 @@ assert.deepEqual(hrefs, [
   "https://gunsearchengine.com/for-dealers",
   "press",
 ]);
+// CA-NAV-FFL-PLUGINS: FFL Plugins is a top-level dropdown with both plugin pages.
+assert.match(
+  navSrc,
+  /label:\s*"FFL Plugins",\s*children:\s*\[[\s\S]*?href:\s*"ffl-filters",\s*label:\s*"FFL Filters"[\s\S]*?href:\s*"ffl-firewall",\s*label:\s*"FFL Firewall"/,
+  "FFL Plugins dropdown must contain FFL Filters and FFL Firewall",
+);
+// FFL Ecommerce dropdown includes an FFL Plugins item pointing at ffl-filters.
+assert.match(
+  navSrc,
+  /label:\s*"FFL Ecommerce",\s*children:\s*\[[\s\S]*?\{\s*href:\s*"ffl-filters",\s*label:\s*"FFL Plugins"\s*\}/,
+  "FFL Ecommerce dropdown must contain an FFL Plugins item",
+);
+// FFL Filters is no longer a top-level item after FFL Dropshipping.
+assert.match(
+  navSrc,
+  /href:\s*"firearms-dropshipping",\s*label:\s*"FFL Dropshipping"\s*\},[\s\S]*?label:\s*"FFL Plugins"/,
+  "FFL Plugins dropdown sits after FFL Dropshipping",
+);
+assert.doesNotMatch(
+  navSrc,
+  /href:\s*"firearms-dropshipping",\s*label:\s*"FFL Dropshipping"\s*\},\s*\{\s*href:\s*"ffl-filters",\s*label:\s*"FFL Filters"/,
+  "FFL Filters must not stay a top-level item after FFL Dropshipping",
+);
 assert.doesNotMatch(navSrc, /Gun Search Engine/);
 assert.doesNotMatch(navSrc, /LINKS\.gsa/);
 assert.doesNotMatch(navSrc, /_blank/);
