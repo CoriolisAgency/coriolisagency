@@ -185,7 +185,8 @@ const zipRef = /ffl-filters-1\.3\.[0-9]+\.zip|\/downloads\/|ffl-filters-releases
 const navRel = "src/lib/nav.ts";
 const nav = read(navRel);
 assert.match(nav, /\{\s*href:\s*"ffl-filters",\s*label:\s*"FFL Filters"\s*\}/, "header nav item is FFL Filters -> ffl-filters");
-assert.doesNotMatch(nav, /Case Studies/, "header nav has no Case Studies item");
+// CA-FFL-SOVEREIGNTY: Case Studies is a child of the FFL Ecommerce dropdown, not a top-level item.
+assert.match(nav, /label:\s*"FFL Ecommerce",\s*children:\s*\[[\s\S]*?label:\s*"Case Studies"/, "Case Studies must sit in the FFL Ecommerce dropdown");
 {
   const drop = nav.indexOf('{ href: "firearms-dropshipping", label: "FFL Dropshipping" }');
   const ffl = nav.indexOf('{ href: "ffl-filters", label: "FFL Filters" }');
@@ -325,7 +326,6 @@ if (fs.existsSync(dist)) {
     assert.equal(crypto.createHash("sha256").update(distHeroBuf).digest("hex"), f.sha, "dist " + f.rel + " sha256");
   }
   const fflHref = /<a\b[^>]*href="\/ffl-filters\/?"[^>]*>FFL Filters<\/a>/;
-  const caseInChrome = /Case Studies/i;
   const chromeOf = (html) => {
     const header = html.match(/<header\b[\s\S]*?<\/header>/)?.[0] ?? "";
     const drawerAt = html.indexOf('id="nav-drawer"');
@@ -342,12 +342,13 @@ if (fs.existsSync(dist)) {
     return { header, drawer, chrome: header + drawer };
   };
   const assertHeaderNav = (html, rel) => {
-    const { header, drawer, chrome } = chromeOf(html);
+    const { header, drawer } = chromeOf(html);
     assert.ok(header, `${rel} missing <header>`);
     assert.ok(drawer.includes('id="nav-drawer"'), `${rel} missing nav-drawer`);
     assert.match(header, fflHref, `${rel} desktop header missing FFL Filters link`);
     assert.match(drawer, fflHref, `${rel} mobile nav missing FFL Filters link`);
-    assert.doesNotMatch(chrome, caseInChrome, `${rel} header still has a Case Studies item`);
+    assert.match(header, /<a\b[^>]*href="\/case-studies\/?"[^>]*>Case Studies<\/a>/, `${rel} desktop header missing Case Studies in the FFL Ecommerce dropdown`);
+    assert.match(drawer, /<a\b[^>]*href="\/case-studies\/?"[^>]*>Case Studies<\/a>/, `${rel} mobile nav missing Case Studies in the FFL Ecommerce dropdown`);
     const orderIn = (chunk, where) => {
       const drop = chunk.search(/<a\b[^>]*>FFL Dropshipping<\/a>/);
       const ffl = chunk.search(fflHref);

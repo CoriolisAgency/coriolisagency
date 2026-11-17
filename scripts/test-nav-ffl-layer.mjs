@@ -12,6 +12,11 @@ const hrefs = [...navSrc.matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]);
 
 assert.deepEqual(labels, [
   "FFL Ecommerce",
+  "FFL Ecommerce",
+  "FFL Sovereignty",
+  "Case Studies",
+  "Hosting Plans",
+  "FFL Accelerator",
   "FFL Dropshipping",
   "FFL Filters",
   "Gun Store POS",
@@ -24,6 +29,11 @@ assert.deepEqual(labels, [
 ]);
 assert.deepEqual(hrefs, [
   "ecommerce",
+  "ecommerce",
+  "ffl-sovereignty",
+  "case-studies",
+  "ecommerce#plans",
+  "https://fflaccelerator.com",
   "firearms-dropshipping",
   "ffl-filters",
   "gun-store-pos",
