@@ -46,6 +46,14 @@ function active(slug: string) {
     );
   }
   if (slug === "gun-store-pos") return posPaths.has(path);
+  if (slug === "ffl-filters") {
+    return (
+      path === p ||
+      path.startsWith(p + "/") ||
+      path === "/ffl-firewall" ||
+      path.startsWith("/ffl-firewall/")
+    );
+  }
   return path === p || path.startsWith(p + "/");
 }
 
