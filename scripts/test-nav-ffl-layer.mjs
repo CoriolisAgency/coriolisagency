@@ -23,7 +23,6 @@ assert.deepEqual(labels, [
   "FFL Cockpit",
   "FFL Plugins",
   "FFL Filters",
-  "FFL Firewall",
   "Gun Store POS",
   "WooCommerce for AIM",
   "WooCommerce for Rapid",
@@ -45,7 +44,6 @@ assert.deepEqual(hrefs, [
   "ffl-cockpit",
   "ffl-filters",
   "ffl-filters",
-  "ffl-firewall",
   "gun-store-pos",
   "aim-pos",
   "rapid-gun-systems-pos",
@@ -57,8 +55,8 @@ assert.deepEqual(hrefs, [
 // CA-NAV-FFL-PLUGINS: FFL Plugins is a top-level dropdown with both plugin pages.
 assert.match(
   navSrc,
-  /label:\s*"FFL Plugins",\s*children:\s*\[[\s\S]*?href:\s*"ffl-filters",\s*label:\s*"FFL Filters"[\s\S]*?href:\s*"ffl-firewall",\s*label:\s*"FFL Firewall"/,
-  "FFL Plugins dropdown must contain FFL Filters and FFL Firewall",
+  /label:\s*"FFL Plugins",\s*children:\s*\[[\s\S]*?href:\s*"ffl-filters",\s*label:\s*"FFL Filters"/,
+  "FFL Plugins dropdown must contain FFL Filters (FFL Firewall is hidden from the nav, Paul 11:22 AM ET)",
 );
 // FFL Ecommerce dropdown includes an FFL Plugins item pointing at ffl-filters.
 assert.match(
@@ -329,3 +327,5 @@ assert.ok(fs.existsSync(path.join(root, "public/images/ffl-demand-intelligence-s
 }
 
 console.log("test-nav-ffl-layer: ok");
+
+assert.doesNotMatch(navSrc, /ffl-firewall/i, "no FFL Firewall link in the site nav (CA-FFLF-POPUP, Paul 2026-11-18 11:22 AM ET)");

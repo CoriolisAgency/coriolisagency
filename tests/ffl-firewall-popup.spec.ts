@@ -2,6 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 
 const KEY = "ffw_popup_dismissed_until";
 const HREF = "/ffl-firewall";
+const FW = "/ffl-firewall";
 
 async function scrollDeep(page: Page) {
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight * 0.6));
@@ -11,7 +12,7 @@ test.describe("FFL Firewall pop-up, desktop", () => {
   test.use({ viewport: { width: 1280, height: 900 } });
 
   test("does not cover the page on load, opens on 40% scroll as a centered modal", async ({ page }) => {
-    await page.goto("/");
+    await page.goto(FW);
     await expect(page.locator("#ffw-popup-root")).toBeHidden();
     await scrollDeep(page);
     const dlg = page.getByRole("dialog", { name: /Stop selling guns and ammo/ });
@@ -32,7 +33,7 @@ test.describe("FFL Firewall pop-up, desktop", () => {
   });
 
   test("Not now sets the 14-day dismissal key and it stays away after reload", async ({ page }) => {
-    await page.goto("/");
+    await page.goto(FW);
     await scrollDeep(page);
     const dlg = page.getByRole("dialog");
     await dlg.getByRole("button", { name: "Not now" }).click();
@@ -41,7 +42,7 @@ test.describe("FFL Firewall pop-up, desktop", () => {
     const days = (until - Date.now()) / 864e5;
     expect(days).toBeGreaterThan(13.9);
     expect(days).toBeLessThan(14.1);
-    expect(page.url()).not.toContain("ffl-firewall");
+    expect(page.url()).toMatch(/\/ffl-firewall$/); // Not now only dismisses; it stays on the page
     await page.reload();
     await scrollDeep(page);
     await page.waitForTimeout(500);
@@ -49,7 +50,7 @@ test.describe("FFL Firewall pop-up, desktop", () => {
   });
 
   test("Esc closes, focus returns, Tab stays inside", async ({ page }) => {
-    await page.goto("/");
+    await page.goto(FW);
     await page.locator("a").first().focus();
     const before = await page.evaluate(() => document.activeElement?.outerHTML);
     await scrollDeep(page);
@@ -65,7 +66,7 @@ test.describe("FFL Firewall pop-up, desktop", () => {
   });
 
   test("exit intent opens it", async ({ page }) => {
-    await page.goto("/");
+    await page.goto(FW);
     await page.mouse.move(600, 300);
     await page.evaluate(() =>
       document.dispatchEvent(new MouseEvent("mouseout", { clientY: -2, relatedTarget: null, bubbles: true })),
@@ -73,22 +74,30 @@ test.describe("FFL Firewall pop-up, desktop", () => {
     await expect(page.getByRole("dialog")).toBeVisible();
   });
 
-  test("not mounted on /ffl-firewall or its terms", async ({ page }) => {
-    for (const p of ["/ffl-firewall", "/ffl-firewall/", "/ffl-firewall/terms"]) {
+  test("not mounted anywhere except /ffl-firewall", async ({ page }) => {
+    for (const p of ["/", "/ecommerce", "/contact", "/pos", "/ffl-firewall/terms"]) {
       await page.goto(p);
       await expect(page.locator("#ffw-popup-root")).toHaveCount(0);
       await scrollDeep(page);
       await page.waitForTimeout(300);
       await expect(page.locator("#ffw-popup-root")).toHaveCount(0);
+      await expect(page.getByRole("dialog")).toHaveCount(0);
     }
   });
 
-  test("CTA click leads to /ffl-firewall with no redirect", async ({ page }) => {
-    await page.goto("/");
+  test("CTA on /ffl-firewall closes the pop-up instead of navigating", async ({ page }) => {
+    await page.goto(FW);
     await scrollDeep(page);
-    await page.getByRole("dialog").getByRole("link", { name: "See FFL Firewall" }).click();
+    const dlg = page.getByRole("dialog", { name: /Stop selling guns and ammo/ });
+    await dlg.getByRole("link", { name: "See FFL Firewall" }).click();
+    await expect(page.locator("#ffw-popup-root")).toBeHidden();
     await expect(page).toHaveURL(/\/ffl-firewall$/);
-    expect((await page.request.get(HREF, { maxRedirects: 0 })).status()).toBe(200);
+    expect(await page.evaluate((k) => Number(localStorage.getItem(k)) > Date.now(), KEY)).toBe(true);
+  });
+
+  test("the nav has no FFL Firewall link, desktop or drawer", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator('header a[href*="ffl-firewall"], #nav-drawer a[href*="ffl-firewall"]')).toHaveCount(0);
   });
 });
 
@@ -96,7 +105,7 @@ test.describe("FFL Firewall pop-up, phone", () => {
   test.use({ viewport: { width: 390, height: 844 }, hasTouch: true });
 
   test("bottom sheet is about 40% of the screen and swipes away", async ({ page }) => {
-    await page.goto("/");
+    await page.goto(FW);
     await scrollDeep(page);
     const sheet = page.getByRole("dialog", { name: /Stop selling guns and ammo/ });
     await expect(sheet).toBeVisible();
@@ -128,7 +137,7 @@ test.describe("FFL Firewall pop-up, phone", () => {
 
   test("short phone screens drop the hero to 96 px", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 640 });
-    await page.goto("/");
+    await page.goto(FW);
     await scrollDeep(page);
     await expect(page.getByRole("dialog")).toBeVisible();
     const h = await page.locator("#ffw-sheet .ffw-hero").evaluate((e) => e.getBoundingClientRect().height);

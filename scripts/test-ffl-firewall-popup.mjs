@@ -36,31 +36,36 @@ for (const f of ["src/lib/ffl-firewall-popup.ts", "src/components/FflFirewallPop
   assert.doesNotMatch(read(f), /gtag|dataLayer|fetch\(|sendBeacon|XMLHttpRequest|\banalytics\b/i, `${f} has no tracking`);
 }
 
-// Suppression paths
-for (const p of ["/ffl-firewall", "/ffl-firewall/", "/ffl-firewall/terms", "/ffl-firewall/terms/", "/contact"]) assert.equal(lib.ffwPopupDenied(p), true, p);
-for (const p of ["/", "/ecommerce", "/pos", "/ffl-firewalls-x", "/blog/ffl-firewall"]) assert.equal(lib.ffwPopupDenied(p), false, p);
+// Page rule: ONLY /ffl-firewall (and its slash form)
+for (const p of ["/ffl-firewall", "/ffl-firewall/"]) assert.equal(lib.ffwPopupAllowed(p), true, p);
+for (const p of ["/", "/ecommerce", "/pos", "/contact", "/ffl-firewall/terms", "/ffl-firewall/terms/", "/ffl-firewalls-x", "/blog/ffl-firewall"]) assert.equal(lib.ffwPopupAllowed(p), false, p);
 
 // Script uses the key, and the CTA link is the locked target
 const js = read("public/popup/ffl-firewall-popup.js");
 assert.match(js, /cfg\.dismissKey/);
 assert.match(js, /setItem\(cfg\.dismissKey/);
+assert.match(js, /data-ffw-cta\]"\)\) \{ e\.preventDefault\(\); dismiss\(\)/, "CTA closes the pop-up");
 assert.match(read("src/components/FflFirewallPopup.astro"), /withBase\("ffl-firewall"\)/);
 
 // No stacking: rendered only when the claim pop-up is not mounted
 const layout = read("src/layouts/BaseLayout.astro");
 assert.match(layout, /emailCapture && !POPUPS_ENABLED \? <FflFirewallPopup \/> : null/);
 
-// Built output
+// Built output: mounted on /ffl-firewall only, on no other built page
 const dist = path.join(root, "dist");
-if (fs.existsSync(path.join(dist, "index.html"))) {
-  const home = fs.readFileSync(path.join(dist, "index.html"), "utf8");
-  assert.match(home, /id="ffw-popup-root"/);
-  assert.match(home, /href="\/ffl-firewall"/);
-  assert.match(home, /popup\/ffl-firewall-popup\.js/);
+if (fs.existsSync(path.join(dist, "ffl-firewall/index.html"))) {
+  const fw = fs.readFileSync(path.join(dist, "ffl-firewall/index.html"), "utf8");
+  assert.match(fw, /id="ffw-popup-root"/);
+  assert.match(fw, /class="ffw-go" href="\/ffl-firewall"/);
+  assert.match(fw, /popup\/ffl-firewall-popup\.js/);
   assert.ok(fs.existsSync(path.join(dist, "brand/ffl-firewall/popup/ffl-firewall-us-map-hero.webp")));
-  for (const rel of ["ffl-firewall/index.html", "ffl-firewall/terms/index.html", "contact/index.html"]) {
-    const f = path.join(dist, rel);
-    if (fs.existsSync(f)) assert.doesNotMatch(fs.readFileSync(f, "utf8"), /ffw-popup-root/, `${rel} has no pop-up`);
+  const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]));
+  for (const f of walk(dist).filter((x) => x.endsWith(".html"))) {
+    const rel = path.relative(dist, f).replace(/\\/g, "/");
+    if (rel === "ffl-firewall/index.html") continue;
+    assert.doesNotMatch(fs.readFileSync(f, "utf8"), /ffw-popup-root/, `${rel} must not have the pop-up`);
   }
 }
+// The nav carries no FFL Firewall link
+assert.doesNotMatch(read("src/lib/nav.ts"), /ffl-firewall/i, "no FFL Firewall link in the nav");
 console.log("test-ffl-firewall-popup: ok");

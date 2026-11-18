@@ -9,9 +9,9 @@
   try { cfg = JSON.parse(cfgEl.textContent); } catch (e) { return; }
 
   var path = (W.location.pathname.replace(/\/+$/, "") || "/").toLowerCase();
-  for (var i = 0; i < cfg.deny.length; i++) {
-    if (path === cfg.deny[i] || path.indexOf(cfg.deny[i] + "/") === 0) return;
-  }
+  var allowed = false;
+  for (var i = 0; i < cfg.allow.length; i++) if (path === cfg.allow[i]) allowed = true;
+  if (!allowed) return;
 
   var DAY = 864e5, opened = false, lastFocus = null, mode = "modal", dlg = null;
 
@@ -124,7 +124,8 @@
     var t = e.target;
     if (!t.closest) return;
     if (t.closest("[data-ffw-close]")) { e.preventDefault(); dismiss(); return; }
-    if (t.closest("[data-ffw-cta]")) { if (ls) { try { ls.setItem(cfg.clickedKey, String(Date.now())); } catch (er) {} } return; }
+    // Already on the FFL Firewall page: the button just closes the pop-up (same as a dismissal).
+    if (t.closest("[data-ffw-cta]")) { e.preventDefault(); dismiss(); return; }
     if (t.closest("[data-ffw-scrim]")) dismiss();
   });
 
