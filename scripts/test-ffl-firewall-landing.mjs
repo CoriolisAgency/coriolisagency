@@ -46,7 +46,7 @@ const buys = [...page.matchAll(/data-buy="(hero|footer)"/g)].map((m) => m[1]);
 assert.deepEqual(buys, ["hero", "footer"], "hero and footer buy buttons");
 assert.doesNotMatch(page, /data-file=/);
 assert.deepEqual([...page.matchAll(/data-download="(hero|footer)"/g)].map((m) => m[1]), ["hero", "footer"], "hero and footer download buttons open the gate");
-assert.match(page, /const download = withBase\("downloads\/ffl-firewall-0\.1\.0\.zip"\);/, "zip slot (PENDING-ZIP)");
+assert.match(page, /const download = withBase\("downloads\/ffl-firewall-0\.1\.1\.zip"\);/, "zip slot (PENDING-ZIP)");
 assert.doesNotMatch(page, /github\.com\/CoriolisAgency\/ffl-firewall-releases/, "no GitHub release link");
 assert.doesNotMatch(page, /href="[^"]*ffl-filters"/, "no body link to the FFL Filters page (CA-NAV-FFLF)");
 assert.doesNotMatch(page, /free/i, "no FFL Firewall string on the page may contain free (Paul 10:39 AM ET)");
