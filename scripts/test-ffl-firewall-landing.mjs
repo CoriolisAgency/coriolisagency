@@ -45,8 +45,16 @@ assert.match(page, /const buyHref = "https:\/\/checkout\.coriolisagency\.com\/b\
 const buys = [...page.matchAll(/data-buy="(hero|footer)"/g)].map((m) => m[1]);
 assert.deepEqual(buys, ["hero", "footer"], "hero and footer buy buttons");
 assert.doesNotMatch(page, /data-file=/);
-assert.doesNotMatch(page, /data-download/);
-assert.doesNotMatch(page, /\.zip/);
+assert.deepEqual([...page.matchAll(/data-download="(hero|footer)"/g)].map((m) => m[1]), ["hero", "footer"], "hero and footer download buttons open the gate");
+assert.match(page, /const download = withBase\("downloads\/ffl-firewall-0\.1\.0\.zip"\);/, "zip slot (PENDING-ZIP)");
+assert.doesNotMatch(page, /github\.com\/CoriolisAgency\/ffl-firewall-releases/, "no GitHub release link");
+assert.doesNotMatch(page, /href="[^"]*ffl-filters"/, "no body link to the FFL Filters page (CA-NAV-FFLF)");
+assert.doesNotMatch(page, /free/i, "no FFL Firewall string on the page may contain free (Paul 10:39 AM ET)");
+assert.match(page, /import FflFiltersDownloadGate from "\.\.\/\.\.\/components\/FflFiltersDownloadGate\.astro";/);
+assert.match(page, /<FflFiltersDownloadGate[\s\S]*?href=\{download\}[\s\S]*?buyHref=\{buyHref\}[\s\S]*?\/>/);
+for (const s of ["Download FFL Firewall", "Download", "That email doesn't look valid.", "FFL Firewall download", "Buy a license", "We couldn't send that. Try again, or write to support@coriolisagency.com."]) assert.ok(page.includes(s), `gate string missing: ${s}`);
+assert.ok(page.includes("Anyone can download and install FFL Firewall, with no purchase needed to download or install. Enter your company name, website URL, and email, and your download starts."));
+assert.ok(page.includes("Your download has started, and you can install FFL Firewall without buying anything. It starts checking carts once a license key is in, and a license costs $79 a month for unlimited transactions. Buy a license whenever you're ready, and we'll email your key. If you need help, "));
 assert.doesNotMatch(page, /FflFirewallLeadGate/);
 assert.doesNotMatch(page, /data-early-access/);
 assert.doesNotMatch(page, /#early-access/);
@@ -73,12 +81,13 @@ assert.ok(page.includes("What does FFL Firewall check?"));
 assert.ok(page.includes("How do I buy it?"));
 assert.ok(page.includes("Pay through Stripe, get your key by email, paste it in"));
 assert.ok(page.includes("Get FFL Firewall for $79 a month"));
-assert.ok(page.includes("One flat price covers every cart: $79 a month for unlimited transactions, billed monthly through Stripe Checkout. There's no free trial, and you can cancel anytime."));
-assert.ok(page.includes("$79 a month, however many transactions your store runs. No free trial, and you can cancel anytime from your billing portal."));
+assert.ok(page.includes("PENDING-BRANDY-HERO-PRICE-LINE"));
+assert.ok(page.includes("PENDING-BRANDY-FOOTER-PRICE-LINE"));
 assert.ok(page.includes("A WooCommerce store"));
 assert.ok(page.includes("Products that have a UPC"));
 assert.ok(page.includes("A checkout where the shopper enters a zip code"));
-assert.ok(page.includes("Click Buy FFL Firewall on this page and pay through Stripe Checkout."));
+// PENDING-BRANDY-FAQ-HOW-ANSWER replaces the old answer until Brandy revises it.
+assert.ok(page.includes("PENDING-BRANDY-FAQ-HOW-ANSWER"));
 assert.ok(page.includes("You're still responsible for what you ship, and this is not legal advice."));
 assert.doesNotMatch(page, /California|Colorado|Illinois|Massachusetts|New York|Washington,?\s*D\.?C/i);
 

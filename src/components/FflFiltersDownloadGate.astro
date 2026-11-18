@@ -6,15 +6,44 @@
  */
 interface Props {
   href: string;
+  // Every string below defaults to the FFL Filters wording, so the FFL
+  // Filters page renders the same text it always has.
+  title?: string;
+  description?: string;
+  submitLabel?: string;
+  emailInvalid?: string;
+  leadMessage?: string;
+  thanksLead?: string;
+  // Optional: when set, a failed lead post shows this message and keeps the
+  // form open (no download). FFL Filters leaves it unset and keeps its behaviour.
+  failureMessage?: string;
+  // Optional: a buy link shown under the thank-you text.
+  buyHref?: string;
+  buyLabel?: string;
 }
 
-const { href } = Astro.props;
+const {
+  href,
+  title = "Before you download",
+  description = "Enter your company name, website URL, and email.",
+  submitLabel = "Download",
+  emailInvalid = "That email does not look valid.",
+  leadMessage = "FFL Filters download",
+  thanksLead = "Your download has started. If you need help, ",
+  failureMessage = "",
+  buyHref = "",
+  buyLabel = "",
+} = Astro.props;
 ---
 
 <div
   hidden
   data-fflf-dl-gate
   data-file={href}
+  data-submit-label={submitLabel}
+  data-email-invalid={emailInvalid}
+  data-lead-message={leadMessage}
+  data-failure={failureMessage}
   data-action="/api/lead"
   data-min-fill-ms="3000"
 >
@@ -31,8 +60,8 @@ const { href } = Astro.props;
       <span aria-hidden="true">&times;</span>
     </button>
     <div data-fflf-dl-form-view>
-      <h2 id="fflf-dl-title" class="fflf-dl-title">Before you download</h2>
-      <p id="fflf-dl-desc" class="fflf-dl-desc">Enter your company name, website URL, and email.</p>
+      <h2 id="fflf-dl-title" class="fflf-dl-title">{title}</h2>
+      <p id="fflf-dl-desc" class="fflf-dl-desc">{description}</p>
       <form data-fflf-dl-form class="fflf-dl-form" novalidate>
         <label class="fflf-dl-field">
           Company Name
@@ -51,15 +80,20 @@ const { href } = Astro.props;
           <input name="company_url" tabindex="-1" autocomplete="off" />
         </label>
         <p class="fflf-dl-error" data-fflf-dl-error role="alert"></p>
-        <button type="submit" class="fflf-dl-submit" data-fflf-dl-submit>Download</button>
+        <button type="submit" class="fflf-dl-submit" data-fflf-dl-submit>{submitLabel}</button>
       </form>
     </div>
     <div data-fflf-dl-thanks hidden>
       <h2 id="fflf-dl-thanks-title" class="fflf-dl-title">Thank you</h2>
       <p class="fflf-dl-desc">
-        Your download has started. If you need help, write to{' '}
+        {thanksLead}write to{' '}
         <a href="mailto:support@coriolisagency.com" class="fflf-dl-mail">support@coriolisagency.com</a>.
       </p>
+      {buyHref && buyLabel && (
+        <p class="fflf-dl-desc">
+          <a href={buyHref} class="fflf-dl-mail" data-fflf-dl-buy>{buyLabel}</a>
+        </p>
+      )}
     </div>
   </div>
 </div>
@@ -84,6 +118,10 @@ const { href } = Astro.props;
   var action = gate.getAttribute("data-action") || "/api/lead";
   var minFillMs = Number(gate.getAttribute("data-min-fill-ms") || "3000");
   if (!Number.isFinite(minFillMs) || minFillMs < 0) minFillMs = 3000;
+  var submitLabel = gate.getAttribute("data-submit-label") || "Download";
+  var emailInvalid = gate.getAttribute("data-email-invalid") || "That email does not look valid.";
+  var leadMessage = gate.getAttribute("data-lead-message") || "FFL Filters download";
+  var failureMsg = gate.getAttribute("data-failure") || "";
 
   var openedAt = 0;
   var lastTrigger = null;
@@ -165,7 +203,7 @@ const { href } = Astro.props;
     setError("");
     if (submitBtn) {
       submitBtn.disabled = false;
-      submitBtn.textContent = "Download";
+      submitBtn.textContent = submitLabel;
     }
   }
 
@@ -262,7 +300,7 @@ const { href } = Astro.props;
   function validate(company, website, email) {
     if (!company) return "Company name is required.";
     if (!email) return "Email is required.";
-    if (!EMAIL_RE.test(email)) return "That email does not look valid.";
+    if (!EMAIL_RE.test(email)) return emailInvalid;
     if (!website) return "URL is required.";
     return "";
   }
@@ -303,7 +341,7 @@ const { href } = Astro.props;
       phone: "",
       website: website,
       pillar: "Ecommerce",
-      message: "FFL Filters download",
+      message: leadMessage,
       company_url: String(data.get("company_url") || ""),
       site: "coriolisagency",
       page: location.pathname,
@@ -321,6 +359,15 @@ const { href } = Astro.props;
       if (settled) return;
       settled = true;
       sending = false;
+      if (!ok && failureMsg) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitLabel;
+        }
+        setError(failureMsg);
+        console.error("download gate: lead failed", status || 0, errName || "error");
+        return;
+      }
       startDownload();
       if (isOpen()) showThanks();
       if (!ok) {

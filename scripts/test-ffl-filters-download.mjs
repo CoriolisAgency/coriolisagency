@@ -181,7 +181,8 @@ const allowed = new Set([
   "public/robots.txt",
 ]);
 const pageRef = /\/ffl-filters(?!\/connect|-connect)(?=["'`)\s/?#]|$)/m;
-const zipRef = /ffl-filters-1\.3\.[0-9]+\.zip|\/downloads\/|ffl-filters-releases/;
+// FFL Firewall zips also live under /downloads/ (Paul 10:28 AM ET, FFL Filters pattern), so only other /downloads/ paths count.
+const zipRef = /ffl-filters-1\.3\.[0-9]+\.zip|\/downloads\/(?!ffl-firewall-)|ffl-filters-releases/;
 const navRel = "src/lib/nav.ts";
 const nav = read(navRel);
 assert.match(nav, /\{\s*href:\s*"ffl-filters",\s*label:\s*"FFL Filters"\s*\}/, "header nav still links FFL Filters to ffl-filters");

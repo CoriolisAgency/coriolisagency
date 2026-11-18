@@ -23,7 +23,7 @@ test.describe("FFL Firewall buy page", () => {
     expect(robots).toBe("noindex, nofollow");
     await expect(page).toHaveTitle("FFL Firewall: a WooCommerce checkout plugin for FFL dealers | Coriolis");
     await expect(page.locator("[data-fflfw-ea-gate]")).toHaveCount(0);
-    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect(page.getByRole("dialog")).toHaveCount(0); // gate is hidden until a download button is clicked
     await expect(heroBuy(page)).toBeVisible();
     await expect(heroBuy(page)).toHaveText(BUY_HERO);
     await expect(heroBuy(page)).toHaveAttribute("href", BUY_HREF);
@@ -31,6 +31,17 @@ test.describe("FFL Firewall buy page", () => {
     await expect(footerBuy(page)).toHaveText(BUY_FOOTER);
     await expect(footerBuy(page)).toHaveAttribute("href", BUY_HREF);
     await expect(page.getByRole("link", { name: "Read the FFL Firewall terms" }).first()).toHaveAttribute("href", TERMS_PATH);
+  });
+
+  test("download buttons open the lead gate, and the gate carries the Buy a license link", async ({ page }) => {
+    await page.goto(PAGE_PATH);
+    await page.locator('[data-download="hero"]').click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByRole("heading", { name: "Download FFL Firewall" })).toBeVisible();
+    await expect(dialog.getByRole("button", { name: "Download", exact: true })).toBeVisible();
+    await expect(dialog).not.toContainText(/free/i);
+    await expect(page.locator("[data-fflf-dl-buy]")).toHaveAttribute("href", BUY_HREF);
   });
 
   test("terms page is published and is not noindex", async ({ page }) => {
