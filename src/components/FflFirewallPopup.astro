@@ -13,15 +13,15 @@ import {
   FFW_POPUP_CLICKED_KEY,
   FFW_POPUP_SESSION_KEY,
   FFW_POPUP_DISMISS_DAYS,
-  FFW_POPUP_DENY_PREFIXES,
-  ffwPopupDenied,
+  FFW_POPUP_ALLOW_PATHS,
+  ffwPopupAllowed,
 } from "../lib/ffl-firewall-popup";
 import { withBase } from "../lib/base";
 
 const base = import.meta.env.BASE_URL || "/";
 const raw = Astro.url.pathname;
 const path = raw.startsWith(base) ? raw.slice(base.length - 1) : raw;
-const show = !ffwPopupDenied(path);
+const show = ffwPopupAllowed(path);
 
 const href = withBase("ffl-firewall");
 const heroSrc = withBase("brand/ffl-firewall/popup/ffl-firewall-us-map-hero.webp");
@@ -32,7 +32,7 @@ const cfg = JSON.stringify({
   clickedKey: FFW_POPUP_CLICKED_KEY,
   sessionKey: FFW_POPUP_SESSION_KEY,
   days: FFW_POPUP_DISMISS_DAYS,
-  deny: FFW_POPUP_DENY_PREFIXES,
+  allow: FFW_POPUP_ALLOW_PATHS,
 }).replace(/</g, "\\u003c");
 ---
 

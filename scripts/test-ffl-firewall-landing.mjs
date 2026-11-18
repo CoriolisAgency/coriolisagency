@@ -68,7 +68,7 @@ assert.match(read("src/layouts/BaseLayout.astro"), /noindex && <meta name="robot
 for (const section of ["hero", "built-around", "fits", "settings", "faq", "install", "requirements", "download"]) {
   assert.match(page, new RegExp(`data-section="${section}"`), `missing data-section=${section}`);
 }
-assert.match(page, /<h1[^>]*>A WooCommerce plugin that checks the cart at checkout for FFL dealers<\/h1>/);
+assert.match(page, /<h1[^>]*>Stop selling guns and ammo into states and ZIP codes where they can't ship<\/h1>/);
 assert.ok(page.includes("At checkout, FFL Firewall checks each product in the cart by UPC against the zip code the shopper entered. If an item is prohibited for that zip, it's removed from the cart and the shopper sees a message explaining why."));
 assert.ok(page.includes("For FFL dealers running WooCommerce."));
 assert.ok(page.includes("It checks each product in the cart against the shopper's zip"));
@@ -209,17 +209,16 @@ assert.match(read("public/robots.txt"), /^Allow: \/ffl-firewall\/terms$/m);
 // 5. Nav: FFL Firewall sits in the FFL Plugins dropdown (CA-NAV-FFL-PLUGINS).
 const navRel = "src/lib/nav.ts";
 const nav = read(navRel);
-assert.match(nav, /\{\s*href:\s*"ffl-firewall",\s*label:\s*"FFL Firewall"\s*\}/, "header nav missing FFL Firewall in the FFL Plugins dropdown");
-assert.match(nav, /label:\s*"FFL Plugins",\s*children:\s*\[[\s\S]*?href:\s*"ffl-filters",\s*label:\s*"FFL Filters"[\s\S]*?href:\s*"ffl-firewall",\s*label:\s*"FFL Firewall"/, "FFL Plugins dropdown must contain FFL Filters and FFL Firewall");
+assert.doesNotMatch(nav, /ffl-firewall/i, "FFL Firewall is hidden from the header nav (Paul 11:22 AM ET)");
+assert.match(nav, /label:\s*"FFL Plugins",\s*children:\s*\[[\s\S]*?href:\s*"ffl-filters",\s*label:\s*"FFL Filters"/, "FFL Plugins dropdown must contain FFL Filters");
 {
   assert.match(nav, /label:\s*"FFL Dropshipping",\s*children:\s*\[[\s\S]*?href:\s*"firearms-dropshipping",\s*label:\s*"FFL Dropshipping"[\s\S]*?href:\s*"ffl-cockpit",\s*label:\s*"FFL Cockpit"/, "FFL Dropshipping dropdown keeps firearms-dropshipping and includes FFL Cockpit");
   const drop = nav.indexOf('{ href: "firearms-dropshipping", label: "FFL Dropshipping" }');
   const plugins = nav.indexOf('label: "FFL Plugins"', drop);
   const ffl = nav.indexOf('{ href: "ffl-filters", label: "FFL Filters" }');
-  const firewall = nav.indexOf('{ href: "ffl-firewall", label: "FFL Firewall" }');
   const pos = nav.indexOf('href: "gun-store-pos"');
-  assert.ok(drop !== -1 && plugins !== -1 && ffl !== -1 && firewall !== -1 && pos !== -1, "header nav missing Dropshipping, FFL Plugins, FFL Filters, FFL Firewall, or POS");
-  assert.ok(drop < plugins && plugins < ffl && ffl < firewall && firewall < pos, "nav order should be FFL Dropshipping, FFL Plugins dropdown, Gun Store POS");
+  assert.ok(drop !== -1 && plugins !== -1 && ffl !== -1 && pos !== -1, "header nav missing Dropshipping, FFL Plugins, FFL Filters, or POS");
+  assert.ok(drop < plugins && plugins < ffl && ffl < pos, "nav order should be FFL Dropshipping, FFL Plugins dropdown, Gun Store POS");
 }
 
 // 6. Sitemap + lastmod + robots + vercel + IndexNow.
@@ -319,8 +318,8 @@ if (fs.existsSync(dist)) {
     const { header, drawer } = chromeOf(built);
     assert.ok(header, `${rel} missing <header>`);
     assert.ok(drawer.includes('id="nav-drawer"'), `${rel} missing nav-drawer`);
-    assert.match(header, fwHref, `${rel} desktop header missing FFL Firewall link`);
-    assert.match(drawer, fwHref, `${rel} mobile nav missing FFL Firewall link`);
+    assert.doesNotMatch(header, fwHref, `${rel} desktop header must not link FFL Firewall`);
+    assert.doesNotMatch(drawer, fwHref, `${rel} mobile nav must not link FFL Firewall`);
     assert.match(header, pluginsHref, `${rel} desktop header missing FFL Plugins link`);
     assert.match(drawer, pluginsHref, `${rel} mobile nav missing FFL Plugins link`);
     const orderIn = (chunk, where) => {
@@ -329,10 +328,9 @@ if (fs.existsSync(dist)) {
       const cockpit = after.search(cockpitHref);
       const plugins = after.search(pluginsHref);
       const filters = after.search(fflHref);
-      const fw = after.search(fwHref);
       const pos = chunk.search(/<a\b[^>]*>Gun Store POS<\/a>/);
-      assert.ok(drop !== -1 && cockpit !== -1 && plugins !== -1 && filters !== -1 && fw !== -1 && pos !== -1, `${rel} ${where} missing Dropshipping, FFL Cockpit, FFL Plugins, FFL Filters, FFL Firewall, or POS`);
-      assert.ok(cockpit < plugins && plugins < filters && filters < fw && drop + fw < pos, `${rel} ${where} FFL Plugins dropdown is not between FFL Dropshipping and Gun Store POS`);
+      assert.ok(drop !== -1 && cockpit !== -1 && plugins !== -1 && filters !== -1 && pos !== -1, `${rel} ${where} missing Dropshipping, FFL Cockpit, FFL Plugins, FFL Filters, or POS`);
+      assert.ok(cockpit < plugins && plugins < filters && drop + filters < pos, `${rel} ${where} FFL Plugins dropdown is not between FFL Dropshipping and Gun Store POS`);
     };
     orderIn(header, "desktop header");
     orderIn(drawer, "mobile nav");

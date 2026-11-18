@@ -22,10 +22,13 @@ export const FFW_POPUP_CLICKED_KEY = "ffw_popup_clicked";
 export const FFW_POPUP_SESSION_KEY = "ffw_popup_session";
 export const FFW_POPUP_DISMISS_DAYS = 14;
 
-/** Pages that never show it: the FFL Firewall page and everything under it, plus /contact. */
-export const FFW_POPUP_DENY_PREFIXES = ["/ffl-firewall", "/contact"] as const;
+/**
+ * Paul 2026-11-18 11:22 AM ET: the pop-up shows ONLY on the FFL Firewall page (and its
+ * trailing-slash form) while he tests it. Not on the terms page, not anywhere else.
+ */
+export const FFW_POPUP_ALLOW_PATHS = ["/ffl-firewall"] as const;
 
-export function ffwPopupDenied(pathname: string): boolean {
+export function ffwPopupAllowed(pathname: string): boolean {
   const p = (pathname.replace(/\/+$/, "") || "/").toLowerCase();
-  return FFW_POPUP_DENY_PREFIXES.some((d) => p === d || p.startsWith(d + "/"));
+  return (FFW_POPUP_ALLOW_PATHS as readonly string[]).includes(p);
 }
