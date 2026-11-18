@@ -14,18 +14,18 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (rel) => fs.readFileSync(path.join(root, rel), "utf8");
 const lib = await import("../src/lib/ffl-firewall-popup.ts");
 
-assert.equal(lib.FFW_POPUP_HREF, "/ffl-firewall/");
+assert.equal(lib.FFW_POPUP_HREF, "/ffl-firewall");
 assert.equal(lib.FFW_POPUP_DISMISS_KEY, "ffw_popup_dismissed_until");
 assert.equal(lib.FFW_POPUP_DISMISS_DAYS, 14);
 
 const expected = {
   eyebrow: "New from Coriolis",
-  title: "FFL Firewall checks the cart at checkout for FFL dealers on WooCommerce",
+  title: "Stop selling guns and ammo into states and ZIP codes where they can't ship",
   cta: "See FFL Firewall",
   later: "Not now",
   close: "Close",
   fine: "For FFL dealers running WooCommerce.",
-  sheetTitle: "FFL Firewall for WooCommerce",
+  body: "FFL Firewall checks every item in a WooCommerce cart by UPC against the shopper's ZIP code, and takes out anything restricted there before the order goes through.",
 };
 for (const [k, v] of Object.entries(expected)) assert.equal(lib.FFW_POPUP_COPY[k], v, `copy ${k}`);
 
@@ -44,7 +44,7 @@ for (const p of ["/", "/ecommerce", "/pos", "/ffl-firewalls-x", "/blog/ffl-firew
 const js = read("public/popup/ffl-firewall-popup.js");
 assert.match(js, /cfg\.dismissKey/);
 assert.match(js, /setItem\(cfg\.dismissKey/);
-assert.match(read("src/components/FflFirewallPopup.astro"), /withBase\("ffl-firewall\/"\)/);
+assert.match(read("src/components/FflFirewallPopup.astro"), /withBase\("ffl-firewall"\)/);
 
 // No stacking: rendered only when the claim pop-up is not mounted
 const layout = read("src/layouts/BaseLayout.astro");
@@ -55,7 +55,7 @@ const dist = path.join(root, "dist");
 if (fs.existsSync(path.join(dist, "index.html"))) {
   const home = fs.readFileSync(path.join(dist, "index.html"), "utf8");
   assert.match(home, /id="ffw-popup-root"/);
-  assert.match(home, /href="\/ffl-firewall\/"/);
+  assert.match(home, /href="\/ffl-firewall"/);
   assert.match(home, /popup\/ffl-firewall-popup\.js/);
   assert.ok(fs.existsSync(path.join(dist, "brand/ffl-firewall/popup/ffl-firewall-us-map-hero.webp")));
   for (const rel of ["ffl-firewall/index.html", "ffl-firewall/terms/index.html", "contact/index.html"]) {

@@ -6,20 +6,17 @@
  */
 export const FFW_POPUP_COPY = {
   eyebrow: "New from Coriolis",
-  title: "FFL Firewall checks the cart at checkout for FFL dealers on WooCommerce",
-  body: "It checks each item in the cart by UPC against the zip code the shopper entered, and takes out anything that can't ship there, with a message telling the shopper why.",
+  title: "Stop selling guns and ammo into states and ZIP codes where they can't ship",
+  body: "FFL Firewall checks every item in a WooCommerce cart by UPC against the shopper's ZIP code, and takes out anything restricted there before the order goes through.",
   price:
     "FFL Firewall is a paid plugin with a built-in demo. No purchase is needed to download it, and a license turns the checks on for $79 a month with unlimited transactions.",
   cta: "See FFL Firewall",
   later: "Not now",
   close: "Close",
   fine: "For FFL dealers running WooCommerce.",
-  sheetTitle: "FFL Firewall for WooCommerce",
-  sheetBody:
-    "A paid plugin from Coriolis that checks each cart item by UPC and zip at checkout. Download it and try the built-in demo, then add a license at $79 a month for unlimited transactions.",
 } as const;
 
-export const FFW_POPUP_HREF = "/ffl-firewall/";
+export const FFW_POPUP_HREF = "/ffl-firewall";
 export const FFW_POPUP_DISMISS_KEY = "ffw_popup_dismissed_until";
 export const FFW_POPUP_CLICKED_KEY = "ffw_popup_clicked";
 export const FFW_POPUP_SESSION_KEY = "ffw_popup_session";
