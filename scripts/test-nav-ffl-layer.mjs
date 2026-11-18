@@ -94,7 +94,7 @@ assert.doesNotMatch(chrome, /const nav = \[/);
 const bannedCopy =
   /Gun Runner|Warlord|\bPOS\b|Betsy|\bGSA\b|GunSearchAgent/;
 
-function assertLandingPage(rel, { h1, campaign, notice, pro = true, gseAllowed = /\/dealers\/register/ }) {
+function assertLandingPage(rel, { h1, campaign, notice, pro = true, gseAllowed = /^https?:\/\/(?:www\.)?gunsearchengine\.com\/(?:dealers\/register|pro)?\?/ }) {
   const src = read(rel);
   assert.match(src, new RegExp(h1.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(src, /utm_source=coriolisagency/);
@@ -137,7 +137,7 @@ assertLandingPage("src/pages/ffl-analytics.astro", {
 assertLandingPage("src/pages/ffl-search-console.astro", {
   h1: "FFL Search Console: see how Google finds your gun store",
   pro: false,
-  gseAllowed: /\/dealers\/register|\/dealers\/ffl-search-console$|\/pro$/,
+  gseAllowed: /^https?:\/\/(?:www\.)?gunsearchengine\.com\/(?:dealers\/register|dealers\/ffl-search-console|pro)?\?/,
   campaign: "ffl-search-console",
   notice:
     "Not affiliated with Google. Google Search Console is a trademark of Google LLC.",
@@ -147,7 +147,7 @@ const consoleSrc = read("src/pages/ffl-search-console.astro");
 assert.doesNotMatch(consoleSrc, /\b(is live|now available|now live)\b/i);
 assert.doesNotMatch(consoleSrc, /data-pro-plate|Coming soon|All future Pro features|being built|More Pro features are on the way|sign up by/);
 assert.ok(consoleSrc.includes("GSE Pro is optional. Coriolis quotes Pro at $99 a month. [GSE Pro](https://www.gunsearchengine.com/pro?utm_source=coriolisagency&utm_medium=referral&utm_campaign=ffl-search-console&utm_content=gse-pro), read November 10, 2026, says: \\\"Activate by Dec 31, 2026 and get Pro free through Dec 31, 2027.\\\""), "ffl-search-console missing current Pro sentence");
-assert.match(consoleSrc, /withBase\("ffl-seo"\)/);
+assert.match(consoleSrc, /\[SEO tools for gun stores\]\(\/ffl-seo\)/);
 
 // On-site FFL pages open in the same tab (Paul, 1:38 PM ET).
 assert.doesNotMatch(navSrc, /newTab/);
@@ -221,31 +221,16 @@ assert.match(home, /const cardLinkClass = `\$\{linkClass\} !text-sky-400 relativ
 // Ad-safe Demand Intelligence sample is hosted on this site.
 assert.ok(fs.existsSync(path.join(root, "public/images/ffl-demand-intelligence-sample-august-2026.png")));
 
-// Pro plate: black and gold card with Paul's four features. "Coming soon" and "All future Pro features" are cut (Chief 9:24 PM ET).
-const PRO_FEATURES = [
-  "Monthly Demand Intelligence reports",
-  "Sightline embed with custom styling",
-  "(the Free plan gets the standard Sightline embed)",
-  "OtterText integration for Sightline alerts",
-  "(uses your own OtterText account)",
-  "Pro (Verified) status on GunSearchEngine.com",
-];
-for (const rel of ["src/pages/ffl-analytics.astro"]) {
-  const src = read(rel);
+// Pro plate: black and gold card; its copy is now markdown ("Pro adds ...", sample link), with no cut phrases.
+{
+  const src = read("src/pages/ffl-analytics.astro");
   const start = src.indexOf("data-pro-plate");
-  assert.ok(start !== -1, `${rel} missing Pro plate`);
-  const plate = src.slice(src.lastIndexOf("<div", start), src.indexOf("</ul>", start));
+  assert.ok(start !== -1, "ffl-analytics missing Pro plate");
+  const plate = src.slice(src.lastIndexOf("<div", start), src.indexOf("</div>\n\n", start));
   assert.match(plate, /bg-black/);
   assert.match(plate, /border-gold\/60/);
-  for (const f of PRO_FEATURES) assert.ok(plate.includes(f), `${rel} Pro plate missing: ${f}`);
-  assert.equal([...plate.matchAll(/<li\b/g)].length, 4, `${rel} Pro plate must list exactly 4 features`);
-  assert.doesNotMatch(src, /Coming soon|All future Pro features|Sign up by/);
-  assert.doesNotMatch(src, /Otter Text|More Pro features are on the way/);
-  assert.match(
-    plate,
-    /Monthly Demand Intelligence reports\{" "\}\s*<a\s+href="\/images\/ffl-demand-intelligence-sample-august-2026\.png"\s+target="_blank"\s+rel="noopener noreferrer"\s+class="[^"]*text-gold[^"]*"\s*>\(see sample\)<\/a/,
-    `${rel} missing gold "(see sample)" link`,
-  );
+  assert.ok(plate.includes("Pro adds monthly Demand Intelligence reports ([see sample](/images/ffl-demand-intelligence-sample-august-2026.png))"));
+  assert.doesNotMatch(src, /Coming soon|All future Pro features|Sign up by|Otter Text|More Pro features are on the way/);
 }
 
 // SEO-U24 PR A (Chief, 2026-10-21 7:35 PM ET).
@@ -258,7 +243,7 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
   assert.doesNotMatch(read("src/pages/demand-intelligence.astro") + read("src/lib/faq.ts"), /NBS Fall Market|Aug(ust)? 24/);
   const di = flat("src/pages/demand-intelligence.astro");
   assert.match(di, /Tell us what you want to see, and we'll book your demo\./);
-  assert.match(di, /Ready to apply now\? <a href=\{APPLY_HREF\}[^>]*>Start on GunSearchEngine\.com<\/a>\./);
+  assert.match(di, /\[Start on GunSearchEngine\.com\]\(https:\/\/www\.gunsearchengine\.com\/betsy\/enterprise-copilot\?[^)]*#demo\)/);
   assert.match(di, /const APPLY_HREF = `\$\{GSE\}\/betsy\/enterprise-copilot#demo`;/);
   assert.match(di, /<LeadForm site="coriolisagency" defaultPillar="Demand Intelligence" \/>/);
   // Owner-term links: same tab, withBase + linkClass.
@@ -273,20 +258,20 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
   };
   // SEO-REFRESH-P1 (Paul 8:06 AM ET Nov 10): these pages render Brandy's copy through md(); check the source strings.
   const mdAnchor = (rel, text) => assert.ok(read(rel).includes(text), `${rel} missing owner-term link: ${text}`);
-  mdAnchor("src/pages/best-ffl-ecommerce-website.astro", "See [FFL website design](/ecommerce).");
-  mdAnchor("src/pages/ffl-cockpit.astro", "It all runs on your [FFL website design](/ecommerce), so your catalog and orders stay in one place.");
-  mdAnchor("src/pages/ffl-cockpit.astro", "Want more guns online without more on the shelf? Add [FFL dropshipping](/firearms-dropshipping).");
-  anchor("src/pages/ecommerce.astro", "Use", "firearms-dropshipping", "FFL dropshipping", "to list distributor stock you don't keep on hand.");
-  anchor("src/pages/ecommerce.astro", "Then bring buyers back with", "email-marketing-for-ffl-ecommerce", "FFL email marketing", "built for gun stores.");
+  mdAnchor("src/pages/best-ffl-ecommerce-website.astro", "[FFL website design](/ecommerce)");
+  mdAnchor("src/pages/ffl-cockpit.astro", "[FFL website design](/ecommerce)");
+  mdAnchor("src/pages/ffl-cockpit.astro", "[FFL dropshipping](/firearms-dropshipping)");
+  mdAnchor("src/pages/ecommerce.astro", "[FFL dropshipping](/firearms-dropshipping)");
+  mdAnchor("src/pages/ecommerce.astro", "[FFL email marketing](/email-marketing-for-ffl-ecommerce)");
   for (const rel of ["src/pages/ammoready-alternative.astro", "src/pages/gearfire-alternative.astro"]) {
-    anchor(rel, "Want an FFL website you own, built and run by people who know the trade?", "ecommerce", "Start here", ".");
+    mdAnchor(rel, "[FFL Ecommerce](/ecommerce)");
   }
   // AGENCY-GROKBOT-NOINDEX: /grok-bot-setup unlinked; CTA goes to /contact.
   {
     const ai = flat("src/pages/ai-studio.astro");
     assert.doesNotMatch(ai, /withBase\("grok-bot-setup"\)/);
-    assert.match(ai, /Want an AI assistant that works for your shop\? Start with Grok Bot setup for gun stores\./);
-    assert.match(ai, /href=\{withBase\("contact"\)\}[\s\S]*?Talk to Coriolis/);
+    assert.doesNotMatch(ai, /grok-bot-setup/);
+    assert.match(ai, /href="#talk"[^>]*>Talk to Coriolis/);
   }
   // Proof cards.
   const fx = read("src/lib/factory.ts");
@@ -306,9 +291,9 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
     "/trident-1-pos",
   );
   assert.equal(bySrc["/category/aim-pos-woocommerce"].destination, "/aim-pos");
-  assert.match(chrome, /id="pos-menu"/);
-  assert.match(chrome, /aria-controls="pos-menu"/);
-  assert.match(chrome, /aria-label="Gun Store POS pages"/);
+  assert.match(chrome, /item\.href === "gun-store-pos" \? "pos-menu"/);
+  assert.match(chrome, /aria-controls=\{menuId\}/);
+  assert.match(chrome, /aria-label=\{`\$\{item\.label\} pages`\}/);
   assert.match(chrome, /pos-menu-panel absolute right-0 top-full z-50 pt-1/);
   assert.doesNotMatch(chrome, /class="pos-menu[^"]*\bmt-1\b/);
   assert.match(chrome, /const CLOSE_MS = 200/);
@@ -327,9 +312,11 @@ for (const rel of ["src/pages/ffl-analytics.astro"]) {
     fflm,
     /const contact = `\$\{withBase\("contact"\)\}\?topic=ffl-messenger`;/,
   );
-  assert.ok([...fflm.matchAll(/href=\{contact\}/g)].length >= 3);
+  assert.ok([...fflm.matchAll(/\(\/contact\?topic=ffl-messenger\)/g)].length >= 3);
   assert.doesNotMatch(navSrc, /ffl-messenger/);
-  assert.doesNotMatch(chrome, /ffl-messenger/);
+  // CA-VOICE-P1 batch 5 (#166) added one footer link; the header nav still must not carry it.
+  assert.equal([...chrome.matchAll(/ffl-messenger/g)].length, 1);
+  assert.match(chrome, /<a href=\{withBase\("ffl-messenger-enterprise"\)\} class="hover:text-sky-300">FFL Messenger<\/a>/);
   assert.match(home, /<LeadForm site="coriolisagency" defaultPillar="Ecommerce" \/>/);
   const talk = read("src/components/TalkSection.astro");
   assert.match(talk, /<LeadForm site="coriolisagency" defaultPillar=\{pillar\} \/>/);
