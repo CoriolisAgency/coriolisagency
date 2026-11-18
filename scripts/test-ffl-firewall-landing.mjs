@@ -143,7 +143,7 @@ assert.ok(page.includes(ogAlt), "page ships Brandy OG alt verbatim");
 
 // 3. Hero art + lockup.
 const heroAlt =
-  "A stylized checkout in a browser window, with the address yourstore.example/checkout. The cart shows Glock pistols with their photos and specs; one row is pulled out, and a message reads, \"This item can't be shipped to the zip code you entered.\"";
+  "Stop selling guns and ammo into states and ZIP codes where they can't ship";
 const heroFiles = [
   { rel: "public/brand/ffl-firewall/hero/ffl-firewall-hero-desktop-1440x1152.webp", sha: "a679ce800e5695add5f11e1fa4ded012003ab830ae160fc24940351a4cb4da0d", w: 1440, h: 1152, magic: "52494646", kind: "webp" },
   { rel: "public/brand/ffl-firewall/hero/ffl-firewall-hero-desktop-1440x1152.jpg", sha: "5926bff3b0e77cffa36458ab6c9ff9ca60ac0e7dcc27a06dd229006e740c3d22", w: 1440, h: 1152, magic: "ffd8ff", kind: "jpeg" },
