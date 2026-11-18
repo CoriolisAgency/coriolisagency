@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 # FFLFW-LANDING: noindex at launch. Remove this line to allow crawling.
 Disallow: /ffl-firewall
+# FFLF-FIREWALL-V1-S3B-BUY: terms are published and may be crawled.
+Allow: /ffl-firewall/terms
 
 Sitemap: https://www.coriolisagency.com/sitemap-index.xml
