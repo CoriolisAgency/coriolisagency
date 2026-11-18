@@ -1,11 +1,9 @@
 ---
 /**
- * FFLFW-LANDING (Paul 2026-11-16 11:03 AM ET via Chief): /ffl-firewall early-access
- * landing page. Copy is Brandy's, verbatim (brand/ffl-firewall/landing/). Logo and
- * hero/OG art used as locked. CTA is an early-access lead form (no download) that
- * POSTs to the existing /api/lead path. Launch robots and nav: noindex, nofollow
- * (Chief confirmed) and a header item immediately after FFL Filters. Guarded by
- * scripts/test-ffl-firewall-landing.mjs.
+ * FFL Firewall landing page. Copy is Brandy's, verbatim.
+ * FFLF-FIREWALL-V1-S3B-BUY: the early-access lead form is retired. Both buy
+ * buttons go to the live Stripe payment link. The page stays noindex, nofollow.
+ * Guarded by scripts/test-ffl-firewall-landing.mjs.
  *
  * To index later: drop the `noindex` prop below and the matching X-Robots-Tag,
  * sitemap filter, lastmod SKIP, robots.txt Disallow, and IndexNow refusal.
@@ -16,14 +14,16 @@
  * art reuses the FFL Filters Glock product photos and specs; placeholders gone.
  */
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { btnPlan, btnSecondary } from "../../lib/links";
+import { btnPlan, btnSecondary, linkClass } from "../../lib/links";
 import { withBase } from "../../lib/base";
-import FflFirewallLeadGate from "../../components/FflFirewallLeadGate.astro";
 
 const contact = withBase("contact");
-const logo = withBase("brand/ffl-firewall/ffl-firewall-lockup-on-dark.svg");
-const earlyAccessLabel = "Get early access";
+const terms = withBase("ffl-firewall/terms");
+const buyHref = "https://checkout.coriolisagency.com/b/6oU7sM3obb7c5phf2o1440s";
+const buyLabel = "Buy FFL Firewall: unlimited transactions, $79 a month";
+const buyFooterLabel = "Get unlimited transactions for $79 a month";
 const contactLabel = "Talk to Coriolis";
+const logo = withBase("brand/ffl-firewall/ffl-firewall-lockup-on-dark.svg");
 const ogImage = "og/ffl-firewall-og.jpg";
 const ogImageAlt =
   `The FFL Firewall logo and the headline "A WooCommerce plugin that checks the cart at checkout for FFL dealers" sit on a dark navy background. Beside them, a stylized checkout in a browser window shows a cart with one item pulled out and a message that the item can't be shipped to the zip code the shopper entered.`;
@@ -51,9 +51,10 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
       <h1 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">A WooCommerce plugin that checks the cart at checkout for FFL dealers</h1>
       <p class={body}>At checkout, FFL Firewall checks each product in the cart by UPC against the zip code the shopper entered. If an item is prohibited for that zip, it's removed from the cart and the shopper sees a message explaining why.</p>
       <div class="mt-8 flex flex-wrap items-center gap-3">
-        <a href="#early-access" class={btnPlan} data-early-access="hero">{earlyAccessLabel}</a>
+        <a href={buyHref} class={btnPlan} data-buy="hero">{buyLabel}</a>
         <a href={contact} class={btnSecondary}>{contactLabel}</a>
       </div>
+      <p class="mt-3 text-sm leading-relaxed text-zinc-400">One flat price covers every cart: $79 a month for unlimited transactions, billed monthly through Stripe Checkout. There's no free trial, and you can cancel anytime. <a href={terms} class={linkClass}>Read the FFL Firewall terms</a></p>
       <p class="mt-3 text-xs text-zinc-500">For FFL dealers running WooCommerce.</p>
       <picture>
         <source media="(min-width: 640px)" type="image/webp" srcset={withBase("brand/ffl-firewall/hero/ffl-firewall-hero-desktop-1440x1152.webp")} width="1440" height="1152" />
@@ -106,16 +107,16 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
       <p class={body}><strong class="text-white">What does FFL Firewall check?</strong><br />It looks at the UPC on each item in the cart and the zip the shopper entered at checkout.</p>
       <p class={body}><strong class="text-white">What happens if an item is prohibited for that zip?</strong><br />That item comes out of the cart, and a message tells the shopper why.</p>
       <p class={body}><strong class="text-white">Does this take the place of my own shipping judgment?</strong><br />FFL Firewall is a tool that helps you catch restricted items at checkout. You're still responsible for what you ship, and this is not legal advice.</p>
-      <p class={body}><strong class="text-white">Can I download it today?</strong><br />Not yet. Leave your company name, website, and email on this page, and we'll write when it's ready to try.</p>
+      <p class={body}><strong class="text-white">How do I buy it?</strong><br />Click Buy FFL Firewall on this page and pay through Stripe Checkout. It's $79 a month with no cap on transactions, and there's no free trial. Your license key and the plugin download link arrive by email; install the plugin and paste the key into WooCommerce > FFL Firewall. To cancel, use the billing portal link in that email, and the checks keep running until the end of the month you've already paid for.</p>
       <p class={body}><strong class="text-white">Who is it for?</strong><br />FFL dealers who run a WooCommerce store.</p>
     </div>
   </section>
 
   <section class="border-t border-zinc-800/80 py-12" data-section="install">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <p class={eyebrow}>Early access</p>
-      <h2 class={`mt-3 ${h2}`}>Leave your details and we'll write when it's ready</h2>
-      <p class={body}>FFL Firewall isn't available to download yet. Fill in your company name, website, and email on this page, and we'll write when you can try it. If you want a hand with your WooCommerce store in the meantime, talk to Coriolis.</p>
+      <p class={eyebrow}>How buying works</p>
+      <h2 class={`mt-3 ${h2}`}>Pay through Stripe, get your key by email, paste it in</h2>
+      <p class={body}>Checkout runs on Stripe. When your payment goes through, we email your license key and a link to download the plugin to the address you used at checkout. Install the plugin in WordPress, go to WooCommerce > FFL Firewall, paste the key into the License key field and click Check key. If you'd like a hand with your WooCommerce store, talk to Coriolis.</p>
     </div>
   </section>
 
@@ -130,18 +131,18 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
     </div>
   </section>
 
-  <section id="early-access" class="border-t border-zinc-800/80 py-12" data-section="download">
+  <section id="buy" class="border-t border-zinc-800/80 py-12" data-section="download">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <p class={eyebrow}>Get early access</p>
-      <h2 class={`mt-3 ${h2}`}>Get early access to FFL Firewall</h2>
-      <p class={body}>This is a Coriolis plugin for FFL dealers who already run WooCommerce. Leave your company name, website, and email, and we'll write when it's ready to try. If you'd like a hand with your store in the meantime, talk to Coriolis.</p>
+      <p class={eyebrow}>Buy FFL Firewall</p>
+      <h2 class={`mt-3 ${h2}`}>Get FFL Firewall for $79 a month</h2>
+      <p class={body}>This is a Coriolis plugin for FFL dealers who already run WooCommerce, and one subscription covers unlimited transactions, so the check runs on every order your store takes. Buy it through Stripe Checkout, and we'll email your license key and the download link once the payment goes through. If you'd like a hand with your store first, talk to Coriolis.</p>
       <div class="mt-8 flex flex-wrap items-center gap-3">
-        <a href="#early-access" class={btnPlan} data-early-access="footer">{earlyAccessLabel}</a>
+        <a href={buyHref} class={btnPlan} data-buy="footer">{buyFooterLabel}</a>
         <a href={contact} class={btnSecondary}>{contactLabel}</a>
       </div>
+      <p class="mt-3 text-sm leading-relaxed text-zinc-400">$79 a month, however many transactions your store runs. No free trial, and you can cancel anytime from your billing portal. <a href={terms} class={linkClass}>Read the FFL Firewall terms</a></p>
       <p class={body}>FFL Firewall is a tool that helps you catch restricted items at checkout. You're still responsible for what you ship, and this is not legal advice.</p>
       <p class="mt-4 text-sm text-zinc-400"><a href="mailto:support@coriolisagency.com" class="font-medium !text-sky-400 hover:!underline underline-offset-2">support@coriolisagency.com</a></p>
     </div>
   </section>
-  <FflFirewallLeadGate />
 </BaseLayout>

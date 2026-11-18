@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
- * FFLFW-LANDING guard: /ffl-firewall is a noindex early-access landing page.
- * Checks Brandy's copy and art, the lead-form payload (message/page/pillar,
- * no data-file), launch noindex + nav order, sitemap/lastmod/IndexNow/vercel
- * exclusions, and banned words. If dist/ exists (after `npm run build`), also
- * checks the built page, sitemap, OG/hero bytes, and header nav order.
+ * FFLFW-LANDING / FFLF-FIREWALL-V1-S3B-BUY guard: /ffl-firewall is a noindex
+ * buy page. Checks Brandy's copy and art, the live Stripe buy buttons, that the
+ * early-access lead form is gone, launch noindex + nav order, sitemap/lastmod/
+ * IndexNow/vercel exclusions, published terms, and banned words. If dist/
+ * exists (after `npm run build`), also checks the built page, sitemap, OG/hero
+ * bytes, and header nav order.
  */
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
@@ -17,15 +18,15 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (rel) => fs.readFileSync(path.join(root, rel), "utf8");
 
 const pageRel = "src/pages/ffl-firewall/index.astro";
-const gateRel = "src/components/FflFirewallLeadGate.astro";
+const termsRel = "src/pages/ffl-firewall/terms.astro";
 const page = read(pageRel);
-const gate = read(gateRel);
+const terms = read(termsRel);
 
 const banned = /Orchid|eState/i;
 assert.doesNotMatch(page, banned, `${pageRel} has a banned word`);
-assert.doesNotMatch(gate, banned, `${gateRel} has a banned word`);
+assert.doesNotMatch(terms, banned, `${termsRel} has a banned word`);
 
-// 1. Page: noindex, title, meta, path, early-access CTAs, contact, no download/file.
+// 1. Page: noindex, title, meta, path, buy CTAs, contact, no download/file.
 assert.match(page, /^\s*noindex\s*$/m, "page passes noindex to BaseLayout");
 assert.match(
   page,
@@ -37,15 +38,20 @@ assert.match(
 );
 assert.match(page, /path="\/ffl-firewall"/);
 assert.match(page, /withBase\("contact"\)/);
-assert.match(page, /const earlyAccessLabel = "Get early access";/);
+assert.match(page, /const buyLabel = "Buy FFL Firewall: unlimited transactions, \$79 a month";/);
+assert.match(page, /const buyFooterLabel = "Get unlimited transactions for \$79 a month";/);
 assert.match(page, /const contactLabel = "Talk to Coriolis";/);
-const ea = [...page.matchAll(/data-early-access="(hero|footer)"/g)].map((m) => m[1]);
-assert.deepEqual(ea, ["hero", "footer"], "hero and footer early-access buttons");
+assert.match(page, /const buyHref = "https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s";/);
+const buys = [...page.matchAll(/data-buy="(hero|footer)"/g)].map((m) => m[1]);
+assert.deepEqual(buys, ["hero", "footer"], "hero and footer buy buttons");
 assert.doesNotMatch(page, /data-file=/);
 assert.doesNotMatch(page, /data-download/);
 assert.doesNotMatch(page, /\.zip/);
-assert.match(page, /import FflFirewallLeadGate from "\.\.\/\.\.\/components\/FflFirewallLeadGate\.astro";/);
-assert.match(page, /<FflFirewallLeadGate \/>/);
+assert.doesNotMatch(page, /FflFirewallLeadGate/);
+assert.doesNotMatch(page, /data-early-access/);
+assert.doesNotMatch(page, /#early-access/);
+assert.match(page, /withBase\("ffl-firewall\/terms"\)/);
+assert.ok(page.includes("Read the FFL Firewall terms"));
 assert.match(read("src/layouts/BaseLayout.astro"), /noindex && <meta name="robots" content="noindex, nofollow" \/>/);
 
 // Verbatim section copy and data-section names (FFL Filters structure + faq).
@@ -64,15 +70,17 @@ assert.ok(page.includes("What the check uses"));
 assert.ok(page.includes("It uses the UPC on the product and the zip at checkout"));
 assert.ok(page.includes("The questions dealers ask about FFL Firewall"));
 assert.ok(page.includes("What does FFL Firewall check?"));
-assert.ok(page.includes("Can I download it today?"));
-assert.ok(page.includes("Leave your details and we'll write when it's ready"));
+assert.ok(page.includes("How do I buy it?"));
+assert.ok(page.includes("Pay through Stripe, get your key by email, paste it in"));
+assert.ok(page.includes("Get FFL Firewall for $79 a month"));
+assert.ok(page.includes("One flat price covers every cart: $79 a month for unlimited transactions, billed monthly through Stripe Checkout. There's no free trial, and you can cancel anytime."));
+assert.ok(page.includes("$79 a month, however many transactions your store runs. No free trial, and you can cancel anytime from your billing portal."));
 assert.ok(page.includes("A WooCommerce store"));
 assert.ok(page.includes("Products that have a UPC"));
 assert.ok(page.includes("A checkout where the shopper enters a zip code"));
-assert.ok(page.includes("Get early access to FFL Firewall"));
+assert.ok(page.includes("Click Buy FFL Firewall on this page and pay through Stripe Checkout."));
 assert.ok(page.includes("You're still responsible for what you ship, and this is not legal advice."));
 assert.doesNotMatch(page, /California|Colorado|Illinois|Massachusetts|New York|Washington,?\s*D\.?C/i);
-assert.doesNotMatch(gate, /California|Colorado|Illinois|Massachusetts|New York|Washington,?\s*D\.?C/i);
 
 // 2. OG image: exact JPEG, page-only props, Brandy's alt verbatim.
 const ogRel = "public/og/ffl-firewall-og.jpg";
@@ -171,41 +179,16 @@ assert.match(page, /decoding="async"/);
 assert.match(page, /loading="eager"/);
 assert.match(page, /class="mt-10 block h-auto w-full rounded-\[14px\]"/);
 
-// 4. Lead gate: payload fields, honeypot, no file/download.
-assert.match(gate, /role="dialog"/);
-assert.match(gate, /aria-modal="true"/);
-assert.match(gate, /a\[data-early-access\]/);
-assert.match(gate, /name="company"/);
-assert.match(gate, /name="website"/);
-assert.match(gate, /name="email"/);
-assert.match(gate, /name="company_url"/);
-assert.match(gate, /data-action="\/api\/lead"/);
-assert.match(gate, /data-page="\/ffl-firewall"/);
-assert.match(gate, /data-min-fill-ms="3000"/);
-assert.match(gate, /pillar: "Ecommerce"/);
-assert.match(gate, /message: "FFL Firewall early access"/);
-assert.match(gate, /page: pagePath/);
-assert.match(gate, /site: "coriolisagency"/);
-assert.match(gate, /name: company/);
-assert.match(gate, /phone: ""/);
-assert.match(gate, /started_at: startedAtStamp\(\)/);
-assert.match(gate, /Get early access/);
-assert.match(gate, /Enter your company name, website URL, and email\./);
-assert.match(gate, /Company name is required\./);
-assert.match(gate, /Email is required\./);
-assert.match(gate, /That email does not look valid\./);
-assert.match(gate, /URL is required\./);
-assert.match(gate, /We'll write when FFL Firewall is ready to try/);
-assert.match(gate, /We couldn't send that\. Try again, or write to /);
-assert.match(gate, /mailto:support@coriolisagency\.com/);
-assert.match(gate, /setSendFailedError/);
-assert.match(gate, /mailto:support@coriolisagency\.com/);
-assert.match(gate, /write to\{' '\}/);
-assert.match(gate, /"Escape"/);
-assert.doesNotMatch(gate, /data-file=/);
-assert.doesNotMatch(gate, /startDownload/);
-assert.doesNotMatch(gate, /\.zip/);
-assert.doesNotMatch(gate, /data-download/);
+// 4. Terms page: Brandy's final terms verbatim, published, not noindex.
+assert.match(terms, /path="\/ffl-firewall\/terms"/);
+assert.doesNotMatch(terms, /^\s*noindex\s*$/m, "terms page must not pass noindex");
+assert.ok(terms.includes("FFL Firewall terms"));
+assert.ok(terms.includes("Effective the day FFL Firewall billing launches."));
+assert.ok(terms.includes("Who provides FFL Firewall"));
+assert.ok(terms.includes("FFL Firewall is a WooCommerce plugin for FFL dealers, provided by Coriolis, LLC. If you have a question about these terms or about the plugin, write to Coriolis support at support@coriolisagency.com."));
+assert.ok(terms.includes("FFL Firewall costs $79 a month, and there is no free trial."));
+assert.ok(terms.includes("These terms are governed by the laws of the State of South Carolina, and any dispute will be heard in Greenville County, South Carolina."));
+assert.match(read("public/robots.txt"), /^Allow: \/ffl-firewall\/terms$/m);
 
 // 5. Nav: FFL Firewall sits in the FFL Plugins dropdown (CA-NAV-FFL-PLUGINS).
 const navRel = "src/lib/nav.ts";
@@ -225,8 +208,9 @@ assert.match(nav, /label:\s*"FFL Plugins",\s*children:\s*\[[\s\S]*?href:\s*"ffl-
 
 // 6. Sitemap + lastmod + robots + vercel + IndexNow.
 const cfg = read("astro.config.mjs");
-assert.match(cfg, /!\/\\\/ffl-firewall\\\/\?\$\/\.test\(new URL\(page\)\.pathname\)/, "sitemap filter excludes /ffl-firewall");
+assert.match(cfg, /!\/\^\\\/ffl-firewall\(\\\/\.\*\)\?\$\/\.test\(new URL\(page\)\.pathname\)/, "sitemap filter excludes /ffl-firewall and /ffl-firewall/*");
 assert.match(read("scripts/gen-lastmod.mjs"), /"\/ffl-firewall",/);
+assert.match(read("scripts/gen-lastmod.mjs"), /"\/ffl-firewall\/terms",/);
 assert.equal(JSON.parse(read("lastmod.json"))["/ffl-firewall"], undefined, "not in lastmod.json");
 assert.match(read("public/robots.txt"), /^Disallow: \/ffl-firewall$/m);
 
@@ -256,14 +240,19 @@ if (fs.existsSync(dist)) {
   const html = fs.readFileSync(path.join(dist, "ffl-firewall", "index.html"), "utf8");
   assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
   assert.match(html, /<title>FFL Firewall: a WooCommerce checkout plugin for FFL dealers \| Coriolis<\/title>/);
-  assert.match(html, /role="dialog"/);
-  assert.match(html, /data-fflfw-ea-gate/);
-  assert.match(html, /data-page="\/ffl-firewall"/);
-  assert.match(html, /data-action="\/api\/lead"/);
+  assert.doesNotMatch(html, /role="dialog"/);
+  assert.doesNotMatch(html, /data-fflfw-ea-gate/);
+  assert.doesNotMatch(html, /data-early-access/);
   assert.doesNotMatch(html, /data-file=/);
-  assert.equal((html.match(/data-early-access="(hero|footer)"/g) ?? []).length, 2);
-  assert.match(html, /FFL Firewall early access/);
-  assert.match(html, /pillar: "Ecommerce"/);
+  assert.equal((html.match(/data-buy="(hero|footer)"/g) ?? []).length, 2);
+  assert.match(html, /https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s/);
+  assert.match(html, /Buy FFL Firewall: unlimited transactions, \$79 a month/);
+  assert.match(html, /Get unlimited transactions for \$79 a month/);
+  assert.match(html, /Read the FFL Firewall terms/);
+  const termsHtml = fs.readFileSync(path.join(dist, "ffl-firewall", "terms", "index.html"), "utf8");
+  assert.doesNotMatch(termsHtml, /<meta name="robots" content="noindex, nofollow"/);
+  assert.match(termsHtml, /<title>FFL Firewall terms \| Coriolis, LLC<\/title>/);
+  assert.match(termsHtml, /Effective the day FFL Firewall billing launches/);
   const ogAbsRe = ogAbs.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const ogAltEsc = ogAlt.replaceAll('"', "&quot;").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   assert.match(html, new RegExp(`<meta property="og:image" content="${ogAbsRe}"`));

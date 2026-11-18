@@ -25,6 +25,7 @@ const SKIP = new Set([
   "/grok-bot-setup",
   // FFLFW-LANDING: noindex at launch, off the sitemap. Remove to start dating the page.
   "/ffl-firewall",
+  "/ffl-firewall/terms",
 ]);
 
 // Dynamic routes: the data file that holds their slugs and content.

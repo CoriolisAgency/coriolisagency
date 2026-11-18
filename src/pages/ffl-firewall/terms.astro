@@ -1,0 +1,59 @@
+---
+/**
+ * FFL Firewall terms. Source: brand/ffl-firewall/terms/ffl-firewall-terms-final.md,
+ * published verbatim for FFLF-FIREWALL-V1-S3B-BUY (Karp amendment 7c5cd47).
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="FFL Firewall terms | Coriolis, LLC"
+  description="Terms for FFL Firewall, a WooCommerce plugin for FFL dealers provided by Coriolis, LLC."
+  path="/ffl-firewall/terms"
+  emailCapture={false}
+>
+  <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+    <h1 class="text-3xl font-semibold tracking-tight text-white">FFL Firewall terms</h1>
+    <p class="mt-2 text-sm text-zinc-500">Effective the day FFL Firewall billing launches.</p>
+
+    <div class="mt-8 space-y-8 text-sm leading-relaxed text-zinc-400">
+      <section>
+        <h2 class="text-base font-semibold text-white">Who provides FFL Firewall</h2>
+        <p class="mt-2">FFL Firewall is a WooCommerce plugin for FFL dealers, provided by Coriolis, LLC. If you have a question about these terms or about the plugin, write to Coriolis support at support@coriolisagency.com.</p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">What it does</h2>
+        <p class="mt-2">At checkout, FFL Firewall checks each product in the cart by UPC against the zip code the shopper entered. When that check finds an item is prohibited for the zip, the plugin acts on the rule you set in its settings: it removes the item from the cart and shows the shopper a short message explaining why, or it lets the item through and flags the order. A flag means the order gets an order note and a Flagged label in your WooCommerce Orders screen, and Coriolis sends you no email about it.</p>
+        <p class="mt-2">For handguns in roster states, the Roster states setting gives you three choices: remove the item from the cart, allow it and flag the order, or allow it with no flag. When an item is allowed and flagged, the shopper sees nothing about the flag at checkout. Every removal, flag and shopper notice is listed on the plugin's Log tab, so you can look back at what the check did.</p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">Your responsibility</h2>
+        <p class="mt-2">FFL Firewall is a tool that helps you catch restricted items at checkout. You're still responsible for what you sell and what you ship, and this is not legal advice. The check can miss an item or flag one that's fine, so keep your own review in place and look at every order yourself before anything ships.</p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">Price, billing and cancelling</h2>
+        <p class="mt-2">FFL Firewall costs $79 a month, and there is no free trial. You're charged monthly in advance, by card, through Stripe Checkout. You can cancel at any time; when you do, the checks keep running until the end of the month you've already paid for, and then they stop, so carts go through checkout without the product check from that point on. We don't refund partial months.</p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">What the plugin sends to Coriolis</h2>
+        <p class="mt-2">To run the product check, the plugin sends only the UPC of each product in the cart and the zip code the shopper entered at checkout. To check your license, it sends your license key and your site's URL. It never sends the shopper's name.</p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">When the check can't run</h2>
+        <p class="mt-2">Sometimes the check can't run at all, for example when the checking service is unavailable or your license key is invalid. In that case the item passes, the shopper sees no message and can keep checking out, and the order is flagged with an order note and a Flagged label so you know to review it yourself before you ship.</p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">Limit of liability</h2>
+        <p class="mt-2">Coriolis's total liability to you for anything arising from FFL Firewall is capped at the fees you paid for it in the 12 months before the claim.</p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">Changes to these terms</h2>
+        <p class="mt-2">If we change these terms, we'll email you at least 30 days before the change takes effect.</p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">Governing law</h2>
+        <p class="mt-2">These terms are governed by the laws of the State of South Carolina, and any dispute will be heard in Greenville County, South Carolina.</p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
