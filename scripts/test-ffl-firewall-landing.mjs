@@ -48,7 +48,7 @@ const buys = [...page.matchAll(/data-buy="(hero|footer)"/g)].map((m) => m[1]);
 assert.deepEqual(buys, ["hero", "footer"], "hero and footer buy buttons");
 assert.doesNotMatch(page, /data-file=/);
 assert.deepEqual([...page.matchAll(/data-download="(hero|footer)"/g)].map((m) => m[1]), ["hero", "footer"], "hero and footer download buttons open the gate");
-assert.match(page, /const download = withBase\("downloads\/ffl-firewall-0\.1\.1\.zip"\);/, "zip slot (PENDING-ZIP)");
+assert.match(page, /const download = withBase\("downloads\/ffl-firewall-0\.1\.2\.zip"\);/, "zip slot (PENDING-ZIP)");
 assert.doesNotMatch(page, /github\.com\/CoriolisAgency\/ffl-firewall-releases/, "no GitHub release link");
 assert.doesNotMatch(page, /href="[^"]*ffl-filters"/, "no body link to the FFL Filters page (CA-NAV-FFLF)");
 assert.doesNotMatch(page, /free/i, "no FFL Firewall string on the page may contain free (Paul 10:39 AM ET)");
@@ -258,14 +258,14 @@ if (fs.existsSync(dist)) {
   // Download gate (FFL Filters component, reworded) mounted once, hidden until a download button opens it.
   assert.equal((html.match(/<div[^>]*\sdata-fflf-dl-gate[\s>=]/g) ?? []).length, 1);
   assert.equal((html.match(/data-download="(hero|footer)"/g) ?? []).length, 2);
-  assert.match(html, /data-file="\/downloads\/ffl-firewall-0\.1\.1\.zip"/);
+  assert.match(html, /data-file="\/downloads\/ffl-firewall-0\.1\.2\.zip"/);
   assert.doesNotMatch(html, /data-fflfw-ea-gate/);
   assert.doesNotMatch(html, /data-early-access/);
   assert.doesNotMatch(html, /free/i, "no free anywhere on the built /ffl-firewall page");
   assert.doesNotMatch(html, /github\.com\/CoriolisAgency\/ffl-firewall/);
-  // The zip ships with the site, byte for byte (sha256 of ffl-firewall 0.1.1 built from ffl-firewall e768fa6c).
-  const fwZip = fs.readFileSync(path.join(dist, "downloads", "ffl-firewall-0.1.1.zip"));
-  assert.equal(crypto.createHash("sha256").update(fwZip).digest("hex"), "55e1b6e112ca2c3ae1e7204baa5eab65325a51f9078a6fc1c8ae5b6b7ac0b579", "ffl-firewall-0.1.1.zip sha256");
+  // The zip ships with the site, byte for byte (sha256 of ffl-firewall 0.1.2).
+  const fwZip = fs.readFileSync(path.join(dist, "downloads", "ffl-firewall-0.1.2.zip"));
+  assert.equal(crypto.createHash("sha256").update(fwZip).digest("hex"), "b10295d258db82de73837fd749cf9de59c38dd87d707cee837bb24224e16b136", "ffl-firewall-0.1.2.zip sha256");
   assert.equal((html.match(/data-buy="(hero|footer)"/g) ?? []).length, 2);
   assert.match(html, /https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s/);
   assert.match(html, />Buy a license</);
