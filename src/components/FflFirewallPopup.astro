@@ -23,7 +23,7 @@ const raw = Astro.url.pathname;
 const path = raw.startsWith(base) ? raw.slice(base.length - 1) : raw;
 const show = !ffwPopupDenied(path);
 
-const href = withBase("ffl-firewall/");
+const href = withBase("ffl-firewall");
 const heroSrc = withBase("brand/ffl-firewall/popup/ffl-firewall-us-map-hero.webp");
 const lockSrc = withBase("brand/ffl-firewall/ffl-firewall-lockup-on-light.svg");
 const iconSrc = withBase("brand/ffl-firewall/icon/ffl-firewall-icon-512.png");
@@ -80,8 +80,8 @@ const cfg = JSON.stringify({
         </button>
         <div class="ffw-hero"><img alt="" width="1200" height="768" data-src={heroSrc} decoding="async" /></div>
         <div class="ffw-bd">
-          <div class="ffw-row"><img class="ffw-ico" alt="FFL Firewall" width="30" height="30" data-src={iconSrc} decoding="async" /><h2 id="ffw-sheet-t" class="ffw-h">{C.sheetTitle}</h2></div>
-          <p class="ffw-p">{C.sheetBody}</p>
+          <div class="ffw-row"><img class="ffw-ico" alt="FFL Firewall" width="30" height="30" data-src={iconSrc} decoding="async" /><h2 id="ffw-sheet-t" class="ffw-h">{C.title}</h2></div>
+          <p class="ffw-p">{C.body}</p>
           <div class="ffw-acts">
             <a class="ffw-go" href={href} data-ffw-cta>{C.cta}<svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
             <button type="button" class="ffw-no" data-ffw-close>{C.later}</button>

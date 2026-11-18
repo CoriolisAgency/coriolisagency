@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 
 const KEY = "ffw_popup_dismissed_until";
-const HREF = "/ffl-firewall/";
+const HREF = "/ffl-firewall";
 
 async function scrollDeep(page: Page) {
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight * 0.6));
@@ -14,7 +14,7 @@ test.describe("FFL Firewall pop-up, desktop", () => {
     await page.goto("/");
     await expect(page.locator("#ffw-popup-root")).toBeHidden();
     await scrollDeep(page);
-    const dlg = page.getByRole("dialog", { name: /FFL Firewall checks the cart/ });
+    const dlg = page.getByRole("dialog", { name: /Stop selling guns and ammo/ });
     await expect(dlg).toBeVisible();
     await expect(dlg).toHaveAttribute("aria-modal", "true");
     const box = (await dlg.boundingBox())!;
@@ -83,11 +83,12 @@ test.describe("FFL Firewall pop-up, desktop", () => {
     }
   });
 
-  test("CTA click leads to /ffl-firewall/ and is remembered", async ({ page }) => {
+  test("CTA click leads to /ffl-firewall with no redirect", async ({ page }) => {
     await page.goto("/");
     await scrollDeep(page);
     await page.getByRole("dialog").getByRole("link", { name: "See FFL Firewall" }).click();
-    await expect(page).toHaveURL(/\/ffl-firewall\/?$/);
+    await expect(page).toHaveURL(/\/ffl-firewall$/);
+    expect((await page.request.get(HREF, { maxRedirects: 0 })).status()).toBe(200);
   });
 });
 
@@ -97,7 +98,7 @@ test.describe("FFL Firewall pop-up, phone", () => {
   test("bottom sheet is about 40% of the screen and swipes away", async ({ page }) => {
     await page.goto("/");
     await scrollDeep(page);
-    const sheet = page.getByRole("dialog", { name: "FFL Firewall for WooCommerce" });
+    const sheet = page.getByRole("dialog", { name: /Stop selling guns and ammo/ });
     await expect(sheet).toBeVisible();
     await expect(sheet).toHaveAttribute("aria-modal", "false");
     await page.waitForTimeout(400);
