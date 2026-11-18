@@ -5,8 +5,8 @@ test.use({ viewport: { width: 1280, height: 800 } });
 const PAGE_PATH = "/" + "ffl-firewall";
 const TERMS_PATH = "/" + "ffl-firewall/terms";
 const BUY_HREF = "https://checkout.coriolisagency.com/b/6oU7sM3obb7c5phf2o1440s";
-const BUY_HERO = "Buy FFL Firewall: unlimited transactions, $79 a month";
-const BUY_FOOTER = "Get unlimited transactions for $79 a month";
+const BUY_HERO = "Buy a license";
+const BUY_FOOTER = "Buy a license";
 
 function heroBuy(page: Page) {
   return page.locator('[data-buy="hero"]');

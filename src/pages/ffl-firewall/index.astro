@@ -21,25 +21,24 @@ import { withBase } from "../../lib/base";
 const contact = withBase("contact");
 const terms = withBase("ffl-firewall/terms");
 const buyHref = "https://checkout.coriolisagency.com/b/6oU7sM3obb7c5phf2o1440s";
-const buyLabel = "Buy FFL Firewall: unlimited transactions, $79 a month";
-const buyFooterLabel = "Get unlimited transactions for $79 a month";
+const buyLabel = "Buy a license";
+const buyFooterLabel = "Buy a license";
 const contactLabel = "Talk to Coriolis";
-// PENDING-ZIP: the plugin zip slot, public/downloads/ffl-firewall-<version>.zip.
-// The version (0.1.0 or 0.1.1) and the file itself are held; do not merge until the file exists.
+// The plugin zip, public/downloads/ffl-firewall-0.1.1.zip (built from ffl-firewall e768fa6c).
 const download = withBase("downloads/ffl-firewall-0.1.1.zip");
-// PENDING-BRANDY: page download button labels. Brandy has not supplied these as approved rows.
-const downloadHeroLabel = "PENDING-BRANDY-HERO-DOWNLOAD-LABEL";
-const downloadFooterLabel = "PENDING-BRANDY-FOOTER-DOWNLOAD-LABEL";
-// COPY-DELTA-S3B-GATE.md (Brandy, Nov 18, 2026), verbatim.
+// Brandy copy block, Paul-approved 10:47 AM ET Nov 18, 2026, verbatim.
+const downloadHeroLabel = "Download FFL Firewall";
+const downloadFooterLabel = "Download the FFL Firewall plugin";
+// Brandy copy block rows 15 to 19, Paul-approved, verbatim.
 const gate = {
   title: "Download FFL Firewall",
   description:
-    "Anyone can download and install FFL Firewall, with no purchase needed to download or install. Enter your company name, website URL, and email, and your download starts.",
+    "FFL Firewall is a paid plugin, and anyone can download and install it with no purchase needed; it checks carts once you add a license. Enter your company name, website URL, and email, and your download starts.",
   submitLabel: "Download",
   emailInvalid: "That email doesn't look valid.",
   leadMessage: "FFL Firewall download",
   thanksLead:
-    "Your download has started, and you can install FFL Firewall without buying anything. It starts checking carts once a license key is in, and a license costs $79 a month for unlimited transactions. Buy a license whenever you're ready, and we'll email your key. If you need help, ",
+    "Your download has started, and you can install FFL Firewall without buying anything. Unlicensed installs don't check carts, so your orders are left alone until you add a license key, which costs $79 a month for unlimited transactions. The built-in demo in WooCommerce > FFL Firewall gives you 10 test runs to see each result first. Buy a license whenever you're ready, and we'll email your key. If you need help, ",
   buyLabel: "Buy a license",
 };
 const logo = withBase("brand/ffl-firewall/ffl-firewall-lockup-on-dark.svg");
@@ -70,11 +69,11 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
       <h1 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">A WooCommerce plugin that checks the cart at checkout for FFL dealers</h1>
       <p class={body}>At checkout, FFL Firewall checks each product in the cart by UPC against the zip code the shopper entered. If an item is prohibited for that zip, it's removed from the cart and the shopper sees a message explaining why.</p>
       <div class="mt-8 flex flex-wrap items-center gap-3">
-        <a href={buyHref} class={btnPlan} data-buy="hero">{buyLabel}</a>
-        <a href={download} class={btnSecondary} download data-download="hero">{downloadHeroLabel}</a>
+        <a href={download} class={btnPlan} download data-download="hero">{downloadHeroLabel}</a>
+        <a href={buyHref} class={btnSecondary} data-buy="hero">{buyLabel}</a>
         <a href={contact} class={btnSecondary}>{contactLabel}</a>
       </div>
-      <p class="mt-3 text-sm leading-relaxed text-zinc-400">PENDING-BRANDY-HERO-PRICE-LINE <a href={terms} class={linkClass}>Read the FFL Firewall terms</a></p>
+      <p class="mt-3 text-sm leading-relaxed text-zinc-400">No purchase is needed to download or install it, and its built-in demo gives you 10 test runs. The checks on real carts turn on with a license, which is $79 a month for unlimited transactions, billed monthly in advance through Stripe Checkout, and you can cancel anytime. <a href={terms} class={linkClass}>Read the FFL Firewall terms</a></p>
       <p class="mt-3 text-xs text-zinc-500">For FFL dealers running WooCommerce.</p>
       <picture>
         <source media="(min-width: 640px)" type="image/webp" srcset={withBase("brand/ffl-firewall/hero/ffl-firewall-hero-desktop-1440x1152.webp")} width="1440" height="1152" />
@@ -127,16 +126,16 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
       <p class={body}><strong class="text-white">What does FFL Firewall check?</strong><br />It looks at the UPC on each item in the cart and the zip the shopper entered at checkout.</p>
       <p class={body}><strong class="text-white">What happens if an item is prohibited for that zip?</strong><br />That item comes out of the cart, and a message tells the shopper why.</p>
       <p class={body}><strong class="text-white">Does this take the place of my own shipping judgment?</strong><br />FFL Firewall is a tool that helps you catch restricted items at checkout. You're still responsible for what you ship, and this is not legal advice.</p>
-      <p class={body}><strong class="text-white">How do I buy it?</strong><br />PENDING-BRANDY-FAQ-HOW-ANSWER</p>
+      <p class={body}><strong class="text-white">How do I get it?</strong><br />Download it from this page and install it like any WordPress plugin; you don't have to buy anything to download or install it. Until a license key is in, it doesn't check carts or touch orders, and its built-in demo lets you try 10 test runs. A license costs $79 a month with no cap on transactions, paid through Stripe Checkout. Your key arrives by email, you paste it into WooCommerce > FFL Firewall, and you can cancel anytime from the billing portal link in that email.</p>
       <p class={body}><strong class="text-white">Who is it for?</strong><br />FFL dealers who run a WooCommerce store.</p>
     </div>
   </section>
 
   <section class="border-t border-zinc-800/80 py-12" data-section="install">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <p class={eyebrow}>How buying works</p>
-      <h2 class={`mt-3 ${h2}`}>Pay through Stripe, get your key by email, paste it in</h2>
-      <p class={body}>Checkout runs on Stripe. When your payment goes through, we email your license key and a link to download the plugin to the address you used at checkout. Install the plugin in WordPress, go to WooCommerce > FFL Firewall, paste the key into the License key field and click Check key. If you'd like a hand with your WooCommerce store, talk to Coriolis.</p>
+      <p class={eyebrow}>How it works</p>
+      <h2 class={`mt-3 ${h2}`}>Download it, then add a license to turn the checks on</h2>
+      <p class={body}>Anyone can download and install FFL Firewall, and an unlicensed install doesn't check carts or touch orders. When you're ready for the checks to run, buy a license through Stripe Checkout, and we'll email your key to the address you used. In WordPress, go to WooCommerce > FFL Firewall, paste the key into the License key field and click Check key. If you'd like a hand with your WooCommerce store, talk to Coriolis.</p>
     </div>
   </section>
 
@@ -153,15 +152,15 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
 
   <section id="buy" class="border-t border-zinc-800/80 py-12" data-section="download">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <p class={eyebrow}>Buy FFL Firewall</p>
-      <h2 class={`mt-3 ${h2}`}>Get FFL Firewall for $79 a month</h2>
-      <p class={body}>This is a Coriolis plugin for FFL dealers who already run WooCommerce, and one subscription covers unlimited transactions, so the check runs on every order your store takes. Buy it through Stripe Checkout, and we'll email your license key and the download link once the payment goes through. If you'd like a hand with your store first, talk to Coriolis.</p>
+      <p class={eyebrow}>Get FFL Firewall</p>
+      <h2 class={`mt-3 ${h2}`}>Download FFL Firewall, then license it for $79 a month</h2>
+      <p class={body}>This is a Coriolis plugin for FFL dealers who already run WooCommerce. You can download and install it without buying anything, and when you want the checks running, one license covers unlimited transactions on your store. If you'd like a hand with your store first, talk to Coriolis.</p>
       <div class="mt-8 flex flex-wrap items-center gap-3">
-        <a href={buyHref} class={btnPlan} data-buy="footer">{buyFooterLabel}</a>
-        <a href={download} class={btnSecondary} download data-download="footer">{downloadFooterLabel}</a>
+        <a href={download} class={btnPlan} download data-download="footer">{downloadFooterLabel}</a>
+        <a href={buyHref} class={btnSecondary} data-buy="footer">{buyFooterLabel}</a>
         <a href={contact} class={btnSecondary}>{contactLabel}</a>
       </div>
-      <p class="mt-3 text-sm leading-relaxed text-zinc-400">PENDING-BRANDY-FOOTER-PRICE-LINE <a href={terms} class={linkClass}>Read the FFL Firewall terms</a></p>
+      <p class="mt-3 text-sm leading-relaxed text-zinc-400">FFL Firewall is a paid plugin, and one license covers unlimited transactions for $79 a month. You can cancel anytime from your billing portal. <a href={terms} class={linkClass}>Read the FFL Firewall terms</a></p>
       <p class={body}>FFL Firewall is a tool that helps you catch restricted items at checkout. You're still responsible for what you ship, and this is not legal advice.</p>
       <p class="mt-4 text-sm text-zinc-400"><a href="mailto:support@coriolisagency.com" class="font-medium !text-sky-400 hover:!underline underline-offset-2">support@coriolisagency.com</a></p>
     </div>

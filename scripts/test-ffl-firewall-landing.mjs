@@ -38,8 +38,10 @@ assert.match(
 );
 assert.match(page, /path="\/ffl-firewall"/);
 assert.match(page, /withBase\("contact"\)/);
-assert.match(page, /const buyLabel = "Buy FFL Firewall: unlimited transactions, \$79 a month";/);
-assert.match(page, /const buyFooterLabel = "Get unlimited transactions for \$79 a month";/);
+assert.match(page, /const buyLabel = "Buy a license";/);
+assert.match(page, /const buyFooterLabel = "Buy a license";/);
+assert.match(page, /const downloadHeroLabel = "Download FFL Firewall";/);
+assert.match(page, /const downloadFooterLabel = "Download the FFL Firewall plugin";/);
 assert.match(page, /const contactLabel = "Talk to Coriolis";/);
 assert.match(page, /const buyHref = "https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s";/);
 const buys = [...page.matchAll(/data-buy="(hero|footer)"/g)].map((m) => m[1]);
@@ -53,8 +55,8 @@ assert.doesNotMatch(page, /free/i, "no FFL Firewall string on the page may conta
 assert.match(page, /import FflFiltersDownloadGate from "\.\.\/\.\.\/components\/FflFiltersDownloadGate\.astro";/);
 assert.match(page, /<FflFiltersDownloadGate[\s\S]*?href=\{download\}[\s\S]*?buyHref=\{buyHref\}[\s\S]*?\/>/);
 for (const s of ["Download FFL Firewall", "Download", "That email doesn't look valid.", "FFL Firewall download", "Buy a license"]) assert.ok(page.includes(s), `gate string missing: ${s}`);
-assert.ok(page.includes("Anyone can download and install FFL Firewall, with no purchase needed to download or install. Enter your company name, website URL, and email, and your download starts."));
-assert.ok(page.includes("Your download has started, and you can install FFL Firewall without buying anything. It starts checking carts once a license key is in, and a license costs $79 a month for unlimited transactions. Buy a license whenever you're ready, and we'll email your key. If you need help, "));
+assert.ok(page.includes("FFL Firewall is a paid plugin, and anyone can download and install it with no purchase needed; it checks carts once you add a license. Enter your company name, website URL, and email, and your download starts."));
+assert.ok(page.includes("Your download has started, and you can install FFL Firewall without buying anything. Unlicensed installs don't check carts, so your orders are left alone until you add a license key, which costs $79 a month for unlimited transactions. The built-in demo in WooCommerce > FFL Firewall gives you 10 test runs to see each result first. Buy a license whenever you're ready, and we'll email your key. If you need help, "));
 assert.doesNotMatch(page, /FflFirewallLeadGate/);
 assert.doesNotMatch(page, /data-early-access/);
 assert.doesNotMatch(page, /#early-access/);
@@ -78,16 +80,21 @@ assert.ok(page.includes("What the check uses"));
 assert.ok(page.includes("It uses the UPC on the product and the zip at checkout"));
 assert.ok(page.includes("The questions dealers ask about FFL Firewall"));
 assert.ok(page.includes("What does FFL Firewall check?"));
-assert.ok(page.includes("How do I buy it?"));
-assert.ok(page.includes("Pay through Stripe, get your key by email, paste it in"));
-assert.ok(page.includes("Get FFL Firewall for $79 a month"));
-assert.ok(page.includes("PENDING-BRANDY-HERO-PRICE-LINE"));
-assert.ok(page.includes("PENDING-BRANDY-FOOTER-PRICE-LINE"));
+assert.ok(page.includes("How do I get it?"));
+assert.ok(page.includes("Download it, then add a license to turn the checks on"));
+assert.ok(page.includes("Download FFL Firewall, then license it for $79 a month"));
+assert.ok(page.includes("No purchase is needed to download or install it, and its built-in demo gives you 10 test runs. The checks on real carts turn on with a license, which is $79 a month for unlimited transactions, billed monthly in advance through Stripe Checkout, and you can cancel anytime."));
+assert.ok(page.includes("FFL Firewall is a paid plugin, and one license covers unlimited transactions for $79 a month. You can cancel anytime from your billing portal."));
 assert.ok(page.includes("A WooCommerce store"));
 assert.ok(page.includes("Products that have a UPC"));
 assert.ok(page.includes("A checkout where the shopper enters a zip code"));
-// PENDING-BRANDY-FAQ-HOW-ANSWER replaces the old answer until Brandy revises it.
-assert.ok(page.includes("PENDING-BRANDY-FAQ-HOW-ANSWER"));
+// Brandy copy block rows 4, 9 to 14, verbatim.
+assert.ok(page.includes("Download it from this page and install it like any WordPress plugin; you don't have to buy anything to download or install it. Until a license key is in, it doesn't check carts or touch orders, and its built-in demo lets you try 10 test runs. A license costs $79 a month with no cap on transactions, paid through Stripe Checkout. Your key arrives by email, you paste it into WooCommerce > FFL Firewall, and you can cancel anytime from the billing portal link in that email."));
+assert.ok(page.includes("<p class={eyebrow}>How it works</p>"));
+assert.ok(page.includes("Anyone can download and install FFL Firewall, and an unlicensed install doesn't check carts or touch orders. When you're ready for the checks to run, buy a license through Stripe Checkout, and we'll email your key to the address you used. In WordPress, go to WooCommerce > FFL Firewall, paste the key into the License key field and click Check key. If you'd like a hand with your WooCommerce store, talk to Coriolis."));
+assert.ok(page.includes("<p class={eyebrow}>Get FFL Firewall</p>"));
+assert.ok(page.includes("This is a Coriolis plugin for FFL dealers who already run WooCommerce. You can download and install it without buying anything, and when you want the checks running, one license covers unlimited transactions on your store. If you'd like a hand with your store first, talk to Coriolis."));
+assert.doesNotMatch(page, /PENDING/, "no placeholders left");
 assert.ok(page.includes("You're still responsible for what you ship, and this is not legal advice."));
 assert.doesNotMatch(page, /California|Colorado|Illinois|Massachusetts|New York|Washington,?\s*D\.?C/i);
 
@@ -262,8 +269,8 @@ if (fs.existsSync(dist)) {
   assert.equal(crypto.createHash("sha256").update(fwZip).digest("hex"), "55e1b6e112ca2c3ae1e7204baa5eab65325a51f9078a6fc1c8ae5b6b7ac0b579", "ffl-firewall-0.1.1.zip sha256");
   assert.equal((html.match(/data-buy="(hero|footer)"/g) ?? []).length, 2);
   assert.match(html, /https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s/);
-  assert.match(html, /Buy FFL Firewall: unlimited transactions, \$79 a month/);
-  assert.match(html, /Get unlimited transactions for \$79 a month/);
+  assert.match(html, />Buy a license</);
+  assert.match(html, />Download the FFL Firewall plugin</);
   assert.match(html, /Read the FFL Firewall terms/);
   const termsHtml = fs.readFileSync(path.join(dist, "ffl-firewall", "terms", "index.html"), "utf8");
   assert.doesNotMatch(termsHtml, /<meta name="robots" content="noindex, nofollow"/);
