@@ -52,7 +52,7 @@ assert.doesNotMatch(page, /href="[^"]*ffl-filters"/, "no body link to the FFL Fi
 assert.doesNotMatch(page, /free/i, "no FFL Firewall string on the page may contain free (Paul 10:39 AM ET)");
 assert.match(page, /import FflFiltersDownloadGate from "\.\.\/\.\.\/components\/FflFiltersDownloadGate\.astro";/);
 assert.match(page, /<FflFiltersDownloadGate[\s\S]*?href=\{download\}[\s\S]*?buyHref=\{buyHref\}[\s\S]*?\/>/);
-for (const s of ["Download FFL Firewall", "Download", "That email doesn't look valid.", "FFL Firewall download", "Buy a license", "We couldn't send that. Try again, or write to support@coriolisagency.com."]) assert.ok(page.includes(s), `gate string missing: ${s}`);
+for (const s of ["Download FFL Firewall", "Download", "That email doesn't look valid.", "FFL Firewall download", "Buy a license"]) assert.ok(page.includes(s), `gate string missing: ${s}`);
 assert.ok(page.includes("Anyone can download and install FFL Firewall, with no purchase needed to download or install. Enter your company name, website URL, and email, and your download starts."));
 assert.ok(page.includes("Your download has started, and you can install FFL Firewall without buying anything. It starts checking carts once a license key is in, and a license costs $79 a month for unlimited transactions. Buy a license whenever you're ready, and we'll email your key. If you need help, "));
 assert.doesNotMatch(page, /FflFirewallLeadGate/);
@@ -249,10 +249,17 @@ if (fs.existsSync(dist)) {
   const html = fs.readFileSync(path.join(dist, "ffl-firewall", "index.html"), "utf8");
   assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
   assert.match(html, /<title>FFL Firewall: a WooCommerce checkout plugin for FFL dealers \| Coriolis<\/title>/);
-  assert.doesNotMatch(html, /role="dialog"/);
+  // Download gate (FFL Filters component, reworded) mounted once, hidden until a download button opens it.
+  assert.equal((html.match(/<div[^>]*\sdata-fflf-dl-gate[\s>=]/g) ?? []).length, 1);
+  assert.equal((html.match(/data-download="(hero|footer)"/g) ?? []).length, 2);
+  assert.match(html, /data-file="\/downloads\/ffl-firewall-0\.1\.1\.zip"/);
   assert.doesNotMatch(html, /data-fflfw-ea-gate/);
   assert.doesNotMatch(html, /data-early-access/);
-  assert.doesNotMatch(html, /data-file=/);
+  assert.doesNotMatch(html, /free/i, "no free anywhere on the built /ffl-firewall page");
+  assert.doesNotMatch(html, /github\.com\/CoriolisAgency\/ffl-firewall/);
+  // The zip ships with the site, byte for byte (sha256 of ffl-firewall 0.1.1 built from ffl-firewall e768fa6c).
+  const fwZip = fs.readFileSync(path.join(dist, "downloads", "ffl-firewall-0.1.1.zip"));
+  assert.equal(crypto.createHash("sha256").update(fwZip).digest("hex"), "55e1b6e112ca2c3ae1e7204baa5eab65325a51f9078a6fc1c8ae5b6b7ac0b579", "ffl-firewall-0.1.1.zip sha256");
   assert.equal((html.match(/data-buy="(hero|footer)"/g) ?? []).length, 2);
   assert.match(html, /https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s/);
   assert.match(html, /Buy FFL Firewall: unlimited transactions, \$79 a month/);

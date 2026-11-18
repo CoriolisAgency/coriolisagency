@@ -46,8 +46,7 @@ test.describe("FFL Firewall buy page", () => {
 
   test("terms page is published and is not noindex", async ({ page }) => {
     await page.goto(TERMS_PATH);
-    const robots = await page.locator('meta[name="robots"]').getAttribute("content");
-    expect(robots).not.toBe("noindex, nofollow");
+    await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0);
     await expect(page).toHaveTitle("FFL Firewall terms | Coriolis, LLC");
     await expect(page.getByRole("heading", { name: "FFL Firewall terms", exact: true })).toBeVisible();
     await expect(page.getByText("Effective the day FFL Firewall billing launches.")).toBeVisible();
