@@ -1,0 +1,12 @@
+---
+/** Service name, always "FFL Firewall · NAME" (S5F, Brandy's v2 landing mock). */
+interface Props {
+  n?: string;
+}
+const { n } = Astro.props;
+---
+<span class="fwn"><b>FFL</b> Firewall{n && <><i class="dot"> · </i><b>{n}</b></>}</span>
+<style>
+  .fwn b { font-weight: 700; }
+  .fwn .dot { color: #E53E3E; font-style: normal; font-weight: 700; }
+</style>

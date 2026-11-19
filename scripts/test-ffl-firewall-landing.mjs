@@ -30,24 +30,22 @@ assert.doesNotMatch(terms, banned, `${termsRel} has a banned word`);
 assert.match(page, /^\s*noindex\s*$/m, "page passes noindex to BaseLayout");
 assert.match(
   page,
-  /title="FFL Firewall: a WooCommerce checkout plugin for FFL dealers \| Coriolis"/,
+  /title="FFL Firewall: a managed security service for WooCommerce FFL dealers \| Coriolis"/,
 );
 assert.match(
   page,
-  /description="FFL Firewall is a WooCommerce plugin for FFL dealers, made by Coriolis. At checkout it checks each product against the shopper's zip code and removes items that can't go there."/,
+  /description="FFL Firewall is a \$79\/month managed security service for FFL dealers, delivered as a WooCommerce plugin, with bot and scraper control and state shipping checks at checkout."/,
 );
 assert.match(page, /path="\/ffl-firewall"/);
 assert.match(page, /withBase\("contact"\)/);
 assert.match(page, /const buyLabel = "Buy a license";/);
-assert.match(page, /const buyFooterLabel = "Buy a license";/);
-assert.match(page, /const downloadHeroLabel = "Download FFL Firewall";/);
-assert.match(page, /const downloadFooterLabel = "Download the FFL Firewall plugin";/);
+assert.match(page, /const getLabel = "Get FFL Firewall";/);
 assert.match(page, /const contactLabel = "Talk to Coriolis";/);
 assert.match(page, /const buyHref = "https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s";/);
-const buys = [...page.matchAll(/data-buy="(hero|footer)"/g)].map((m) => m[1]);
-assert.deepEqual(buys, ["hero", "footer"], "hero and footer buy buttons");
+const buys = [...page.matchAll(/data-buy="(pricing)"/g)].map((m) => m[1]);
+assert.deepEqual(buys, ["pricing"], "the pricing card keeps the Stripe buy button (S5F)");
 assert.doesNotMatch(page, /data-file=/);
-assert.deepEqual([...page.matchAll(/data-download="(hero|footer)"/g)].map((m) => m[1]), ["hero", "footer"], "hero and footer download buttons open the gate");
+assert.deepEqual([...page.matchAll(/data-download="(hero|pricing|footer)"/g)].map((m) => m[1]), ["hero", "pricing", "footer"], "Get FFL Firewall buttons open the gate");
 assert.match(page, /const download = withBase\("downloads\/ffl-firewall-0\.1\.3\.zip"\);/, "zip slot (PENDING-ZIP)");
 assert.doesNotMatch(page, /github\.com\/CoriolisAgency\/ffl-firewall-releases/, "no GitHub release link");
 assert.doesNotMatch(page, /href="[^"]*ffl-filters"/, "no body link to the FFL Filters page (CA-NAV-FFLF)");
@@ -64,36 +62,68 @@ assert.match(page, /withBase\("ffl-firewall\/terms"\)/);
 assert.ok(page.includes("Read the FFL Firewall terms"));
 assert.match(read("src/layouts/BaseLayout.astro"), /noindex && <meta name="robots" content="noindex, nofollow" \/>/);
 
-// Verbatim section copy and data-section names (FFL Filters structure + faq).
-for (const section of ["hero", "built-around", "fits", "settings", "faq", "install", "requirements", "download"]) {
+// S5F: Brandy's v2 landing copy, verbatim (service names render through FflFwName as "FFL Firewall · NAME").
+for (const section of ["hero", "services", "activation", "pricing", "faq", "download"]) {
   assert.match(page, new RegExp(`data-section="${section}"`), `missing data-section=${section}`);
 }
-assert.match(page, /<h1[^>]*>Stop selling guns and ammo into states and ZIP codes where they can't ship<\/h1>/);
-assert.ok(page.includes("At checkout, FFL Firewall checks each product in the cart by UPC against the zip code the shopper entered. If an item is prohibited for that zip, it's removed from the cart and the shopper sees a message explaining why."));
-assert.ok(page.includes("For FFL dealers running WooCommerce."));
-assert.ok(page.includes("It checks each product in the cart against the shopper's zip"));
-assert.ok(page.includes("The product check."));
-assert.ok(page.includes("Items that can't go there."));
-assert.ok(page.includes("A message for the shopper."));
-assert.ok(page.includes("It runs at the checkout you already use"));
-assert.ok(page.includes("What the check uses"));
-assert.ok(page.includes("It uses the UPC on the product and the zip at checkout"));
-assert.ok(page.includes("The questions dealers ask about FFL Firewall"));
-assert.ok(page.includes("What does FFL Firewall check?"));
-assert.ok(page.includes("How do I get it?"));
-assert.ok(page.includes("Download it, then add a license to turn the checks on"));
-assert.ok(page.includes("Download FFL Firewall, then license it for $79 a month"));
-assert.ok(page.includes("No purchase is needed to download or install it, and its built-in demo gives you 10 test runs. The checks on real carts turn on with a license, which is $79 a month for unlimited transactions, billed monthly in advance through Stripe Checkout, and you can cancel anytime."));
-assert.ok(page.includes("FFL Firewall is a paid plugin, and one license covers unlimited transactions for $79 a month. You can cancel anytime from your billing portal."));
-assert.ok(page.includes("A WooCommerce store"));
-assert.ok(page.includes("Products that have a UPC"));
-assert.ok(page.includes("A checkout where the shopper enters a zip code"));
-// Brandy copy block rows 4, 9 to 14, verbatim.
-assert.ok(page.includes("Download it from this page and install it like any WordPress plugin; you don't have to buy anything to download or install it. Until a license key is in, it doesn't check carts or touch orders, and its built-in demo lets you try 10 test runs. A license costs $79 a month with no cap on transactions, paid through Stripe Checkout. Your key arrives by email, you paste it into WooCommerce > FFL Firewall, and you can cancel anytime from the billing portal link in that email."));
-assert.ok(page.includes("<p class={eyebrow}>How it works</p>"));
-assert.ok(page.includes("Anyone can download and install FFL Firewall, and an unlicensed install doesn't check carts or touch orders. When you're ready for the checks to run, buy a license through Stripe Checkout, and we'll email your key to the address you used. In WordPress, go to WooCommerce > FFL Firewall, paste the key into the License key field and click Check key. If you'd like a hand with your WooCommerce store, talk to Coriolis."));
-assert.ok(page.includes("<p class={eyebrow}>Get FFL Firewall</p>"));
-assert.ok(page.includes("This is a Coriolis plugin for FFL dealers who already run WooCommerce. You can download and install it without buying anything, and when you want the checks running, one license covers unlimited transactions on your store. If you'd like a hand with your store first, talk to Coriolis."));
+assert.match(page, /<h1>A managed security service for FFL dealers, delivered as a WooCommerce plugin<\/h1>/);
+for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(page.includes(`<FflFwName n="${n}" />`), `service name ${n}`);
+assert.ok(read("src/components/FflFwName.astro").includes('<b>FFL</b> Firewall'), "name lockup component");
+const copyStrings = [
+  "A $79/month managed security service, delivered as a plugin, that adds new features over time.",
+  "It puts bot and scraper control and state shipping checks in one plugin.",
+  "blocks and throttles bots, scrapers and card testers once you switch it on, and",
+  "helps you catch items at checkout that can't ship to the buyer's ZIP.",
+  "For FFL dealers running WooCommerce. The price is a flat $79 a month, whether or not you turn on",
+  "Planned, not built yet",
+  "The three FFL Firewall services, shown with their badges.",
+  "What's in the plugin",
+  "Two services working today, and a third in planning",
+  "Bot and scraper control",
+  "It watches the traffic coming into your store, spots bots and scrapers, and blocks or throttles them before they reach checkout. The countermeasures are rate limits, user agent and header checks, honeypot form fields that only bots fill in, checkout velocity and card-testing checks, and a datacenter IP block list. Coming later, and not part of this version, is a shared Coriolis reputation feed.",
+  "Everything it does stays on your own site, where a request it catches is blocked or slowed down. It stays fully off until you switch it on with your site key, and it needs an FFL Firewall license.",
+  "State shipping checks",
+  "On both the classic and Blocks checkout, it matches each item's UPC to the shipping ZIP to help you catch restricted items. Items that can't ship there come out of the cart with a note to the shopper, items that need a permit or age check get a required acknowledgement checkbox, and orders that need a second look get an order note and a Flagged label.",
+  "If the check can't run, checkout carries on and the order is flagged for you to review.",
+  "Store hardening scan",
+  "This is an idea we're working on rather than a feature you can use today. The plan is a report, run weekly and whenever you ask for one, on WordPress.org plugin versions and configuration gaps in your store. It's meant to report only, so any changes would stay with you.",
+  "Like every future feature, it will be included in your $79/month plan when it ships.",
+  "You're still responsible for what you ship, and this is not legal advice.",
+  "starts working",
+  "The service is opt-in, so installing the plugin doesn't switch it on. Bot and scraper control stays fully off until you turn it on and add your site key, and the plugin takes care of the dealer embed from there.",
+  "Turn it on in the plugin",
+  "In WooCommerce, go to FFL Firewall, open the tab for bot and scraper control and switch the service on.",
+  "Paste your site key",
+  "Paste your site key into the Site key field and save it, which is the only setup the service needs from you.",
+  "The plugin adds the dealer embed",
+  "Once the key is saved, the plugin adds the dealer embed to your store's pages for you, and the countermeasures start once it has been seen.",
+  "Your plugin dashboard shows the service as active only while the dealer embed has been seen in the last 24 hours. If a day goes by without the plugin seeing it, the dashboard says so, which tells you to check your site key and settings. Your bill doesn't change either way, because the plan costs $79 a month whether the service is on or off.",
+  "One flat price of $79 a month",
+  ", ready whenever you activate it",
+  " transactions</li>",
+  "Every future feature we add",
+  ", included in your $79/month plan when it ships",
+  "Billing runs monthly in advance through Stripe Checkout, and you can cancel at any time.",
+  "The questions dealers ask about FFL Firewall",
+  "What do I get for $79 a month?",
+  "You get the plugin and the services in it, which today means",
+  "Every feature we add later is included at the same price.",
+  "It only starts once you switch it on and add your site key, so you choose when bot and scraper control begins. Your plugin dashboard marks it active while the script has been seen within the past day.",
+  "The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. All of that happens on your own site.",
+  "It looks at items that carry a UPC when the shopper reaches checkout. Items with no UPC pass through, and when the check can't finish, the order goes through with a Flagged label so you can review it yourself.",
+  "is a store hardening report we're planning, and it isn't built yet. The plan is for it to run weekly and on demand, report what it finds and leave every change to you.",
+  "Is FFL Firewall legal advice?",
+  "No. FFL Firewall is a tool that helps you catch restricted items at checkout, and every shipping decision stays with you and your own counsel.",
+  "Put FFL Firewall on your WooCommerce store",
+  "This is a Coriolis plugin for FFL dealers who already run WooCommerce, and one $79 monthly plan covers every service in it. If you'd like a hand with your store first, talk to Coriolis.",
+  "FFL Firewall helps you protect your store and catch restricted items at checkout. You're still responsible for what you ship, and this is not legal advice.",
+  "support@coriolisagency.com",
+];
+for (const s of copyStrings) assert.ok(page.includes(s), `Brandy v2 copy missing: ${s}`);
+// Locks: no vulnerability, compliance or vendor claims (Paul 11:16 AM ET, Chief 12:20 PM ET).
+assert.doesNotMatch(page, /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b|Wordfence|Patchstack|WPScan/i, "no vulnerability, compliance or vendor claims");
+assert.doesNotMatch(page, /free/i, "no free (also asserted above)");
+
 assert.doesNotMatch(page, /PENDING/, "no placeholders left");
 assert.ok(page.includes("You're still responsible for what you ship, and this is not legal advice."));
 assert.doesNotMatch(page, /California|Colorado|Illinois|Massachusetts|New York|Washington,?\s*D\.?C/i);
@@ -184,16 +214,7 @@ assert.ok(fs.existsSync(path.join(root, "public/brand/ffl-firewall/icon/ffl-fire
 assert.match(page, /width="278"/);
 assert.match(page, /height="80"/);
 assert.match(page, /withBase\("brand\/ffl-firewall\/ffl-firewall-lockup-on-dark\.svg"\)/);
-assert.match(page, /<picture>/);
-assert.match(page, /media="\(min-width: 640px\)" type="image\/webp" srcset=\{withBase\("brand\/ffl-firewall\/hero\/ffl-firewall-hero-desktop-1440x1152\.webp"\)\} width="1440" height="1152"/);
-assert.match(page, /media="\(min-width: 640px\)" srcset=\{withBase\("brand\/ffl-firewall\/hero\/ffl-firewall-hero-desktop-1440x1152\.jpg"\)\} width="1440" height="1152"/);
-assert.match(page, /type="image\/webp" srcset=\{withBase\("brand\/ffl-firewall\/hero\/ffl-firewall-hero-mobile-750x1200\.webp"\)\} width="750" height="1200"/);
-assert.match(page, /withBase\("brand\/ffl-firewall\/hero\/ffl-firewall-hero-mobile-750x1200\.jpg"\)/);
-assert.ok(page.includes(heroAlt), "page ships the hero alt");
-assert.match(page, /fetchpriority="high"/);
-assert.match(page, /decoding="async"/);
-assert.match(page, /loading="eager"/);
-assert.match(page, /class="mt-10 block h-auto w-full rounded-\[14px\]"/);
+assert.doesNotMatch(page, /<picture>/, "S5F: hero picture replaced by the three-service panel");
 
 // 4. Terms page: Brandy's final terms verbatim, published, not noindex.
 assert.match(terms, /path="\/ffl-firewall\/terms"/);
@@ -254,10 +275,10 @@ if (fs.existsSync(dist)) {
   for (const m of maps) assert.doesNotMatch(fs.readFileSync(path.join(dist, m), "utf8"), /\/ffl-firewall</, `${m} lists /ffl-firewall`);
   const html = fs.readFileSync(path.join(dist, "ffl-firewall", "index.html"), "utf8");
   assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
-  assert.match(html, /<title>FFL Firewall: a WooCommerce checkout plugin for FFL dealers \| Coriolis<\/title>/);
+  assert.match(html, /<title>FFL Firewall: a managed security service for WooCommerce FFL dealers \| Coriolis<\/title>/);
   // Download gate (FFL Filters component, reworded) mounted once, hidden until a download button opens it.
   assert.equal((html.match(/<div[^>]*\sdata-fflf-dl-gate[\s>=]/g) ?? []).length, 1);
-  assert.equal((html.match(/data-download="(hero|footer)"/g) ?? []).length, 2);
+  assert.equal((html.match(/data-download="(hero|pricing|footer)"/g) ?? []).length, 3);
   assert.match(html, /data-file="\/downloads\/ffl-firewall-0\.1\.3\.zip"/);
   assert.doesNotMatch(html, /data-fflfw-ea-gate/);
   assert.doesNotMatch(html, /data-early-access/);
@@ -266,10 +287,16 @@ if (fs.existsSync(dist)) {
   // The zip ships with the site, byte for byte (sha256 of ffl-firewall 0.1.3).
   const fwZip = fs.readFileSync(path.join(dist, "downloads", "ffl-firewall-0.1.3.zip"));
   assert.equal(crypto.createHash("sha256").update(fwZip).digest("hex"), "2bbd483906a76b660fe47ef1dc10712ddb8198b9cf926b59c6701c42a9641358", "ffl-firewall-0.1.3.zip sha256");
-  assert.equal((html.match(/data-buy="(hero|footer)"/g) ?? []).length, 2);
+  assert.equal((html.match(/data-buy="pricing"/g) ?? []).length, 1);
   assert.match(html, /https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s/);
   assert.match(html, />Buy a license</);
-  assert.match(html, />Download the FFL Firewall plugin</);
+  assert.match(html, />Get FFL Firewall</);
+  const mainStart = html.indexOf('class="fwl');
+  const mainEnd = html.indexOf("data-fflf-dl-gate", mainStart);
+  assert.ok(mainStart !== -1 && mainEnd > mainStart, "landing body found");
+  const text = html.slice(mainStart, mainEnd).replace(/<(script|style)[\s\S]*?<\/\1>/g, " ").replace(/<[^>]+>/g, "").replace(/&#39;|&#x27;/g, "'").replace(/\s+/g, " ");
+  for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(text.includes(`FFL Firewall · ${n}`), `built page names FFL Firewall · ${n}`);
+  assert.doesNotMatch(text, /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b/i, "no vulnerability, compliance or vendor claims on the built page");
   assert.match(html, /Read the FFL Firewall terms/);
   const termsHtml = fs.readFileSync(path.join(dist, "ffl-firewall", "terms", "index.html"), "utf8");
   assert.doesNotMatch(termsHtml, /<meta name="robots" content="noindex, nofollow"/);
@@ -289,13 +316,7 @@ if (fs.existsSync(dist)) {
     "da69a7a458f2b6b6a958ed201eae593db2faca173c4323a75ed2bc9463f62549",
     "dist og image sha256",
   );
-  const heroAltEsc = heroAlt.replaceAll('"', "&quot;").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  assert.match(html, /<picture>/);
-  assert.match(html, /<source media="\(min-width: 640px\)" type="image\/webp" srcset="\/brand\/ffl-firewall\/hero\/ffl-firewall-hero-desktop-1440x1152\.webp" width="1440" height="1152"/);
-  assert.match(html, /<source media="\(min-width: 640px\)" srcset="\/brand\/ffl-firewall\/hero\/ffl-firewall-hero-desktop-1440x1152\.jpg" width="1440" height="1152"/);
-  assert.match(html, /<source type="image\/webp" srcset="\/brand\/ffl-firewall\/hero\/ffl-firewall-hero-mobile-750x1200\.webp" width="750" height="1200"/);
-  assert.match(html, new RegExp(`src="/brand/ffl-firewall/hero/ffl-firewall-hero-mobile-750x1200.jpg"`));
-  assert.match(html, new RegExp(`alt="${heroAltEsc}"`));
+  assert.doesNotMatch(html, /<picture>/);
   for (const f of heroFiles) {
     const distHeroBuf = fs.readFileSync(path.join(dist, f.rel.replace(/^public\//, "")));
     assert.equal(crypto.createHash("sha256").update(distHeroBuf).digest("hex"), f.sha, "dist " + f.rel + " sha256");
