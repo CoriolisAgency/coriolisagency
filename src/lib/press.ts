@@ -23,6 +23,21 @@ export type PressPost = {
 
 export const PRESS_POSTS: PressPost[] = [
   {
+    slug: "eggnog-sales-151-million-pounds-nog-wars",
+    path: "/press/eggnog-sales-151-million-pounds-nog-wars",
+    kicker: "News",
+    title: "Americans bought 151.4 million pounds of eggnog in 2025, twice the 1975 total",
+    dek: "USDA counts 151.4 million pounds of eggnog sold in 2025, double 1975, while milk shrank. In YouGov's poll, 55% like it. Nog Wars, settled by data.",
+    date: "2026-11-19",
+    dateLabel: "November 19, 2026",
+    location: "",
+    ogImagePath: CANON_PATHS.eggnogOg,
+    heroImagePath: CANON_PATHS.eggnogHero,
+    imageAlt:
+      "Eggnog glass and mug with two upright and one lying Tactical Eggnog lip balm tubes beside a rifle",
+    standalone: true,
+  },
+  {
     slug: "radian-weapons-joins-vault-as-a-founding-member",
     path: "/press/radian-weapons-joins-vault-as-a-founding-member",
     kicker: "FFL Ecommerce News",

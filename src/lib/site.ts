@@ -32,6 +32,8 @@ export const CANON_PATHS = {
   tier1Kinetics: "brand/tier-1-kinetics.png",
   radianVaultHero: "brand/radian-vault-hero-1600x900.png",
   radianVaultOg: "brand/radian-vault-og-1200x630.png",
+  eggnogHero: "brand/eggnog-sales-151-million-pounds-nog-wars-hero-1600x900.webp",
+  eggnogOg: "brand/eggnog-sales-151-million-pounds-nog-wars-og-1200x630.webp",
   gsgHero: "brand/gun-store-game-hero.png",
   contactHero: "brand/contact-hero.jpg",
   grokBot: "brand/grok-bot-official.png",
