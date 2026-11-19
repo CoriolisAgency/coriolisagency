@@ -1,0 +1,139 @@
+---
+/**
+ * /press/eggnog-sales-151-million-pounds-nog-wars
+ * CA-NEWS-EGGNOG (Brandy copy 2026-11-19, /workspace/eggnog/draft.md; Paul 8:55 AM ET Nov 19 via Chief: get it live
+ * on CA in the News sections and post to GSE). Cross-post of the GSE news post; the canonical points at the
+ * GSE URL (no earlier cross-post precedent). Own page file, same layout, metadata, hero figure and NewsArticle
+ * schema as the Radian release. The two Tactical Eggnog Lip Balm links are an intentional RickRoll and carry
+ * target="_blank" rel="noopener". Listed on /press and in the sitemap via PRESS_POSTS (standalone: true).
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaRow from "../../components/CtaRow.astro";
+import { LINKS, linkClass } from "../../lib/links";
+import { pressBySlug } from "../../lib/press";
+import { SITE, SITE_ORIGIN } from "../../lib/site";
+import { withBase } from "../../lib/base";
+import { md } from "../../lib/md";
+
+const post = pressBySlug("eggnog-sales-151-million-pounds-nog-wars")!;
+const siteOrigin = Astro.site ?? new URL(SITE_ORIGIN);
+const pageUrl = new URL(withBase(post.path), siteOrigin).href;
+const canonicalUrl = "https://www.gunsearchengine.com/blog/eggnog-sales-151-million-pounds-nog-wars";
+const imageUrl = new URL(withBase(post.ogImagePath), siteOrigin).href;
+const heroPath = post.heroImagePath ?? post.ogImagePath;
+---
+
+<BaseLayout
+  title={`${post.title} | Coriolis Agency`}
+  description={post.dek}
+  path={post.path}
+  canonicalUrl={canonicalUrl}
+  ogImagePath={post.ogImagePath}
+  ogType="article"
+  publishedTime={post.date}
+  extraJsonLd={[
+    {
+      "@type": "NewsArticle",
+      "@id": `${pageUrl}#article`,
+      headline: post.title,
+      description: post.dek,
+      datePublished: post.date,
+      dateModified: post.modified ?? post.date,
+      url: pageUrl,
+      mainEntityOfPage: canonicalUrl,
+      image: imageUrl,
+      inLanguage: "en-US",
+      author: {
+        "@type": "Organization",
+        name: SITE.legalName,
+        url: LINKS.home,
+      },
+      publisher: { "@id": `${LINKS.home}/#organization` },
+      isPartOf: { "@id": `${pageUrl}#webpage` },
+    },
+  ]}
+>
+  <article class="border-b border-zinc-800/80 py-12 sm:py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <p class="text-xs text-zinc-500">
+        <a href={withBase("press")} class="hover:text-sky-300">Press</a>
+        <span class="px-1.5">/</span>
+        News
+      </p>
+      <p
+        class="mt-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-gold"
+      >
+        {post.kicker}
+      </p>
+      <h1
+        class="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl text-balance"
+      >
+        {post.title}
+      </h1>
+      <p class="mt-4 text-sm text-zinc-500">
+        {post.dateLabel}
+      </p>
+
+      <figure class="mt-8 overflow-hidden rounded-2xl ring-1 ring-white/10">
+        <img
+          src={withBase(heroPath)}
+          alt={post.imageAlt}
+          width="1600"
+          height="900"
+          class="w-full bg-[#111] object-contain"
+        />
+      </figure>
+
+      <div class="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-zinc-300">
+        <p set:html={md("USDA's Economic Research Service counted 151.4 million pounds of eggnog sold in the United States in 2025, which is almost exactly double the 76 million pounds sold in 1975. Every holiday season since at least 2024, the gun corner of X splits into pro-nog and anti-nog camps under the #NogWars hashtag, and GunSearchEngine is putting its position on the record, on the side of the nog, using the numbers below.")} />
+
+        <p set:html={md("Anyone looking for the gear table behind this post can start at [GunSearchEngine search](https://www.gunsearchengine.com/search), where the listings are slightly more serious.")} />
+
+        <h2 class="pt-4 text-lg font-semibold text-white">{"The sales record"}</h2>
+
+        <p set:html={md("The ERS series for fluid beverage milk sales lists eggnog by the million pounds from 2000 forward, with earlier benchmarks for 1975, 1980 and 1990 (76, 95 and 123 million pounds). The volume sold in 2024 was 162.4 million pounds, the highest in the series. The 2025 figure of 151.4 million pounds was 11 million pounds lower, a drop of 6.8%, and still the third-highest year since 2000 behind 2024 and 2003 (153.4 million).")} />
+
+        <p set:html={md("The anti-nog side will point at that dip, so for the record: the same series shows 2018 at 124.0 million pounds and 2019 at 121.4 million, and the category recovered both times. USDA has revised these figures over the years, so older articles quote different numbers for the same years, and the figures here are from the current ERS file.")} />
+
+        <h2 class="pt-4 text-lg font-semibold text-white">{"Eggnog against the milk aisle"}</h2>
+
+        <p set:html={md("Total fluid milk sales fell about 22% from roughly 55.4 billion pounds in 2009 to 43.2 billion pounds in 2024, according to ERS. Eggnog went from 141.9 million pounds to 162.4 million pounds over the same stretch. One carton at a time, it outgrew the aisle it sits in. It is still a niche, since buttermilk sold 441.6 million pounds in 2025, nearly three times the eggnog total, though nobody has yet organized a hashtag war over buttermilk.")} />
+
+        <h2 class="pt-4 text-lg font-semibold text-white">{"What people say when asked"}</h2>
+
+        <p set:html={md("YouGov polled 1,000 U.S. adult citizens on December 12 to 16, 2022 (margin of error about 3.5%). For plain, non-alcoholic eggnog, 23% said they love it and 32% like it, for 55% in favor. Another 33% dislike or hate it (16% and 17%), and 13% weren't sure.")} />
+
+        <p set:html={md("Age matters. Love-or-like came to 43% of adults 18 to 29, 51% of those 30 to 44, 59% of those 45 to 64 and 65% of those 65 and older. The nog's base skews toward people who have been through more holiday seasons and have the receipts.")} />
+
+        <p set:html={md("Spiked eggnog, asked of adults 21 and older, split the room more: 42% love or like it, 39% dislike or hate it and 19% weren't sure. Spiking, in other words, is the contested ground, and plain nog has the cleaner mandate.")} />
+
+        <p set:html={md("Against other holiday drinks, eggnog came fourth by love-or-like share at 55%, behind hot chocolate (90%), tea (78%) and apple cider (67%). Among respondents who named a favorite, 12% picked eggnog and 28% picked hot chocolate. Hot chocolate leads, and the data says so, though fourth place out of the full holiday lineup is a respectable showing for a drink that is mostly egg and cream.")} />
+
+        <h2 class="pt-4 text-lg font-semibold text-white">{"The war on X"}</h2>
+
+        <p><Fragment set:html={md("The #NogWars posts we found on X go back to October 2024, when a Palmetto State Armory post under #NOGWARS2024 drew about 1.0 million impressions, and the feud has returned each year since, with morale patches and a pro-nog and anti-nog magazine pair from Rougaroux Firearms on the merchandise side, plus our own ")} /><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class={linkClass} target="_blank" rel="noopener">Tactical Eggnog Lip Balm</a><Fragment set:html={md(" for operators who refuse to let the cold win the argument. On Nov. 19, 2026, [Guns.com posted](https://x.com/Guns_com/status/2123219713140588835) \"Stock up on guns, ammo, and nog.\" Our desk sees no reason to file a correction.")} /></p>
+
+        <p><Fragment set:html={md("We do not have a market share ranking for eggnog brands, a monthly sales curve or a regional poll, because none of those could be sourced to anything better than anecdote. If you have the data, send it, and apply a coat of ")} /><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class={linkClass} target="_blank" rel="noopener">Tactical Eggnog Lip Balm</a><Fragment set:html={md(" before you hit reply.")} /></p>
+
+        <p set:html={md("**Run a gun store? [List it on GunSearchEngine free.](https://www.gunsearchengine.com/for-dealers/feed?utm_source=coriolisagency&utm_medium=referral&utm_campaign=news&utm_content=eggnog-sales-151-million-pounds-nog-wars)** GSE Basic, feed sync included, is free for every FFL.")} />
+
+        <h2 class="pt-4 text-lg font-semibold text-white">Sources</h2>
+        <ul class="list-disc space-y-2 pl-5 text-sm">
+          <li><a href="https://ers.usda.gov/media/5512/fluid-beverage-milk-sales-quantities-by-product-annual.csv" class={linkClass} target="_blank" rel="noopener noreferrer">USDA Economic Research Service, "Fluid beverage milk sales quantities by product, annual" (CSV, retrieved Nov. 19, 2026) (official)</a></li>
+          <li><a href="https://www.ers.usda.gov/data-products/charts-of-note/113979" class={linkClass} target="_blank" rel="noopener noreferrer">USDA ERS, Charts of Note, fluid milk sales (official)</a></li>
+          <li><a href="https://d3nkl3psvxxpe9.cloudfront.net/documents/Combined_Holiday_Drinks_December_12_16_2022.pdf" class={linkClass} target="_blank" rel="noopener noreferrer">YouGov, combined holiday drinks poll, Dec. 12 to 16, 2022 (crosstabs)</a></li>
+          <li><a href="https://yougov.com/en-us/articles/44840-hot-chocolate-americans-favorite-holiday-beverage" class={linkClass} target="_blank" rel="noopener noreferrer">YouGov, "Hot chocolate is Americans' favorite holiday beverage" (topline)</a></li>
+          <li><a href="https://x.com/palmettoarmory/status/1852060192659173419" class={linkClass} target="_blank" rel="noopener noreferrer">Palmetto State Armory on X, Oct. 31, 2024, #NOGWARS2024</a></li>
+          <li><a href="https://x.com/Guns_com/status/2123219713140588835" class={linkClass} target="_blank" rel="noopener noreferrer">Guns.com on X, Nov. 19, 2026</a></li>
+          <li><a href="https://x.com/rougarouxpew/status/2000188841345364476" class={linkClass} target="_blank" rel="noopener noreferrer">Rougaroux Firearms, Pro-Nog and Anti-Nog magazines, Dec. 2025</a></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <CtaRow primary="contact" />
+    </div>
+  </section>
+</BaseLayout>
