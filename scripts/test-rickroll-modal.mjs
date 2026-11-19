@@ -10,14 +10,18 @@ const ok = (n) => console.log(`  ok  ${n}`);
 
 const egg = readFileSync(join(pages, "eggnog-sales-151-million-pounds-nog-wars.astro"), "utf8");
 const anchors = egg.match(/<a [^>]*data-rickroll[^>]*>/g) ?? [];
-assert.equal(anchors.length, 3, "three marked lip balm links");
+assert.equal(anchors.length, 5, "three text links plus two chart links");
+assert.equal((egg.match(/<a [^>]*data-rickroll[^>]*><img /g) ?? []).length, 2, "both charts are wrapped in the pop-up link");
+assert.ok(!/Parody notice/.test(egg), "top parody notice removed");
+assert.ok(egg.includes("](https://www.gunsearchengine.com/)"), "line-15 link goes to the GSE homepage");
+assert.ok(!egg.includes("gunsearchengine.com/search"), "no /search link");
 for (const a of anchors) {
   assert.match(a, /href="https:\/\/www\.youtube\.com\/watch\?v=dQw4w9WgXcQ"/);
   assert.match(a, /target="_blank"/);
   assert.match(a, /rel="noopener"/);
   assert.doesNotMatch(a, /#rickroll/);
 }
-ok("three marked links: normal YouTube href, target=_blank, rel=noopener");
+ok("five marked links (3 text, 2 charts): normal YouTube href, target=_blank, rel=noopener");
 assert.match(egg, /bindRickroll/);
 ok("eggnog page binds the modal script");
 
