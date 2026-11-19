@@ -67,7 +67,7 @@ assert.match(read("src/layouts/BaseLayout.astro"), /noindex && <meta name="robot
 for (const section of ["hero", "services", "activation", "pricing", "faq", "download"]) {
   assert.match(page, new RegExp(`data-section="${section}"`), `missing data-section=${section}`);
 }
-assert.match(page, /<h1>Ecommerce Security for FFLs<\/h1>/);
+assert.match(page, /<h1>Managed Ecommerce Security for FFLs<\/h1>/);
 for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(page.includes(`<FflFwName n="${n}" />`), `service name ${n}`);
 {
   const fwn = read("src/components/FflFwName.astro");
