@@ -18,22 +18,26 @@ assert.equal(lib.FFW_POPUP_HREF, "/ffl-firewall");
 assert.equal(lib.FFW_POPUP_DISMISS_KEY, "ffw_popup_dismissed_until");
 assert.equal(lib.FFW_POPUP_DISMISS_DAYS, 14);
 
+const nb = (s) => s.replace(/FFL Firewall · (ACTIVE DEFENSE|OVERWATCH|RECON)/g, (m) => m.replace(/ /g, "\u00A0"));
 const expected = {
   eyebrow: "New from Coriolis",
-  title: "FFL Firewall: managed security for FFL dealers on WooCommerce",
+  title: "FFL Firewall: shipping checks and security for FFL dealers",
   cta: "See FFL Firewall",
   later: "Not now",
   close: "Close",
   fine: "For FFL dealers running WooCommerce.",
-  body: "Three services in one plugin: FFL Firewall · ACTIVE DEFENSE for bots and scrapers, FFL Firewall · OVERWATCH for state shipping checks, and FFL Firewall · RECON for store hardening reports.",
+  body: nb("FFL Firewall · OVERWATCH helps you catch items at checkout that can't ship to the buyer's ZIP. FFL Firewall · ACTIVE DEFENSE keeps watching for bots, and FFL Firewall · RECON reports come as a bonus."),
 };
 for (const [k, v] of Object.entries(expected)) assert.equal(lib.FFW_POPUP_COPY[k], v, `copy ${k}`);
-assert.equal(lib.FFW_POPUP_COPY.price, "One flat price of $79 a month covers every service, unlimited OVERWATCH transactions and every feature we add later. You can download it and try the demo before you buy a license.", "copy price");
+assert.equal(lib.FFW_POPUP_COPY.price, nb("A flat $79 a month covers every service, unlimited FFL Firewall · OVERWATCH transactions and future features. You can download it and try the demo before you buy a license."), "copy price");
+// FFLF-FIREWALL-V1-OVERWATCH-LEAD: every service name uses non-breaking spaces, never a plain-space form.
+for (const v of Object.values(lib.FFW_POPUP_COPY)) assert.doesNotMatch(v, /FFL Firewall · |FFL Firewall\u00A0· |· (ACTIVE DEFENSE|OVERWATCH|RECON)/, `plain-space service name in: ${v}`);
+assert.equal((lib.FFW_POPUP_COPY.body.match(/FFL\u00A0Firewall\u00A0·\u00A0(OVERWATCH|ACTIVE\u00A0DEFENSE|RECON)/g) ?? []).length, 3, "body names three services with nbsp");
 // FFLF-FIREWALL-V1-POPUP-COPY: none of the old cart-check wording remains.
 for (const f of ["src/lib/ffl-firewall-popup.ts", "src/components/FflFirewallPopup.astro", "public/popup/ffl-firewall-popup.js"]) {
   assert.doesNotMatch(read(f), /by UPC|ZIP code|cart by|Stop selling guns|built-in demo|takes out anything restricted/i, `${f} has old cart-check wording`);
 }
-for (const v of Object.values(lib.FFW_POPUP_COPY)) assert.doesNotMatch(v, /\bUPC\b|\bZIP\b|\bcart\b/i, `no cart-check wording in: ${v}`);
+for (const v of Object.values(lib.FFW_POPUP_COPY)) assert.doesNotMatch(v, /\bUPC\b|\bcart\b/i, `no cart-check wording in: ${v}`);
 
 const all = [...Object.values(lib.FFW_POPUP_COPY), ...read("src/components/FflFirewallPopup.astro").match(/>[^<>{}]*[A-Za-z][^<>{}]*</g) ?? []];
 for (const s of all) assert.doesNotMatch(s, /free/i, `no "free" in: ${s}`);

@@ -5,8 +5,9 @@ interface Props {
 }
 const { n } = Astro.props;
 ---
-<span class="fwn"><b>FFL</b> Firewall{n && <><i class="dot"> · </i><b>{n}</b></>}</span>
+<span class="fwn"><b>FFL</b>&nbsp;Firewall{n && <><i class="dot">&nbsp;·&nbsp;</i><b>{n.replace(/ /g, "\u00A0")}</b></>}</span>
 <style>
+  .fwn { white-space: nowrap; }
   .fwn b { font-weight: 700; }
   .fwn .dot { color: #E53E3E; font-style: normal; font-weight: 700; }
 </style>
