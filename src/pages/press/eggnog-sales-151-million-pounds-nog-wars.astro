@@ -111,9 +111,9 @@ const heroPath = post.heroImagePath ?? post.ogImagePath;
 
         <h2 class="pt-4 text-lg font-semibold text-white">{"The war on X"}</h2>
 
-        <p><Fragment set:html={md("The #NogWars posts we found on X go back to October 2024, when a Palmetto State Armory post under #NOGWARS2024 drew about 1.0 million impressions, and the feud has returned each year since, with morale patches and a pro-nog and anti-nog magazine pair from Rougaroux Firearms on the merchandise side, plus our own ")} /><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class={linkClass} target="_blank" rel="noopener">Tactical Eggnog Lip Balm</a><Fragment set:html={md(" for operators who refuse to let the cold win the argument. On Nov. 19, 2026, [Guns.com posted](https://x.com/Guns_com/status/2123219713140588835) \"Stock up on guns, ammo, and nog.\" Our desk sees no reason to file a correction.")} /></p>
+        <p><Fragment set:html={md("The #NogWars posts we found on X go back to October 2024, when a Palmetto State Armory post under #NOGWARS2024 drew about 1.0 million impressions, and the feud has returned each year since, with morale patches and a pro-nog and anti-nog magazine pair from Rougaroux Firearms on the merchandise side, plus our own ")} /><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class={linkClass} target="_blank" rel="noopener" data-rickroll>Tactical Eggnog Lip Balm</a><Fragment set:html={md(" for operators who refuse to let the cold win the argument. On Nov. 19, 2026, [Guns.com posted](https://x.com/Guns_com/status/2123219713140588835) \"Stock up on guns, ammo, and nog.\" Our desk sees no reason to file a correction.")} /></p>
 
-        <p><Fragment set:html={md("We do not have a market share ranking for eggnog brands, a monthly sales curve or a regional poll, because none of those could be sourced to anything better than anecdote. If you have the data, send it, and apply a coat of ")} /><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class={linkClass} target="_blank" rel="noopener">Tactical Eggnog Lip Balm</a><Fragment set:html={md(" before you hit reply.")} /></p>
+        <p><Fragment set:html={md("We do not have a market share ranking for eggnog brands, a monthly sales curve or a regional poll, because none of those could be sourced to anything better than anecdote. If you have the data, send it, and apply a coat of ")} /><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class={linkClass} target="_blank" rel="noopener" data-rickroll>Tactical Eggnog Lip Balm</a><Fragment set:html={md(" before you hit reply.")} /></p>
 
         <p set:html={md("**Run a gun store? [List it on GunSearchEngine free.](https://www.gunsearchengine.com/for-dealers/feed?utm_source=coriolisagency&utm_medium=referral&utm_campaign=news&utm_content=eggnog-sales-151-million-pounds-nog-wars)** GSE Basic, feed sync included, is free for every FFL.")} />
 
@@ -137,3 +137,8 @@ const heroPath = post.heroImagePath ?? post.ogImagePath;
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import { bindRickroll } from "../../scripts/rickroll-modal";
+  bindRickroll(document);
+</script>
