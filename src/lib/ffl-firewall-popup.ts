@@ -1,15 +1,15 @@
 /**
  * CA-FFLF-POPUP: strings and rules for the site-wide FFL Firewall pop-up.
- * Copy is verbatim from Brandy's popup-v2 COPY.md (v2b). Paul approved the
+ * Copy is verbatim from Brandy's popup-v2 COPY-rebrand-2026-11-19.md (Paul 12:53 PM ET). Paul approved the
  * pop-up 10:33 AM ET, the map hero 10:54 AM ET, and white card F01 on desktop
  * 11:00 AM ET. No event tracking of any kind (not approved).
  */
 export const FFW_POPUP_COPY = {
   eyebrow: "New from Coriolis",
-  title: "Stop selling guns and ammo into states and ZIP codes where they can't ship",
-  body: "FFL Firewall checks every item in a WooCommerce cart by UPC against the shopper's ZIP code, and takes out anything restricted there before the order goes through.",
+  title: "FFL Firewall: managed security for FFL dealers on WooCommerce",
+  body: "Three services in one plugin: FFL Firewall · ACTIVE DEFENSE for bots and scrapers, FFL Firewall · OVERWATCH for state shipping checks, and FFL Firewall · RECON for store hardening reports.",
   price:
-    "FFL Firewall is a paid plugin with a built-in demo. No purchase is needed to download it, and a license turns the checks on for $79 a month with unlimited transactions.",
+    "One flat price of $79 a month covers every service, unlimited OVERWATCH transactions and every feature we add later. You can download it and try the demo before you buy a license.",
   cta: "See FFL Firewall",
   later: "Not now",
   close: "Close",
