@@ -95,7 +95,7 @@ const copyStrings = [
   "On both the classic and Blocks checkout, it matches each item's UPC to the shipping ZIP to help you catch items that can't ship there. Those items come out of the cart with a note to the shopper, items that need a permit or age check get a required acknowledgement checkbox, and orders that need a second look get an order note and a Flagged label.",
   "If the check can't run, checkout carries on and the order is flagged for you to review.",
   "Once you switch it on with your site key, the plugin adds the dealer embed for you, and from then on it stays on and keeps watching the traffic coming into your store. It spots bots and scrapers and blocks or throttles them before they reach checkout, using rate limits, user agent and header checks, honeypot form fields that only bots fill in, checkout velocity and card-testing checks, and a datacenter IP block list.",
-  "Everything it does stays on your own site, where a request it catches is blocked or slowed down. A shared Coriolis reputation feed is coming later and isn't part of this version, and the service needs an FFL Firewall license.",
+  "Each check runs on your own site, where a request it catches is blocked or slowed down. You can also join the shared reputation feed, a separate opt-in that's off by default: your store reports the bots its checks catch as salted hashes, never shopper details, and receives a list of bots that other FFL Firewall stores have reported. The feed works only while <FflFwName n=\"ACTIVE DEFENSE\" /> is on, and the service needs an FFL Firewall license.",
   "It's a bonus that comes with your plan. Every week, and whenever you press Run scan, it compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org, flags configuration gaps in your setup and lists what to fix first.",
   "It reports only and makes no automatic fixes, so every change stays in your hands.",
   "You're still responsible for what you ship, and this is not legal advice.",
@@ -134,6 +134,7 @@ for (const s of copyStrings) assert.ok(page.includes(s), `Brandy v3 copy missing
 assert.doesNotMatch(page, /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b|Wordfence|Patchstack|WPScan/i, "no vulnerability, compliance or vendor claims");
 assert.doesNotMatch(page, /free/i, "no free (also asserted above)");
 // RECON is live (Paul 12:42 PM ET): no planned / ships wording anywhere on the page.
+assert.doesNotMatch(page, /reputation feed is coming later|isn't part of this version/i, "the shared feed is not described as coming later");
 assert.doesNotMatch(page, /Planned|when it ships|planning|isn't built|not built/i, "RECON is presented as live");
 assert.doesNotMatch(page, /class="sv plan"|cc dim/, "no planned-tag markup left");
 
