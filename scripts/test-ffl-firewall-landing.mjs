@@ -119,7 +119,7 @@ const copyStrings = [
   "whenever you switch it on and",
   "reports as a bonus. Every feature we add later is included at the same price.",
   "It only starts once you switch it on and add your site key, so you choose when bot and scraper control begins. After that it stays on, and your plugin dashboard marks it active while the dealer embed has been seen within the past day.",
-  "The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. All of that happens on your own site.",
+  "The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. Those checks run on your own site; if you've joined the shared reputation feed, your store also reports the bots it catches as salted hashes, never shopper details.",
   "It looks at items that carry a UPC when the shopper reaches checkout. Items with no UPC pass through, and when the check can't finish, the order goes through with a Flagged label so you can review it yourself.",
   "is a bonus store hardening report that runs weekly and on demand. It checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps, then leaves every change to you, since it never fixes anything on its own.",
   "Is FFL Firewall legal advice?",
