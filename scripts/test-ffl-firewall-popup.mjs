@@ -46,6 +46,9 @@ for (const f of ["src/lib/ffl-firewall-popup.ts", "src/components/FflFirewallPop
   assert.doesNotMatch(read(f), /gtag|dataLayer|fetch\(|sendBeacon|XMLHttpRequest|\banalytics\b/i, `${f} has no tracking`);
 }
 
+// OVERWATCH-LEAD: the v3 body keeps each service name on one line, so the phone sheet tightens its body tracking to stay at the same height (4 body lines, 351 px at 390x844).
+assert.match(read("src/components/FflFirewallPopup.astro"), /\.ffw-sheet \.ffw-p\{font-size:14px;margin-top:8px;letter-spacing:-\.02em\}/, "phone sheet body tracking keeps the sheet height");
+
 // Page rule: ONLY /ffl-firewall (and its slash form)
 for (const p of ["/ffl-firewall", "/ffl-firewall/"]) assert.equal(lib.ffwPopupAllowed(p), true, p);
 for (const p of ["/", "/ecommerce", "/pos", "/contact", "/ffl-firewall/terms", "/ffl-firewall/terms/", "/ffl-firewalls-x", "/blog/ffl-firewall"]) assert.equal(lib.ffwPopupAllowed(p), false, p);
