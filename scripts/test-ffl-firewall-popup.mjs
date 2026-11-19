@@ -20,14 +20,20 @@ assert.equal(lib.FFW_POPUP_DISMISS_DAYS, 14);
 
 const expected = {
   eyebrow: "New from Coriolis",
-  title: "Stop selling guns and ammo into states and ZIP codes where they can't ship",
+  title: "FFL Firewall: managed security for FFL dealers on WooCommerce",
   cta: "See FFL Firewall",
   later: "Not now",
   close: "Close",
   fine: "For FFL dealers running WooCommerce.",
-  body: "FFL Firewall checks every item in a WooCommerce cart by UPC against the shopper's ZIP code, and takes out anything restricted there before the order goes through.",
+  body: "Three services in one plugin: FFL Firewall · ACTIVE DEFENSE for bots and scrapers, FFL Firewall · OVERWATCH for state shipping checks, and FFL Firewall · RECON for store hardening reports.",
 };
 for (const [k, v] of Object.entries(expected)) assert.equal(lib.FFW_POPUP_COPY[k], v, `copy ${k}`);
+assert.equal(lib.FFW_POPUP_COPY.price, "One flat price of $79 a month covers every service, unlimited OVERWATCH transactions and every feature we add later. You can download it and try the demo before you buy a license.", "copy price");
+// FFLF-FIREWALL-V1-POPUP-COPY: none of the old cart-check wording remains.
+for (const f of ["src/lib/ffl-firewall-popup.ts", "src/components/FflFirewallPopup.astro", "public/popup/ffl-firewall-popup.js"]) {
+  assert.doesNotMatch(read(f), /by UPC|ZIP code|cart by|Stop selling guns|built-in demo|takes out anything restricted/i, `${f} has old cart-check wording`);
+}
+for (const v of Object.values(lib.FFW_POPUP_COPY)) assert.doesNotMatch(v, /\bUPC\b|\bZIP\b|\bcart\b/i, `no cart-check wording in: ${v}`);
 
 const all = [...Object.values(lib.FFW_POPUP_COPY), ...read("src/components/FflFirewallPopup.astro").match(/>[^<>{}]*[A-Za-z][^<>{}]*</g) ?? []];
 for (const s of all) assert.doesNotMatch(s, /free/i, `no "free" in: ${s}`);

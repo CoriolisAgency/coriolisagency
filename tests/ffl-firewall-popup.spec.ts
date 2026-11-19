@@ -15,7 +15,7 @@ test.describe("FFL Firewall pop-up, desktop", () => {
     await page.goto(FW);
     await expect(page.locator("#ffw-popup-root")).toBeHidden();
     await scrollDeep(page);
-    const dlg = page.getByRole("dialog", { name: /Stop selling guns and ammo/ });
+    const dlg = page.getByRole("dialog", { name: /managed security for FFL dealers/ });
     await expect(dlg).toBeVisible();
     await expect(dlg).toHaveAttribute("aria-modal", "true");
     const box = (await dlg.boundingBox())!;
@@ -88,7 +88,7 @@ test.describe("FFL Firewall pop-up, desktop", () => {
   test("CTA on /ffl-firewall closes the pop-up instead of navigating", async ({ page }) => {
     await page.goto(FW);
     await scrollDeep(page);
-    const dlg = page.getByRole("dialog", { name: /Stop selling guns and ammo/ });
+    const dlg = page.getByRole("dialog", { name: /managed security for FFL dealers/ });
     await dlg.getByRole("link", { name: "See FFL Firewall" }).click();
     await expect(page.locator("#ffw-popup-root")).toBeHidden();
     await expect(page).toHaveURL(/\/ffl-firewall$/);
@@ -107,7 +107,7 @@ test.describe("FFL Firewall pop-up, phone", () => {
   test("bottom sheet is about 40% of the screen and swipes away", async ({ page }) => {
     await page.goto(FW);
     await scrollDeep(page);
-    const sheet = page.getByRole("dialog", { name: /Stop selling guns and ammo/ });
+    const sheet = page.getByRole("dialog", { name: /managed security for FFL dealers/ });
     await expect(sheet).toBeVisible();
     await expect(sheet).toHaveAttribute("aria-modal", "false");
     await page.waitForTimeout(400);
