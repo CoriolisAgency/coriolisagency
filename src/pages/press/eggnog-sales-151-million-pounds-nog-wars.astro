@@ -75,6 +75,7 @@ const heroPath = post.heroImagePath ?? post.ogImagePath;
       </p>
 
       <figure class="mt-8 overflow-hidden rounded-2xl ring-1 ring-white/10">
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener" data-rickroll class="block">
         <img
           src={withBase(heroPath)}
           alt={post.imageAlt}
@@ -82,9 +83,12 @@ const heroPath = post.heroImagePath ?? post.ogImagePath;
           height="900"
           class="w-full bg-[#111] object-contain"
         />
+        </a>
       </figure>
 
       <div class="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-zinc-300">
+        <blockquote class="border-l-2 border-gold/60 pl-4 text-zinc-200"><p><strong>A message from the Institute&#39;s sponsor:</strong> Tactical Eggnog Lip Balm was issued to all 1,776 respondents in this study, and the Institute&#39;s ethics board, meeting once again in the parking lot, has cleared it for operators who refuse to let the cold win the argument.</p><p class="mt-3"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener" data-rickroll class="text-gold underline">Requisition your Tactical Eggnog Lip Balm</a></p></blockquote>
+
         <p><Fragment set:html={md("USDA's Economic Research Service counted 151.4 million pounds of eggnog sold in the United States in 2025, and the GunSearchEngine Institute for Nog Studies, an independent research body funded entirely by people who like eggnog, has spent the 2026 field season asking what all that nog says about the firearm brands Americans follow on X. Readers who came for guns rather than dairy science can retreat to [GunSearchEngine](https://www.gunsearchengine.com/), where the data is real and nobody has been assigned a Nog Index.")} /></p>
 
         <h2 class="pt-4 text-lg font-semibold text-white">{"Executive summary"}</h2>
