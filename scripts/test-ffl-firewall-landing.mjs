@@ -225,8 +225,8 @@ assert.doesNotMatch(terms, /^\s*noindex\s*$/m, "terms page must not pass noindex
 assert.ok(terms.includes("FFL Firewall terms"));
 assert.ok(terms.includes("Effective the day FFL Firewall billing launches."));
 assert.ok(terms.includes("Who provides FFL Firewall"));
-assert.ok(terms.includes("FFL Firewall is a managed security service for FFL dealers, delivered as a WooCommerce plugin, made up of FFL Firewall · ACTIVE DEFENSE, FFL Firewall · OVERWATCH and FFL Firewall · RECON, and provided by Coriolis, LLC. If you have a question about these terms or about the plugin, write to Coriolis support at support@coriolisagency.com."));
-assert.ok(terms.includes("a managed security service for FFL dealers, delivered as a WooCommerce plugin"), "terms carry the locked positioning");
+assert.ok(terms.includes("FFL Firewall is a managed security service for FFL dealers, provided by Coriolis, LLC and delivered as a WooCommerce plugin. It includes three services: FFL Firewall · ACTIVE DEFENSE, FFL Firewall · OVERWATCH and FFL Firewall · RECON. If you have a question about these terms or about the plugin, write to Coriolis support at support@coriolisagency.com."));
+assert.ok(terms.includes("a managed security service for FFL dealers, provided by Coriolis, LLC and delivered as a WooCommerce plugin. It includes three services:"), "terms carry the locked positioning");
 for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(terms.includes("FFL Firewall \u00b7 " + n), "terms name " + n);
 assert.doesNotMatch(terms, /checkout plugin/i, "terms do not call it a checkout plugin");
 assert.doesNotMatch(terms, /forever|compliance|compliant/i, "terms positioning has no forever/compliance");
