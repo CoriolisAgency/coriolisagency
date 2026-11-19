@@ -10,14 +10,14 @@ const ok = (n) => console.log(`  ok  ${n}`);
 
 const egg = readFileSync(join(pages, "eggnog-sales-151-million-pounds-nog-wars.astro"), "utf8");
 const anchors = egg.match(/<a [^>]*data-rickroll[^>]*>/g) ?? [];
-assert.equal(anchors.length, 2, "two marked lip balm links");
+assert.equal(anchors.length, 3, "three marked lip balm links");
 for (const a of anchors) {
   assert.match(a, /href="https:\/\/www\.youtube\.com\/watch\?v=dQw4w9WgXcQ"/);
   assert.match(a, /target="_blank"/);
   assert.match(a, /rel="noopener"/);
   assert.doesNotMatch(a, /#rickroll/);
 }
-ok("two marked links: normal YouTube href, target=_blank, rel=noopener");
+ok("three marked links: normal YouTube href, target=_blank, rel=noopener");
 assert.match(egg, /bindRickroll/);
 ok("eggnog page binds the modal script");
 
