@@ -3,8 +3,8 @@
  * FFL Firewall landing page. FFLF-FIREWALL-V1-S5F: rebrand around the three
  * services (ACTIVE DEFENSE, OVERWATCH, RECON) and the flat $79/month.
  * Copy is Brandy's v2 landing copy, verbatim (Paul approved the mocks 11:16 AM
- * ET Nov 19, 2026). RECON is planned, not built: WordPress.org versions and
- * configuration gaps only.
+ * ET Nov 19, 2026), updated for RECON live (Paul 12:42 PM ET). RECON covers
+ * WordPress.org versions and configuration gaps only.
  * Download gate, Stripe buy link and terms link are unchanged (S3B-BUY, 0.1.3 zip).
  * The page stays noindex, nofollow. Guarded by scripts/test-ffl-firewall-landing.mjs.
  *
@@ -21,7 +21,6 @@ import { withBase } from "../../lib/base";
 const contact = withBase("contact");
 const terms = withBase("ffl-firewall/terms");
 const buyHref = "https://checkout.coriolisagency.com/b/6oU7sM3obb7c5phf2o1440s";
-const buyLabel = "Buy a license";
 const getLabel = "Get FFL Firewall";
 const contactLabel = "Talk to Coriolis";
 // The plugin zip, public/downloads/ffl-firewall-0.1.3.zip (0.1.1 and 0.1.2 stay in place).
@@ -39,9 +38,9 @@ const gate = {
   buyLabel: "Buy a license",
 };
 const logo = withBase("brand/ffl-firewall/ffl-firewall-lockup-on-dark.svg");
-const ogImage = "og/ffl-firewall-og.jpg";
+const ogImage = "og/ffl-firewall-og.png";
 const ogImageAlt =
-  `The FFL Firewall logo and the headline "A WooCommerce plugin that checks the cart at checkout for FFL dealers" sit on a dark navy background. Beside them, a stylized checkout in a browser window shows a cart with one item pulled out and a message that the item can't be shipped to the zip code the shopper entered.`;
+  "FFL Firewall: ACTIVE DEFENSE, OVERWATCH and RECON in one WooCommerce plugin for FFL dealers, $79/month.";
 ---
 
 <BaseLayout
@@ -61,7 +60,7 @@ const ogImageAlt =
       <div class="eb">FFL Firewall</div>
       <h1>A managed security service for FFL dealers, delivered as a WooCommerce plugin</h1>
       <p class="pos">A $79/month managed security service, delivered as a plugin, that adds new features over time.</p>
-      <p>It puts bot and scraper control and state shipping checks in one plugin. <FflFwName n="ACTIVE DEFENSE" /> blocks and throttles bots, scrapers and card testers once you switch it on, and <FflFwName n="OVERWATCH" /> helps you catch items at checkout that can't ship to the buyer's ZIP.</p>
+      <p>It puts bot and scraper control, state shipping checks and a store hardening report in one plugin. <FflFwName n="ACTIVE DEFENSE" /> blocks and throttles bots, scrapers and card testers once you switch it on, <FflFwName n="OVERWATCH" /> helps you catch items at checkout that can't ship to the buyer's ZIP, and <FflFwName n="RECON" /> reports the weak spots in your store's setup so you can fix them.</p>
       <div class="btns">
         <a href={download} class="btn red" download data-download="hero">{getLabel}</a>
         <a href={contact} class="btn">{contactLabel}</a>
@@ -71,7 +70,7 @@ const ogImageAlt =
         <div class="crow">
           <div class="cc"><FflFwGlyph kind="active-defense" /><div class="nm">ACTIVE DEFENSE</div><div class="k">Bot and scraper control</div></div>
           <div class="cc"><FflFwGlyph kind="overwatch" /><div class="nm">OVERWATCH</div><div class="k">State shipping checks</div></div>
-          <div class="cc dim"><FflFwGlyph kind="recon" /><div class="nm">RECON</div><div class="k">Store hardening scan</div><span class="ptag">Planned, not built yet</span></div>
+          <div class="cc"><FflFwGlyph kind="recon" /><div class="nm">RECON</div><div class="k">Store hardening scan</div></div>
         </div>
         <p class="cap">The three FFL Firewall services, shown with their badges.</p>
       </div>
@@ -81,7 +80,7 @@ const ogImageAlt =
   <section class="fwl-sec" data-section="services">
     <div class="col">
       <div class="eb">What's in the plugin</div>
-      <h2>Two services working today, and a third in planning</h2>
+      <h2>Three services in one plugin</h2>
       <div class="svc">
         <div class="sv">
           <FflFwGlyph kind="active-defense" size={56} />
@@ -101,13 +100,13 @@ const ogImageAlt =
             <p>If the check can't run, checkout carries on and the order is flagged for you to review.</p>
           </div>
         </div>
-        <div class="sv plan">
+        <div class="sv">
           <FflFwGlyph kind="recon" size={56} />
           <div>
             <h3><FflFwName n="RECON" /></h3>
-            <div class="k">Store hardening scan<span class="ptag">Planned, not built yet</span></div>
-            <p>This is an idea we're working on rather than a feature you can use today. The plan is a report, run weekly and whenever you ask for one, on WordPress.org plugin versions and configuration gaps in your store. It's meant to report only, so any changes would stay with you.</p>
-            <p>Like every future feature, it will be included in your $79/month plan when it ships.</p>
+            <div class="k">Store hardening scan</div>
+            <p>It runs a store hardening check every week and whenever you press Run scan. It compares the versions of your plugins, themes and WordPress core to the current releases on WordPress.org, flags configuration gaps in your setup, and lists what to fix first.</p>
+            <p>It reports only and never changes anything on your site, so every fix stays in your hands. It needs an FFL Firewall license and is included in your $79/month plan.</p>
           </div>
         </div>
       </div>
@@ -141,12 +140,11 @@ const ogImageAlt =
             <li><FflFwName n="ACTIVE DEFENSE" />, ready whenever you activate it</li>
             <li>Unlimited <FflFwName n="OVERWATCH" /> transactions</li>
             <li>Every future feature we add</li>
-            <li><FflFwName n="RECON" />, included in your $79/month plan when it ships</li>
+            <li><FflFwName n="RECON" /> weekly and on-demand reports</li>
           </ul>
           <p class="small">You pay the same $79 a month whether or not <FflFwName n="ACTIVE DEFENSE" /> is on. Billing runs monthly in advance through Stripe Checkout, and you can cancel at any time. <a href={terms} class="lnk">Read the FFL Firewall terms</a></p>
           <div class="btns tight">
             <a href={download} class="btn red" download data-download="pricing">{getLabel}</a>
-            <a href={buyHref} class="btn" data-buy="pricing">{buyLabel}</a>
           </div>
         </div>
       </div>
@@ -161,7 +159,7 @@ const ogImageAlt =
       <div class="q"><b>Why is <FflFwName n="ACTIVE DEFENSE" /> off when I install the plugin?</b><p>It only starts once you switch it on and add your site key, so you choose when bot and scraper control begins. Your plugin dashboard marks it active while the script has been seen within the past day.</p></div>
       <div class="q"><b>What happens to a bot that <FflFwName n="ACTIVE DEFENSE" /> catches?</b><p>The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. All of that happens on your own site.</p></div>
       <div class="q"><b>Does <FflFwName n="OVERWATCH" /> look at every order?</b><p>It looks at items that carry a UPC when the shopper reaches checkout. Items with no UPC pass through, and when the check can't finish, the order goes through with a Flagged label so you can review it yourself.</p></div>
-      <div class="q"><b>What is <FflFwName n="RECON" />?</b><p><FflFwName n="RECON" /> is a store hardening report we're planning, and it isn't built yet. The plan is for it to run weekly and on demand, report what it finds and leave every change to you.</p></div>
+      <div class="q"><b>What is <FflFwName n="RECON" />?</b><p><FflFwName n="RECON" /> is a store hardening report that runs weekly and on demand. It checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps, then leaves every change to you, since it never fixes anything on its own.</p></div>
       <div class="q"><b>Is FFL Firewall legal advice?</b><p>No. FFL Firewall is a tool that helps you catch restricted items at checkout, and every shipping decision stays with you and your own counsel.</p></div>
     </div>
   </section>
@@ -216,8 +214,6 @@ const ogImageAlt =
   .cc { background: #0A1220; border: 1px solid #26344a; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
   .cc .nm { font-weight: 700; letter-spacing: .6px; font-size: 15px; color: #fff; }
   .cc .k { font-size: 12px; color: #A1A1AA; }
-  .cc.dim :global(.glyph) { opacity: .5; }
-  .ptag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: #fcd34d; border: 1px dashed #b98f1e; border-radius: 4px; padding: 2px 8px; align-self: flex-start; }
   .fwl .cap { font-size: 12px; color: #A1A1AA; margin: 10px 0 0; text-align: center; }
   .svc { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 26px; }
   .sv { background: #0F1B2D; border: 1px solid #26344a; border-radius: 12px; padding: 26px 28px; display: grid; grid-template-columns: 64px 1fr; gap: 18px; }
@@ -225,8 +221,6 @@ const ogImageAlt =
   .sv .k { color: #A1A1AA; font-size: 14px; margin: 2px 0 12px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
   .fwl .sv p { font-size: 15.5px; }
   .fwl .sv p:last-child { margin: 0; }
-  .sv.plan { border-style: dashed; }
-  .sv.plan :global(.glyph) { opacity: .55; }
   .fwl .foot { font-size: 13px; color: #A1A1AA; margin-top: 16px; }
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 26px 0 18px; }
   .stp { background: #0F1B2D; border: 1px solid #26344a; border-radius: 12px; padding: 22px; }
