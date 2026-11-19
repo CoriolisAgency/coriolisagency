@@ -243,6 +243,29 @@ assert.ok(terms.includes("FFL Firewall costs $79 a month, and there is no free t
 assert.ok(terms.includes("These terms are governed by the laws of the State of South Carolina, and any dispute will be heard in Greenville County, South Carolina."));
 assert.match(read("public/robots.txt"), /^Allow: \/ffl-firewall\/terms$/m);
 
+// 4b. FFLF-FIREWALL-V1-S6-REPUTATION-FEED (S6E): Brandy's shared reputation feed terms lines, verbatim,
+// in their own section right after "What the plugin sends to Coriolis", whose last line stays as it is.
+{
+  const feedParas = [
+      "The shared reputation feed is a separate opt-in with its own switch, and it's off by default, so turning on FFL Firewall · ACTIVE DEFENSE doesn't turn it on. One switch covers both directions, so joining means your store reports the bots its checks catch and receives a list of bots that other FFL Firewall stores have reported. The feed only works while FFL Firewall · ACTIVE DEFENSE is on, and it needs an active FFL Firewall license.",
+      "If you join the feed, the plugin sends Coriolis, LLC signals about the bots your store catches, and nothing about your shoppers. The signals are salted hashes of the IP addresses and IPv6 networks the bots came from, the bot's user agent when a request fails the user agent check, and the type of pattern caught, such as a honeypot form field or a run of failed payments. Raw IP addresses stay on your store, because the plugin hashes them before anything is sent. Rate-limit hits stay on your store too and are never sent to the feed. Shoppers are never named or identified, and the plugin sends no names, emails, addresses, orders, cart contents or payment details.",
+      "Coriolis, LLC uses feed signals only to build the shared reputation list. Coriolis deletes your store's reports 30 days after each one was last seen. Once you switch the feed off, your store stops sending signals and stops using the shared list.",
+      "If the feed stops a real visitor on your store, you can mark that visitor as Not a bot from the plugin. The visitor is unblocked on your store right away, and Coriolis reviews whether to take them off the network list. Coriolis decides the result of each review and doesn't commit to a particular result or a time for it."
+  ];
+  const sends = terms.indexOf("What the plugin sends to Coriolis</h2>");
+  const head = terms.indexOf(">The shared reputation feed</h2>");
+  const next = terms.indexOf("When the check can't run</h2>");
+  assert.ok(sends !== -1 && head > sends && next > head, "feed section sits after What the plugin sends to Coriolis");
+  assert.ok(terms.includes("It never sends the shopper's name.</p>"), "the sends section's last line is unchanged");
+  let at = head;
+  for (const p of feedParas) {
+    const i = terms.indexOf("<p class=\"mt-2\">" + p + "</p>", at);
+    assert.ok(i > at && i < next, "feed terms paragraph verbatim and in order: " + p.slice(0, 40));
+    at = i;
+  }
+  assert.doesNotMatch(terms.slice(head, next), /anonymi[sz]ed/i, "feed terms never say anonymized");
+}
+
 // 5. Nav: FFL Firewall sits in the FFL Plugins dropdown (CA-NAV-FFL-PLUGINS).
 const navRel = "src/lib/nav.ts";
 const nav = read(navRel);
