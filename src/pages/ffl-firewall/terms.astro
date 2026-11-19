@@ -2,6 +2,8 @@
 /**
  * FFL Firewall terms. Source: brand/ffl-firewall/terms/ffl-firewall-terms-final.md,
  * published verbatim for FFLF-FIREWALL-V1-S3B-BUY (Karp amendment 7c5cd47).
+ * "The shared reputation feed" section: Brandy's terms lines, verbatim, from
+ * TERMS-feed-lines-2026-11-19.md (Paul approved 1:41 PM ET; ships with S6E, Paul 1:35 PM ET).
  */
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
@@ -37,6 +39,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <section>
         <h2 class="text-base font-semibold text-white">What the plugin sends to Coriolis</h2>
         <p class="mt-2">To run the product check, the plugin sends only the UPC of each product in the cart and the zip code the shopper entered at checkout. To check your license, it sends your license key and your site's URL. It never sends the shopper's name.</p>
+      </section>
+      <section>
+        <h2 class="text-base font-semibold text-white">The shared reputation feed</h2>
+        <p class="mt-2">The shared reputation feed is a separate opt-in with its own switch, and it's off by default, so turning on FFL Firewall · ACTIVE DEFENSE doesn't turn it on. One switch covers both directions, so joining means your store reports the bots its checks catch and receives a list of bots that other FFL Firewall stores have reported. The feed only works while FFL Firewall · ACTIVE DEFENSE is on, and it needs an active FFL Firewall license.</p>
+        <p class="mt-2">If you join the feed, the plugin sends Coriolis, LLC signals about the bots your store catches, and nothing about your shoppers. The signals are salted hashes of the IP addresses and IPv6 networks the bots came from, the bot's user agent when a request fails the user agent check, and the type of pattern caught, such as a honeypot form field or a run of failed payments. Raw IP addresses stay on your store, because the plugin hashes them before anything is sent. Rate-limit hits stay on your store too and are never sent to the feed. Shoppers are never named or identified, and the plugin sends no names, emails, addresses, orders, cart contents or payment details.</p>
+        <p class="mt-2">Coriolis, LLC uses feed signals only to build the shared reputation list. Coriolis deletes your store's reports 30 days after each one was last seen. Once you switch the feed off, your store stops sending signals and stops using the shared list.</p>
+        <p class="mt-2">If the feed stops a real visitor on your store, you can mark that visitor as Not a bot from the plugin. The visitor is unblocked on your store right away, and Coriolis reviews whether to take them off the network list. Coriolis decides the result of each review and doesn't commit to a particular result or a time for it.</p>
       </section>
       <section>
         <h2 class="text-base font-semibold text-white">When the check can't run</h2>
