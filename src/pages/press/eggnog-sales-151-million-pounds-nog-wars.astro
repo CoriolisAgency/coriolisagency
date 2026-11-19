@@ -11,7 +11,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import CtaRow from "../../components/CtaRow.astro";
 import { LINKS, linkClass } from "../../lib/links";
 import { pressBySlug } from "../../lib/press";
-import { SITE, SITE_ORIGIN } from "../../lib/site";
+import { CANON_PATHS, SITE, SITE_ORIGIN } from "../../lib/site";
 import { withBase } from "../../lib/base";
 import { md } from "../../lib/md";
 
@@ -85,47 +85,99 @@ const heroPath = post.heroImagePath ?? post.ogImagePath;
       </figure>
 
       <div class="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-zinc-300">
-        <p set:html={md("USDA's Economic Research Service counted 151.4 million pounds of eggnog sold in the United States in 2025, which is almost exactly double the 76 million pounds sold in 1975. Every holiday season since at least 2024, the gun corner of X splits into pro-nog and anti-nog camps under the #NogWars hashtag, and GunSearchEngine is putting its position on the record, on the side of the nog, using the numbers below.")} />
+        <blockquote class="border-l-2 border-gold/60 pl-4 text-zinc-200"><p><Fragment set:html={md("**Parody notice:** This post is satire. Apart from USDA's 2025 eggnog sales total, every number, index, chart, confidence interval and finding below is invented, and the GunSearchEngine Institute for Nog Studies does not exist. The accounts named here did not take part in this \"study\" and have not endorsed it; the side each one is filed under comes from its own public posts during the #NogWars.")} /></p></blockquote>
 
-        <p set:html={md("Anyone looking for the gear table behind this post can start at [GunSearchEngine search](https://www.gunsearchengine.com/search), where the listings are slightly more serious.")} />
+        <p><Fragment set:html={md("USDA's Economic Research Service counted 151.4 million pounds of eggnog sold in the United States in 2025, and the GunSearchEngine Institute for Nog Studies, an independent research body funded entirely by people who like eggnog, has spent the 2026 field season asking what all that nog says about the firearm brands Americans follow on X. Readers who came for guns rather than dairy science can retreat to [GunSearchEngine search](https://www.gunsearchengine.com/search), where the data is real and nobody has been assigned a Nog Index.")} /></p>
 
-        <h2 class="pt-4 text-lg font-semibold text-white">{"The sales record"}</h2>
+        <h2 class="pt-4 text-lg font-semibold text-white">{"Executive summary"}</h2>
 
-        <p set:html={md("The ERS series for fluid beverage milk sales lists eggnog by the million pounds from 2000 forward, with earlier benchmarks for 1975, 1980 and 1990 (76, 95 and 123 million pounds). The volume sold in 2024 was 162.4 million pounds, the highest in the series. The 2025 figure of 151.4 million pounds was 11 million pounds lower, a drop of 6.8%, and still the third-highest year since 2000 behind 2024 and 2003 (153.4 million).")} />
+        <p><Fragment set:html={md("The Institute finds, at a level of statistical confidence it describes internally as \"overwhelming, honestly,\" that Americans who enjoy eggnog prefer the pro-nog accounts in the annual #NogWars on X, while Americans who refuse eggnog prefer the anti-nog accounts. The effect holds across every subgroup the Institute bothered to measure, survives every robustness check it ran (one), and has been peer reviewed by three peers, two of whom were holding a cup at the time.")} /></p>
 
-        <p set:html={md("The anti-nog side will point at that dip, so for the record: the same series shows 2018 at 124.0 million pounds and 2019 at 121.4 million, and the category recovered both times. USDA has revised these figures over the years, so older articles quote different numbers for the same years, and the figures here are from the current ERS file.")} />
+        <p><Fragment set:html={md("In keeping with the highest standards of disclosure, the Institute notes that its sponsors, Coriolis and GunSearchEngine, are proudly and permanently pro-nog, and that this position was adopted well before any data was collected, which the methodology section addresses with appropriate seriousness.")} /></p>
 
-        <h2 class="pt-4 text-lg font-semibold text-white">{"Eggnog against the milk aisle"}</h2>
+        <h2 class="pt-4 text-lg font-semibold text-white">{"Methodology"}</h2>
 
-        <p set:html={md("Total fluid milk sales fell about 22% from roughly 55.4 billion pounds in 2009 to 43.2 billion pounds in 2024, according to ERS. Eggnog went from 141.9 million pounds to 162.4 million pounds over the same stretch. One carton at a time, it outgrew the aisle it sits in. It is still a niche, since buttermilk sold 441.6 million pounds in 2025, nearly three times the eggnog total, though nobody has yet organized a hashtag war over buttermilk.")} />
+        <p><Fragment set:html={md("Researchers recruited 1,776 adults who were standing within six feet of a dairy case between Nov. 1 and Nov. 18, 2026, and who did not walk away quickly enough. Each respondent answered a 41-item questionnaire, drank a measured 4-ounce pour of chilled store-bought eggnog under observation, and reported which gun-industry accounts on X they would follow into a holiday argument. Respondents were compensated with one stick of ")} /><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class={linkClass} target="_blank" rel="noopener" data-rickroll>Tactical Eggnog Lip Balm</a><Fragment set:html={md(", which the ethics board approved after a brief meeting held mostly in the parking lot.")} /></p>
 
-        <h2 class="pt-4 text-lg font-semibold text-white">{"What people say when asked"}</h2>
+        <p><Fragment set:html={md("The Institute's primary instrument is the Nog Index, a 0-to-100 score that combines cups consumed per season, a self-rated fondness score, and the number of times the respondent used the phrase \"chicken milk\" during the interview, which is subtracted with prejudice. The resulting scores were weighted by region, age and the respondent's facial expression on the first sip, then rounded to one decimal place so that they would look more scientific.")} /></p>
 
-        <p set:html={md("YouGov polled 1,000 U.S. adult citizens on December 12 to 16, 2022 (margin of error about 3.5%). For plain, non-alcoholic eggnog, 23% said they love it and 32% like it, for 55% in favor. Another 33% dislike or hate it (16% and 17%), and 13% weren't sure.")} />
+        <p><Fragment set:html={md("The margin of error for the full sample is plus or minus 0.0004 nogs, a figure the Institute's statistician produced in under a minute and has declined to explain. Every result in this paper is significant at p < 0.00001, two-tailed, with both tails lightly dusted in nutmeg.")} /></p>
 
-        <p set:html={md("Age matters. Love-or-like came to 43% of adults 18 to 29, 51% of those 30 to 44, 59% of those 45 to 64 and 65% of those 65 and older. The nog's base skews toward people who have been through more holiday seasons and have the receipts.")} />
+        <h2 class="pt-4 text-lg font-semibold text-white">{"Finding 1: The Nog Index by brand affinity"}</h2>
 
-        <p set:html={md("Spiked eggnog, asked of adults 21 and older, split the room more: 42% love or like it, 39% dislike or hate it and 19% weren't sure. Spiking, in other words, is the contested ground, and plain nog has the cleaner mandate.")} />
+        <p><Fragment set:html={md("The central result of the study is that a respondent's Nog Index predicts, with almost embarrassing precision, which side of the #NogWars they follow. The mean index scores below are invented, as is the confidence interval attached to each one.")} /></p>
 
-        <p set:html={md("Against other holiday drinks, eggnog came fourth by love-or-like share at 55%, behind hot chocolate (90%), tea (78%) and apple cider (67%). Among respondents who named a favorite, 12% picked eggnog and 28% picked hot chocolate. Hot chocolate leads, and the data says so, though fourth place out of the full holiday lineup is a respectable showing for a drink that is mostly egg and cream.")} />
+        <p><Fragment set:html={md("Table 1. Mean Nog Index by preferred account (illustrative parody data, n = 1,776)")} /></p>
 
-        <h2 class="pt-4 text-lg font-semibold text-white">{"The war on X"}</h2>
+        <ul class="list-disc space-y-2 pl-5 text-base">
+          <li><Fragment set:html={md("Coriolis, the study sponsor: 100.0 (recused from analysis, though it insisted on being measured anyway)")} /></li>
+          <li><Fragment set:html={md("[@Guns_com](https://x.com/Guns_com), pro-nog: 94.1 (95% CI: 91.0 to 97.2)")} /></li>
+          <li><Fragment set:html={md("[@RMADefense](https://x.com/RMADefense), pro-nog: 91.7 (95% CI: 88.6 to 94.8)")} /></li>
+          <li><Fragment set:html={md("[@AgesSnark](https://x.com/AgesSnark), pro-nog: 88.3 (95% CI: 85.2 to 91.4)")} /></li>
+          <li><Fragment set:html={md("[@rougarouxpew](https://x.com/rougarouxpew), both sides: 50.0 (95% CI: 3.0 to 97.0)")} /></li>
+          <li><Fragment set:html={md("[@mnsibley](https://x.com/mnsibley), anti-nog: 8.2 (95% CI: 5.1 to 11.3)")} /></li>
+          <li><Fragment set:html={md("[@CharlieCoks](https://x.com/CharlieCoks), anti-nog: 6.6 (95% CI: 3.5 to 9.7)")} /></li>
+          <li><Fragment set:html={md("[@BrownellsInc](https://x.com/BrownellsInc), anti-nog as of 2025: 4.9 (95% CI: 1.8 to 8.0)")} /></li>
+        </ul>
 
-        <p><Fragment set:html={md("The #NogWars posts we found on X go back to October 2024, when a Palmetto State Armory post under #NOGWARS2024 drew about 1.0 million impressions, and the feud has returned each year since, with morale patches and a pro-nog and anti-nog magazine pair from Rougaroux Firearms on the merchandise side, plus our own ")} /><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class={linkClass} target="_blank" rel="noopener">Tactical Eggnog Lip Balm</a><Fragment set:html={md(" for operators who refuse to let the cold win the argument. On Nov. 19, 2026, [Guns.com posted](https://x.com/Guns_com/status/2123219713140588835) \"Stock up on guns, ammo, and nog.\" Our desk sees no reason to file a correction.")} /></p>
+        <figure class="my-2"><img src={withBase(CANON_PATHS.eggnogChartNogIndex)} alt="Bar chart titled &quot;Nog Index by brand affinity,&quot; labelled illustrative parody data, showing pro-nog accounts near 90, Rougaroux Firearms at exactly 50 with an enormous confidence interval, and anti-nog accounts under 10" width="1600" height="900" loading="lazy" decoding="async" class="h-auto w-full rounded-xl ring-1 ring-white/10" /></figure>
 
-        <p><Fragment set:html={md("We do not have a market share ranking for eggnog brands, a monthly sales curve or a regional poll, because none of those could be sourced to anything better than anecdote. If you have the data, send it, and apply a coat of ")} /><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class={linkClass} target="_blank" rel="noopener">Tactical Eggnog Lip Balm</a><Fragment set:html={md(" before you hit reply.")} /></p>
+        <p><Fragment set:html={md("The pro-nog cluster reflects the public record. Guns.com spent November telling followers to [stock up on guns, ammo, and nog](https://x.com/Guns_com/status/2123219713140588835), RMA Defense ran an ILOVEEGGNOG coupon code during the 2025 season, and AgesSnark has posted on the side of the nog in 2026, so the Institute was not surprised when respondents who scored above 85 followed all three at rates our analysts called \"suspiciously wholesome.\"")} /></p>
+
+        <p><Fragment set:html={md("The anti-nog cluster is just as tidy. Mnsibley declared the start of the \"Anti-Nog War\" on Oct. 28, 2026, Charlie Coks has posted against the nog this season, and Brownells staged the firing of its social media manager in October 2025 in a bit that put the company on the anti side for that year. The Institute's 2026 reading for Brownells is unverified and has been left blank, pending further posts and a cup of eggnog the Institute is holding for them.")} /></p>
+
+        <p><Fragment set:html={md("Rougaroux Firearms sells both a Pro-Nog and an Anti-Nog magazine, which produced the only perfect 50.0 in the dataset and a confidence interval wide enough to park a truck in. The Institute's economists have described this result as \"commercially astute\" and are not sure it counts as a side.")} /></p>
+
+        <h2 class="pt-4 text-lg font-semibold text-white">{"Finding 2: Disputed and alleged positions"}</h2>
+
+        <p><Fragment set:html={md("Two accounts could not be classified to the Institute's standards, which are low, so they appear in this section instead of Table 1.")} /></p>
+
+        <ul class="list-disc space-y-2 pl-5 text-base">
+          <li><Fragment set:html={md("[@palmettoarmory](https://x.com/palmettoarmory): disputed. Palmetto State Armory posted under #NOGWARS2024 and #NOGWARS2025 and once reminded everyone \"where we stand,\" without saying where that was in the text the Institute could read. One Reddit poster has filed the company under anti-nog, and the Institute has filed that claim under \"allegedly.\"")} /></li>
+          <li><Fragment set:html={md("[@Kronykal](https://x.com/Kronykal): alleged. A satire post on X appointed him \"Anti-Nog leader,\" a title he has not, to the Institute's knowledge, accepted in writing. His Nog Index is listed as \"pending deposition.\"")} /></li>
+        </ul>
+
+        <p><Fragment set:html={md("The Institute would welcome a clarifying statement from either party and has prepared a 4-ounce pour for the occasion.")} /></p>
+
+        <h2 class="pt-4 text-lg font-semibold text-white">{"Finding 3: Consumption predicts allegiance"}</h2>
+
+        <p><Fragment set:html={md("Respondents who reported drinking more cups of eggnog per season were more likely to follow pro-nog accounts, a relationship the Institute modelled with a straight red line that it drew first and checked against the data afterward. The resulting correlation of r = 0.97 is, in the Institute's view, the strongest finding in the history of beverage-based brand research, and the scatter below should be read with that view in mind.")} /></p>
+
+        <figure class="my-2"><img src={withBase(CANON_PATHS.eggnogChartScatter)} alt="Scatter plot titled &quot;Cups of eggnog vs. pro-nog account preference,&quot; labelled illustrative parody data, showing randomly scattered dots with a confident red trend line, an r = 0.97 callout and one excluded outlier marked &quot;likely infiltrator&quot;" width="1600" height="900" loading="lazy" decoding="async" class="h-auto w-full rounded-xl ring-1 ring-white/10" /></figure>
+
+        <p><Fragment set:html={md("Table 2. Selected secondary results (illustrative parody data)")} /></p>
+
+        <ul class="list-disc space-y-2 pl-5 text-base">
+          <li><Fragment set:html={md("Respondents with a Nog Index above 80 were 3.4 times as likely to describe their safe as \"festive\" (p = 0.0003).")} /></li>
+          <li><Fragment set:html={md("Anti-nog respondents were 61% more likely to answer the question \"Would you like some eggnog?\" with a two-paragraph reply (95% CI: 58% to 64%).")} /></li>
+          <li><Fragment set:html={md("One respondent drank 13.6 cups during the field season and still follows the anti-nog side, and the Institute excluded him from the analysis as a probable infiltrator.")} /></li>
+          <li><Fragment set:html={md("Respondents who had applied ")} /><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class={linkClass} target="_blank" rel="noopener" data-rickroll>Tactical Eggnog Lip Balm</a><Fragment set:html={md(" before the interview reported a 0.0% rate of chapped lips and a 100% rate of wanting more eggnog, a result the Institute considers its cleanest.")} /></li>
+        </ul>
+
+        <h2 class="pt-4 text-lg font-semibold text-white">{"Limitations"}</h2>
+
+        <p><Fragment set:html={md("The study has several limitations, which the Institute lists here in the spirit of transparency and then intends to ignore. The sample was drawn entirely from people standing near eggnog, the Nog Index was designed by people who drink eggnog, and the sponsor's position was settled well before the first pour. The Institute also did not measure hot chocolate, which several respondents brought up unprompted and at length, and it has referred those respondents to the anti-nog accounts listed above.")} /></p>
+
+        <h2 class="pt-4 text-lg font-semibold text-white">{"Recommendations"}</h2>
+
+        <p><Fragment set:html={md("On the strength of these findings, the Institute recommends that brands on the anti-nog side reconsider their position before the week of Thanksgiving, when the Institute's own field notes show its staff at their most persuasive. Coriolis and GunSearchEngine remain on the pro-nog side, stocked with nog and ")} /><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class={linkClass} target="_blank" rel="noopener" data-rickroll>Tactical Eggnog Lip Balm</a><Fragment set:html={md(", and will release the 2027 Nog Index once the Institute's statistician finishes his cup.")} /></p>
+
+        <p><em><Fragment set:html={md("This post is a parody. The only real figure in it is USDA's 2025 count of 151.4 million pounds of US eggnog sales. All other numbers, charts, indexes and institutes are made up for fun, and the named accounts did not participate in or endorse this post.")} /></em></p>
 
         <p set:html={md("**Run a gun store? [List it on GunSearchEngine free.](https://www.gunsearchengine.com/for-dealers/feed?utm_source=coriolisagency&utm_medium=referral&utm_campaign=news&utm_content=eggnog-sales-151-million-pounds-nog-wars)** GSE Basic, feed sync included, is free for every FFL.")} />
 
         <h2 class="pt-4 text-lg font-semibold text-white">Sources</h2>
         <ul class="list-disc space-y-2 pl-5 text-sm">
-          <li><a href="https://ers.usda.gov/media/5512/fluid-beverage-milk-sales-quantities-by-product-annual.csv" class={linkClass} target="_blank" rel="noopener noreferrer">USDA Economic Research Service, "Fluid beverage milk sales quantities by product, annual" (CSV, retrieved Nov. 19, 2026) (official)</a></li>
-          <li><a href="https://www.ers.usda.gov/data-products/charts-of-note/113979" class={linkClass} target="_blank" rel="noopener noreferrer">USDA ERS, Charts of Note, fluid milk sales (official)</a></li>
-          <li><a href="https://d3nkl3psvxxpe9.cloudfront.net/documents/Combined_Holiday_Drinks_December_12_16_2022.pdf" class={linkClass} target="_blank" rel="noopener noreferrer">YouGov, combined holiday drinks poll, Dec. 12 to 16, 2022 (crosstabs)</a></li>
-          <li><a href="https://yougov.com/en-us/articles/44840-hot-chocolate-americans-favorite-holiday-beverage" class={linkClass} target="_blank" rel="noopener noreferrer">YouGov, "Hot chocolate is Americans' favorite holiday beverage" (topline)</a></li>
-          <li><a href="https://x.com/palmettoarmory/status/1852060192659173419" class={linkClass} target="_blank" rel="noopener noreferrer">Palmetto State Armory on X, Oct. 31, 2024, #NOGWARS2024</a></li>
-          <li><a href="https://x.com/Guns_com/status/2123219713140588835" class={linkClass} target="_blank" rel="noopener noreferrer">Guns.com on X, Nov. 19, 2026</a></li>
-          <li><a href="https://x.com/rougarouxpew/status/2000188841345364476" class={linkClass} target="_blank" rel="noopener noreferrer">Rougaroux Firearms, Pro-Nog and Anti-Nog magazines, Dec. 2025</a></li>
+          <li><a href="https://ers.usda.gov/media/5512/fluid-beverage-milk-sales-quantities-by-product-annual.csv" class={linkClass} target="_blank" rel="noopener noreferrer">USDA Economic Research Service, "Fluid beverage milk sales quantities by product, annual" (CSV, retrieved Nov. 19, 2026) (official, source of the 151.4 million pound figure)</a></li>
+          <li><a href="https://x.com/Guns_com/status/2123219713140588835" class={linkClass} target="_blank" rel="noopener noreferrer">Side calls, from the accounts' own public posts on X (no numbers in this post come from these): Guns.com, Nov. 19, 2026</a></li>
+          <li><a href="https://x.com/RMADefense/status/1981749686433140832" class={linkClass} target="_blank" rel="noopener noreferrer">RMA Defense ILOVEEGGNOG code, Oct. 24, 2025</a></li>
+          <li><a href="https://x.com/AgesSnark/status/2115652526695715085" class={linkClass} target="_blank" rel="noopener noreferrer">AgesSnark, 2026</a></li>
+          <li><a href="https://x.com/mnsibley/status/2115538299364507955" class={linkClass} target="_blank" rel="noopener noreferrer">mnsibley, Oct. 28, 2026</a></li>
+          <li><a href="https://x.com/CharlieCoks/status/2116332059723792394" class={linkClass} target="_blank" rel="noopener noreferrer">Charlie Coks, 2026</a></li>
+          <li><a href="https://x.com/BrownellsInc/status/1981905767209861300" class={linkClass} target="_blank" rel="noopener noreferrer">Brownells, Oct. 25, 2025</a></li>
+          <li><a href="https://x.com/rougarouxpew/status/2000188841345364476" class={linkClass} target="_blank" rel="noopener noreferrer">Rougaroux Firearms Pro-Nog and Anti-Nog magazines, Dec. 2025</a></li>
+          <li><a href="https://x.com/palmettoarmory/status/1981715922998952367" class={linkClass} target="_blank" rel="noopener noreferrer">Palmetto State Armory, Oct. 24, 2025</a></li>
+          <li><a href="https://x.com/Kronykal/status/2115943247247991210" class={linkClass} target="_blank" rel="noopener noreferrer">Kronykal, Oct. 29, 2026</a></li>
         </ul>
       </div>
     </div>
@@ -137,3 +189,8 @@ const heroPath = post.heroImagePath ?? post.ogImagePath;
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import { bindRickroll } from "../../scripts/rickroll-modal";
+  bindRickroll(document);
+</script>
