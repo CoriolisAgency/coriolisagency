@@ -1,0 +1,152 @@
+---
+/**
+ * CA-POPUP-FFL-FILTERS: site-wide FFL Filters promo pop-up (white card P01 on desktop,
+ * bottom sheet P02 on phones). Spec: Brandy's ffl-filters/popup-v1 BEHAVIOUR.md + COPY.md.
+ * A copy of FflFirewallPopup with ffw renamed to fff, except: a deny list (/ffl-filters and
+ * /ffl-firewall, plus subpaths), a CTA that navigates, its own storage keys, and a 48 px lockup.
+ * No event tracking. The hero art loads only when it opens.
+ */
+import {
+  FFF_POPUP_COPY as C,
+  FFF_POPUP_DISMISS_KEY,
+  FFF_POPUP_CLICKED_KEY,
+  FFF_POPUP_SESSION_KEY,
+  FFF_POPUP_DISMISS_DAYS,
+  FFF_POPUP_DENY_PATHS,
+  fffPopupAllowed,
+} from "../lib/ffl-filters-popup";
+import { withBase } from "../lib/base";
+
+const base = import.meta.env.BASE_URL || "/";
+const raw = Astro.url.pathname;
+const path = raw.startsWith(base) ? raw.slice(base.length - 1) : raw;
+const show = fffPopupAllowed(path);
+
+const href = withBase("ffl-filters");
+const dir = "brand/ffl-filters/popup/";
+const modalWebp = withBase(dir + "ffl-filters-popup-hero-modal-1168x632.webp");
+const modalJpg = withBase(dir + "ffl-filters-popup-hero-modal-1168x632.jpg");
+const sheetWebp = withBase(dir + "ffl-filters-popup-hero-sheet-1086x324.webp");
+const sheetJpg = withBase(dir + "ffl-filters-popup-hero-sheet-1086x324.jpg");
+const lockSrc = withBase(dir + "ffl-filters-lockup-on-light.svg");
+const iconSrc = withBase(dir + "ffl-filters-icon-small.svg");
+const cfg = JSON.stringify({
+  dismissKey: FFF_POPUP_DISMISS_KEY,
+  clickedKey: FFF_POPUP_CLICKED_KEY,
+  sessionKey: FFF_POPUP_SESSION_KEY,
+  days: FFF_POPUP_DISMISS_DAYS,
+  deny: FFF_POPUP_DENY_PATHS,
+}).replace(/</g, "\\u003c");
+---
+
+{
+  show && (
+    <div id="fff-popup-root" data-fff-popup hidden>
+      <div class="fff-scrim" data-fff-scrim />
+      <div
+        class="fff-card fff-modal"
+        id="fff-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="fff-modal-t"
+        tabindex="-1"
+        data-fff-dialog="modal"
+      >
+        <button type="button" class="fff-x" data-fff-close aria-label={C.close}>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" /></svg>
+        </button>
+        <div class="fff-hero"><picture><source type="image/webp" data-srcset={modalWebp} /><img alt="" width="1168" height="632" data-src={modalJpg} loading="lazy" decoding="async" /></picture></div>
+        <div class="fff-bd">
+          <img class="fff-lock" alt="FFL Filters" height="48" data-src={lockSrc} decoding="async" />
+          <p class="fff-eb">{C.eyebrow}</p>
+          <h2 id="fff-modal-t" class="fff-h">{C.title}</h2>
+          <p class="fff-p">{C.body}</p>
+          <p class="fff-p fff-pr">{C.body2}</p>
+        </div>
+        <div class="fff-ft">
+          <a class="fff-go" href={href} data-fff-cta>{C.cta}<svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
+          <button type="button" class="fff-no" data-fff-close>{C.later}</button>
+          <p class="fff-fine">{C.fine}</p>
+        </div>
+      </div>
+      <div
+        class="fff-card fff-sheet"
+        id="fff-sheet"
+        role="dialog"
+        aria-modal="false"
+        aria-labelledby="fff-sheet-t"
+        data-fff-dialog="sheet"
+      >
+        <div class="fff-grab" aria-hidden="true"></div>
+        <button type="button" class="fff-x" data-fff-close aria-label={C.close}>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" /></svg>
+        </button>
+        <div class="fff-hero"><picture><source type="image/webp" data-srcset={sheetWebp} /><img alt="" width="1086" height="324" data-src={sheetJpg} loading="lazy" decoding="async" /></picture></div>
+        <div class="fff-bd">
+          <div class="fff-row"><img class="fff-ico" alt="" width="30" height="30" data-src={iconSrc} decoding="async" /><h2 id="fff-sheet-t" class="fff-h">{C.title}</h2></div>
+          <p class="fff-p">{C.sheetBody}</p>
+          <div class="fff-acts">
+            <a class="fff-go" href={href} data-fff-cta>{C.cta}<svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
+            <button type="button" class="fff-no" data-fff-close>{C.later}</button>
+          </div>
+        </div>
+      </div>
+      <script type="application/json" id="fff-popup-cfg" set:html={cfg} />
+      <script is:inline src={withBase("popup/ffl-filters-popup.js")} defer />
+    </div>
+  )
+}
+
+<style is:global>
+  #fff-popup-root[hidden]{display:none}
+  #fff-popup-root{font-family:"Noto Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  #fff-popup-root *{box-sizing:border-box}
+  .fff-scrim{position:fixed;inset:0;z-index:2147483000;background:rgba(3,6,12,.62);opacity:0;transition:opacity .25s ease}
+  .fff-card{position:fixed;z-index:2147483001;background:#fff;color:#18181b;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08);overflow:hidden;display:none;flex-direction:column;opacity:0;transition:opacity .25s ease,transform .3s ease}
+  .fff-x{position:absolute;top:10px;right:10px;width:40px;height:40px;border:0;border-radius:999px;background:rgba(255,255,255,.85);color:#3f3f46;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;padding:0}
+  .fff-x:focus-visible,.fff-no:focus-visible,.fff-go:focus-visible{outline:3px solid #2563eb;outline-offset:2px}
+  .fff-hero{flex:none;background:linear-gradient(180deg,#fff 0%,#f4f4f5 100%);border-bottom:1px solid #e4e4e7;display:flex;align-items:center;justify-content:center}
+  .fff-hero picture{display:block;width:100%;height:100%}
+  .fff-hero img{display:block;width:100%;height:100%;object-fit:contain}
+  .fff-bd{padding:18px 32px 8px;overflow-y:auto;flex:1 1 auto;min-height:0}
+  .fff-lock{display:block;height:48px;width:auto;margin:0 0 6px -6px}
+  .fff-eb{margin:0;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#52525b}
+  .fff-h{margin:6px 0 0;font-size:25px;line-height:1.22;font-weight:700;letter-spacing:-.015em;color:#18181b}
+  .fff-p{margin:10px 0 0;font-size:15px;line-height:1.55;color:#3f3f46}
+  .fff-pr{color:#18181b}
+  .fff-ft{flex:none;padding:8px 32px 16px}
+  .fff-go{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#18181b;color:#fff;font-weight:700;font-size:16px;padding:15px 20px;border-radius:8px;text-decoration:none}
+  .fff-go:hover{background:#27272a}
+  .fff-no{display:block;margin:10px auto 0;border:0;background:none;color:#52525b;font:600 14px/1.4 inherit;padding:8px 12px;cursor:pointer}
+  .fff-fine{margin:6px 0 0;text-align:center;font-size:12px;color:#71717a}
+  /* desktop modal (P01): 640 px, hero 350 / 240, 90vh cap */
+  .fff-modal{left:50%;top:50%;width:640px;max-width:calc(100vw - 32px);max-height:90vh;transform:translate(-50%,-48%)}
+  .fff-modal .fff-hero{height:350px;padding:20px 28px 14px}
+  @media (max-height:859px){.fff-modal .fff-hero{height:240px}}
+  /* phone sheet (P02): 126 px hero, 96 px under 700 px tall */
+  .fff-sheet{left:0;right:0;bottom:0;border-radius:18px 18px 0 0;transform:translateY(24px);touch-action:pan-x}
+  .fff-sheet .fff-hero{height:126px;padding:14px 14px 4px}
+  .fff-sheet .fff-bd{padding:12px 18px 6px;overflow:visible}
+  .fff-sheet .fff-h{font-size:18px;margin:0}
+  .fff-sheet .fff-p{font-size:14px;margin-top:8px;letter-spacing:-.02em}
+  .fff-row{display:flex;align-items:center;gap:10px}
+  .fff-ico{width:30px;height:30px;flex:none;border-radius:7px}
+  .fff-acts{display:flex;align-items:center;gap:10px;margin:14px 0 0}
+  .fff-acts .fff-go{flex:1;padding:13px 16px;font-size:15px}
+  .fff-acts .fff-no{margin:0;flex:none;min-height:44px}
+  .fff-sheet .fff-x{top:12px;right:8px}
+  .fff-grab{position:absolute;top:8px;left:50%;margin-left:-20px;width:40px;height:4px;border-radius:2px;background:#a1a1aa;z-index:2}
+  .fff-sheet{padding-bottom:6px}
+  @media (max-height:699px){.fff-sheet .fff-hero{height:96px;padding-top:12px}}
+  /* which card shows */
+  #fff-popup-root[data-mode="modal"] .fff-modal,#fff-popup-root[data-mode="sheet"] .fff-sheet{display:flex}
+  #fff-popup-root[data-mode="sheet"] .fff-scrim{display:none}
+  #fff-popup-root[data-open] .fff-scrim{opacity:1}
+  #fff-popup-root[data-open] .fff-modal{opacity:1;transform:translate(-50%,-50%)}
+  #fff-popup-root[data-open] .fff-sheet{opacity:1;transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){
+    .fff-scrim,.fff-card{transition:opacity .15s linear}
+    .fff-modal,#fff-popup-root[data-open] .fff-modal{transform:translate(-50%,-50%)}
+    .fff-sheet,#fff-popup-root[data-open] .fff-sheet{transform:none}
+  }
+</style>
