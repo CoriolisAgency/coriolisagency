@@ -74,6 +74,15 @@ for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(page.include
   assert.ok(fwn.includes("<b>FFL</b>&nbsp;Firewall") && fwn.includes("&nbsp;·&nbsp;"), "name lockup uses non-breaking spaces (OVERWATCH-LEAD)");
   assert.ok(fwn.includes('n.replace(/ /g, "\\u00A0")') && /\.fwn \{ white-space: nowrap; \}/.test(fwn), "service name never wraps");
 }
+// PLATES-INLINE (Paul 10:07 AM ET Nov 21): the three console plates show the bare feature name inline to the right of the icon, on one line; every other use keeps "FFL Firewall ? NAME".
+{
+  const plates = page.slice(page.indexOf('<div class="console"'), page.indexOf('<p class="cap">'));
+  for (const [k, n] of [["overwatch", "OVERWATCH"], ["active-defense", "ACTIVE DEFENSE"], ["recon", "RECON"]]) {
+    assert.ok(plates.includes(`<div class="hd"><FflFwGlyph kind="${k}" /><div class="nm">${n}</div></div>`), `plate ${n} shows the bare name inline with its icon`);
+  }
+  assert.ok(!plates.includes("FflFwName"), "plates carry no FFL Firewall prefix");
+  assert.ok(/\.cc \.hd \{ display: flex; align-items: center;/.test(page) && /\.cc \.nm \{[^}]*white-space: nowrap;/.test(page), "plate name sits inline and never wraps");
+}
 // OVERWATCH-LEAD: OVERWATCH leads the hero console, the services and the pricing list (Paul 1:33 PM ET).
 {
   assert.ok(page.indexOf('data-section="services"') < page.indexOf('<h3><FflFwName n="OVERWATCH" /></h3>') && page.indexOf('<h3><FflFwName n="OVERWATCH" /></h3>') < page.indexOf('<h3><FflFwName n="ACTIVE DEFENSE" /></h3>') && page.indexOf('<h3><FflFwName n="ACTIVE DEFENSE" /></h3>') < page.indexOf('<h3><FflFwName n="RECON" /></h3>'), "services order OVERWATCH, ACTIVE DEFENSE, RECON");
