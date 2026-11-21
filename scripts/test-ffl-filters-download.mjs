@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * CA-FFLF-DOWNLOAD-PAGE / CA-NAV-FFLF / CA-FFLF-INDEX guard: /ffl-filters is the
- * indexable download page for FFL Filters 1.3.8 (beta), served from the permanent GitHub release
+ * indexable download page for FFL Filters 1.3.9 (beta), served from the permanent GitHub release
  * asset (never the latest release tag). The header nav (desktop and mobile) links to the page as
  * "FFL Filters"; nothing else in the repo may link to the page or a zip. The older 1.3.7
  * zip remains in public/downloads/ and must stay unlinked. Checks the zip bytes, the page's buttons,
@@ -32,23 +32,23 @@ assert.equal(
 );
 assert.equal(zip.subarray(0, 4).toString("hex"), "504b0304", "legacy 1.3.7 zip magic (not an LFS pointer)");
 
-// 2. Page: indexable (CA-FFLF-INDEX), every download button has the 1.3.8 (beta) label and the GH asset href, contact goes to /contact.
+// 2. Page: indexable (CA-FFLF-INDEX), every download button has the 1.3.9 (beta) label and the GH asset href, contact goes to /contact.
 const pageRel = "src/pages/ffl-filters/index.astro";
 const page = read(pageRel);
-const downloadUrl = "https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.8/ffl-filters-1.3.8.zip";
+const downloadUrl = "https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.9/ffl-filters-1.3.9.zip";
 assert.doesNotMatch(page, /^\s*noindex\s*$/m, "page must not pass noindex to BaseLayout");
 assert.doesNotMatch(page, /\brobots\s*=/, "page must not set a robots prop");
 assert.ok(page.includes('const download = "' + downloadUrl + '";'), "page pins the permanent GH asset URL");
 assert.doesNotMatch(page, /releases\/(?:download\/)?latest/, "download must not use the latest tag");
-assert.match(page, /const downloadLabel = "Download FFL Filters 1\.3\.8 \(beta\)";/);
+assert.match(page, /const downloadLabel = "Download FFL Filters 1\.3\.9 \(beta\)";/);
 const dl = [...page.matchAll(/<a href=\{download\}[^>]*>([^<]*)<\/a>/g)].map((m) => m[1]);
 assert.equal(dl.length, 2, "two download buttons");
 for (const label of dl) assert.equal(label, "{downloadLabel}");
-assert.doesNotMatch(page.replace(/downloadLabel = "[^"]*"/, ""), /Download FFL Filters 1\.3\.8(?! zip file)/, "no unlabelled download button text");
+assert.doesNotMatch(page.replace(/downloadLabel = "[^"]*"/, ""), /Download FFL Filters 1\.3\.9(?! zip file)/, "no unlabelled download button text");
 assert.match(page, /withBase\("contact"\)/);
-assert.match(page, /Version 1\.3\.8 . Free . GPLv2 or later/);
-assert.match(page, /Get FFL Filters 1\.3\.8/);
-assert.match(page, /Download the FFL Filters 1\.3\.8 zip file from this page and keep it zipped\./);
+assert.match(page, /Version 1\.3\.9 . Free . GPLv2 or later/);
+assert.match(page, /Get FFL Filters 1\.3\.9/);
+assert.match(page, /Download the FFL Filters 1\.3\.9 zip file from this page and keep it zipped\./);
 assert.match(read("src/layouts/BaseLayout.astro"), /noindex && <meta name="robots" content="noindex, nofollow" \/>/);
 
 // CA-FFLF-DOWNLOAD-GATE: the page mounts the gate and keeps the two zip links.
@@ -156,7 +156,7 @@ assert.match(page, /decoding="async"/);
 assert.match(page, /loading="eager"/);
 assert.match(page, /class="mt-10 block h-auto w-full rounded-\[14px\]"/);
 // Hero sits directly after the version line; page copy is otherwise unchanged.
-assert.match(page, /Version 1\.3\.8 . Free . GPLv2 or later<\/p>\s*<picture>/);
+assert.match(page, /Version 1\.3\.9 . Free . GPLv2 or later<\/p>\s*<picture>/);
 // OG tags stay exactly as they were.
 assert.match(page, /const ogImage = "og\/ffl-filters-og\.jpg";/);
 assert.match(page, /ogImageWidth=\{1200\}/);
@@ -300,11 +300,11 @@ if (fs.existsSync(dist)) {
   const html = fs.readFileSync(path.join(dist, "ffl-filters", "index.html"), "utf8");
   assert.doesNotMatch(html, /<meta name="robots"/, "built /ffl-filters has no robots meta");
   assert.equal((html.split(downloadUrl).length - 1), 3, "GH asset URL appears on both buttons and data-file");
-  assert.equal((html.match(/href="https:\/\/github\.com\/CoriolisAgency\/ffl-filters-releases\/releases\/download\/v1\.3\.8\/ffl-filters-1\.3\.8\.zip"/g) ?? []).length, 2, "two button hrefs point at the GH asset");
-  assert.match(html, /data-file="https:\/\/github\.com\/CoriolisAgency\/ffl-filters-releases\/releases\/download\/v1\.3\.8\/ffl-filters-1\.3\.8\.zip"/, "gate data-file is the GH asset");
+  assert.equal((html.match(/href="https:\/\/github\.com\/CoriolisAgency\/ffl-filters-releases\/releases\/download\/v1\.3\.9\/ffl-filters-1\.3\.9\.zip"/g) ?? []).length, 2, "two button hrefs point at the GH asset");
+  assert.match(html, /data-file="https:\/\/github\.com\/CoriolisAgency\/ffl-filters-releases\/releases\/download\/v1\.3\.9\/ffl-filters-1\.3\.9\.zip"/, "gate data-file is the GH asset");
   assert.doesNotMatch(html, /releases\/(?:download\/)?latest/);
-  assert.equal((html.match(/Download FFL Filters 1\.3\.8 \(beta\)/g) ?? []).length, 2);
-  assert.match(html, /Version 1\.3\.8 /);
+  assert.equal((html.match(/Download FFL Filters 1\.3\.9 \(beta\)/g) ?? []).length, 2);
+  assert.match(html, /Version 1\.3\.9 /);
   assert.match(html, /role="dialog"/);
   assert.match(html, /data-fflf-dl-gate/);
   assert.match(html, /mailto:support@coriolisagency\.com/);
