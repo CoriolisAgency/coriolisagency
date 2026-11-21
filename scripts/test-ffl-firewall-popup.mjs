@@ -60,23 +60,19 @@ assert.match(js, /setItem\(cfg\.dismissKey/);
 assert.match(js, /data-ffw-cta\]"\)\) \{ e\.preventDefault\(\); dismiss\(\)/, "CTA closes the pop-up");
 assert.match(read("src/components/FflFirewallPopup.astro"), /withBase\("ffl-firewall"\)/);
 
-// No stacking: rendered only when the claim pop-up is not mounted
+// CA-POPUP-FFL-FILTERS (Paul 10:08 AM ET Nov 21): the FFL Filters pop-up is now the active one.
+// The Firewall pop-up files stay in the repo, unmounted.
 const layout = read("src/layouts/BaseLayout.astro");
-assert.match(layout, /emailCapture && !POPUPS_ENABLED \? <FflFirewallPopup \/> : null/);
+assert.doesNotMatch(layout, /<FflFirewallPopup/, "Firewall pop-up is no longer mounted");
+assert.match(layout, /emailCapture && !POPUPS_ENABLED \? <FflFiltersPopup \/> : null/);
 
-// Built output: mounted on /ffl-firewall only, on no other built page
+// Built output: no built page carries the Firewall pop-up any more
 const dist = path.join(root, "dist");
-if (fs.existsSync(path.join(dist, "ffl-firewall/index.html"))) {
-  const fw = fs.readFileSync(path.join(dist, "ffl-firewall/index.html"), "utf8");
-  assert.match(fw, /id="ffw-popup-root"/);
-  assert.match(fw, /class="ffw-go" href="\/ffl-firewall"/);
-  assert.match(fw, /popup\/ffl-firewall-popup\.js/);
-  assert.ok(fs.existsSync(path.join(dist, "brand/ffl-firewall/popup/ffl-firewall-us-map-hero.webp")));
+if (fs.existsSync(path.join(dist, "index.html"))) {
   const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]));
   for (const f of walk(dist).filter((x) => x.endsWith(".html"))) {
     const rel = path.relative(dist, f).replace(/\\/g, "/");
-    if (rel === "ffl-firewall/index.html") continue;
-    assert.doesNotMatch(fs.readFileSync(f, "utf8"), /ffw-popup-root/, `${rel} must not have the pop-up`);
+    assert.doesNotMatch(fs.readFileSync(f, "utf8"), /ffw-popup-root/, `${rel} must not have the Firewall pop-up`);
   }
 }
 // The nav carries no FFL Firewall link

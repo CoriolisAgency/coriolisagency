@@ -201,8 +201,17 @@ assert.match(nav, /label:\s*"FFL Ecommerce",\s*children:\s*\[[\s\S]*?label:\s*"C
   assert.doesNotMatch(nav, /href:\s*"firearms-dropshipping",\s*label:\s*"FFL Dropshipping"\s*\},\s*\{\s*href:\s*"ffl-filters",\s*label:\s*"FFL Filters"/, "FFL Filters must not stay a top-level item after FFL Dropshipping");
 }
 assert.doesNotMatch(nav, zipRef, `${navRel} links to the 1.3.7 zip`);
+// CA-POPUP-FFL-FILTERS (Paul 2026-11-21 10:08 AM ET: "...link it to the /ffl-filters page and make that the
+// active pop-up on the CA site"): the FFL Filters pop-up files may name /ffl-filters (CTA href and deny list).
+// Kept out of `allowed` so the src-allowance check below still holds for everything else.
+const fffPopupFiles = new Set([
+  "src/lib/ffl-filters-popup.ts",
+  "src/components/FflFiltersPopup.astro",
+  "public/popup/ffl-filters-popup.js",
+  "scripts/test-ffl-filters-popup.mjs",
+]);
 for (const f of files) {
-  if (allowed.has(f) || f === "package-lock.json" || f === navRel) continue;
+  if (allowed.has(f) || fffPopupFiles.has(f) || f === "package-lock.json" || f === navRel) continue;
   const src = read(f);
   assert.doesNotMatch(src, pageRef, `${f} links to /ffl-filters`);
   assert.doesNotMatch(src, zipRef, `${f} links to the 1.3.7 zip`);
@@ -421,11 +430,22 @@ if (fs.existsSync(dist)) {
     return body.replace(sectionRe, `$1${stripped}$3`);
   };
 
+  // CA-POPUP-FFL-FILTERS (Paul 2026-11-21 10:08 AM ET): allow exactly the two pop-up CTA anchors
+  // (desktop modal + phone sheet) inside #fff-popup-root. No other new /ffl-filters links.
+  const fffCtaRe = /<a class="fff-go" href="\/ffl-filters" data-fff-cta>/g;
+  const allowFffPopupCta = (body, rel) => {
+    const n = (body.match(fffCtaRe) || []).length;
+    if (!n) return body;
+    assert.match(body, /id="fff-popup-root"/, `${rel} pop-up CTA outside the FFL Filters pop-up`);
+    assert.equal(n, 2, `${rel} FFL Filters pop-up must have exactly two CTA anchors`);
+    return body.replace(fffCtaRe, "<!--ca-popup-ffl-filters-cta-->");
+  };
+
   for (const f of fs.readdirSync(dist, { recursive: true })) {
     if (!String(f).endsWith(".html") || path.normalize(String(f)) === path.join("ffl-filters", "index.html")) continue;
     const other = fs.readFileSync(path.join(dist, String(f)), "utf8");
     if (!isRedirectStub(other)) {
-      const body = allowHomepagePartnerBarFflFiltersLink(assertHeaderNav(other, f), f);
+      const body = allowFffPopupCta(allowHomepagePartnerBarFflFiltersLink(assertHeaderNav(other, f), f), f);
       assert.doesNotMatch(body, /href="(https:\/\/www\.coriolisagency\.com)?\/ffl-filters\/?"/, `${f} non-header link to /ffl-filters`);
     }
     assert.doesNotMatch(other, /ffl-filters-1\.3\.[0-9]+\.zip/, `${f} links to the zip`);

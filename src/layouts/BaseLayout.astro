@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import SiteChrome from "../components/SiteChrome.astro";
-import FflFirewallPopup from "../components/FflFirewallPopup.astro";
+import FflFiltersPopup from "../components/FflFiltersPopup.astro";
 import UtmCapture from "@coriolis/lead-form/UtmCapture.astro";
 import { SITE, SITE_ORIGIN, CANON_PATHS } from "../lib/site";
 import { AGENCY_POPUP_CONFIG, POPUPS_ENABLED } from "../lib/popup-config";
@@ -218,7 +218,7 @@ const showPopup = POPUPS_ENABLED && emailCapture;
     <SiteChrome>
       <slot />
     </SiteChrome>
-    {emailCapture && !POPUPS_ENABLED ? <FflFirewallPopup /> : null}
+    {emailCapture && !POPUPS_ENABLED ? <FflFiltersPopup /> : null}
     {
       showPopup ? (
         <link rel="stylesheet" href={withBase("popup/coriolis-popup.v2.css")} />

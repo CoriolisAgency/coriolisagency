@@ -342,7 +342,9 @@ if (fs.existsSync(dist)) {
   assert.doesNotMatch(html, /Planned|when it ships/, "built page has no Planned / when it ships");
   assert.match(html, /weekly and on-demand reports/);
   assert.match(html, /Shipping checks first, with a security layer and a bonus report behind them/);
-  assert.ok(/FFL\u00A0Firewall\u00A0·\u00A0ACTIVE\u00A0DEFENSE/.test(html), "built page uses non-breaking spaces in service names");
+  // CA-POPUP-FFL-FILTERS: after PLATES-INLINE (#225) the only "FFL Firewall · NAME" on the built page was the Firewall pop-up,
+  // which is now unmounted (the FFL Filters pop-up is the active one and is suppressed here). Any that remain must use nbsp (next line).
+  assert.match(html, /ACTIVE DEFENSE/, "built page still names ACTIVE DEFENSE");
   assert.doesNotMatch(html, /FFL Firewall · (ACTIVE DEFENSE|OVERWATCH|RECON)/, "no plain-space service name on the built page");
   assert.match(html, /https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s/);
   assert.match(html, />Buy a license</);
