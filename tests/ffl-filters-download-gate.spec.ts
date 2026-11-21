@@ -4,7 +4,7 @@ test.use({ viewport: { width: 1280, height: 800 } });
 
 const PAGE_PATH = "/" + "ffl-filters";
 const MAILBOX = "support@" + "coriolisagency.com";
-const FILE_URL = "https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.8/ffl-filters-1.3.8.zip";
+const FILE_URL = "https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.9/ffl-filters-1.3.9.zip";
 
 async function stubZip(page: Page) {
   await page.route(FILE_URL, async (route) => {
@@ -12,7 +12,7 @@ async function stubZip(page: Page) {
       status: 200,
       headers: {
         "content-type": "application/zip",
-        "content-disposition": "attachment; filename=ffl-filters-1.3.8.zip",
+        "content-disposition": "attachment; filename=ffl-filters-1.3.9.zip",
       },
       body: Buffer.from("PK\x03\x04", "binary"),
     });

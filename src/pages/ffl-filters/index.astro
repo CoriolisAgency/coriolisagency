@@ -8,8 +8,8 @@
  * sitemap at the canonical https://www.coriolisagency.com/ffl-filters. /ffl-filters/connect and
  * /ffl-firewall stay noindex and off the sitemap. Guarded by scripts/test-ffl-filters-download.mjs.
  * CA-FFLF-138-BETA (Paul 2026-11-16 12:01 PM ET via Chief): version label is
- * "1.3.8 (beta)". The gated download is the permanent GitHub release asset
- * https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.8/ffl-filters-1.3.8.zip
+ * "1.3.9 (beta)". The gated download is the permanent GitHub release asset
+ * https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.9/ffl-filters-1.3.9.zip
  * (never the latest release tag). The older 1.3.7 zip remains at public/downloads/ and is not linked.
  * CA-FFLF-OG-IMAGE (Paul 2026-11-14 12:01 PM ET via Chief): page-only OG/Twitter image
  * at public/og/ffl-filters-og.jpg (1200x630), with Brandy's alt text verbatim.
@@ -21,10 +21,10 @@ import { btnPlan, btnSecondary } from "../../lib/links";
 import { withBase } from "../../lib/base";
 import FflFiltersDownloadGate from "../../components/FflFiltersDownloadGate.astro";
 
-const download = "https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.8/ffl-filters-1.3.8.zip";
+const download = "https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.9/ffl-filters-1.3.9.zip";
 const contact = withBase("contact");
 const logo = withBase("brand/ffl-filters/ffl-filters-lockup-on-dark.svg");
-const downloadLabel = "Download FFL Filters 1.3.8 (beta)";
+const downloadLabel = "Download FFL Filters 1.3.9 (beta)";
 const ogImage = "og/ffl-filters-og.jpg";
 const ogImageAlt =
   'The FFL Filters logo and the headline "A free WooCommerce filter plugin built for FFL dealers" sit on a dark navy background. Beside them, a browser window shows a shop page filtered to Glock and 9mm Luger, with the filter panel on the left and Glock G17 V, G45 V, G19 V and G26 V pistol cards.';
@@ -53,7 +53,7 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
         <a href={download} class={btnPlan} download data-download="hero">{downloadLabel}</a>
         <a href={contact} class={btnSecondary}>{contactLabel}</a>
       </div>
-      <p class="mt-3 text-xs text-zinc-500">Version 1.3.8 · Free · GPLv2 or later</p>
+      <p class="mt-3 text-xs text-zinc-500">Version 1.3.9 · Free · GPLv2 or later</p>
       <picture>
         <source media="(min-width: 640px)" type="image/webp" srcset={withBase("brand/ffl-filters/hero/ffl-filters-hero-desktop-1440x1152.webp")} width="1440" height="1152" />
         <source media="(min-width: 640px)" srcset={withBase("brand/ffl-filters/hero/ffl-filters-hero-desktop-1440x1152.jpg")} width="1440" height="1152" />
@@ -107,7 +107,7 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
       <h2 class={`mt-3 ${h2}`}>Install FFL Filters</h2>
       <ol class="mt-4 list-decimal space-y-2 pl-6 text-base leading-relaxed text-zinc-300">
         <li>Make sure WooCommerce 9.2 or newer is installed and active.</li>
-        <li>Download the FFL Filters 1.3.8 zip file from this page and keep it zipped.</li>
+        <li>Download the FFL Filters 1.3.9 zip file from this page and keep it zipped.</li>
         <li>In WordPress, go to Plugins &gt; Add New Plugin &gt; Upload Plugin, choose the zip file and click Install Now.</li>
         <li>Click Activate.</li>
         <li>Go to WooCommerce &gt; FFL Filters. The Welcome tab walks you through the three setup steps, starting with which filters to show.</li>
@@ -130,7 +130,7 @@ const body = "mt-4 text-base leading-relaxed text-zinc-300";
   <section class="border-t border-zinc-800/80 py-12" data-section="download">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
       <p class={eyebrow}>Download</p>
-      <h2 class={`mt-3 ${h2}`}>Get FFL Filters 1.3.8</h2>
+      <h2 class={`mt-3 ${h2}`}>Get FFL Filters 1.3.9</h2>
       <p class={body}>FFL Filters is free for any FFL running WooCommerce. If you'd like a hand setting it up, or you want more out of your store than filters, talk to Coriolis.</p>
       <div class="mt-8 flex flex-wrap items-center gap-3">
         <a href={download} class={btnPlan} download data-download="footer">{downloadLabel}</a>
