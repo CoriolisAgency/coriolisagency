@@ -1,3 +1,18 @@
+# Line endings: store and check out text as LF on every machine (CORIOLISAGENCY-CRLF-CLEANUP).
+* text=auto eol=lf
+
 popup-kit/** text eol=lf
 public/popup/** text eol=lf
 public/downloads/** binary -filter -diff
+
+# Binary types: never touch line endings.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
+*.zip binary
