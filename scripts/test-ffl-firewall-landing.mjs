@@ -103,8 +103,8 @@ const copyStrings = [
   "State shipping checks",
   "On both the classic and Blocks checkout, it matches each item's UPC to the shipping ZIP to help you catch items that can't ship there. Those items come out of the cart with a note to the shopper, items that need a permit or age check get a required acknowledgement checkbox, and orders that need a second look get an order note and a Flagged label.",
   "If the check can't run, checkout carries on and the order is flagged for you to review.",
-  "Once you switch it on with your site key, the plugin adds the dealer embed for you, and from then on it stays on and keeps watching the traffic coming into your store. It spots bots and scrapers and blocks or throttles them before they reach checkout, using rate limits, user agent and header checks, honeypot form fields that only bots fill in, checkout velocity and card-testing checks, and a datacenter IP block list.",
-  "Each check runs on your own site, where a request it catches is blocked or slowed down. You can also join the shared reputation feed, a separate opt-in that's off by default: your store reports the bots its checks catch as salted hashes, never shopper details, and receives a list of bots that other FFL Firewall stores have reported. The feed works only while <FflFwName n=\"ACTIVE DEFENSE\" /> is on, and the service needs an FFL Firewall license.",
+  "Once you switch it on with your site key, the plugin adds the dealer embed for you, and from then on it stays on and keeps watching the traffic coming into your store. It spots bots and scrapers and blocks or throttles them before they reach checkout, using rate limits, user agent and header checks, honeypot form fields that only bots fill in, checkout velocity and card-testing checks, and an optional datacenter IP list.",
+  "Each check runs on your own site, where a request it catches is blocked or slowed down. The shared reputation feed adds what other FFL Firewall stores have seen: your store reports the bots its checks catch as salted hashes, never shopper details, and receives a list of bots those stores have reported. A new install is in the feed by default while <FflFwName n=\"ACTIVE DEFENSE\" /> is on and the license is active; a store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until the store switches it on. You can switch the feed on or off at any time. The feed never touches checkout, login, the cart, My Account or wp-admin, and major search engines and link previewers are never blocked from your pages. The feed works only while <FflFwName n=\"ACTIVE DEFENSE\" /> is on, and the service needs an FFL Firewall license.",
   "It's a bonus that comes with your plan. Every week, and whenever you press Run scan, it compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org, flags configuration gaps in your setup and lists what to fix first.",
   "It reports only and makes no automatic fixes, so every change stays in your hands.",
   "You're still responsible for what you ship, and this is not legal advice.",
@@ -128,7 +128,7 @@ const copyStrings = [
   "whenever you switch it on and",
   "reports as a bonus. Every feature we add later is included at the same price.",
   "It only starts once you switch it on and add your site key, so you choose when bot and scraper control begins. After that it stays on, and your plugin dashboard marks it active while the dealer embed has been seen within the past day.",
-  "The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. Those checks run on your own site; if you've joined the shared reputation feed, your store also reports the bots it catches as salted hashes, never shopper details.",
+  "The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. Those checks run on your own site; while your store is in the shared reputation feed, it also reports the bots it catches as salted hashes, never shopper details. Checkout, login, the cart, My Account and wp-admin are never touched by the feed.",
   "It looks at items that carry a UPC when the shopper reaches checkout. Items with no UPC pass through, and when the check can't finish, the order goes through with a Flagged label so you can review it yourself.",
   "is a bonus store hardening report that runs weekly and on demand. It checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps, then leaves every change to you, since it never fixes anything on its own.",
   "Is FFL Firewall legal advice?",
@@ -139,6 +139,8 @@ const copyStrings = [
   "support@coriolisagency.com",
 ];
 for (const s of copyStrings) assert.ok(page.includes(s), `Brandy v3 copy missing: ${s}`);
+// FFLFW-TERMS-DEFAULT-SHARE-LANDING: the feed is default-on for new installs only; the old opt-in line is gone.
+assert.doesNotMatch(page, /off by default|separate opt-in|datacenter IP block list/, "old feed and datacenter lines are gone");
 // Locks: no vulnerability, compliance or vendor claims (Paul 11:16 AM ET, Chief 12:20 PM ET).
 assert.doesNotMatch(page, /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b|Wordfence|Patchstack|WPScan/i, "no vulnerability, compliance or vendor claims");
 assert.doesNotMatch(page, /free/i, "no free (also asserted above)");
