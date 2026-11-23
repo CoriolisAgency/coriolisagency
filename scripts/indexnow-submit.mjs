@@ -30,7 +30,9 @@ if (urls.length === 0 || bad.length > 0) {
 
 // Unlinked, noindex paths are never submitted. CA-FFLF-INDEX: /ffl-filters itself may be
 // submitted; /ffl-filters/connect, /ffl-firewall, and /downloads/ stay out.
-const NO_INDEXNOW = [/^\/ffl-filters\//, /^\/ffl-firewall(\/.*)?$/, /^\/downloads\//];
+// FFLFW-LANDING-1-0: /ffl-firewall itself may be submitted once FFLFW_V1_LIVE flips; /ffl-firewall/* stays out.
+const { fflfwLandingNoindex } = await import("../src/lib/ffl-firewall-release.mjs");
+const NO_INDEXNOW = [/^\/ffl-filters\//, /^\/ffl-firewall\/.+$/, /^\/downloads\//, ...(fflfwLandingNoindex() ? [/^\/ffl-firewall\/?$/] : [])];
 const refused = urls.filter((u) => NO_INDEXNOW.some((re) => re.test(new URL(u).pathname)));
 if (refused.length > 0) {
   console.error(`refusing noindex URLs (not for IndexNow): ${refused.join(", ")}`);

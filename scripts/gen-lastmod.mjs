@@ -5,6 +5,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { fflfwLandingNoindex } from "../src/lib/ffl-firewall-release.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pagesDir = path.join(root, "src", "pages");
@@ -23,9 +24,11 @@ const SKIP = new Set([
   "/unum",
   "/press/unum-partners-with-coriolis",
   "/grok-bot-setup",
-  // FFLFW-LANDING: noindex at launch, off the sitemap. Remove to start dating the page.
-  "/ffl-firewall",
+  // FFLFW-LANDING: noindex at launch, off the sitemap. FFLFW-LANDING-1-0: /ffl-firewall is dated once
+  // FFLFW_V1_LIVE flips (src/lib/ffl-firewall-release.mjs); terms and the setup guide stay out.
+  ...(fflfwLandingNoindex() ? ["/ffl-firewall"] : []),
   "/ffl-firewall/terms",
+  "/ffl-firewall/setup",
 ]);
 
 // Dynamic routes: the data file that holds their slugs and content.

@@ -13,6 +13,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { FFLFW_V1_LIVE, FFLFW_ZIP_CURRENT, FFLFW_ZIP_V1, FFLFW_ZIP_V1_SHA256, fflfwZip, fflfwLandingNoindex } from "../src/lib/ffl-firewall-release.mjs";
+import { PENDING_COPY } from "../src/lib/ffl-firewall-pending-copy.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (rel) => fs.readFileSync(path.join(root, rel), "utf8");
@@ -27,7 +29,8 @@ assert.doesNotMatch(page, banned, `${pageRel} has a banned word`);
 assert.doesNotMatch(terms, banned, `${termsRel} has a banned word`);
 
 // 1. Page: noindex, title, meta, path, buy CTAs, contact, no download/file.
-assert.match(page, /^\s*noindex\s*$/m, "page passes noindex to BaseLayout");
+assert.match(page, /^\s*noindex=\{fflfwLandingNoindex\(\)\}\s*$/m, "page noindex follows the FFLFW_V1_LIVE switch");
+assert.equal(FFLFW_V1_LIVE, false, "FFLFW_V1_LIVE stays false until Paul's S4 purchase passes (Paul 9:15 AM ET Nov 23)");
 assert.match(
   page,
   /title="FFL Firewall: state shipping checks and managed security for WooCommerce FFL dealers \| Coriolis"/,
@@ -47,7 +50,7 @@ const pricingSec = page.slice(page.indexOf('data-section="pricing"'), page.index
 assert.doesNotMatch(pricingSec, /Buy a license|buyHref|buyLabel/, "pricing card has no Buy a license");
 assert.doesNotMatch(page, /data-file=/);
 assert.deepEqual([...page.matchAll(/data-download="(hero|pricing|footer)"/g)].map((m) => m[1]), ["hero", "pricing", "footer"], "Get FFL Firewall buttons open the gate");
-assert.match(page, /const download = withBase\("downloads\/ffl-firewall-0\.1\.3\.zip"\);/, "zip slot (PENDING-ZIP)");
+assert.match(page, /const download = withBase\(fflfwZip\(\)\);/, "zip slot follows the FFLFW_V1_LIVE switch");
 assert.doesNotMatch(page, /github\.com\/CoriolisAgency\/ffl-firewall-releases/, "no GitHub release link");
 assert.doesNotMatch(page, /href="[^"]*ffl-filters"/, "no body link to the FFL Filters page (CA-NAV-FFLF)");
 assert.doesNotMatch(page, /free/i, "no FFL Firewall string on the page may contain free (Paul 10:39 AM ET)");
@@ -103,17 +106,14 @@ const copyStrings = [
   "State shipping checks",
   "On both the classic and Blocks checkout, it matches each item's UPC to the shipping ZIP to help you catch items that can't ship there. Those items come out of the cart with a note to the shopper, items that need a permit or age check get a required acknowledgement checkbox, and orders that need a second look get an order note and a Flagged label.",
   "If the check can't run, checkout carries on and the order is flagged for you to review.",
-  "Once you switch it on with your site key, the plugin adds the dealer embed for you, and from then on it stays on and keeps watching the traffic coming into your store. It spots bots and scrapers and blocks or throttles them before they reach checkout, using rate limits, user agent and header checks, honeypot form fields that only bots fill in, checkout velocity and card-testing checks, and an optional datacenter IP list.",
+  "It spots bots and scrapers and blocks or throttles them before they reach checkout, using rate limits, user agent and header checks, honeypot form fields that only bots fill in, checkout velocity and card-testing checks, and an optional datacenter IP list.",
   "Each check runs on your own site, where a request it catches is blocked or slowed down. The shared reputation feed adds what other FFL Firewall stores have seen: your store reports the bots its checks catch as salted hashes, never shopper details, and receives a list of bots those stores have reported. A new install is in the feed by default while <FflFwName n=\"ACTIVE DEFENSE\" /> is on and the license is active; a store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until the store switches it on. You can switch the feed on or off at any time. The feed never touches checkout, login, the cart, My Account or wp-admin, and major search engines and link previewers are never blocked from your pages. The feed works only while <FflFwName n=\"ACTIVE DEFENSE\" /> is on, and the service needs an FFL Firewall license.",
   "It's a bonus that comes with your plan. Every week, and whenever you press Run scan, it compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org, flags configuration gaps in your setup and lists what to fix first.",
   "It reports only and makes no automatic fixes, so every change stays in your hands.",
   "You're still responsible for what you ship, and this is not legal advice.",
   "starts working",
-  "The service is opt-in, so installing the plugin doesn't switch it on. Once you turn it on and add your site key, the plugin takes care of the dealer embed, and the service stays on and keeps watching from there.",
   "Turn it on in the plugin",
   "In WooCommerce, go to FFL Firewall, open the tab for bot and scraper control and switch the service on.",
-  "Paste your site key",
-  "Paste your site key into the Site key field and save it, which is the only setup the service needs from you.",
   "The plugin adds the dealer embed",
   "Once the key is saved, the plugin adds the dealer embed to your store's pages for you, and the countermeasures start once it has been seen.",
   "Your plugin dashboard shows the service as active only while the dealer embed has been seen in the last 24 hours. If a day goes by without the plugin seeing it, the dashboard says so, which tells you to check your site key and settings. Your bill doesn't change either way, because the plan costs $79 a month whether the service is on or off.",
@@ -127,7 +127,7 @@ const copyStrings = [
   "What do I get for $79 a month?",
   "whenever you switch it on and",
   "reports as a bonus. Every feature we add later is included at the same price.",
-  "It only starts once you switch it on and add your site key, so you choose when bot and scraper control begins. After that it stays on, and your plugin dashboard marks it active while the dealer embed has been seen within the past day.",
+  "After that it stays on, and your plugin dashboard marks it active while the dealer embed has been seen within the past day.",
   "The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. Those checks run on your own site; while your store is in the shared reputation feed, it also reports the bots it catches as salted hashes, never shopper details. Checkout, login, the cart, My Account and wp-admin are never touched by the feed.",
   "It looks at items that carry a UPC when the shopper reaches checkout. Items with no UPC pass through, and when the check can't finish, the order goes through with a Flagged label so you can review it yourself.",
   "is a bonus store hardening report that runs weekly and on demand. It checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps, then leaves every change to you, since it never fixes anything on its own.",
@@ -149,7 +149,9 @@ assert.doesNotMatch(page, /reputation feed is coming later|isn't part of this ve
 assert.doesNotMatch(page, /Planned|when it ships|planning|isn't built|not built/i, "RECON is presented as live");
 assert.doesNotMatch(page, /class="sv plan"|cc dim/, "no planned-tag markup left");
 
-assert.doesNotMatch(page, /PENDING/, "no placeholders left");
+// FFLFW-LANDING-1-0: Brandy placeholders come only from src/lib/ffl-firewall-pending-copy.mjs (checked in 6b; none may remain
+// once FFLFW_V1_LIVE flips); no other PENDING marker may appear.
+assert.doesNotMatch(page.replace('import { PENDING_COPY as P } from "../../lib/ffl-firewall-pending-copy.mjs";', ""), /PENDING/, "no placeholders left outside the Brandy placeholder list");
 assert.ok(page.includes("You're still responsible for what you ship, and this is not legal advice."));
 assert.doesNotMatch(page, /California|Colorado|Illinois|Massachusetts|New York|Washington,?\s*D\.?C/i);
 
@@ -299,17 +301,22 @@ assert.match(nav, /label:\s*"FFL Plugins",\s*children:\s*\[[\s\S]*?href:\s*"ffl-
 
 // 6. Sitemap + lastmod + robots + vercel + IndexNow.
 const cfg = read("astro.config.mjs");
-assert.match(cfg, /!\/\^\\\/ffl-firewall\(\\\/\.\*\)\?\$\/\.test\(new URL\(page\)\.pathname\)/, "sitemap filter excludes /ffl-firewall and /ffl-firewall/*");
-assert.match(read("scripts/gen-lastmod.mjs"), /"\/ffl-firewall",/);
-assert.match(read("scripts/gen-lastmod.mjs"), /"\/ffl-firewall\/terms",/);
-assert.equal(JSON.parse(read("lastmod.json"))["/ffl-firewall"], undefined, "not in lastmod.json");
-assert.match(read("public/robots.txt"), /^Disallow: \/ffl-firewall$/m);
+assert.ok(cfg.includes("!/^\\/ffl-firewall\\/.+$/.test(new URL(page).pathname)"), "sitemap filter excludes /ffl-firewall/*");
+assert.ok(cfg.includes("!(fflfwLandingNoindex() && /^\\/ffl-firewall\\/?$/.test(new URL(page).pathname))"), "sitemap filter excludes /ffl-firewall while noindex");
+const lastmodSrc = read("scripts/gen-lastmod.mjs");
+assert.ok(lastmodSrc.includes('...(fflfwLandingNoindex() ? ["/ffl-firewall"] : []),'), "lastmod skips /ffl-firewall while noindex");
+assert.match(lastmodSrc, /"\/ffl-firewall\/terms",/);
+assert.match(lastmodSrc, /"\/ffl-firewall\/setup",/);
+if (fflfwLandingNoindex()) assert.equal(JSON.parse(read("lastmod.json"))["/ffl-firewall"], undefined, "not in lastmod.json");
+assert.equal(JSON.parse(read("lastmod.json"))["/ffl-firewall/setup"], undefined, "setup guide not in lastmod.json");
+// FFLFW-LANDING-1-0: the two static companions of FFLFW_V1_LIVE must agree with it.
+assert.equal(/^Disallow: \/ffl-firewall$/m.test(read("public/robots.txt")), fflfwLandingNoindex(), "robots.txt Disallow: /ffl-firewall matches FFLFW_V1_LIVE");
 
 const vercel = JSON.parse(read("vercel.json"));
 const hdr = (src) => Object.fromEntries((vercel.headers.find((h) => h.source === src)?.headers ?? []).map((h) => [h.key, h.value]));
-assert.equal(hdr("/ffl-firewall")["X-Robots-Tag"], "noindex, nofollow");
+assert.equal(hdr("/ffl-firewall")["X-Robots-Tag"], fflfwLandingNoindex() ? "noindex, nofollow" : undefined, "vercel.json /ffl-firewall X-Robots-Tag matches FFLFW_V1_LIVE");
 
-for (const u of ["https://www.coriolisagency.com/ffl-firewall", "https://www.coriolisagency.com/ffl-firewall/"]) {
+for (const u of [...(fflfwLandingNoindex() ? ["https://www.coriolisagency.com/ffl-firewall", "https://www.coriolisagency.com/ffl-firewall/"] : []), "https://www.coriolisagency.com/ffl-firewall/setup"]) {
   let code = 0;
   try {
     execFileSync(process.execPath, [path.join(root, "scripts/indexnow-submit.mjs"), u], { stdio: "pipe", env: { ...process.env, INDEXNOW_KEY: "test-key-not-used" } });
@@ -319,6 +326,79 @@ for (const u of ["https://www.coriolisagency.com/ffl-firewall", "https://www.cor
   assert.equal(code, 2, `indexnow refuses ${u}`);
 }
 
+// 6b. FFLFW-LANDING-1-0: launch switch, setup guide and Brandy placeholders.
+assert.equal(FFLFW_ZIP_CURRENT, "downloads/ffl-firewall-0.1.3.zip", "current zip is 0.1.3 until the swap");
+assert.equal(FFLFW_ZIP_V1, "downloads/ffl-firewall-1.0.0.zip");
+assert.ok(fs.existsSync(path.join(root, "public", FFLFW_ZIP_CURRENT)), "current zip ships");
+if (FFLFW_V1_LIVE) {
+  const v1 = path.join(root, "public", FFLFW_ZIP_V1);
+  assert.ok(fs.existsSync(v1), "FFLFW_V1_LIVE needs public/downloads/ffl-firewall-1.0.0.zip");
+  assert.match(FFLFW_ZIP_V1_SHA256, /^[a-f0-9]{64}$/, "FFLFW_V1_LIVE needs FFLFW_ZIP_V1_SHA256");
+  assert.equal(crypto.createHash("sha256").update(fs.readFileSync(v1)).digest("hex"), FFLFW_ZIP_V1_SHA256, "1.0.0 zip sha256");
+  assert.equal(Object.keys(PENDING_COPY).length, 0, "no placeholders may remain at launch");
+}
+const setupRel = "src/pages/ffl-firewall/setup.astro";
+const setupSrc = read(setupRel);
+assert.match(setupSrc, /^\s*noindex\s*$/m, "setup guide is noindex");
+assert.match(setupSrc, /path="\/ffl-firewall\/setup"/);
+assert.doesNotMatch(setupSrc, banned, `${setupRel} has a banned word`);
+assert.match(page, /<a href=\{setup\} class="lnk" data-setup-link>/, "landing links the setup guide");
+// Every placeholder used is defined, every one defined is used, and each is listed for Brandy in the doc.
+const used = new Set([...(page + setupSrc).matchAll(/P\.([A-Z0-9_]+)/g)].map((m) => m[1]));
+const defined = Object.keys(PENDING_COPY);
+for (const k of used) assert.ok(defined.includes(k), `placeholder ${k} is not defined`);
+for (const k of defined) {
+  assert.ok(used.has(k), `placeholder ${k} is defined but unused`);
+  assert.equal(PENDING_COPY[k], `[[${k}]]`, `placeholder ${k} renders as its name`);
+}
+const doc = read("docs/ffl-firewall-landing-1-0.md");
+for (const k of defined) assert.ok(doc.includes("`" + k + "`"), `docs/ffl-firewall-landing-1-0.md lists ${k}`);
+// Facts the 1.0.0 copy must not get ahead of: no SEO-crawler exemption or past-due grace before FFLFW-CRAWLER-GRACE merges.
+for (const [rel, src] of [[pageRel, page], [setupRel, setupSrc]]) {
+  assert.doesNotMatch(src, /SEO crawler|Ahrefs|Semrush|7-day|seven-day|grace period|GunSearch|\bGSE\b/i, `${rel} gets ahead of what shipped`);
+}
+if (defined.length) console.log(`test-ffl-firewall-landing: ${defined.length} Brandy placeholders remain (not launch-ready)`);
+
+// FFLFW-LANDING-1-0: Brandy's FINAL strings (Karp-cleared 11:58 AM ET Nov 23, 2026), verbatim. Service names on
+// /ffl-firewall render through FflFwName (nbsp in the built page; compared with spaces).
+const FINAL_LANDING = {
+  "FFLFW_L10_AD_SERVICE_ON": "When you switch it on, the plugin connects the site key made when you bought FFL Firewall and adds the dealer embed script for you, and from then on it stays on and keeps watching the traffic coming into your store.",
+  "FFLFW_L10_ACTIVATION_INTRO": "The service is opt-in, so installing the plugin doesn't switch it on. Your site key is made when you buy FFL Firewall; the first time you switch FFL Firewall · ACTIVE DEFENSE on, the plugin connects that key to your store and takes care of the dealer embed script, and the service stays on and keeps watching from there.",
+  "FFLFW_L10_STEP2_TITLE": "Tick the data disclosure and save",
+  "FFLFW_L10_STEP2_BODY": "On the FFL Firewall · ACTIVE DEFENSE tab, tick the data disclosure and click save; with an active license, the plugin picks up the site key made at checkout and connects it to your store, so there's nothing to copy. If you already have a site key, you can still paste it into the Site key field, and a pasted key is the one the plugin uses.",
+  "FFLFW_L10_FAQ_AD_OFF_LEAD": "It only starts once you switch it on and tick the data disclosure, so you choose when bot and scraper control begins.",
+  "FFLFW_L10_SETUP_LINK": "Read the setup guide"
+};
+const FINAL_SETUP = {
+  "FFLFW_SETUP_META_TITLE": "FFL Firewall setup guide | Coriolis Agency",
+  "FFLFW_SETUP_META_DESCRIPTION": "How to install FFL Firewall on a WooCommerce gun store, add your license and switch on each of its three services, step by step.",
+  "FFLFW_SETUP_EYEBROW": "FFL Firewall 1.0.0",
+  "FFLFW_SETUP_H1": "Set up FFL Firewall on your WooCommerce store",
+  "FFLFW_SETUP_INTRO": "This guide is for FFL dealers who sell on WooCommerce. Setup is six short steps in your WordPress dashboard: install the plugin, add your license, then switch on each service and choose your settings.",
+  "FFLFW_SETUP_S1_TITLE": "Install the plugin",
+  "FFLFW_SETUP_S1_BODY": "Download the FFL Firewall zip from the FFL Firewall page, then in WordPress go to Plugins > Add New > Upload Plugin, choose the zip, install it and click Activate. Until you add a license the plugin doesn't check real carts, but the built-in demo lets you run 10 test checks on a UPC and zip so you can see how it works.",
+  "FFLFW_SETUP_S2_TITLE": "Add your license",
+  "FFLFW_SETUP_S2_BODY": "FFL Firewall is $79 a month, with unlimited FFL Firewall · OVERWATCH transactions and every service included. After you buy, your license key arrives by email; in WordPress, go to WooCommerce > FFL Firewall, open the License tab, paste the key and click Check key.",
+  "FFLFW_SETUP_S3_TITLE": "Switch on FFL Firewall · OVERWATCH",
+  "FFLFW_SETUP_S3_BODY": "On the FFL Firewall · OVERWATCH tab, switch the check on and choose your roster setting, which starts as allow and flag. From then on every order is checked at checkout, on both the classic checkout and the WooCommerce Blocks checkout, and the results show up in the cart and on the order.",
+  "FFLFW_SETUP_S4_TITLE": "Switch on FFL Firewall · ACTIVE DEFENSE",
+  "FFLFW_SETUP_S4_BODY": "On the FFL Firewall · ACTIVE DEFENSE tab, switch it on, tick the data disclosure and click save. With an active license, the plugin connects the site key made when you bought FFL Firewall to this store and adds the dealer embed script, so you don't have to copy anything (a site key you paste in yourself still works and takes priority). Click Check for script to confirm it's on your pages; the dashboard shows the service as active once the dealer embed script has been seen in the last 24 hours.",
+  "FFLFW_SETUP_S5_TITLE": "Choose your shared reputation feed setting",
+  "FFLFW_SETUP_S5_BODY": "The shared reputation feed lets FFL Firewall stores warn each other about bots: your store reports the bots it catches as salted hashes, never shopper details, and gets back a list of bots other stores have reported. On a new install it's on by default while FFL Firewall · ACTIVE DEFENSE is on and the license is active. A store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until you switch it on. You can switch it on or off any time in the Shared reputation feed section.",
+  "FFLFW_SETUP_S6_TITLE": "Run FFL Firewall · RECON",
+  "FFLFW_SETUP_S6_BODY": "FFL Firewall · RECON scans your site every week, and you can click Run scan whenever you want a fresh one. It lists WordPress, plugin and theme updates that are waiting, read from WordPress's own update data, along with setup gaps such as missing https or debug output left on. It only reports what it finds and changes nothing on your site.",
+  "FFLFW_SETUP_UPDATES_TITLE": "Keep it up to date",
+  "FFLFW_SETUP_UPDATES_BODY": "New FFL Firewall versions show up on the WordPress Plugins screen like any other plugin update, so you can update with one click.",
+  "FFLFW_SETUP_HELP_TITLE": "Help with setup",
+  "FFLFW_SETUP_HELP_BODY": "If a step doesn't look the way this guide describes, or you'd like us to walk through setup with you, email support@coriolisagency.com and a person on our team will get back to you.",
+  "FFLFW_SETUP_BACK_LINK": "Back to FFL Firewall"
+};
+assert.equal(Object.keys(FINAL_LANDING).length + Object.keys(FINAL_SETUP).length, 28, "all 28 cleared strings are tracked");
+assert.equal(defined.length, 0, "no Brandy placeholders remain");
+for (const [k, v] of Object.entries(FINAL_SETUP)) assert.ok(setupSrc.includes(JSON.stringify(v)) || setupSrc.includes(v), `setup guide ships ${k} verbatim`);
+assert.match(FINAL_SETUP.FFLFW_SETUP_S3_BODY, /which starts as allow and flag/, "S3 keeps the roster default (Defaults.php: roster_rule => ROSTER_FLAG)");
+assert.match(FINAL_SETUP.FFLFW_SETUP_S6_BODY, /every week/, "S6 keeps the weekly scan (Recon/Module.php: wp_schedule_event weekly)");
+
 // 7. package.json test:ci includes this script.
 assert.match(read("package.json"), /scripts\/test-ffl-firewall-landing\.mjs/);
 
@@ -327,14 +407,26 @@ const dist = path.join(root, "dist");
 if (fs.existsSync(dist)) {
   const maps = fs.readdirSync(dist).filter((f) => /^sitemap-\d+\.xml$/.test(f));
   assert.ok(maps.length > 0, "built sitemap present");
-  for (const m of maps) assert.doesNotMatch(fs.readFileSync(path.join(dist, m), "utf8"), /\/ffl-firewall</, `${m} lists /ffl-firewall`);
+  for (const m of maps) {
+    const xml = fs.readFileSync(path.join(dist, m), "utf8");
+    if (fflfwLandingNoindex()) assert.doesNotMatch(xml, /\/ffl-firewall</, `${m} lists /ffl-firewall`);
+    assert.doesNotMatch(xml, /\/ffl-firewall\/setup</, `${m} lists /ffl-firewall/setup`);
+  }
+  // FFLFW-LANDING-1-0: setup guide built, noindex, no vendor names.
+  const setupHtml = fs.readFileSync(path.join(dist, "ffl-firewall", "setup", "index.html"), "utf8");
+  assert.match(setupHtml, /<meta name="robots" content="noindex, nofollow"/);
+  const setupBody = setupHtml.slice(setupHtml.indexOf("data-fflfw-setup"), setupHtml.indexOf("</article>", setupHtml.indexOf("data-fflfw-setup")));
+  assert.ok(setupBody.length > 0, "setup guide body found");
+  assert.doesNotMatch(setupBody, /GunSearch|\bGSE\b|Orchid|eState/i, "setup guide body names no vendor (site chrome excluded)");
+  assert.equal((fs.readFileSync(path.join(dist, "ffl-firewall", "index.html"), "utf8").match(/data-setup-link/g) ?? []).length, 1, "landing links the setup guide once");
   const html = fs.readFileSync(path.join(dist, "ffl-firewall", "index.html"), "utf8");
-  assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
+  if (fflfwLandingNoindex()) assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
+  else assert.doesNotMatch(html, /<meta name="robots"/);
   assert.match(html, /<title>FFL Firewall: state shipping checks and managed security for WooCommerce FFL dealers \| Coriolis<\/title>/);
   // Download gate (FFL Filters component, reworded) mounted once, hidden until a download button opens it.
   assert.equal((html.match(/<div[^>]*\sdata-fflf-dl-gate[\s>=]/g) ?? []).length, 1);
   assert.equal((html.match(/data-download="(hero|pricing|footer)"/g) ?? []).length, 3);
-  assert.match(html, /data-file="\/downloads\/ffl-firewall-0\.1\.3\.zip"/);
+  assert.ok(html.includes(`data-file="/${fflfwZip()}"`), "gate serves the zip FFLFW_V1_LIVE picks");
   assert.doesNotMatch(html, /data-fflfw-ea-gate/);
   assert.doesNotMatch(html, /data-early-access/);
   assert.doesNotMatch(html, /free/i, "no free anywhere on the built /ffl-firewall page");
@@ -360,6 +452,13 @@ if (fs.existsSync(dist)) {
   assert.ok(mainStart !== -1 && mainEnd > mainStart, "landing body found");
   const text = html.slice(mainStart, mainEnd).replace(/<(script|style)[\s\S]*?<\/\1>/g, " ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&#39;|&#x27;/g, "'").replace(/\s+/g, " ");
   for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(text.includes(`FFL Firewall · ${n}`), `built page names FFL Firewall · ${n}`);
+  for (const [k, v] of Object.entries(FINAL_LANDING)) assert.ok(text.includes(v), `built /ffl-firewall ships ${k} verbatim`);
+  const setupText = setupBody.replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&#39;|&#x27;/g, "'").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/\s+/g, " ");
+  for (const [k, v] of Object.entries(FINAL_SETUP)) {
+    if (k === "FFLFW_SETUP_META_TITLE") assert.ok(setupHtml.includes(`<title>${v.replace(/&/g, "&amp;")}</title>`), "setup title verbatim");
+    else if (k === "FFLFW_SETUP_META_DESCRIPTION") assert.ok(setupHtml.includes(`<meta name="description" content="${v}">`), "setup description verbatim");
+    else assert.ok(setupText.includes(v), `built setup guide ships ${k} verbatim`);
+  }
   assert.doesNotMatch(text, /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b/i, "no vulnerability, compliance or vendor claims on the built page");
   assert.match(html, /Read the FFL Firewall terms/);
   const termsHtml = fs.readFileSync(path.join(dist, "ffl-firewall", "terms", "index.html"), "utf8");
