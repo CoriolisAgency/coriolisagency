@@ -356,9 +356,9 @@ for (const k of defined) {
 }
 const doc = read("docs/ffl-firewall-landing-1-0.md");
 for (const k of defined) assert.ok(doc.includes("`" + k + "`"), `docs/ffl-firewall-landing-1-0.md lists ${k}`);
-// Facts the 1.0.0 copy must not get ahead of: no SEO-crawler exemption or past-due grace before FFLFW-CRAWLER-GRACE merges.
+// Facts the 1.0.0 copy must not get ahead of. FFLFW-CRAWLER-GRACE merged (ffl-firewall #42), so the SEO-crawler line is allowed; the past-due grace lives on the terms page only.
 for (const [rel, src] of [[pageRel, page], [setupRel, setupSrc]]) {
-  assert.doesNotMatch(src, /SEO crawler|Ahrefs|Semrush|7-day|seven-day|grace period|GunSearch|\bGSE\b/i, `${rel} gets ahead of what shipped`);
+  assert.doesNotMatch(src, /7-day|seven-day|grace period|GunSearch|\bGSE\b/i, `${rel} gets ahead of what shipped`);
 }
 if (defined.length) console.log(`test-ffl-firewall-landing: ${defined.length} Brandy placeholders remain (not launch-ready)`);
 
