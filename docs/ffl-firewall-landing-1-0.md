@@ -44,8 +44,9 @@ Copy is Brandy's; Karp checks it against the locks. Each placeholder renders as 
 
 Facts the copy must match (as shipped Nov 23, 2026):
 - The plugin readme is 1.0.0. Price: $79 a month, unlimited OVERWATCH transactions, every service included.
-- ACTIVE DEFENSE: with an active license, switching it on with the data disclosure ticked gets the store's
-  site key automatically (FFLFW-ONBOARD-SITEKEY); a dealer can still paste a key, and a pasted key wins.
+- ACTIVE DEFENSE: the store's site key is made at paid checkout (FFLFW-ONBOARD-SITEKEY-CHECKOUT) and bound to
+  the store the first time ACTIVE DEFENSE is switched on with the data disclosure ticked and an active license;
+  a dealer can still paste a key, and a pasted key wins.
   The dashboard shows it active while the dealer embed was seen in the last 24 hours.
 - Shared reputation feed: on by default for new installs only (while ACTIVE DEFENSE is on and the license is
   active); an existing install keeps its saved choice, and one that never chose stays off until switched on.
@@ -55,10 +56,10 @@ Facts the copy must match (as shipped Nov 23, 2026):
 
 | Placeholder | Where | Replaces / must say |
 |---|---|---|
-| `FFLFW_L10_AD_SERVICE_ON` | ACTIVE DEFENSE card, first sentence | Was: "Once you switch it on with your site key, the plugin adds the dealer embed for you, and from then on it stays on and keeps watching the traffic coming into your store." Now: switching it on gets the site key and adds the embed. |
+| `FFLFW_L10_AD_SERVICE_ON` | ACTIVE DEFENSE card, first sentence | Was: "Once you switch it on with your site key, the plugin adds the dealer embed for you, and from then on it stays on and keeps watching the traffic coming into your store." Now: switching it on binds the site key made at paid checkout to the store and adds the embed. |
 | `FFLFW_L10_ACTIVATION_INTRO` | Activation section intro | Was: "...Once you turn it on and add your site key, the plugin takes care of the dealer embed..." Opt-in stays true. |
 | `FFLFW_L10_STEP2_TITLE` | Activation step 2 title | Was: "Paste your site key". |
-| `FFLFW_L10_STEP2_BODY` | Activation step 2 body | Was: "Paste your site key into the Site key field and save it, which is the only setup the service needs from you." Now: tick the data disclosure and save; the key arrives with an active license; pasting one still works. |
+| `FFLFW_L10_STEP2_BODY` | Activation step 2 body | Was: "Paste your site key into the Site key field and save it, which is the only setup the service needs from you." Now: tick the data disclosure and save; the site key made at paid checkout is bound to the store on that first save with an active license; pasting one still works. |
 | `FFLFW_L10_FAQ_AD_OFF_LEAD` | FAQ "Why is ACTIVE DEFENSE off when I install the plugin?", first sentence | Was: "It only starts once you switch it on and add your site key, so you choose when bot and scraper control begins." |
 | `FFLFW_L10_SETUP_LINK` | Download section, link to the setup guide | New link label. |
 
@@ -74,7 +75,7 @@ Facts the copy must match (as shipped Nov 23, 2026):
 | `FFLFW_SETUP_S1_TITLE` / `FFLFW_SETUP_S1_BODY` | Install: download the zip from /ffl-firewall, WordPress Plugins > Add New > Upload Plugin, activate. Unlicensed installs don't check carts; the built-in demo gives 10 test runs. |
 | `FFLFW_SETUP_S2_TITLE` / `FFLFW_SETUP_S2_BODY` | License: buy ($79 a month), the key is emailed; WooCommerce > FFL Firewall, License tab, paste it and click Check key. |
 | `FFLFW_SETUP_S3_TITLE` / `FFLFW_SETUP_S3_BODY` | OVERWATCH tab: switch it on; roster-state choice; results on classic and Blocks checkout. |
-| `FFLFW_SETUP_S4_TITLE` / `FFLFW_SETUP_S4_BODY` | ACTIVE DEFENSE tab: switch on, tick the data disclosure, save; the site key arrives automatically with an active license; Check for script; active once the embed is seen (24 hours). |
+| `FFLFW_SETUP_S4_TITLE` / `FFLFW_SETUP_S4_BODY` | ACTIVE DEFENSE tab: switch on, tick the data disclosure, save; the site key made at paid checkout is bound to this store on the first turn-on with an active license; Check for script; active once the embed is seen (24 hours). |
 | `FFLFW_SETUP_S5_TITLE` / `FFLFW_SETUP_S5_BODY` | Shared reputation feed: default-on for new installs only; existing no-choice installs off; switch any time; salted hashes, never shopper details. |
 | `FFLFW_SETUP_S6_TITLE` / `FFLFW_SETUP_S6_BODY` | RECON tab: weekly and Run scan; WordPress.org versions and configuration gaps; reports only. |
 | `FFLFW_SETUP_UPDATES_TITLE` / `FFLFW_SETUP_UPDATES_BODY` | Updates show in the WordPress Plugins screen (FFLFW-UPDATER). |
