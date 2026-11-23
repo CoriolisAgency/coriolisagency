@@ -5,7 +5,7 @@
  * "The shared reputation feed" section: Brandy's terms lines, verbatim, from
  * TERMS-feed-lines-2026-11-19.md (Paul approved 1:41 PM ET; ships with S6E, Paul 1:35 PM ET).
  * FFLFW-TERMS-DEFAULT-SHARE (Karp-cleared 2026-11-23): T0, T2, T3 and the no-trial line (option A);
- * the feed section's first paragraph (T1) stays as is until its revision clears.
+ * T1 (Brandy's no-choice revision), Karp-cleared 11:05 AM ET.
  */
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
@@ -45,7 +45,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </section>
       <section>
         <h2 class="text-base font-semibold text-white">The shared reputation feed</h2>
-        <p class="mt-2">The shared reputation feed is a separate opt-in with its own switch, and it's off by default, so turning on FFL Firewall · ACTIVE DEFENSE doesn't turn it on. One switch covers both directions, so joining means your store reports the bots its checks catch and receives a list of bots that other FFL Firewall stores have reported. The feed only works while FFL Firewall · ACTIVE DEFENSE is on, and it needs an active FFL Firewall license.</p>
+        <p class="mt-2">Stores that install FFL Firewall from now on are in the shared reputation feed by default while FFL Firewall · ACTIVE DEFENSE is switched on and their license is active; stores that already had FFL Firewall installed keep the feed setting they had, and if you never made a choice, the feed stays off until you switch it on. Either way, you can switch the feed on or off at any time. One switch covers both directions, so being in the feed means your store reports the bots its checks catch and receives a list of bots that other FFL Firewall stores have reported. The feed only works while FFL Firewall · ACTIVE DEFENSE is on, and it needs an active FFL Firewall license.</p>
         <p class="mt-2">While your store is in the feed, the plugin sends Coriolis, LLC signals about the bots your store catches, and nothing about your shoppers. The signals are salted hashes of the IP addresses and IPv6 networks the bots came from, the bot's user agent when a request fails the user agent check, and the type of pattern caught, such as a honeypot form field or a run of failed payments. Raw IP addresses stay on your store, because the plugin hashes them before anything is sent. Rate-limit hits stay on your store too and are never sent to the feed. Shoppers are never named or identified, and the plugin sends no names, emails, addresses, orders, cart contents or payment details.</p>
         <p class="mt-2">Coriolis, LLC uses feed signals only for the shared list, and your store's reports are deleted after 30 days. To leave the feed, untick &quot;Join the shared reputation feed&quot; in the Shared reputation feed section of the FFL Firewall · ACTIVE DEFENSE tab and click &quot;Save feed setting&quot;; once the feed is off, your store stops sending signals and stops using the shared list.</p>
         <p class="mt-2">If the feed stops a real visitor on your store, you can mark that visitor as Not a bot from the plugin. The visitor is unblocked on your store right away, and Coriolis reviews whether to take them off the network list. Coriolis decides the result of each review and doesn't commit to a particular result or a time for it.</p>
