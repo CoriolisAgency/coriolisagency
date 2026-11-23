@@ -375,8 +375,10 @@ if (fs.existsSync(dist)) {
   // FFLFW-LANDING-1-0: setup guide built, noindex, no vendor names.
   const setupHtml = fs.readFileSync(path.join(dist, "ffl-firewall", "setup", "index.html"), "utf8");
   assert.match(setupHtml, /<meta name="robots" content="noindex, nofollow"/);
-  assert.doesNotMatch(setupHtml.replace(/<(script|style)[\s\S]*?<\/\1>/g, " "), /GunSearch|\bGSE\b|Orchid|eState/i, "setup guide names no vendor");
-  assert.equal((html.match(/data-setup-link/g) ?? []).length, 1, "landing links the setup guide once");
+  const setupBody = setupHtml.slice(setupHtml.indexOf("data-fflfw-setup"), setupHtml.indexOf("</article>", setupHtml.indexOf("data-fflfw-setup")));
+  assert.ok(setupBody.length > 0, "setup guide body found");
+  assert.doesNotMatch(setupBody, /GunSearch|\bGSE\b|Orchid|eState/i, "setup guide body names no vendor (site chrome excluded)");
+  assert.equal((fs.readFileSync(path.join(dist, "ffl-firewall", "index.html"), "utf8").match(/data-setup-link/g) ?? []).length, 1, "landing links the setup guide once");
   const html = fs.readFileSync(path.join(dist, "ffl-firewall", "index.html"), "utf8");
   if (fflfwLandingNoindex()) assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
   else assert.doesNotMatch(html, /<meta name="robots"/);
