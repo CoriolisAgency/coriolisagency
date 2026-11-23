@@ -27,9 +27,17 @@ Only `/ffl-firewall` changes; `/ffl-firewall/terms` and `/ffl-firewall/setup` ke
 ## Setup guide
 
 `/ffl-firewall/setup` (`src/pages/ffl-firewall/setup.astro`): noindex, off the sitemap, lastmod and IndexNow,
-linked once from the landing's download section. Structure only until Brandy's copy is cleared.
+linked once from the landing's download section. Copy: Brandy's FINAL strings.
 
 ## Copy owed by Brandy (named placeholders)
+
+**Status: cleared.** All 28 repo strings were replaced with Brandy's FINAL strings (Karp-cleared 11:58 AM ET
+Nov 23, 2026), verbatim; `PENDING_COPY` is empty. Karp's conditions checked against ffl-firewall main
+(cea8bd8): the roster default is allow and flag (`plugin/ffl-firewall/src/Settings/Defaults.php:45`,
+label `src/Admin/Page.php:351`), and RECON schedules a weekly scan (`plugin/ffl-firewall/src/Recon/Module.php:74`),
+so S3 and S6 ship as written. The copy says the site key is made at checkout, so the PR is held until
+FFLFW-ONBOARD-SITEKEY-CHECKOUT merges. The Stripe product description stays out of this repo.
+The tables below are the original brief, kept for reference.
 
 Copy is Brandy's; Karp checks it against the locks. Each placeholder renders as `[[NAME]]` and lives in
 `src/lib/ffl-firewall-pending-copy.mjs`. No vendor names (never name GSE), no "free".

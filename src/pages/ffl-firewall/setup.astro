@@ -1,37 +1,38 @@
 ---
 /**
- * FFLFW-LANDING-1-0: FFL Firewall setup guide. Structure only: every line is a named placeholder from
- * src/lib/ffl-firewall-pending-copy.mjs until Brandy's copy is cleared by Karp
- * (facts each line must match: docs/ffl-firewall-landing-1-0.md). The guide stays noindex, nofollow and off
- * the sitemap, lastmod and IndexNow (the /ffl-firewall/* exclusions), whatever FFLFW_V1_LIVE says.
- * Guarded by scripts/test-ffl-firewall-landing.mjs.
+ * FFLFW-LANDING-1-0: FFL Firewall setup guide. Copy: Brandy's FINAL strings (Karp-cleared 11:58 AM ET Nov 23, 2026),
+ * verbatim; facts checked against ffl-firewall main (roster default allow and flag, weekly RECON scan).
+ * The guide stays noindex, nofollow and off the sitemap, lastmod and IndexNow (the /ffl-firewall/* exclusions),
+ * whatever FFLFW_V1_LIVE says. Guarded by scripts/test-ffl-firewall-landing.mjs.
  */
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { withBase } from "../../lib/base";
-import { PENDING_COPY as P } from "../../lib/ffl-firewall-pending-copy.mjs";
 
 const landing = withBase("ffl-firewall");
+const support = "support@coriolisagency.com";
 const steps = [
-  { n: 1, id: "install", title: P.FFLFW_SETUP_S1_TITLE, body: P.FFLFW_SETUP_S1_BODY },
-  { n: 2, id: "license", title: P.FFLFW_SETUP_S2_TITLE, body: P.FFLFW_SETUP_S2_BODY },
-  { n: 3, id: "overwatch", title: P.FFLFW_SETUP_S3_TITLE, body: P.FFLFW_SETUP_S3_BODY },
-  { n: 4, id: "active-defense", title: P.FFLFW_SETUP_S4_TITLE, body: P.FFLFW_SETUP_S4_BODY },
-  { n: 5, id: "feed", title: P.FFLFW_SETUP_S5_TITLE, body: P.FFLFW_SETUP_S5_BODY },
-  { n: 6, id: "recon", title: P.FFLFW_SETUP_S6_TITLE, body: P.FFLFW_SETUP_S6_BODY },
+  { n: 1, id: "install", title: "Install the plugin", body: "Download the FFL Firewall zip from the FFL Firewall page, then in WordPress go to Plugins > Add New > Upload Plugin, choose the zip, install it and click Activate. Until you add a license the plugin doesn't check real carts, but the built-in demo lets you run 10 test checks on a UPC and zip so you can see how it works." },
+  { n: 2, id: "license", title: "Add your license", body: "FFL Firewall is $79 a month, with unlimited FFL Firewall · OVERWATCH transactions and every service included. After you buy, your license key arrives by email; in WordPress, go to WooCommerce > FFL Firewall, open the License tab, paste the key and click Check key." },
+  { n: 3, id: "overwatch", title: "Switch on FFL Firewall · OVERWATCH", body: "On the FFL Firewall · OVERWATCH tab, switch the check on and choose your roster setting, which starts as allow and flag. From then on every order is checked at checkout, on both the classic checkout and the WooCommerce Blocks checkout, and the results show up in the cart and on the order." },
+  { n: 4, id: "active-defense", title: "Switch on FFL Firewall · ACTIVE DEFENSE", body: "On the FFL Firewall · ACTIVE DEFENSE tab, switch it on, tick the data disclosure and click save. With an active license, the plugin connects the site key made when you bought FFL Firewall to this store and adds the dealer embed script, so you don't have to copy anything (a site key you paste in yourself still works and takes priority). Click Check for script to confirm it's on your pages; the dashboard shows the service as active once the dealer embed script has been seen in the last 24 hours." },
+  { n: 5, id: "feed", title: "Choose your shared reputation feed setting", body: "The shared reputation feed lets FFL Firewall stores warn each other about bots: your store reports the bots it catches as salted hashes, never shopper details, and gets back a list of bots other stores have reported. On a new install it's on by default while FFL Firewall · ACTIVE DEFENSE is on and the license is active. A store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until you switch it on. You can switch it on or off any time in the Shared reputation feed section." },
+  { n: 6, id: "recon", title: "Run FFL Firewall · RECON", body: "FFL Firewall · RECON scans your site every week, and you can click Run scan whenever you want a fresh one. It lists WordPress, plugin and theme updates that are waiting, read from WordPress's own update data, along with setup gaps such as missing https or debug output left on. It only reports what it finds and changes nothing on your site." },
 ];
+const helpBody = "If a step doesn't look the way this guide describes, or you'd like us to walk through setup with you, email support@coriolisagency.com and a person on our team will get back to you.";
+const [helpBefore, helpAfter] = helpBody.split(support);
 ---
 
 <BaseLayout
-  title={P.FFLFW_SETUP_META_TITLE}
-  description={P.FFLFW_SETUP_META_DESCRIPTION}
+  title="FFL Firewall setup guide | Coriolis Agency"
+  description="How to install FFL Firewall on a WooCommerce gun store, add your license and switch on each of its three services, step by step."
   path="/ffl-firewall/setup"
   noindex
   emailCapture={false}
 >
   <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16" data-fflfw-setup>
-    <p class="text-xs font-bold uppercase tracking-widest text-red-500">{P.FFLFW_SETUP_EYEBROW}</p>
-    <h1 class="mt-2 text-3xl font-semibold tracking-tight text-white">{P.FFLFW_SETUP_H1}</h1>
-    <p class="mt-4 text-base leading-relaxed text-zinc-300">{P.FFLFW_SETUP_INTRO}</p>
+    <p class="text-xs font-bold uppercase tracking-widest text-red-500">FFL Firewall 1.0.0</p>
+    <h1 class="mt-2 text-3xl font-semibold tracking-tight text-white">Set up FFL Firewall on your WooCommerce store</h1>
+    <p class="mt-4 text-base leading-relaxed text-zinc-300">This guide is for FFL dealers who sell on WooCommerce. Setup is six short steps in your WordPress dashboard: install the plugin, add your license, then switch on each service and choose your settings.</p>
 
     <ol class="mt-10 space-y-8 text-sm leading-relaxed text-zinc-400">
       {steps.map((s) => (
@@ -43,14 +44,13 @@ const steps = [
     </ol>
 
     <section class="mt-10 text-sm leading-relaxed text-zinc-400" data-setup-section="updates">
-      <h2 class="text-base font-semibold text-white">{P.FFLFW_SETUP_UPDATES_TITLE}</h2>
-      <p class="mt-2">{P.FFLFW_SETUP_UPDATES_BODY}</p>
+      <h2 class="text-base font-semibold text-white">Keep it up to date</h2>
+      <p class="mt-2">New FFL Firewall versions show up on the WordPress Plugins screen like any other plugin update, so you can update with one click.</p>
     </section>
     <section class="mt-8 text-sm leading-relaxed text-zinc-400" data-setup-section="help">
-      <h2 class="text-base font-semibold text-white">{P.FFLFW_SETUP_HELP_TITLE}</h2>
-      <p class="mt-2">{P.FFLFW_SETUP_HELP_BODY}</p>
-      <p class="mt-2"><a href="mailto:support@coriolisagency.com" class="text-red-300 underline">support@coriolisagency.com</a></p>
+      <h2 class="text-base font-semibold text-white">Help with setup</h2>
+      <p class="mt-2">{helpBefore}<a href={`mailto:${support}`} class="text-red-300 underline">{support}</a>{helpAfter}</p>
     </section>
-    <p class="mt-10 text-sm"><a href={landing} class="text-red-300 underline">{P.FFLFW_SETUP_BACK_LINK}</a></p>
+    <p class="mt-10 text-sm"><a href={landing} class="text-red-300 underline">Back to FFL Firewall</a></p>
   </article>
 </BaseLayout>

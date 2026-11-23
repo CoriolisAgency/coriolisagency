@@ -359,6 +359,46 @@ for (const [rel, src] of [[pageRel, page], [setupRel, setupSrc]]) {
 }
 if (defined.length) console.log(`test-ffl-firewall-landing: ${defined.length} Brandy placeholders remain (not launch-ready)`);
 
+// FFLFW-LANDING-1-0: Brandy's FINAL strings (Karp-cleared 11:58 AM ET Nov 23, 2026), verbatim. Service names on
+// /ffl-firewall render through FflFwName (nbsp in the built page; compared with spaces).
+const FINAL_LANDING = {
+  "FFLFW_L10_AD_SERVICE_ON": "When you switch it on, the plugin connects the site key made when you bought FFL Firewall and adds the dealer embed script for you, and from then on it stays on and keeps watching the traffic coming into your store.",
+  "FFLFW_L10_ACTIVATION_INTRO": "The service is opt-in, so installing the plugin doesn't switch it on. Your site key is made when you buy FFL Firewall; the first time you switch FFL Firewall · ACTIVE DEFENSE on, the plugin connects that key to your store and takes care of the dealer embed script, and the service stays on and keeps watching from there.",
+  "FFLFW_L10_STEP2_TITLE": "Tick the data disclosure and save",
+  "FFLFW_L10_STEP2_BODY": "On the FFL Firewall · ACTIVE DEFENSE tab, tick the data disclosure and click save; with an active license, the plugin picks up the site key made at checkout and connects it to your store, so there's nothing to copy. If you already have a site key, you can still paste it into the Site key field, and a pasted key is the one the plugin uses.",
+  "FFLFW_L10_FAQ_AD_OFF_LEAD": "It only starts once you switch it on and tick the data disclosure, so you choose when bot and scraper control begins.",
+  "FFLFW_L10_SETUP_LINK": "Read the setup guide"
+};
+const FINAL_SETUP = {
+  "FFLFW_SETUP_META_TITLE": "FFL Firewall setup guide | Coriolis Agency",
+  "FFLFW_SETUP_META_DESCRIPTION": "How to install FFL Firewall on a WooCommerce gun store, add your license and switch on each of its three services, step by step.",
+  "FFLFW_SETUP_EYEBROW": "FFL Firewall 1.0.0",
+  "FFLFW_SETUP_H1": "Set up FFL Firewall on your WooCommerce store",
+  "FFLFW_SETUP_INTRO": "This guide is for FFL dealers who sell on WooCommerce. Setup is six short steps in your WordPress dashboard: install the plugin, add your license, then switch on each service and choose your settings.",
+  "FFLFW_SETUP_S1_TITLE": "Install the plugin",
+  "FFLFW_SETUP_S1_BODY": "Download the FFL Firewall zip from the FFL Firewall page, then in WordPress go to Plugins > Add New > Upload Plugin, choose the zip, install it and click Activate. Until you add a license the plugin doesn't check real carts, but the built-in demo lets you run 10 test checks on a UPC and zip so you can see how it works.",
+  "FFLFW_SETUP_S2_TITLE": "Add your license",
+  "FFLFW_SETUP_S2_BODY": "FFL Firewall is $79 a month, with unlimited FFL Firewall · OVERWATCH transactions and every service included. After you buy, your license key arrives by email; in WordPress, go to WooCommerce > FFL Firewall, open the License tab, paste the key and click Check key.",
+  "FFLFW_SETUP_S3_TITLE": "Switch on FFL Firewall · OVERWATCH",
+  "FFLFW_SETUP_S3_BODY": "On the FFL Firewall · OVERWATCH tab, switch the check on and choose your roster setting, which starts as allow and flag. From then on every order is checked at checkout, on both the classic checkout and the WooCommerce Blocks checkout, and the results show up in the cart and on the order.",
+  "FFLFW_SETUP_S4_TITLE": "Switch on FFL Firewall · ACTIVE DEFENSE",
+  "FFLFW_SETUP_S4_BODY": "On the FFL Firewall · ACTIVE DEFENSE tab, switch it on, tick the data disclosure and click save. With an active license, the plugin connects the site key made when you bought FFL Firewall to this store and adds the dealer embed script, so you don't have to copy anything (a site key you paste in yourself still works and takes priority). Click Check for script to confirm it's on your pages; the dashboard shows the service as active once the dealer embed script has been seen in the last 24 hours.",
+  "FFLFW_SETUP_S5_TITLE": "Choose your shared reputation feed setting",
+  "FFLFW_SETUP_S5_BODY": "The shared reputation feed lets FFL Firewall stores warn each other about bots: your store reports the bots it catches as salted hashes, never shopper details, and gets back a list of bots other stores have reported. On a new install it's on by default while FFL Firewall · ACTIVE DEFENSE is on and the license is active. A store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until you switch it on. You can switch it on or off any time in the Shared reputation feed section.",
+  "FFLFW_SETUP_S6_TITLE": "Run FFL Firewall · RECON",
+  "FFLFW_SETUP_S6_BODY": "FFL Firewall · RECON scans your site every week, and you can click Run scan whenever you want a fresh one. It lists WordPress, plugin and theme updates that are waiting, read from WordPress's own update data, along with setup gaps such as missing https or debug output left on. It only reports what it finds and changes nothing on your site.",
+  "FFLFW_SETUP_UPDATES_TITLE": "Keep it up to date",
+  "FFLFW_SETUP_UPDATES_BODY": "New FFL Firewall versions show up on the WordPress Plugins screen like any other plugin update, so you can update with one click.",
+  "FFLFW_SETUP_HELP_TITLE": "Help with setup",
+  "FFLFW_SETUP_HELP_BODY": "If a step doesn't look the way this guide describes, or you'd like us to walk through setup with you, email support@coriolisagency.com and a person on our team will get back to you.",
+  "FFLFW_SETUP_BACK_LINK": "Back to FFL Firewall"
+};
+assert.equal(Object.keys(FINAL_LANDING).length + Object.keys(FINAL_SETUP).length, 28, "all 28 cleared strings are tracked");
+assert.equal(defined.length, 0, "no Brandy placeholders remain");
+for (const [k, v] of Object.entries(FINAL_SETUP)) assert.ok(setupSrc.includes(JSON.stringify(v)) || setupSrc.includes(v), `setup guide ships ${k} verbatim`);
+assert.match(FINAL_SETUP.FFLFW_SETUP_S3_BODY, /which starts as allow and flag/, "S3 keeps the roster default (Defaults.php: roster_rule => ROSTER_FLAG)");
+assert.match(FINAL_SETUP.FFLFW_SETUP_S6_BODY, /every week/, "S6 keeps the weekly scan (Recon/Module.php: wp_schedule_event weekly)");
+
 // 7. package.json test:ci includes this script.
 assert.match(read("package.json"), /scripts\/test-ffl-firewall-landing\.mjs/);
 
@@ -412,6 +452,13 @@ if (fs.existsSync(dist)) {
   assert.ok(mainStart !== -1 && mainEnd > mainStart, "landing body found");
   const text = html.slice(mainStart, mainEnd).replace(/<(script|style)[\s\S]*?<\/\1>/g, " ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&#39;|&#x27;/g, "'").replace(/\s+/g, " ");
   for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(text.includes(`FFL Firewall · ${n}`), `built page names FFL Firewall · ${n}`);
+  for (const [k, v] of Object.entries(FINAL_LANDING)) assert.ok(text.includes(v), `built /ffl-firewall ships ${k} verbatim`);
+  const setupText = setupBody.replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&#39;|&#x27;/g, "'").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/\s+/g, " ");
+  for (const [k, v] of Object.entries(FINAL_SETUP)) {
+    if (k === "FFLFW_SETUP_META_TITLE") assert.ok(setupHtml.includes(`<title>${v.replace(/&/g, "&amp;")}</title>`), "setup title verbatim");
+    else if (k === "FFLFW_SETUP_META_DESCRIPTION") assert.ok(setupHtml.includes(`<meta name="description" content="${v}">`), "setup description verbatim");
+    else assert.ok(setupText.includes(v), `built setup guide ships ${k} verbatim`);
+  }
   assert.doesNotMatch(text, /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b/i, "no vulnerability, compliance or vendor claims on the built page");
   assert.match(html, /Read the FFL Firewall terms/);
   const termsHtml = fs.readFileSync(path.join(dist, "ffl-firewall", "terms", "index.html"), "utf8");

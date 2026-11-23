@@ -1,39 +1,6 @@
-// FFLFW-LANDING-1-0: named placeholders for copy Brandy owns. Each one renders as its own name in brackets
-// so it can't pass for real copy. Brandy's text replaces the value, Karp checks it against the locks, and the
-// entry is then removed (the page uses the string directly). The PR does not merge while any remain.
-// Listed with the facts each must match in docs/ffl-firewall-landing-1-0.md.
+// FFLFW-LANDING-1-0: named placeholders for copy Brandy owns. Each renders as its own name in brackets so it
+// can't pass for real copy; scripts/test-ffl-firewall-landing.mjs keeps this list, its use on the pages and
+// docs/ffl-firewall-landing-1-0.md in sync, and refuses FFLFW_V1_LIVE while any remain.
+// All 28 were replaced with Brandy's FINAL strings (Karp-cleared 11:58 AM ET Nov 23, 2026); none remain.
 
-const p = (name) => `[[${name}]]`;
-
-export const PENDING_COPY = {
-  // /ffl-firewall: onboarding now provisions the site key when ACTIVE DEFENSE is switched on (FFLFW-ONBOARD-SITEKEY).
-  FFLFW_L10_AD_SERVICE_ON: p("FFLFW_L10_AD_SERVICE_ON"),
-  FFLFW_L10_ACTIVATION_INTRO: p("FFLFW_L10_ACTIVATION_INTRO"),
-  FFLFW_L10_STEP2_TITLE: p("FFLFW_L10_STEP2_TITLE"),
-  FFLFW_L10_STEP2_BODY: p("FFLFW_L10_STEP2_BODY"),
-  FFLFW_L10_FAQ_AD_OFF_LEAD: p("FFLFW_L10_FAQ_AD_OFF_LEAD"),
-  FFLFW_L10_SETUP_LINK: p("FFLFW_L10_SETUP_LINK"),
-  // /ffl-firewall/setup: the setup guide.
-  FFLFW_SETUP_META_TITLE: p("FFLFW_SETUP_META_TITLE"),
-  FFLFW_SETUP_META_DESCRIPTION: p("FFLFW_SETUP_META_DESCRIPTION"),
-  FFLFW_SETUP_EYEBROW: p("FFLFW_SETUP_EYEBROW"),
-  FFLFW_SETUP_H1: p("FFLFW_SETUP_H1"),
-  FFLFW_SETUP_INTRO: p("FFLFW_SETUP_INTRO"),
-  FFLFW_SETUP_S1_TITLE: p("FFLFW_SETUP_S1_TITLE"),
-  FFLFW_SETUP_S1_BODY: p("FFLFW_SETUP_S1_BODY"),
-  FFLFW_SETUP_S2_TITLE: p("FFLFW_SETUP_S2_TITLE"),
-  FFLFW_SETUP_S2_BODY: p("FFLFW_SETUP_S2_BODY"),
-  FFLFW_SETUP_S3_TITLE: p("FFLFW_SETUP_S3_TITLE"),
-  FFLFW_SETUP_S3_BODY: p("FFLFW_SETUP_S3_BODY"),
-  FFLFW_SETUP_S4_TITLE: p("FFLFW_SETUP_S4_TITLE"),
-  FFLFW_SETUP_S4_BODY: p("FFLFW_SETUP_S4_BODY"),
-  FFLFW_SETUP_S5_TITLE: p("FFLFW_SETUP_S5_TITLE"),
-  FFLFW_SETUP_S5_BODY: p("FFLFW_SETUP_S5_BODY"),
-  FFLFW_SETUP_S6_TITLE: p("FFLFW_SETUP_S6_TITLE"),
-  FFLFW_SETUP_S6_BODY: p("FFLFW_SETUP_S6_BODY"),
-  FFLFW_SETUP_UPDATES_TITLE: p("FFLFW_SETUP_UPDATES_TITLE"),
-  FFLFW_SETUP_UPDATES_BODY: p("FFLFW_SETUP_UPDATES_BODY"),
-  FFLFW_SETUP_HELP_TITLE: p("FFLFW_SETUP_HELP_TITLE"),
-  FFLFW_SETUP_HELP_BODY: p("FFLFW_SETUP_HELP_BODY"),
-  FFLFW_SETUP_BACK_LINK: p("FFLFW_SETUP_BACK_LINK"),
-};
+export const PENDING_COPY = {};
