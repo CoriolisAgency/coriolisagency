@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import gseLinks from "./src/integrations/gse-links.mjs";
+import { fflfwLandingNoindex } from "./src/lib/ffl-firewall-release.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -83,7 +84,9 @@ export default defineConfig({
         // CA-FFLF-LEAD-RECEIVER: public lead-handoff page, noindex, off the sitemap.
         !page.includes("/ffl-filters/connect") &&
         // FFLFW-LANDING (Paul 2026-11-16 11:03 AM ET; Chief confirmed noindex at launch): off the sitemap.
-        !/^\/ffl-firewall(\/.*)?$/.test(new URL(page).pathname),
+        // FFLFW-LANDING-1-0: /ffl-firewall itself joins once FFLFW_V1_LIVE flips; /ffl-firewall/* stays out.
+        !/^\/ffl-firewall\/.+$/.test(new URL(page).pathname) &&
+        !(fflfwLandingNoindex() && /^\/ffl-firewall\/?$/.test(new URL(page).pathname)),
       serialize(item) {
         item.lastmod = pageLastmod(item.url);
         return item;

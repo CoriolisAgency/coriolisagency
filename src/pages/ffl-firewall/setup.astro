@@ -1,0 +1,56 @@
+---
+/**
+ * FFLFW-LANDING-1-0: FFL Firewall setup guide. Structure only: every line is a named placeholder from
+ * src/lib/ffl-firewall-pending-copy.mjs until Brandy's copy is cleared by Karp
+ * (facts each line must match: docs/ffl-firewall-landing-1-0.md). The guide stays noindex, nofollow and off
+ * the sitemap, lastmod and IndexNow (the /ffl-firewall/* exclusions), whatever FFLFW_V1_LIVE says.
+ * Guarded by scripts/test-ffl-firewall-landing.mjs.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../lib/base";
+import { PENDING_COPY as P } from "../../lib/ffl-firewall-pending-copy.mjs";
+
+const landing = withBase("ffl-firewall");
+const steps = [
+  { n: 1, id: "install", title: P.FFLFW_SETUP_S1_TITLE, body: P.FFLFW_SETUP_S1_BODY },
+  { n: 2, id: "license", title: P.FFLFW_SETUP_S2_TITLE, body: P.FFLFW_SETUP_S2_BODY },
+  { n: 3, id: "overwatch", title: P.FFLFW_SETUP_S3_TITLE, body: P.FFLFW_SETUP_S3_BODY },
+  { n: 4, id: "active-defense", title: P.FFLFW_SETUP_S4_TITLE, body: P.FFLFW_SETUP_S4_BODY },
+  { n: 5, id: "feed", title: P.FFLFW_SETUP_S5_TITLE, body: P.FFLFW_SETUP_S5_BODY },
+  { n: 6, id: "recon", title: P.FFLFW_SETUP_S6_TITLE, body: P.FFLFW_SETUP_S6_BODY },
+];
+---
+
+<BaseLayout
+  title={P.FFLFW_SETUP_META_TITLE}
+  description={P.FFLFW_SETUP_META_DESCRIPTION}
+  path="/ffl-firewall/setup"
+  noindex
+  emailCapture={false}
+>
+  <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16" data-fflfw-setup>
+    <p class="text-xs font-bold uppercase tracking-widest text-red-500">{P.FFLFW_SETUP_EYEBROW}</p>
+    <h1 class="mt-2 text-3xl font-semibold tracking-tight text-white">{P.FFLFW_SETUP_H1}</h1>
+    <p class="mt-4 text-base leading-relaxed text-zinc-300">{P.FFLFW_SETUP_INTRO}</p>
+
+    <ol class="mt-10 space-y-8 text-sm leading-relaxed text-zinc-400">
+      {steps.map((s) => (
+        <li id={s.id} data-setup-step={s.id}>
+          <h2 class="text-base font-semibold text-white"><span class="mr-2 text-red-500">{s.n}.</span>{s.title}</h2>
+          <p class="mt-2">{s.body}</p>
+        </li>
+      ))}
+    </ol>
+
+    <section class="mt-10 text-sm leading-relaxed text-zinc-400" data-setup-section="updates">
+      <h2 class="text-base font-semibold text-white">{P.FFLFW_SETUP_UPDATES_TITLE}</h2>
+      <p class="mt-2">{P.FFLFW_SETUP_UPDATES_BODY}</p>
+    </section>
+    <section class="mt-8 text-sm leading-relaxed text-zinc-400" data-setup-section="help">
+      <h2 class="text-base font-semibold text-white">{P.FFLFW_SETUP_HELP_TITLE}</h2>
+      <p class="mt-2">{P.FFLFW_SETUP_HELP_BODY}</p>
+      <p class="mt-2"><a href="mailto:support@coriolisagency.com" class="text-red-300 underline">support@coriolisagency.com</a></p>
+    </section>
+    <p class="mt-10 text-sm"><a href={landing} class="text-red-300 underline">{P.FFLFW_SETUP_BACK_LINK}</a></p>
+  </article>
+</BaseLayout>
