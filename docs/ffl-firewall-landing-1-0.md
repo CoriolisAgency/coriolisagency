@@ -17,7 +17,8 @@ Flipping it to `true` (in one PR, after S4 passes):
 2. Add `public/downloads/ffl-firewall-1.0.0.zip` (the rebuilt 1.0.0 zip) and set `FFLFW_ZIP_V1_SHA256`.
 3. Delete `Disallow: /ffl-firewall` (and its comment) from `public/robots.txt`.
 4. Delete the `/ffl-firewall` `X-Robots-Tag` header block from `vercel.json`.
-5. Run `npm run lastmod:gen`.
+5. Remove the `FFLFW_V1_LIVE stays false` assertion in `scripts/test-ffl-firewall-landing.mjs` (it pins the switch off until S4).
+6. Run `npm run lastmod:gen`.
 
 Steps 2 to 4 are static files that can't read the flag; `scripts/test-ffl-firewall-landing.mjs` fails test:ci
 if any of them disagrees with the flag, and it refuses `FFLFW_V1_LIVE = true` while any placeholder below remains.
