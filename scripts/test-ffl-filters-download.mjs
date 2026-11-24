@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * CA-FFLF-DOWNLOAD-PAGE / CA-NAV-FFLF / CA-FFLF-INDEX guard: /ffl-filters is the
- * indexable download page for FFL Filters 1.3.9 (beta), served from the permanent GitHub release
+ * indexable download page for the latest FFL Filters release (fflfVersion, "(beta)" label), served from the permanent GitHub release
  * asset (never the latest release tag). The header nav (desktop and mobile) links to the page as
  * "FFL Filters"; nothing else in the repo may link to the page or a zip. The older 1.3.7
  * zip remains in public/downloads/ and must stay unlinked. Checks the zip bytes, the page's buttons,
@@ -32,23 +32,39 @@ assert.equal(
 );
 assert.equal(zip.subarray(0, 4).toString("hex"), "504b0304", "legacy 1.3.7 zip magic (not an LFS pointer)");
 
-// 2. Page: indexable (CA-FFLF-INDEX), every download button has the 1.3.9 (beta) label and the GH asset href, contact goes to /contact.
+// 2. Page: indexable (CA-FFLF-INDEX), every download button has the fflfVersion (beta) label and the GH asset href, contact goes to /contact.
 const pageRel = "src/pages/ffl-filters/index.astro";
 const page = read(pageRel);
-const downloadUrl = "https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.9/ffl-filters-1.3.9.zip";
+// CA-FFLF-PAGE-VERSION-SYNC: fflfVersion is the page's one version constant; everything below derives from it.
+const verDecl = [...page.matchAll(/const fflfVersion = "([^"]*)";/g)];
+assert.equal(verDecl.length, 1, "page declares fflfVersion exactly once");
+const ver = verDecl[0][1];
+assert.match(ver, /^\d+\.\d+\.\d+$/, "fflfVersion is x.y.z");
+const verRe = ver.replace(/\./g, "\\.");
+const downloadUrl = `https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v${ver}/ffl-filters-${ver}.zip`;
+assert.ok(page.includes("const download = `https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v${fflfVersion}/ffl-filters-${fflfVersion}.zip`;"), "download URL derives from fflfVersion");
+// No other x.y.z literal anywhere in the page source: every version mention must use {fflfVersion}.
+// The changelog constant is release-notes text and may name an earlier version (e.g. "in 1.4.1"), so it is excluded.
+{
+  const changelogDecl = [...page.matchAll(/const fflfChangelog =\s*"([^"]+)";/g)];
+  assert.equal(changelogDecl.length, 1, "page declares fflfChangelog exactly once, as a plain string");
+  const stripped = page.replace(verDecl[0][0], "").replace(changelogDecl[0][0], "");
+  const stray = stripped.match(/\b\d+\.\d+\.\d+\b/g) ?? [];
+  assert.deepEqual(stray, [], "page hardcodes a version outside fflfVersion");
+  assert.match(page, /<p class="mt-1 text-xs text-zinc-500" data-fflf-changelog>\{fflfChangelog\}<\/p>/, "changelog line renders fflfChangelog");
+}
 assert.doesNotMatch(page, /^\s*noindex\s*$/m, "page must not pass noindex to BaseLayout");
 assert.doesNotMatch(page, /\brobots\s*=/, "page must not set a robots prop");
-assert.ok(page.includes('const download = "' + downloadUrl + '";'), "page pins the permanent GH asset URL");
 assert.doesNotMatch(page, /releases\/(?:download\/)?latest/, "download must not use the latest tag");
-assert.match(page, /const downloadLabel = "Download FFL Filters 1\.3\.9 \(beta\)";/);
+assert.ok(page.includes("const downloadLabel = `Download FFL Filters ${fflfVersion} (beta)`;"), "label derives from fflfVersion and keeps (beta)");
 const dl = [...page.matchAll(/<a href=\{download\}[^>]*>([^<]*)<\/a>/g)].map((m) => m[1]);
 assert.equal(dl.length, 2, "two download buttons");
 for (const label of dl) assert.equal(label, "{downloadLabel}");
-assert.doesNotMatch(page.replace(/downloadLabel = "[^"]*"/, ""), /Download FFL Filters 1\.3\.9(?! zip file)/, "no unlabelled download button text");
+assert.doesNotMatch(page.replace(/downloadLabel = `[^`]*`/, ""), /Download FFL Filters (?:\{fflfVersion\}|\d)(?! zip file)/, "no unlabelled download button text");
 assert.match(page, /withBase\("contact"\)/);
-assert.match(page, /Version 1\.3\.9 . Free . GPLv2 or later/);
-assert.match(page, /Get FFL Filters 1\.3\.9/);
-assert.match(page, /Download the FFL Filters 1\.3\.9 zip file from this page and keep it zipped\./);
+assert.match(page, /Version \{fflfVersion\} . Free . GPLv2 or later/);
+assert.match(page, /Get FFL Filters \{fflfVersion\}<\/h2>/);
+assert.match(page, /Download the FFL Filters \{fflfVersion\} zip file from this page and keep it zipped\./);
 assert.match(read("src/layouts/BaseLayout.astro"), /noindex && <meta name="robots" content="noindex, nofollow" \/>/);
 
 // CA-FFLF-DOWNLOAD-GATE: the page mounts the gate and keeps the two zip links.
@@ -155,8 +171,8 @@ assert.match(page, /fetchpriority="high"/);
 assert.match(page, /decoding="async"/);
 assert.match(page, /loading="eager"/);
 assert.match(page, /class="mt-10 block h-auto w-full rounded-\[14px\]"/);
-// Hero sits directly after the version line; page copy is otherwise unchanged.
-assert.match(page, /Version 1\.3\.9 . Free . GPLv2 or later<\/p>\s*<picture>/);
+// Hero sits directly after the version line and its changelog line (CA-FFLF-PAGE-VERSION-SYNC); page copy is otherwise unchanged.
+assert.match(page, /Version \{fflfVersion\} . Free . GPLv2 or later<\/p>\s*<p class="mt-1 text-xs text-zinc-500" data-fflf-changelog>\{fflfChangelog\}<\/p>\s*<picture>/);
 // OG tags stay exactly as they were.
 assert.match(page, /const ogImage = "og\/ffl-filters-og\.jpg";/);
 assert.match(page, /ogImageWidth=\{1200\}/);
@@ -182,7 +198,7 @@ const allowed = new Set([
 ]);
 const pageRef = /\/ffl-filters(?!\/connect|-connect)(?=["'`)\s/?#]|$)/m;
 // FFL Firewall zips also live under /downloads/ (Paul 10:28 AM ET, FFL Filters pattern), so only other /downloads/ paths count.
-const zipRef = /ffl-filters-1\.3\.[0-9]+\.zip|\/downloads\/(?!ffl-firewall-)|ffl-filters-releases/;
+const zipRef = /ffl-filters-\d+\.\d+\.\d+\.zip|\/downloads\/(?!ffl-firewall-)|ffl-filters-releases/;
 const navRel = "src/lib/nav.ts";
 const nav = read(navRel);
 assert.match(nav, /\{\s*href:\s*"ffl-filters",\s*label:\s*"FFL Filters"\s*\}/, "header nav still links FFL Filters to ffl-filters");
@@ -300,11 +316,18 @@ if (fs.existsSync(dist)) {
   const html = fs.readFileSync(path.join(dist, "ffl-filters", "index.html"), "utf8");
   assert.doesNotMatch(html, /<meta name="robots"/, "built /ffl-filters has no robots meta");
   assert.equal((html.split(downloadUrl).length - 1), 3, "GH asset URL appears on both buttons and data-file");
-  assert.equal((html.match(/href="https:\/\/github\.com\/CoriolisAgency\/ffl-filters-releases\/releases\/download\/v1\.3\.9\/ffl-filters-1\.3\.9\.zip"/g) ?? []).length, 2, "two button hrefs point at the GH asset");
-  assert.match(html, /data-file="https:\/\/github\.com\/CoriolisAgency\/ffl-filters-releases\/releases\/download\/v1\.3\.9\/ffl-filters-1\.3\.9\.zip"/, "gate data-file is the GH asset");
+  assert.equal(html.split(`href="${downloadUrl}"`).length - 1, 2, "two button hrefs point at the GH asset");
+  assert.ok(html.includes(`data-file="${downloadUrl}"`), "gate data-file is the GH asset");
   assert.doesNotMatch(html, /releases\/(?:download\/)?latest/);
-  assert.equal((html.match(/Download FFL Filters 1\.3\.9 \(beta\)/g) ?? []).length, 2);
-  assert.match(html, /Version 1\.3\.9 /);
+  assert.equal(html.split(`Download FFL Filters ${ver} (beta)`).length - 1, 2);
+  assert.ok(html.includes(`Version ${ver} `), "built version line shows fflfVersion");
+  assert.ok(html.includes(`Get FFL Filters ${ver}</h2>`), "built download heading shows fflfVersion");
+  assert.ok(html.includes(`Download the FFL Filters ${ver} zip file`), "built install step shows fflfVersion");
+  // CA-FFLF-PAGE-VERSION-SYNC: every FFL Filters version in the built page equals fflfVersion.
+  for (const m of html.matchAll(/(?:FFL Filters|Version) (\d+\.\d+\.\d+)|releases\/download\/v(\d+\.\d+\.\d+)\/ffl-filters-(\d+\.\d+\.\d+)\.zip/g)) {
+    for (const v of m.slice(1).filter(Boolean)) assert.equal(v, ver, `built page shows FFL Filters ${v}, expected ${ver}`);
+  }
+  assert.match(html, /data-fflf-changelog>[^<]+<\/p>/, "built page shows the changelog line");
   assert.match(html, /role="dialog"/);
   assert.match(html, /data-fflf-dl-gate/);
   assert.match(html, /mailto:support@coriolisagency\.com/);
