@@ -35,10 +35,9 @@ assert.match(
   page,
   /title="FFL Firewall: state shipping checks and managed security for WooCommerce FFL dealers \| Coriolis"/,
 );
-assert.match(
-  page,
-  /description="FFL Firewall is a \$79\/month WooCommerce plugin for FFL dealers that helps you catch items at checkout that can't ship to the buyer's ZIP, with always-on bot and scraper control and weekly store reports included."/,
-);
+// CA-FFLFW-PAGE-COPY-3: the meta description is Paul's subhead, verbatim, with no shield (Paul 10:51 AM ET Nov 24, 2026).
+assert.ok(page.includes('description="A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats"'), "meta description equals the subhead");
+assert.ok(!/description="[^"]*\$79\/month/.test(page), "old $79/month meta description gone");
 assert.match(page, /path="\/ffl-firewall"/);
 assert.match(page, /withBase\("contact"\)/);
 assert.doesNotMatch(page, /const buyLabel/, "pricing card has no buy label (Paul 12:45 PM ET)");
@@ -75,9 +74,11 @@ for (const section of ["hero", "services", "activation", "pricing", "faq", "down
 assert.ok(page.includes("<h1>FFL Shipping Compliance, Bot Defense, and Site Hardening for WooCommerce</h1>"), "hero H1 verbatim");
 assert.ok(!page.includes("Shipping Compliance, Bot Defense, and Site Hardening for FFLs"), "old H1 gone");
 // CA-FFLFW-PAGE-COPY-2: the pricing card carries the same subhead (Paul 10:44 AM ET Nov 24, 2026); the old $79 line is gone.
-assert.ok(page.includes('<p class="pos pos-sm">A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats</p>'), "pricing line verbatim, no trailing period");
+assert.ok(page.includes('<p class="pos pos-sm">A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats <span class="shield" aria-hidden="true">🛡️</span></p>'), "pricing line verbatim, no trailing period");
 assert.ok(!page.includes("delivered as a plugin, that adds new features over time"), "old $79 positioning line gone");
-assert.ok(page.includes('<p class="pos">A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats</p>'), "hero subhead verbatim, no trailing period");
+// CA-FFLFW-PAGE-COPY-3: a decorative shield ends both subheads, hidden from screen readers.
+assert.equal(page.split('<span class="shield" aria-hidden="true">🛡️</span>').length - 1, 2, "two aria-hidden shields, hero and pricing");
+assert.ok(page.includes('<p class="pos">A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats <span class="shield" aria-hidden="true">🛡️</span></p>'), "hero subhead verbatim, no trailing period");
 for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(page.includes(`<FflFwName n="${n}" />`), `service name ${n}`);
 {
   const fwn = read("src/components/FflFwName.astro");
