@@ -70,7 +70,9 @@ assert.match(read("src/layouts/BaseLayout.astro"), /noindex && <meta name="robot
 for (const section of ["hero", "services", "activation", "pricing", "faq", "download"]) {
   assert.match(page, new RegExp(`data-section="${section}"`), `missing data-section=${section}`);
 }
-assert.match(page, /<h1>Managed Ecommerce Security for FFLs<\/h1>/);
+// CA-FFLFW-PAGE-COPY: Paul's hero heading and subhead, verbatim (Paul 10:32 AM ET Nov 24, 2026).
+assert.match(page, /<h1>Shipping Compliance, Bot Defense, and Site Hardening for FFLs<\/h1>/);
+assert.ok(page.includes('<p class="pos">A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats</p>'), "hero subhead verbatim, no trailing period");
 for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(page.includes(`<FflFwName n="${n}" />`), `service name ${n}`);
 {
   const fwn = read("src/components/FflFwName.astro");
@@ -89,7 +91,10 @@ for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(page.include
 // OVERWATCH-LEAD: OVERWATCH leads the hero console, the services and the pricing list (Paul 1:33 PM ET).
 {
   assert.ok(page.indexOf('data-section="services"') < page.indexOf('<h3><FflFwName n="OVERWATCH" /></h3>') && page.indexOf('<h3><FflFwName n="OVERWATCH" /></h3>') < page.indexOf('<h3><FflFwName n="ACTIVE DEFENSE" /></h3>') && page.indexOf('<h3><FflFwName n="ACTIVE DEFENSE" /></h3>') < page.indexOf('<h3><FflFwName n="RECON" /></h3>'), "services order OVERWATCH, ACTIVE DEFENSE, RECON");
-  assert.ok(page.includes('<span class="bonus-tag">Included bonus</span>'), "RECON carries the Included bonus tag");
+  // CA-FFLFW-PAGE-COPY: three gold badges (Paul 10:32 AM ET Nov 24, 2026), each on the hero plate and the services card.
+  for (const b of ["SHIPPING COMPLIANCE", "BOT MITIGATION", "ZERO DAY DEFENSE"]) assert.equal(page.split(`<span class="bonus-tag">${b}</span>`).length - 1, 2, `${b} badge on plate and card`);
+  assert.ok(!/>\s*Included bonus\s*</i.test(page), "Included bonus badge renamed");
+  assert.ok(/\.bonus-tag \{[^}]*color: var\(--color-gold\);/.test(page), "badges use the brand gold token");
 }
 const copyStrings = [
   "A $79/month managed security service, delivered as a plugin, that adds new features over time.",
@@ -100,7 +105,7 @@ const copyStrings = [
   "The three FFL Firewall services, shown with their badges.",
   "Always-on bot and scraper control",
   "Store hardening report",
-  "Included bonus",
+  "ZERO DAY DEFENSE",
   "What's in the plugin",
   "Shipping checks first, with a security layer and a bonus report behind them",
   "State shipping checks",
@@ -142,7 +147,9 @@ for (const s of copyStrings) assert.ok(page.includes(s), `Brandy v3 copy missing
 // FFLFW-TERMS-DEFAULT-SHARE-LANDING: the feed is default-on for new installs only; the old opt-in line is gone.
 assert.doesNotMatch(page, /off by default|separate opt-in|datacenter IP block list/, "old feed and datacenter lines are gone");
 // Locks: no vulnerability, compliance or vendor claims (Paul 11:16 AM ET, Chief 12:20 PM ET).
-assert.doesNotMatch(page, /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b|Wordfence|Patchstack|WPScan/i, "no vulnerability, compliance or vendor claims");
+// CA-FFLFW-PAGE-COPY: Paul's own heading, subhead and SHIPPING COMPLIANCE badge (10:32 AM ET Nov 24, 2026) are the only exemptions.
+const paulCompliance = (s) => s.split("Shipping Compliance, Bot Defense, and Site Hardening for FFLs").join("").split("A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats").join("").split("SHIPPING COMPLIANCE").join("");
+assert.doesNotMatch(paulCompliance(page), /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b|Wordfence|Patchstack|WPScan/i, "no vulnerability, compliance or vendor claims");
 assert.doesNotMatch(page, /free/i, "no free (also asserted above)");
 // RECON is live (Paul 12:42 PM ET): no planned / ships wording anywhere on the page.
 assert.doesNotMatch(page, /reputation feed is coming later|isn't part of this version/i, "the shared feed is not described as coming later");
@@ -462,7 +469,7 @@ if (fs.existsSync(dist)) {
     else if (k === "FFLFW_SETUP_META_DESCRIPTION") assert.ok(setupHtml.includes(`<meta name="description" content="${v}">`), "setup description verbatim");
     else assert.ok(setupText.includes(v), `built setup guide ships ${k} verbatim`);
   }
-  assert.doesNotMatch(text, /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b/i, "no vulnerability, compliance or vendor claims on the built page");
+  assert.doesNotMatch(paulCompliance(text), /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b/i, "no vulnerability, compliance or vendor claims on the built page");
   assert.match(html, /Read the FFL Firewall terms/);
   const termsHtml = fs.readFileSync(path.join(dist, "ffl-firewall", "terms", "index.html"), "utf8");
   assert.doesNotMatch(termsHtml, /<meta name="robots" content="noindex, nofollow"/);
