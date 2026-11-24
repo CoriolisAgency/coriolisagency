@@ -117,7 +117,7 @@ const copyStrings = [
   "On both the classic and Blocks checkout, it matches each item's UPC to the shipping ZIP to help you catch items that can't ship there. Those items come out of the cart with a note to the shopper, items that need a permit or age check get a required acknowledgement checkbox, and orders that need a second look get an order note and a Flagged label.",
   "If the check can't run, checkout carries on and the order is flagged for you to review.",
   "It spots bots and scrapers and blocks or throttles them before they reach checkout, using rate limits, user agent and header checks, honeypot form fields that only bots fill in, checkout velocity and card-testing checks, and an optional datacenter IP list.",
-  "Each check runs on your own site, where a request it catches is blocked or slowed down. The shared reputation feed adds what other FFL Firewall stores have seen: your store reports the bots its checks catch as salted hashes, never shopper details, and receives a list of bots those stores have reported. A new install is in the feed by default while <FflFwName n=\"ACTIVE DEFENSE\" /> is on and the license is active; a store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until the store switches it on. You can switch the feed on or off at any time. The feed never touches checkout, login, the cart, My Account or wp-admin, and search engines and the Ahrefs and Semrush SEO crawlers skip the checks once FFL Firewall verifies they're the real thing. The feed works only while <FflFwName n=\"ACTIVE DEFENSE\" /> is on, and the service needs an FFL Firewall license.",
+  "Each check runs on your own site, where a request it catches is blocked or slowed down. The shared reputation feed adds what other FFL Firewall stores have seen: your store reports the bots its checks catch as salted hashes, never shopper details, and receives a list of bots those stores have reported.</p>",
   // CA-FFLFW-PAGE-COPY-4: Brandy's RECON paragraph, Karp-cleared 11:17 AM ET (Paul 11:15 AM ET Nov 24, 2026).
   "<p><FflFwName n=\"RECON\" /> is powered by Wordfence: every week, and again whenever you press Run scan, it matches your plugins against the vulnerabilities Wordfence has published and compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org. It flags configuration gaps in your setup and lists what to fix first.</p>",
   "<p>RECON reports only and makes no automatic fixes, so every change stays in your hands.</p>",
@@ -549,3 +549,19 @@ if (fs.existsSync(dist)) {
   console.log("test-ffl-firewall-landing: dist checks ok");
 }
 console.log("test-ffl-firewall-landing: ok");
+
+// CA-FFLFW-FEED-PARA-REMOVE (Paul 11:45 AM ET Nov 24, 2026 via Chief): the feed-default paragraph is gone from /ffl-firewall.
+{
+  const landing = page;
+  for (const gone of [
+    "A new install is in the feed by default",
+    "keeps its saved choice, and if it never made one, the feed stays off until the store switches it on",
+    "You can switch the feed on or off at any time.",
+    "The feed never touches checkout, login, the cart, My Account or wp-admin, and search engines",
+    "Ahrefs and Semrush",
+    "The feed works only while",
+    "and the service needs an FFL Firewall license.",
+  ]) assert.ok(!landing.includes(gone), `feed paragraph piece removed: ${gone}`);
+  assert.ok(landing.includes("receives a list of bots those stores have reported.</p>"), "paragraph ends after the reputation-feed sentence");
+  console.log("  ok  CA-FFLFW-FEED-PARA-REMOVE: feed-default paragraph absent");
+}

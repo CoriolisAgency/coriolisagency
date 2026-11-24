@@ -1,7 +1,8 @@
 ---
 import { bulletHoleSrc, pickBulletHoles } from "../lib/bullet-holes";
 
-type BulletItem = string | { label: string; items: string[] };
+// `html` items are trusted, approved copy from src/lib/plans.ts (never user input).
+type BulletItem = string | { label: string; items: string[] } | { html: string; text: string };
 
 interface Props {
   items: BulletItem[];
@@ -13,7 +14,9 @@ interface Props {
 const { items, variant = "default", listKey, class: className } = Astro.props;
 
 function itemText(item: BulletItem): string {
-  return typeof item === "string" ? item : [item.label, ...item.items].join("\n");
+  if (typeof item === "string") return item;
+  if ("html" in item) return item.text;
+  return [item.label, ...item.items].join("\n");
 }
 
 const itemsText = items.map(itemText).join("\n");
@@ -28,8 +31,9 @@ const holes =
     <ul class:list={[className, "list-bullet-holes"]}>
       {items.map((item, i) => {
         const n = holes[i]!;
-        const label = typeof item === "string" ? item : item.label;
-        const nested = typeof item === "string" ? null : item.items;
+        const html = typeof item === "string" || !("html" in item) ? null : item.html;
+        const label = typeof item === "string" ? item : "html" in item ? null : item.label;
+        const nested = typeof item === "string" || "html" in item ? null : item.items;
         return (
           <li>
             <img
@@ -42,7 +46,7 @@ const holes =
               decoding="async"
             />
             <span class="list-bullet-holes__text">
-              {label}
+              {html ? <Fragment set:html={html} /> : label}
               {nested ? (
                 <ul class="list-bullet-holes__sub">
                   {nested.map((s) => (
@@ -60,6 +64,8 @@ const holes =
       {items.map((item) =>
         typeof item === "string" ? (
           <li>{item}</li>
+        ) : "html" in item ? (
+          <li set:html={item.html} />
         ) : (
           <li>
             {item.label}

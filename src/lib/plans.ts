@@ -1,3 +1,5 @@
+import { md } from "./md";
+
 export type PlanId =
   | "minute-man"
   | "militia"
@@ -5,7 +7,11 @@ export type PlanId =
   | "warlord"
   | "ffl-accelerator";
 
-export type PlanFeature = string | { label: string; items: string[] };
+/**
+ * A feature is plain text, a label with sub-items, or trusted inline HTML from approved copy
+ * (`html` is rendered with set:html; `text` is the plain-text form).
+ */
+export type PlanFeature = string | { label: string; items: string[] } | { html: string; text: string };
 
 export interface Plan {
   id: PlanId;
@@ -155,7 +161,15 @@ export const PLANS: Plan[] = [
       },
       "Minor site updates as needed",
       "Up to 2 hours of other tech work a month ($250 value at $125/hour)",
-      "GunSearchEngine.com Pro",
+      // CA-ECOMMERCE-INCLUDED-FREE (Paul's copy, 2026-11-24 11:42 AM ET via Chief): prices struck through, both included free.
+      {
+        html: "GunSearchEngine.com Pro Included Free (<s>$99/month</s>)",
+        text: "GunSearchEngine.com Pro Included Free ($99/month)",
+      },
+      {
+        html: `${md("[FFL Firewall](/ffl-firewall)")} Included Free (<s>$79/month</s>)`,
+        text: "FFL Firewall Included Free ($79/month)",
+      },
     ],
   },
 ];
