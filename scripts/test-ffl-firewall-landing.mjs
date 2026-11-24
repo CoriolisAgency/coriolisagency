@@ -98,9 +98,9 @@ for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(page.include
 {
   assert.ok(page.indexOf('data-section="services"') < page.indexOf('<h3><FflFwName n="OVERWATCH" /></h3>') && page.indexOf('<h3><FflFwName n="OVERWATCH" /></h3>') < page.indexOf('<h3><FflFwName n="ACTIVE DEFENSE" /></h3>') && page.indexOf('<h3><FflFwName n="ACTIVE DEFENSE" /></h3>') < page.indexOf('<h3><FflFwName n="RECON" /></h3>'), "services order OVERWATCH, ACTIVE DEFENSE, RECON");
   // CA-FFLFW-PAGE-COPY: three gold badges (Paul 10:32 AM ET Nov 24, 2026), each on the hero plate and the services card.
-  for (const b of ["SHIPPING COMPLIANCE", "BOT MITIGATION", "ZERO DAY DEFENSE"]) assert.equal(page.split(`<span class="bonus-tag">${b}</span>`).length - 1, 2, `${b} badge on plate and card`);
+  for (const b of ["SHIPPING COMPLIANCE", "BOT MITIGATION", "ZERO DAY DEFENSE"]) assert.equal(page.split(`<span class="svc-tag">${b}</span>`).length - 1, 2, `${b} badge on plate and card`);
   assert.ok(!/>\s*Included bonus\s*</i.test(page), "Included bonus badge renamed");
-  assert.ok(/\.bonus-tag \{[^}]*color: var\(--color-gold\);/.test(page), "badges use the brand gold token");
+  assert.ok(/\.svc-tag \{[^}]*color: var\(--color-gold\);/.test(page), "badges use the brand gold token");
 }
 const copyStrings = [
   "checks each cart item's UPC against the shipping ZIP at checkout and removes or flags restricted items.",
@@ -112,7 +112,7 @@ const copyStrings = [
   "Store hardening report",
   "ZERO DAY DEFENSE",
   "What's in the plugin",
-  "Shipping checks first, with a security layer and a bonus report behind them",
+  "Shipping checks first, then a security layer and a hardening report powered by Wordfence",
   "State shipping checks",
   "On both the classic and Blocks checkout, it matches each item's UPC to the shipping ZIP to help you catch items that can't ship there. Those items come out of the cart with a note to the shopper, items that need a permit or age check get a required acknowledgement checkbox, and orders that need a second look get an order note and a Flagged label.",
   "If the check can't run, checkout carries on and the order is flagged for you to review.",
@@ -132,16 +132,16 @@ const copyStrings = [
   ", always on once you switch it on",
   " transactions</li>",
   "Every future feature we add",
-  " weekly and on-demand reports, included as a bonus</li>",
+  " weekly and on-demand reports, powered by Wordfence</li>",
   "Billing runs monthly in advance through Stripe Checkout, and you can cancel at any time.",
   "The questions dealers ask about FFL Firewall",
   "What do I get for $79 a month?",
   "whenever you switch it on and",
-  "reports as a bonus. Every feature we add later is included at the same price.",
+  " weekly and on-demand reports. Every feature we add later is included at the same price.",
   "After that it stays on, and your plugin dashboard marks it active while the dealer embed has been seen within the past day.",
   "The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. Those checks run on your own site; while your store is in the shared reputation feed, it also reports the bots it catches as salted hashes, never shopper details. Checkout, login, the cart, My Account and wp-admin are never touched by the feed.",
   "It looks at items that carry a UPC when the shopper reaches checkout. Items with no UPC pass through, and when the check can't finish, the order goes through with a Flagged label so you can review it yourself.",
-  "is a bonus store hardening report that runs weekly and on demand. It checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps, then leaves every change to you, since it never fixes anything on its own.",
+  " is a store hardening report powered by Wordfence, and it runs weekly and on demand. It matches your plugins against the vulnerabilities Wordfence has published, checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps.",
   "Is FFL Firewall legal advice?",
   "No. FFL Firewall is a tool that helps you catch restricted items at checkout, and every shipping decision stays with you and your own counsel.",
   "Put FFL Firewall on your WooCommerce store",
@@ -157,7 +157,11 @@ assert.doesNotMatch(page, /off by default|separate opt-in|datacenter IP block li
 // CA-FFLFW-PAGE-COPY-2: plus Paul's RECON hero sentence naming Wordfence (10:44 AM ET Nov 24, 2026), verbatim.
 // CA-FFLFW-PAGE-COPY-4: plus the RECON card's Wordfence sentence (Karp-cleared 11:17 AM ET Nov 24, 2026), verbatim.
 assert.ok(!page.includes("bonus that comes with your plan"), "old RECON bonus paragraph gone");
-const paulCompliance = (s) => s.split("FFL Shipping Compliance, Bot Defense, and Site Hardening for WooCommerce").join("").split("A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats").join("").split("SHIPPING COMPLIANCE").join("").split(" is powered by Wordfence: every week, and again whenever you press Run scan, it matches your plugins against the vulnerabilities Wordfence has published and compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org.").join("").split("delivers weekly and on-demand website security reports powered by Wordfence.").join("");
+// CA-FFLFW-PAGE-COPY-5: Brandy's bonus rewrites and image alt, Karp-cleared 11:28 AM ET (Paul 11:20 AM ET Nov 24, 2026); those three Wordfence strings are the only new exemptions.
+assert.doesNotMatch(page, /bonus/i, "no bonus wording or class left in the /ffl-firewall source");
+assert.ok(page.includes("<p><FflFwName n=\"RECON\" /> is a store hardening report powered by Wordfence, and it runs weekly and on demand. It matches your plugins against the vulnerabilities Wordfence has published, checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps. It never fixes anything on its own, so every change stays with you.</p>"), "What is RECON? answer verbatim");
+assert.ok(page.includes("You get unlimited <FflFwName n=\"OVERWATCH\" /> transactions, <FflFwName n=\"ACTIVE DEFENSE\" /> whenever you switch it on and <FflFwName n=\"RECON\" /> weekly and on-demand reports. Every feature we add later is included at the same price."), "What do I get answer verbatim");
+const paulCompliance = (s) => s.split("FFL Shipping Compliance, Bot Defense, and Site Hardening for WooCommerce").join("").split("A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats").join("").split("SHIPPING COMPLIANCE").join("").split("weekly and on-demand reports, powered by Wordfence").join("").split("Shipping checks first, then a security layer and a hardening report powered by Wordfence").join("").split(" is a store hardening report powered by Wordfence, and it runs weekly and on demand. It matches your plugins against the vulnerabilities Wordfence has published, checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps.").join("").split(" is powered by Wordfence: every week, and again whenever you press Run scan, it matches your plugins against the vulnerabilities Wordfence has published and compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org.").join("").split("delivers weekly and on-demand website security reports powered by Wordfence.").join("");
 assert.doesNotMatch(paulCompliance(page), /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b|Wordfence|Patchstack|WPScan/i, "no vulnerability, compliance or vendor claims");
 assert.doesNotMatch(page, /free/i, "no free (also asserted above)");
 // RECON is live (Paul 12:42 PM ET): no planned / ships wording anywhere on the page.
@@ -205,7 +209,7 @@ function jpegSize(buf) {
 
 const ogAbs = "https://www.coriolisagency.com/og/ffl-firewall-og.png";
 const ogAlt =
-  "FFL Firewall: OVERWATCH, ACTIVE DEFENSE and RECON in one WooCommerce plugin for FFL dealers, $79/month.";
+  "FFL Firewall: FFL shipping checks, bot defense and site hardening for WooCommerce in one managed service, $79/month.";
 assert.match(page, /const ogImage = "og\/ffl-firewall-og\.png";/);
 assert.match(page, /ogImagePath=\{ogImage\}/);
 assert.match(page, /ogImageWidth=\{1200\}/);
@@ -458,7 +462,7 @@ if (fs.existsSync(dist)) {
   assert.doesNotMatch(builtPricing, /Buy a license/, "built pricing card has no Buy a license");
   assert.doesNotMatch(html, /Planned|when it ships/, "built page has no Planned / when it ships");
   assert.match(html, /weekly and on-demand reports/);
-  assert.match(html, /Shipping checks first, with a security layer and a bonus report behind them/);
+  assert.match(html, /Shipping checks first, then a security layer and a hardening report powered by Wordfence/);
   // CA-POPUP-FFL-FILTERS: after PLATES-INLINE (#225) the only "FFL Firewall · NAME" on the built page was the Firewall pop-up,
   // which is now unmounted (the FFL Filters pop-up is the active one and is suppressed here). Any that remain must use nbsp (next line).
   assert.match(html, /ACTIVE DEFENSE/, "built page still names ACTIVE DEFENSE");
@@ -478,6 +482,7 @@ if (fs.existsSync(dist)) {
     else if (k === "FFLFW_SETUP_META_DESCRIPTION") assert.ok(setupHtml.includes(`<meta name="description" content="${v}">`), "setup description verbatim");
     else assert.ok(setupText.includes(v), `built setup guide ships ${k} verbatim`);
   }
+  assert.doesNotMatch(text, /bonus/i, "no visible bonus text on the built /ffl-firewall page (CA-FFLFW-PAGE-COPY-5)");
   assert.doesNotMatch(paulCompliance(text), /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b/i, "no vulnerability, compliance or vendor claims on the built page");
   assert.match(html, /Read the FFL Firewall terms/);
   const termsHtml = fs.readFileSync(path.join(dist, "ffl-firewall", "terms", "index.html"), "utf8");
