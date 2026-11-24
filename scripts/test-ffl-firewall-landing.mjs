@@ -118,8 +118,9 @@ const copyStrings = [
   "If the check can't run, checkout carries on and the order is flagged for you to review.",
   "It spots bots and scrapers and blocks or throttles them before they reach checkout, using rate limits, user agent and header checks, honeypot form fields that only bots fill in, checkout velocity and card-testing checks, and an optional datacenter IP list.",
   "Each check runs on your own site, where a request it catches is blocked or slowed down. The shared reputation feed adds what other FFL Firewall stores have seen: your store reports the bots its checks catch as salted hashes, never shopper details, and receives a list of bots those stores have reported. A new install is in the feed by default while <FflFwName n=\"ACTIVE DEFENSE\" /> is on and the license is active; a store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until the store switches it on. You can switch the feed on or off at any time. The feed never touches checkout, login, the cart, My Account or wp-admin, and search engines and the Ahrefs and Semrush SEO crawlers skip the checks once FFL Firewall verifies they're the real thing. The feed works only while <FflFwName n=\"ACTIVE DEFENSE\" /> is on, and the service needs an FFL Firewall license.",
-  "It's a bonus that comes with your plan. Every week, and whenever you press Run scan, it compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org, flags configuration gaps in your setup and lists what to fix first.",
-  "It reports only and makes no automatic fixes, so every change stays in your hands.",
+  // CA-FFLFW-PAGE-COPY-4: Brandy's RECON paragraph, Karp-cleared 11:17 AM ET (Paul 11:15 AM ET Nov 24, 2026).
+  "<p><FflFwName n=\"RECON\" /> is powered by Wordfence: every week, and again whenever you press Run scan, it matches your plugins against the vulnerabilities Wordfence has published and compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org. It flags configuration gaps in your setup and lists what to fix first.</p>",
+  "<p>RECON reports only and makes no automatic fixes, so every change stays in your hands.</p>",
   "You're still responsible for what you ship, and this is not legal advice.",
   "starts working",
   "Turn it on in the plugin",
@@ -154,7 +155,9 @@ assert.doesNotMatch(page, /off by default|separate opt-in|datacenter IP block li
 // Locks: no vulnerability, compliance or vendor claims (Paul 11:16 AM ET, Chief 12:20 PM ET).
 // CA-FFLFW-PAGE-COPY: Paul's own heading, subhead and SHIPPING COMPLIANCE badge (10:32 AM ET Nov 24, 2026) are the only exemptions; the H1 exemption is now Paul's 10:45 AM ET H1.
 // CA-FFLFW-PAGE-COPY-2: plus Paul's RECON hero sentence naming Wordfence (10:44 AM ET Nov 24, 2026), verbatim.
-const paulCompliance = (s) => s.split("FFL Shipping Compliance, Bot Defense, and Site Hardening for WooCommerce").join("").split("A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats").join("").split("SHIPPING COMPLIANCE").join("").split("delivers weekly and on-demand website security reports powered by Wordfence.").join("");
+// CA-FFLFW-PAGE-COPY-4: plus the RECON card's Wordfence sentence (Karp-cleared 11:17 AM ET Nov 24, 2026), verbatim.
+assert.ok(!page.includes("bonus that comes with your plan"), "old RECON bonus paragraph gone");
+const paulCompliance = (s) => s.split("FFL Shipping Compliance, Bot Defense, and Site Hardening for WooCommerce").join("").split("A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats").join("").split("SHIPPING COMPLIANCE").join("").split(" is powered by Wordfence: every week, and again whenever you press Run scan, it matches your plugins against the vulnerabilities Wordfence has published and compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org.").join("").split("delivers weekly and on-demand website security reports powered by Wordfence.").join("");
 assert.doesNotMatch(paulCompliance(page), /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b|Wordfence|Patchstack|WPScan/i, "no vulnerability, compliance or vendor claims");
 assert.doesNotMatch(page, /free/i, "no free (also asserted above)");
 // RECON is live (Paul 12:42 PM ET): no planned / ships wording anywhere on the page.
