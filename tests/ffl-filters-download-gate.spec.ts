@@ -1,10 +1,14 @@
+import fs from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
 
 test.use({ viewport: { width: 1280, height: 800 } });
 
 const PAGE_PATH = "/" + "ffl-filters";
 const MAILBOX = "support@" + "coriolisagency.com";
-const FILE_URL = "https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v1.3.9/ffl-filters-1.3.9.zip";
+// CA-FFLF-PAGE-VERSION-SYNC: the zip URL follows the page's fflfVersion constant.
+const FFLF_VERSION = fs.readFileSync("src/pages/ffl-filters/index.astro", "utf8").match(/const fflfVersion = "([^"]+)";/)![1];
+const ZIP_NAME = `ffl-filters-${FFLF_VERSION}.zip`;
+const FILE_URL = `https://github.com/CoriolisAgency/ffl-filters-releases/releases/download/v${FFLF_VERSION}/${ZIP_NAME}`;
 
 async function stubZip(page: Page) {
   await page.route(FILE_URL, async (route) => {
@@ -12,7 +16,7 @@ async function stubZip(page: Page) {
       status: 200,
       headers: {
         "content-type": "application/zip",
-        "content-disposition": "attachment; filename=ffl-filters-1.3.9.zip",
+        "content-disposition": `attachment; filename=${ZIP_NAME}`,
       },
       body: Buffer.from("PK\x03\x04", "binary"),
     });
