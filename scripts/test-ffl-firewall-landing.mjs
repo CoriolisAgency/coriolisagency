@@ -367,13 +367,13 @@ for (const u of [...(fflfwLandingNoindex() ? ["https://www.coriolisagency.com/ff
 
 // 6b. FFLFW-LANDING-1-0: launch switch, setup guide and Brandy placeholders.
 assert.equal(FFLFW_ZIP_CURRENT, "downloads/ffl-firewall-0.1.3.zip", "current zip is 0.1.3 until the swap");
-assert.equal(FFLFW_ZIP_V1, "downloads/ffl-firewall-1.0.1.zip");
+assert.equal(FFLFW_ZIP_V1, "downloads/ffl-firewall-1.0.2.zip");
 assert.ok(fs.existsSync(path.join(root, "public", FFLFW_ZIP_CURRENT)), "current zip ships");
 if (FFLFW_V1_LIVE) {
   const v1 = path.join(root, "public", FFLFW_ZIP_V1);
-  assert.ok(fs.existsSync(v1), "FFLFW_V1_LIVE needs public/downloads/ffl-firewall-1.0.1.zip");
+  assert.ok(fs.existsSync(v1), "FFLFW_V1_LIVE needs public/downloads/ffl-firewall-1.0.2.zip");
   assert.match(FFLFW_ZIP_V1_SHA256, /^[a-f0-9]{64}$/, "FFLFW_V1_LIVE needs FFLFW_ZIP_V1_SHA256");
-  assert.equal(crypto.createHash("sha256").update(fs.readFileSync(v1)).digest("hex"), FFLFW_ZIP_V1_SHA256, "1.0.1 zip sha256");
+  assert.equal(crypto.createHash("sha256").update(fs.readFileSync(v1)).digest("hex"), FFLFW_ZIP_V1_SHA256, "1.0.2 zip sha256");
   assert.equal(Object.keys(PENDING_COPY).length, 0, "no placeholders may remain at launch");
 }
 const setupRel = "src/pages/ffl-firewall/setup.astro";
@@ -412,7 +412,7 @@ const FINAL_LANDING = {
 const FINAL_SETUP = {
   "FFLFW_SETUP_META_TITLE": "FFL Firewall setup guide | Coriolis Agency",
   "FFLFW_SETUP_META_DESCRIPTION": "How to install FFL Firewall on a WooCommerce gun store, add your license and switch on each of its three services, step by step.",
-  "FFLFW_SETUP_EYEBROW": "FFL Firewall 1.0.1",
+  "FFLFW_SETUP_EYEBROW": "FFL Firewall 1.0.2",
   "FFLFW_SETUP_H1": "Set up FFL Firewall on your WooCommerce store",
   "FFLFW_SETUP_INTRO": "This guide is for FFL dealers who sell on WooCommerce. Setup is six short steps in your WordPress dashboard: install the plugin, add your license, then switch on each service and choose your settings.",
   "FFLFW_SETUP_S1_TITLE": "Install the plugin",
