@@ -263,6 +263,20 @@ assert.match(page, /height="80"/);
 assert.match(page, /withBase\("brand\/ffl-firewall\/ffl-firewall-lockup-on-dark\.svg"\)/);
 assert.doesNotMatch(page, /<picture>/, "S5F: hero picture replaced by the three-service panel");
 
+// CA-FFLFW-FFL-LAW-BADGE: white Endorsed By badge, unaltered, next to the lockup.
+const endorseBadgeRel = "public/brand/ffl-firewall/ffl-law-endorsed-by-badge-white.png";
+const endorseBadgeSha = "7005df2ee397a79073cfdc84ff5e3c2ddfec87c293f4c3d248bbfede9f02bc7c";
+const endorseBadge = fs.readFileSync(path.join(root, endorseBadgeRel));
+assert.equal(crypto.createHash("sha256").update(endorseBadge).digest("hex"), endorseBadgeSha, "endorse badge sha256 (unaltered white PNG)");
+assert.equal(endorseBadge.readUInt32BE(16), 1600, "endorse badge width");
+assert.equal(endorseBadge.readUInt32BE(20), 535, "endorse badge height");
+assert.match(page, /const endorseLogo = withBase\("brand\/ffl-firewall\/ffl-law-endorsed-by-badge-white\.png"\);/);
+assert.match(page, /class="hero-marks"/);
+assert.match(page, /<a class="endorse" href="https:\/\/ffllaw\.com" target="_blank" rel="noopener noreferrer">/);
+assert.match(page, /alt="Endorsed by FFL Law"/);
+assert.equal((page.match(/Endorsed by FFL Law/g) || []).length, 1, "alt is the only 'Endorsed by FFL Law' string; no second visible label");
+assert.doesNotMatch(page, />Endorsed by</);
+
 // 4. Terms page: Brandy's final terms verbatim, published, not noindex.
 assert.match(terms, /path="\/ffl-firewall\/terms"/);
 assert.doesNotMatch(terms, /^\s*noindex\s*$/m, "terms page must not pass noindex");
@@ -507,6 +521,11 @@ if (fs.existsSync(dist)) {
     "dist og image sha256",
   );
   assert.doesNotMatch(html, /<picture>/);
+  const distEndorse = fs.readFileSync(path.join(dist, "brand/ffl-firewall/ffl-law-endorsed-by-badge-white.png"));
+  assert.equal(crypto.createHash("sha256").update(distEndorse).digest("hex"), endorseBadgeSha, "dist endorse badge sha256");
+  assert.match(html, /<a class="endorse" href="https:\/\/ffllaw\.com" target="_blank" rel="noopener noreferrer">/);
+  assert.match(html, /alt="Endorsed by FFL Law"/);
+  assert.match(html, /class="hero-marks"/);
   for (const f of heroFiles) {
     const distHeroBuf = fs.readFileSync(path.join(dist, f.rel.replace(/^public\//, "")));
     assert.equal(crypto.createHash("sha256").update(distHeroBuf).digest("hex"), f.sha, "dist " + f.rel + " sha256");

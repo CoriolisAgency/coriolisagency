@@ -42,6 +42,7 @@ const gate = {
   buyLabel: "Buy a license",
 };
 const logo = withBase("brand/ffl-firewall/ffl-firewall-lockup-on-dark.svg");
+const endorseLogo = withBase("brand/ffl-firewall/ffl-law-endorsed-by-badge-white.png");
 const ogImage = "og/ffl-firewall-og.png";
 const ogImageAlt =
   "FFL Firewall: FFL shipping checks, bot defense and site hardening for WooCommerce in one managed service, $79/month.";
@@ -58,7 +59,17 @@ const ogImageAlt =
   ogImageAlt={ogImageAlt}
 >
   <div class="fwl">
-  <section class="fwl-sec" data-section="hero"><div class="col"><img src={logo} alt="FFL Firewall" width="278" height="80" class="lock" />
+  <section class="fwl-sec" data-section="hero"><div class="col"><div class="hero-marks">
+  <img src={logo} alt="FFL Firewall" width="278" height="80" class="lock" />
+  <a class="endorse" href="https://ffllaw.com" target="_blank" rel="noopener noreferrer">
+    <img
+      src={endorseLogo}
+      alt="Endorsed by FFL Law"
+      width="1600"
+      height="535"
+    />
+  </a>
+</div>
   <div class="eb">FFL Firewall</div><h1>FFL Shipping Compliance, Bot Defense, and Site Hardening for WooCommerce</h1><p class="pos">A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats <span class="shield" aria-hidden="true">🛡️</span></p><p><FflFwName n="OVERWATCH" /> checks each cart item's UPC against the shipping ZIP at checkout and removes or flags restricted items. <FflFwName n="ACTIVE DEFENSE" /> is always-on bots and scraper mitigation powered by network sensors and automatic updates. <FflFwName n="RECON" /> delivers weekly and on-demand website security reports powered by Wordfence.</p>
   <div class="btns"><a href={download} class="btn red" download data-download="hero">{getLabel}</a><a href={contact} class="btn">{contactLabel}</a></div><p class="small">For FFL dealers running WooCommerce. The price is a flat $79 a month, whether or not you turn on <FflFwName n="ACTIVE DEFENSE" />.</p>
   <div class="console" data-console><div class="crow">
@@ -99,7 +110,30 @@ const ogImageAlt =
   .col { max-width: 880px; margin: 0 auto; padding: 0 32px; }
   .fwl-sec { padding: 72px 0; border-bottom: 1px solid #1c2738; }
   .fwl-sec.last { border-bottom: 0; }
-  .lock { height: 64px; width: auto; display: block; margin: 0 0 26px; }
+  .hero-marks {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 24px;
+    margin: 0 0 26px;
+    flex-wrap: wrap;
+  }
+  .lock {
+    height: 64px;
+    width: auto;
+    display: block;
+    margin: 0; /* bottom margin moves to .hero-marks */
+  }
+  .endorse {
+    display: block;
+    flex: none;
+    line-height: 0;
+  }
+  .endorse img {
+    height: 80px;
+    width: auto;
+    display: block;
+  }
   .eb { color: #E53E3E; font-size: 12px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; margin: 0 0 10px; }
   h1 { font-size: 46px; line-height: 1.1; margin: 0 0 20px; letter-spacing: -.8px; color: #fff; font-weight: 700; }
   h2 { font-size: 32px; line-height: 1.2; margin: 0 0 16px; letter-spacing: -.4px; color: #fff; font-weight: 700; }
@@ -146,7 +180,13 @@ const ogImageAlt =
   @media (max-width: 600px) {
     .col { padding: 0 20px; }
     .fwl-sec { padding: 48px 0; }
+    .hero-marks {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
     .lock { height: 48px; }
+    .endorse img { height: 80px; }
     h1 { font-size: 32px; }
     h2 { font-size: 25px; }
     .pos { font-size: 18px; }
