@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { fflfwLandingNoindex } from "../src/lib/ffl-firewall-release.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (rel) => fs.readFileSync(path.join(root, rel), "utf8");
@@ -202,7 +203,7 @@ assert.match(astro, /\/ffl-filters\/connect/, "sitemap filter must exclude conne
 
 const robots = read("public/robots.txt");
 assert.doesNotMatch(robots, /Disallow:\s*\/ffl-filters\/?\s*$/m, "landing page must not be disallowed");
-assert.match(robots, /^Disallow: \/ffl-firewall$/m);
+assert.equal(/^Disallow: \/ffl-firewall$/m.test(robots), fflfwLandingNoindex(), "robots.txt Disallow: /ffl-firewall matches FFLFW_V1_LIVE");
 
 const pkg = JSON.parse(read("package.json"));
 assert.match(pkg.scripts["test:ci"], /test-ffl-filters-connect\.mjs/);
