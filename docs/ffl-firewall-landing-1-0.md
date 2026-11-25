@@ -76,7 +76,7 @@ Facts the copy must match (as shipped Nov 23, 2026):
 | `FFLFW_SETUP_S2_TITLE` / `FFLFW_SETUP_S2_BODY` | License: buy ($79 a month), the key is emailed; WooCommerce > FFL Firewall, License tab, paste it and click Check key. |
 | `FFLFW_SETUP_S3_TITLE` / `FFLFW_SETUP_S3_BODY` | OVERWATCH tab: switch it on; roster-state choice; results on classic and Blocks checkout. |
 | `FFLFW_SETUP_S4_TITLE` / `FFLFW_SETUP_S4_BODY` | ACTIVE DEFENSE tab: switch on, tick the data disclosure, save; the site key made at paid checkout is bound to this store on the first turn-on with an active license; Check for script; active once the embed is seen (24 hours). |
-| `FFLFW_SETUP_S5_TITLE` / `FFLFW_SETUP_S5_BODY` | Shared reputation feed: default-on for new installs only; existing no-choice installs off; switch any time; salted hashes, never shopper details. |
+| `FFLFW_SETUP_S5_TITLE` / `FFLFW_SETUP_S5_BODY` | Shared reputation feed: default-on for new installs only; existing no-choice installs off; switch any time; salted hashes of bots' IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details. |
 | `FFLFW_SETUP_S6_TITLE` / `FFLFW_SETUP_S6_BODY` | RECON tab: weekly and Run scan; WordPress.org versions and configuration gaps; reports only. |
 | `FFLFW_SETUP_UPDATES_TITLE` / `FFLFW_SETUP_UPDATES_BODY` | Updates show in the WordPress Plugins screen (FFLFW-UPDATER). |
 | `FFLFW_SETUP_HELP_TITLE` / `FFLFW_SETUP_HELP_BODY` | Help; support@coriolisagency.com is already on the page. |
