@@ -2,7 +2,7 @@
 //
 // FFLFW_V1_LIVE is true: the page is indexed (sitemap, lastmod, IndexNow) and every download
 // button serves FFLFW_ZIP_V1. Companions that must agree with this flag:
-//   1. public/downloads/ffl-firewall-1.0.0.zip and FFLFW_ZIP_V1_SHA256,
+//   1. public/downloads/ffl-firewall-1.0.1.zip and FFLFW_ZIP_V1_SHA256,
 //   2. no Disallow: /ffl-firewall in public/robots.txt,
 //   3. no /ffl-firewall X-Robots-Tag header in vercel.json.
 // scripts/test-ffl-firewall-landing.mjs fails test:ci when any of these disagree with the flag.
@@ -12,9 +12,9 @@
 export const FFLFW_V1_LIVE = true;
 
 export const FFLFW_ZIP_CURRENT = "downloads/ffl-firewall-0.1.3.zip";
-export const FFLFW_ZIP_V1 = "downloads/ffl-firewall-1.0.0.zip";
-/** sha256 of the 1.0.0 zip, set in the same PR that adds the zip and flips the flag. */
-export const FFLFW_ZIP_V1_SHA256 = "00273e20ec06cc777c5f71f40afc485d7f77850ac3c295ca830d5b4693e9d069";
+export const FFLFW_ZIP_V1 = "downloads/ffl-firewall-1.0.1.zip";
+/** sha256 of the 1.0.1 zip, set in the same PR that adds the zip. */
+export const FFLFW_ZIP_V1_SHA256 = "8671ca4a330a4e8fee308bd53aadbd25badeb4da57230c6fa6e7640d7bf96f45";
 
 /** Site-relative path of the zip every download button serves. */
 export function fflfwZip() {

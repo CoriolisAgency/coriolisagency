@@ -367,13 +367,13 @@ for (const u of [...(fflfwLandingNoindex() ? ["https://www.coriolisagency.com/ff
 
 // 6b. FFLFW-LANDING-1-0: launch switch, setup guide and Brandy placeholders.
 assert.equal(FFLFW_ZIP_CURRENT, "downloads/ffl-firewall-0.1.3.zip", "current zip is 0.1.3 until the swap");
-assert.equal(FFLFW_ZIP_V1, "downloads/ffl-firewall-1.0.0.zip");
+assert.equal(FFLFW_ZIP_V1, "downloads/ffl-firewall-1.0.1.zip");
 assert.ok(fs.existsSync(path.join(root, "public", FFLFW_ZIP_CURRENT)), "current zip ships");
 if (FFLFW_V1_LIVE) {
   const v1 = path.join(root, "public", FFLFW_ZIP_V1);
-  assert.ok(fs.existsSync(v1), "FFLFW_V1_LIVE needs public/downloads/ffl-firewall-1.0.0.zip");
+  assert.ok(fs.existsSync(v1), "FFLFW_V1_LIVE needs public/downloads/ffl-firewall-1.0.1.zip");
   assert.match(FFLFW_ZIP_V1_SHA256, /^[a-f0-9]{64}$/, "FFLFW_V1_LIVE needs FFLFW_ZIP_V1_SHA256");
-  assert.equal(crypto.createHash("sha256").update(fs.readFileSync(v1)).digest("hex"), FFLFW_ZIP_V1_SHA256, "1.0.0 zip sha256");
+  assert.equal(crypto.createHash("sha256").update(fs.readFileSync(v1)).digest("hex"), FFLFW_ZIP_V1_SHA256, "1.0.1 zip sha256");
   assert.equal(Object.keys(PENDING_COPY).length, 0, "no placeholders may remain at launch");
 }
 const setupRel = "src/pages/ffl-firewall/setup.astro";
@@ -412,11 +412,11 @@ const FINAL_LANDING = {
 const FINAL_SETUP = {
   "FFLFW_SETUP_META_TITLE": "FFL Firewall setup guide | Coriolis Agency",
   "FFLFW_SETUP_META_DESCRIPTION": "How to install FFL Firewall on a WooCommerce gun store, add your license and switch on each of its three services, step by step.",
-  "FFLFW_SETUP_EYEBROW": "FFL Firewall 1.0.0",
+  "FFLFW_SETUP_EYEBROW": "FFL Firewall 1.0.1",
   "FFLFW_SETUP_H1": "Set up FFL Firewall on your WooCommerce store",
   "FFLFW_SETUP_INTRO": "This guide is for FFL dealers who sell on WooCommerce. Setup is six short steps in your WordPress dashboard: install the plugin, add your license, then switch on each service and choose your settings.",
   "FFLFW_SETUP_S1_TITLE": "Install the plugin",
-  "FFLFW_SETUP_S1_BODY": "Download the FFL Firewall zip from the FFL Firewall page, then in WordPress go to Plugins > Add New > Upload Plugin, choose the zip, install it and click Activate. Until you add a license the plugin doesn't check real carts, but the built-in demo lets you run 10 test checks on a UPC and zip so you can see how it works.",
+  "FFLFW_SETUP_S1_BODY": "Download the FFL Firewall zip from the FFL Firewall page, then in WordPress go to Plugins > Add New > Upload Plugin, choose the zip, install it and click Activate. Until you add a license the plugin doesn't check real carts, but the built-in demo lets you run 10 test checks on a UPC and zip so you can see how it works. The first time you open WooCommerce > FFL Firewall, a screen shows what FFL Firewall · ACTIVE DEFENSE sends and keeps, and you choose Keep ACTIVE DEFENSE on or Switch off ACTIVE DEFENSE before the page opens.",
   "FFLFW_SETUP_S2_TITLE": "Add your license",
   "FFLFW_SETUP_S2_BODY": "FFL Firewall is $79 a month, with unlimited FFL Firewall · OVERWATCH transactions and every service included. After you buy, your license key arrives by email; in WordPress, go to WooCommerce > FFL Firewall, open the License tab, paste the key and click Check key.",
   "FFLFW_SETUP_S3_TITLE": "Switch on FFL Firewall · OVERWATCH",
@@ -426,7 +426,7 @@ const FINAL_SETUP = {
   "FFLFW_SETUP_S5_TITLE": "Choose your shared reputation feed setting",
   "FFLFW_SETUP_S5_BODY": "The shared reputation feed lets FFL Firewall stores warn each other about bots: your store reports the bots it catches as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and gets back a list of bots other stores have reported. On a new install it's on by default while FFL Firewall · ACTIVE DEFENSE is on and the license is active. A store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until you switch it on. You can switch it on or off any time in the Shared reputation feed section. While FFL Firewall · ACTIVE DEFENSE is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.",
   "FFLFW_SETUP_S6_TITLE": "Run FFL Firewall · RECON",
-  "FFLFW_SETUP_S6_BODY": "FFL Firewall · RECON scans your site every week, and you can click Run scan whenever you want a fresh one. It lists WordPress, plugin and theme updates that are waiting, read from WordPress's own update data, along with setup gaps such as missing https or debug output left on. It only reports what it finds and changes nothing on your site.",
+  "FFLFW_SETUP_S6_BODY": "FFL Firewall · RECON scans your site every week, and you can click Run scan whenever you want a fresh one. It lists WordPress, plugin and theme updates that are waiting, read from WordPress's own update data, along with setup gaps such as missing https or debug output left on. It only reports what it finds and changes nothing on your site. Its first scan runs after install with no license needed and includes the known plugin vulnerability check, which sends the names and versions of your installed plugins to the Coriolis server. Weekly scans, Run scan and later vulnerability checks need an active license.",
   "FFLFW_SETUP_UPDATES_TITLE": "Keep it up to date",
   "FFLFW_SETUP_UPDATES_BODY": "New FFL Firewall versions show up on the WordPress Plugins screen like any other plugin update, so you can update with one click.",
   "FFLFW_SETUP_HELP_TITLE": "Help with setup",
