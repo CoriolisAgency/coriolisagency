@@ -30,7 +30,7 @@ assert.doesNotMatch(terms, banned, `${termsRel} has a banned word`);
 
 // 1. Page: noindex, title, meta, path, buy CTAs, contact, no download/file.
 assert.match(page, /^\s*noindex=\{fflfwLandingNoindex\(\)\}\s*$/m, "page noindex follows the FFLFW_V1_LIVE switch");
-assert.equal(FFLFW_V1_LIVE, false, "FFLFW_V1_LIVE stays false until Paul's S4 purchase passes (Paul 9:15 AM ET Nov 23)");
+assert.equal(FFLFW_V1_LIVE, true, "FFLFW_V1_LIVE is on for the 1.0.0 launch");
 assert.match(
   page,
   /title="FFL Firewall: state shipping checks and managed security for WooCommerce FFL dealers \| Coriolis"/,

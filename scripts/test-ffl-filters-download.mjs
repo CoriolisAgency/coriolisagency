@@ -18,6 +18,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { fflfwLandingNoindex } from "../src/lib/ffl-firewall-release.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (rel) => fs.readFileSync(path.join(root, rel), "utf8");
@@ -264,11 +265,11 @@ assert.ok(JSON.parse(read("lastmod.json"))["/ffl-filters"], "/ffl-filters must b
 const vercel = JSON.parse(read("vercel.json"));
 const hdr = (src) => Object.fromEntries((vercel.headers.find((h) => h.source === src)?.headers ?? []).map((h) => [h.key, h.value]));
 assert.equal(hdr("/ffl-filters")["X-Robots-Tag"], undefined, "no X-Robots-Tag on /ffl-filters");
-assert.equal(hdr("/ffl-firewall")["X-Robots-Tag"], "noindex, nofollow", "firewall header untouched");
+assert.equal(hdr("/ffl-firewall")["X-Robots-Tag"], fflfwLandingNoindex() ? "noindex, nofollow" : undefined, "vercel.json /ffl-firewall X-Robots-Tag matches FFLFW_V1_LIVE");
 assert.equal(hdr("/downloads/(.*)")["X-Robots-Tag"], "noindex, nofollow");
 const robotsTxt = read("public/robots.txt");
 assert.doesNotMatch(robotsTxt, /Disallow:\s*\/ffl-filters\/?\s*$/m, "robots.txt must not disallow /ffl-filters");
-assert.match(robotsTxt, /^Disallow: \/ffl-firewall$/m, "robots.txt still disallows /ffl-firewall");
+assert.equal(/^Disallow: \/ffl-firewall$/m.test(robotsTxt), fflfwLandingNoindex(), "robots.txt Disallow: /ffl-firewall matches FFLFW_V1_LIVE");
 assert.equal(hdr("/downloads/(.*)\\.zip")["Content-Type"], "application/zip");
 assert.ok(vercel.rewrites.some((r) => r.source === "/ffl-filters/connect" && r.destination === "/api/ffl-filters-connect"), "connect rewrite intact");
 
@@ -312,7 +313,8 @@ if (fs.existsSync(dist)) {
   assert.match(sitemapXml, /<loc>https:\/\/www\.coriolisagency\.com\/ffl-filters<\/loc>/, "sitemap lists canonical /ffl-filters");
   assert.doesNotMatch(sitemapXml, /<loc>https:\/\/www\.coriolisagency\.com\/ffl-filters\/<\/loc>/, "sitemap must not list trailing-slash /ffl-filters/");
   assert.doesNotMatch(sitemapXml, /\/ffl-filters\/connect/, "sitemap must not list connect");
-  assert.doesNotMatch(sitemapXml, /\/ffl-firewall/, "sitemap must not list /ffl-firewall");
+  if (fflfwLandingNoindex()) assert.doesNotMatch(sitemapXml, /\/ffl-firewall/, "sitemap must not list /ffl-firewall while noindex");
+  else assert.match(sitemapXml, /<loc>https:\/\/www\.coriolisagency\.com\/ffl-firewall<\/loc>/, "sitemap lists /ffl-firewall when live");
   const html = fs.readFileSync(path.join(dist, "ffl-filters", "index.html"), "utf8");
   assert.doesNotMatch(html, /<meta name="robots"/, "built /ffl-filters has no robots meta");
   assert.equal((html.split(downloadUrl).length - 1), 3, "GH asset URL appears on both buttons and data-file");
