@@ -115,9 +115,9 @@ for (const n of ["DEFENDER", "OVERWATCH", "PICKET"]) assert.ok(page.includes(`<F
   assert.ok(plates.includes('<FflFwName n="PICKET" />'), "PICKET secondary heading");
   assert.ok(plates.includes('<FflFwName n="OVERWATCH" />'), "OVERWATCH secondary heading");
   assert.ok(plates.includes('<FflFwName n="DEFENDER" />'), "DEFENDER secondary heading");
-  assert.ok(plates.includes('<span class="svc-tag live">Transaction Security</span>'), "Fraud Detection badge");
-  assert.ok(plates.includes('<span class="svc-tag live">Powered by Orchid</span>'), "State Law Compliance badge");
-  assert.ok(plates.includes('<span class="svc-tag live">Adaptive Protection</span>'), "Bot & AI Defense badge");
+  assert.ok(plates.includes('<span class="svc-tag">Transaction Security</span>'), "Fraud Detection badge");
+  assert.ok(plates.includes('<span class="svc-tag">Powered by Orchid</span>'), "State Law Compliance badge");
+  assert.ok(plates.includes('<span class="svc-tag">Adaptive Protection</span>'), "Bot & AI Defense badge");
   assert.ok(!plates.includes("Coming"), "no Coming badge text on the cards");
   assert.ok(!plates.includes("In the plugin"), "no In the plugin badge text on the cards");
   assert.ok(!plates.includes("COMING"), "no COMING badge text on the cards");
@@ -135,8 +135,7 @@ for (const n of ["DEFENDER", "OVERWATCH", "PICKET"]) assert.ok(page.includes(`<F
   assert.ok(!page.includes("ZERO DAY DEFENSE"), "ZERO DAY DEFENSE gone");
   assert.ok(!/>\s*Included bonus\s*</i.test(page), "Included bonus badge renamed");
   assert.ok(/\.svc-tag \{[^}]*color: var\(--color-gold\);/.test(page), "services badges use the brand gold token");
-  assert.ok(!/\.cc \.svc-tag/.test(page) && !/svc-tag[^{]*\{[^}]*color-green/.test(page), "no green badge rule remains");
-  assert.ok(/\.svc-tag\.live \{[^}]*color: #a1a1aa;/.test(page), "card badges use the existing gray .svc-tag.live style");
+  assert.ok(/\.cc \.svc-tag \{[^}]*color: var\(--color-green-500\);/.test(page), "card badges use the site green token");
   assert.ok(/\.console \{[^}]*margin-bottom: 40px;/.test(page), "space below the feature-card plate uses the existing 40px token");
   assert.ok(/\.fwl p\.hero-lede \{ margin: 0 0 26px; \}/.test(page), "space below the lede uses the existing 26px token");
 }
