@@ -25,7 +25,12 @@ const page = read(pageRel);
 const terms = read(termsRel);
 
 const banned = /Orchid|eState/i;
-assert.doesNotMatch(page, banned, `${pageRel} has a banned word`);
+// CA-FFLFW-H1-PEACE follow-up: Paul 5:59 / Chief 6:02+6:03, the State Law Compliance
+// badge "Powered by Orchid" is the only allowed Orchid string on this page.
+const orchidBadge = "Powered by Orchid";
+assert.equal((page.match(/Orchid/g) || []).length, 1, "Orchid appears only on the State Law Compliance badge");
+assert.ok(page.includes(orchidBadge), "State Law Compliance badge reads Powered by Orchid");
+assert.doesNotMatch(page.replace(orchidBadge, ""), banned, `${pageRel} has a banned word outside the Orchid badge`);
 assert.doesNotMatch(terms, banned, `${termsRel} has a banned word`);
 
 // 1. Page: noindex, title, meta, path, buy CTAs, contact, no download/file.
@@ -88,23 +93,30 @@ const landingBody = page.split(/^---$/m).slice(2).join("---");
 assert.ok(!landingBody.includes("ACTIVE DEFENSE"), "landing source body has 0 hits for ACTIVE DEFENSE");
 assert.ok(landingBody.includes("DEFENDER"), "landing source names DEFENDER");
 assert.ok(landingBody.includes("State Law Compliance"), "OVERWATCH card label is State Law Compliance");
+assert.ok(!landingBody.includes("Bot Defense"), "landing source body has 0 bare Bot Defense");
+assert.ok(landingBody.includes("Bot &amp; AI Defense"), "landing source names Bot & AI Defense");
 for (const n of ["DEFENDER", "OVERWATCH", "PICKET"]) assert.ok(page.includes(`<FflFwName n="${n}" />`), `service name ${n}`);
 {
   const fwn = read("src/components/FflFwName.astro");
   assert.ok(fwn.includes("<b>FFL</b>&nbsp;Firewall") && fwn.includes("&nbsp;·&nbsp;"), "name lockup uses non-breaking spaces (OVERWATCH-LEAD)");
   assert.ok(fwn.includes('n.replace(/ /g, "\\u00A0")') && /\.fwn \{ white-space: nowrap; \}/.test(fwn), "service name never wraps");
 }
-// CA-FFLFW-H1-PEACE: hero console is Fraud Prevention (PICKET, Coming), State Law Compliance (OVERWATCH), Bot Defense (DEFENDER).
+// CA-FFLFW-H1-PEACE follow-up: hero console is Fraud Prevention (PICKET), State Law Compliance (OVERWATCH), Bot & AI Defense (DEFENDER).
 {
   const plates = page.slice(page.indexOf('<div class="console"'), page.indexOf('data-section="services"'));
   assert.ok(plates.includes('<div class="nm">Fraud Prevention</div>'), "card heading Fraud Prevention");
   assert.ok(plates.includes('<div class="nm">State Law Compliance</div>'), "card heading State Law Compliance");
-  assert.ok(plates.includes('<div class="nm">Bot Defense</div>'), "card heading Bot Defense");
+  assert.ok(plates.includes('<div class="nm">Bot &amp; AI Defense</div>'), "card heading Bot & AI Defense");
   assert.ok(plates.includes('<FflFwName n="PICKET" />'), "PICKET secondary heading");
   assert.ok(plates.includes('<FflFwName n="OVERWATCH" />'), "OVERWATCH secondary heading");
   assert.ok(plates.includes('<FflFwName n="DEFENDER" />'), "DEFENDER secondary heading");
-  assert.ok(plates.includes('<span class="svc-tag">Coming</span>'), "Coming chip");
-  assert.equal(plates.split('<span class="svc-tag live">In the plugin</span>').length - 1, 2, "In the plugin chips");
+  assert.ok(plates.includes('<span class="svc-tag">Transaction Security</span>'), "Fraud Prevention badge");
+  assert.ok(plates.includes('<span class="svc-tag">Powered by Orchid</span>'), "State Law Compliance badge");
+  assert.ok(plates.includes('<span class="svc-tag">Adaptive Protection</span>'), "Bot & AI Defense badge");
+  assert.ok(!plates.includes("Coming"), "no Coming badge text on the cards");
+  assert.ok(!plates.includes("In the plugin"), "no In the plugin badge text on the cards");
+  assert.ok(!plates.includes("COMING"), "no COMING badge text on the cards");
+  assert.ok(!plates.includes("IN THE PLUGIN"), "no IN THE PLUGIN badge text on the cards");
   assert.ok(!plates.includes("RECON"), "RECON card gone");
   assert.ok(!plates.includes("ZERO DAY DEFENSE"), "ZERO DAY DEFENSE tag gone");
   assert.ok(/\.cc \.hd \{ display: flex; align-items: center;/.test(page) && /\.cc \.nm \{[^}]*white-space: nowrap;/.test(page), "plate name sits inline and never wraps");
@@ -117,7 +129,10 @@ for (const n of ["DEFENDER", "OVERWATCH", "PICKET"]) assert.ok(page.includes(`<F
   assert.equal(page.split('<span class="svc-tag">BOT MITIGATION</span>').length - 1, 1, "BOT MITIGATION remains on the DEFENDER services plate only");
   assert.ok(!page.includes("ZERO DAY DEFENSE"), "ZERO DAY DEFENSE gone");
   assert.ok(!/>\s*Included bonus\s*</i.test(page), "Included bonus badge renamed");
-  assert.ok(/\.svc-tag \{[^}]*color: var\(--color-gold\);/.test(page), "badges use the brand gold token");
+  assert.ok(/\.svc-tag \{[^}]*color: var\(--color-gold\);/.test(page), "services badges use the brand gold token");
+  assert.ok(/\.cc \.svc-tag \{[^}]*color: var\(--color-green-500\);/.test(page), "card badges use the site green token");
+  assert.ok(/\.console \{[^}]*margin-bottom: 40px;/.test(page), "space below the feature-card plate uses the existing 40px token");
+  assert.ok(/\.fwl p\.hero-lede \{ margin: 0 0 26px; \}/.test(page), "space below the lede uses the existing 26px token");
 }
 const copyStrings = [
   "checks each cart item's UPC against the shipping ZIP at checkout and removes or flags restricted items.",
@@ -126,7 +141,7 @@ const copyStrings = [
   "For FFL dealers running WooCommerce. The price is a flat $79 a month, whether or not you turn on",
   "It will screen card orders on high-value optics, with firearms orders handled too, and hold the risky ones for you to review. You make the call on every held order.",
   "Checks each cart item's UPC against the shipping ZIP at checkout. Restricted items come out of the cart with a note to the shopper, or get flagged for your review.",
-  "Runs once you keep it on at the first-open screen, your license is active, and your dealer embed script is checking in with Coriolis. Then it blocks or slows bots and scrapers before they reach checkout. Checks include rate limits, header checks, honeypot form fields, and card-testing checks.",
+  "Keep it on at first open, with an active license and your dealer embed script checking in with Coriolis, and it blocks or slows bots and scrapers before checkout.",
   "Bot and scraper control",
   "What's in the plugin",
   "Shipping checks first, then a security layer",
@@ -238,7 +253,7 @@ function jpegSize(buf) {
 
 const ogAbs = "https://www.coriolisagency.com/og/ffl-firewall-og.png";
 const ogAlt =
-  "FFL Firewall: state shipping checks and bot defense for WooCommerce in one managed service, $79/month.";
+  "FFL Firewall: state shipping checks and bot & AI defense for WooCommerce in one managed service, $79/month.";
 assert.match(page, /const ogImage = "og\/ffl-firewall-og\.png";/);
 assert.match(page, /ogImagePath=\{ogImage\}/);
 assert.match(page, /ogImageWidth=\{1200\}/);
@@ -299,6 +314,8 @@ assert.equal(crypto.createHash("sha256").update(endorseBadge).digest("hex"), end
 assert.equal(endorseBadge.readUInt32BE(16), 1600, "endorse badge width");
 assert.equal(endorseBadge.readUInt32BE(20), 535, "endorse badge height");
 assert.match(page, /const endorseLogo = withBase\("brand\/ffl-firewall\/ffl-law-endorsed-by-badge-white\.png"\);/);
+assert.match(page, /\.endorse img \{[\s\S]*?height: 72px;/, "FFL Law logo is 1.2x the prior 60px rendered height");
+assert.doesNotMatch(page, /\.endorse img \{[\s\S]*?height: 60px;/, "prior 60px FFL Law logo height is gone");
 assert.match(page, /class="hero-marks"/);
 assert.match(page, /<a class="endorse" href="https:\/\/ffllaw\.com" target="_blank" rel="noopener noreferrer">/);
 assert.match(page, /alt="Endorsed by FFL Law"/);
@@ -514,6 +531,16 @@ if (fs.existsSync(dist)) {
     assert.match(html, /DEFENDER/, "built page names DEFENDER");
     assert.match(html, /State Law Compliance/, "built page names State Law Compliance");
     assert.match(html, /<h1>Peace of mind for \$79 a month<\/h1>/, "built H1 verbatim");
+    assert.match(html, /Transaction Security/, "built Fraud Prevention badge");
+    assert.match(html, /Powered by Orchid/, "built State Law Compliance badge");
+    assert.match(html, /Adaptive Protection/, "built Bot & AI Defense badge");
+    assert.match(html, /Bot &amp; AI Defense/, "built card title Bot & AI Defense");
+    assert.doesNotMatch(html, /<span class="svc-tag">Coming<\/span>/, "built page has no Coming badge");
+    assert.doesNotMatch(html, /In the plugin/, "built page has no In the plugin badge text");
+    assert.doesNotMatch(html, /IN THE PLUGIN/, "built page has no IN THE PLUGIN badge text");
+    assert.equal((html.match(/Bot Defense/g) || []).length, 0, "built page has 0 bare Bot Defense");
+    assert.match(html, /class="hero-lede"/, "built lede has spacing class");
+
   assert.doesNotMatch(html, /FFL Firewall · (DEFENDER|OVERWATCH|RECON|PICKET)/, "no plain-space service name on the built page");
   assert.match(html, /https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s/);
   assert.match(html, />Buy a license</);
