@@ -147,7 +147,7 @@ const copyStrings = [
   "For FFL dealers running WooCommerce. The price is a flat $79 a month, whether or not you turn on",
   "It screens card orders on high-value optics, with firearms orders handled too, and holds the risky ones for you to review. You make the call on every held order.",
   "Checks each cart item's UPC against the shipping ZIP at checkout. Restricted items come out of the cart with a note to the shopper, or get flagged for your review.",
-  "Monitors, detects, and blocks abusive automated traffic from bots, scrapers, and AI agents with rate limits, header checks, honeypots, and card-testing checks.",
+  "Detects and blocks abusive bots, scrapers, and AI agents with rate limits, header checks, honeypots, and card-testing checks.",
   "Bot and scraper control",
   "What's in the plugin",
   "Shipping checks first, then a security layer",
@@ -544,7 +544,8 @@ if (fs.existsSync(dist)) {
     assert.match(html, /Fraud Detection/, "built page says Fraud Detection");
     assert.doesNotMatch(html, /\bis coming\b|coming and not in the plugin|not in the plugin yet/i, "built page has no coming wording for PICKET");
     assert.doesNotMatch(html, /It will screen/, "built page has no future-tense PICKET card body");
-    assert.match(html, /Monitors, detects, and blocks abusive automated traffic from bots, scrapers, and AI agents with rate limits, header checks, honeypots, and card-testing checks\./, "built page has the DEFENDER rev 3 card body");
+    assert.doesNotMatch(html, /Monitors, detects, and blocks abusive automated traffic/, "built page has no DEFENDER rev 3 card body");
+    assert.match(html, /Detects and blocks abusive bots, scrapers, and AI agents with rate limits, header checks, honeypots, and card-testing checks\./, "built page has the DEFENDER rev 4 card body");
     assert.match(html, /which detects and blocks abusive bots, scrapers, and AI agents<\/li>/, "built page has the DEFENDER rev 3 pricing bullet");
     assert.doesNotMatch(html, /Keep it on at first open, with an active license/, "built page has no DEFENDER rev 2 card body");
     assert.doesNotMatch(html, /bot and scraper control that runs while/, "built page has no old DEFENDER pricing bullet");
