@@ -493,6 +493,28 @@ assert.match(FINAL_SETUP.FFLFW_SETUP_S6_BODY, /every week/, "S6 keeps the weekly
 assert.match(read("package.json"), /scripts\/test-ffl-firewall-landing\.mjs/);
 
 // 8. Built output, when present.
+// CA-FFLFW-NETWORK-MAP: the cleared network map sits in its own section directly below the hero. Visual
+// only (no text, caption, image, script or JS), the aria-label is the row's exact string, motion honors
+// prefers-reduced-motion, and the ported block is pinned by sha256 so it can only change on purpose.
+{
+  const mapRel = "src/components/FflFwNetworkMap.astro";
+  const comp = read(mapRel);
+  const mapBody = comp.slice(comp.indexOf("\n---\n", 4) + 5);
+  assert.equal(crypto.createHash("sha256").update(mapBody).digest("hex"), "182cd68d6ef272d17fca5970d4bd50eeb33e2459c6661f30b36a9fec3f52a3a9", "network map block matches the cleared port");
+  assert.ok(comp.includes('aria-label="Illustration of FFL Firewall stores connected across the US"'), "map aria-label exact");
+  assert.ok(comp.includes('<svg viewBox="4 -16 970 630" aria-hidden="true" focusable="false"'), "map svg is aria-hidden");
+  assert.ok(/@media \(prefers-reduced-motion:reduce\)\{\s*\.fflfw-netmap \*\{animation:none!important\}/.test(mapBody), "map honors prefers-reduced-motion");
+  for (const bad of ["<img", "<script", "<text", "<title", "<desc", "<foreignObject", "<image", "<animate", "filter="]) assert.ok(!mapBody.includes(bad), "map has no " + bad);
+  assert.ok(!/<figcaption/.test(mapBody), "map has no caption");
+  assert.ok(page.includes('import FflFwNetworkMap from "../../components/FflFwNetworkMap.astro";'), "page imports the map");
+  const heroAt = page.indexOf('data-section="hero"');
+  const mapAt = page.indexOf('<FflFwNetworkMap />');
+  const svcAt = page.indexOf('data-section="services"');
+  assert.ok(heroAt > 0 && heroAt < mapAt && mapAt < svcAt, "map is directly below the hero, above What's in the plugin");
+  assert.match(page, /<section class="fwl-sec" data-section="network-map"><div class="col"><FflFwNetworkMap \/><\/div><\/section>/, "map sits inside .col in its own section");
+  assert.equal(page.split("<FflFwNetworkMap />").length - 1, 1, "map is placed once");
+  console.log("  ok  CA-FFLFW-NETWORK-MAP: map block pinned, aria-label exact, reduced motion, no text or media");
+}
 const dist = path.join(root, "dist");
 if (fs.existsSync(dist)) {
   const maps = fs.readdirSync(dist).filter((f) => /^sitemap-\d+\.xml$/.test(f));
@@ -659,4 +681,16 @@ console.log("test-ffl-firewall-landing: ok");
   ]) assert.ok(!landing.includes(gone), `feed paragraph piece removed: ${gone}`);
   assert.ok(landing.includes("Each check runs on your own site, where a request it catches is blocked or slowed down. The shared reputation feed adds what other FFL Firewall stores have seen: your store reports the bots its checks catch as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and receives a list of bots those stores have reported. While FFL Firewall · DEFENDER is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps."), "DEFENDER card ends with Karp-cleared H-IDX69 (CA-FFLFW-H1-PEACE name swap)");
   console.log("  ok  CA-FFLFW-FEED-PARA-REMOVE: feed-default paragraph absent");
+}
+
+if (fs.existsSync(path.join(root, "dist"))) {
+  // CA-FFLFW-NETWORK-MAP, built page: the figure follows the hero section, and carries no text.
+  const html = fs.readFileSync(path.join(root, "dist", "ffl-firewall", "index.html"), "utf8");
+  const mapAt = html.indexOf('data-section="network-map"');
+  assert.ok(html.indexOf('data-section="hero"') < mapAt && mapAt < html.indexOf('data-section="services"'), "built: map between hero and services");
+  const fig = html.slice(html.indexOf('<figure class="fflfw-netmap"'), html.indexOf("</figure>", mapAt) + 9);
+  assert.ok(fig.includes('role="img" aria-label="Illustration of FFL Firewall stores connected across the US"'), "built: aria-label exact");
+  assert.equal(fig.replace(/<[^>]*>/g, "").trim(), "", "built: the figure has no visible text");
+  assert.equal(html.split('class="fflfw-netmap"').length - 1, 1, "built: one map");
+  console.log("  ok  CA-FFLFW-NETWORK-MAP: built page order and no text");
 }
