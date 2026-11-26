@@ -146,7 +146,7 @@ const copyStrings = [
   "For FFL dealers running WooCommerce. The price is a flat $79 a month, whether or not you turn on",
   "It screens card orders on high-value optics, with firearms orders handled too, and holds the risky ones for you to review. You make the call on every held order.",
   "Checks each cart item's UPC against the shipping ZIP at checkout. Restricted items come out of the cart with a note to the shopper, or get flagged for your review.",
-  "Detects and blocks abusive bots, scrapers, and AI agents with rate limits, header checks, honeypots, and card-testing checks.",
+  "Monitors, detects, and blocks abusive bots, scrapers, and AI agents on your store with rate limits, header checks, honeypots, and card-testing checks.",
   "Bot and scraper control",
   "What's in the plugin",
   "Shipping checks first, then a security layer",
