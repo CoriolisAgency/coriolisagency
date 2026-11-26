@@ -77,6 +77,11 @@ for (const section of ["hero", "services", "activation", "pricing", "faq", "down
 // CA-FFLFW-H1-PEACE: Paul's H1, verbatim (5:35 AM ET Nov 26, 2026).
 assert.ok(page.includes("<h1>Peace of mind for $79 a month</h1>"), "hero H1 verbatim");
 assert.ok(!page.includes("<h1>Fraud Prevention, State Shipping Compliance, and Bot Defense for FFLs</h1>"), "previous H1 gone");
+assert.ok(!/fraud prevention/i.test(page), "Fraud Prevention renamed to Fraud Detection on the page source");
+assert.ok(/Fraud Detection/.test(page), "Fraud Detection present");
+assert.ok(!page.includes("It will screen"), "PICKET card body is present tense (STRINGS-FINAL pair 2)");
+assert.ok(!/\bis coming\b|coming and not in the plugin|not in the plugin yet|which is coming/i.test(page), "PICKET is not described as coming on the page source");
+assert.ok(!/class="cc soon"|\.cc\.soon/.test(page), "the hero fraud card has no soon (dashed coming) style");
 assert.ok(!page.includes("Shipping Compliance, Bot Defense, and Site Hardening for FFLs"), "older H1 gone");
 // CA-FFLFW-PAGE-COPY-2: the pricing card carries the same subhead (Paul 10:44 AM ET Nov 24, 2026); the old $79 line is gone.
 assert.ok(page.includes('<p class="pos pos-sm">A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats <span class="shield" aria-hidden="true">🛡️</span></p>'), "pricing line verbatim, no trailing period");
@@ -101,18 +106,18 @@ for (const n of ["DEFENDER", "OVERWATCH", "PICKET"]) assert.ok(page.includes(`<F
   assert.ok(fwn.includes("<b>FFL</b>&nbsp;Firewall") && fwn.includes("&nbsp;·&nbsp;"), "name lockup uses non-breaking spaces (OVERWATCH-LEAD)");
   assert.ok(fwn.includes('n.replace(/ /g, "\\u00A0")') && /\.fwn \{ white-space: nowrap; \}/.test(fwn), "service name never wraps");
 }
-// CA-FFLFW-H1-PEACE follow-up: hero console is Fraud Prevention (PICKET), State Law Compliance (OVERWATCH), Bot & AI Defense (DEFENDER).
+// CA-FFLFW-H1-PEACE follow-up: hero console is Fraud Detection (PICKET), State Law Compliance (OVERWATCH), Bot & AI Defense (DEFENDER).
 {
   const plates = page.slice(page.indexOf('<div class="console"'), page.indexOf('data-section="services"'));
-  assert.ok(plates.includes('<div class="nm">Fraud Prevention</div>'), "card heading Fraud Prevention");
+  assert.ok(plates.includes('<div class="nm">Fraud Detection</div>'), "card heading Fraud Detection");
   assert.ok(plates.includes('<div class="nm">State Law Compliance</div>'), "card heading State Law Compliance");
   assert.ok(plates.includes('<div class="nm">Bot &amp; AI Defense</div>'), "card heading Bot & AI Defense");
   assert.ok(plates.includes('<FflFwName n="PICKET" />'), "PICKET secondary heading");
   assert.ok(plates.includes('<FflFwName n="OVERWATCH" />'), "OVERWATCH secondary heading");
   assert.ok(plates.includes('<FflFwName n="DEFENDER" />'), "DEFENDER secondary heading");
-  assert.ok(plates.includes('<span class="svc-tag">Transaction Security</span>'), "Fraud Prevention badge");
-  assert.ok(plates.includes('<span class="svc-tag">Powered by Orchid</span>'), "State Law Compliance badge");
-  assert.ok(plates.includes('<span class="svc-tag">Adaptive Protection</span>'), "Bot & AI Defense badge");
+  assert.ok(plates.includes('<span class="svc-tag live">Transaction Security</span>'), "Fraud Detection badge");
+  assert.ok(plates.includes('<span class="svc-tag live">Powered by Orchid</span>'), "State Law Compliance badge");
+  assert.ok(plates.includes('<span class="svc-tag live">Adaptive Protection</span>'), "Bot & AI Defense badge");
   assert.ok(!plates.includes("Coming"), "no Coming badge text on the cards");
   assert.ok(!plates.includes("In the plugin"), "no In the plugin badge text on the cards");
   assert.ok(!plates.includes("COMING"), "no COMING badge text on the cards");
@@ -130,18 +135,19 @@ for (const n of ["DEFENDER", "OVERWATCH", "PICKET"]) assert.ok(page.includes(`<F
   assert.ok(!page.includes("ZERO DAY DEFENSE"), "ZERO DAY DEFENSE gone");
   assert.ok(!/>\s*Included bonus\s*</i.test(page), "Included bonus badge renamed");
   assert.ok(/\.svc-tag \{[^}]*color: var\(--color-gold\);/.test(page), "services badges use the brand gold token");
-  assert.ok(/\.cc \.svc-tag \{[^}]*color: var\(--color-green-500\);/.test(page), "card badges use the site green token");
+  assert.ok(!/\.cc \.svc-tag/.test(page) && !/svc-tag[^{]*\{[^}]*color-green/.test(page), "no green badge rule remains");
+  assert.ok(/\.svc-tag\.live \{[^}]*color: #a1a1aa;/.test(page), "card badges use the existing gray .svc-tag.live style");
   assert.ok(/\.console \{[^}]*margin-bottom: 40px;/.test(page), "space below the feature-card plate uses the existing 40px token");
   assert.ok(/\.fwl p\.hero-lede \{ margin: 0 0 26px; \}/.test(page), "space below the lede uses the existing 26px token");
 }
 const copyStrings = [
   "checks each cart item's UPC against the shipping ZIP at checkout and removes or flags restricted items.",
   "is bot and scraper mitigation powered by network sensors and automatic updates, and it runs once you keep it on and your dealer embed script is checking in with Coriolis.",
-  ", our Fraud Prevention service for card orders on high-value optics, is coming and not in the plugin yet.",
+  " is our Fraud Detection service for card orders on high-value optics.",
   "For FFL dealers running WooCommerce. The price is a flat $79 a month, whether or not you turn on",
-  "It will screen card orders on high-value optics, with firearms orders handled too, and hold the risky ones for you to review. You make the call on every held order.",
+  "It screens card orders on high-value optics, with firearms orders handled too, and holds the risky ones for you to review. You make the call on every held order.",
   "Checks each cart item's UPC against the shipping ZIP at checkout. Restricted items come out of the cart with a note to the shopper, or get flagged for your review.",
-  "Keep it on at first open, with an active license and your dealer embed script checking in with Coriolis, and it blocks or slows bots and scrapers before checkout.",
+  "Monitors, detects, and blocks abusive automated traffic from bots, scrapers, and AI agents with rate limits, header checks, honeypots, and card-testing checks.",
   "Bot and scraper control",
   "What's in the plugin",
   "Shipping checks first, then a security layer",
@@ -159,15 +165,15 @@ const copyStrings = [
   "Once the key is saved, the plugin adds the dealer embed to your store's pages for you. The countermeasures start after your dealer embed script first checks in with Coriolis, and they run while your license is active.",
   "blocks only while your license is active and your dealer embed script has checked in with Coriolis in the last 24 hours. Your plugin dashboard shows the service as active only while that check-in is current. If a day goes by without one, the dashboard says so, which tells you to check your site key and settings. Your bill doesn't change either way, because the plan costs $79 a month whether the service is on or off.",
   "One flat price of $79 a month",
-  ", bot and scraper control that runs while your dealer embed script checks in with Coriolis",
+  ", which detects and blocks abusive bots, scrapers, and AI agents",
   " transactions</li>",
+  "<FflFwName n=\"PICKET\" /> (Fraud Detection)",
   "Every future feature we add",
-  "Every future feature we add, including Fraud Prevention (<FflFwName n=\"PICKET\" />), which is coming and not in the plugin yet",
   "Billing runs monthly in advance through Stripe Checkout, and you can cancel at any time.",
   "The questions dealers ask about FFL Firewall",
   "What do I get for $79 a month?",
   "after you choose Keep on the first-open screen and your dealer embed script checks in.",
-  "Every feature we add later is included at the same price, and Fraud Prevention (<FflFwName n=\"PICKET\" />) is coming.",
+  "<FflFwName n=\"PICKET\" /> (Fraud Detection) is included too. Every feature we add later is included at the same price.",
   "The first time you open the FFL Firewall page, a one-time screen asks you to keep it on or switch it off, and you can change that later from the <FflFwName n=\"DEFENDER\" /> tab. Your plugin dashboard marks it active while its dealer embed check-in is current.",
   "The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. Those checks run on your own site; while your store is in the shared reputation feed, it also reports the bots it catches as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details. Checkout, login, the cart, My Account and wp-admin are never touched by the feed.",
   "It looks at items that carry a UPC when the shopper reaches checkout. Items with no UPC pass through, and when the check can't finish, the order goes through with a Flagged label so you can review it yourself.",
@@ -190,7 +196,7 @@ assert.ok(!page.includes("bonus that comes with your plan"), "old RECON bonus pa
 // CA-FFLFW-TERMS-BEACON-TRUTH: Karp-cleared 8:36 AM ET Nov 25, 2026; H-IDX69 and H-SET18 name gunsearchengine.com, so they are also exempted from the vendor-name lock.
 assert.doesNotMatch(page, /bonus/i, "no bonus wording or class left in the /ffl-firewall source");
 assert.ok(!page.includes("<p><FflFwName n=\"RECON\" /> is a store hardening report powered by Wordfence"), "What is RECON? answer gone");
-assert.ok(page.includes("You get unlimited <FflFwName n=\"OVERWATCH\" /> transactions and <FflFwName n=\"DEFENDER\" /> after you choose Keep on the first-open screen and your dealer embed script checks in. Every feature we add later is included at the same price, and Fraud Prevention (<FflFwName n=\"PICKET\" />) is coming."), "What do I get answer verbatim");
+assert.ok(page.includes("You get unlimited <FflFwName n=\"OVERWATCH\" /> transactions and <FflFwName n=\"DEFENDER\" /> after you choose Keep on the first-open screen and your dealer embed script checks in. <FflFwName n=\"PICKET\" /> (Fraud Detection) is included too. Every feature we add later is included at the same price."), "What do I get answer verbatim");
 const paulCompliance = (s) => s.split("While FFL Firewall · DEFENDER is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.").join("").split("Each check runs on your own site, where a request it catches is blocked or slowed down. The shared reputation feed adds what other FFL Firewall stores have seen: your store reports the bots its checks catch as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and receives a list of bots those stores have reported. While FFL Firewall · ACTIVE DEFENSE is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.").join("").split("The shared reputation feed lets FFL Firewall stores warn each other about bots: your store reports the bots it catches as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and gets back a list of bots other stores have reported. On a new install it's on by default while FFL Firewall · ACTIVE DEFENSE is on and the license is active. A store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until you switch it on. You can switch it on or off any time in the Shared reputation feed section. While FFL Firewall · ACTIVE DEFENSE is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.").join("").split("Fraud Prevention, State Shipping Compliance, and Bot Defense for FFLs").join("").split("State Compliance").join("").split("State Law Compliance").join("").split("A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats").join("").split("SHIPPING COMPLIANCE").join("").split("weekly and on-demand reports, powered by Wordfence").join("").split("Shipping checks first, then a security layer and a hardening report powered by Wordfence").join("").split(" is a store hardening report powered by Wordfence, and it runs weekly and on demand. It matches your plugins against the vulnerabilities Wordfence has published, checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps.").join("").split(" is powered by Wordfence: every week, and again whenever you press Run scan, it matches your plugins against the vulnerabilities Wordfence has published and compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org.").join("").split("delivers weekly and on-demand website security reports powered by Wordfence.").join("");
 assert.doesNotMatch(paulCompliance(page), /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b|Wordfence|Patchstack|WPScan/i, "no vulnerability, compliance or vendor claims");
 assert.doesNotMatch(page, /free/i, "no free (also asserted above)");
@@ -253,7 +259,7 @@ function jpegSize(buf) {
 
 const ogAbs = "https://www.coriolisagency.com/og/ffl-firewall-og.png";
 const ogAlt =
-  "FFL Firewall: state shipping checks and bot & AI defense for WooCommerce in one managed service, $79/month.";
+  "FFL Firewall: fraud detection, state shipping checks, and bot and AI defense for WooCommerce in one managed service.";
 assert.match(page, /const ogImage = "og\/ffl-firewall-og\.png";/);
 assert.match(page, /ogImagePath=\{ogImage\}/);
 assert.match(page, /ogImageWidth=\{1200\}/);
@@ -531,9 +537,18 @@ if (fs.existsSync(dist)) {
     assert.match(html, /DEFENDER/, "built page names DEFENDER");
     assert.match(html, /State Law Compliance/, "built page names State Law Compliance");
     assert.match(html, /<h1>Peace of mind for \$79 a month<\/h1>/, "built H1 verbatim");
-    assert.match(html, /Transaction Security/, "built Fraud Prevention badge");
+    assert.match(html, /Transaction Security/, "built Fraud Detection badge");
     assert.match(html, /Powered by Orchid/, "built State Law Compliance badge");
     assert.match(html, /Adaptive Protection/, "built Bot & AI Defense badge");
+    assert.doesNotMatch(html, /fraud prevention/i, "built page has 0 Fraud Prevention");
+    assert.match(html, /Fraud Detection/, "built page says Fraud Detection");
+    assert.doesNotMatch(html, /\bis coming\b|coming and not in the plugin|not in the plugin yet/i, "built page has no coming wording for PICKET");
+    assert.doesNotMatch(html, /It will screen/, "built page has no future-tense PICKET card body");
+    assert.match(html, /Monitors, detects, and blocks abusive automated traffic from bots, scrapers, and AI agents with rate limits, header checks, honeypots, and card-testing checks\./, "built page has the DEFENDER rev 3 card body");
+    assert.match(html, /which detects and blocks abusive bots, scrapers, and AI agents<\/li>/, "built page has the DEFENDER rev 3 pricing bullet");
+    assert.doesNotMatch(html, /Keep it on at first open, with an active license/, "built page has no DEFENDER rev 2 card body");
+    assert.doesNotMatch(html, /bot and scraper control that runs while/, "built page has no old DEFENDER pricing bullet");
+    assert.doesNotMatch(html, /Runs once you keep it on at first open/, "built page has no old 34-word DEFENDER body");
     assert.match(html, /Bot &amp; AI Defense/, "built card title Bot & AI Defense");
     assert.doesNotMatch(html, /<span class="svc-tag">Coming<\/span>/, "built page has no Coming badge");
     assert.doesNotMatch(html, /In the plugin/, "built page has no In the plugin badge text");
