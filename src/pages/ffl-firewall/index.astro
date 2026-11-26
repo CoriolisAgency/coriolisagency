@@ -45,7 +45,7 @@ const logo = withBase("brand/ffl-firewall/ffl-firewall-lockup-on-dark.svg");
 const endorseLogo = withBase("brand/ffl-firewall/ffl-law-endorsed-by-badge-white.png");
 const ogImage = "og/ffl-firewall-og.png";
 const ogImageAlt =
-  "FFL Firewall: state shipping checks and bot & AI defense for WooCommerce in one managed service, $79/month.";
+  "FFL Firewall: fraud detection, state shipping checks, and bot and AI defense for WooCommerce in one managed service.";
 ---
 
 <BaseLayout
@@ -74,14 +74,14 @@ const ogImageAlt =
   <div class="console" data-console>
 <div class="crow">
 
-<div class="cc soon" id="card-fraud">
+<div class="cc" id="card-fraud">
  <div class="st"><span class="svc-tag live">Transaction Security</span></div>
  <div class="hd">
   <svg class="glyph" width="36" height="36" viewBox="0 0 96 96" aria-hidden="true"><rect x="10" y="22" width="76" height="52" rx="8" fill="none" stroke="#E4E4E7" stroke-width="5" stroke-dasharray="9 7"></rect><path d="M10 38 H86" stroke="#E4E4E7" stroke-width="3" opacity=".6"></path><path d="M48 50 L58 60 L48 70 L38 60 Z" fill="#E53E3E" opacity=".9"></path></svg>
   <div class="nm">Fraud Detection</div>
  </div>
  <div class="k"><FflFwName n="PICKET" /></div>
- <p>It will screen card orders on high-value optics, with firearms orders handled too, and hold the risky ones for you to review. You make the call on every held order.</p>
+ <p>It screens card orders on high-value optics, with firearms orders handled too, and holds the risky ones for you to review. You make the call on every held order.</p>
 </div>
 
 <div class="cc" id="card-state">
@@ -105,7 +105,7 @@ const ogImageAlt =
 </div>
 
 </div>
-</div><p class="hero-lede"><FflFwName n="OVERWATCH" /> checks each cart item's UPC against the shipping ZIP at checkout and removes or flags restricted items. <FflFwName n="DEFENDER" /> is bot and scraper mitigation powered by network sensors and automatic updates, and it runs once you keep it on and your dealer embed script is checking in with Coriolis. <FflFwName n="PICKET" />, our Fraud Detection service for card orders on high-value optics, is coming and not in the plugin yet.</p>
+</div><p class="hero-lede"><FflFwName n="OVERWATCH" /> checks each cart item's UPC against the shipping ZIP at checkout and removes or flags restricted items. <FflFwName n="DEFENDER" /> is bot and scraper mitigation powered by network sensors and automatic updates, and it runs once you keep it on and your dealer embed script is checking in with Coriolis. <FflFwName n="PICKET" /> is our Fraud Detection service for card orders on high-value optics.</p>
   <div class="btns"><a href={download} class="btn red" download data-download="hero">{getLabel}</a><a href={contact} class="btn">{contactLabel}</a></div><p class="small">For FFL dealers running WooCommerce. The price is a flat $79 a month, whether or not you turn on <FflFwName n="DEFENDER" />.</p>
 </div></section>
   
@@ -115,11 +115,11 @@ const ogImageAlt =
   <p><FflFwName n="DEFENDER" /> blocks only while your license is active and your dealer embed script has checked in with Coriolis in the last 24 hours. Your plugin dashboard shows the service as active only while that check-in is current. If a day goes by without one, the dashboard says so, which tells you to check your site key and settings. Your bill doesn't change either way, because the plan costs $79 a month whether the service is on or off.</p></div></section>
   
   <section class="fwl-sec" data-section="pricing"><div class="col"><div class="eb">Pricing</div><h2>One flat price of $79 a month</h2><div class="price"><div><div class="amt">$79<small> / month</small></div></div>
-  <div><p class="pos pos-sm">A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats <span class="shield" aria-hidden="true">🛡️</span></p><ul><li>Unlimited <FflFwName n="OVERWATCH" /> transactions</li><li><FflFwName n="DEFENDER" />, which detects and blocks abusive bots, scrapers, and AI agents</li><li>Every future feature we add, including Fraud Detection (<FflFwName n="PICKET" />), which is coming and not in the plugin yet</li></ul><p class="small">You pay the same $79 a month whether or not <FflFwName n="DEFENDER" /> is on. Billing runs monthly in advance through Stripe Checkout, and you can cancel at any time. <a href={terms} class="lnk">Read the FFL Firewall terms</a></p><div class="btns tight">
+  <div><p class="pos pos-sm">A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats <span class="shield" aria-hidden="true">🛡️</span></p><ul><li>Unlimited <FflFwName n="OVERWATCH" /> transactions</li><li><FflFwName n="DEFENDER" />, which detects and blocks abusive bots, scrapers, and AI agents</li><li><FflFwName n="PICKET" /> (Fraud Detection)</li><li>Every future feature we add</li></ul><p class="small">You pay the same $79 a month whether or not <FflFwName n="DEFENDER" /> is on. Billing runs monthly in advance through Stripe Checkout, and you can cancel at any time. <a href={terms} class="lnk">Read the FFL Firewall terms</a></p><div class="btns tight">
               <a href={download} class="btn red" download data-download="pricing">{getLabel}</a>
             </div></div></div></div></section>
   
-  <section class="fwl-sec faq" data-section="faq"><div class="col"><div class="eb">Questions</div><h2>The questions dealers ask about FFL Firewall</h2><div class="q"><b>What do I get for $79 a month?</b><p>You get unlimited <FflFwName n="OVERWATCH" /> transactions and <FflFwName n="DEFENDER" /> after you choose Keep on the first-open screen and your dealer embed script checks in. Every feature we add later is included at the same price, and Fraud Detection (<FflFwName n="PICKET" />) is coming.</p></div><div class="q"><b>Does <FflFwName n="OVERWATCH" /> look at every order?</b><p>It looks at items that carry a UPC when the shopper reaches checkout. Items with no UPC pass through, and when the check can't finish, the order goes through with a Flagged label so you can review it yourself.</p></div><div class="q"><b>When does <FflFwName n="DEFENDER" /> start working?</b><p>The first time you open the FFL Firewall page, a one-time screen asks you to keep it on or switch it off, and you can change that later from the <FflFwName n="DEFENDER" /> tab. Your plugin dashboard marks it active while its dealer embed check-in is current.</p></div><div class="q"><b>What happens to a bot that <FflFwName n="DEFENDER" /> catches?</b><p>The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. Those checks run on your own site; while your store is in the shared reputation feed, it also reports the bots it catches as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details. Checkout, login, the cart, My Account and wp-admin are never touched by the feed.</p></div><div class="q"><b>Is FFL Firewall legal advice?</b><p>No. FFL Firewall is a tool that helps you catch restricted items at checkout, and every shipping decision stays with you and your own counsel.</p></div></div></section>
+  <section class="fwl-sec faq" data-section="faq"><div class="col"><div class="eb">Questions</div><h2>The questions dealers ask about FFL Firewall</h2><div class="q"><b>What do I get for $79 a month?</b><p>You get unlimited <FflFwName n="OVERWATCH" /> transactions and <FflFwName n="DEFENDER" /> after you choose Keep on the first-open screen and your dealer embed script checks in. <FflFwName n="PICKET" /> (Fraud Detection) is included too. Every feature we add later is included at the same price.</p></div><div class="q"><b>Does <FflFwName n="OVERWATCH" /> look at every order?</b><p>It looks at items that carry a UPC when the shopper reaches checkout. Items with no UPC pass through, and when the check can't finish, the order goes through with a Flagged label so you can review it yourself.</p></div><div class="q"><b>When does <FflFwName n="DEFENDER" /> start working?</b><p>The first time you open the FFL Firewall page, a one-time screen asks you to keep it on or switch it off, and you can change that later from the <FflFwName n="DEFENDER" /> tab. Your plugin dashboard marks it active while its dealer embed check-in is current.</p></div><div class="q"><b>What happens to a bot that <FflFwName n="DEFENDER" /> catches?</b><p>The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. Those checks run on your own site; while your store is in the shared reputation feed, it also reports the bots it catches as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details. Checkout, login, the cart, My Account and wp-admin are never touched by the feed.</p></div><div class="q"><b>Is FFL Firewall legal advice?</b><p>No. FFL Firewall is a tool that helps you catch restricted items at checkout, and every shipping decision stays with you and your own counsel.</p></div></div></section>
   
   <section id="buy" class="fwl-sec last" data-section="download"><div class="col"><div class="eb">Get FFL Firewall</div><h2>Put FFL Firewall on your WooCommerce store</h2><p>This is a Coriolis plugin for FFL dealers who already run WooCommerce, and one $79 monthly plan covers every service in it. If you'd like a hand with your store first, talk to Coriolis.</p><div class="btns"><a href={download} class="btn red" download data-download="footer">{getLabel}</a><a href={contact} class="btn">{contactLabel}</a></div>
   <p class="small">FFL Firewall helps you protect your store and catch restricted items at checkout. You're still responsible for what you ship, and this is not legal advice.</p><p><a href={setup} class="lnk" data-setup-link>Read the setup guide</a></p><p><a href="mailto:support@coriolisagency.com" class="lnk">support@coriolisagency.com</a></p></div></section>
@@ -231,7 +231,6 @@ const ogImageAlt =
   }
 
   /* CA-FFLFW-PAGE-TRUTH: card console from cleared index.html */
-  .cc.soon { border-style: dashed; border-color: #3a4a63; }
   .cc .k .fwn { color: #d4d4d8; font-size: 12px; letter-spacing: .2px; }
   .cc p { margin: 2px 0 0; color: #d4d4d8; font-size: 13.5px; line-height: 1.5; }
   .st { min-height: 22px; }
