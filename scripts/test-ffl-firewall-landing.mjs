@@ -141,7 +141,7 @@ const copyStrings = [
   "For FFL dealers running WooCommerce. The price is a flat $79 a month, whether or not you turn on",
   "It will screen card orders on high-value optics, with firearms orders handled too, and hold the risky ones for you to review. You make the call on every held order.",
   "Checks each cart item's UPC against the shipping ZIP at checkout. Restricted items come out of the cart with a note to the shopper, or get flagged for your review.",
-  "Runs once you keep it on at first open, your license is active, and your dealer embed script is checking in with Coriolis. It blocks or slows bots and scrapers before they reach checkout.",
+  "Keep it on at first open, with an active license and your dealer embed script checking in with Coriolis, and it blocks or slows bots and scrapers before checkout.",
   "Bot and scraper control",
   "What's in the plugin",
   "Shipping checks first, then a security layer",
