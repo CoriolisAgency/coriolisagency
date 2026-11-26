@@ -79,69 +79,74 @@ assert.ok(!page.includes("delivered as a plugin, that adds new features over tim
 // CA-FFLFW-PAGE-COPY-3: a decorative shield ends both subheads, hidden from screen readers.
 assert.equal(page.split('<span class="shield" aria-hidden="true">🛡️</span>').length - 1, 2, "two aria-hidden shields, hero and pricing");
 assert.ok(page.includes('<p class="pos">A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats <span class="shield" aria-hidden="true">🛡️</span></p>'), "hero subhead verbatim, no trailing period");
-for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(page.includes(`<FflFwName n="${n}" />`), `service name ${n}`);
+for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "PICKET"]) assert.ok(page.includes(`<FflFwName n="${n}" />`), `service name ${n}`);
 {
   const fwn = read("src/components/FflFwName.astro");
   assert.ok(fwn.includes("<b>FFL</b>&nbsp;Firewall") && fwn.includes("&nbsp;·&nbsp;"), "name lockup uses non-breaking spaces (OVERWATCH-LEAD)");
   assert.ok(fwn.includes('n.replace(/ /g, "\\u00A0")') && /\.fwn \{ white-space: nowrap; \}/.test(fwn), "service name never wraps");
 }
-// PLATES-INLINE (Paul 10:07 AM ET Nov 21): the three console plates show the bare feature name inline to the right of the icon, on one line; every other use keeps "FFL Firewall ? NAME".
+// CA-FFLFW-PAGE-TRUTH: hero console is Fraud Prevention (PICKET, Coming), State Compliance (OVERWATCH), Bot Defense (ACTIVE DEFENSE).
 {
-  const plates = page.slice(page.indexOf('<div class="console"'), page.indexOf('<p class="cap">'));
-  for (const [k, n] of [["overwatch", "OVERWATCH"], ["active-defense", "ACTIVE DEFENSE"], ["recon", "RECON"]]) {
-    assert.ok(plates.includes(`<div class="hd"><FflFwGlyph kind="${k}" /><div class="nm">${n}</div></div>`), `plate ${n} shows the bare name inline with its icon`);
-  }
-  assert.ok(!plates.includes("FflFwName"), "plates carry no FFL Firewall prefix");
+  const plates = page.slice(page.indexOf('<div class="console"'), page.indexOf('data-section="services"'));
+  assert.ok(plates.includes('<div class="nm">Fraud Prevention</div>'), "card heading Fraud Prevention");
+  assert.ok(plates.includes('<div class="nm">State Compliance</div>'), "card heading State Compliance");
+  assert.ok(plates.includes('<div class="nm">Bot Defense</div>'), "card heading Bot Defense");
+  assert.ok(plates.includes('<FflFwName n="PICKET" />'), "PICKET secondary heading");
+  assert.ok(plates.includes('<FflFwName n="OVERWATCH" />'), "OVERWATCH secondary heading");
+  assert.ok(plates.includes('<FflFwName n="ACTIVE DEFENSE" />'), "ACTIVE DEFENSE secondary heading");
+  assert.ok(plates.includes('<span class="svc-tag">Coming</span>'), "Coming chip");
+  assert.equal(plates.split('<span class="svc-tag live">In the plugin</span>').length - 1, 2, "In the plugin chips");
+  assert.ok(!plates.includes("RECON"), "RECON card gone");
+  assert.ok(!plates.includes("ZERO DAY DEFENSE"), "ZERO DAY DEFENSE tag gone");
   assert.ok(/\.cc \.hd \{ display: flex; align-items: center;/.test(page) && /\.cc \.nm \{[^}]*white-space: nowrap;/.test(page), "plate name sits inline and never wraps");
 }
-// OVERWATCH-LEAD: OVERWATCH leads the hero console, the services and the pricing list (Paul 1:33 PM ET).
+// CA-FFLFW-PAGE-TRUTH: services section keeps OVERWATCH then ACTIVE DEFENSE; RECON is gone.
 {
-  assert.ok(page.indexOf('data-section="services"') < page.indexOf('<h3><FflFwName n="OVERWATCH" /></h3>') && page.indexOf('<h3><FflFwName n="OVERWATCH" /></h3>') < page.indexOf('<h3><FflFwName n="ACTIVE DEFENSE" /></h3>') && page.indexOf('<h3><FflFwName n="ACTIVE DEFENSE" /></h3>') < page.indexOf('<h3><FflFwName n="RECON" /></h3>'), "services order OVERWATCH, ACTIVE DEFENSE, RECON");
-  // CA-FFLFW-PAGE-COPY: three gold badges (Paul 10:32 AM ET Nov 24, 2026), each on the hero plate and the services card.
-  for (const b of ["SHIPPING COMPLIANCE", "BOT MITIGATION", "ZERO DAY DEFENSE"]) assert.equal(page.split(`<span class="svc-tag">${b}</span>`).length - 1, 2, `${b} badge on plate and card`);
+  assert.ok(page.indexOf('data-section="services"') < page.indexOf('<h3><FflFwName n="OVERWATCH" /></h3>') && page.indexOf('<h3><FflFwName n="OVERWATCH" /></h3>') < page.indexOf('<h3><FflFwName n="ACTIVE DEFENSE" /></h3>'), "services order OVERWATCH, ACTIVE DEFENSE");
+  assert.ok(!page.includes('<h3><FflFwName n="RECON" /></h3>'), "RECON services heading gone");
+  assert.equal(page.split('<span class="svc-tag">SHIPPING COMPLIANCE</span>').length - 1, 1, "SHIPPING COMPLIANCE remains on the OVERWATCH services plate only");
+  assert.equal(page.split('<span class="svc-tag">BOT MITIGATION</span>').length - 1, 1, "BOT MITIGATION remains on the ACTIVE DEFENSE services plate only");
+  assert.ok(!page.includes("ZERO DAY DEFENSE"), "ZERO DAY DEFENSE gone");
   assert.ok(!/>\s*Included bonus\s*</i.test(page), "Included bonus badge renamed");
   assert.ok(/\.svc-tag \{[^}]*color: var\(--color-gold\);/.test(page), "badges use the brand gold token");
 }
 const copyStrings = [
   "checks each cart item's UPC against the shipping ZIP at checkout and removes or flags restricted items.",
-  "is always-on bots and scraper mitigation powered by network sensors and automatic updates.",
-  "delivers weekly and on-demand website security reports powered by Wordfence.",
+  "is bot and scraper mitigation powered by network sensors and automatic updates, and it runs once you keep it on and your dealer embed script is checking in with Coriolis.",
+  ", our Fraud Prevention service for card orders on high-value optics, is coming and not in the plugin yet.",
   "For FFL dealers running WooCommerce. The price is a flat $79 a month, whether or not you turn on",
-  "The three FFL Firewall services, shown with their badges.",
-  "Always-on bot and scraper control",
-  "Store hardening report",
-  "ZERO DAY DEFENSE",
+  "It will screen card orders on high-value optics, with firearms orders handled too, and hold the risky ones for you to review. You make the call on every held order.",
+  "Checks each cart item's UPC against the shipping ZIP at checkout. Restricted items come out of the cart with a note to the shopper, or get flagged for your review.",
+  "Runs once you keep it on at the first-open screen, your license is active, and your dealer embed script is checking in with Coriolis. Then it blocks or slows bots and scrapers before they reach checkout. Checks include rate limits, header checks, honeypot form fields, and card-testing checks.",
+  "Bot and scraper control",
   "What's in the plugin",
-  "Shipping checks first, then a security layer and a hardening report powered by Wordfence",
+  "Shipping checks first, then a security layer",
   "State shipping checks",
   "On both the classic and Blocks checkout, it matches each item's UPC to the shipping ZIP to help you catch items that can't ship there. Those items come out of the cart with a note to the shopper, items that need a permit or age check get a required acknowledgement checkbox, and orders that need a second look get an order note and a Flagged label.",
   "If the check can't run, checkout carries on and the order is flagged for you to review.",
   "It spots bots and scrapers and blocks or throttles them before they reach checkout, using rate limits, user agent and header checks, honeypot form fields that only bots fill in, checkout velocity and card-testing checks, and an optional datacenter IP list.",
   "Each check runs on your own site, where a request it catches is blocked or slowed down. The shared reputation feed adds what other FFL Firewall stores have seen: your store reports the bots its checks catch as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and receives a list of bots those stores have reported. While FFL Firewall · ACTIVE DEFENSE is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.</p>",
-  // CA-FFLFW-PAGE-COPY-4: Brandy's RECON paragraph, Karp-cleared 11:17 AM ET (Paul 11:15 AM ET Nov 24, 2026).
-  "<p><FflFwName n=\"RECON\" /> is powered by Wordfence: every week, and again whenever you press Run scan, it matches your plugins against the vulnerabilities Wordfence has published and compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org. It flags configuration gaps in your setup and lists what to fix first.</p>",
-  "<p>RECON reports only and makes no automatic fixes, so every change stays in your hands.</p>",
+  "You keep it on at the first-open screen. With an active license, it then connects the site key made when you bought FFL Firewall and adds the dealer embed script for you, and from then on it keeps watching the traffic coming into your store. It blocks only while your license is active and your dealer embed script has checked in with Coriolis in the last 24 hours.",
   "You're still responsible for what you ship, and this is not legal advice.",
   "starts working",
-  "Turn it on in the plugin",
-  "In WooCommerce, go to FFL Firewall, open the tab for bot and scraper control and switch the service on.",
+  "Choose Keep on the first-open screen",
+  "In WooCommerce, go to FFL Firewall. The one-time screen opens first, and you choose Keep ACTIVE DEFENSE on. You can change that later from the <FflFwName n=\"ACTIVE DEFENSE\" /> tab.",
   "The plugin adds the dealer embed",
-  "Once the key is saved, the plugin adds the dealer embed to your store's pages for you, and the countermeasures start once it has been seen.",
-  "Your plugin dashboard shows the service as active only while the dealer embed has been seen in the last 24 hours. If a day goes by without the plugin seeing it, the dashboard says so, which tells you to check your site key and settings. Your bill doesn't change either way, because the plan costs $79 a month whether the service is on or off.",
+  "Once the key is saved, the plugin adds the dealer embed to your store's pages for you. The countermeasures start after your dealer embed script first checks in with Coriolis, and they run while your license is active.",
+  "blocks only while your license is active and your dealer embed script has checked in with Coriolis in the last 24 hours. Your plugin dashboard shows the service as active only while that check-in is current. If a day goes by without one, the dashboard says so, which tells you to check your site key and settings. Your bill doesn't change either way, because the plan costs $79 a month whether the service is on or off.",
   "One flat price of $79 a month",
-  ", always on once you switch it on",
+  ", bot and scraper control that runs while your dealer embed script checks in with Coriolis",
   " transactions</li>",
   "Every future feature we add",
-  " weekly and on-demand reports, powered by Wordfence</li>",
+  "Every future feature we add, including Fraud Prevention (<FflFwName n=\"PICKET\" />), which is coming and not in the plugin yet",
   "Billing runs monthly in advance through Stripe Checkout, and you can cancel at any time.",
   "The questions dealers ask about FFL Firewall",
   "What do I get for $79 a month?",
-  "from the day you install and",
-  " weekly and on-demand reports. Every feature we add later is included at the same price.",
-  "After that it stays on, and your plugin dashboard marks it active while the dealer embed has been seen within the past day.",
+  "after you choose Keep on the first-open screen and your dealer embed script checks in.",
+  "Every feature we add later is included at the same price, and Fraud Prevention (<FflFwName n=\"PICKET\" />) is coming.",
+  "The first time you open the FFL Firewall page, a one-time screen asks you to keep it on or switch it off, and you can change that later from the <FflFwName n=\"ACTIVE DEFENSE\" /> tab. Your plugin dashboard marks it active while its dealer embed check-in is current.",
   "The request is blocked or slowed down, whether it was caught by a rate limit, a honeypot form field or one of the other checks. Those checks run on your own site; while your store is in the shared reputation feed, it also reports the bots it catches as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details. Checkout, login, the cart, My Account and wp-admin are never touched by the feed.",
   "It looks at items that carry a UPC when the shopper reaches checkout. Items with no UPC pass through, and when the check can't finish, the order goes through with a Flagged label so you can review it yourself.",
-  " is a store hardening report powered by Wordfence, and it runs weekly and on demand. It matches your plugins against the vulnerabilities Wordfence has published, checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps.",
   "Is FFL Firewall legal advice?",
   "No. FFL Firewall is a tool that helps you catch restricted items at checkout, and every shipping decision stays with you and your own counsel.",
   "Put FFL Firewall on your WooCommerce store",
@@ -160,14 +165,28 @@ assert.ok(!page.includes("bonus that comes with your plan"), "old RECON bonus pa
 // CA-FFLFW-PAGE-COPY-5: Brandy's bonus rewrites and image alt, Karp-cleared 11:28 AM ET (Paul 11:20 AM ET Nov 24, 2026); those three Wordfence strings are the only new exemptions.
 // CA-FFLFW-TERMS-BEACON-TRUTH: Karp-cleared 8:36 AM ET Nov 25, 2026; H-IDX69 and H-SET18 name gunsearchengine.com, so they are also exempted from the vendor-name lock.
 assert.doesNotMatch(page, /bonus/i, "no bonus wording or class left in the /ffl-firewall source");
-assert.ok(page.includes("<p><FflFwName n=\"RECON\" /> is a store hardening report powered by Wordfence, and it runs weekly and on demand. It matches your plugins against the vulnerabilities Wordfence has published, checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps. It never fixes anything on its own, so every change stays with you.</p>"), "What is RECON? answer verbatim");
-assert.ok(page.includes("You get unlimited <FflFwName n=\"OVERWATCH\" /> transactions, <FflFwName n=\"ACTIVE DEFENSE\" /> from the day you install and <FflFwName n=\"RECON\" /> weekly and on-demand reports. Every feature we add later is included at the same price."), "What do I get answer verbatim");
-const paulCompliance = (s) => s.split("Each check runs on your own site, where a request it catches is blocked or slowed down. The shared reputation feed adds what other FFL Firewall stores have seen: your store reports the bots its checks catch as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and receives a list of bots those stores have reported. While FFL Firewall · ACTIVE DEFENSE is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.").join("").split("The shared reputation feed lets FFL Firewall stores warn each other about bots: your store reports the bots it catches as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and gets back a list of bots other stores have reported. On a new install it's on by default while FFL Firewall · ACTIVE DEFENSE is on and the license is active. A store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until you switch it on. You can switch it on or off any time in the Shared reputation feed section. While FFL Firewall · ACTIVE DEFENSE is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.").join("").split("Fraud Prevention, State Shipping Compliance, and Bot Defense for FFLs").join("").split("A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats").join("").split("SHIPPING COMPLIANCE").join("").split("weekly and on-demand reports, powered by Wordfence").join("").split("Shipping checks first, then a security layer and a hardening report powered by Wordfence").join("").split(" is a store hardening report powered by Wordfence, and it runs weekly and on demand. It matches your plugins against the vulnerabilities Wordfence has published, checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps.").join("").split(" is powered by Wordfence: every week, and again whenever you press Run scan, it matches your plugins against the vulnerabilities Wordfence has published and compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org.").join("").split("delivers weekly and on-demand website security reports powered by Wordfence.").join("");
+assert.ok(!page.includes("<p><FflFwName n=\"RECON\" /> is a store hardening report powered by Wordfence"), "What is RECON? answer gone");
+assert.ok(page.includes("You get unlimited <FflFwName n=\"OVERWATCH\" /> transactions and <FflFwName n=\"ACTIVE DEFENSE\" /> after you choose Keep on the first-open screen and your dealer embed script checks in. Every feature we add later is included at the same price, and Fraud Prevention (<FflFwName n=\"PICKET\" />) is coming."), "What do I get answer verbatim");
+const paulCompliance = (s) => s.split("Each check runs on your own site, where a request it catches is blocked or slowed down. The shared reputation feed adds what other FFL Firewall stores have seen: your store reports the bots its checks catch as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and receives a list of bots those stores have reported. While FFL Firewall · ACTIVE DEFENSE is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.").join("").split("The shared reputation feed lets FFL Firewall stores warn each other about bots: your store reports the bots it catches as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and gets back a list of bots other stores have reported. On a new install it's on by default while FFL Firewall · ACTIVE DEFENSE is on and the license is active. A store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until you switch it on. You can switch it on or off any time in the Shared reputation feed section. While FFL Firewall · ACTIVE DEFENSE is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.").join("").split("Fraud Prevention, State Shipping Compliance, and Bot Defense for FFLs").join("").split("State Compliance").join("").split("A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats").join("").split("SHIPPING COMPLIANCE").join("").split("weekly and on-demand reports, powered by Wordfence").join("").split("Shipping checks first, then a security layer and a hardening report powered by Wordfence").join("").split(" is a store hardening report powered by Wordfence, and it runs weekly and on demand. It matches your plugins against the vulnerabilities Wordfence has published, checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps.").join("").split(" is powered by Wordfence: every week, and again whenever you press Run scan, it matches your plugins against the vulnerabilities Wordfence has published and compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org.").join("").split("delivers weekly and on-demand website security reports powered by Wordfence.").join("");
 assert.doesNotMatch(paulCompliance(page), /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b|Wordfence|Patchstack|WPScan/i, "no vulnerability, compliance or vendor claims");
 assert.doesNotMatch(page, /free/i, "no free (also asserted above)");
 // RECON is live (Paul 12:42 PM ET): no planned / ships wording anywhere on the page.
 assert.doesNotMatch(page, /reputation feed is coming later|isn't part of this version/i, "the shared feed is not described as coming later");
-assert.doesNotMatch(page, /Planned|when it ships|planning|isn't built|not built/i, "RECON is presented as live");
+assert.doesNotMatch(page, /Planned|when it ships|planning|isn't built|not built/i, "no planned / ships wording");
+// CA-FFLFW-PAGE-TRUTH: removed strings are gone from the page body (frontmatter comments excluded).
+{
+  const body = page.split(/^---$/m).slice(2).join("---");
+  for (const [re, label] of [
+    [/RECON/i, "RECON"],
+    [/Wordfence/i, "Wordfence"],
+    [/hardening/i, "hardening"],
+    [/switches on/i, "switches on"],
+    [/install notice/i, "install notice"],
+  ]) {
+    const m = body.match(re);
+    assert.equal(m, null, `page body still has ${label}`);
+  }
+}
 assert.doesNotMatch(page, /class="sv plan"|cc dim/, "no planned-tag markup left");
 
 // FFLFW-LANDING-1-0: Brandy placeholders come only from src/lib/ffl-firewall-pending-copy.mjs (checked in 6b; none may remain
@@ -210,7 +229,7 @@ function jpegSize(buf) {
 
 const ogAbs = "https://www.coriolisagency.com/og/ffl-firewall-og.png";
 const ogAlt =
-  "FFL Firewall: FFL shipping checks, bot defense and site hardening for WooCommerce in one managed service, $79/month.";
+  "FFL Firewall: state shipping checks and bot defense for WooCommerce in one managed service, $79/month.";
 assert.match(page, /const ogImage = "og\/ffl-firewall-og\.png";/);
 assert.match(page, /ogImagePath=\{ogImage\}/);
 assert.match(page, /ogImageWidth=\{1200\}/);
@@ -402,11 +421,11 @@ if (defined.length) console.log(`test-ffl-firewall-landing: ${defined.length} Br
 // FFLFW-LANDING-1-0: Brandy's FINAL strings (Karp-cleared 11:58 AM ET Nov 23, 2026), verbatim. Service names on
 // /ffl-firewall render through FflFwName (nbsp in the built page; compared with spaces).
 const FINAL_LANDING = {
-  "FFLFW_L10_AD_SERVICE_ON": "It switches on when you install the plugin and, with an active license, connects the site key made when you bought FFL Firewall, adds the dealer embed script for you, and from then on keeps watching the traffic coming into your store.",
-  "FFLFW_L10_ACTIVATION_INTRO": "FFL Firewall · ACTIVE DEFENSE switches on when you install the plugin. Your site key is made when you buy FFL Firewall; with an active license, the plugin connects that key to your store and takes care of the dealer embed script, and the service keeps watching from there.",
-  "FFLFW_L10_STEP2_TITLE": "Read the install notice",
-  "FFLFW_L10_STEP2_BODY": "After you install, the plugin shows a notice that FFL Firewall · ACTIVE DEFENSE is on and what it sends to Coriolis, LLC. With an active license, the plugin picks up the site key made at checkout and connects it to your store, so there's nothing to copy. If you already have a site key, you can still paste it into the Site key field on the FFL Firewall · ACTIVE DEFENSE tab, and a pasted key is the one the plugin uses.",
-  "FFLFW_L10_FAQ_AD_OFF_LEAD": "It starts when you install the plugin, and you can switch it off from the install notice or the FFL Firewall · ACTIVE DEFENSE tab at any time.",
+  "FFLFW_L10_AD_SERVICE_ON": "You keep it on at the first-open screen. With an active license, it then connects the site key made when you bought FFL Firewall and adds the dealer embed script for you, and from then on it keeps watching the traffic coming into your store. It blocks only while your license is active and your dealer embed script has checked in with Coriolis in the last 24 hours.",
+  "FFLFW_L10_ACTIVATION_INTRO": "The first time you open the FFL Firewall page, a one-time screen asks you to choose Keep ACTIVE DEFENSE on or Switch off ACTIVE DEFENSE. Your site key is made when you buy FFL Firewall; with an active license, the plugin connects that key to your store and takes care of the dealer embed script, and the service keeps watching from there.",
+  "FFLFW_L10_STEP2_TITLE": "Read what it sends",
+  "FFLFW_L10_STEP2_BODY": "The first-open screen shows what FFL Firewall · ACTIVE DEFENSE sends to Coriolis, LLC, before you choose. With an active license, the plugin picks up the site key made at checkout and connects it to your store, so there's nothing to copy. If you already have a site key, you can still paste it into the Site key field on the FFL Firewall · ACTIVE DEFENSE tab, and a pasted key is the one the plugin uses.",
+  "FFLFW_L10_FAQ_AD_OFF_LEAD": "The first time you open the FFL Firewall page, a one-time screen asks you to keep it on or switch it off, and you can change that later from the FFL Firewall · ACTIVE DEFENSE tab. Your plugin dashboard marks it active while its dealer embed check-in is current.",
   "FFLFW_L10_SETUP_LINK": "Read the setup guide"
 };
 const FINAL_SETUP = {
@@ -478,12 +497,12 @@ if (fs.existsSync(dist)) {
   const builtPricing = html.slice(html.indexOf('data-section="pricing"'), html.indexOf('data-section="faq"'));
   assert.doesNotMatch(builtPricing, /Buy a license/, "built pricing card has no Buy a license");
   assert.doesNotMatch(html, /Planned|when it ships/, "built page has no Planned / when it ships");
-  assert.match(html, /weekly and on-demand reports/);
-  assert.match(html, /Shipping checks first, then a security layer and a hardening report powered by Wordfence/);
+  assert.match(html, /Shipping checks first, then a security layer/);
+  assert.doesNotMatch(html, /weekly and on-demand reports|hardening report powered by Wordfence/);
   // CA-POPUP-FFL-FILTERS: after PLATES-INLINE (#225) the only "FFL Firewall · NAME" on the built page was the Firewall pop-up,
   // which is now unmounted (the FFL Filters pop-up is the active one and is suppressed here). Any that remain must use nbsp (next line).
   assert.match(html, /ACTIVE DEFENSE/, "built page still names ACTIVE DEFENSE");
-  assert.doesNotMatch(html, /FFL Firewall · (ACTIVE DEFENSE|OVERWATCH|RECON)/, "no plain-space service name on the built page");
+  assert.doesNotMatch(html, /FFL Firewall · (ACTIVE DEFENSE|OVERWATCH|RECON|PICKET)/, "no plain-space service name on the built page");
   assert.match(html, /https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s/);
   assert.match(html, />Buy a license</);
   assert.match(html, />Get FFL Firewall</);
@@ -491,7 +510,7 @@ if (fs.existsSync(dist)) {
   const mainEnd = html.indexOf("data-fflf-dl-gate", mainStart);
   assert.ok(mainStart !== -1 && mainEnd > mainStart, "landing body found");
   const text = html.slice(mainStart, mainEnd).replace(/<(script|style)[\s\S]*?<\/\1>/g, " ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&#39;|&#x27;/g, "'").replace(/\s+/g, " ");
-  for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "RECON"]) assert.ok(text.includes(`FFL Firewall · ${n}`), `built page names FFL Firewall · ${n}`);
+  for (const n of ["ACTIVE DEFENSE", "OVERWATCH", "PICKET"]) assert.ok(text.includes(`FFL Firewall · ${n}`), `built page names FFL Firewall · ${n}`);
   for (const [k, v] of Object.entries(FINAL_LANDING)) assert.ok(text.includes(v), `built /ffl-firewall ships ${k} verbatim`);
   const setupText = setupBody.replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&#39;|&#x27;/g, "'").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/\s+/g, " ");
   for (const [k, v] of Object.entries(FINAL_SETUP)) {
