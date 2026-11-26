@@ -228,10 +228,10 @@ assert.doesNotMatch(page, /California|Colorado|Illinois|Massachusetts|New York|W
 // 2. OG image: Brandy's PNG (12:46 PM ET), page-only props, alt verbatim.
 const ogRel = "public/og/ffl-firewall-og.png";
 const ogBuf = fs.readFileSync(path.join(root, ogRel));
-assert.equal(ogBuf.length, 209702, "og image size");
+assert.equal(ogBuf.length, 143770, "og image size");
 assert.equal(
   crypto.createHash("sha256").update(ogBuf).digest("hex"),
-  "854e2f74f9f46241cb18623dc012af3df6323a251fa4d19a2a23aa796274574c",
+  "4701c01a97fb7d1b1b3a2156a6b2431c272c40c8f40efeae54e63e6cc9886899",
   "og image sha256",
 );
 assert.equal(ogBuf.subarray(0, 4).toString("hex"), "89504e47", "png magic");
@@ -590,7 +590,7 @@ if (fs.existsSync(dist)) {
   const distOg = fs.readFileSync(path.join(dist, "og", "ffl-firewall-og.png"));
   assert.equal(
     crypto.createHash("sha256").update(distOg).digest("hex"),
-    "854e2f74f9f46241cb18623dc012af3df6323a251fa4d19a2a23aa796274574c",
+    "4701c01a97fb7d1b1b3a2156a6b2431c272c40c8f40efeae54e63e6cc9886899",
     "dist og image sha256",
   );
   assert.doesNotMatch(html, /<picture>/);
