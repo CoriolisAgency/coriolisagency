@@ -192,7 +192,7 @@ assert.ok(!page.includes("bonus that comes with your plan"), "old RECON bonus pa
 // CA-FFLFW-TERMS-BEACON-TRUTH: Karp-cleared 8:36 AM ET Nov 25, 2026; H-IDX69 and H-SET18 name gunsearchengine.com, so they are also exempted from the vendor-name lock.
 assert.doesNotMatch(page, /bonus/i, "no bonus wording or class left in the /ffl-firewall source");
 assert.ok(!page.includes("<p><FflFwName n=\"RECON\" /> is a store hardening report powered by Wordfence"), "What is RECON? answer gone");
-assert.ok(page.includes("You get unlimited <FflFwName n=\"OVERWATCH\" /> transactions. <FflFwName n=\"PICKET\" /> (Fraud Detection) is included too. <FflFwName n=\"DEFENDER\" /> after you choose Keep on the first-open screen and your dealer embed script checks in. Every feature we add later is included at the same price."), "What do I get answer verbatim");
+assert.ok(page.includes("You get unlimited <FflFwName n=\"OVERWATCH\" /> transactions. <FflFwName n=\"PICKET\" /> (Fraud Detection) is included too. <FflFwName n=\"DEFENDER\" /> starts after you choose Keep on the first-open screen and your dealer embed script checks in. Every feature we add later is included at the same price."), "What do I get answer verbatim");
 const paulCompliance = (s) => s.split("While FFL Firewall · DEFENDER is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.").join("").split("Each check runs on your own site, where a request it catches is blocked or slowed down. The shared reputation feed adds what other FFL Firewall stores have seen: your store reports the bots its checks catch as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and receives a list of bots those stores have reported. While FFL Firewall · ACTIVE DEFENSE is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.").join("").split("The shared reputation feed lets FFL Firewall stores warn each other about bots: your store reports the bots it catches as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and gets back a list of bots other stores have reported. On a new install it's on by default while FFL Firewall · ACTIVE DEFENSE is on and the license is active. A store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until you switch it on. You can switch it on or off any time in the Shared reputation feed section. While FFL Firewall · ACTIVE DEFENSE is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.").join("").split("Fraud Prevention, State Shipping Compliance, and Bot Defense for FFLs").join("").split("State Compliance").join("").split("State Law Compliance").join("").split("A managed ecommerce security and compliance service that updates itself in real-time and adapts automatically to emergent threats").join("").split("SHIPPING COMPLIANCE").join("").split("weekly and on-demand reports, powered by Wordfence").join("").split("Shipping checks first, then a security layer and a hardening report powered by Wordfence").join("").split(" is a store hardening report powered by Wordfence, and it runs weekly and on demand. It matches your plugins against the vulnerabilities Wordfence has published, checks your plugins, themes and WordPress core against the current WordPress.org releases and flags configuration gaps.").join("").split(" is powered by Wordfence: every week, and again whenever you press Run scan, it matches your plugins against the vulnerabilities Wordfence has published and compares the versions of your plugins, themes and WordPress core with the current releases on WordPress.org.").join("").split("delivers weekly and on-demand website security reports powered by Wordfence.").join("");
 assert.doesNotMatch(paulCompliance(page), /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b|Wordfence|Patchstack|WPScan/i, "no vulnerability, compliance or vendor claims");
 assert.doesNotMatch(page, /free/i, "no free (also asserted above)");
@@ -224,10 +224,10 @@ assert.doesNotMatch(page, /California|Colorado|Illinois|Massachusetts|New York|W
 // 2. OG image: Brandy's PNG (12:46 PM ET), page-only props, alt verbatim.
 const ogRel = "public/og/ffl-firewall-og.png";
 const ogBuf = fs.readFileSync(path.join(root, ogRel));
-assert.equal(ogBuf.length, 143770, "og image size");
+assert.equal(ogBuf.length, 144510, "og image size");
 assert.equal(
   crypto.createHash("sha256").update(ogBuf).digest("hex"),
-  "4701c01a97fb7d1b1b3a2156a6b2431c272c40c8f40efeae54e63e6cc9886899",
+  "226fa3d841dbf406a732dc6744e2853b75beef2aecaee0d85de6de92972308f9",
   "og image sha256",
 );
 assert.equal(ogBuf.subarray(0, 4).toString("hex"), "89504e47", "png magic");
@@ -609,7 +609,7 @@ if (fs.existsSync(dist)) {
   const distOg = fs.readFileSync(path.join(dist, "og", "ffl-firewall-og.png"));
   assert.equal(
     crypto.createHash("sha256").update(distOg).digest("hex"),
-    "4701c01a97fb7d1b1b3a2156a6b2431c272c40c8f40efeae54e63e6cc9886899",
+    "226fa3d841dbf406a732dc6744e2853b75beef2aecaee0d85de6de92972308f9",
     "dist og image sha256",
   );
   assert.doesNotMatch(html, /<picture>/);
