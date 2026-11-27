@@ -1,4 +1,4 @@
-// CA-WEBSITE-PLANS-PAGE (Paul 2026-11-27 4:56 PM ET via Chief 4:57): header "Website Plans" item, the /website-plans page,
+﻿// CA-WEBSITE-PLANS-PAGE (Paul 2026-11-27 4:56 PM ET via Chief 4:57): header "Website Plans" item, the /website-plans page,
 // and the plan cards + setup packages shared with /ecommerce so one edit updates both.
 import assert from "node:assert/strict";
 import fs from "node:fs";
@@ -11,7 +11,7 @@ const ok = (n) => console.log(`  ok  ${n}`);
 
 // 1. Header nav: one Website Plans item, same tab, no GunSearchEngine.com item (desktop and drawer both map MAIN_NAV).
 const nav = read("src/lib/nav.ts");
-assert.match(nav, /\{\s*href:\s*"website-plans",\s*label:\s*"Website Plans"\s*\}/, "Website Plans item links website-plans");
+assert.match(nav, /\{\s*href:\s*"website-plans",\s*label:\s*"Website Plans",\s*cta:\s*true\s*\}/, "Website Plans item links website-plans and is the CTA");
 assert.doesNotMatch(nav, /gunsearchengine/i, "no GunSearchEngine.com header item");
 assert.doesNotMatch(nav, /website-plans[^}]*external/, "Website Plans is not external (same tab)");
 const chrome = read("src/components/SiteChrome.astro");
@@ -78,6 +78,29 @@ if (fs.existsSync(dist)) {
     // nav: desktop + drawer each carry the item; no GSE header anchor.
     assert.equal((html.match(/<a href="\/website-plans"[^>]*>Website Plans<\/a>/g) ?? []).length, 2, `${name} nav item (desktop and drawer)`);
     assert.doesNotMatch(html, /<a[^>]*href="https:\/\/gunsearchengine\.com\/for-dealers"/, `${name}: no GSE header item`);
+    // CA-HEADER-NAV-CTA: Website Plans is the yellow CTA, Talk to Coriolis the outline button, FFL Plugins and Press in the footer.
+    const header = html.match(/<header\b[\s\S]*?<\/header>/)?.[0] ?? "";
+    const drawerAt = html.indexOf('id="nav-drawer"');
+    const drawerEnd = Math.min(...[html.indexOf("<script", drawerAt), html.indexOf("<main", drawerAt), html.indexOf("<footer", drawerAt)].filter((i) => i !== -1));
+    const drawer = html.slice(html.lastIndexOf("<div", drawerAt), drawerEnd);
+    const footerAt = html.lastIndexOf("<footer"); // the site footer is the last one
+    const footer = footerAt === -1 ? "" : html.slice(footerAt, html.indexOf("</footer>", footerAt) + 9);
+    assert.ok(header && drawerAt !== -1 && footer, `${name}: header, drawer and footer present`);
+    for (const [where, chunk] of [["desktop header", header], ["mobile drawer", drawer]]) {
+      const plans = chunk.match(/<a href="\/website-plans"[^>]*>Website Plans<\/a>/g) ?? [];
+      assert.equal(plans.length, 1, `${name} ${where}: one Website Plans link`);
+      assert.match(plans[0], /class="[^"]*bg-\[#c8960c\][^"]*"/, `${name} ${where}: Website Plans carries the yellow CTA class`);
+      assert.match(plans[0], /data-nav-cta="primary"/, `${name} ${where}: Website Plans is the primary CTA`);
+      const talk = chunk.match(/<a href="\/contact"[^>]*>\s*Talk to Coriolis\s*<\/a>/g) ?? [];
+      assert.equal(talk.length, 1, `${name} ${where}: one Talk to Coriolis link at /contact`);
+      assert.match(talk[0], /class="[^"]*border-zinc-500 bg-transparent[^"]*"/, `${name} ${where}: Talk to Coriolis carries the outline class`);
+      assert.doesNotMatch(talk[0], /bg-\[#c8960c\]/, `${name} ${where}: Talk to Coriolis is not yellow`);
+      assert.match(talk[0], /data-nav-cta="outline"/, `${name} ${where}: Talk to Coriolis is the outline CTA`);
+      assert.equal((chunk.match(/bg-\[#c8960c\]/g) ?? []).length, 1, `${name} ${where}: only Website Plans is yellow`);
+      assert.doesNotMatch(chunk, /FFL Plugins|>\s*News\s*</, `${name} ${where}: no FFL Plugins or News link`);
+    }
+    assert.match(footer, />FFL Plugins<\/a>/, `${name} footer carries FFL Plugins (its href is pinned in test-ffl-filters-download.mjs)`);
+    assert.match(footer, /<a href="\/press"[^>]*>Press<\/a>/, `${name} footer links Press`);
     assert.match(html, /href="https:\/\/www\.gunsearchengine\.com\/"/, `${name}: footer GSE link stays`);
   }
   // The shared blocks are byte-identical on both pages (only the plans heading tag differs: h1 here, h2 on /ecommerce).

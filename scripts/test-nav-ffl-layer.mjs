@@ -1,4 +1,4 @@
-import assert from "node:assert/strict";
+﻿import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -17,19 +17,15 @@ assert.deepEqual(labels, [
   "Case Studies",
   "Hosting Plans",
   "FFL Accelerator",
-  "FFL Plugins",
   "FFL Dropshipping",
   "FFL Dropshipping",
   "FFL Cockpit",
-  "FFL Plugins",
-  "FFL Filters",
   "Gun Store POS",
   "WooCommerce for AIM",
   "WooCommerce for Rapid",
   "WooCommerce for MicroBiz",
   "WooCommerce for Trident 1",
   "Website Plans",
-  "News",
 ]);
 assert.deepEqual(hrefs, [
   "ecommerce",
@@ -38,44 +34,33 @@ assert.deepEqual(hrefs, [
   "case-studies",
   "ecommerce#plans",
   "https://fflaccelerator.com",
-  "ffl-filters",
   "firearms-dropshipping",
   "firearms-dropshipping",
   "ffl-cockpit",
-  "ffl-filters",
-  "ffl-filters",
   "gun-store-pos",
   "aim-pos",
   "rapid-gun-systems-pos",
   "microbiz-pos",
   "trident-1-pos",
   "website-plans",
-  "press",
 ]);
-// CA-NAV-FFL-PLUGINS: FFL Plugins is a top-level dropdown with both plugin pages.
-assert.match(
-  navSrc,
-  /label:\s*"FFL Plugins",\s*children:\s*\[[\s\S]*?href:\s*"ffl-filters",\s*label:\s*"FFL Filters"/,
-  "FFL Plugins dropdown must contain FFL Filters (FFL Firewall is hidden from the nav, Paul 11:22 AM ET)",
-);
-// FFL Ecommerce dropdown includes an FFL Plugins item pointing at ffl-filters.
-assert.match(
-  navSrc,
-  /label:\s*"FFL Ecommerce",\s*children:\s*\[[\s\S]*?\{\s*href:\s*"ffl-filters",\s*label:\s*"FFL Plugins"\s*\}/,
-  "FFL Ecommerce dropdown must contain an FFL Plugins item",
-);
+// CA-HEADER-NAV-CTA (Paul 5:50 PM ET): FFL Plugins (the top-level dropdown and the FFL Ecommerce child) and News left the header.
+assert.doesNotMatch(navSrc, /FFL Plugins|FFL Filters|ffl-filters/, "no FFL Plugins or FFL Filters item in the header nav");
+assert.doesNotMatch(navSrc, /label:\s*"News"|href:\s*"press"/, "no News item in the header nav");
 // CA-NAV-DROPSHIP-DROPDOWN: FFL Dropshipping is a dropdown with FFL Cockpit.
 assert.match(
   navSrc,
   /label:\s*"FFL Dropshipping",\s*children:\s*\[[\s\S]*?href:\s*"firearms-dropshipping",\s*label:\s*"FFL Dropshipping"[\s\S]*?href:\s*"ffl-cockpit",\s*label:\s*"FFL Cockpit"/,
   "FFL Dropshipping dropdown must keep the firearms-dropshipping href and include FFL Cockpit",
 );
-// FFL Filters is no longer a top-level item after FFL Dropshipping.
+// Top-level order: FFL Ecommerce, FFL Dropshipping, Gun Store POS, then the Website Plans CTA last.
 assert.match(
   navSrc,
-  /href:\s*"firearms-dropshipping",\s*label:\s*"FFL Dropshipping"\s*\},[\s\S]*?label:\s*"FFL Plugins"/,
-  "FFL Plugins dropdown sits after FFL Dropshipping",
+  /label:\s*"FFL Ecommerce",\s*children:[\s\S]*?label:\s*"FFL Dropshipping",\s*children:[\s\S]*?label:\s*"Gun Store POS",\s*children:[\s\S]*?\{\s*href:\s*"website-plans",\s*label:\s*"Website Plans",\s*cta:\s*true\s*\},\s*\];/,
+  "header order is FFL Ecommerce, FFL Dropshipping, Gun Store POS, Website Plans (cta)",
 );
+assert.equal([...navSrc.matchAll(/cta:\s*true\s*\}/g)].length, 1, "exactly one header CTA item");
+// FFL Filters is not a top-level item after FFL Dropshipping.
 assert.doesNotMatch(
   navSrc,
   /href:\s*"firearms-dropshipping",\s*label:\s*"FFL Dropshipping"\s*\},\s*\{\s*href:\s*"ffl-filters",\s*label:\s*"FFL Filters"/,
@@ -84,13 +69,21 @@ assert.doesNotMatch(
 assert.doesNotMatch(navSrc, /Gun Search Engine/);
 // CA-WEBSITE-PLANS-PAGE: the header has no GunSearchEngine.com item (the footer family links below stay), and Website Plans is a same-tab top-level item.
 assert.doesNotMatch(navSrc, /gunsearchengine/i, "no GunSearchEngine.com item in the header nav");
-assert.match(navSrc, /\{\s*href:\s*"website-plans",\s*label:\s*"Website Plans"\s*\}/, "Website Plans header item links /website-plans");
+assert.match(navSrc, /\{\s*href:\s*"website-plans",\s*label:\s*"Website Plans",\s*cta:\s*true\s*\}/, "Website Plans header item links /website-plans and is the CTA");
 assert.doesNotMatch(navSrc, /LINKS\.gsa/);
 assert.doesNotMatch(navSrc, /_blank/);
 
 const chrome = read("src/components/SiteChrome.astro");
 assert.equal([...chrome.matchAll(/MAIN_NAV\.map\(/g)].length, 2);
 assert.doesNotMatch(chrome, /const nav = \[/);
+// CA-HEADER-NAV-CTA: yellow primary CTA for Website Plans, standard outline for Talk to Coriolis, FFL Plugins in the footer.
+assert.match(chrome, /const ctaDesktop =\s*"[^"]*border-\[#8a6a0a\] bg-\[#c8960c\][^"]*"/, "desktop CTA keeps the yellow primary classes");
+assert.match(chrome, /const outlineDesktop =\s*"[^"]*border-zinc-500 bg-transparent[^"]*text-zinc-100[^"]*"/, "desktop outline uses the btnSecondary colours");
+assert.equal([...chrome.matchAll(/data-nav-cta="primary"/g)].length, 2, "Website Plans CTA in desktop and drawer");
+assert.equal([...chrome.matchAll(/data-nav-cta="outline"/g)].length, 2, "Talk to Coriolis outline in desktop and drawer");
+assert.equal([...chrome.matchAll(/class=\{outline(?:Desktop|Drawer)\}/g)].length, 2, "both Talk to Coriolis links use the outline classes");
+assert.match(chrome, /<a href=\{withBase\("ffl-filters"\)\} class="hover:text-sky-300">FFL Plugins<\/a>/, "footer links FFL Plugins to ffl-filters");
+assert.match(chrome, /<a href=\{withBase\("press"\)\} class="hover:text-sky-300">Press<\/a>/, "footer keeps the Press link (News moved here)");
 
 const bannedCopy =
   /Gun Runner|Warlord|\bPOS\b|Betsy|\bGSA\b|GunSearchAgent/;
@@ -161,7 +154,7 @@ assert.deepEqual([...familyBlock.matchAll(/label:\s*"([^"]+)"/g)].map((m) => m[1
 assert.deepEqual([...familyBlock.matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]), ["https://www.gunsearchengine.com/", "https://www.gunstoregame.com/", "https://fflintel.com/"]);
 assert.match(chrome, />FFL Ecommerce<\/a>/);
 assert.match(chrome, /<a href=\{withBase\("ffl-analytics"\)\} class="hover:text-sky-300">FFL Analytics<\/a>/);
-// OPS-34 (2026-10-08-homepage-clients-footer): footer row is exactly "FFL Ecommerce · Gun Store POS · FFL Analytics", same tab;
+// OPS-34 (2026-10-08-homepage-clients-footer): footer row is exactly "FFL Ecommerce Â· Gun Store POS Â· FFL Analytics", same tab;
 // the FFL Search Console footer link is gone (the page stays live).
 assert.match(chrome, /<a href=\{withBase\("gun-store-pos"\)\} class="hover:text-sky-300">Gun Store POS<\/a>/);
 assert.doesNotMatch(chrome, /withBase\("ffl-search-console"\)/);

@@ -35,6 +35,18 @@ const posPaths = new Set([
   "/rapid-gun-systems-pos",
 ]);
 
+// CA-HEADER-NAV-CTA: Website Plans is the yellow primary CTA (the colours Talk to
+// Coriolis used before); Talk to Coriolis is the site's standard outline button
+// (btnSecondary in src/lib/links.ts: zinc-500 border, transparent, zinc-100 text).
+const ctaDesktop =
+  "rounded-sm border border-[#8a6a0a] bg-[#c8960c] px-2.5 py-1.5 text-xs font-semibold !text-[#05080f] hover:bg-[#e0a910] sm:text-sm";
+const ctaDrawer =
+  "rounded-sm border border-[#8a6a0a] bg-[#c8960c] px-3 py-2 text-sm font-semibold !text-[#05080f] hover:bg-[#e0a910]";
+const outlineDesktop =
+  "rounded-sm border border-zinc-500 bg-transparent px-2.5 py-1.5 text-xs font-semibold text-zinc-100 transition-colors hover:bg-zinc-800 sm:text-sm";
+const outlineDrawer =
+  "rounded-sm border border-zinc-500 bg-transparent px-3 py-2 text-sm font-semibold text-zinc-100 transition-colors hover:bg-zinc-800";
+
 function active(slug: string) {
   const p = `/${slug}`;
   if (slug === "ecommerce") {
@@ -111,6 +123,18 @@ const family = [
           const external = "external" in item && item.external;
           const children = "children" in item ? item.children : undefined;
           const pillActive = !external && active(item.href);
+          if ("cta" in item && item.cta) {
+            return (
+              <a
+                href={external ? item.href : withBase(item.href)}
+                class={ctaDesktop}
+                data-nav-cta="primary"
+                aria-current={pillActive ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            );
+          }
           const pillClass = [
             "rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors sm:text-sm",
             pillActive
@@ -212,7 +236,8 @@ const family = [
       }
       <a
         href={withBase("contact")}
-        class="rounded-sm border border-[#8a6a0a] bg-[#c8960c] px-2.5 py-1.5 text-xs font-semibold !text-[#05080f] hover:bg-[#e0a910] sm:text-sm"
+        class={outlineDesktop}
+        data-nav-cta="outline"
       >
         Talk to Coriolis
       </a>
@@ -273,6 +298,18 @@ const family = [
       MAIN_NAV.map((item) => {
         const external = "external" in item && item.external;
         const children = "children" in item ? item.children : undefined;
+        if ("cta" in item && item.cta) {
+          return (
+            <a
+              href={external ? item.href : withBase(item.href)}
+              class={ctaDrawer}
+              data-nav-cta="primary"
+              aria-current={!external && active(item.href) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          );
+        }
         return (
           <>
             <a
@@ -326,7 +363,8 @@ const family = [
     }
     <a
       href={withBase("contact")}
-      class="rounded-sm border border-[#8a6a0a] bg-[#c8960c] px-3 py-2 text-sm font-semibold !text-[#05080f] hover:bg-[#e0a910]"
+      class={outlineDrawer}
+      data-nav-cta="outline"
     >
       Talk to Coriolis
     </a>
@@ -484,6 +522,8 @@ const family = [
         <a href={withBase("ffl-analytics")} class="hover:text-sky-300">FFL Analytics</a>
         {" · "}
         <a href={withBase("ffl-messenger-enterprise")} class="hover:text-sky-300">FFL Messenger</a>
+        {" · "}
+        <a href={withBase("ffl-filters")} class="hover:text-sky-300">FFL Plugins</a>
       </p>
       <p class="text-xs leading-relaxed text-zinc-500">
         {SITE.legalName} · {SITE.origin}.
