@@ -25,12 +25,8 @@ const page = read(pageRel);
 const terms = read(termsRel);
 
 const banned = /Orchid|eState/i;
-// CA-FFLFW-H1-PEACE follow-up: Paul 5:59 / Chief 6:02+6:03, the State Law Compliance
-// badge "Powered by Orchid" is the only allowed Orchid string on this page.
-const orchidBadge = "Powered by Orchid";
-assert.equal((page.match(/Orchid/g) || []).length, 1, "Orchid appears only on the State Law Compliance badge");
-assert.ok(page.includes(orchidBadge), "State Law Compliance badge reads Powered by Orchid");
-assert.doesNotMatch(page.replace(orchidBadge, ""), banned, `${pageRel} has a banned word outside the Orchid badge`);
+assert.doesNotMatch(page, banned, `${pageRel} has a banned word`);
+assert.ok(page.includes('<span class="svc-tag">CART MONITOR</span>'), "State Law Compliance badge reads CART MONITOR");
 assert.doesNotMatch(terms, banned, `${termsRel} has a banned word`);
 
 // 1. Page: noindex, title, meta, path, buy CTAs, contact, no download/file.
@@ -75,7 +71,7 @@ for (const section of ["hero", "services", "activation", "pricing", "faq", "down
   assert.match(page, new RegExp(`data-section="${section}"`), `missing data-section=${section}`);
 }
 // CA-FFLFW-H1-PEACE: Paul's H1, verbatim (5:35 AM ET Nov 26, 2026).
-assert.ok(page.includes("<h1>Peace of mind for $79 a month</h1>"), "hero H1 verbatim");
+assert.ok(page.includes("<h1>Fraud Detection, Bot Mitigation, and State Law Compliance</h1>"), "hero H1 verbatim");
 assert.ok(!page.includes("<h1>Fraud Prevention, State Shipping Compliance, and Bot Defense for FFLs</h1>"), "previous H1 gone");
 assert.ok(!/fraud prevention/i.test(page), "Fraud Prevention renamed to Fraud Detection on the page source");
 assert.ok(/Fraud Detection/.test(page), "Fraud Detection present");
@@ -116,7 +112,7 @@ for (const n of ["DEFENDER", "OVERWATCH", "PICKET"]) assert.ok(page.includes(`<F
   assert.ok(plates.includes('<FflFwName n="OVERWATCH" />'), "OVERWATCH secondary heading");
   assert.ok(plates.includes('<FflFwName n="DEFENDER" />'), "DEFENDER secondary heading");
   assert.ok(plates.includes('<span class="svc-tag">Transaction Security</span>'), "Fraud Detection badge");
-  assert.ok(plates.includes('<span class="svc-tag">Powered by Orchid</span>'), "State Law Compliance badge");
+  assert.ok(plates.includes('<span class="svc-tag">CART MONITOR</span>'), "State Law Compliance badge");
   assert.ok(plates.includes('<span class="svc-tag">Adaptive Protection</span>'), "Bot & AI Defense badge");
   assert.ok(!plates.includes("Coming"), "no Coming badge text on the cards");
   assert.ok(!plates.includes("In the plugin"), "no In the plugin badge text on the cards");
@@ -557,9 +553,9 @@ if (fs.existsSync(dist)) {
   assert.doesNotMatch(html, /ACTIVE DEFENSE/, "built page has 0 hits for ACTIVE DEFENSE");
     assert.match(html, /DEFENDER/, "built page names DEFENDER");
     assert.match(html, /State Law Compliance/, "built page names State Law Compliance");
-    assert.match(html, /<h1>Peace of mind for \$79 a month<\/h1>/, "built H1 verbatim");
+    assert.match(html, /<h1>Fraud Detection, Bot Mitigation, and State Law Compliance<\/h1>/, "built H1 verbatim");
     assert.match(html, /Transaction Security/, "built Fraud Detection badge");
-    assert.match(html, /Powered by Orchid/, "built State Law Compliance badge");
+    assert.match(html, /<span class="svc-tag">CART MONITOR<\/span>/, "built State Law Compliance badge");
     assert.match(html, /Adaptive Protection/, "built Bot & AI Defense badge");
     assert.doesNotMatch(html, /fraud prevention/i, "built page has 0 Fraud Prevention");
     assert.match(html, /Fraud Detection/, "built page says Fraud Detection");
