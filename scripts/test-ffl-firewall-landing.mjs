@@ -71,7 +71,7 @@ for (const section of ["hero", "services", "activation", "pricing", "faq", "down
   assert.match(page, new RegExp(`data-section="${section}"`), `missing data-section=${section}`);
 }
 // CA-FFLFW-H1-PEACE: Paul's H1, verbatim (5:35 AM ET Nov 26, 2026).
-assert.ok(page.includes("<h1>Fraud Detection, Bot Mitigation, and State Law Compliance</h1>"), "hero H1 verbatim");
+assert.ok(page.includes("<h1>Ecommerce Security for FFLs</h1>"), "hero H1 verbatim");
 assert.ok(!page.includes("<h1>Fraud Prevention, State Shipping Compliance, and Bot Defense for FFLs</h1>"), "previous H1 gone");
 assert.ok(!/fraud prevention/i.test(page), "Fraud Prevention renamed to Fraud Detection on the page source");
 assert.ok(/Fraud Detection/.test(page), "Fraud Detection present");
@@ -553,7 +553,7 @@ if (fs.existsSync(dist)) {
   assert.doesNotMatch(html, /ACTIVE DEFENSE/, "built page has 0 hits for ACTIVE DEFENSE");
     assert.match(html, /DEFENDER/, "built page names DEFENDER");
     assert.match(html, /State Law Compliance/, "built page names State Law Compliance");
-    assert.match(html, /<h1>Fraud Detection, Bot Mitigation, and State Law Compliance<\/h1>/, "built H1 verbatim");
+    assert.match(html, /<h1>Ecommerce Security for FFLs<\/h1>/, "built H1 verbatim");
     assert.match(html, /Transaction Security/, "built Fraud Detection badge");
     assert.match(html, /<span class="svc-tag">CART MONITOR<\/span>/, "built State Law Compliance badge");
     assert.match(html, /Adaptive Protection/, "built Bot & AI Defense badge");
