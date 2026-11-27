@@ -39,14 +39,17 @@ assert.ok(wp.indexOf("<HostingPlansSection") < wp.indexOf("<SetupPackagesSection
 assert.match(wp, /<HostingPlansSection headingTag="h1" \/>/, "the plans heading is the page H1");
 ok("shared components used by /ecommerce and /website-plans, plans before setup");
 
-// 3. Title, H1 and description reuse existing live strings word for word.
+// 3. H1 is the live string word for word; title and description are Brandy's strings, cleared by Karp (META-FINAL.md, sha8 783c6349).
 const H1 = "The five monthly plans, from Minute Man through FFL Accelerator";
 assert.ok(plansComp.includes(`{"${H1}"}`), "H1 string is the plans heading in the shared component");
+const TITLE = "FFL Website Plans and Pricing: $169 to $569/mo | Coriolis";
+const DESC = "Compare five monthly FFL website plans from $169 to $569/mo, then pick a Basic $500 or Retail $2,500 setup package for your gun store's WooCommerce site.";
 const ecoDesc = eco.match(/description="([^"]+)"/)[1];
-assert.ok(wp.includes(`description="${ecoDesc}"`), "meta description is /ecommerce's description word for word");
-assert.ok(wp.includes(`title="${H1} | Coriolis"`), "title is the H1 string plus the site suffix");
+assert.notEqual(DESC, ecoDesc, "meta description is unique, not /ecommerce's");
+assert.ok(wp.includes(`description="${DESC}"`), "meta description is the cleared string verbatim");
+assert.ok(wp.includes(`title="${TITLE}"`), "title is the cleared string verbatim");
 assert.match(wp, /path="\/website-plans"/, "path (canonical) is /website-plans");
-ok("title, H1, description reuse existing strings");
+ok("title and description are the cleared strings; H1 is the live string");
 
 // 4. Sitemap lastmod and IndexNow.
 assert.ok(JSON.parse(read("lastmod.json"))["/website-plans"], "/website-plans is in lastmod.json");
@@ -66,8 +69,8 @@ if (fs.existsSync(dist)) {
   assert.doesNotMatch(wpHtml, /<meta name="robots" content="[^"]*noindex/i, "built page is indexable");
   assert.equal((wpHtml.match(/<h1[ >]/g) ?? []).length, 1, "exactly one H1");
   assert.match(wpHtml, new RegExp(`<h1 class="mb-6 text-xl font-semibold text-white">${H1}</h1>`), "built H1 text");
-  assert.ok(wpHtml.includes(`<title>${H1} | Coriolis</title>`), "built title");
-  assert.ok(wpHtml.includes(`content="${ecoDesc}"`), "built meta description");
+  assert.ok(wpHtml.includes(`<title>${TITLE}</title>`), "built title");
+  assert.ok(wpHtml.includes(`content="${DESC}"`), "built meta description");
   for (const [name, html] of [["/website-plans", wpHtml], ["/ecommerce", ecoHtml]]) {
     for (const id of ["minute-man", "militia", "gun-runner", "warlord", "ffl-accelerator"]) assert.ok(html.includes(`<article id="${id}"`), `${name} has the ${id} plan card`);
     assert.equal((html.match(/one-time<\/span>/g) ?? []).length, 2, `${name} has both setup packages`);
