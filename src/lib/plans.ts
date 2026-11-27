@@ -167,7 +167,7 @@ export const PLANS: Plan[] = [
         text: "GunSearchEngine.com Pro Included Free ($99/month)",
       },
       {
-        html: `${md("[FFL Firewall](https://www.fflfirewall.com)")} Included Free (<s>$79/month</s>)`,
+        html: `${md("[FFL Firewall](https://www.fflfirewall.com/)")} Included Free (<s>$79/month</s>)`,
         text: "FFL Firewall Included Free ($79/month)",
       },
     ],
