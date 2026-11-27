@@ -1,0 +1,22 @@
+---
+// CA-WEBSITE-PLANS-PAGE (Paul 2026-11-27 4:56 PM ET via Chief 4:57): the hosting plan cards first, then the setup packages.
+// Both blocks are the shared components /ecommerce also renders (HostingPlansSection, SetupPackagesSection), fed by
+// src/lib/plans.ts, so the two pages cannot drift. No copy is composed here: every string below already exists on a live page.
+//   title        = the H1 string (src/pages/ecommerce.astro: the plans h2) + the site's " | Coriolis" suffix. NEEDS BRANDY.
+//   description  = src/pages/ecommerce.astro description, word for word. NEEDS BRANDY (duplicates /ecommerce's).
+//   H1           = "The five monthly plans, from Minute Man through FFL Accelerator" (HostingPlansSection headingTag="h1").
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HostingPlansSection from "../components/HostingPlansSection.astro";
+import SetupPackagesSection from "../components/SetupPackagesSection.astro";
+import { CANON_PATHS } from "../lib/site";
+---
+
+<BaseLayout
+  title="The five monthly plans, from Minute Man through FFL Accelerator | Coriolis"
+  description="FFL website design you own: WooCommerce on your domain. Plans from $169/mo, setup $500 or $2,500. Add dropshipping or the register you already run."
+  path="/website-plans"
+  ogImagePath={CANON_PATHS.rangeMckinney}
+>
+  <HostingPlansSection headingTag="h1" />
+  <SetupPackagesSection />
+</BaseLayout>

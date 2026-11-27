@@ -28,7 +28,7 @@ assert.deepEqual(labels, [
   "WooCommerce for Rapid",
   "WooCommerce for MicroBiz",
   "WooCommerce for Trident 1",
-  "GunSearchEngine.com",
+  "Website Plans",
   "News",
 ]);
 assert.deepEqual(hrefs, [
@@ -49,7 +49,7 @@ assert.deepEqual(hrefs, [
   "rapid-gun-systems-pos",
   "microbiz-pos",
   "trident-1-pos",
-  "https://gunsearchengine.com/for-dealers",
+  "website-plans",
   "press",
 ]);
 // CA-NAV-FFL-PLUGINS: FFL Plugins is a top-level dropdown with both plugin pages.
@@ -82,6 +82,9 @@ assert.doesNotMatch(
   "FFL Filters must not stay a top-level item after FFL Dropshipping",
 );
 assert.doesNotMatch(navSrc, /Gun Search Engine/);
+// CA-WEBSITE-PLANS-PAGE: the header has no GunSearchEngine.com item (the footer family links below stay), and Website Plans is a same-tab top-level item.
+assert.doesNotMatch(navSrc, /gunsearchengine/i, "no GunSearchEngine.com item in the header nav");
+assert.match(navSrc, /\{\s*href:\s*"website-plans",\s*label:\s*"Website Plans"\s*\}/, "Website Plans header item links /website-plans");
 assert.doesNotMatch(navSrc, /LINKS\.gsa/);
 assert.doesNotMatch(navSrc, /_blank/);
 

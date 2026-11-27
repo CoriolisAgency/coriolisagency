@@ -60,6 +60,8 @@ export const MAIN_NAV: readonly NavItem[] = [
       { href: "trident-1-pos", label: "WooCommerce for Trident 1" },
     ],
   },
-  { href: "https://gunsearchengine.com/for-dealers", label: "GunSearchEngine.com", external: true },
+  // CA-WEBSITE-PLANS-PAGE (Paul 2026-11-27 4:56 PM ET via Chief 4:57): the old third-party header item is swapped for
+  // Website Plans (/website-plans, same tab). The footer family links stay (D-N3/D-N4).
+  { href: "website-plans", label: "Website Plans" },
   { href: "press", label: "News" },
 ];
