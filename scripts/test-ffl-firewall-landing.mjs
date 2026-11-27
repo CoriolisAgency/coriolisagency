@@ -513,6 +513,8 @@ assert.match(read("package.json"), /scripts\/test-ffl-firewall-landing\.mjs/);
   console.log("  ok  CA-FFLFW-NETWORK-MAP: map block pinned, aria-label exact, reduced motion, no text or media");
 }
 const dist = path.join(root, "dist");
+// Built HTML as the source writes it: drop Astro's scoped-style attribute (data-astro-cid-*) and decode the escaped apostrophe (&#39;).
+const readBuilt = (...p) => fs.readFileSync(path.join(...p), "utf8").replace(/ data-astro-cid-[a-z0-9]+(?:="[^"]*")?/g, "").replace(/&#(?:39|x27);/g, "'");
 if (fs.existsSync(dist)) {
   const maps = fs.readdirSync(dist).filter((f) => /^sitemap-\d+\.xml$/.test(f));
   assert.ok(maps.length > 0, "built sitemap present");
@@ -522,13 +524,13 @@ if (fs.existsSync(dist)) {
     assert.doesNotMatch(xml, /\/ffl-firewall\/setup</, `${m} lists /ffl-firewall/setup`);
   }
   // FFLFW-LANDING-1-0: setup guide built, noindex, no vendor names.
-  const setupHtml = fs.readFileSync(path.join(dist, "ffl-firewall", "setup", "index.html"), "utf8");
+  const setupHtml = readBuilt(dist, "ffl-firewall", "setup", "index.html");
   assert.match(setupHtml, /<meta name="robots" content="noindex, nofollow"/);
   const setupBody = setupHtml.slice(setupHtml.indexOf("data-fflfw-setup"), setupHtml.indexOf("</article>", setupHtml.indexOf("data-fflfw-setup")));
   assert.ok(setupBody.length > 0, "setup guide body found");
   assert.doesNotMatch(setupBody.split("The shared reputation feed lets FFL Firewall stores warn each other about bots: your store reports the bots it catches as salted hashes of their IP addresses, IPv6 networks and user agents, with no shopper names, emails, orders or payment details, and gets back a list of bots other stores have reported. On a new install it's on by default while FFL Firewall · ACTIVE DEFENSE is on and the license is active. A store that already had FFL Firewall keeps its saved choice, and if it never made one, the feed stays off until you switch it on. You can switch it on or off any time in the Shared reputation feed section. While FFL Firewall · ACTIVE DEFENSE is on, the dealer embed script also sends gunsearchengine.com, which is operated by Coriolis, LLC, details of each visit, including the pages and products your visitors view and any email address they enter in the dealer search; the FFL Firewall terms explain what it keeps.").join(""), /GunSearch|\bGSE\b|Orchid|eState/i, "setup guide body names no vendor (site chrome excluded)");
-  assert.equal((fs.readFileSync(path.join(dist, "ffl-firewall", "index.html"), "utf8").match(/data-setup-link/g) ?? []).length, 1, "landing links the setup guide once");
-  const html = fs.readFileSync(path.join(dist, "ffl-firewall", "index.html"), "utf8");
+  assert.equal((readBuilt(dist, "ffl-firewall", "index.html").match(/data-setup-link/g) ?? []).length, 1, "landing links the setup guide once");
+  const html = readBuilt(dist, "ffl-firewall", "index.html");
   if (fflfwLandingNoindex()) assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
   else assert.doesNotMatch(html, /<meta name="robots"/);
   assert.match(html, /<title>FFL Firewall: state shipping checks and managed security for WooCommerce FFL dealers \| Coriolis<\/title>/);
@@ -563,7 +565,7 @@ if (fs.existsSync(dist)) {
     assert.doesNotMatch(html, /\bis coming\b|coming and not in the plugin|not in the plugin yet/i, "built page has no coming wording for PICKET");
     assert.doesNotMatch(html, /It will screen/, "built page has no future-tense PICKET card body");
     assert.doesNotMatch(html, /Monitors, detects, and blocks abusive automated traffic/, "built page has no DEFENDER rev 3 card body");
-    assert.match(html, /Detects and blocks abusive bots, scrapers, and AI agents with rate limits, header checks, honeypots, and card-testing checks\./, "built page has the DEFENDER rev 4 card body");
+    assert.match(html, /Monitors, detects, and blocks abusive bots, scrapers, and AI agents on your store with rate limits, header checks, honeypots, and card-testing checks\./, "built page has the DEFENDER rev 5 card body");
     assert.match(html, /which detects and blocks abusive bots, scrapers, and AI agents<\/li>/, "built page has the DEFENDER rev 3 pricing bullet");
     assert.doesNotMatch(html, /Keep it on at first open, with an active license/, "built page has no DEFENDER rev 2 card body");
     assert.doesNotMatch(html, /bot and scraper control that runs while/, "built page has no old DEFENDER pricing bullet");
@@ -575,7 +577,10 @@ if (fs.existsSync(dist)) {
     assert.equal((html.match(/Bot Defense/g) || []).length, 0, "built page has 0 bare Bot Defense");
     assert.match(html, /class="hero-lede"/, "built lede has spacing class");
 
-  assert.doesNotMatch(html, /FFL Firewall · (DEFENDER|OVERWATCH|RECON|PICKET)/, "no plain-space service name on the built page");
+  // The one approved compliance sentence keeps a plain-space "FFL Firewall · DEFENDER" (see paulCompliance above); drop only that opener.
+  const plainSpaceExempt = "While FFL Firewall · DEFENDER is on, the dealer embed script also sends";
+  assert.equal(html.split(plainSpaceExempt).length - 1, 1, "the compliance sentence is on the built page once");
+  assert.doesNotMatch(html.split(plainSpaceExempt).join(""), /FFL Firewall · (DEFENDER|OVERWATCH|RECON|PICKET)/, "no plain-space service name on the built page");
   assert.match(html, /https:\/\/checkout\.coriolisagency\.com\/b\/6oU7sM3obb7c5phf2o1440s/);
   assert.match(html, />Buy a license</);
   assert.match(html, />Get FFL Firewall</);
@@ -594,7 +599,7 @@ if (fs.existsSync(dist)) {
   assert.doesNotMatch(text, /bonus/i, "no visible bonus text on the built /ffl-firewall page (CA-FFLFW-PAGE-COPY-5)");
   assert.doesNotMatch(paulCompliance(text), /known plugin issues|vulnerab|compliant|compliance|guarantee|GunSearch|\bGSE\b/i, "no vulnerability, compliance or vendor claims on the built page");
   assert.match(html, /Read the FFL Firewall terms/);
-  const termsHtml = fs.readFileSync(path.join(dist, "ffl-firewall", "terms", "index.html"), "utf8");
+  const termsHtml = readBuilt(dist, "ffl-firewall", "terms", "index.html");
   assert.doesNotMatch(termsHtml, /<meta name="robots" content="noindex, nofollow"/);
   assert.match(termsHtml, /<title>FFL Firewall terms \| Coriolis, LLC<\/title>/);
   assert.match(termsHtml, /Effective the day FFL Firewall billing launches/);
@@ -682,7 +687,7 @@ console.log("test-ffl-firewall-landing: ok");
 
 if (fs.existsSync(path.join(root, "dist"))) {
   // CA-FFLFW-NETWORK-MAP, built page: the figure follows the hero section, and carries no text.
-  const html = fs.readFileSync(path.join(root, "dist", "ffl-firewall", "index.html"), "utf8");
+  const html = readBuilt(root, "dist", "ffl-firewall", "index.html");
   const mapAt = html.indexOf('data-section="network-map"');
   assert.ok(html.indexOf('data-section="hero"') < mapAt && mapAt < html.indexOf('data-section="services"'), "built: map between hero and services");
   const fig = html.slice(html.indexOf('<figure class="fflfw-netmap"'), html.indexOf("</figure>", mapAt) + 9);
