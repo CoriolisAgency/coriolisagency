@@ -39,11 +39,11 @@ assert.ok(wp.indexOf("<HostingPlansSection") < wp.indexOf("<SetupPackagesSection
 assert.match(wp, /<HostingPlansSection headingTag="h1" \/>/, "the plans heading is the page H1");
 ok("shared components used by /ecommerce and /website-plans, plans before setup");
 
-// 3. H1 is the live string word for word; title and description are Brandy's strings, cleared by Karp (META-FINAL.md, sha8 783c6349).
+// 3. H1 is the live string word for word; title and description are Brandy's strings, cleared by Karp (TITLE-META-FINAL.md, sha8 fcfc6565).
 const H1 = "The five monthly plans, from Minute Man through FFL Accelerator";
 assert.ok(plansComp.includes(`{"${H1}"}`), "H1 string is the plans heading in the shared component");
-const TITLE = "FFL Website Plans and Pricing: $169 to $569/mo | Coriolis";
-const DESC = "Compare five monthly FFL website plans from $169 to $569/mo, then pick a Basic $500 or Retail $2,500 setup package for your gun store's WooCommerce site.";
+const TITLE = "FFL Website Hosting Plans and Setup Packages | Coriolis";
+const DESC = "Compare five monthly hosting plans for your FFL store, from Minute Man at $169/mo to FFL Accelerator at $569/mo, plus two setup packages at $500 or $2,500.";
 const ecoDesc = eco.match(/description="([^"]+)"/)[1];
 assert.notEqual(DESC, ecoDesc, "meta description is unique, not /ecommerce's");
 assert.ok(wp.includes(`description="${DESC}"`), "meta description is the cleared string verbatim");
