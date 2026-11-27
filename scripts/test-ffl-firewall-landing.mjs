@@ -370,19 +370,18 @@ assert.match(read("public/robots.txt"), /^Allow: \/ffl-firewall\/terms$/m);
   assert.doesNotMatch(terms, /anonymized, aggregate|Raw IP addresses stay|only for the shared list|deleted after 30 days/, "CA-FFLFW-PRIVACY-COPY-TRUTH: the refuted privacy claims are gone from the terms");
 }
 
-// 5. Nav: FFL Firewall sits in the FFL Plugins dropdown (CA-NAV-FFL-PLUGINS).
+// 5. Nav: no FFL Firewall in the header; FFL Plugins left the header (CA-HEADER-NAV-CTA, Paul 5:50 PM ET).
 const navRel = "src/lib/nav.ts";
 const nav = read(navRel);
 assert.doesNotMatch(nav, /ffl-firewall/i, "FFL Firewall is hidden from the header nav (Paul 11:22 AM ET)");
-assert.match(nav, /label:\s*"FFL Plugins",\s*children:\s*\[[\s\S]*?href:\s*"ffl-filters",\s*label:\s*"FFL Filters"/, "FFL Plugins dropdown must contain FFL Filters");
+assert.doesNotMatch(nav, /FFL Plugins|FFL Filters|ffl-filters/, "header nav has no FFL Plugins or FFL Filters item");
 {
   assert.match(nav, /label:\s*"FFL Dropshipping",\s*children:\s*\[[\s\S]*?href:\s*"firearms-dropshipping",\s*label:\s*"FFL Dropshipping"[\s\S]*?href:\s*"ffl-cockpit",\s*label:\s*"FFL Cockpit"/, "FFL Dropshipping dropdown keeps firearms-dropshipping and includes FFL Cockpit");
   const drop = nav.indexOf('{ href: "firearms-dropshipping", label: "FFL Dropshipping" }');
-  const plugins = nav.indexOf('label: "FFL Plugins"', drop);
-  const ffl = nav.indexOf('{ href: "ffl-filters", label: "FFL Filters" }');
+  const cockpitAt = nav.indexOf('{ href: "ffl-cockpit", label: "FFL Cockpit" }');
   const pos = nav.indexOf('href: "gun-store-pos"');
-  assert.ok(drop !== -1 && plugins !== -1 && ffl !== -1 && pos !== -1, "header nav missing Dropshipping, FFL Plugins, FFL Filters, or POS");
-  assert.ok(drop < plugins && plugins < ffl && ffl < pos, "nav order should be FFL Dropshipping, FFL Plugins dropdown, Gun Store POS");
+  assert.ok(drop !== -1 && cockpitAt !== -1 && pos !== -1, "header nav missing Dropshipping, FFL Cockpit, or POS");
+  assert.ok(drop < cockpitAt && cockpitAt < pos, "nav order should be FFL Dropshipping dropdown (with FFL Cockpit), Gun Store POS");
 }
 
 // 6. Sitemap + lastmod + robots + vercel + IndexNow.
@@ -647,17 +646,17 @@ if (fs.existsSync(dist)) {
     assert.ok(drawer.includes('id="nav-drawer"'), `${rel} missing nav-drawer`);
     assert.doesNotMatch(header, fwHref, `${rel} desktop header must not link FFL Firewall`);
     assert.doesNotMatch(drawer, fwHref, `${rel} mobile nav must not link FFL Firewall`);
-    assert.match(header, pluginsHref, `${rel} desktop header missing FFL Plugins link`);
-    assert.match(drawer, pluginsHref, `${rel} mobile nav missing FFL Plugins link`);
+    assert.doesNotMatch(header, pluginsHref, `${rel} desktop header must not carry FFL Plugins`);
+    assert.doesNotMatch(drawer, pluginsHref, `${rel} mobile nav must not carry FFL Plugins`);
+    assert.doesNotMatch(header, fflHref, `${rel} desktop header must not carry FFL Filters`);
+    assert.doesNotMatch(drawer, fflHref, `${rel} mobile nav must not carry FFL Filters`);
     const orderIn = (chunk, where) => {
       const drop = chunk.search(/<a\b[^>]*>FFL Dropshipping<\/a>/);
       const after = chunk.slice(drop);
       const cockpit = after.search(cockpitHref);
-      const plugins = after.search(pluginsHref);
-      const filters = after.search(fflHref);
       const pos = chunk.search(/<a\b[^>]*>Gun Store POS<\/a>/);
-      assert.ok(drop !== -1 && cockpit !== -1 && plugins !== -1 && filters !== -1 && pos !== -1, `${rel} ${where} missing Dropshipping, FFL Cockpit, FFL Plugins, FFL Filters, or POS`);
-      assert.ok(cockpit < plugins && plugins < filters && drop + filters < pos, `${rel} ${where} FFL Plugins dropdown is not between FFL Dropshipping and Gun Store POS`);
+      assert.ok(drop !== -1 && cockpit !== -1 && pos !== -1, `${rel} ${where} missing Dropshipping, FFL Cockpit, or POS`);
+      assert.ok(drop + cockpit < pos, `${rel} ${where} FFL Dropshipping dropdown (with FFL Cockpit) is not before Gun Store POS`);
     };
     orderIn(header, "desktop header");
     orderIn(drawer, "mobile nav");
