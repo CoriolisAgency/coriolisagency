@@ -1,6 +1,11 @@
 // Build step (astro:build:done) over the generated HTML:
 // 1. Plain-text "GunSearchEngine.com" (not already inside a link or other
 //    interactive/non-body element) becomes a link to https://gunsearchengine.com.
+//    Exception: the shared setup-packages section (id="setup", used by /ecommerce and
+//    /website-plans) stays plain text on every page. The plan cards (id="plans") keep their links.
+//    Without this the setup bullet depended on the host page: /ecommerce has an inline script with a "<" operator that this tokenizer reads as a tag,
+//    which swallows its </script> and leaves the rest of the page "inside a script" (so nothing after
+//    it was linked), while a page without such a script linked the setup bullet.
 // 2. Links to off-site family hosts (gunsearchengine.com, gunstoregame.com,
 //    fflintel.com, fflanalytics.com, fflsearchconsole.com) open in a new tab
 //    (target="_blank" rel="noopener noreferrer"). On-site links such as
@@ -18,6 +23,8 @@ const SKIP = new Set(["a", "button", "summary", "label", "option", "select", "te
 const NEW_TAB_HREF = /^https?:\/\/(?:www\.)?(?:gunsearchengine|gunstoregame|fflintel|fflanalytics|fflsearchconsole)\.com(?:[/?#:]|$)/i;
 const SAME_TAB_HREF = /^(?:\/[^"?#]*)?\/ffl-(?:analytics|search-console)(?:[?#]|$)/i;
 
+const PLAIN_IDS = new Set(["setup"]);
+
 function fixAnchor(tag) {
   const href = /\shref="([^"]*)"/i.exec(tag)?.[1];
   if (href === undefined) return tag;
@@ -32,6 +39,7 @@ function fixAnchor(tag) {
 export function transformHtml(html) {
   const out = [];
   const skip = [];
+  let plain = null; // { name, depth } while inside an element whose id is in PLAIN_IDS
   const re = /<!--[\s\S]*?-->|<[^>]+>|[^<]+/g;
   let m;
   while ((m = re.exec(html))) {
@@ -41,6 +49,16 @@ export function transformHtml(html) {
       const tm = /^<\/?([a-zA-Z][\w-]*)/.exec(tok);
       const name = tm?.[1]?.toLowerCase();
       if (name === "a" && !tok.startsWith("</")) tok = fixAnchor(tok);
+      if (name && !tok.endsWith("/>")) {
+        if (plain) {
+          if (name === plain.name) {
+            plain.depth += tok.startsWith("</") ? -1 : 1;
+            if (plain.depth === 0) plain = null;
+          }
+        } else if (!tok.startsWith("</") && PLAIN_IDS.has(/\sid="([^"]*)"/i.exec(tok)?.[1] ?? "")) {
+          plain = { name, depth: 1 };
+        }
+      }
       if (name && SKIP.has(name)) {
         if (tok.startsWith("</")) {
           const i = skip.lastIndexOf(name);
@@ -50,7 +68,7 @@ export function transformHtml(html) {
       out.push(tok);
       continue;
     }
-    out.push(skip.length === 0 ? tok.split(LABEL).join(LINK) : tok);
+    out.push(skip.length === 0 && !plain ? tok.split(LABEL).join(LINK) : tok);
   }
   return out.join("");
 }

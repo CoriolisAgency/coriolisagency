@@ -190,6 +190,10 @@ assert.equal(
   transformHtml("<p>Try GunSearchEngine.com today</p>"),
   '<p>Try <a href="https://gunsearchengine.com" target="_blank" rel="noopener noreferrer" class="font-medium !text-sky-400 hover:!underline underline-offset-2">GunSearchEngine.com</a> today</p>',
 );
+// The shared setup-packages section stays plain on every host page, and linking resumes after it.
+const plainSection = '<section id="setup"><div><ul><li>GunSearchEngine.com setup</li></ul></div><p>GunSearchEngine.com</p></section>';
+const afterPlain = transformHtml(plainSection + "<p>GunSearchEngine.com</p>");
+assert.ok(afterPlain.startsWith(plainSection + '<p><a href="https://gunsearchengine.com"'), "setup section stays plain, linking resumes after it");
 assert.equal(transformHtml('<a href="/x">GunSearchEngine.com</a>'), '<a href="/x">GunSearchEngine.com</a>');
 assert.equal(transformHtml("<button><span>GunSearchEngine.com</span></button>"), "<button><span>GunSearchEngine.com</span></button>");
 assert.equal(transformHtml('<a href="/ffl-analytics" class="c">x</a>'), '<a href="/ffl-analytics" class="c">x</a>');

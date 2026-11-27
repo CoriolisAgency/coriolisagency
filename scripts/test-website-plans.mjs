@@ -81,11 +81,12 @@ if (fs.existsSync(dist)) {
   const block = (html, id, endId) => {
     const s = html.indexOf(`<section class="border-b border-zinc-800/80 py-12" id="${id}"`);
     assert.ok(s >= 0, `section ${id} found`);
-    // The gse-links build step links plain-text "GunSearchEngine.com" per page (it does so on /website-plans but not on the longer /ecommerce); compare the blocks without that auto-link.
-    return html.slice(s, html.indexOf("</section>", s) + 10).replace(/<a href="https:\/\/gunsearchengine\.com" [^>]*>GunSearchEngine\.com<\/a>/g, "GunSearchEngine.com");
+    return html.slice(s, html.indexOf("</section>", s) + 10);
   };
   assert.equal(block(wpHtml, "plans").replace("<h1 ", "<h2 ").replace("</h1>", "</h2>"), block(ecoHtml, "plans"), "plan cards identical on both pages");
   assert.equal(block(wpHtml, "setup"), block(ecoHtml, "setup"), "setup packages identical on both pages");
+  assert.ok(block(wpHtml, "setup").includes("<li>GunSearchEngine.com setup (free plan)</li>"), "setup bullet stays plain text on /website-plans, as on /ecommerce");
+  assert.ok(block(ecoHtml, "setup").includes("<li>GunSearchEngine.com setup (free plan)</li>"), "setup bullet stays plain text on /ecommerce");
   const sm = fs.readdirSync(dist).filter((f) => /^sitemap-\d+\.xml$/.test(f)).map((f) => fs.readFileSync(path.join(dist, f), "utf8")).join("");
   assert.match(sm, /<loc>https:\/\/www\.coriolisagency\.com\/website-plans<\/loc>/, "sitemap lists /website-plans");
   ok("built: canonical, one H1, cards identical on /website-plans and /ecommerce, nav item, sitemap");
