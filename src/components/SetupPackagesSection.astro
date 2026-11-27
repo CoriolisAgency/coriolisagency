@@ -1,0 +1,43 @@
+---
+// CA-WEBSITE-PLANS-PAGE: the one-time setup packages (Basic and Retail), shared by /ecommerce and /website-plans.
+// Moved out of src/pages/ecommerce.astro unchanged; the cards read src/lib/plans.ts (SETUP), so there is one place to edit.
+import { LINKS, btnPlan } from "../lib/links";
+import { SETUP } from "../lib/plans";
+import { md } from "../lib/md";
+---
+
+<section class="border-b border-zinc-800/80 py-12" id="setup">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <h2 class="text-xl font-semibold text-white">{"One-time setup packages: Basic Setup at $500 or Retail Setup at $2,500"}</h2>
+    <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+      {
+        SETUP.map((s) => (
+          <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
+              {s.hook}
+            </p>
+            <h3 class="mt-2 text-lg font-semibold text-white">{s.name}</h3>
+            <p class="mt-1 text-2xl font-semibold text-gold">
+              ${s.price.toLocaleString()}
+              <span class="text-sm font-medium text-zinc-500"> one-time</span>
+            </p>
+            <ul class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400">
+              {s.features.map((f) => (
+                <li>{f}</li>
+              ))}
+            </ul>
+            <a
+              href={LINKS[s.checkoutKey]}
+              class={`${btnPlan} mt-6`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {s.name}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+    <p class="mt-6 max-w-3xl text-sm text-zinc-400" set:html={md("Setup and monthly, side by side, are on [what an FFL website costs](/ffl-website-cost). If you're not a retail shop, we also build [websites for ranges, gunsmiths and instructors](/websites-for-ranges-gunsmiths-instructors).")} />
+  </div>
+</section>

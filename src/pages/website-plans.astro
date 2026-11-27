@@ -1,0 +1,23 @@
+---
+// CA-WEBSITE-PLANS-PAGE (Paul 2026-11-27 4:56 PM ET via Chief 4:57): the hosting plan cards first, then the setup packages.
+// Both blocks are the shared components /ecommerce also renders (HostingPlansSection, SetupPackagesSection), fed by
+// src/lib/plans.ts, so the two pages cannot drift.
+//   title        = Brandy's title, cleared by Karp 5:15 PM ET 2026-11-27 (META-FINAL.md, sha8 783c6349). The string already
+//                  ends in " | Coriolis" and BaseLayout does not append a suffix, so it is passed whole.
+//   description  = Brandy's meta description, same clearance, verbatim.
+//   H1           = "The five monthly plans, from Minute Man through FFL Accelerator" (HostingPlansSection headingTag="h1"), cleared verbatim.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HostingPlansSection from "../components/HostingPlansSection.astro";
+import SetupPackagesSection from "../components/SetupPackagesSection.astro";
+import { CANON_PATHS } from "../lib/site";
+---
+
+<BaseLayout
+  title="FFL Website Plans and Pricing: $169 to $569/mo | Coriolis"
+  description="Compare five monthly FFL website plans from $169 to $569/mo, then pick a Basic $500 or Retail $2,500 setup package for your gun store's WooCommerce site."
+  path="/website-plans"
+  ogImagePath={CANON_PATHS.rangeMckinney}
+>
+  <HostingPlansSection headingTag="h1" />
+  <SetupPackagesSection />
+</BaseLayout>

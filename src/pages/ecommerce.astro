@@ -1,26 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import BulletList from "../components/BulletList.astro";
 import CtaRow from "../components/CtaRow.astro";
 import EcommerceCluster from "../components/EcommerceCluster.astro";
+import HostingPlansSection from "../components/HostingPlansSection.astro";
+import SetupPackagesSection from "../components/SetupPackagesSection.astro";
 import FaqBlock from "../components/FaqBlock.astro";
 import { FAQ_ECOMMERCE } from "../lib/faq";
 import { HOWTO_SWITCH, HOWTO_WOO_SELL_GUNS } from "../lib/howto";
 import { POS_PAGES } from "../lib/pos";
-import { LINKS, linkClass, btnPlan } from "../lib/links";
-import { PLANS, SETUP, type PlanId } from "../lib/plans";
+import { linkClass } from "../lib/links";
 import { CANON_PATHS } from "../lib/site";
 import { withBase } from "../lib/base";
 import { md } from "../lib/md";
 import { TRUSTINDEX_REVIEWS_HREF } from "../lib/google-reviews";
-
-const PLAN_TAGLINE_EMOJI: Record<PlanId, string> = {
-  "minute-man": "📦",
-  militia: "🚚",
-  "gun-runner": "🎧",
-  warlord: "🏪",
-  "ffl-accelerator": "🔥",
-};
 
 // CA-VOICE-P1 batch 1 (Paul yes via Chief, 2026-11-10 12:49 PM ET): copy from batch-1/ecommerce.md, as drafted.
 // Plan cards and setup packages stay as template blocks (plans.ts).
@@ -80,63 +72,7 @@ import TalkSection from "../components/TalkSection.astro";
     </div>
   </section>
 
-  <section class="border-b border-zinc-800/80 py-12" id="plans">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <p class="mb-6 text-sm text-zinc-400" set:html={md("Coriolis has 100+ clients and a [5-star Google rating](https://www.trustindex.io/reviews/coriolisagency.com), and is a member of NSSF, FPC and GOA.")} />
-      <h2 class="mb-6 text-xl font-semibold text-white">{"The five monthly plans, from Minute Man through FFL Accelerator"}</h2>
-      <div class="grid grid-cols-1 gap-4 lg:grid-cols-5">
-        {
-          PLANS.map((plan) => (
-            <article
-              id={plan.id}
-              class:list={[
-                "relative flex scroll-mt-24 flex-col rounded-2xl border p-5 lg:max-xl:px-3",
-                plan.featured
-                  ? "border-gold/60 bg-gold/5 lg:col-span-1"
-                  : "border-zinc-800 bg-zinc-950/50",
-                plan.badge ? "mt-3 lg:mt-0" : null,
-              ]}
-            >
-              {plan.badge ? (
-                <span class="pointer-events-none absolute bottom-[calc(100%+1px)] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-t-full rounded-b-none bg-gold px-4 pt-1 pb-0.5 text-[11px] font-semibold leading-4 tracking-[0.04em] text-zinc-950">
-                  {plan.badge}
-                </span>
-              ) : null}
-              <p class="text-[13.2px] lg:text-[length:clamp(9px,calc(1.25vw_-_4px),12px)] font-semibold uppercase tracking-[0.14em] text-zinc-500">
-                {plan.hook} <span aria-hidden="true">{PLAN_TAGLINE_EMOJI[plan.id]}</span>
-              </p>
-              <h3 class="mt-2 text-[1.35rem]/[2.1rem] lg:max-xl:text-[19px]/[2.1rem] font-semibold text-white">{plan.name}</h3>
-              <p class="mt-1 text-2xl font-semibold text-gold">
-                ${plan.price}
-                <span class="text-sm font-medium text-zinc-500">/mo</span>
-              </p>
-              {plan.includesFrom ? (
-                <p class="mt-2 text-xs text-zinc-500">
-                  Everything in {plan.includesFrom} +
-                </p>
-              ) : null}
-              {plan.description ? (
-                <p class="mt-2 text-xs leading-relaxed text-zinc-300">{plan.description}</p>
-              ) : null}
-              <BulletList
-                items={plan.features}
-                variant={plan.bullets ?? "default"}
-                listKey={plan.id}
-                class="mt-4 flex-1 space-y-1.5 text-sm lg:max-xl:text-[12.5px] text-zinc-400"
-              />
-              {plan.offerSite ? (
-                <p class="mt-4 text-sm">
-                  <a href={plan.offerSite.href} class={linkClass} target="_blank" rel="noopener">
-                    {plan.offerSite.label}
-                  </a>
-                </p>
-              ) : null}
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <HostingPlansSection />
 
   <TalkSection
     id="talk-plans"
@@ -169,41 +105,7 @@ import TalkSection from "../components/TalkSection.astro";
     </div>
   </section>
 
-  <section class="border-b border-zinc-800/80 py-12" id="setup">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <h2 class="text-xl font-semibold text-white">{"One-time setup packages: Basic Setup at $500 or Retail Setup at $2,500"}</h2>
-      <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-        {
-          SETUP.map((s) => (
-            <article class="flex flex-col rounded-2xl border border-zinc-800 bg-zinc-950/50 p-6">
-              <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
-                {s.hook}
-              </p>
-              <h3 class="mt-2 text-lg font-semibold text-white">{s.name}</h3>
-              <p class="mt-1 text-2xl font-semibold text-gold">
-                ${s.price.toLocaleString()}
-                <span class="text-sm font-medium text-zinc-500"> one-time</span>
-              </p>
-              <ul class="mt-4 flex-1 space-y-1.5 text-sm text-zinc-400">
-                {s.features.map((f) => (
-                  <li>{f}</li>
-                ))}
-              </ul>
-              <a
-                href={LINKS[s.checkoutKey]}
-                class={`${btnPlan} mt-6`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {s.name}
-              </a>
-            </article>
-          ))
-        }
-      </div>
-      <p class="mt-6 max-w-3xl text-sm text-zinc-400" set:html={md("Setup and monthly, side by side, are on [what an FFL website costs](/ffl-website-cost). If you're not a retail shop, we also build [websites for ranges, gunsmiths and instructors](/websites-for-ranges-gunsmiths-instructors).")} />
-    </div>
-  </section>
+  <SetupPackagesSection />
 
   <section
     class="scroll-mt-24 border-b border-zinc-800/80 py-12"
